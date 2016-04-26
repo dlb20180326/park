@@ -191,9 +191,8 @@ export default {
     filters: {
         formatDuring: function (value) {
             if(value == "" || value == null || value == undefined){
-                var value="无"
+                var value="无";
                 return value
-
             }else {
                 Date.prototype.toLocaleString = function(){
                     let months = this.getMonth()+1;
@@ -213,8 +212,10 @@ export default {
                         minutes = '0' + minutes;
                     }
                     return this.getFullYear() +'.'+months+'.'+dates+' '+hours+':'+minutes
-                }
-                return new Date(value).toLocaleString();}}
+                };
+                return new Date(value).toLocaleString();
+            }
+        }
     },
     methods:{
     	progress(){
