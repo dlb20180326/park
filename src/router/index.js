@@ -25,8 +25,9 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+    store.commit('updateLoadingStatus', { isLoading: true });
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (!store.state.user.id) {
+        if (!store.state.user.uid) {
             next({
                 path: '/login'
                 // query: { redirect: to.fullPath }
@@ -37,6 +38,10 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
+});
+
+router.afterEach(to => {
+    setTimeout(() => store.commit('updateLoadingStatus', { isLoading: false }), 60);
 });
 
 export default router;

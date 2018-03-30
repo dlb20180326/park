@@ -1,23 +1,40 @@
 <template>
     <div id="app">
-        <img src="./assets/logo.png">
+        <loading v-model="isLoading"></loading>
         <router-view/>
     </div>
 </template>
 
 <script>
+import { Loading } from 'vux';
+import { mapState } from 'vuex';
+
 export default {
-    name: 'App'
+    components: {
+        Loading
+    },
+    computed: {
+        ...mapState({
+            isLoading: state => state.vux.isLoading
+        })
+    }
 };
 </script>
 
 <style>
-#app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+/* html,
+body {
+    font-family: 'Microsoft YaHei', 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100%;
+} */
+</style>
+<style lang="less">
+@import '~vux/src/styles/reset.less';
 </style>
