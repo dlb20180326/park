@@ -2,6 +2,9 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '../store';
 
+import { LoadingPlugin } from 'vux';
+Vue.use(LoadingPlugin);
+
 Vue.use(Router);
 
 const router = new Router({
@@ -25,7 +28,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-    store.commit('updateLoadingStatus', { isLoading: true });
+    Vue.$vux.loading.show({ text: '加载中' });
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!store.state.user.uid) {
             next({
@@ -41,7 +44,7 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach(to => {
-    setTimeout(() => store.commit('updateLoadingStatus', { isLoading: false }), 60);
+    setTimeout(() => Vue.$vux.loading.hide(), 60);
 });
 
 export default router;

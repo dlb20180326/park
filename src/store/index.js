@@ -24,15 +24,4 @@ const store = new Vuex.Store({
     strict: process.env.NODE_ENV !== 'production'
 });
 
-store.registerModule('vux', {
-    state: {
-        isLoading: false
-    },
-    mutations: {
-        updateLoadingStatus(state, payload) {
-            state.isLoading = payload.isLoading;
-        }
-    }
-});
-
 export default store;
