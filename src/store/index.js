@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import Cookies from 'js-cookie';
+import { cookie } from 'vux';
 
 Vue.use(Vuex);
 
@@ -16,8 +16,8 @@ const store = new Vuex.Store({
             state.user = value;
         },
         logout(state) {
-            Cookies.remove('uid');
-            Cookies.remove('token');
+            cookie.remove('uid');
+            cookie.remove('token');
             state.user = {};
         }
     },
