@@ -4,8 +4,8 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import store from './store';
-import FastClick from 'fastclick';
 
+import FastClick from 'fastclick';
 FastClick.attach(document.body);
 
 Vue.config.productionTip = false;

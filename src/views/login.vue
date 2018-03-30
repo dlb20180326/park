@@ -1,25 +1,33 @@
 <template>
     <div id="login">
-        <!-- <mt-field placeholder="请输入用户名" type="text" :attr="{ maxlength: 50 }" v-model="uid"></mt-field>
-        <mt-field placeholder="请输入密码" type="password" :attr="{ maxlength: 50 }" v-model="pwd"></mt-field>
-        <mt-button type="primary" @click="login">登录</mt-button> -->
+        <group>
+            <x-input title="帐号" placeholder="请输入帐号" type="text" v-model="uid"></x-input>
+            <x-input title="密码" placeholder="请输入密码" type="password" v-model="pwd"></x-input>
+            <x-button type="primary" @click.native="login">登录</x-button>
+        </group>
     </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import { AjaxPlugin, Group } from 'vux';
+import { AjaxPlugin, ToastPlugin, Group, XButton, XInput } from 'vux';
 
 Vue.use(AjaxPlugin);
+Vue.use(ToastPlugin);
 
 export default {
     data() {
         return { uid: null, pwd: null };
     },
+    components: {
+        Group,
+        XButton,
+        XInput
+    },
     methods: {
         login() {
-            if (!this.uid) return Toast('请输入用户名');
-            if (!this.pwd) return Toast('请输入密码');
+            if (!this.uid) return this.$vux.toast.show({ text: '请输入帐号', type: 'text', position: 'top' });
+            if (!this.pwd) return this.$vux.toast.show({ text: '请输入密码', type: 'text', position: 'top' });
             this.$store.commit('user', { uid: this.uid, pwd: this.pwd });
             this.$router.push({ path: '/' });
         }
@@ -29,11 +37,10 @@ export default {
 
 <style lang="less" scoped>
 #login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: stretch;
     width: 90%;
-    margin: 0 auto;
+    margin: 180px auto 0;
+}
+.weui-btn {
+    margin-top: 50px;
 }
 </style>

@@ -22,18 +22,14 @@ export default {
 </script>
 
 <style>
-/* html,
+html,
 body {
     font-family: 'Microsoft YaHei', 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     margin: 0;
-    height: 100%;
-} */
+    min-height: 100%;
+}
 </style>
 <style lang="less">
 @import '~vux/src/styles/reset.less';
