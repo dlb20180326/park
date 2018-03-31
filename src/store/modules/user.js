@@ -1,4 +1,5 @@
-import { cookie } from 'vux';
+import Vue from 'vue';
+import { cookie, md5 } from 'vux';
 
 const KEYS = ['uid', 'token'];
 
@@ -6,6 +7,18 @@ const user = {
     state: {},
     getters: {
         user: state => state
+    },
+    actions: {
+        login: ({ commit }, { username, password }) =>
+            Vue.http
+                .post('auth/login', {
+                    user: username,
+                    passwd: md5(password).toUpperCase()
+                })
+                .then(result => {
+                    commit('login', result.result);
+                    return result;
+                })
     },
     mutations: {
         login(state, data) {
@@ -21,13 +34,13 @@ const user = {
             );
         },
         logout(state) {
+            Object.keys(state).map(key => delete state[key]);
             KEYS.forEach(key =>
                 cookie.remove(key, {
                     // domain: 'example.com',
                     path: '/'
                 })
             );
-            Object.keys(state).map(key => delete state[key]);
         }
     }
 };

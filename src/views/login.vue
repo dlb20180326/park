@@ -9,10 +9,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import { ToastPlugin, Group, XButton, XInput } from 'vux';
-
-Vue.use(ToastPlugin);
+import { Group, XButton, XInput } from 'vux';
 
 export default {
     data() {
@@ -27,8 +24,15 @@ export default {
         login() {
             if (!this.uid) return this.$vux.toast.show({ text: '请输入帐号', type: 'text', position: 'top' });
             if (!this.pwd) return this.$vux.toast.show({ text: '请输入密码', type: 'text', position: 'top' });
-            this.$store.commit('login', { uid: this.uid, pwd: this.pwd });
-            this.$router.push({ path: '/' });
+            this.$store
+                .dispatch('login', {
+                    username: this.uid,
+                    password: this.pwd
+                })
+                .then(
+                    result => this.$router.push({ path: '/' }),
+                    error => this.$vux.toast.show({ text: error.message, type: 'text', position: 'top' })
+                );
         }
     }
 };

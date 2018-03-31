@@ -1,43 +1,24 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '../store';
+import { routes } from './routes';
 
 Vue.use(Router);
 
 const router = new Router({
     mode: 'history',
-    routes: [
-        {
-            path: '/',
-            component: () => import('@/views/main'),
-            meta: { requiresAuth: true }
-        },
-        {
-            path: '/login',
-            component: () => import('@/views/login')
-        },
-        {
-            path: '/about',
-            component: () => import('@/views/about'),
-            meta: { requiresAuth: true }
-        }
-    ]
+    routes: routes
 });
 
 router.beforeEach((to, from, next) => {
     Vue.$vux.loading.show({ text: '加载中' });
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (!store.state.user.uid) {
-            next({
-                path: '/login'
-                // query: { redirect: to.fullPath }
-            });
-        } else {
-            next();
-        }
-    } else {
-        next();
-    }
+    // if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (to.path === '/login' || store.state.user.uid) return next();
+    // store.dispatch
+    next({
+        path: '/login'
+        // query: { redirect: to.fullPath }
+    });
 });
 
 router.afterEach(to => {
