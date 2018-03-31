@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = '/dangjian/';
+const baseURL = '/api/';
 
 // Add a request interceptor
 axios.interceptors.request.use(
@@ -18,7 +18,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         // Do something with response data
-        if (response.data.code) {
+        if (!response.data.status) {
             return Promise.reject(response.data);
         }
         return response.data;

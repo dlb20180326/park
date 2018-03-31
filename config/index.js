@@ -12,9 +12,9 @@ module.exports = {
         proxyTable: {
             '/api/': {
                 changeOrigin: true,
-                target: 'http://www.dlbdata.cn/dangjian/',
+                target: 'http://www.dlbdata.cn/',
                 pathRewrite: {
-                    '^/api': '/api'
+                    '^/api/': '/dangjian/'
                 }
             }
         },

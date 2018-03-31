@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import { cookie, md5 } from 'vux';
+import { cookie } from 'vux';
 
-const KEYS = ['uid', 'token'];
+const KEYS = ['ptoken', 'userId'];
 
 const user = {
     state: {},
@@ -9,11 +9,11 @@ const user = {
         user: state => state
     },
     actions: {
-        login: ({ commit }, { username, password }) =>
+        login: ({ commit }, { name, password }) =>
             Vue.http
                 .post('puser/tologin', {
-                    username: username,
-                    password: md5(password).toUpperCase()
+                    name: name,
+                    password: password
                 })
                 .then(result => {
                     commit('login', result.result);

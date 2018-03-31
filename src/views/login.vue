@@ -26,7 +26,7 @@ export default {
             if (!this.password) return this.$vux.toast.show({ text: '请输入密码', type: 'text', position: 'top' });
             this.$store
                 .dispatch('login', {
-                    username: this.name,
+                    name: this.name,
                     password: this.password
                 })
                 .then(
