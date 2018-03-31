@@ -1,21 +1,55 @@
-# park
+## 环境部署
 
-> A Vue.js project
+```bash
+# 克隆项目至本地
+git clone git@github.com:dlb20180326/park.git
+cd park
 
-## Build Setup
-
-``` bash
-# install dependencies
+# 安装依赖包
 npm install
 
-# serve with hot reload at localhost:8080
+# 启动开发模式
 npm run dev
 
-# build for production with minification
+# 生成静态文件发布至生产环境使用
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## UI 组件（VUX）
+
+* 本项目使用[vux](https://vux.li)移动端 UI 组件库，[点击链接](https://vux.li)前往查看文档
+
+## 目录规范参照
+
+```bash
+src
+├── assets
+│   ├── css
+│   ├── fonts
+│   └── img
+├── components
+├── plugins
+├── router
+│   ├── index.js
+│   └── routes.js
+├── store
+│   ├── modules
+│   │   └── user.js
+│   └── index.js
+├── utils
+│   ├── axios.js
+│   └── index.js
+├── views
+│   ├── activity
+│   │   └── index.vue
+│   ├── party
+│   │   └── index.vue
+│   ├── points
+│   │   ├── evaluate.vue
+│   │   └── index.vue
+│   ├── index.vue
+│   ├── layout.vue
+│   └── login.vue
+├── App.vue
+└── main.js
+```
