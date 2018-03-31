@@ -19,7 +19,38 @@ npm run build
 
 * 本项目使用[vux](https://vux.li)移动端 UI 组件库，[点击链接](https://vux.li)前往查看文档
 
-## 目录规范参照
+## 开发配置
+
+* 本地 API 代理，配置节点[proxyTable](config/index.js)，实现本地跨域请求接口信息
+
+```js
+// 配置参考
+proxyTable: {
+  '/api/': {
+    changeOrigin: true,
+        target: 'http://www.dlbdata.cn/',
+        pathRewrite: {
+          '^/api/': '/dangjian/'
+        }
+    }
+},
+```
+
+## 规范参照
+
+> 没有死板的规范，规范可以自行定制，  
+> 只要简洁明了，有利于项目管理，有助于提高团队开发效率，就是好的规范
+
+* 代码格式请参照项目代码，以及[.editorconfig](.editorconfig)的配置
+
+* 目录参照
+  * `assets`：资源目录
+  * `components`：公共组件
+  * `plugins`：第三方插件
+  * `router`：路由配置
+  * `store`：公共模块
+  * `utils`：构建工具
+  * `views`：功能页面
 
 ```bash
 src
@@ -52,4 +83,18 @@ src
 │   └── login.vue
 ├── App.vue
 └── main.js
+```
+
+* 接口请求参照
+
+```js
+Vue.http
+  .post('puser/tologin', {
+    name: name,
+    password: password
+  })
+  .then(result => {
+    commit('login', result.result);
+    return result;
+  });
 ```
