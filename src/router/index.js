@@ -12,13 +12,14 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
     Vue.$vux.loading.show({ text: '加载中' });
+    return next();
     // if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (to.path === '/login' || store.state.user.uid) return next();
+    // if (to.path === '/login' || store.state.user.uid) return next();
     // store.dispatch
-    next({
-        path: '/login'
-        // query: { redirect: to.fullPath }
-    });
+    // next({
+    //     path: '/login'
+    //     // query: { redirect: to.fullPath }
+    // });
 });
 
 router.afterEach(to => {
