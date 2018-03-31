@@ -11,9 +11,9 @@ const user = {
     actions: {
         login: ({ commit }, { username, password }) =>
             Vue.http
-                .post('auth/login', {
-                    user: username,
-                    passwd: md5(password).toUpperCase()
+                .post('puser/tologin', {
+                    username: username,
+                    password: md5(password).toUpperCase()
                 })
                 .then(result => {
                     commit('login', result.result);

@@ -1,8 +1,8 @@
 <template>
     <div id="login">
         <group>
-            <x-input title="帐号" placeholder="请输入帐号" type="text" v-model="uid"></x-input>
-            <x-input title="密码" placeholder="请输入密码" type="password" v-model="pwd"></x-input>
+            <x-input title="帐号" placeholder="请输入帐号" type="text" v-model="name"></x-input>
+            <x-input title="密码" placeholder="请输入密码" type="password" v-model="password"></x-input>
             <x-button type="primary" @click.native="login">登录</x-button>
         </group>
     </div>
@@ -13,7 +13,7 @@ import { Group, XButton, XInput } from 'vux';
 
 export default {
     data() {
-        return { uid: null, pwd: null };
+        return { name: null, password: null };
     },
     components: {
         Group,
@@ -22,12 +22,12 @@ export default {
     },
     methods: {
         login() {
-            if (!this.uid) return this.$vux.toast.show({ text: '请输入帐号', type: 'text', position: 'top' });
-            if (!this.pwd) return this.$vux.toast.show({ text: '请输入密码', type: 'text', position: 'top' });
+            if (!this.name) return this.$vux.toast.show({ text: '请输入帐号', type: 'text', position: 'top' });
+            if (!this.password) return this.$vux.toast.show({ text: '请输入密码', type: 'text', position: 'top' });
             this.$store
                 .dispatch('login', {
-                    username: this.uid,
-                    password: this.pwd
+                    username: this.name,
+                    password: this.password
                 })
                 .then(
                     result => this.$router.push({ path: '/' }),
