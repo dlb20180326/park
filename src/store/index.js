@@ -1,25 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { cookie } from 'vux';
+import user from './modules/user';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-    state: {
-        user: {}
-    },
-    getters: {
-        user: state => state.user
-    },
-    mutations: {
-        user(state, value) {
-            state.user = value;
-        },
-        logout(state) {
-            cookie.remove('uid');
-            cookie.remove('token');
-            state.user = {};
-        }
+    state: {},
+    getters: {},
+    mutations: {},
+    modules: {
+        user
     },
     strict: process.env.NODE_ENV !== 'production'
 });

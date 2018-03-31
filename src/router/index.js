@@ -2,9 +2,6 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '../store';
 
-import { LoadingPlugin } from 'vux';
-Vue.use(LoadingPlugin);
-
 Vue.use(Router);
 
 const router = new Router({

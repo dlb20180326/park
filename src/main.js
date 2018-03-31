@@ -5,6 +5,10 @@ import App from './App';
 import router from './router';
 import store from './store';
 
+import { AjaxPlugin, LoadingPlugin } from 'vux';
+Vue.use(AjaxPlugin);
+Vue.use(LoadingPlugin);
+
 import FastClick from 'fastclick';
 FastClick.attach(document.body);
 

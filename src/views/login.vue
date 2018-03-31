@@ -10,9 +10,8 @@
 
 <script>
 import Vue from 'vue';
-import { AjaxPlugin, ToastPlugin, Group, XButton, XInput } from 'vux';
+import { ToastPlugin, Group, XButton, XInput } from 'vux';
 
-Vue.use(AjaxPlugin);
 Vue.use(ToastPlugin);
 
 export default {
@@ -28,7 +27,7 @@ export default {
         login() {
             if (!this.uid) return this.$vux.toast.show({ text: '请输入帐号', type: 'text', position: 'top' });
             if (!this.pwd) return this.$vux.toast.show({ text: '请输入密码', type: 'text', position: 'top' });
-            this.$store.commit('user', { uid: this.uid, pwd: this.pwd });
+            this.$store.commit('login', { uid: this.uid, pwd: this.pwd });
             this.$router.push({ path: '/' });
         }
     }
