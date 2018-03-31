@@ -15,7 +15,7 @@ npm run dev
 npm run build
 ```
 
-## UI 组件（VUX）
+## UI 组件 [ VUX ]
 
 * 本项目使用[vux](https://vux.li)移动端 UI 组件库，[点击链接](https://vux.li)前往查看文档
 
@@ -34,6 +34,43 @@ proxyTable: {
         }
     }
 },
+```
+
+## 生产配置 [ nginx ]
+
+```conf
+#  建议开启 gzip 及 http2.0，配置SSL，提升网站访问效率及安全性
+server {
+
+    # 端口
+    listen                              80;
+    # 域名
+    server_name                         www.website.com;
+
+    charset                             utf-8;
+    index                               index.html;
+
+    # 路径
+    root                                /home/website;
+
+    # 匹配所有请求地址，找不到地址或404就会默认返回index.html，前端H5路由专用
+    location / {
+        try_files                       $uri $uri/ /index.html;
+    }
+
+    # 匹配到api请求，则会启用代理，转发至其它接口地址，匹配规则请参照实际接口
+    # 如：
+    # 请求登录 http://www.website.com/api/login
+    # 匹配后会将请求转发至 http://api.website.com/api/login
+    # 地址可以是域名，也可以是IP+端口：http://192.168.1.100:8080/api/
+    location /api/ {
+        proxy_pass                      http://api.website.com/api/;
+        proxy_buffers                   32 32k;
+        proxy_buffer_size               128k;
+        proxy_busy_buffers_size         128k;
+    }
+
+}
 ```
 
 ## 规范参照
