@@ -1,4 +1,5 @@
 import axios from 'axios';
+import qs from 'qs';
 
 const baseURL = '/api/';
 
@@ -8,6 +9,10 @@ axios.interceptors.request.use(
         // Do something before request is sent
         if (!/^(http(s)?:\/\/|\/)/.test(config.url)) {
             config.url = baseURL + config.url;
+        }
+        if (config.method.toUpperCase() === 'POST') {
+            config.data = qs.stringify(config.data);
+            config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         }
         return config;
     },
