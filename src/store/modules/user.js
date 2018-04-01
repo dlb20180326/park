@@ -9,11 +9,18 @@ const user = {
         user: state => state
     },
     actions: {
-        userinfo: ({ commit }) =>
-            Vue.http.get('puser/queryById').then(result => {
-                commit('setUser', result.entry);
-                return result;
-            }),
+        userinfo: ({ commit }, data) => {
+            if (cookie.get('userId')) {
+                return Vue.http
+                    .get('puser/queryById', { params: Object.assign(data || {}, { userId: cookie.get('userId') }) })
+                    .then(result => {
+                        commit('setUser', result.entry);
+                        return result;
+                    });
+            } else {
+                return Promise.reject();
+            }
+        },
         login: ({ commit }, data) => Vue.http.post('puser/tologin', data),
         logout: ({ commit }) =>
             new Promise((resolve, reject) => {
