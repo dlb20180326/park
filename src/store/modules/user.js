@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { cookie } from 'vux';
 
-const KEYS = ['ptoken', 'userId'];
+const KEYS = ['roleId', 'userId', 'ptoken'];
 
 const user = {
     state: {},
@@ -9,29 +9,29 @@ const user = {
         user: state => state
     },
     actions: {
-        login: ({ commit }, { name, password }) =>
-            Vue.http
-                .post('puser/tologin', {
-                    name: name,
-                    password: password
-                })
-                .then(result => {
-                    commit('login', result.result);
-                    return result;
-                })
+        login: ({ commit }, data) =>
+            Vue.http.post('puser/tologin', data || {}).then(result => {
+                commit('login', result.entry);
+                return result;
+            }),
+        logout: ({ commit }) =>
+            new Promise((resolve, reject) => {
+                commit('logout');
+                resolve();
+            })
     },
     mutations: {
         login(state, data) {
             Object.keys(data).map(key => {
                 state[key] = data[key];
             });
-            KEYS.forEach(key =>
-                cookie.set(key, data[key], {
-                    // domain: 'example.com',
-                    path: '/',
-                    expires: new Date(new Date().setMonth(new Date().getMonth() + 1))
-                })
-            );
+            // KEYS.forEach(key =>
+            //     cookie.set(key, data[key], {
+            //         // domain: 'example.com',
+            //         path: '/',
+            //         expires: new Date(new Date().setMonth(new Date().getMonth() + 1))
+            //     })
+            // );
         },
         logout(state) {
             Object.keys(state).map(key => delete state[key]);

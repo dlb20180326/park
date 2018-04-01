@@ -12,18 +12,20 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
     Vue.$vux.loading.show({ text: '加载中' });
-    return next();
+
     // if (to.matched.some(record => record.meta.requiresAuth)) {
-    // if (to.path === '/login' || store.state.user.uid) return next();
-    // store.dispatch
-    // next({
-    //     path: '/login'
-    //     // query: { redirect: to.fullPath }
-    // });
+    if (/^\/login/.test(to.path) || store.state.user.userId) return next();
+
+    store.dispatch('login').then(
+        result => next(),
+        error =>
+            next({
+                path: '/login'
+                // query: { redirect: to.fullPath }
+            })
+    );
 });
 
-router.afterEach(to => {
-    setTimeout(() => Vue.$vux.loading.hide(), 60);
-});
+router.afterEach(to => setTimeout(() => Vue.$vux.loading.hide(), 60));
 
 export default router;
