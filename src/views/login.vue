@@ -22,8 +22,18 @@ export default {
     },
     methods: {
         login() {
-            if (!this.name) return this.$vux.toast.show({ text: '请输入帐号', type: 'text', position: 'top' });
-            if (!this.password) return this.$vux.toast.show({ text: '请输入密码', type: 'text', position: 'top' });
+            if (!this.name)
+                return this.$vux.toast.show({
+                    text: '请输入帐号',
+                    type: 'text',
+                    position: 'top'
+                });
+            if (!this.password)
+                return this.$vux.toast.show({
+                    text: '请输入密码',
+                    type: 'text',
+                    position: 'top'
+                });
             this.$store
                 .dispatch('login', {
                     name: this.name,
@@ -31,7 +41,13 @@ export default {
                 })
                 .then(
                     result => this.$router.push({ path: '/' }),
-                    error => this.$vux.toast.show({ text: error.message, type: 'text', position: 'top' })
+                    error =>
+                        this.$vux.toast.show({
+                            text: error.message,
+                            width: '18em',
+                            type: 'text',
+                            position: 'top'
+                        })
                 );
         }
     }
