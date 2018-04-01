@@ -9,19 +9,20 @@ const user = {
         user: state => state
     },
     actions: {
-        login: ({ commit }, data) =>
-            Vue.http.post('puser/tologin', data || {}).then(result => {
-                commit('login', result.entry);
+        userinfo: ({ commit }) =>
+            Vue.http.get('puser/queryById').then(result => {
+                commit('setUser', result.entry);
                 return result;
             }),
+        login: ({ commit }, data) => Vue.http.post('puser/tologin', data),
         logout: ({ commit }) =>
             new Promise((resolve, reject) => {
-                commit('logout');
+                commit('clearUser');
                 resolve();
             })
     },
     mutations: {
-        login(state, data) {
+        setUser(state, data) {
             Object.keys(data).map(key => {
                 state[key] = data[key];
             });
@@ -33,7 +34,7 @@ const user = {
             //     })
             // );
         },
-        logout(state) {
+        clearUser(state) {
             Object.keys(state).map(key => delete state[key]);
             KEYS.forEach(key =>
                 cookie.remove(key, {
