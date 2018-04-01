@@ -18,11 +18,17 @@ router.beforeEach((to, from, next) => {
 
     store.dispatch('userinfo').then(
         result => next(),
-        error =>
-            next({
-                path: '/login'
-                // query: { redirect: to.fullPath }
-            })
+        error => {
+            if (/^\/login/.test(from.path)) {
+                next(false);
+                setTimeout(() => Vue.$vux.loading.hide(), 60);
+            } else {
+                next({
+                    path: '/login'
+                    // query: { redirect: to.fullPath }
+                });
+            }
+        }
     );
 });
 
