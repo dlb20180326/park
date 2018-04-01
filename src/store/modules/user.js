@@ -12,7 +12,11 @@ const user = {
         userinfo: ({ commit }, data) => {
             if (cookie.get('userId')) {
                 return Vue.http
-                    .get('puser/queryById', { params: Object.assign(data || {}, { userId: cookie.get('userId') }) })
+                    .get('puser/queryById', {
+                        params: Object.assign(data || {}, {
+                            userId: cookie.get('userId')
+                        })
+                    })
                     .then(result => {
                         commit('setUser', result.entry);
                         return result;
