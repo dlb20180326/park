@@ -1,5 +1,5 @@
 <template>
-    <div class="page-content">
+    <div class="page-body">
         <view-box ref="viewBox">
             <div class="header">
                 <div class="header-top">
@@ -158,10 +158,10 @@ export default {
 </script>
 
 <style scoped>
-.page-content {
-    background-color: #ffffff;
+.page-body {
     flex: 1;
     overflow: auto;
+    background-color: #ffffff;
 }
 .header {
     width: 100%;
