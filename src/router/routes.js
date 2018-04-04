@@ -44,7 +44,7 @@ export const routes = [
                 path: 'activity/detail',
                 component: () => import('@/views/activity/detail')
             },
-			{
+            {
                 path: 'activity/detailPack',
                 component: () => import('@/views/activity/detailPack')
             },
@@ -63,8 +63,7 @@ export const routes = [
             {
                 path: 'life/organize',
                 component: () => import('@/views/life/organize')
-           	},
-            
+            }
         ]
     },
     {
