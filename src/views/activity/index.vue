@@ -2,7 +2,7 @@
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
             党员活动
-            <router-link slot="right" to="/activity/post">发起活动</router-link>
+            <router-link slot="right" to="/activity/new">发起活动</router-link>
         </x-header>
         <flexbox class="list-item" v-for="(item, index) in list" :key="index" :gutter="0" align="stretch">
             <flexbox-item class="list-avatar">
@@ -115,18 +115,7 @@ export default {
 
 <style lang="less" scoped>
 .page-body {
-    flex: 1;
-    overflow: auto;
     background-color: #efefef;
-}
-.vux-header {
-    background-color: #a0333b;
-    .vux-header-left a,
-    .vux-header-left button,
-    .vux-header-right a,
-    .vux-header-right button {
-        color: #fff;
-    }
 }
 .vux-flexbox.list-item {
     background-color: #fff;

@@ -158,11 +158,6 @@ export default {
 </script>
 
 <style scoped>
-.page-body {
-    flex: 1;
-    overflow: auto;
-    background-color: #ffffff;
-}
 .header {
     width: 100%;
     height: 1.6rem;

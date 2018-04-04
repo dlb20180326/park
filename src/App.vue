@@ -9,7 +9,9 @@ export default {};
 <style lang="less">
 @import '~vux/src/styles/reset.less';
 @import './assets/dlbicon/iconfont.css';
+</style>
 
+<style lang="less">
 html {
     font-size: 625%; /*100 ÷ 16 × 100% = 625%*/
 }
@@ -44,7 +46,8 @@ html {
         font-size: 843.75%;
     }
 }
-
+</style>
+<style lang="less">
 html,
 body {
     font-family: 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -55,5 +58,24 @@ body {
 }
 body {
     font-size: 0.16rem;
+}
+
+.vux-header {
+    background-color: #a0333b !important;
+    .vux-header-left a,
+    .vux-header-left button,
+    .vux-header-right a,
+    .vux-header-right button {
+        color: #fff !important;
+    }
+}
+.disabled-tabbar + .weui-tabbar {
+    display: none !important;
+}
+
+.page-body {
+    flex: 1;
+    overflow: auto;
+    background-color: #fff;
 }
 </style>
