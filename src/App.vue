@@ -23,4 +23,7 @@ body {
 @import './assets/dlbicon/iconfont.css';
 // background-color: #f17519;
 // transition: width 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+.vux-loading {
+    font-size: 14px;
+}
 </style>
