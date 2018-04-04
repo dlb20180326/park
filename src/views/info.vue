@@ -39,23 +39,8 @@
     			
     		</div>
 		</div>
-		<tabbar slot="bottom">
-        	<tabbar-item>
-        		<img slot="icon" src="@/assets/images/gray-home.png">
-        		<img slot="icon-active" src="@/assets/images/iconw-home.png">
-        		<span slot="label">首页</span>
-      		</tabbar-item>
-      		<tabbar-item active-class="reds">
-        		<img slot="icon" src="@/assets/images/gray-item.png">
-        		<img slot="icon-active" src="@/assets/images/iconw-integral.png">
-        		<span slot="label">积分详情</span>
-      		</tabbar-item>
-      		<tabbar-item>
-        		<img slot="icon" src="@/assets/images/gray-active.png">
-        		<img slot="icon-active" src="@/assets/images/iconw-activity.png">
-        		<span slot="label">活动详情</span>
-      		</tabbar-item>
-    	</tabbar>
+
+
     	</view-box>
 	</div>
 </template>
