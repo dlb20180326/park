@@ -13,13 +13,12 @@ import * as utils from './utils';
 // for (let i in components) {
 //     Vue.component(i, components[i]);
 // }
-
 //引入vux
 import { AjaxPlugin, LoadingPlugin, ToastPlugin } from 'vux';
 Vue.use(AjaxPlugin);
 Vue.use(LoadingPlugin);
 Vue.use(ToastPlugin);
-
+// 引入rem
 // Vue.use(VueRouter);
 
 //import FastClick from 'fastclick';

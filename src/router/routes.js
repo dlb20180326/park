@@ -13,6 +13,10 @@ export const routes = [
                 component: () => import('@/views/party')
             },
             {
+                path: 'party/dues',
+                component: () => import('@/views/party/dues')
+            },
+            {
                 path: 'points',
                 component: () => import('@/views/points')
             },
