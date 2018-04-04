@@ -83,10 +83,10 @@ module.exports = vuxLoader.merge(webpackConfig, {
     plugins: [
         'vux-ui',
         'duplicate-style',
-        'inline-manifest'
-        // {
-        //     name: 'less-theme',
-        //     path: 'src/styles/theme.less'
-        // }
+        'inline-manifest',
+        {
+            name: 'less-theme',
+            path: 'src/assets/css/theme.less'
+        }
     ]
 });
