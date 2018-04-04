@@ -21,7 +21,7 @@
 				<div class="changePass">修改密码</div>
 				<div class="forget">忘记密码</div>
 			</div>
-			<button class="btn-dl" @click.native="login">登录</button>
+			<button type="button" class="btn-dl" @click="login">登录</button>
 		</form>
 	</div>
 </template>
@@ -51,7 +51,7 @@ export default {
 	        		text: '请输入帐号',
 			        type: 'text',
 			        position: 'top'
-    });
+    			});
 			if (!this.pass)
 			    return this.$vux.toast.show({
 			        text: '请输入密码',
@@ -126,6 +126,6 @@ float:left;margin-top:0.12rem;}
 .clearfix{
     zoom:1;
 }
-.btn-dl{margin:.52rem auto;width:2.37rem;height:.42rem;line-height: .42rem;border:1px solid rgba(255,255,255,0.2);border-radius:5px;text-align:center;font-size:16px;color:rgba(255,255,255,0.8);background-color: rgba(255,255,255,0.2);}
+.btn-dl{margin:.92rem auto;display:block;width:77.4%;height:.42rem;line-height: .42rem;border:1px solid rgba(255,255,255,0.2);border-radius:5px;text-align:center;font-size:16px;color:rgba(255,255,255,0.8);background-color: rgba(255,255,255,0.2);}
 .checkState{width: 86%;margin: 0 auto;height:.24rem;line-height:.24rem;font-size:13px;color:#FFF28C;}
 </style>

@@ -6,7 +6,7 @@ export const routes = [
         children: [
             {
                 path: '',
-                component: () => import('@/views/index')
+                component: () => import('@/views/info')
             },
             {
                 path: 'party',

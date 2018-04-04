@@ -19,6 +19,7 @@ Vue.use(AjaxPlugin);
 Vue.use(LoadingPlugin);
 Vue.use(ToastPlugin);
 // 引入rem
+import rem from '@/assets/js/dpr.js';
 // Vue.use(VueRouter);
 
 //import FastClick from 'fastclick';

@@ -41,18 +41,18 @@
 		</div>
 		<tabbar slot="bottom">
         	<tabbar-item>
-        		<img slot="icon" src="../../assets/images/gray-home.png">
-        		<img slot="icon-active" src="../../assets/images/iconw-home.png">
+        		<img slot="icon" src="@/assets/images/gray-home.png">
+        		<img slot="icon-active" src="@/assets/images/iconw-home.png">
         		<span slot="label">首页</span>
       		</tabbar-item>
       		<tabbar-item active-class="reds">
-        		<img slot="icon" src="../../assets/images/gray-item.png">
-        		<img slot="icon-active" src="../../assets/images/iconw-integral.png">
+        		<img slot="icon" src="@/assets/images/gray-item.png">
+        		<img slot="icon-active" src="@/assets/images/iconw-integral.png">
         		<span slot="label">积分详情</span>
       		</tabbar-item>
       		<tabbar-item>
-        		<img slot="icon" src="../../assets/images/gray-active.png">
-        		<img slot="icon-active" src="../../assets/images/iconw-activity.png">
+        		<img slot="icon" src="@/assets/images/gray-active.png">
+        		<img slot="icon-active" src="@/assets/images/iconw-activity.png">
         		<span slot="label">活动详情</span>
       		</tabbar-item>
     	</tabbar>
@@ -194,7 +194,7 @@ export default {
 .header-top{width:90%;height:1.96rem;border-radius: 5px;background:rgba(255,255,255,1);box-shadow: 0 3px 8px 0 rgba(174,174,174,0.5);position: absolute;top:.24rem;left:5%;}
 .top-head{width:78%;height:1.14rem;margin:0 auto;border-bottom:1px solid #EDEDED;}
 .top-left{height:.32rem;font-size:.18rem;font-family:PingFangSC-Semibold;color:rgba(62,62,62,1);line-height:.25rem;margin:.49rem 0 .24rem .24rem;font-weight:600;float:left;}
-.top-right{width:.66rem;height:.66rem;font-weight:600;float:right;margin:.24rem .3rem .15rem 0;background:url(../../assets/images/icon-head.png) no-repeat;background-size:100% 100%;}
+.top-right{width:.66rem;height:.66rem;font-weight:600;float:right;margin:.24rem .3rem .15rem 0;background:url(../assets/images/icon-head.png) no-repeat;background-size:100% 100%;}
 .top-second{width:82%;height:0.17rem;margin:.17rem auto 0 auto;font-size:.12rem;line-height:.17rem;}
 .second-left{width:1.53rem;height:0.17rem;float:left;overflow:hidden;}
 .second-right{float:right;margin-right:0px;}
