@@ -31,13 +31,13 @@
                         <div><img src="@/assets/images/preview.jpg"></div>
                     </flexbox-item>
                     <flexbox-item :span="1/3">
-                        <div><img src="@/assets/images/preview.jpg"></div>
+                        <div><img src="@/assets/images/preview1.jpg"></div>
                     </flexbox-item>
                     <flexbox-item :span="1/3">
-                        <div><img src="@/assets/images/preview.jpg"></div>
+                        <div><img src="@/assets/images/preview2.jpg"></div>
                     </flexbox-item>
                     <flexbox-item :span="1/3">
-                        <div><img src="@/assets/images/preview.jpg"></div>
+                        <div><img src="@/assets/images/preview3.jpg"></div>
                     </flexbox-item>
                     <flexbox-item :span="1/3">
                         <a class="btn-plus"></a>
@@ -211,9 +211,12 @@ export default {
             box-shadow: 0 0 0.05rem rgba(0, 0, 0, 0.15);
             background-color: rgba(0, 0, 0, 0.03);
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             img {
-                width: 100%;
-                height: 100%;
+                min-width: 100%;
             }
             &.btn-plus {
                 background-image: url(../../assets/images/add_bg.png);
