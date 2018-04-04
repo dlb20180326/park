@@ -1,131 +1,206 @@
 <template>
-	<div id="loginPage">
-		<x-img :src=bigPic  class="icon-pic"></x-img>
-		<!--<div class="checkState" v-show="hideCheck">{{msg}}</div>-->
-		<form id="myForm">
-			<div class="input-all clearfix">
-				<div class="left-content">
-					<i class="img-phone"></i>
-					<label for="in-phone" class="font-label">账号</label>
-				</div>
-				<input type="text" id="in-phone" v-model="account" required />
-			</div>
-			<div class="input-all clearfix">
-				<div class="left-content">
-					<i class="img-locks"></i>
-					<label for="in-phone" class="label-lock">密码</label>
-				</div>
-				<input type="password" id="in-phone" v-model="pass"  required />
-			</div>
-			<div class="passAbout">
-				<div class="changePass">修改密码</div>
-				<div class="forget">忘记密码</div>
-			</div>
-			<button type="button" class="btn-dl" @click="login">登录</button>
-		</form>
-	</div>
+    <div id="loginPage">
+        <img src="@/assets/images/iconw-bigpic.png" class="icon-pic">
+        <form id="myForm">
+            <div class="input-all clearfix">
+                <div class="left-content">
+                    <i class="img-phone"></i>
+                    <label for="in-phone" class="font-label">账号</label>
+                </div>
+                <input type="text" v-model="account" />
+            </div>
+            <div class="input-all clearfix">
+                <div class="left-content">
+                    <i class="img-locks"></i>
+                    <label for="in-phone" class="label-lock">密码</label>
+                </div>
+                <input type="password" v-model="pass" />
+            </div>
+            <div class="passAbout">
+                <div class="changePass">修改密码</div>
+                <div class="forget">忘记密码</div>
+            </div>
+            <button type="button" class="btn-dl" @click="login">登录</button>
+        </form>
+    </div>
 </template>
 <script>
-import bigPic from '@/assets/images/iconw-bigpic.png';
-import rem from '@/assets/js/dpr.js';
-import {XImg,Icon} from 'vux'
+import { XImg, Icon } from 'vux';
 export default {
-	data(){
-		return {
-			bigPic,
-			account:'wangjie',
-			pass:'12345678'
-			
-			
-		}
-	},
-	components:{
-		XImg,
-		Icon
-		
-	},
-	methods:{
-		login(){
+    data() {
+        return {
+            account: 'wangjie',
+            pass: '12345678'
+        };
+    },
+    components: {
+        XImg,
+        Icon
+    },
+    methods: {
+        login() {
             if (!this.account)
-    			return this.$vux.toast.show({
-	        		text: '请输入帐号',
-			        type: 'text',
-			        position: 'top'
-    			});
-			if (!this.pass)
-			    return this.$vux.toast.show({
-			        text: '请输入密码',
-			        type: 'text',
-			        position: 'top'
-			    });
-			this.$store
-			    .dispatch('login', {
-			        name: this.account,
-			        password: this.pass
-			    })
-		    .then(
-		        result => this.$router.push({ path: '/' }),
-		        error =>
-		            this.$vux.toast.show({
-		                text: error.message,
-		                width: '18em',
-		                type: 'text',
-		                position: 'top'
-		            })
-		    );
-		}
-	}
-}
+                return this.$vux.toast.show({
+                    text: '请输入帐号',
+                    type: 'text',
+                    position: 'top'
+                });
+            if (!this.pass)
+                return this.$vux.toast.show({
+                    text: '请输入密码',
+                    type: 'text',
+                    position: 'top'
+                });
+            this.$store
+                .dispatch('login', {
+                    name: this.account,
+                    password: this.pass
+                })
+                .then(
+                    result =>
+                        this.$router.push({
+                            path: '/'
+                        }),
+                    error =>
+                        this.$vux.toast.show({
+                            text: error.message,
+                            width: '18em',
+                            type: 'text',
+                            position: 'top'
+                        })
+                );
+        }
+    }
+};
 </script>
 <style scoped>
- #loginPage{background:url(../assets/images/iconw-bg.png) no-repeat;background-size:100% 100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px;}
-.icon-pic{width:1.4rem;height:1.2rem;display:block;margin:0.9rem auto 0.52rem auto;}
-#myForm{
-	width: 86%;
-	margin: 0 auto;
+#loginPage {
+    background: url(../assets/images/iconw-bg.png) no-repeat;
+    background-size: 100% 100%;
+    background-color: #b98042;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
-#myForm .input-all{
-	height: 0.42rem;
+.icon-pic {
+    width: 1.4rem;
+    height: 1.2rem;
+    display: block;
+    margin: 0.8rem auto 0;
+}
+#myForm {
+    width: 86%;
+    margin: 0.5rem auto 0;
+}
+#myForm .input-all {
+    height: 0.42rem;
     line-height: 0.42rem;
     padding-left: 0.61rem;
-    padding-right: .3rem;
-    border-bottom:2px solid #D1826C;
-    position:relative;
-    width: calc(100% - .91rem);
+    padding-right: 0.3rem;
+    border-bottom: 2px solid #d1826c;
+    position: relative;
+    width: calc(100% - 0.91rem);
 }
-.input-all #in-phone{
-	outline: 0px;
+.input-all input {
+    outline: 0px;
     width: 75%;
     background-color: transparent;
     display: block;
-    height: .32rem;
+    height: 0.32rem;
     box-sizing: border-box;
-    border:0px;
-    color:#fff;
-    position:absolute;
-    top:.08rem;
+    border: 0px;
+    color: #fff;
+    position: absolute;
+    top: 0.08rem;
+    font-size: 0.14rem;
+    margin-left: 0.1rem;
 }
-.input-all .check{width:0.21rem;height:0.21rem;float:right;margin-right:-27px;margin-top:13px;}
-.input-all .left-content{width: 0.61rem;height:.32rem ;float:left;margin:0.05rem 0rem 0.05rem -0.52rem;}
-.font-label{font-size:12px;color:rgba(255,255,255,0.6);display:block;margin-left:0.11rem;float:left;width:.32rem;line-height:.37rem;}
-.img-phone{width:0.09rem;height:0.14rem;background: url(../assets/images/iconw-phone.png) no-repeat;background-size:100% 100%;display:block;
-float:left;margin-top:0.12rem;}
-.img-locks{width:0.11rem;height:0.13rem;background: url(../assets/images/iconw-key.png) no-repeat;background-size:100% 100%;display:block;
-float:left;margin-top:0.12rem;}
-.label-lock{font-size:12px;color:rgba(255,255,255,0.6);;display:block;margin-left:0.09rem;float:left;width:.32rem;line-height:.37rem;}
-.passAbout{}
-.forget{width:.61rem;height:0.17rem;color:#ddd;font-size:12px;float:right;margin-top:.14rem;}
-.changePass{width:.61rem;height:0.17rem;color:#ddd;font-size:12px;float:left;margin-top:.14rem;}
- .clearfix:after{
+.input-all .check {
+    width: 0.21rem;
+    height: 0.21rem;
+    float: right;
+    margin-right: -27px;
+    margin-top: 13px;
+}
+.input-all .left-content {
+    width: 0.61rem;
+    height: 0.32rem;
+    float: left;
+    margin: 0.05rem 0rem 0.05rem -0.52rem;
+}
+.font-label {
+    color: rgba(255, 255, 255, 0.6);
+    display: block;
+    margin-left: 0.11rem;
+    float: left;
+    width: 0.32rem;
+    line-height: 0.37rem;
+}
+.img-phone {
+    width: 0.09rem;
+    height: 0.14rem;
+    background: url(../assets/images/iconw-phone.png) no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    float: left;
+    margin-top: 0.12rem;
+}
+.img-locks {
+    width: 0.11rem;
+    height: 0.13rem;
+    background: url(../assets/images/iconw-key.png) no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    float: left;
+    margin-top: 0.12rem;
+}
+.label-lock {
+    color: rgba(255, 255, 255, 0.6);
+    display: block;
+    margin-left: 0.09rem;
+    float: left;
+    width: 0.32rem;
+    line-height: 0.37rem;
+}
+.passAbout {
+    margin-top: 0.14rem;
+    font-size: 0.14rem;
+}
+.forget {
+    width: 0.61rem;
+    height: 0.17rem;
+    color: #ddd;
+    float: right;
+}
+.changePass {
+    width: 0.61rem;
+    height: 0.17rem;
+    color: #ddd;
+    float: left;
+}
+.clearfix:after {
     display: block;
     clear: both;
-    content: "";
+    content: '';
     visibility: hidden;
     height: 0;
 }
-.clearfix{
-    zoom:1;
+.clearfix {
+    zoom: 1;
 }
-.btn-dl{margin:.92rem auto;display:block;width:77.4%;height:.42rem;line-height: .42rem;border:1px solid rgba(255,255,255,0.2);border-radius:5px;text-align:center;font-size:16px;color:rgba(255,255,255,0.8);background-color: rgba(255,255,255,0.2);}
-.checkState{width: 86%;margin: 0 auto;height:.24rem;line-height:.24rem;font-size:13px;color:#FFF28C;}
+.btn-dl {
+    margin: 1rem auto 0;
+    display: block;
+    width: 77.4%;
+    height: 0.42rem;
+    line-height: 0.42rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.16rem;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.2);
+}
 </style>
