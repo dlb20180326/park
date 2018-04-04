@@ -29,12 +29,9 @@ npm run build
 ```js
 // 配置参考
 proxyTable: {
-  '/api/': {
-    changeOrigin: true,
-        target: 'http://www.dlbdata.cn/',
-        pathRewrite: {
-          '^/api/': '/dangjian/'
-        }
+    '/dangjian/': {
+        changeOrigin: true,
+        target: 'http://www.dlbdata.cn/'
     }
 },
 ```
