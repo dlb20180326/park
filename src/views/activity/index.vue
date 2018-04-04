@@ -1,16 +1,9 @@
 <template>
     <div class="page-body">
-        <flexbox class="page-header" :gutter="0" align="end" justify="space-between">
-            <flexbox-item>
-                <img src="@/assets/images/left-row.png" height="20vw"> 返回
-            </flexbox-item>
-            <flexbox-item>
-                <h4>党员活动</h4>
-            </flexbox-item>
-            <flexbox-item>
-                发起活动
-            </flexbox-item>
-        </flexbox>
+        <x-header :left-options="{showBack: false}">
+            党员活动
+            <router-link slot="right" to="/activity/post">发起活动</router-link>
+        </x-header>
         <flexbox class="list-item" v-for="(item, index) in list" :key="index" :gutter="0" align="stretch">
             <flexbox-item class="list-avatar">
                 <img src="@/assets/images/icon-head.png">
@@ -49,10 +42,11 @@
 </template>
 
 <script>
-import { Flexbox, FlexboxItem } from 'vux';
+import { XHeader, Flexbox, FlexboxItem } from 'vux';
 
 export default {
     components: {
+        XHeader,
         Flexbox,
         FlexboxItem
     },
@@ -125,30 +119,13 @@ export default {
     overflow: auto;
     background-color: #efefef;
 }
-.page-header {
-    height: 0.6rem;
+.vux-header {
     background-color: #a0333b;
-    color: #fff;
-    .vux-flexbox-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 0.4rem;
-        font-size: 0.18rem;
-        &:first-child,
-        &:last-child {
-            flex: 0 0 auto;
-            width: auto;
-            min-width: 0.5rem;
-            padding-left: 0.15rem;
-            font-size: 0.14rem;
-            justify-content: start;
-        }
-        &:last-child {
-            padding-left: 0;
-            padding-right: 0.15rem;
-            justify-content: end;
-        }
+    .vux-header-left a,
+    .vux-header-left button,
+    .vux-header-right a,
+    .vux-header-right button {
+        color: #fff;
     }
 }
 .vux-flexbox.list-item {
