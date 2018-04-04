@@ -10,12 +10,9 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            '/api/': {
+            '/dangjian/': {
                 changeOrigin: true,
-                target: 'http://www.dlbdata.cn/',
-                pathRewrite: {
-                    '^/api/': '/dangjian/'
-                }
+                target: 'http://www.dlbdata.cn/'
             }
         },
 
