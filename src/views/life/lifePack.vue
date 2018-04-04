@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import Xheader from './rheader'
+import Xheader from '@/components/comother/rheader'
 import {Previewer, TransferDom,ViewBox} from 'vux'
 	export default {
 		directives: {

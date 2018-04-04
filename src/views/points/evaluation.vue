@@ -11,17 +11,17 @@
   					<div class="flag">{{info.score}}</div>
       				</flexbox-item>
     		</flexbox>
-			<footers :selec='select'></footers>
+			<!--<footers :selec='select'></footers>-->
    		</view-box>
  	</div>
 </template>
 <script>
-import {XHeader,Flexbox,FlexboxItem} from 'vux'
-import footers from '../layout/footer'
+import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
+/*import footers from '../layout/footer'*/
 	export default {
 		data(){			
 			return {
-				collect:[{bgImg:'./src/assets/images/icon-idea.png',label:'政治学习',score:'10分'},		{bgImg:'./src/assets/images/icon-flag.png',label:'组织生活双报道',score:'20分'},
+				collect:[{bgImg:'../assets/images/icon-idea.png',label:'政治学习',score:'10分'},		{bgImg:'./src/assets/images/icon-flag.png',label:'组织生活双报道',score:'20分'},
 						{bgImg:'./src/assets/images/icon-much.png',label:'党费缴纳',score:'10分'},		{bgImg:'./src/assets/images/icon-idea.png',label:'思想汇报',score:'15分'},		{bgImg:'./src/assets/images/icon-before.png',label:'先锋作用',score:'10分'},		{bgImg:'./src/assets/images/icon-law.png',label:'遵纪守法一票否决',score:'20分'},
 						{bgImg:'./src/assets/images/icon-server.png',label:'公益服务',score:'10分'}],
 						select:{infos:'积分详情',inte:false}
@@ -29,7 +29,10 @@ import footers from '../layout/footer'
 		},
 		components:{
 			XHeader,
-			footers
+			Flexbox,
+			FlexboxItem,
+			ViewBox
+//			footers
 		},
 		methods:{
 
@@ -57,7 +60,7 @@ html,body{
 .vux-flexbox-item:nth-child(odd){margin-left:0px!important;}
 .vux-flexbox-item:nth-child(even){margin-right:-1%;}
 .vux-flexbox .vux-flexbox-item{min-width: 49%;width: 49%;margin-bottom:.1rem;-webkit-flex:0;position:relative;}
-.iconImg{width:.24rem;height:.25rem;margin:0 auto .07rem auto;background-repeat:nnono-repeat;background-size:100% 100%;}
+.iconImg{width:.24rem;height:.25rem;margin:0 auto .07rem auto;background-repeat:no-repeat;background-size:100% 100%;}
 .fonts-label{width:100%;height:.21rem;line-height:.21rem;text-align: center;font-size:.14rem;}
 .flag{width:.24rem;height:.42rem;position:absolute;right:.15rem;top:-0.08rem;background: url(../../assets/images/icon-flag.png) no-repeat;font-size:.12rem;color:#FFFFFF;writing-mode:lr-tb;text-align:center;line-height:.16rem;}
 </style>

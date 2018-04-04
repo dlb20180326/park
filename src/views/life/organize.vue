@@ -20,27 +20,12 @@
 	      		</previewer>
 	    	</div>
 			</div>
-			<p class="allPic">
-			<span class="picture">参与人员</span>
-			<span class="numberz"><span class="color-num">20</span>/23</span>
-			</p>
-			<div class="wz-fonts">
-				王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 李薇薇 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔
-			</div>
-			<div class="btnMore">查看全部参与人员名单<span class="down"></span></div>
-			<p class="allPic">
-			<span class="no-picture">未参与人员</span>
-			<span class="numberz"><span class="color-num">3</span>/23</span>
-			</p>
-			<div class="wz-fonts">
-				王俊凯 李薇薇 维吾尔 
-			</div>
 	 	</view-box>
 	</div>
 </template>
 
 <script>
-import Xheader from './rheader'
+import Xheader from '@/components/comother/rheader'
 import {Previewer, TransferDom,ViewBox} from 'vux'
 	export default {
 		directives: {
@@ -72,10 +57,6 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
       			{
         			msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
         			src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg'
-      			},
-      			{
-        			msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-        			src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwwcynw2j20p00b4js9.jpg'
       			}],
       			options: {
         			getThumbBoundsFn (index) {
@@ -119,11 +100,6 @@ html,body{
 .color-num{color:rgba(185, 54, 71, 1);}
 .line-pic{width:87.2%;margin:.1rem 4.8% .2rem 8%;height:.36rem;overflow:hidden;}
 .line-pic img{width:.36rem;height:.36rem;margin-left:.07rem;display:block;float:left;}
-.wz-fonts{font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.24rem;width:87.2%;margin:.1rem 4.8% .2rem 8%;word-spacing:.24rem;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 4;overflow: hidden;}
+.wz-fonts{height:.2rem; font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.2rem;width:87.2%;margin:.1rem 4.8% .2rem 8%;overflow:hidden;text-overflow: ellipsis;white-space:nowrap;}
 .no-picture{width:1.1rem;font-size:.2rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);margin-left:8%;display:block;float: left;}
-.btnMore{width:1.6rem;height:.3rem;border-radius:15px;margin:.2rem auto;font-size:.1rem;
-font-family:PingFangSC-Medium;
-color:rgba(204,204,204,1);border:1px solid #E4E4E4;line-height:.3rem;text-align:center;
-}
-.down{width:0.1rem;height:0.1rem;display:inline-block;background: url(../../assets/images/icon-down.png) no-repeat;background-size:100% 100%;margin-left:.05rem;}
 </style>

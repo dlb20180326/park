@@ -19,13 +19,13 @@
 					<span class="line-bottom"></span>
 				</div>
 			</div>
-			<footers :selec='select'></footers>
+			<!--<footers :selec='select'></footers>-->
    		</view-box>
  	</div>
 </template>
 <script>
-import {XHeader} from 'vux'
-import footers from '../layout/footer'
+import {XHeader,ViewBox} from 'vux'
+/*import footers from '../layout/footer'*/
 	export default {
 		data(){
 			let listinfo = [{name:'王阿斯',sex:'男',age:23,roll:'花期银行第一支部',now:5},{name:'王阿斯',sex:'男',age:23,roll:'花期银行第一支部',now:0}];
@@ -39,7 +39,8 @@ import footers from '../layout/footer'
 		},
 		components:{
 			XHeader,
-			footers
+			ViewBox
+//			footers
 		},
 		methods:{
 			

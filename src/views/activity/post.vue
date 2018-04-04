@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import Xheader from './rheader'
+import Xheader from '@/components/comother/rheader'
 import {Previewer, TransferDom,ViewBox} from 'vux'
 	export default {
 		directives: {
@@ -102,4 +102,5 @@ html,body{
 .line-pic img{width:.36rem;height:.36rem;margin-left:.07rem;display:block;float:left;}
 .wz-fonts{height:.2rem; font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.2rem;width:87.2%;margin:.1rem 4.8% .2rem 8%;overflow:hidden;text-overflow: ellipsis;white-space:nowrap;}
 .no-picture{width:1.1rem;font-size:.2rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);margin-left:8%;display:block;float: left;}
+.weui-tab__panel{padding-bottom:0px!important;}
 </style>

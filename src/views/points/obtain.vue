@@ -8,8 +8,9 @@
  	</div>
 </template>
 <script>
-import Xheader from './rheader'
-import Gain from './gain'
+import Xheader from '@/components/comother/rheader'
+import Gain from '@/components/comother/gain'
+import {ViewBox} from 'vux'
 	export default {
 		data(){
 			let list = [
@@ -42,7 +43,8 @@ import Gain from './gain'
 		},
 		components:{
 			'r-header':Xheader,
-			'gain':Gain
+			'gain':Gain,
+			ViewBox
 		},
 		methods:{
 

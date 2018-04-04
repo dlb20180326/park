@@ -14,7 +14,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<mt-popup v-model="popupVisible" position="left" :modal=true :closeOnClickModal=false>
+			<mt-popup v-model="popupVisible" position="left" :closeOnClickModal=false>
 			<div class="middle">
 				<div class="middle-top">评分说明</div>
 				<div class="middle-content">
@@ -24,13 +24,16 @@
 				</div>
 				<div class="knowBtn" @click="know">我知道了</div>
 			</div>
-			<!--<child></child>-->
 			</mt-popup>
    		</view-box>
  	</div>
 </template>
 <script>
-import Xheader from './rheader'
+import Xheader from '@/components/comother/rheader'
+import Vue from 'vue';
+import {ViewBox} from 'vux'
+import { Popup } from 'mint-ui';
+Vue.component(Popup.name, Popup);
 	export default {
 		data(){
 			
@@ -52,7 +55,8 @@ import Xheader from './rheader'
 			}
 		},
 		components:{
-			'r-header':Xheader
+			'r-header':Xheader,
+			ViewBox
 		},
 		methods:{
 			changeItem(){

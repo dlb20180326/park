@@ -24,10 +24,10 @@
 			<span class="picture">参与人员</span>
 			<span class="numberz"><span class="color-num">20</span>/23</span>
 			</p>
-			<div class="wz-fonts" style="-webkit-line-clamp: 5;">
-				王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 李薇薇 王俊凯 李薇薇 维吾尔 王俊凯 
+			<div class="wz-fonts">
+				王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 李薇薇 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔
 			</div>
-			<div class="btnMore">收起<span class="up"></span></div>
+			<div class="btnMore">查看全部参与人员名单<span class="down"></span></div>
 			<p class="allPic">
 			<span class="no-picture">未参与人员</span>
 			<span class="numberz"><span class="color-num">3</span>/23</span>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import Xheader from './rheader'
+import Xheader from '@/components/comother/rheader'
 import {Previewer, TransferDom,ViewBox} from 'vux'
 	export default {
 		directives: {
@@ -61,7 +61,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 		},
 		data(){
 			return {
-				contents:{rights:'',title:'驿站活动详情'},
+				contents:{rights:'',title:'组织生活详情'},
 				dateTime:'2019年2月18日',
 				location:'陆家嘴',
 				num:10,
@@ -125,5 +125,5 @@ html,body{
 font-family:PingFangSC-Medium;
 color:rgba(204,204,204,1);border:1px solid #E4E4E4;line-height:.3rem;text-align:center;
 }
-.up{width:0.1rem;height:0.1rem;display:inline-block;background: url(../../assets/images/icon-up.png) no-repeat;background-size:100% 100%;float:right;margin-right:.2rem;margin-top:.1rem;}
+.down{width:0.1rem;height:0.1rem;display:inline-block;background: url(../../assets/images/icon-down.png) no-repeat;background-size:100% 100%;margin-left:.05rem;}
 </style>
