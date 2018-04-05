@@ -53,6 +53,10 @@ export const routes = [
                 component: () => import('@/views/activity/post')
             },
             {
+                path: 'activity/new',
+                component: () => import('@/views/activity/new')
+            },
+            {
                 path: 'life',
                 component: () => import('@/views/life')
             },
