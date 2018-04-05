@@ -45,8 +45,9 @@
 </template>
 
 <script>
-import { Flexbox, FlexboxItem, Tabbar, TabbarItem, ViewBox } from 'vux';
+import { Flexbox, FlexboxItem, Tabbar, TabbarItem, ViewBox,cookie} from 'vux';
 import echarts from 'echarts';
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -54,7 +55,8 @@ export default {
             username: '王大陆',
             dateTime: '',
             locations: { areas: '上海中心片区', secretary: '韩xx', branch: '花旗银行第二党支部' },
-            charts: ''
+            charts: '',
+            userId:cookie.get('userId')
         };
     },
     components: {
@@ -81,6 +83,9 @@ export default {
         this.$nextTick(function() {
             this.drawAxis('echartShow');
         });
+
+        
+        
     },
     methods: {
         drawAxis(id) {
@@ -174,7 +179,7 @@ export default {
     left: 5%;
 }
 .top-head {
-    width: 78%;
+    width: 86%;
     height: 1.14rem;
     margin: 0 auto;
     border-bottom: 1px solid #ededed;
@@ -185,7 +190,7 @@ export default {
     font-family: PingFangSC-Semibold;
     color: rgba(62, 62, 62, 1);
     line-height: 0.25rem;
-    margin: 0.49rem 0 0.24rem 0.24rem;
+    margin: 0.49rem 0 0.21rem 0.24rem;
     font-weight: 600;
     float: left;
 }
@@ -194,7 +199,7 @@ export default {
     height: 0.66rem;
     font-weight: 600;
     float: right;
-    margin: 0.24rem 0.3rem 0.15rem 0;
+    margin: 0.24rem 0.2rem 0.15rem 0;
     background: url(../assets/images/icon-head.png) no-repeat;
     background-size: 100% 100%;
 }
@@ -206,7 +211,7 @@ export default {
     line-height: 0.17rem;
 }
 .second-left {
-    width: 1.53rem;
+    width: 1.32rem;
     height: 0.17rem;
     float: left;
     overflow: hidden;
