@@ -21,9 +21,9 @@ import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
 	export default {
 		data(){			
 			return {
-				collect:[{bgImg:'../assets/images/icon-idea.png',label:'政治学习',score:'10分'},		{bgImg:'./src/assets/images/icon-flag.png',label:'组织生活双报道',score:'20分'},
-						{bgImg:'./src/assets/images/icon-much.png',label:'党费缴纳',score:'10分'},		{bgImg:'./src/assets/images/icon-idea.png',label:'思想汇报',score:'15分'},		{bgImg:'./src/assets/images/icon-before.png',label:'先锋作用',score:'10分'},		{bgImg:'./src/assets/images/icon-law.png',label:'遵纪守法一票否决',score:'20分'},
-						{bgImg:'./src/assets/images/icon-server.png',label:'公益服务',score:'10分'}],
+				collect:[{bgImg:require('@/assets/images/icon-idea.png'),label:'政治学习',score:'10分'},		{bgImg:require('@/assets/images/icon-flag.png'),label:'组织生活双报道',score:'20分'},
+						{bgImg:require('@/assets/images/icon-much.png'),label:'党费缴纳',score:'10分'},		{bgImg:require('@/assets/images/icon-idea.png'),label:'思想汇报',score:'15分'},		{bgImg:require('@/assets/images/icon-before.png'),label:'先锋作用',score:'10分'},		{bgImg:require('@/assets/images/icon-law.png'),label:'遵纪守法一票否决',score:'20分'},
+						{bgImg:require('@/assets/images/icon-server.png'),label:'公益服务',score:'10分'}],
 						select:{infos:'积分详情',inte:false}
 			}
 		},

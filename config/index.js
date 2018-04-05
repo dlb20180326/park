@@ -12,7 +12,8 @@ module.exports = {
         proxyTable: {
             '/dangjian/': {
                 changeOrigin: true,
-                target: 'http://www.dlbdata.cn/'
+                target: 'http://www.dlbdata.cn/',
+                pathRewrite:{'^/dangjian/':'/dangjian/'}
             }
         },
 
