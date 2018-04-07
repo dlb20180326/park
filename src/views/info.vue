@@ -47,7 +47,7 @@
 <script>
 import { Flexbox, FlexboxItem, Tabbar, TabbarItem, ViewBox,cookie} from 'vux';
 import echarts from 'echarts';
-import axios from 'axios'
+
 export default {
     data() {
         return {
@@ -56,7 +56,7 @@ export default {
             dateTime: '',
             locations: { areas: '上海中心片区', secretary: '韩xx', branch: '花旗银行第二党支部' },
             charts: '',
-            userId:cookie.get('userId')
+
         };
     },
     components: {
@@ -82,9 +82,7 @@ export default {
 
         this.$nextTick(function() {
             this.drawAxis('echartShow');
-        });
-
-        
+        });    
         
     },
     methods: {
