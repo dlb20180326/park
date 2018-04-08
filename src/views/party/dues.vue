@@ -27,7 +27,7 @@
       							<span class="months">{{info.month}}月党费：</span>
       							<span class="dollar">{{info.dues}}元</span>
       						</div>
-      						<div class="status"  v-text="info.status==1?'已缴纳':'未缴纳'"></div>
+      						<div class="status" :class="[info.status==1?'greenStatus':'redStatus']"  v-text="info.status==1?'已缴纳':'未缴纳'"></div>
       					</div>
       				</flexbox-item>
     		</flexbox>
@@ -45,13 +45,6 @@ import axios from 'axios'
 				userId:cookie.get('userId'),
 				contents:{rights:'编辑',title:'党建'},
 				info:{name:'王大陆',cardId:'6282451745218551527'},
-/*				collect:[{month:'1月党费',money:'451元',status:'已缴纳'},
-						{month:'4月党费',money:'41元',status:'已缴纳'},
-						{month:'6月党费',money:'97元',status:'已缴纳'},
-						{month:'3月党费',money:'45元',status:'未缴纳'},
-						{month:'7月党费',money:'41元',status:'已缴纳'},
-						{month:'11月党费',money:'97元',status:'未缴纳'}]*/
-						
 				collect:[],
 				pay:''
 			}
@@ -71,10 +64,17 @@ import axios from 'axios'
 	        		userid:this.userId
 	        	}
 	        }).then(res =>{
-						console.log(res.success);
-				}).catch(err =>{
-					this.collect = err.data;
+				this.collect = res.data;
+				this.collect.sort((x,y) => {
+					return (x.month > y.month ? 1 : -1)
+//					return x.month - y.month
 				})
+				}).catch(err =>{
+					console.log('fail'+err);
+				})
+		},
+		methods:{
+			
 		}
 		
 	}

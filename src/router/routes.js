@@ -37,24 +37,24 @@ export const routes = [
                 component: () => import('@/views/points/obtain')
             },
             {
-                path: 'activity',
-                component: () => import('@/views/activity')
+                path: 'active',
+                component: () => import('@/views/active')
             },
             {
-                path: 'activity/detail',
-                component: () => import('@/views/activity/detail')
+                path: 'active/detail',
+                component: () => import('@/views/active/detail')
             },
             {
-                path: 'activity/detailPack',
-                component: () => import('@/views/activity/detailPack')
+                path: 'active/detailPack',
+                component: () => import('@/views/active/detailPack')
             },
             {
-                path: 'activity/post',
-                component: () => import('@/views/activity/post')
+                path: 'active/post',
+                component: () => import('@/views/active/post')
             },
             {
-                path: 'activity/new',
-                component: () => import('@/views/activity/new')
+                path: 'active/new',
+                component: () => import('@/views/active/new')
             },
             {
                 path: 'life',

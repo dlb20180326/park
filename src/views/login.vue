@@ -1,7 +1,7 @@
 <template>
     <div id="loginPage">
         <img src="@/assets/images/iconw-bigpic.png" class="icon-pic">
-        <form id="myForm">
+        <div id="myForm">
             <div class="input-all clearfix">
                 <div class="left-content">
                     <i class="img-phone"></i>
@@ -21,7 +21,7 @@
                 <div class="forget">忘记密码</div>
             </div>
             <button type="button" class="btn-dl" @click="login">登录</button>
-        </form>
+        </div>
     </div>
 </template>
 <script>

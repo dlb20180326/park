@@ -10,7 +10,7 @@
 					<span class="colorL">姓名：</span>
 					<span class="colorW">{{listinfo.name}}</span>
 					<span class="colorL">性别：</span>
-					<span class="colorW">{{listinfo.sex}}</span>
+					<span class="colorW">{{judge(listinfo.sex)}}</span>
 					<span class="colorL">年龄：</span>
 					<span class="colorW">{{listinfo.age}}</span>
 					<span class="colorL">转出支部：</span>
@@ -31,8 +31,6 @@ import axios from 'axios'
 /*import footers from '../layout/footer'*/
 	export default {
 		data(){
-/*			let listinfo = [{name:'王阿斯',sex:'男',age:23,roll:'花期银行第一支部',now:5},{name:'王阿斯',sex:'男',age:23,roll:'花期银行第一支部',now:0}];*/
-			
 			return {
 				listinfo:{},
 				select:{infos:'党员信息',acin:false},
@@ -50,19 +48,27 @@ import axios from 'axios'
 			infor(){
 				axios.get('/dangjian/ppartymember/queryByUserId',{
 		        	params:{
-		        		userid:2
+		        		userid:this.userId
 		        	}
 		       }).then(res =>{
+		       		console.log(res)
+					this.listinfo = res.data;
 					}).catch(err =>{
-						this.listinfo = err.data;
-						
-						console.log(this.listinfo)
+		       		console.log('fail'+err);
 					})
 				
+			},
+			judge(event){
+				if(event == '1'){
+					return event = '男'
+				}else{
+					return event = '女'
+				}
 			}
 		},
 		mounted(){
 			this.infor();
+			this.judge();
 		}
 	}
 </script>
@@ -89,11 +95,11 @@ margin-top: .2rem;}
 	height:auto;
 }
 .allLine:nth-child(n){padding-top:.2rem;}
-.allLine{width:76%;height:1.7rem;margin:0 18.7% 0 5.3%;}
-.allLine span{display:block;float:left;margin-bottom:0.08rem;}
-.colorL{width:.7rem;height:.2rem; font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(153,153,153,1);line-height:.2rem;}
-.colorW{width:1.6rem;height:.2rem; font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(102,102,102,1);line-height:.2rem;margin-left:.1rem;}
-.rights{width:.12rem;height:.12rem;float:left;margin-left:-1.5rem;margin-top:.03rem;background: url(../../assets/images/icon-right.png) no-repeat;background-size:100% 100%;}
+.allLine{width:100%;overflow:hidden;}
+.allLine span{display:block;float:left;}
+.colorL{width:.74rem;height:.3rem;font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(153,153,153,1);line-height:.3rem;margin-left:5.3%;}
+.colorW{width:2rem;height:.3rem; font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(102,102,102,1);line-height:.3rem;margin-left:.1rem;}
+.rights{width:.12rem;height:.12rem;float:left;margin-left:-1.8rem;margin-top:.085rem;background: url(../../assets/images/icon-right.png) no-repeat;background-size:100% 100%;}
 .color-d{color:rgba(185, 54, 71, 1);}
 .line-bottom{height:.2rem;width:150%;border-bottom:1px solid #EFEFEF;margin-left:-7%;}
 </style>

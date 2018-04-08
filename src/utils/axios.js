@@ -23,9 +23,9 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         // Do something with response data
-        if (!response.data.status) {
+       /* if (!response.data.status) {
             return Promise.reject(response.data);
-        }
+        }*/
         return response.data;
     },
     error => Promise.reject(error)
