@@ -2,7 +2,7 @@
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
             党员活动
-            <router-link slot="right" to="/activity/new">发起活动</router-link>
+            <router-link slot="right" to="/active/new">发起活动</router-link>
         </x-header>
         <flexbox class="list-item" v-for="(item, index) in list" :key="index" :gutter="0" align="stretch">
             <flexbox-item class="list-avatar">

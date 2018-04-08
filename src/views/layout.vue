@@ -15,7 +15,59 @@
 import { Tabbar, TabbarItem } from 'vux';
 
 const tabs = {
+    2: [
+        {
+            icon: require('@/assets/images/gray-home.png'),
+            iconActive: require('@/assets/images/iconw-home.png'),
+            label: '首页',
+            link: '/'
+        },
+        {
+            icon: require('@/assets/images/gray-info.png'),
+            iconActive: require('@/assets/images/iconw-partyMembe.png'),
+            label: '党务信息',
+            link: '/party'
+        },
+        {
+            icon: require('@/assets/images/gray-item.png'),
+            iconActive: require('@/assets/images/iconw-integral.png'),
+            label: '片区活动',
+            link: '/active'
+        },
+        {
+            icon: require('@/assets/images/gray-active.png'),
+            iconActive: require('@/assets/images/iconw-activity.png'),
+            label: '积分审核',
+            link: '/points'
+        }
+    ],
     3: [
+        {
+            icon: require('@/assets/images/gray-home.png'),
+            iconActive: require('@/assets/images/iconw-home.png'),
+            label: '首页',
+            link: '/'
+        },
+        {
+            icon: require('@/assets/images/gray-info.png'),
+            iconActive: require('@/assets/images/iconw-partyMembe.png'),
+            label: '党员信息',
+            link: '/party'
+        },
+        {
+            icon: require('@/assets/images/gray-active.png'),
+            iconActive: require('@/assets/images/iconw-activity.png'),
+            label: '支部活动',
+            link: '/active'
+        },
+        {
+            icon: require('@/assets/images/gray-item.png'),
+            iconActive: require('@/assets/images/iconw-integral.png'),
+            label: '积分评定',
+            link: '/points'
+        }
+    ],
+    4: [
         {
             icon: require('@/assets/images/gray-home.png'),
             iconActive: require('@/assets/images/iconw-home.png'),
@@ -32,33 +84,7 @@ const tabs = {
             icon: require('@/assets/images/gray-active.png'),
             iconActive: require('@/assets/images/iconw-activity.png'),
             label: '党员活动',
-            link: '/activity'
-        }
-    ],
-    4: [
-        {
-            icon: require('@/assets/images/gray-home.png'),
-            iconActive: require('@/assets/images/iconw-home.png'),
-            label: '首页',
-            link: '/'
-        },
-        {
-            icon: require('@/assets/images/gray-info.png'),
-            iconActive: require('@/assets/images/iconw-partyMembe.png'),
-            label: '党员信息',
-            link: '/party'
-        },
-        {
-            icon: require('@/assets/images/gray-item.png'),
-            iconActive: require('@/assets/images/iconw-integral.png'),
-            label: '支部活动',
-            link: '/activity'
-        },
-        {
-            icon: require('@/assets/images/gray-active.png'),
-            iconActive: require('@/assets/images/iconw-activity.png'),
-            label: '积分评定',
-            link: '/points'
+            link: '/active'
         }
     ]
 };
