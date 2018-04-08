@@ -13,6 +13,7 @@ module.exports = {
             '/dangjian/': {
                 changeOrigin: true,
                 target: 'http://www.dlbdata.cn/',
+//				target:'192.168.1.172:8080/',
                 pathRewrite:{'^/dangjian/':'/dangjian/'}
             }
         },
