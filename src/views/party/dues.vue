@@ -24,10 +24,10 @@
       				<flexbox-item v-for="(info,index) in collect" :key="index">
       					<div class="flex-demo">
       						<div class="money">
-      							<span class="months">{{info.month}}：</span>
-      							<span class="dollar">{{info.money}}</span>
+      							<span class="months">{{info.month}}月党费：</span>
+      							<span class="dollar">{{info.dues}}元</span>
       						</div>
-      						<div class="status">{{info.status}}</div>
+      						<div class="status"  v-text="info.status==1?'已缴纳':'未缴纳'"></div>
       					</div>
       				</flexbox-item>
     		</flexbox>
@@ -36,19 +36,24 @@
 	</div>
 </template>
 <script>
-import {XHeader,ViewBox,Group,Cell,Flexbox,FlexboxItem} from 'vux'
+import {XHeader,ViewBox,Group,Cell,Flexbox,FlexboxItem,cookie} from 'vux'
 import Rheader from '../../components/comother/rheader'
+import axios from 'axios'
 	export default {
 		data(){
 			return {
+				userId:cookie.get('userId'),
 				contents:{rights:'编辑',title:'党建'},
 				info:{name:'王大陆',cardId:'6282451745218551527'},
-				collect:[{month:'1月党费',money:'451元',status:'已缴纳'},
+/*				collect:[{month:'1月党费',money:'451元',status:'已缴纳'},
 						{month:'4月党费',money:'41元',status:'已缴纳'},
 						{month:'6月党费',money:'97元',status:'已缴纳'},
 						{month:'3月党费',money:'45元',status:'未缴纳'},
 						{month:'7月党费',money:'41元',status:'已缴纳'},
-						{month:'11月党费',money:'97元',status:'未缴纳'}]
+						{month:'11月党费',money:'97元',status:'未缴纳'}]*/
+						
+				collect:[],
+				pay:''
 			}
 		},
 		components:{
@@ -59,6 +64,17 @@ import Rheader from '../../components/comother/rheader'
 			Cell,
 			Flexbox,
 			FlexboxItem
+		},
+		mounted(){
+			axios.get('/dangjian/ppartymemberdues/queryByUserId',{
+	        	params:{
+	        		userid:this.userId
+	        	}
+	        }).then(res =>{
+						console.log(res.success);
+				}).catch(err =>{
+					this.collect = err.data;
+				})
 		}
 		
 	}
@@ -83,7 +99,7 @@ html,body {
 .vux-flexbox-item:nth-child(even){margin-right:-1%;}
 .money{width:84%;margin-left:15.4%;padding-top:.13rem;height:.25rem;}
 .money span{display:block;}
-.money .months{width:.8rem;height:.2rem;font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(72,72,72,1);
+.money .months{width:.65rem;height:.2rem;font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(72,72,72,1);
 line-height:.2rem;float:left;padding-top:0.03rem;}
 .dollar{height:.25rem; font-size:.18rem;font-family:PingFangSC-Medium;color:rgba(83,83,83,1);line-height:.25rem;float:left;font-weight:600;}
 .status{width:100%;height:.17rem;line-height:.17rem;text-align:center;font-size:.12rem;font-family:PingFangSC-Medium;margin-top:0.04rem;}
@@ -92,7 +108,7 @@ line-height:.2rem;float:left;padding-top:0.03rem;}
 .btnPay{width:89.4%;height:.4rem;line-height:.4rem;text-align:center;font-size:.16rem;font-family:PingFangSC-Medium;color:rgba(255,255,255,1);position:relative;bottom:.2rem;background:rgba(185,54,71,1);border-radius: 4px;margin-left:5.3%;}
 .vux-flexbox .vux-flexbox-item{min-width: 47%;width: 48%;margin-bottom:.1rem;}
 .payinfo{width:1.16rem;height:.25rem; font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(79,79,79,1);line-height:.2rem;margin:.37rem 0 .2rem .2rem;}
-.payBtn{width:.76rem;height:.2rem;border-radius:.1rem;font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(157,14,30,1);line-height:.2rem; margin:.34rem .72rem .24rem .19rem;border:1px solid #C24747;text-align:center;}
+.payBtn{width:.76rem;height:.2rem;border-radius:.1rem;font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(157,14,30,1);line-height:.2rem; margin:.34rem .24rem .24rem .19rem;border:1px solid #C24747;text-align:center;}
 .pay span{display:block;float:left;}
 .payPrize{height:.44rem; font-size:.26rem;font-family:PingFangSC-Medium;color:rgba(250,122,0,1);line-height:.49rem;margin-top:.19rem;}
 .prize{width:.18rem;height:.2rem; font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(79,79,79,1);line-height:.2rem;margin:.37rem 0 .25rem .1rem;}
