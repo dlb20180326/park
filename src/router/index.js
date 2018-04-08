@@ -23,7 +23,12 @@ router.beforeEach((to, from, next) => {
                 next(false);
                 setTimeout(() => Vue.$vux.loading.hide(), 60);
             } else {
-                next({ path: '/login' });
+                next({
+                    path: '/login',
+                    query: {
+                        openId: to.query.openId || undefined
+                    }
+                });
             }
         }
     );

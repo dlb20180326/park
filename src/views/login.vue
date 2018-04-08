@@ -54,7 +54,8 @@ export default {
             this.$store
                 .dispatch('login', {
                     name: this.account,
-                    password: this.pass
+                    password: this.pass,
+                    openId: this.$route.query.openId || undefined
                 })
                 .then(
                     result =>
