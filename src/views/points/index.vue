@@ -9,19 +9,13 @@
 				</div>
 				<div class="right-btn" @click="showDet">切换<span></span></div>
 			</div>
-			<div v-transfer-dom>
-	      		<popup v-model="topShow" position="top">
-	        		<div class="pop-content">
-	        		I'm on top. Hide in 1s.
-	        		</div>
-	      		</popup>
-	    	</div>
+
 		</view-box>
 	</div>
 </template>
 <script>
 import rHeader from '@/components/comother/rheader'
-import {Popup,ViewBox,Sticky,Panel,TransferDom} from 'vux'
+import {ViewBox,Sticky,Panel,TransferDom} from 'vux'
 	export default{
 		data(){
 			return {
@@ -33,7 +27,6 @@ import {Popup,ViewBox,Sticky,Panel,TransferDom} from 'vux'
 		components:{
 			'r-header':rHeader,
 			ViewBox,
-			Popup,
 			Panel,
 			Sticky	
 		},
@@ -56,5 +49,7 @@ import {Popup,ViewBox,Sticky,Panel,TransferDom} from 'vux'
 	.left-active{color:#333;}
 	.right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
 	.right-btn span{width:.1rem;height:.1rem;display:block;float:right;margin:0.07rem ;background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
-	.pop-content{width:100%;height:1.8rem;background-color:rosybrown;margin-top:.96rem;}
+	.pop-content{width:100%;height:1.8rem;background-color:rosybrown;}
+	.vux-popup-dialog{background-color: transparent;}
+	.vux-popup-dialog.vux-popup-top{top:.96rem;}
 </style>
