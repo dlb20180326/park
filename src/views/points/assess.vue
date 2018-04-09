@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        积分评定
     </div>
 </template>
 

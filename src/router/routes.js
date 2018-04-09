@@ -56,6 +56,14 @@ export const routes = [
                 component: () => import('@/views/points')
             },
             {
+                path: 'points/assess',
+                component: () => import('@/views/points/assess')
+            },
+            {
+                path: 'points/review',
+                component: () => import('@/views/points/review')
+            },
+            {
                 path: 'points/evaluation',
                 component: () => import('@/views/points/evaluation')
             },
@@ -66,7 +74,7 @@ export const routes = [
             },
             {
                 path: 'points/audit',
-                name:'Audit',
+                name: 'Audit',
                 component: () => import('@/views/points/auditDetail')
             },
             {
