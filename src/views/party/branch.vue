@@ -2,11 +2,11 @@
 	<div style="height:100%;">
    		<view-box ref="viewBox" body-padding-top=".46rem" body-padding-bottom=".55rem">
 			<x-header :left-options="{showBack: false}" class="bgColors" slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">支部党员信息</x-header>
-			<div class="title-name">花期银行第二党支部党员信息一览</div>
+			<div class="title-name">{{navName.departmentname}}</div>
 			<div class="detail">
-			<!--	<div class="allLine" v-for="(context,index) in listinfo" :key="index">-->
-				<div class="allLine">
-					
+			<!--	<div class="allLine" >-->
+				<div class="allLine" v-for="(listinfo,index) in contents" :key="index">
+					<router-link :to="{name:'Obtain',params:{userid:listinfo.userid,year:years}}">
 					<span class="colorL">姓名：</span>
 					<span class="colorW">{{listinfo.name}}</span>
 					<span class="colorL">性别：</span>
@@ -14,11 +14,12 @@
 					<span class="colorL">年龄：</span>
 					<span class="colorW">{{listinfo.age}}</span>
 					<span class="colorL">转出支部：</span>
-					<span class="colorW">{{listinfo.OutZb}}</span>
+					<span class="colorW">{{listinfo.fromdepartmentname}}</span>
 					<span class="colorL">现有积分：</span>
-					<span class="colorW color-d">{{listinfo.id}}</span>
+					<span class="colorW color-d">{{listinfo.totalscore}}</span>
 					<span class="rights"></span>
 					<span class="line-bottom"></span>
+					</router-link>
 				</div>
 			</div>
 			<!--<footers :selec='select'></footers>-->
@@ -28,11 +29,12 @@
 <script>
 import {XHeader,ViewBox,cookie} from 'vux'
 import axios from 'axios'
-/*import footers from '../layout/footer'*/
 	export default {
 		data(){
 			return {
-				listinfo:{},
+				contents:[],
+				navName:{},
+				years:new Date().getFullYear(),
 				select:{infos:'党员信息',acin:false},
 				userId:cookie.get('userId')
 				
@@ -46,17 +48,29 @@ import axios from 'axios'
 		},
 		methods:{
 			infor(){
-				axios.get('/dangjian/ppartymember/queryByUserId',{
+				axios.get('/dangjian/ppartymember/queryByDepartmentId',{
 		        	params:{
-		        		userid:this.userId
+		        		departmentid:this.$store.getters.user.departmentid
 		        	}
-		       }).then(res =>{
+		      }).then(res =>{
 		       		console.log(res)
-					this.listinfo = res.data;
+					this.contents = res.data;
 					}).catch(err =>{
 		       		console.log('fail'+err);
 					})
 				
+			},
+			nav(){
+				axios.get('/dangjian/pdepartment/queryById',{
+		        	params:{
+		        		departmentid:this.$store.getters.user.departmentid
+		        	}
+		       }).then(res =>{
+		       		console.log(res)
+					this.navName = res.data;
+					}).catch(err =>{
+		       		console.log('fail'+err);
+					})
 			},
 			judge(event){
 				if(event == '1'){
@@ -68,6 +82,7 @@ import axios from 'axios'
 		},
 		mounted(){
 			this.infor();
+			this.nav();
 			this.judge();
 		}
 	}
@@ -99,7 +114,7 @@ margin-top: .2rem;}
 .allLine span{display:block;float:left;}
 .colorL{width:.74rem;height:.3rem;font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(153,153,153,1);line-height:.3rem;margin-left:5.3%;}
 .colorW{width:2rem;height:.3rem; font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(102,102,102,1);line-height:.3rem;margin-left:.1rem;}
-.rights{width:.12rem;height:.12rem;float:left;margin-left:-1.8rem;margin-top:.085rem;background: url(../../assets/images/icon-right.png) no-repeat;background-size:100% 100%;}
+.rights{width:.12rem;height:.12rem;float:left;margin-left:-1.6rem;margin-top:.085rem;background: url(../../assets/images/icon-right.png) no-repeat;background-size:100% 100%;}
 .color-d{color:rgba(185, 54, 71, 1);}
-.line-bottom{height:.2rem;width:150%;border-bottom:1px solid #EFEFEF;margin-left:-7%;}
+.line-bottom{height:.2rem;width:100%;border-bottom:1px solid #EFEFEF;}
 </style>

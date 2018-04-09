@@ -18,6 +18,8 @@ const user = {
                         })
                     })
                     .then(result => {
+//                  	console.log(result);
+   
                         commit('setUser', result.entry);
                         return result;
                     });
@@ -37,6 +39,7 @@ const user = {
             Object.keys(data).map(key => {
                 state[key] = data[key];
             });
+
             // KEYS.forEach(key =>
             //     cookie.set(key, data[key], {
             //         // domain: 'example.com',

@@ -71,14 +71,15 @@
 </template>
 
 <script>
-import { XHeader, GroupTitle, Flexbox, FlexboxItem, XButton } from 'vux';
+import { XHeader, GroupTitle, Flexbox, FlexboxItem, XButton,Popover } from 'vux';
 export default {
     components: {
         XHeader,
         GroupTitle,
         Flexbox,
         FlexboxItem,
-        XButton
+        XButton,
+        Popover
     },
     data() {
         return { value1: '' };
@@ -136,4 +137,5 @@ export default {
     padding-right: 0;
     color: #464646;
 }
+.Popover{padding: 20px 20px;}
 </style>

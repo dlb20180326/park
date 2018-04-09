@@ -36,7 +36,6 @@ import { Popup } from 'mint-ui';
 Vue.component(Popup.name, Popup);
 	export default {
 		data(){
-			
 			let list = [{name:'王俊凯',btn:'去处理'},{name:'李琳',btn:'去处理'},{name:'潘旭',btn:'去处理'},{name:'赵杨',btn:'待审批'}];
 				for(let i=0;i<list.length;i++){
 					if(list[i].btn == '待审批'){
