@@ -11,6 +11,8 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+    if (/^\/$/.test(to.path) && /^\/main/.test(from.path)) return next(false);
+
     Vue.$vux.loading.show({ text: '加载中' });
 
     // if (to.matched.some(record => record.meta.requiresAuth)) {
@@ -20,20 +22,19 @@ router.beforeEach((to, from, next) => {
         result => next(),
         error => {
             if (/^\/login/.test(from.path)) {
-                next(false);
-                setTimeout(() => Vue.$vux.loading.hide(), 60);
-            } else {
-                next({
-                    path: '/login',
-                    query: {
-                        openId: to.query.openId || undefined
-                    }
-                });
+                Vue.$vux.loading.hide();
+                return next(false);
             }
+            return next({
+                path: '/login',
+                query: {
+                    openId: to.query.openId || undefined
+                }
+            });
         }
     );
 });
 
-router.afterEach(to => setTimeout(() => Vue.$vux.loading.hide(), 60));
+router.afterEach(() => Vue.$vux.loading.hide());
 
 export default router;

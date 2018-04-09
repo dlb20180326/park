@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { XHeader, GroupTitle, Flexbox, FlexboxItem, XButton,Popover } from 'vux';
+import { XHeader, GroupTitle, Flexbox, FlexboxItem, XButton, Popover } from 'vux';
 export default {
     components: {
         XHeader,
@@ -80,9 +80,6 @@ export default {
         FlexboxItem,
         XButton,
         Popover
-    },
-    data() {
-        return { value1: '' };
     }
 };
 </script>
@@ -137,5 +134,7 @@ export default {
     padding-right: 0;
     color: #464646;
 }
-.Popover{padding: 20px 20px;}
+.Popover {
+    padding: 20px 20px;
+}
 </style>
