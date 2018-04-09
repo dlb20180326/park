@@ -33,7 +33,7 @@
                         <div><img src="@/assets/images/preview3.jpg"></div>
                     </flexbox-item>
                     <flexbox-item :span="1/3">
-                        <a class="btn-plus"></a>
+                        <a class="btn-plus" @click="chooseImage"></a>
                     </flexbox-item>
                 </flexbox>
             </flexbox-item>
@@ -134,6 +134,10 @@ export default {
                     console.log('checkJsApi success');
                 }
             });
+        });
+    },
+    methods: {
+        chooseImage() {
             wx.chooseImage({
                 count: 1, // 默认9
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -142,7 +146,7 @@ export default {
                     var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
                 }
             });
-        });
+        }
     }
 };
 </script>
