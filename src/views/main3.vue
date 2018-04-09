@@ -33,7 +33,7 @@
                     现有党员：
                 </flexbox-item>
                 <flexbox-item>
-                    <span>25</span>
+                    <span class="number">25</span>
                     人
                 </flexbox-item>
             </flexbox>
@@ -121,6 +121,9 @@ export default {
         margin-top: 0.1rem;
         text-align: center;
     }
+}
+.number {
+    color: #a0333b;
 }
 .vux-flexbox-item.label {
     flex: 0 0 auto;
