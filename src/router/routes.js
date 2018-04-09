@@ -1,3 +1,5 @@
+import store from '../store';
+
 export const routes = [
     {
         path: '/login',
@@ -8,6 +10,11 @@ export const routes = [
         // meta: { requiresAuth: true },
         component: () => import('@/views/layout'),
         children: [
+            {
+                path: '',
+                beforeEnter: (to, from, next) =>
+                    next({ path: /^\/$/.test(to.path) ? '/main' + store.getters.user.roleid : to.path })
+            },
             {
                 path: 'main1',
                 component: () => import('@/views/main1')

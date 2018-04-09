@@ -17,7 +17,7 @@ router.beforeEach((to, from, next) => {
     if (/^\/login/.test(to.path) || store.getters.user.userid) return next();
 
     store.dispatch('userinfo').then(
-        result => next({ path: /^\/$/.test(to.path) ? '/main' + result.entry.roleid : to.path }),
+        result => next(),
         error => {
             if (/^\/login/.test(from.path)) {
                 next(false);
