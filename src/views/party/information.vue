@@ -48,7 +48,7 @@ export default {
     mounted() {}
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .page-body.party-information {
     background: #f4f4f4;
     #vux_view_box_body {

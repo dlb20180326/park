@@ -65,6 +65,11 @@ export const routes = [
                 component: () => import('@/views/points/obtain')
             },
             {
+                path: 'points/audit',
+                name:'Audit',
+                component: () => import('@/views/points/auditDetail')
+            },
+            {
                 path: 'active',
                 component: () => import('@/views/active')
             },
