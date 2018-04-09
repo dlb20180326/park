@@ -4,23 +4,23 @@
             <div class="header">
                 <div class="header-top">
                     <div class="top-head">
-                        <div class="top-left">{{dateTime}}，{{username}}</div>
+                        <div class="top-left">{{dateTime}}，{{userAbout.name}}</div>
                         <div class="top-right"></div>
                     </div>
                     <div class="top-second">
                         <div class="second-left">
                             <span class="color-light">片区:</span>
-                            <span class="color-dark">{{locations.areas}}</span>
+                            <span class="color-dark">{{partAbout.address}}</span>
                         </div>
                         <div class="second-right">
                             <span class="color-light">党支部书记:</span>
-                            <span class="color-dark">{{locations.secretary}}</span>
+                            <span class="color-dark">{{partAbout.partyBranch}}</span>
                         </div>
                     </div>
-                    <div class="top-second">
-                        <div class="second-left">
+                    <div class="top-second2">
+                        <div class="left-second">
                             <span class="color-light">党支部:</span>
-                            <span class="color-dark">{{locations.branch}}</span>
+                            <span class="color-dark">{{partAbout.departmentname}}</span>
                         </div>
                     </div>
                 </div>
@@ -47,15 +47,16 @@
 <script>
 import { Flexbox, FlexboxItem, Tabbar, TabbarItem, ViewBox,cookie} from 'vux';
 import echarts from 'echarts';
+import axios from 'axios'
 
 export default {
     data() {
         return {
             users: [{ id: 1, fonts: '年度积分', integral: 38 }, { id: 2, fonts: '活动次数', integral: 4 }],
-            username: '王大陆',
+            userAbout:{},
             dateTime: '',
-            locations: { areas: '上海中心片区', secretary: '韩xx', branch: '花旗银行第二党支部' },
             charts: '',
+            partAbout:{}
 
         };
     },
@@ -79,11 +80,15 @@ export default {
         } else {
             this.dateTime = '晚上好';
         }
-
+		
         this.$nextTick(function() {
             this.drawAxis('echartShow');
         });    
+        this.userName();
+        this.infoDetail();
         
+        
+        console.log(this.$store.getters.user);
     },
     methods: {
         drawAxis(id) {
@@ -155,6 +160,29 @@ export default {
             window.onresize = function() {
                 myCharts.resize();
             };
+        },
+        infoDetail(){
+        	axios.get('/dangjian/pdepartment/queryById',{
+        		params:{
+        			departmentid:this.$store.getters.user.departmentid
+        		}
+        	}).then( res=>{
+        		this.partAbout = res.data
+        	}).catch( err =>{
+        		console.log(err);
+        	})
+        },
+        userName(){
+			axios.get('/dangjian/ppartymember/queryByUserId',{
+        		params:{
+        			userid:this.$store.getters.user.userid
+        		}
+        	}).then( res=>{
+        		console.log(res);
+        		this.userAbout = res.data
+        	}).catch( err =>{
+        		console.log(err);
+        	})
         }
     }
 };
@@ -168,7 +196,7 @@ export default {
 }
 .header-top {
     width: 90%;
-    height: 1.96rem;
+    height: 2.05rem;
     border-radius: 5px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0 3px 8px 0 rgba(174, 174, 174, 0.5);
@@ -201,12 +229,15 @@ export default {
     background: url(../assets/images/icon-head.png) no-repeat;
     background-size: 100% 100%;
 }
-.top-second {
+.top-second,.top-second2{
     width: 82%;
-    height: 0.17rem;
-    margin: 0.17rem auto 0 auto;
+    margin: 0 auto;
     font-size: 0.12rem;
     line-height: 0.17rem;
+    padding-top: .15rem;
+}
+.top-second2{
+    padding-top: .25rem;
 }
 .second-left {
     width: 1.32rem;
@@ -214,9 +245,16 @@ export default {
     float: left;
     overflow: hidden;
 }
+
 .second-right {
     float: right;
     margin-right: 0px;
+}
+
+.left-second {
+    width: 100%;
+    height: 0.17rem;
+    float: left;
 }
 .color-light {
     font-family: PingFang-SC-Medium;

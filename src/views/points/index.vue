@@ -1,42 +1,51 @@
 <template>
 	<div>
 		<view-box ref="viewBox" body-padding-top=".46rem" body-padding-bottom=".55rem">
-		<r-header :rfs='itegal'></r-header>
-		<div class="header-list">
-			<div class="list-left">
-			<span class="left-now">当前支部：</span>
-			<span class="left-active">花期银行第一支部</span>
+			<r-header :rfs='itegal'></r-header>
+			<div class="header-list">
+				<div class="list-left">
+				<span class="left-now">当前支部：</span>
+				<span class="left-active">花期银行第一支部</span>
+				</div>
+				<div class="right-btn" @click="showDet">切换<span></span></div>
 			</div>
-			<div class="right-btn">切换<span></span></div>
-		</div>
+			<div v-transfer-dom>
+	      		<popup v-model="topShow" position="top">
+	        		<div class="pop-content">
+	        		I'm on top. Hide in 1s.
+	        		</div>
+	      		</popup>
+	    	</div>
 		</view-box>
 	</div>
 </template>
 <script>
 import rHeader from '@/components/comother/rheader'
-import {Group,PopupPicker,ViewBox,Sticky,Panel} from 'vux'
+import {Popup,ViewBox,Sticky,Panel,TransferDom} from 'vux'
 	export default{
 		data(){
 			return {
-				itegal:{rights:'',title:'积分审核'}
+				itegal:{rights:'',title:'积分审核'},
+				topShow:false
 				
 			}
 		},
 		components:{
 			'r-header':rHeader,
 			ViewBox,
-			PopupPicker,
-			Group,
+			Popup,
 			Panel,
-			Sticky
-			
-			
+			Sticky	
 		},
+		directives: {
+   			TransferDom
+  		},
 		methods:{
-			
+			showDet(){
+				this.topShow = !this.topShow
+			}
 		},
 		mounted(){
-			
 		}
 	}
 </script>
@@ -45,6 +54,7 @@ import {Group,PopupPicker,ViewBox,Sticky,Panel} from 'vux'
 	.list-left{width:54%;margin:.15rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;}
 	.left-now{color:#666666;}
 	.left-active{color:#333;}
-	.right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;}
-	.right-btn span{width:.1rem;height:.1rem;display:block;float:right;margin:0.07rem ;background-image:url(../../assets/images/icon-down.png);background-size: 100% 100%;}
+	.right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
+	.right-btn span{width:.1rem;height:.1rem;display:block;float:right;margin:0.07rem ;background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
+	.pop-content{width:100%;height:1.8rem;background-color:rosybrown;margin-top:.96rem;}
 </style>
