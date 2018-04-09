@@ -1,12 +1,28 @@
 export const routes = [
     {
+        path: '/login',
+        component: () => import('@/views/login')
+    },
+    {
         path: '/',
         // meta: { requiresAuth: true },
         component: () => import('@/views/layout'),
         children: [
             {
-                path: '',
-                component: () => import('@/views/info')
+                path: 'main1',
+                component: () => import('@/views/main1')
+            },
+            {
+                path: 'main2',
+                component: () => import('@/views/main2')
+            },
+            {
+                path: 'main3',
+                component: () => import('@/views/main3')
+            },
+            {
+                path: 'main4',
+                component: () => import('@/views/main4')
             },
             {
                 path: 'party',
@@ -38,7 +54,7 @@ export const routes = [
             },
             {
                 path: 'points/obtain',
-                name:'Obtain',
+                name: 'Obtain',
                 component: () => import('@/views/points/obtain')
             },
             {
@@ -78,9 +94,5 @@ export const routes = [
                 component: () => import('@/views/life/organize')
             }
         ]
-    },
-    {
-        path: '/login',
-        component: () => import('@/views/login')
     }
 ];

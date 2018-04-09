@@ -45,19 +45,18 @@
 </template>
 
 <script>
-import { Flexbox, FlexboxItem, Tabbar, TabbarItem, ViewBox,cookie} from 'vux';
+import { Flexbox, FlexboxItem, Tabbar, TabbarItem, ViewBox, cookie } from 'vux';
 import echarts from 'echarts';
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
     data() {
         return {
             users: [{ id: 1, fonts: '年度积分', integral: 38 }, { id: 2, fonts: '活动次数', integral: 4 }],
-            userAbout:{},
+            userAbout: {},
             dateTime: '',
             charts: '',
-            partAbout:{}
-
+            partAbout: {}
         };
     },
     components: {
@@ -80,14 +79,13 @@ export default {
         } else {
             this.dateTime = '晚上好';
         }
-		
+
         this.$nextTick(function() {
             this.drawAxis('echartShow');
-        });    
+        });
         this.userName();
         this.infoDetail();
-        
-        
+
         console.log(this.$store.getters.user);
     },
     methods: {
@@ -161,28 +159,34 @@ export default {
                 myCharts.resize();
             };
         },
-        infoDetail(){
-        	axios.get('/dangjian/pdepartment/queryById',{
-        		params:{
-        			departmentid:this.$store.getters.user.departmentid
-        		}
-        	}).then( res=>{
-        		this.partAbout = res.data
-        	}).catch( err =>{
-        		console.log(err);
-        	})
+        infoDetail() {
+            axios
+                .get('/dangjian/pdepartment/queryById', {
+                    params: {
+                        departmentid: this.$store.getters.user.departmentid
+                    }
+                })
+                .then(res => {
+                    this.partAbout = res.data;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         },
-        userName(){
-			axios.get('/dangjian/ppartymember/queryByUserId',{
-        		params:{
-        			userid:this.$store.getters.user.userid
-        		}
-        	}).then( res=>{
-        		console.log(res);
-        		this.userAbout = res.data
-        	}).catch( err =>{
-        		console.log(err);
-        	})
+        userName() {
+            axios
+                .get('/dangjian/ppartymember/queryByUserId', {
+                    params: {
+                        userid: this.$store.getters.user.userid
+                    }
+                })
+                .then(res => {
+                    console.log(res);
+                    this.userAbout = res.data;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
     }
 };
@@ -229,15 +233,16 @@ export default {
     background: url(../assets/images/icon-head.png) no-repeat;
     background-size: 100% 100%;
 }
-.top-second,.top-second2{
+.top-second,
+.top-second2 {
     width: 82%;
     margin: 0 auto;
     font-size: 0.12rem;
     line-height: 0.17rem;
-    padding-top: .15rem;
+    padding-top: 0.15rem;
 }
-.top-second2{
-    padding-top: .25rem;
+.top-second2 {
+    padding-top: 0.25rem;
 }
 .second-left {
     width: 1.32rem;

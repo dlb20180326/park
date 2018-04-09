@@ -14,10 +14,10 @@ router.beforeEach((to, from, next) => {
     Vue.$vux.loading.show({ text: '加载中' });
 
     // if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (/^\/login/.test(to.path) || store.state.user.userid) return next();
+    if (/^\/login/.test(to.path) || store.getters.user.userid) return next();
 
     store.dispatch('userinfo').then(
-        result => next(),
+        result => next({ path: /^\/$/.test(to.path) ? '/main' + result.entry.roleid : to.path }),
         error => {
             if (/^\/login/.test(from.path)) {
                 next(false);
