@@ -2,10 +2,11 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import FastClick from 'fastclick';
+import wx from 'weixin-js-sdk';
 
 import App from './App';
 import router from './router';
-import rem from './assets/js/dpr.js'
+import rem from './assets/js/dpr.js';
 import store from './store';
 import * as utils from './utils';
 
