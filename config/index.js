@@ -15,11 +15,6 @@ module.exports = {
                 target: 'http://www.dlbdata.cn/',
                 // target:'192.168.1.173:8080/',
                 pathRewrite: { '^/dangjian/': '/dangjian/' }
-            },
-            '/weixin/': {
-                changeOrigin: true,
-                target: 'https://api.weixin.qq.com/',
-                pathRewrite: { '^/weixin/': '/' }
             }
         },
 

@@ -112,14 +112,6 @@ export default {
         };
     },
     mounted() {
-        // console.log(wx);
-        Vue.http.get('/weixin/cgi-bin/token', {
-            params: {
-                grant_type: 'client_credential',
-                appid: 'wxef4c83c01085bb38',
-                secret: '8d72463ffdf8a2232241985b442c1c93'
-            }
-        });
         Vue.http.get('mp/getToken').then(result => {
             wx.config({
                 debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
