@@ -10,9 +10,9 @@
 				<div class="right-btn" @click="showDet">切换<span></span></div>
 			</div>
 			<transition-group enter-active-class=" animated bounceInLeft" leave-active-class="animated bounceOutRight">
-				<p v-show="topShow"  class="bg-flag">
-					aaaaaa
-				</p>
+				<div v-show="topShow" v-for="(park,index) in parks" :key="index" class="bg-flag">
+					{{park}}
+				</div>
 			</transition-group>
 			<div class="points-table">
 	            <flexbox :gutter="0">
@@ -42,7 +42,8 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
 		data(){
 			return {
 				itegal:{rights:'',title:'积分审核'},
-				topShow:false
+				topShow:false,
+				parks:[{part:'金领驿站'},{part:'花期银行第一支部'},{part:'花期银行第二支部'}]
 				
 			}
 		},
