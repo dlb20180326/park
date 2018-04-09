@@ -110,7 +110,7 @@ export default {
         selectTab() {
             this.tabsSelected = this.tabs.findIndex(item => {
                 if (item.link === '/') {
-                    return item.link === this.$route.path;
+                    return /^\/main/.test(this.$route.path) || item.link === this.$route.path;
                 } else {
                     return new RegExp('^' + item.link).test(this.$route.path);
                 }
