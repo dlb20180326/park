@@ -4,40 +4,42 @@
             党员活动
             <router-link slot="right" to="/active/new">发起活动</router-link>
         </x-header>
-        <flexbox class="list-item" v-for="(item, index) in list" :key="index" :gutter="0" align="stretch">
-            <flexbox-item class="list-avatar">
-                <img src="@/assets/images/icon-head.png">
-            </flexbox-item>
-            <flexbox-item class="list-body">
-                <flexbox align="start">
-                    <flexbox-item class="list-head">
-                        <b>{{item.title}}</b>
-                        <p>{{item.date}}</p>
-                    </flexbox-item>
-                    <flexbox-item class="list-close">
-                        <a><img src="@/assets/images/x.png"></a>
-                    </flexbox-item>
-                </flexbox>
-                <div class="list-content" v-html="item.content"></div>
-                <flexbox class="images-preview" :gutter="0" wrap="wrap">
-                    <flexbox-item :span="1/3">
-                        <div><img v-clipping="require('@/assets/images/preview.jpg')"></div>
-                    </flexbox-item>
-                    <flexbox-item :span="1/3">
-                        <div><img v-clipping="require('@/assets/images/preview1.jpg')"></div>
-                    </flexbox-item>
-                    <flexbox-item :span="1/3">
-                        <div><img v-clipping="require('@/assets/images/preview2.jpg')"></div>
-                    </flexbox-item>
-                    <flexbox-item :span="1/3">
-                        <div><img v-clipping="require('@/assets/images/preview3.jpg')"></div>
-                    </flexbox-item>
-                    <flexbox-item :span="1/3">
-                        <a class="btn-plus" @click="chooseImage"></a>
-                    </flexbox-item>
-                </flexbox>
-            </flexbox-item>
-        </flexbox>
+        <div class="box">
+            <flexbox class="list-item" v-for="(item, index) in list" :key="index" :gutter="0" align="stretch">
+                <flexbox-item class="list-avatar">
+                    <img src="@/assets/images/icon-head.png">
+                </flexbox-item>
+                <flexbox-item class="list-body">
+                    <flexbox align="start">
+                        <flexbox-item class="list-head">
+                            <b>{{item.title}}</b>
+                            <p>{{item.date}}</p>
+                        </flexbox-item>
+                        <flexbox-item class="list-close">
+                            <a><img src="@/assets/images/x.png"></a>
+                        </flexbox-item>
+                    </flexbox>
+                    <div class="list-content" v-html="item.content"></div>
+                    <flexbox class="images-preview" :gutter="0" wrap="wrap">
+                        <flexbox-item :span="1/3">
+                            <div><img v-clipping="require('@/assets/images/preview.jpg')"></div>
+                        </flexbox-item>
+                        <flexbox-item :span="1/3">
+                            <div><img v-clipping="require('@/assets/images/preview1.jpg')"></div>
+                        </flexbox-item>
+                        <flexbox-item :span="1/3">
+                            <div><img v-clipping="require('@/assets/images/preview2.jpg')"></div>
+                        </flexbox-item>
+                        <flexbox-item :span="1/3">
+                            <div><img v-clipping="require('@/assets/images/preview3.jpg')"></div>
+                        </flexbox-item>
+                        <flexbox-item :span="1/3">
+                            <a class="btn-plus" @click="chooseImage"></a>
+                        </flexbox-item>
+                    </flexbox>
+                </flexbox-item>
+            </flexbox>
+        </div>
     </div>
 </template>
 
@@ -173,7 +175,15 @@ export default {
 
 <style lang="less" scoped>
 .page-body {
+    display: flex;
+    flex-direction: column;
     background-color: #efefef;
+}
+.box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 }
 .vux-flexbox.list-item {
     background-color: #fff;
