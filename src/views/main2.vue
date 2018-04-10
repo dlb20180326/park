@@ -105,6 +105,8 @@ export default {
         XHeader,
         GroupTitle,
         Flexbox,
+        Flexbox,
+        FlexboxItem,
         XButton
     },
     mounted() {
@@ -172,8 +174,6 @@ export default {
 }
 .box {
     flex: 1;
-    display: flex;
-    flex-direction: column;
     overflow-y: auto;
 }
 .head,

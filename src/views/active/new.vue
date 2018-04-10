@@ -128,6 +128,8 @@ export default {
             activeContent: '',
             activeStatus: 0,
             activeProjectActive: '',
+            hot: '',
+            hourListValue: '',
             PickerVisible1: false,
             pickerValue1: '请选择活动类型',
             years: '',
@@ -262,8 +264,6 @@ export default {
 }
 .box {
     flex: 1;
-    display: flex;
-    flex-direction: column;
     overflow-y: auto;
 }
 ul,

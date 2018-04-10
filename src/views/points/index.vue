@@ -117,7 +117,7 @@
                                     积分变动：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    <spam class="number">+5分</spam>
+                                    <span class="number">+5分</span>
                                 </flexbox-item>
                             </flexbox>
                         </div>
@@ -151,7 +151,7 @@
                                     积分变动：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    <spam class="number">+5分</spam>
+                                    <span class="number">+5分</span>
                                 </flexbox-item>
                             </flexbox>
                         </div>
@@ -185,7 +185,7 @@
                                     积分变动：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    <spam class="number">+5分</spam>
+                                    <span class="number">+5分</span>
                                 </flexbox-item>
                             </flexbox>
                         </div>
@@ -217,8 +217,6 @@ export default {
 }
 .box {
     flex: 1;
-    display: flex;
-    flex-direction: column;
     overflow-y: auto;
 }
 .head,
