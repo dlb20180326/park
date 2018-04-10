@@ -1,112 +1,311 @@
 <template>
-	<div>
-		<view-box ref="viewBox" body-padding-top=".46rem" body-padding-bottom=".55rem">
-			<r-header :rfs='itegal'></r-header>
-			<div class="header-list">
-				<div class="list-left">
-				<span class="left-now">当前支部：</span>
-				<span class="left-active">花期银行第一支部</span>
-				</div>
-				<div class="right-btn" @click="showDet">切换<span></span></div>
-			</div>
-			<transition-group enter-active-class=" animated bounceInLeft" leave-active-class="animated bounceOutRight">
-				<div v-show="topShow" v-for="(park,index) in parks" :key="index" class="bg-flag">
-					{{park}}
-				</div>
-			</transition-group>
-			<div class="points-table">
-	            <flexbox :gutter="0">
-	                <flexbox-item>姓名</flexbox-item>
-	                <flexbox-item>支部书记</flexbox-item>
-	                <flexbox-item>积分</flexbox-item>
-	                <flexbox-item>操作</flexbox-item>
-	            </flexbox>
-	            <flexbox :gutter="0">
-	                <flexbox-item>张海丽</flexbox-item>
-	                <flexbox-item>韩式</flexbox-item>
-	                <flexbox-item>28</flexbox-item>
-	                <flexbox-item>
-	                	<router-link :to="{name:'Audit'}">
-	                	<button class="go-btn">去处理</button>
-	                	</router-link>
-	                </flexbox-item>
-	            </flexbox>
-	        </div>
-		</view-box>
-	</div>
+    <div class="page-body">
+        <x-header :left-options="{showBack: false}">
+            党员积分
+        </x-header>
+        <div class="box">
+            <div class="head">
+                <flexbox>
+                    <flexbox-item class="avatar">
+                        <img src="@/assets/images/icon-head.png">
+                    </flexbox-item>
+                    <flexbox-item>
+                        <div class="label">积分周期：</div>
+                        <div>2018年1月1日 - 12月31日</div>
+                    </flexbox-item>
+                </flexbox>
+                <flexbox :gutter="15">
+                    <flexbox-item>
+                        <div class="piece">
+                            <div>现党员积分</div>
+                            <span>22</span>
+                        </div>
+                    </flexbox-item>
+                    <flexbox-item>
+                        <div class="piece">
+                            <div>年度党员评级</div>
+                            <span>暂无</span>
+                        </div>
+                    </flexbox-item>
+                </flexbox>
+            </div>
+            <div class="body">
+                <tab v-model="tabIndex" :line-width="5" active-color="#666" bar-active-color="#a0333b" custom-bar-width="1rem">
+                    <tab-item>
+                        <b>积分进度</b>
+                    </tab-item>
+                    <tab-item>
+                        <b>获取明细</b>
+                    </tab-item>
+                </tab>
+                <transition name="fade">
+                    <div class="tab-content" v-if="tabIndex===0">
+                        <div class="item-detail">
+                            <div class="title">
+                                <b>1. 政治学习</b>
+                                <div class="space"></div>
+                                <span class="number">12</span>/20
+                            </div>
+                            <div class="content">
+                                <x-progress :percent="percent" :show-cancel="false"></x-progress>
+                            </div>
+                            <div class="content">
+                                <x-button mini type="warn">
+                                    点击+积分
+                                </x-button>
+                            </div>
+                        </div>
+                        <div class="item-detail">
+                            <div class="title">
+                                <b>2. 政治学习</b>
+                                <div class="space"></div>
+                                <span class="number">12</span>/20
+                            </div>
+                            <div class="content">
+                                <x-progress :percent="percent" :show-cancel="false"></x-progress>
+                            </div>
+                            <div class="content">
+                                <x-button mini type="warn">
+                                    点击+积分
+                                </x-button>
+                            </div>
+                        </div>
+                        <div class="item-detail">
+                            <div class="title">
+                                <b>3. 政治学习</b>
+                                <div class="space"></div>
+                                <span class="number">12</span>/20
+                            </div>
+                            <div class="content">
+                                <x-progress :percent="percent" :show-cancel="false"></x-progress>
+                            </div>
+                            <div class="content">
+                                <x-button mini type="warn">
+                                    点击+积分
+                                </x-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content" v-if="tabIndex===1">
+                        <div class="item-detail">
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    获取时间：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    2018年1月1日 - 12月31日
+                                </flexbox-item>
+                            </flexbox>
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    积分类型：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    党费缴纳
+                                </flexbox-item>
+                            </flexbox>
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    审核人：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    支部书记
+                                </flexbox-item>
+                            </flexbox>
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    积分变动：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    <spam class="number">+5分</spam>
+                                </flexbox-item>
+                            </flexbox>
+                        </div>
+                        <div class="item-detail">
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    获取时间：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    2018年1月1日 - 12月31日
+                                </flexbox-item>
+                            </flexbox>
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    积分类型：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    党费缴纳
+                                </flexbox-item>
+                            </flexbox>
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    审核人：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    支部书记
+                                </flexbox-item>
+                            </flexbox>
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    积分变动：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    <spam class="number">+5分</spam>
+                                </flexbox-item>
+                            </flexbox>
+                        </div>
+                        <div class="item-detail">
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    获取时间：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    2018年1月1日 - 12月31日
+                                </flexbox-item>
+                            </flexbox>
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    积分类型：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    党费缴纳
+                                </flexbox-item>
+                            </flexbox>
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    审核人：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    支部书记
+                                </flexbox-item>
+                            </flexbox>
+                            <flexbox>
+                                <flexbox-item class="label">
+                                    积分变动：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    <spam class="number">+5分</spam>
+                                </flexbox-item>
+                            </flexbox>
+                        </div>
+                    </div>
+                </transition>
+            </div>
+        </div>
+    </div>
 </template>
+
 <script>
-import rHeader from '@/components/comother/rheader';
-import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
-	export default{
-		data(){
-			return {
-				itegal:{rights:'',title:'积分审核'},
-				topShow:false,
-				parks:[{part:'金领驿站'},{part:'花期银行第一支部'},{part:'花期银行第二支部'}]
-				
-			}
-		},
-		components:{
-			'r-header':rHeader,
-			ViewBox,
-			Panel,
-			Sticky,
-			Flexbox,
-			FlexboxItem
-		},
-		directives: {
-   			TransferDom
-  		},
-		methods:{
-			showDet(){
-				this.topShow = !this.topShow
-			}
-		},
-		mounted(){
-		}
-	}
+import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton } from 'vux';
+export default {
+    components: { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton },
+    data() {
+        return {
+            tabIndex: 0,
+            percent: 60
+        };
+    }
+};
 </script>
-<style scoped  lang="less">
-	.header-list{width:calc(100% - 2px);height:.5rem;border-bottom:1px solid #E4E4E4;}
-	.list-left{width:54%;margin:.15rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;}
-	.left-now{color:#666666;}
-	.left-active{color:#333;}
-	.right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
-	.right-btn span{width:.1rem;height:.1rem;display:block;float:right;margin:0.07rem ;background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
-	.pop-content{width:100%;height:1.8rem;background-color:rosybrown;}
-	.vux-popup-dialog{background-color: transparent;}
-	.vux-popup-dialog.vux-popup-top{top:.96rem;}
-	.bg-flag{width:100%;height:1rem;background-color: yellow;}
-	@import url("animate.css");
-	.go-btn{
-		padding: .05rem .08rem;
-		border: 0;
-		font-size:.15rem;
-		color:#fff;
-		line-height:.2rem;
-		background:rgba(185,54,71,1);
-		border-radius: 4px 
-	}
-	.points-table {
-            box-sizing: border-box;
-            border-radius: 5px;
-            margin: 5px 0 30px;
-            padding: 10px;
-            color: #000;
-            background: #fff;
-            text-align: center;
-            .vux-flexbox {
-                &:first-child {
-                    margin-bottom: 10px;
-                    color: #a31525;
-                }
-                .vux-flexbox-item {
-                    text-align: center;
-                    &:last-child {
-                        color: #a31525;
-                    }
-                }
-            }
-        }
+
+<style lang="less" scoped>
+.page-body {
+    display: flex;
+    flex-direction: column;
+    background-color: #efefef;
+}
+.box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+.head,
+.body {
+    background-color: #fff;
+    // line-height: 2;
+    padding: 0.15rem;
+}
+.head {
+    .label {
+        font-size: 0.14rem;
+        color: #999;
+    }
+}
+.body {
+    flex: 1;
+    margin-top: 0.15rem;
+}
+.vux-flexbox-item.avatar {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 1rem;
+    min-height: 0.7rem;
+    img {
+        width: 0.6rem;
+        height: 0.6rem;
+        margin-top: 0.05rem;
+        border-radius: 50%;
+        box-shadow: 0 0 0.05rem rgba(0, 0, 0, 0.15);
+        background-color: rgba(0, 0, 0, 0.03);
+    }
+}
+.vux-flexbox-item.label {
+    flex: 0 0 auto;
+    width: 0.8rem;
+    color: #999;
+}
+.piece {
+    margin-top: 0.1rem;
+    padding: 0.1rem;
+    border-radius: 5px;
+    background-color: #efefef;
+    text-align: center;
+    span {
+        font-size: 0.24rem;
+        color: #ea8031;
+    }
+}
+.item-detail {
+    margin-top: 0.15rem;
+    padding: 0.1rem;
+    border-top: 1px solid #eee;
+    &:first-child {
+        border-top: 0;
+    }
+    .title {
+        color: #666;
+    }
+    .content {
+        margin-top: 0.15rem;
+        text-align: center;
+    }
+    .space {
+        display: inline-block;
+        width: 0.5rem;
+    }
+    .number {
+        color: #a0333b;
+    }
+}
+</style>
+<style scoped>
+.vux-tab-warp>>>.vux-tab-bar-inner {
+    border-radius: 5px;
+}
+.vux-tab-warp>>>.vux-tab .vux-tab-item {
+    background: transparent;
+    font-size: 0.18rem;
+}
+.weui-progress>>>.weui-progress__bar {
+    height: 0.2rem;
+    border-radius: 0.2rem;
+}
+.weui-progress>>>.weui-progress__inner-bar {
+    border-radius: 0.2rem;
+    background-color: #ea8031;
+}
 </style>
