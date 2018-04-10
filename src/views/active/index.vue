@@ -21,16 +21,16 @@
                 <div class="list-content" v-html="item.content"></div>
                 <flexbox class="images-preview" :gutter="0" wrap="wrap">
                     <flexbox-item :span="1/3">
-                        <div><img src="@/assets/images/preview.jpg"></div>
+                        <div><img v-clipping="require('@/assets/images/preview.jpg')"></div>
                     </flexbox-item>
                     <flexbox-item :span="1/3">
-                        <div><img src="@/assets/images/preview1.jpg"></div>
+                        <div><img v-clipping="require('@/assets/images/preview1.jpg')"></div>
                     </flexbox-item>
                     <flexbox-item :span="1/3">
-                        <div><img src="@/assets/images/preview2.jpg"></div>
+                        <div><img v-clipping="require('@/assets/images/preview2.jpg')"></div>
                     </flexbox-item>
                     <flexbox-item :span="1/3">
-                        <div><img src="@/assets/images/preview3.jpg"></div>
+                        <div><img v-clipping="require('@/assets/images/preview3.jpg')"></div>
                     </flexbox-item>
                     <flexbox-item :span="1/3">
                         <a class="btn-plus" @click="chooseImage"></a>
@@ -51,6 +51,22 @@ export default {
         XHeader,
         Flexbox,
         FlexboxItem
+    },
+    directives: {
+        clipping: {
+            inserted: (el, binding) => {
+                const img = new Image();
+                img.onload = () => {
+                    if (img.width > img.height) {
+                        el.style.height = '100%';
+                    } else {
+                        el.style.width = '100%';
+                    }
+                    el.src = binding.value;
+                };
+                img.src = binding.value;
+            }
+        }
     },
     data() {
         return {
@@ -223,10 +239,10 @@ export default {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            img {
-                max-width: 100%;
-                max-height: 100%;
-            }
+            // img {
+            //     max-width: 100%;
+            //     max-height: 100%;
+            // }
             &.btn-plus {
                 background-image: url(../../assets/images/add_bg.png);
                 background-position: center center;
