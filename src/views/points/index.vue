@@ -270,8 +270,8 @@ export default {
     }
 }
 .item-detail {
-    margin-top: 0.15rem;
-    padding: 0.1rem;
+    margin-top: 0.05rem;
+    padding: 0.15rem 0.1rem;
     border-top: 1px solid #eee;
     &:first-child {
         border-top: 0;
