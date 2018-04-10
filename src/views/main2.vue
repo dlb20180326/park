@@ -124,9 +124,9 @@ export default {
         });
         this.userName();
         this.infoDetail();
-        this.getUserByScoreInfo();
+        /*this.getUserByScoreInfo();
         this.getUserByActiveInfo();
-        this.getScoreByType();
+        this.getScoreByType();*/
     },
     methods: {
         infoDetail() {
