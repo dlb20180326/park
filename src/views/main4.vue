@@ -52,7 +52,7 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            users: [{ id: 1, fonts: '年度积分', integral: 38 }, { id: 2, fonts: '活动次数', integral: 4 }],
+            users: [{ id: 1, fonts: '年度积分', integral: 0 }, { id: 2, fonts: '活动次数', integral: 0 }],
             userAbout: {},
             dateTime: '',
             charts: '',
@@ -68,28 +68,29 @@ export default {
     },
     mounted() {
         let datime = new Date().getHours();
-        if ((datime >= 5) & (datime < 8)) {
+        if ((datime >= 5) && (datime < 8)) {
             this.dateTime = '早上好';
-        } else if ((datime >= 8) & (datime < 11)) {
+        } else if ((datime >= 8) && (datime < 11)) {
             this.dateTime = '上午好';
-        } else if ((datime >= 11) & (datime < 13)) {
+        } else if ((datime >= 11) && (datime < 13)) {
             this.dateTime = '中午好';
-        } else if ((datime >= 13) & (datime < 19)) {
+        } else if ((datime >= 13) && (datime < 19)) {
             this.dateTime = '下午好';
         } else {
             this.dateTime = '晚上好';
         }
 
         this.$nextTick(function() {
-            this.drawAxis('echartShow');
+            //this.drawAxis('echartShow');
         });
         this.userName();
         this.infoDetail();
-
-        console.log(this.$store.getters.user);
+        this.getUserByScoreInfo();
+        this.getUserByActiveInfo();
+        this.getScoreByType();
     },
     methods: {
-        drawAxis(id) {
+        drawAxis(id,arr1,arr2) {
             let myCharts = echarts.init(document.getElementById(id));
             let option = {
                 tooltip: {
@@ -119,15 +120,7 @@ export default {
                                 color: ['#fff4e4', '#ffe8c6', '#fff6e9']
                             }
                         },
-                        indicator: [
-                            { text: '政治学习', max: 100 },
-                            { text: '组织生活', max: 100 },
-                            { text: '思想汇报', max: 100 },
-                            { text: '先锋作用', max: 100 },
-                            { text: '遵纪守法', max: 100 },
-                            { text: '公益服务', max: 100 },
-                            { text: '缴纳党费', max: 100 }
-                        ],
+                        indicator: arr1,
                         center: ['50%', '50%'],
                         radius: 60
                     }
@@ -146,8 +139,8 @@ export default {
                         },
                         data: [
                             {
-                                value: [80, 70, 60, 65, 77, 66, 90],
-                                name: '某软件'
+                                value: arr2,
+                                name: '分数'
                             }
                         ]
                     }
@@ -160,33 +153,76 @@ export default {
             };
         },
         infoDetail() {
-            axios
-                .get('/dangjian/pdepartment/queryById', {
-                    params: {
-                        departmentid: this.$store.getters.user.departmentid
-                    }
-                })
-                .then(res => {
-                    this.partAbout = res.data;
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+            axios.get('/dangjian/pdepartment/queryById', {
+                params: {
+                    departmentid: this.$store.getters.user.departmentid
+                }
+            })
+            .then(res => {
+                this.partAbout = res.data;
+            })
+            .catch(err => {
+                console.log(err);
+            });
         },
         userName() {
-            axios
-                .get('/dangjian/ppartymember/queryByUserId', {
-                    params: {
-                        userid: this.$store.getters.user.userid
-                    }
-                })
-                .then(res => {
-                    console.log(res);
-                    this.userAbout = res.data;
-                })
-                .catch(err => {
-                    console.log(err);
+            axios.get('/dangjian/ppartymember/queryByUserId', {
+                params: {
+                    userid: this.$store.getters.user.userid
+                }
+            })
+            .then(res => {
+                console.log(res);
+                this.userAbout = res.data;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        },
+        getScoreByType(){
+            axios.get('/dangjian/pscoreparty/getProjectScoreByUserId', {
+                params: {
+                    userId: this.$store.getters.user.userid,
+                    year:new Date().getFullYear()
+                }
+            }).then(res => {
+                console.log(res.data);
+                let scoreType = res.data;
+                let b = scoreType.map(function(value,key,arr){
+                    return { text: value.projectName, max: value.score };
                 });
+                let c = scoreType.map(function(value,key,arr){
+                    return value.totalScore;
+                });
+                this.drawAxis('echartShow',b,c)
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        },
+        getUserByActiveInfo(){
+            axios.post('/dangjian/active/getParticipateCount', {
+                params: {
+                    userId: this.$store.getters.user.userid,
+                    year:new Date().getFullYear()
+                }
+            }).then(res => {
+                this.users[1].integral = res.data;
+            }).catch(err => {
+                console.log(err);
+            });
+        },
+        getUserByScoreInfo(){
+            axios.get('/dangjian/pscoreparty/getSumScoreByUserId', {
+                params: {
+                    userId: this.$store.getters.user.userid,
+                    year:new Date().getFullYear()
+                }
+            }).then(res => {
+                this.users[0].integral = res.data;
+            }).catch(err => {
+                console.log(err);
+            });
         }
     }
 };

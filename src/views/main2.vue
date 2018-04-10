@@ -85,10 +85,80 @@
 </template>
 
 <script>
-import { XHeader, GroupTitle, Flexbox, FlexboxItem, XButton } from 'vux';
+import { XHeader, GroupTitle, Flexbox, FlexboxItem, XButton, cookie} from 'vux';
+
+import axios from 'axios';
+
 export default {
-    components: { XHeader, GroupTitle, Flexbox, FlexboxItem, XButton }
+    data() {
+        return {
+            users: [{ id: 1, fonts: '年度积分', integral: 0 }, { id: 2, fonts: '活动次数', integral: 0 }],
+            userAbout: {},
+            dateTime: '',
+            charts: '',
+            partAbout: {}
+        };
+    },
+    components: {
+        XHeader,
+        GroupTitle,
+        Flexbox,
+        XButton,
+    },
+    mounted() {
+        let datime = new Date().getHours();
+        if ((datime >= 5) && (datime < 8)) {
+            this.dateTime = '早上好';
+        } else if ((datime >= 8) && (datime < 11)) {
+            this.dateTime = '上午好';
+        } else if ((datime >= 11) && (datime < 13)) {
+            this.dateTime = '中午好';
+        } else if ((datime >= 13) && (datime < 19)) {
+            this.dateTime = '下午好';
+        } else {
+            this.dateTime = '晚上好';
+        }
+
+        this.$nextTick(function() {
+            //this.drawAxis('echartShow');
+        });
+        this.userName();
+        this.infoDetail();
+        this.getUserByScoreInfo();
+        this.getUserByActiveInfo();
+        this.getScoreByType();
+    },
+    methods: {
+        infoDetail() {
+            axios.get('/dangjian/pdepartment/queryById', {
+                params: {
+                    departmentid: this.$store.getters.user.departmentid
+                }
+            })
+                .then(res => {
+                    this.partAbout = res.data;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
+        userName() {
+            axios.get('/dangjian/ppartymember/queryByUserId', {
+                params: {
+                    userid: this.$store.getters.user.userid
+                }
+            })
+                .then(res => {
+                    console.log(res);
+                    this.userAbout = res.data;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    }
 };
+
 </script>
 
 <style lang="less" scoped>
