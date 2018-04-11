@@ -147,9 +147,9 @@ export default {
         wxInit: data =>
             Vue.http
                 .get('mp/getToken', {
-                    params: {
-                        href: location.href
-                    }
+                    // params: {
+                    //     href: location.href
+                    // }
                 })
                 .then(result => {
                     wx.config({
@@ -169,7 +169,6 @@ export default {
                                 // 以键值对的形式返回，可用的api值true，不可用为false
                                 // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
                                 console.log('checkJsApi success');
-                                resolve();
                             }
                         });
                     });
