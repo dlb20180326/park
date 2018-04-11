@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div  style="height:100%;">
 		<view-box ref="viewBox" body-padding-top=".46rem" body-padding-bottom=".55rem">
 			<r-header :rfs='itegal'></r-header>
 			<div class="header-list">
@@ -9,11 +9,16 @@
 				</div>
 				<div class="right-btn" @click="showDet">切换<span></span></div>
 			</div>
-			<transition-group enter-active-class=" animated bounceInLeft" leave-active-class="animated bounceOutRight">
-				<div v-show="topShow" v-for="(park,index) in parks" :key="index" class="bg-flag">
+			<ul class="tabClick">
+    			<li class="active" @click="slide"><a>待审核（20）</a></li>
+			    <li class=""><a>已审核（1）</a></li>
+			</ul>
+			<div class="trans-black" v-show="showTrans"></div>
+			<div class="animate-down" v-show="topShow">
+				<div  v-for="(park,index) in parks" :key="index" class="bg-flag">
 					{{park}}
 				</div>
-			</transition-group>
+			</div>
 			<div class="points-table">
 	            <flexbox :gutter="0">
 	                <flexbox-item>姓名</flexbox-item>
@@ -43,6 +48,8 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
 			return {
 				itegal:{rights:'',title:'积分审核'},
 				topShow:false,
+				showTrans:false,
+				slides:-1,
 				parks:[{part:'金领驿站'},{part:'花期银行第一支部'},{part:'花期银行第二支部'}]
 				
 			}
@@ -61,6 +68,10 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
 		methods:{
 			showDet(){
 				this.topShow = !this.topShow
+				this.showTrans = !this.showTrans
+			},
+			slide(){
+				this.slides =1
 			}
 		},
 		mounted(){
@@ -77,8 +88,33 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
 	.pop-content{width:100%;height:1.8rem;background-color:rosybrown;}
 	.vux-popup-dialog{background-color: transparent;}
 	.vux-popup-dialog.vux-popup-top{top:.96rem;}
-	.bg-flag{width:100%;height:1rem;background-color: yellow;}
-	@import url("animate.css");
+	.bg-flag{height:.2rem;margin-top:.2rem;}
+	.animate-down{padding:0 .2rem .2rem .21rem;position: absolute;z-index:30;width: calc(100% - 0.41rem);background-color:#FFFFFF;top:.97rem;}
+	.trans-black{position:absolute;z-index:20;background-color:rgba(0,0,0,0.3);top:.96rem;bottom:0px;left:0px;right:0px;}
+	
+	ul,li{list-style: none}
+        .tabClick{ background: #FFFFFF; overflow: hidden;font-family: simsun;border-bottom:1px solid #e4e4e4;
+        clear:both}
+        .tabClick li{
+            height: 0.48rem;
+            font-size: .2rem;
+            line-height: .48rem;
+            width: 50%;
+            float: left;
+            text-align: center;
+            cursor: pointer;
+        }
+        .tabClick li.active{ transition: 0.1s; font-weight: bold;}
+        .tabClick li a{color:#666;}
+        .tabClick li.active a{
+            color: #B93647;
+            transition: 0.1s;
+            font-weight: bold;
+            padding: 0 .2rem .12rem;
+            border-bottom: 3px solid #B93647;
+        }
+
+	/*@import url("animate.css");*/
 	.go-btn{
 		padding: .05rem .08rem;
 		border: 0;
@@ -97,15 +133,11 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
             background: #fff;
             text-align: center;
             .vux-flexbox {
+            	margin-bottom: 10px;
+            	text-align: center;
                 &:first-child {
-                    margin-bottom: 10px;
-                    color: #a31525;
-                }
-                .vux-flexbox-item {
-                    text-align: center;
-                    &:last-child {
-                        color: #a31525;
-                    }
+                    color: #FA7A00;
+                    
                 }
             }
         }

@@ -1,7 +1,6 @@
 <template>
 		<div class="detail">
 			<div class="allLine" v-for="(context,index) in list" :key="index">
-				<!--<span :class="[context.isRed ? 'colorW colored':'colorW colorGreen']">{{context.scoreTime}}</span>-->
 				<span class="colorL">时间：</span>
 				<span class="colorW">{{context.scoreTime}}</span>
 				<span class="colorL">积分类型：</span>

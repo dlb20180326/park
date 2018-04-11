@@ -103,7 +103,7 @@ html,body{
 .vux-header .vux-header-left, .vux-header .vux-header-right{color:#FFFFFF!important;}
 .vux-header .vux-header-left .left-arrow:before{border:1px solid #FFFFFF!important;border-width:1px 0 0 1px!important;}
 .vux-header .vux-header-title{font-size:.17rem!important;}
-.title-name{width:100%;height:.28rem; font-size:.2rem;font-family:PingFangSC-Medium;color:rgba(73,73,73,1);line-height:.28rem;text-align:center;
+.title-name{width:100%;font-size:.2rem;font-family:PingFangSC-Medium;color:rgba(73,73,73,1);line-height:.28rem;text-align:center;
 margin-top: .2rem;}
 .detail{
 	width:100%;
@@ -113,7 +113,7 @@ margin-top: .2rem;}
 .allLine{width:100%;overflow:hidden;}
 .allLine span{display:block;float:left;}
 .colorL{width:.74rem;height:.3rem;font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(153,153,153,1);line-height:.3rem;margin-left:5.3%;}
-.colorW{width:2rem;height:.3rem; font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(102,102,102,1);line-height:.3rem;margin-left:.1rem;}
+.colorW{width:2rem;font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(102,102,102,1);line-height:.3rem;margin-left:.1rem;}
 .rights{width:.12rem;height:.12rem;float:left;margin-left:-1.6rem;margin-top:.085rem;background: url(../../assets/images/icon-right.png) no-repeat;background-size:100% 100%;}
 .color-d{color:rgba(185, 54, 71, 1);}
 .line-bottom{height:.2rem;width:100%;border-bottom:1px solid #EFEFEF;}

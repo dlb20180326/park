@@ -18,13 +18,13 @@
                     <flexbox-item>
                         <div class="piece">
                             <div>现党员积分</div>
-                            <span>22</span>
+                            <span>{{itegral}}</span>
                         </div>
                     </flexbox-item>
                     <flexbox-item>
                         <div class="piece">
                             <div>年度党员评级</div>
-                            <span>暂无</span>
+                            <span>{{results}}</span>
                         </div>
                     </flexbox-item>
                 </flexbox>
@@ -40,60 +40,30 @@
                 </tab>
                 <transition name="fade">
                     <div class="tab-content" v-if="tabIndex===0">
-                        <div class="item-detail">
+                        <div class="item-detail" v-for="(progres,index) in proTotal">
                             <div class="title">
-                                <b>1. 政治学习</b>
+                                <b>{{index+1}}. {{progres.projectName}}</b>
                                 <div class="space"></div>
-                                <span class="number">12</span>/20
+                                <span class="number">{{progres.totalScore}}</span>/{{progres.score}}
                             </div>
                             <div class="content">
-                                <x-progress :percent="percent" :show-cancel="false"></x-progress>
+                                <x-progress :percent="progres.totalScore/progres.score*100" :show-cancel="false"></x-progress>
                             </div>
                             <div class="content">
-                                <x-button mini type="warn">
-                                    点击+积分
-                                </x-button>
-                            </div>
-                        </div>
-                        <div class="item-detail">
-                            <div class="title">
-                                <b>2. 政治学习</b>
-                                <div class="space"></div>
-                                <span class="number">12</span>/20
-                            </div>
-                            <div class="content">
-                                <x-progress :percent="percent" :show-cancel="false"></x-progress>
-                            </div>
-                            <div class="content">
-                                <x-button mini type="warn">
-                                    点击+积分
-                                </x-button>
-                            </div>
-                        </div>
-                        <div class="item-detail">
-                            <div class="title">
-                                <b>3. 政治学习</b>
-                                <div class="space"></div>
-                                <span class="number">12</span>/20
-                            </div>
-                            <div class="content">
-                                <x-progress :percent="percent" :show-cancel="false"></x-progress>
-                            </div>
-                            <div class="content">
-                                <x-button mini type="warn">
+                                <x-button mini type="warn" v-if="projectList[progres.id]">
                                     点击+积分
                                 </x-button>
                             </div>
                         </div>
                     </div>
                     <div class="tab-content" v-if="tabIndex===1">
-                        <div class="item-detail">
+                        <div class="item-detail" v-for="(knoew,index) in getList" :key="index">
                             <flexbox>
                                 <flexbox-item class="label">
                                     获取时间：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    2018年1月1日 - 12月31日
+                                   {{dataPickers(knoew.scoreTime)}}
                                 </flexbox-item>
                             </flexbox>
                             <flexbox>
@@ -101,7 +71,7 @@
                                     积分类型：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    党费缴纳
+                                   {{knoew.detailTitle}}
                                 </flexbox-item>
                             </flexbox>
                             <flexbox>
@@ -109,7 +79,7 @@
                                     审核人：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    支部书记
+                                    {{knoew.approvedName}}
                                 </flexbox-item>
                             </flexbox>
                             <flexbox>
@@ -117,75 +87,7 @@
                                     积分变动：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    <span class="number">+5分</span>
-                                </flexbox-item>
-                            </flexbox>
-                        </div>
-                        <div class="item-detail">
-                            <flexbox>
-                                <flexbox-item class="label">
-                                    获取时间：
-                                </flexbox-item>
-                                <flexbox-item>
-                                    2018年1月1日 - 12月31日
-                                </flexbox-item>
-                            </flexbox>
-                            <flexbox>
-                                <flexbox-item class="label">
-                                    积分类型：
-                                </flexbox-item>
-                                <flexbox-item>
-                                    党费缴纳
-                                </flexbox-item>
-                            </flexbox>
-                            <flexbox>
-                                <flexbox-item class="label">
-                                    审核人：
-                                </flexbox-item>
-                                <flexbox-item>
-                                    支部书记
-                                </flexbox-item>
-                            </flexbox>
-                            <flexbox>
-                                <flexbox-item class="label">
-                                    积分变动：
-                                </flexbox-item>
-                                <flexbox-item>
-                                    <span class="number">+5分</span>
-                                </flexbox-item>
-                            </flexbox>
-                        </div>
-                        <div class="item-detail">
-                            <flexbox>
-                                <flexbox-item class="label">
-                                    获取时间：
-                                </flexbox-item>
-                                <flexbox-item>
-                                    2018年1月1日 - 12月31日
-                                </flexbox-item>
-                            </flexbox>
-                            <flexbox>
-                                <flexbox-item class="label">
-                                    积分类型：
-                                </flexbox-item>
-                                <flexbox-item>
-                                    党费缴纳
-                                </flexbox-item>
-                            </flexbox>
-                            <flexbox>
-                                <flexbox-item class="label">
-                                    审核人：
-                                </flexbox-item>
-                                <flexbox-item>
-                                    支部书记
-                                </flexbox-item>
-                            </flexbox>
-                            <flexbox>
-                                <flexbox-item class="label">
-                                    积分变动：
-                                </flexbox-item>
-                                <flexbox-item>
-                                    <span class="number">+5分</span>
+                                    <span class="number" :class="[knoew.score >= 0?'colored':'colorGreen']">{{knoew.score}}</span>
                                 </flexbox-item>
                             </flexbox>
                         </div>
@@ -198,14 +100,125 @@
 
 <script>
 import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton } from 'vux';
+import axios from 'axios'
 export default {
     components: { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton },
     data() {
         return {
             tabIndex: 0,
-            percent: 60
+            percent:0,
+            collect:[],
+            years:new Date().getFullYear(),
+            proTotal:[],
+            projectList:{},
+            getList:[],
+            rate:[],
+            itegral:'',
+            results:''
         };
-    }
+    },
+    methods:{
+    	progress(){
+    		axios.get('/dangjian/pscoreparty/getProjectScoreByUserId',{
+    			params:{
+    				userId:this.$store.getters.user.userId,
+    				year:this.years
+    			}
+    		}).then( res => {
+    			this.proTotal = res.data;
+    		}).catch(err => { 
+    			console.log('fail'+err);
+    		})
+    	},
+    	project(){
+    		axios.get('/dangjian/pscoredetail/queryByRoleMenu',{
+    			params:{
+    				roleid:4,
+    			}
+    		}).then( res => {
+    			let data = res.data;
+    			let obj = {};
+    			for(var i=0;i<data.length;i++){
+    				obj[data[i].projectId] = data[i];
+    			}
+    			this.projectList  = obj;
+    		}).catch(err => { 
+    			console.log('fail'+err);
+    		})
+    		
+    	},
+    	getDetail(){
+    		axios.get('/dangjian/pscoreparty/queryByUserId',{
+    			params:{
+    				userid:this.$store.getters.user.userid,
+    				year:this.years
+    			}
+    		}).then( res => {
+    			this.getList = res.data;
+    		}).catch(err => { 
+    			console.log('fail'+err);
+    		})
+    		
+    	},
+    	rating(){
+    		let that = this;
+    		that.score();
+    		axios.get('/dangjian/pscorelevel/getList')
+    		.then( res => {
+    			this.rate = res.data;
+    			
+    			console.log(that.itegral);
+    			for(let c in this.rate){
+    			}
+    		}).catch(err => { 
+    			console.log('fail'+err);
+    		})
+    		
+    	},
+    	score(){
+    		axios.get('/dangjian/pscoreparty/getSumScoreByUserId',{
+    			params:{
+    				userId:this.$store.getters.user.userid,
+					year:new Date().getFullYear()	
+    			}
+    		})
+    		.then( res => {
+    			this.itegral = res.data;
+/*    			if(this.itegral>=0 && this.itegral<=59){
+    				this.results = '不及格'	
+    			}else if(this.itegral>=60 && this.itegral<=69){
+    				this.results = '一般'	
+    			}else if(this.itegral>=70 && this.itegral<=89){
+    				this.results = '良好'	
+    			}else if(this.itegral>=90 && this.itegral<=99){
+    				this.results = '优秀'
+    			}else{
+    				this.results = '先锋党员'
+    			}*/
+    		}).catch(err => { 
+    			console.log('fail'+err);
+    		})
+    		
+    	},
+    	dataPickers(dates){
+    		let times = new Date(dates).toLocaleString()
+         	Date.prototype.toLocaleString = function() {
+          		return this.getFullYear() + "年" + (this.getMonth()+1) + "月" + this.getDate() + "日 "
+    		};
+    		return times;
+    	
+    	}
+    	
+    	
+    },
+   	mounted(){
+   		this.progress();
+   		this.project();
+   		this.getDetail();
+   		this.rating();
+   		
+   		
+   	}
 };
 </script>
 
@@ -285,9 +298,6 @@ export default {
         display: inline-block;
         width: 0.5rem;
     }
-    .number {
-        color: #a0333b;
-    }
 }
 </style>
 <style scoped>
@@ -306,4 +316,6 @@ export default {
     border-radius: 0.2rem;
     background-color: #ea8031;
 }
+.colorGreen{color:rgba(24,193,25,1);}
+.colored{color:rgba(185,54,71,1);}
 </style>

@@ -10,10 +10,11 @@ import store from './store';
 import * as utils from './utils';
 
 //引入vux
-import { AjaxPlugin, LoadingPlugin, ToastPlugin } from 'vux';
+import { AjaxPlugin, LoadingPlugin, ToastPlugin, ConfirmPlugin } from 'vux';
 Vue.use(AjaxPlugin);
 Vue.use(LoadingPlugin);
 Vue.use(ToastPlugin);
+Vue.use(ConfirmPlugin);
 
 FastClick.attach(document.body);
 
