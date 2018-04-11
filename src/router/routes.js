@@ -37,6 +37,7 @@ export const routes = [
             },
             {
                 path: 'party/dues',
+                name:'Dues',
                 component: () => import('@/views/party/dues')
             },
             {
@@ -54,6 +55,10 @@ export const routes = [
             {
                 path: 'party/partyDetail',
                 component: () => import('@/views/party/partyDetail')
+            },
+            {
+                path: 'party/addPoint',
+                component: () => import('@/views/party/addPoint')
             },
             {
                 path: 'points',

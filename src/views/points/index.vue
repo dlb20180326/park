@@ -41,19 +41,28 @@
                 <transition name="fade">
                     <div class="tab-content" v-if="tabIndex===0">
                         <div class="item-detail" v-for="(progres,index) in proTotal">
-                            <div class="title">
-                                <b>{{index+1}}. {{progres.projectName}}</b>
-                                <div class="space"></div>
-                                <span class="number">{{progres.totalScore}}</span>/{{progres.score}}
-                            </div>
-                            <div class="content">
-                                <x-progress :percent="progres.totalScore/progres.score*100" :show-cancel="false"></x-progress>
-                            </div>
-                            <div class="content">
-                                <x-button mini type="warn" v-if="projectList[progres.id]">
-                                    点击+积分
-                                </x-button>
-                            </div>
+	                            <div class="title">
+	                                <b>{{index+1}}. {{progres.projectName}}</b>
+	                                <div class="space"></div>
+	                                <span class="number">{{progres.totalScore}}</span>/{{progres.score}}
+	                            </div>
+	                            <div class="content">
+	                                <x-progress :percent="progres.totalScore/progres.score*100" :show-cancel="false"></x-progress>
+	                            </div>
+	                            <router-link :to="{name:'Dues'}" v-if="progres.projectName == '交纳党费'">
+	                            <div class="content">
+	                                <x-button mini type="warn" v-if="projectList[progres.id]">
+	                                    点击+积分
+	                                </x-button>
+	                            </div>
+	                        </router-link>
+	                        	<router-link :to="{name:''}" v-else>
+		                            <div class="content">
+		                                <x-button mini type="warn" v-if="projectList[progres.id]">
+		                                    点击+积分
+		                                </x-button>
+		                            </div>
+	                        	</router-link>
                         </div>
                     </div>
                     <div class="tab-content" v-if="tabIndex===1">
@@ -126,6 +135,7 @@ export default {
     			}
     		}).then( res => {
     			this.proTotal = res.data;
+    			console.log(this.proTotal);
     		}).catch(err => { 
     			console.log('fail'+err);
     		})
@@ -142,6 +152,7 @@ export default {
     				obj[data[i].projectId] = data[i];
     			}
     			this.projectList  = obj;
+    			console.log(this.projectList);
     		}).catch(err => { 
     			console.log('fail'+err);
     		})
@@ -155,6 +166,7 @@ export default {
     			}
     		}).then( res => {
     			this.getList = res.data;
+    			console.log(this.getList);
     		}).catch(err => { 
     			console.log('fail'+err);
     		})
