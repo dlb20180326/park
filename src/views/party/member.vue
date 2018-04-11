@@ -14,24 +14,26 @@
 					</tr>
 				</tbody>
 			</table>
-			<mt-popup v-model="popupVisible" position="left" :closeOnClickModal=false>
-			<div class="middle">
-				<div class="middle-top">评分说明</div>
-				<div class="middle-content">
-					<p><span class="dark">1.获得荣誉:</span>年度获得综合党委以上荣誉的加5分</p>
-					<p><span class="dark">2.先锋表彰：</span>工作突出，年内受到公司、行业表彰奖励的，加5分；</p>
-					<p><span class="dark">3.先锋模范：</span>在其他发挥先锋模范作用方面需要加分的，由党支部研究后视情况予以加分。</p>
+			<div v-transfer-dom>
+				<popup v-model="showPop" position="left" width="100%">
+				<div class="middle">
+					<div class="middle-top">评分说明</div>
+					<div class="middle-content">
+						<p><span class="dark">1.获得荣誉:</span>年度获得综合党委以上荣誉的加5分</p>
+						<p><span class="dark">2.先锋表彰：</span>工作突出，年内受到公司、行业表彰奖励的，加5分；</p>
+						<p><span class="dark">3.先锋模范：</span>在其他发挥先锋模范作用方面需要加分的，由党支部研究后视情况予以加分。</p>
+					</div>
+					<div class="knowBtn" @click="know">我知道了</div>
 				</div>
-				<div class="knowBtn" @click="know">我知道了</div>
+				</popup>
 			</div>
-			</mt-popup>
    		</view-box>
  	</div>
 </template>
 <script>
 import Xheader from '@/components/comother/rheader'
 import Vue from 'vue';
-import {ViewBox} from 'vux'
+import {ViewBox,TransferDom} from 'vux'
 import { Popup } from 'mint-ui';
 Vue.component(Popup.name, Popup);
 	export default {
@@ -50,12 +52,16 @@ Vue.component(Popup.name, Popup);
 				contents:{rights:'',title:'支部党员'},
 				list:list,
 				isYellow:false,
-				popupVisible:false
+				popupVisible:false,
+				showPop:false
 			}
 		},
 		components:{
 			'r-header':Xheader,
 			ViewBox
+		},
+		directives:{
+			TransferDom
 		},
 		methods:{
 			changeItem(){
@@ -87,7 +93,7 @@ html,body{
 #table-style tbody tr td:nth-child(3){text-align:right;}
 .btnSub{width:.6rem;height:.24rem;font-size:.14rem;line-height:.24rem;border-radius: 4px;font-family:PingFangSC-Medium;border:0px;color:#FFFFFF;background-color:rgba(185, 54, 71, 1);}
 .yellowC{background-color:rgba(244,151,74,1);}
-.middle{width:2.8rem;height:3rem;margin:0 auto;border-radius:10px;}
+.middle{width:2.8rem;height:3rem;margin:.8rem auto;border-radius:10px;border:1px solid red;background-color: #FFFFFF;}
 .mint-popup-left{left:15%;}
 .middle .middle-top{width:100%;height:.4rem; background:linear-gradient(90deg,rgba(185,54,71,1),rgba(155,10,26,1));box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#FFFFFF;text-align:center;line-height:.4rem;}
 .middle-content{width:2.4rem;height:1.7rem;margin:.21rem .19rem .21rem .21rem;}

@@ -21,11 +21,11 @@
                         <flexbox-item>年龄</flexbox-item>
                         <flexbox-item>积分</flexbox-item>
                     </flexbox>
-                    <flexbox :gutter="0"  v-for="(item,index) in total" :key="index">
+                    <flexbox :gutter="0"  v-for="(item,index) in total" :key="index"   @click.native="submit(item)">
                         <flexbox-item>{{item.name}}</flexbox-item>
                         <flexbox-item>{{item.sex}}</flexbox-item>
                         <flexbox-item>{{item.age}}</flexbox-item>
-                        <flexbox-item>{{item.totalScore}}</flexbox-item>
+                        <flexbox-item>{{item.totalscore||0.0}}</flexbox-item>
                     </flexbox>
                 </div>
             </view-box>
@@ -52,6 +52,22 @@ export default {
         };
     },
     methods: {
+        submit(item){
+
+            this.$router.push({
+                path: '/party/partypointdetail',
+                name: 'partypointdetail',
+
+                params: {
+                    item:item
+                },query: {
+                    item:item
+                }
+
+            })
+
+
+        },
         getParams() {
 
            let departmentId = this.$route.params.departmentid;
@@ -69,6 +85,7 @@ export default {
                this.departmentname=res.data.departmentname;
                 this.partyBranch=res.data.partyBranch;
                 this.people=res.data.people;
+
             }).catch(function (error) {
                 console.log(error);
             })
@@ -87,6 +104,7 @@ export default {
 
             }) .then((res)=> {
                 this.total=res.data
+                console.log('12321312',res.data)
             }).catch(function (error) {
                 console.log(error);
             })

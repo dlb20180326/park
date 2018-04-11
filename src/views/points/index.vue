@@ -57,7 +57,7 @@
 	                            </div>
 	                            </router-link>
 
-	                        	<router-link :to="{name:''}" v-else>
+	                        	<router-link :to="{name:'addPoint',params:{id:progres.id,moduleId:projectList[[progres.id]]}}" v-else-if="progres.id === 1 ||progres.id === 2 || progres.id === 6">
 		                            <div class="content">
 		                                <x-button mini type="warn" v-if="projectList[progres.id]">
 		                                    点击+积分 模块ID{{projectList[progres.id].id}} 项目id{{progres.id}}
@@ -136,7 +136,6 @@ export default {
     			}
     		}).then( res => {
     			this.proTotal = res.data;
-    			console.log(this.proTotal);
     		}).catch(err => {
     			console.log('fail'+err);
     		})
@@ -151,9 +150,9 @@ export default {
     			let obj = {};
     			for(var i=0;i<data.length;i++){
     				obj[data[i].projectId] = data[i];
+    				this.projectId = obj[data[i].projectId]
     			}
     			this.projectList  = obj;
-    			console.log(this.projectList);
     		}).catch(err => {
     			console.log('fail'+err);
     		})
@@ -167,7 +166,6 @@ export default {
     			}
     		}).then( res => {
     			this.getList = res.data;
-    			console.log(this.getList);
     		}).catch(err => {
     			console.log('fail'+err);
     		})

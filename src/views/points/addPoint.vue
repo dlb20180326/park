@@ -1,15 +1,15 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <x-header>党员积分增加</x-header>
+        <x-header>{{listSingle.projectName}}</x-header>
         <div class="group-item">
             <group-title slot="title">
-                <b>党员姓名：</b>
+                <b>党员姓名：{{userName}}</b>
             </group-title>
 
         </div>
         <div class="group-item">
             <group-title slot="title">
-                <b>政治学习时间</b>
+                <b>政治学习开始时间</b>
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
@@ -20,7 +20,25 @@
                         <i class="iconfont dlb-icon-rili" ></i>
                     </x-button>
                     <group class="date-no-box">
-                        <datetime v-model="hourListValue" format="YYYY-MM-DD HH:mm" @on-change="change"></datetime>
+                        <datetime v-model="hourListValue" format="YYYY-MM-DD HH:mm" @on-change="changeStart"></datetime>
+                    </group>
+                </flexbox-item>
+            </flexbox>
+        </div>
+        <div class="group-item">
+            <group-title slot="title">
+                <b>政治学习结束时间</b>
+            </group-title>
+            <flexbox :gutter="0">
+                <flexbox-item>
+                    <input type="text" v-model='endTime'>
+                </flexbox-item>
+                <flexbox-item class="input-addon" style="position: relative">
+                    <x-button mini type="warn">
+                        <i class="iconfont dlb-icon-rili" ></i>
+                    </x-button>
+                    <group class="date-no-box">
+                        <datetime v-model="ListValue" format="YYYY-MM-DD HH:mm" @on-change="changeEnd"></datetime>
                     </group>
                 </flexbox-item>
             </flexbox>
@@ -40,7 +58,7 @@
         <div class="group-item">
             <group-title slot="title"></group-title>
             <x-button type="warn" @click.native="submit()">
-                提交
+                提交支部书记审核
             </x-button>
         </div>
 
@@ -49,7 +67,7 @@
 
 <script>
     import axios from 'axios'
-    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker , } from 'vux';
+    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker } from 'vux';
 
     export default {
 
@@ -69,22 +87,63 @@
             return {
                 value1: '',
                 startTime:"",
-
+				endTime:'',
                 hourListValue:'',
                 hot:'',
-
+				ListValue:'',
                 activeContent:'',
-
+				listSingle:{},
+				userName:''
             };
         },
         methods: {
+        	getList(){
+        		axios.get('/dangjian/pscoredetail/queryById',{
+        			params:{id:this.$route.params.moduleId.id}
+        		}).then(res =>{
+        			this.listSingle=res.data
+        			console.log(this.listSingle)
+        		}).catch(err =>{
+        			console.log('fail'+err.data)
+        			
+        		})
+        	},
+        	getUser() {
+            axios.get('/dangjian/ppartymember/queryByUserId', {
+                params: {
+                    userid: this.$store.getters.user.userid
+                }
+            })
+            .then(res => {
+                this.userName = res.data.name;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        },
             openPicker() {
                 this.$refs.picker.open();
             },
 
 
             submit(){
-
+				this.$http.post('/dangjian/pstudy/save',{
+  					departmentid:this.$store.getters.user.departmentid,
+  					picIds:1,
+  					createUserid:this.$store.getters.user.userid,
+  					roleid:this.$store.getters.user.roleid,
+  					starttime:this.startTime,
+  					endtime:this.endTime,
+  					projectid:this.listSingle.projectId,
+  					moduleid:this.listSingle.id,
+  					content:this.activeContent
+        		}).then(res =>{
+        			console.log(res.data)
+        		}).catch(err =>{
+        			console.log('fail')
+        			console.log(err.data)
+        			
+        		})
             },
 
             getActivity(){
@@ -112,10 +171,10 @@
             toggleFormat () {
                 this.format = this.format === 'YYYY-MM-DD HH:mm' ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm'
             },
-            change (value) {
+            changeStart (value) {
                 this.startTime = value;
             },
-            change1 (value) {
+            changeEnd (value) {
                 this.endTime = value;
             },
             clearValue (value) {
@@ -132,10 +191,13 @@
                 if (day < 10) day = '0' + day;
                 this.value7 = now.getFullYear() + '-' + cmonth + '-' + day;
                 console.log('set today ok')
-            }
+            },
         },
         mounted() {
-            this.getActivity()
+            this.getActivity();
+            this.getList();
+            this.getUser();
+            console.log(this.$store.getters.user)
         }
     };
 </script>

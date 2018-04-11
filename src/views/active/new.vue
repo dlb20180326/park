@@ -200,6 +200,7 @@ export default {
             }) .then((res)=> {
                 alert(res.msg);
                 this.showQR(res.data);
+                console.log(res.data);
 
                 console.log(res)
             }).catch(function (error) {
