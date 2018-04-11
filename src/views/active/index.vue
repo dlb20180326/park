@@ -147,9 +147,9 @@ export default {
         wxInit: data =>
             Vue.http
                 .get('mp/getToken', {
-                    // params: {
-                    //     href: location.href
-                    // }
+                    params: {
+                        href: location.href
+                    }
                 })
                 .then(result => {
                     wx.config({
