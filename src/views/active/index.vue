@@ -28,6 +28,9 @@
                             <a class="btn-plus" @click="chooseImage"></a>
                         </flexbox-item>
                     </flexbox>
+                    <div v-for="(item, index) in localIds" :key="index">
+                        {{ item }}
+                    </div>
                 </flexbox-item>
             </flexbox>
         </div>
@@ -124,7 +127,8 @@ export default {
                 require('@/assets/images/preview1.jpg'),
                 require('@/assets/images/preview2.jpg'),
                 require('@/assets/images/preview3.jpg')
-            ]
+            ],
+            localIds: []
         };
     },
     mounted() {
@@ -138,7 +142,7 @@ export default {
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: res => {
                     // const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    (res.localIds || []).map(localId => this.imgs.push(localId));
+                    (res.localIds || []).map(localId => this.localIds.push(localId));
                 }
             });
         }
