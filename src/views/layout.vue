@@ -26,7 +26,7 @@ const tabs = {
             icon: require('@/assets/images/gray-info.png'),
             iconActive: require('@/assets/images/iconw-partyMembe.png'),
             label: '党务信息',
-            link: '/party'
+            link: '/party/branch'
         },
         {
             icon: require('@/assets/images/gray-item.png'),
