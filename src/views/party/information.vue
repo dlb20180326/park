@@ -7,11 +7,11 @@
             <view-box>
                 <div class="header">
                     <div class="group-name">
-                        花旗银行第一党支部
+                        {{departmentname}}
                     </div>
                     <flexbox :gutter="0">
-                        <flexbox-item>支部书记:韩书记</flexbox-item>
-                        <flexbox-item>支部人数:25人</flexbox-item>
+                        <flexbox-item>支部书记:{{partyBranch}}</flexbox-item>
+                        <flexbox-item>支部人数:{{people}}人</flexbox-item>
                     </flexbox>
                 </div>
                 <div class="points-table">
@@ -21,19 +21,20 @@
                         <flexbox-item>年龄</flexbox-item>
                         <flexbox-item>积分</flexbox-item>
                     </flexbox>
-                    <flexbox :gutter="0">
-                        <flexbox-item>张海丽</flexbox-item>
-                        <flexbox-item>女</flexbox-item>
-                        <flexbox-item>28</flexbox-item>
-                        <flexbox-item>30</flexbox-item>
+                    <flexbox :gutter="0"  v-for="(item,index) in total" :key="index">
+                        <flexbox-item>{{item.name}}</flexbox-item>
+                        <flexbox-item>{{item.sex}}</flexbox-item>
+                        <flexbox-item>{{item.age}}</flexbox-item>
+                        <flexbox-item>{{item.totalScore}}</flexbox-item>
                     </flexbox>
                 </div>
             </view-box>
         </flexbox>
-121   {{$route.params.departmentid}}
+
     </div>
 </template>
 <script>
+    import axios from 'axios'
 import { XHeader, Flexbox, FlexboxItem, ViewBox } from "vux";
 export default {
     components: {
@@ -44,20 +45,55 @@ export default {
     },
     data() {
         return {
-            /*departmentid:''*/
+            people:'',
+            departmentname:'',
+            partyBranch:'',
+            total:'',
         };
     },
     methods: {
         getParams() {
-            // 取到路由带过来的参数
 
            let departmentId = this.$route.params.departmentid;
-            // 将数据放在当前组件的数据内
-            this.departmentid = departmentId;
-            console.log("123213123",departmentId)
+
+
+            axios({
+                method: 'get',
+                url: '/dangjian/pdepartment/queryById',
+                params: {
+                    departmentid:departmentId
+                }
+
+
+            }) .then((res)=> {
+               this.departmentname=res.data.departmentname;
+                this.partyBranch=res.data.partyBranch;
+                this.people=res.data.people;
+            }).catch(function (error) {
+                console.log(error);
+            })
+
+
+        },
+        getParams1() {
+
+            let departmentId = this.$route.params.departmentid;
+            axios({
+                method: 'get',
+                url: '/dangjian/ppartymember/queryByDepartmentId',
+                params: {
+                    departmentid:departmentId
+                }
+
+            }) .then((res)=> {
+                this.total=res.data
+            }).catch(function (error) {
+                console.log(error);
+            })
         }
     },mounted() {
-        this.getParams()
+        this.getParams();
+        this.getParams1()
     },
 
     watch:{

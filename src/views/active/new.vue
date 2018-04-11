@@ -94,14 +94,22 @@
                 生成活动二维码
             </x-button>
         </div>
+        <div v-transfer-dom class="qrcode-dialog">
+            <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{width: '80%'}">
+                <img :src="Qrcode" alt="">
+            </x-dialog>
+        </div>
     </div>
 </template>
 
 <script>
     import axios from 'axios'
-import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker  } from 'vux';
+import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker ,XDialog, TransferDomDirective as TransferDom  } from 'vux';
 
 export default {
+    directives: {
+        TransferDom
+    },
     components: {
         XHeader,
         GroupTitle,
@@ -112,7 +120,8 @@ export default {
         Datetime,
         Group,
         Picker,
-        Alert
+        Alert,
+        XDialog
     },
     data() {
         return {
@@ -137,7 +146,9 @@ export default {
             year1: [''],
             list:'',
             PickerVisible2:false,
-            departmentid:this.$store.getters.user.departmentid
+            departmentid:this.$store.getters.user.departmentid,
+            showQrcodeDialog: false,
+            Qrcode:''
         };
     },
     methods: {
@@ -187,12 +198,35 @@ export default {
                 }
             }) .then((res)=> {
                 alert(res.msg);
+                this.showQR(res.data);
+
                 console.log(res)
             }).catch(function (error) {
                 console.log(error);
             });}else {
                 alert("开始日期不能大于结束日期");
             }
+        },
+        showQR(data){
+            axios({
+                method: 'post',
+                url: '/dangjian/active/showQrCode',
+                params: {
+                    activeId:data
+                }
+            }) .then((res)=> {
+                this.Qrcode=res
+                alert(res)
+                console.log(res);
+
+
+            }).catch(function (error) {
+                console.log(error);
+            });
+
+
+            this.showQrcodeDialog=true
+
         },
         submit1(it){
             this.activeType=it.id;

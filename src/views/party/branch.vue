@@ -65,8 +65,7 @@ import axios from 'axios'
 		        	params:{
 		        		departmentid:this.$store.getters.user.departmentid
 		        	}
-		       }).then(res =>{
-		       		console.log(res)
+		      }).then(res =>{
 					this.navName = res.data;
 					}).catch(err =>{
 		       		console.log('fail'+err);

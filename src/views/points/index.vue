@@ -185,17 +185,6 @@ export default {
     		})
     		.then( res => {
     			this.itegral = res.data;
-/*    			if(this.itegral>=0 && this.itegral<=59){
-    				this.results = '不及格'	
-    			}else if(this.itegral>=60 && this.itegral<=69){
-    				this.results = '一般'	
-    			}else if(this.itegral>=70 && this.itegral<=89){
-    				this.results = '良好'	
-    			}else if(this.itegral>=90 && this.itegral<=99){
-    				this.results = '优秀'
-    			}else{
-    				this.results = '先锋党员'
-    			}*/
     		}).catch(err => { 
     			console.log('fail'+err);
     		})

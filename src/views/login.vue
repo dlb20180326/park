@@ -29,7 +29,7 @@ import { XImg, Icon } from 'vux';
 export default {
     data() {
         return {
-            account: 'wangjie',
+            account: '',
             pass: '12345678'
         };
     },

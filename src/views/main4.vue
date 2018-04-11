@@ -52,11 +52,12 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            users: [{ id: 1, fonts: '年度积分', integral: 0 }, { id: 2, fonts: '活动次数', integral: 0 }],
+            users: [{ fonts: '年度积分',integral:0}, {fonts: '活动次数',integral:0}],
             userAbout: {},
             dateTime: '',
             charts: '',
-            partAbout: {}
+            partAbout: {},
+            years:new Date().getFullYear()
         };
     },
     components: {
@@ -81,8 +82,9 @@ export default {
         }
 
         this.$nextTick(function() {
-            //this.drawAxis('echartShow');
+//            this.drawAxis('echartShow');
         });
+        console.log(this.years);
         this.userName();
         this.infoDetail();
         this.getUserByScoreInfo();
@@ -200,12 +202,11 @@ export default {
         },
         getUserByActiveInfo(){
             axios.post('/dangjian/active/getParticipateCount', {
-                params: {
                     userId: this.$store.getters.user.userid,
-                    year:new Date().getFullYear()
-                }
+                    year:this.years
             }).then(res => {
                 this.users[1].integral = res.data;
+                console.log(res.data);
             }).catch(err => {
                 console.log(err);
             });
