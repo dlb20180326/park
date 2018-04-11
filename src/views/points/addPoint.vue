@@ -31,7 +31,12 @@
             </group-title>
             <textarea cols="30" rows="10"  maxlength="300" v-model='activeContent'></textarea>
         </div>
-        ++++
+        <div class="group-item">
+        	<span class="addPic">添加照片</span>
+        	<div class="square">
+        		<input type="file" class="fileLoad" />
+        	</div>
+        </div>
         <div class="group-item">
             <group-title slot="title"></group-title>
             <x-button type="warn" @click.native="submit()">
@@ -200,6 +205,13 @@
     }
     }
 
+	.addPic{height:.17rem; 	font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.17rem;
+    }
+	input[type="file"] {
+  	color: transparent;
+  	opacity: 0;
+	}
+	.square{width:.4rem;height:.4rem;border:1px solid #B53141;background: url(../../assets/images/icon-plug.png) no-repeat;background-size:50% 50%;background-position: center;}
 </style>
 <style>
     .date-no-box{position: absolute;top:0px;left: 0;right: 0;bottom: 0;height: 0.32rem;overflow: hidden;opacity: 0}
