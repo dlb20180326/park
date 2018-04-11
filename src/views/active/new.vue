@@ -95,8 +95,9 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-            <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{width: '80%'}">
-                <img :src="Qrcode" alt="">
+            <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{width: '80%',height:'300px'}" >
+                <h1 style="text-align: center">{{activeTitle}}</h1> <br><br>
+                <img id="fei" alt="">
             </x-dialog>
         </div>
     </div>
@@ -208,25 +209,8 @@ export default {
             }
         },
         showQR(data){
-            axios({
-                method: 'post',
-                url: '/dangjian/active/showQrCode',
-                params: {
-                    activeId:data
-                }
-            }) .then((res)=> {
-                this.Qrcode=res
-                alert(res)
-                console.log(res);
-
-
-            }).catch(function (error) {
-                console.log(error);
-            });
-
-
-            this.showQrcodeDialog=true
-
+            document.getElementById('fei').src = '/dangjian/active/showQrCode?activeId='+data;
+            this.showQrcodeDialog = true;
         },
         submit1(it){
             this.activeType=it.id;
