@@ -21,17 +21,8 @@
                     </flexbox>
                     <div class="list-content" v-html="item.content"></div>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
-                        <flexbox-item :span="1/3">
-                            <div><img v-clipping="require('@/assets/images/preview.jpg')"></div>
-                        </flexbox-item>
-                        <flexbox-item :span="1/3">
-                            <div><img v-clipping="require('@/assets/images/preview1.jpg')"></div>
-                        </flexbox-item>
-                        <flexbox-item :span="1/3">
-                            <div><img v-clipping="require('@/assets/images/preview2.jpg')"></div>
-                        </flexbox-item>
-                        <flexbox-item :span="1/3">
-                            <div><img v-clipping="require('@/assets/images/preview3.jpg')"></div>
+                        <flexbox-item :span="1/3" v-for="(item, index) in imgs" :key="index">
+                            <div><img v-clipping="item"></div>
                         </flexbox-item>
                         <flexbox-item :span="1/3">
                             <a class="btn-plus" @click="chooseImage"></a>
@@ -127,6 +118,12 @@ export default {
                     content:
                         '天文学家一直在研究他们称之为婴儿宇宙的大型3D地图。该地图由兰开斯特大学的David Sobral博士领导的一个团队在欧洲揭幕。巨大的地图是使用夏威夷的斯巴鲁望远镜和加那利群岛的伊萨克牛顿望远镜获得数据制作。'
                 }
+            ],
+            imgs: [
+                require('@/assets/images/preview.jpg'),
+                require('@/assets/images/preview1.jpg'),
+                require('@/assets/images/preview2.jpg'),
+                require('@/assets/images/preview3.jpg')
             ]
         };
     },
@@ -139,9 +136,9 @@ export default {
                 // count: 1, // 默认9
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-                success: function(res) {
-                    var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    console.log('localIds:', localIds);
+                success: res => {
+                    // const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                    (res.localIds || []).map(localId => this.imgs.push(localId));
                 }
             });
         }
