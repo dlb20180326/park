@@ -1,12 +1,11 @@
 <template>
-    <div>
-        <view-box ref="viewBox">
+    <div style="height:100%;">
+        <view-box ref="viewBox" body-padding-top=".46rem" body-padding-bottom=".55rem">
             <x-header :left-options="{showBack: false}" class="bgColors" slot="header"
                       style="width:100%;position:absolute;left:0;top:0;z-index:100;">支部党员信息
             </x-header>
-
             <div class="title-name">{{navName.departmentname}}</div>
-            <div class="detail" id="detail">
+            <div class="detail">
                 <!--	<div class="allLine" >-->
                 <div class="allLine" v-for="(listinfo,index) in contents" :key="index">
                     <router-link :to="{name:'Obtain',params:{userid:listinfo.userid,year:years}}">
@@ -35,8 +34,8 @@
                     </router-link>
                 </div>
             </div>
+            <!--<footers :selec='select'></footers>-->
         </view-box>
-
     </div>
 </template>
 <script>
@@ -61,9 +60,6 @@
 //			footers
         },
         methods: {
-            style() {
-                document.getElementById('vux_view_box_body').style.height = document.body.clientHeight+'px'
-            },
             infor() {
                 axios.get('/dangjian/ppartymember/queryByDepartmentId', {
                     params: {
@@ -97,7 +93,6 @@
             }
         },
         mounted() {
-            this.style();
             this.infor();
             this.nav();
             this.judge();
@@ -151,11 +146,10 @@
     .detail {
         width: 100%;
         height: auto;
-        overflow: hidden;
     }
 
     .allLine {
-        width: 90%;
+        width: 96%;
         overflow: hidden;
         margin: 0.1rem auto;
         border-bottom: 1px solid #EFEFEF;
@@ -203,7 +197,4 @@
     .color-d {
         color: rgba(185, 54, 71, 1);
     }
-</style>
-<style>
-    .weui-tabbar{position: fixed}
 </style>
