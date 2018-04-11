@@ -172,7 +172,6 @@ export default {
                 }
             })
             .then(res => {
-                console.log(res);
                 this.userAbout = res.data;
             })
             .catch(err => {
@@ -186,7 +185,6 @@ export default {
                     year:new Date().getFullYear()
                 }
             }).then(res => {
-                console.log(res.data);
                 let scoreType = res.data;
                 let b = scoreType.map(function(value,key,arr){
                     return { text: value.projectName, max: value.score };

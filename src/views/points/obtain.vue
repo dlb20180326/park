@@ -13,32 +13,7 @@ import Gain from '@/components/comother/gain'
 import {ViewBox} from 'vux'
 import axios from 'axios'
 	export default {
-		data(){
-/*			let list = [
-					{left:'时间：',right:'2017.11.22'},
-					{left:'积分类型：',right:'党员缴纳'},
-					{left:'积分变动：',right:'+5分'},
-					{left:'审核人：',right:'支部书记'},
-					{left:'时间：',right:'2017.11.22'},
-					{left:'积分类型：',right:'党员缴纳'},
-					{left:'积分变动：',right:'+5分'},
-					{left:'审核人：',right:'支部书记'},
-					{left:'时间：',right:'2017.11.22'},
-					{left:'积分类型：',right:'党员缴纳'},
-					{left:'积分变动：',right:'-10分'},
-					{left:'审核人：',right:'支部书记'}
-			];*/
-			
-/*			let list = [];*/
-			
-/*			for(let i=0;i<list.length;i++){
-				if(list[i].right.substring(0,1) == '+'){
-					list[i].isRed = true;
-				}else if(list[i].right.substring(0,1) == '-'){
-					list[i].isRed = false;
-				}
-			}*/
-			
+		data(){			
 			return {
 				contents:{rights:'',title:'积分获取明细'},
 				list:[]
