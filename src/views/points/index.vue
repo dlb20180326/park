@@ -49,17 +49,18 @@
 	                            <div class="content">
 	                                <x-progress :percent="progres.totalScore/progres.score*100" :show-cancel="false"></x-progress>
 	                            </div>
-	                            <router-link :to="{name:'Dues'}" v-if="progres.projectName == '交纳党费'">
+	                            <router-link :to="{name:'Dues'}" v-if="progres.id === 7">
 	                            <div class="content">
 	                                <x-button mini type="warn" v-if="projectList[progres.id]">
 	                                    点击+积分
 	                                </x-button>
 	                            </div>
-	                        </router-link>
+	                            </router-link>
+
 	                        	<router-link :to="{name:''}" v-else>
 		                            <div class="content">
 		                                <x-button mini type="warn" v-if="projectList[progres.id]">
-		                                    点击+积分
+		                                    点击+积分 模块ID{{projectList[progres.id].id}} 项目id{{progres.id}}
 		                                </x-button>
 		                            </div>
 	                        	</router-link>
@@ -136,7 +137,7 @@ export default {
     		}).then( res => {
     			this.proTotal = res.data;
     			console.log(this.proTotal);
-    		}).catch(err => { 
+    		}).catch(err => {
     			console.log('fail'+err);
     		})
     	},
@@ -153,10 +154,10 @@ export default {
     			}
     			this.projectList  = obj;
     			console.log(this.projectList);
-    		}).catch(err => { 
+    		}).catch(err => {
     			console.log('fail'+err);
     		})
-    		
+
     	},
     	getDetail(){
     		axios.get('/dangjian/pscoreparty/queryByUserId',{
@@ -167,10 +168,10 @@ export default {
     		}).then( res => {
     			this.getList = res.data;
     			console.log(this.getList);
-    		}).catch(err => { 
+    		}).catch(err => {
     			console.log('fail'+err);
     		})
-    		
+
     	},
     	rating(){
     		let that = this;
@@ -183,24 +184,24 @@ export default {
     					this.results = this.rate[c].level
     				}
     			}
-    		}).catch(err => { 
+    		}).catch(err => {
     			console.log('fail'+err);
     		})
-    		
+
     	},
     	score(){
     		axios.get('/dangjian/pscoreparty/getSumScoreByUserId',{
     			params:{
     				userId:this.$store.getters.user.userid,
-					year:new Date().getFullYear()	
+					year:new Date().getFullYear()
     			}
     		})
     		.then( res => {
     			this.itegral = res.data;
-    		}).catch(err => { 
+    		}).catch(err => {
     			console.log('fail'+err);
     		})
-    		
+
     	},
     	dataPickers(dates){
     		let times = new Date(dates).toLocaleString()
@@ -208,18 +209,18 @@ export default {
           		return this.getFullYear() + "年" + (this.getMonth()+1) + "月" + this.getDate() + "日 "
     		};
     		return times;
-    	
+
     	}
-    	
-    	
+
+
     },
    	mounted(){
    		this.progress();
    		this.project();
    		this.getDetail();
    		this.rating();
-   		
-   		
+
+
    	}
 };
 </script>
