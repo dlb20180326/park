@@ -8,7 +8,7 @@ module.exports = {
     dev: {
         // Paths
         assetsSubDirectory: 'static',
-        assetsPublicPath: './',
+        assetsPublicPath: '/',
         proxyTable: {
             '/dangjian/': {
                 changeOrigin: true,
@@ -48,7 +48,7 @@ module.exports = {
         // Paths
         assetsRoot: path.resolve(__dirname, '../dist'),
         assetsSubDirectory: 'static',
-        assetsPublicPath: './',
+        assetsPublicPath: '/',
 
         /**
          * Source Maps
