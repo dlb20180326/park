@@ -148,7 +148,7 @@ export default {
             Vue.http
                 .get('mp/getToken', {
                     params: {
-                        href: location.href
+                        href: encodeURIComponent(location.origin + '/')
                     }
                 })
                 .then(result => {
