@@ -166,9 +166,10 @@ export default {
     		axios.get('/dangjian/pscorelevel/getList')
     		.then( res => {
     			this.rate = res.data;
-    			
-    			console.log(that.itegral);
     			for(let c in this.rate){
+    				if(that.itegral >= this.rate[c].min && that.itegral <= this.rate[c].max){
+    					this.results = this.rate[c].level
+    				}
     			}
     		}).catch(err => { 
     			console.log('fail'+err);
