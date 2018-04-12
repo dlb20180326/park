@@ -150,6 +150,7 @@ export default {
                     (res.localIds || []).map(localId => oblistWX.push(this.uploadImage(localId)));
                     Observable.zip(...oblistWX).subscribe(serverIds => {
                         let oblistDJ = [];
+                        alert(serverIds);
                         serverIds.map(serverId => oblistDJ.push(this.pictureUpload(serverId)));
                         Observable.forkJoin(...oblistDJ).subscribe(pictureIds =>
                             this.imgIds.push('pictureIds:' + pictureIds)
@@ -163,10 +164,7 @@ export default {
                 wx.uploadImage({
                     localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
                     isShowProgressTips: 1, // 默认为1，显示进度提示
-                    success: res => {
-                        observer.next(res.serverId);
-                        observer.complete();
-                    }
+                    success: res => observer.next(res.serverId)
                 })
             ),
         pictureUpload: serverId =>
@@ -177,10 +175,7 @@ export default {
                             mediaId: serverId
                         }
                     })
-                    .then(result => {
-                        observer.next(result.data);
-                        observer.complete();
-                    })
+                    .then(result => observer.next(result.data))
             )
     }
 };
