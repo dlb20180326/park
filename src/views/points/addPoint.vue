@@ -9,7 +9,7 @@
         </div>
         <div class="group-item">
             <group-title slot="title">
-                <b>政治学习开始时间</b>
+                <b>开始时间</b>
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
@@ -27,7 +27,7 @@
         </div>
         <div class="group-item">
             <group-title slot="title">
-                <b>政治学习结束时间</b>
+                <b>结束时间</b>
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
@@ -98,7 +98,7 @@
         },
         methods: {
         	getList(){
-        		axios.get('/dangjian/pscoredetail/queryById',{
+        		axios.get('pscoredetail/queryById',{
         			params:{id:this.$route.params.moduleId.id}
         		}).then(res =>{
         			this.listSingle=res.data
@@ -109,7 +109,7 @@
         		})
         	},
         	getUser() {
-            axios.get('/dangjian/ppartymember/queryByUserId', {
+            axios.get('ppartymember/queryByUserId', {
                 params: {
                     userid: this.$store.getters.user.userid
                 }
@@ -127,23 +127,26 @@
 
 
             submit(){
-				axios.post('/dangjian/pstudy/save',{
-	  				departmentid:this.$store.getters.user.departmentid,
-  					/*picIds:1,*/
-  					createUserid:this.$store.getters.user.userid,
-  					roleid:this.$store.getters.user.roleid,
-  					starttime:this.startTime,
-  					endtime:this.endTime,
-  					projectid:this.listSingle.projectId,
-  					moduleid:this.listSingle.id,
-  					content:this.activeContent
-        		}).then(res =>{
-        			console.log(res.data)
-        		}).catch(err =>{
-        			console.log('fail')
-        			console.log(err.data)
-        			
-        		})
+                 axios({
+                    url:'pstudy/save',
+                    method:'post',
+                    headers: {'contentType':'application/json'},
+                    params:{
+                        departmentid:this.$store.getters.user.departmentid,
+                        createUserid:this.$store.getters.user.userid,
+                        roleid:this.$store.getters.user.roleid,
+                        starttime:this.startTime,
+                        endtime:this.endTime,
+                        projectid:this.listSingle.projectId,
+                        moduleid:this.listSingle.id,
+                        content:this.activeContent
+                    }
+                }).then(res => {
+                    this.users[1].integral = res.data;
+                    console.log(res.data);
+                }).catch(err => {
+                    console.log(err);
+                });
             },
 
             getActivity(){
