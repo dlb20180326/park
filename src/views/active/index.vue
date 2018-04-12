@@ -142,39 +142,43 @@ export default {
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: res => {
                     // const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    (res.localIds || []).map(localId => {
-                        this.localIds.push(localId);
-                        this.uploadImage(localId);
+                    const promiseList = [];
+                    (res.localIds || []).map(localId => promiseList.push(this.uploadImage(localId)));
+                    Promise.all(promiseList).then(serverIds => {
+                        const promiseList = [];
+                        serverIds.map(serverId => promiseList.push(this.pictureUpload(serverId)));
+                        Promise.all(promiseList).then(pictureIds => {
+                            this.localIds.push(result);
+                        });
                     });
                 }
             });
         },
-        uploadImage(localId) {
-            wx.uploadImage({
-                localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                isShowProgressTips: 1, // 默认为1，显示进度提示
-                success: res => {
-                    // var serverId = res.serverId; // 返回图片的服务器端ID
-                    this.localIds.push(res.serverId);
-                    this.pictureUpload(res.serverId);
-                }
-            });
-        },
-        pictureUpload(serverId) {
-            this.$http
-                .get('picture/upload', {
-                    params: {
-                        mediaId: serverId
-                    }
-                })
-                .then(
-                    result => {
-                        this.localIds.push(result);
-                        // this.$http.get('picture/show',{params:{pictureId:result.id}})
-                    },
-                    error => this.localIds.push(error)
-                );
-        }
+        uploadImage: localId =>
+            new Promise(resolve => {
+                wx.uploadImage({
+                    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                    success: res => resolve(res.serverId)
+                });
+            }),
+        pictureUpload: serverId =>
+            new Promise(resolve => {
+                this.$http
+                    .get('picture/upload', {
+                        params: {
+                            mediaId: serverId
+                        }
+                    })
+                    .then(
+                        result => {
+                            this.localIds.push(result);
+                            resolve(result.data);
+                            // this.$http.get('picture/show',{params:{pictureId:result.id}})
+                        },
+                        error => this.localIds.push(error)
+                    );
+            })
     }
 };
 </script>
