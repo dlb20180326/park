@@ -144,15 +144,11 @@
                     }
                 }).then(res => {
                     this.users[1].integral = res.data;
-<<<<<<< HEAD
-=======
-                    console.log(res.data);
                     if(res.success){
                         this.$vux.loading.show({ text: '增加成功' });
                     }else{
                         this.$vux.loading.show({ text: '增加失败' });
                     }
->>>>>>> 064b46fbd65ed1958c9c973137ca020157f60164
                 }).catch(err => {
                     this.$vux.loading.show({ text: '增加失败' });
                 });
