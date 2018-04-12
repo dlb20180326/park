@@ -135,11 +135,6 @@ export default {
     },
     mounted() {
         weixin.init(['chooseImage', 'uploadImage']);
-        this.$http.get('picture/upload', {
-            params: {
-                mediaId: 'EK43SodvEsnhjUBqytDWTbVs3woTGMhzERj_O9zZECBpLXX_p7A5cttf-BHCLqVW'
-            }
-        });
     },
     methods: {
         chooseImage() {
