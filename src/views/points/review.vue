@@ -5,7 +5,7 @@
 			<div class="header-list">
 				<div class="list-left">
 				<span class="left-now">当前支部：</span>
-				<span class="left-active">花期银行第一支部</span>
+				<span class="left-active">{{partyBranch}}</span>
 				</div>
 				<div class="right-btn" @click="showDet">切换<span></span></div>
 			</div>
@@ -15,8 +15,8 @@
 			</ul>
 			<div class="trans-black" v-show="showTrans"></div>
 			<div class="animate-down" v-show="topShow">
-				<div  v-for="(park,index) in parks" :key="index" class="bg-flag">
-					{{park}}
+				<div  v-for="(park,index) in parks" :key="index" class="bg-flag" @click="change(park)">
+					{{park.part}}
 				</div>
 			</div>
 			<div class="points-table">
@@ -50,7 +50,8 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
 				topShow:false,
 				showTrans:false,
 				slides:-1,
-				parks:[{part:'金领驿站'},{part:'花期银行第一支部'},{part:'花期银行第二支部'}]
+				parks:[{part:'金领驿站'},{part:'花期银行第一支部'},{part:'花期银行第二支部'}],
+				partyBranch:''
 				
 			}
 		},
@@ -65,6 +66,17 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
 		directives: {
    			TransferDom
   		},
+  		handlePicker1(){
+            this.PickerVisible5=true;
+            axios({
+                method: 'get',
+                url: '/dangjian/pdepartment/getList'
+            }) .then((res)=> {
+                this.list1= res.data;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
 		methods:{
 			showDet(){
 				this.topShow = !this.topShow
@@ -72,6 +84,9 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
 			},
 			slide(){
 				this.slides =1
+			},
+			change(park){
+				this.partyBranch = park.part
 			}
 		},
 		mounted(){

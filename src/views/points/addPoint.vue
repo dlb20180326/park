@@ -98,14 +98,12 @@
         },
         methods: {
         	getList(){
-        	console.log(this.$route)
         		axios.get('pscoredetail/queryById',{
         		    params: {
         			    id:this.$route.params.moduleId
         			}
         		}).then(res =>{
         			this.listSingle=res.data
-        			console.log(this.listSingle)
         		}).catch(err =>{
         			console.log('fail'+err.data)
         			
@@ -146,7 +144,6 @@
                     }
                 }).then(res => {
                     this.users[1].integral = res.data;
-                    console.log(res.data);
                 }).catch(err => {
                     console.log(err);
                 });
@@ -203,7 +200,6 @@
             this.getActivity();
             this.getList();
             this.getUser();
-            console.log(this.$store.getters.user)
         }
     };
 </script>
