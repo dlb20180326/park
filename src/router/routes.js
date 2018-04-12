@@ -45,7 +45,7 @@ export const routes = [
                 component: () => import('@/views/party/branch')
             },
             {
-                path: 'party/member',
+                path: 'party/member/',
                 name:'Members',
                 component: () => import('@/views/party/member')
             },
@@ -100,14 +100,13 @@ export const routes = [
                 component: () => import('@/views/points/addPoint')
             },
             {
-                path: 'points/pointEvaluate',
+                path: 'points/pointEvaluate/:partmentId/:name',
                 name:'pointEvaluate',
                 component: () => import('@/views/points/pointEvaluate')
             }
             ,
             {
                 path: 'active',
-                name:'Active',
                 component: () => import('@/views/active')
             },
             {
