@@ -41,9 +41,6 @@
 
 <script>
 import { XHeader, Flexbox, FlexboxItem } from 'vux';
-// import { Observable } from 'rxjs/Observable';
-// import 'rxjs/add/observable/zip';
-// import 'rxjs/add/observable/forkJoin';
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
 
@@ -146,20 +143,10 @@ export default {
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: res => {
-                    // let oblistWX = [];
-                    // (res.localIds || []).map(localId => oblistWX.push(this.uploadImage(localId)));
-                    // Observable.zip(...oblistWX).subscribe(serverIds => {
-                    //     let oblistDJ = [];
-                    //     serverIds.map(serverId => oblistDJ.push(this.pictureUpload(serverId)));
-                    //     Observable.forkJoin(...oblistDJ).subscribe(
-                    //         pictureIds => {}
-                    //         // this.imgIds.push('pictureIds:' + pictureIds)
-                    //     );
-                    // });
                     let localIds = res.localIds || [];
                     new Promise(resolve => {
                         let serverIds = [];
-                        toUpload: localId => {
+                        let toUpload = localId => {
                             this.imgIds.push('localId:' + localId);
                             this.uploadImage(localId).then(serverId => {
                                 this.imgIds.push('serverId:' + serverId);
@@ -180,7 +167,7 @@ export default {
                         let promiseList = [];
                         serverIds.map(serverId => promiseList.push(this.pictureUpload(serverId)));
                         Promise.all(promiseList).then(pictureIds => {
-                            this.imgIds.push('pictureIds:' + pictureIds);
+                            this.imgIds.push('pictureIds:' + pictureIds.join());
                         });
                     });
                 }
@@ -202,10 +189,7 @@ export default {
                             mediaId: serverId
                         }
                     })
-                    .then(result => {
-                        this.imgIds.push('pictureId:' + result.data);
-                        resolve(result.data);
-                    })
+                    .then(result => resolve(result.data))
             )
     }
 };
