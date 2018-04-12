@@ -50,14 +50,17 @@ export const routes = [
             },
             {
                 path: 'party/information',
+                name: 'information',
                 component: () => import('@/views/party/information')
             },
             {
                 path: 'party/partyDetail',
+                name: 'pointDetail',
                 component: () => import('@/views/party/partyDetail')
             },
             {
                 path: 'party/partyPoint',
+                name: 'partypointdetail',
                 component: () => import('@/views/party/partyPointDetail')
             },
             {
@@ -119,6 +122,10 @@ export const routes = [
                 path: 'active/new',
                 component: () => import('@/views/active/new')
             },
+            {
+            	path: 'active/new2',
+                component: () => import('@/views/active/new2')
+        	},
             {
                 path: 'active/activeDetail',
                 component: () => import('@/views/active/activeDetail')

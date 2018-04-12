@@ -127,9 +127,9 @@
 
 
             submit(){
-				this.$http.post('/dangjian/pstudy/save',{
-  					departmentid:this.$store.getters.user.departmentid,
-  					picIds:1,
+				axios.post('/dangjian/pstudy/save',{
+	  				departmentid:this.$store.getters.user.departmentid,
+  					/*picIds:1,*/
   					createUserid:this.$store.getters.user.userid,
   					roleid:this.$store.getters.user.roleid,
   					starttime:this.startTime,
