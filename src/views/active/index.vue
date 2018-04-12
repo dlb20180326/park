@@ -162,8 +162,18 @@ export default {
                         }
                     }).then(serverIds => {
                         let promiseList = [];
-                        serverIds.map(serverId => promiseList.push(this.pictureUpload(serverId)));
-                        Promise.all(promiseList).then(pictureIds => {
+                        serverIds.map(serverId =>
+                            promiseList.push(
+                                this.$http.get('picture/upload', {
+                                    params: {
+                                        mediaId: serverId
+                                    }
+                                })
+                            )
+                        );
+                        Promise.all(promiseList).then(result => {
+                            let pictureIds = [];
+                            result.map(item => pictureIds.push(item.data));
                             this.imgIds.push('pictureIds:' + pictureIds.join());
                         });
                     });
@@ -177,16 +187,6 @@ export default {
                     isShowProgressTips: 1, // 默认为1，显示进度提示
                     success: res => resolve(res.serverId)
                 })
-            ),
-        pictureUpload: serverId =>
-            new Promise(resolve =>
-                this.$http
-                    .get('picture/upload', {
-                        params: {
-                            mediaId: serverId
-                        }
-                    })
-                    .then(result => resolve(result.data))
             )
     }
 };
