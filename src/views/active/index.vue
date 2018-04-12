@@ -135,6 +135,11 @@ export default {
     },
     mounted() {
         weixin.init(['chooseImage', 'uploadImage']);
+        this.$http.get('picture/upload', {
+            params: {
+                mediaId: 'EK43SodvEsnhjUBqytDWTbVs3woTGMhzERj_O9zZECBpLXX_p7A5cttf-BHCLqVW'
+            }
+        });
     },
     methods: {
         chooseImage() {
@@ -166,9 +171,17 @@ export default {
                     }).then(serverIds => {
                         let promiseList = [];
                         this.imgIds.push('serverIds:' + serverIds.join());
-                        serverIds.map(serverId => promiseList.push(this.pictureUpload(serverId)));
-                        Promise.all(promiseList).then(pictureIds => {
-                            // this.imgIds.push('pictureIds:' + pictureIds.join());
+                        serverIds.map(serverId =>
+                            promiseList.push(
+                                this.$http.get('picture/upload', {
+                                    params: {
+                                        mediaId: serverId
+                                    }
+                                })
+                            )
+                        );
+                        Promise.all(promiseList).then(result => {
+                            this.imgIds.push('pictureIds:' + pictureIds.join());
                         });
                     });
                 }
