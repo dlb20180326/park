@@ -81,6 +81,7 @@
             Datetime,
             Group,
             Picker,
+            Alert
 
         },
         data() {
@@ -145,12 +146,12 @@
                 }).then(res => {
                     this.users[1].integral = res.data;
                     if(res.success){
-                        this.$vux.loading.show({ text: '增加成功' });
+                        this.$vux.loading.show({ title: '增加成功' });
                     }else{
-                        this.$vux.loading.show({ text: '增加失败' });
+                        this.$vux.loading.ashow({ title: '增加失败' });
                     }
                 }).catch(err => {
-                    this.$vux.loading.show({ text: '增加失败' });
+                    this.$vux.loading.show({ title: '增加失败' });
                 });
             },
 

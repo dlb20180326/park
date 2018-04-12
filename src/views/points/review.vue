@@ -9,10 +9,10 @@
 				</div>
 				<div class="right-btn" @click="showDet">切换<span></span></div>
 			</div>
-			<ul class="tabClick">
-    			<li class="active" @click="slide"><a>待审核（20）</a></li>
-			    <li class=""><a>已审核（1）</a></li>
-			</ul>
+			    <tab>
+				    <tab-item selected @on-item-click="slide">待审核（20）</tab-item>
+				    <tab-item @on-item-click="slide">已审核（1）</tab-item>
+			    </tab>
 			<div class="trans-black" v-show="showTrans"></div>
 			<div class="animate-down" v-show="topShow">
 				<div  v-for="(park,index) in parks" :key="index" class="bg-flag" @click="change(park)">
@@ -42,7 +42,7 @@
 </template>
 <script>
 import rHeader from '@/components/comother/rheader';
-import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
+import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem} from 'vux';
 	export default{
 		data(){
 			return {
@@ -61,7 +61,9 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
 			Panel,
 			Sticky,
 			Flexbox,
-			FlexboxItem
+			FlexboxItem,
+			Tab, 
+			TabItem
 		},
 		directives: {
    			TransferDom
@@ -87,6 +89,8 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,} from 'vux';
 			},
 			change(park){
 				this.partyBranch = park.part
+				this.topShow = !this.topShow
+				this.showTrans = !this.showTrans
 			}
 		},
 		mounted(){
