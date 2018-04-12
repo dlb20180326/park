@@ -98,8 +98,11 @@
         },
         methods: {
         	getList(){
+        	console.log(this.$route)
         		axios.get('pscoredetail/queryById',{
-        			params:{id:this.$route.params.moduleId.id}
+        		    params: {
+        			    id:this.$route.params.moduleId
+        			}
         		}).then(res =>{
         			this.listSingle=res.data
         			console.log(this.listSingle)
@@ -135,10 +138,10 @@
                         departmentid:this.$store.getters.user.departmentid,
                         createUserid:this.$store.getters.user.userid,
                         roleid:this.$store.getters.user.roleid,
-                        starttime:this.startTime,
-                        endtime:this.endTime,
-                        projectid:this.listSingle.projectId,
-                        moduleid:this.listSingle.id,
+                        starttime:this.startTime.replace(' ','%20'),
+                        endtime:this.endTime.replace(' ','%20'),
+                        projectid:this.$route.params.projectId,
+                        moduleid:this.$route.params.moduleId,
                         content:this.activeContent
                     }
                 }).then(res => {
