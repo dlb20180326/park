@@ -147,10 +147,10 @@ export default {
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: res => {
                     const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    const oblist = [];
+                    let oblist = [];
                     (res.localIds || []).map(localId => oblist.push(this.uploadImage(localId)));
                     Observable.zip(...oblist).subscribe(serverIds => {
-                        const oblist = [];
+                        let oblist = [];
                         serverIds.map(serverId => oblist.push(this.pictureUpload(serverId)));
                         Observable.forkJoin(...oblist).subscribe(pictureIds =>
                             this.imgIds.push('pictureIds:' + pictureIds)
