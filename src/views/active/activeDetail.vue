@@ -31,7 +31,7 @@
             <section class="mainbox">
                 <div class=" clearfix p15 display">
                     <span class="fl weui-cell__bd1">党员生活通知</span>
-                    <a  class=" fr"> <router-link slot="right" to="/activity/activityMore">查看全部 ></router-link></a>
+                    <a  class=" fr"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
                 </div>
                 <div style="padding:2vw 3.5vw 0;">
                     <table width="100%" class="table">

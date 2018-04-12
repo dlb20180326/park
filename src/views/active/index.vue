@@ -2,7 +2,7 @@
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
             党员活动
-            <router-link slot="right" to="/active/new">发起活动</router-link>
+            <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>
         </x-header>
         <div class="box">
             <flexbox class="list-item" v-for="(item, index) in list" :key="index" :gutter="0" align="stretch">
@@ -19,6 +19,7 @@
                             <a><img src="@/assets/images/x.png"></a>
                         </flexbox-item>
                     </flexbox>
+                    <router-link :to="{name:'activePost'}">
                     <div class="list-content" v-html="item.content"></div>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(item, index) in imgs" :key="index">
@@ -31,7 +32,9 @@
                     <div v-for="(item, index) in localIds" :key="index">
                         {{ item }}
                     </div>
+                    </router-link>
                 </flexbox-item>
+             
             </flexbox>
         </div>
     </div>
@@ -234,6 +237,7 @@ export default {
     margin-top: 0.1rem;
     padding-right: 0.15rem;
     font-size: 0.14rem;
+    color:#494949;
 }
 .images-preview {
     margin-top: 0.1rem;
