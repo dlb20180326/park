@@ -16,10 +16,10 @@
                 </div>
                 <input type="password" v-model="pass" />
             </div>
-            <div class="passAbout">
+<!--            <div class="passAbout">
                 <div class="changePass">修改密码</div>
                 <div class="forget">忘记密码</div>
-            </div>
+            </div>-->
             <button type="button" class="btn-dl" @click="login">登录</button>
         </div>
     </div>

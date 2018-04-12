@@ -2,7 +2,7 @@
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
             党员活动
-            <router-link slot="right" to="/active/new">发起活动</router-link>
+            <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>
         </x-header>
         <div class="box">
             <flexbox class="list-item" v-for="(item, index) in list" :key="index" :gutter="0" align="stretch">
@@ -10,16 +10,18 @@
                     <img src="@/assets/images/icon-head.png">
                 </flexbox-item>
                 <flexbox-item class="list-body">
-                    <flexbox align="start">
-                        <flexbox-item class="list-head">
-                            <b>{{item.title}}</b>
-                            <p>{{item.date}}</p>
-                        </flexbox-item>
-                        <flexbox-item class="list-close">
-                            <a><img src="@/assets/images/x.png"></a>
-                        </flexbox-item>
-                    </flexbox>
-                    <div class="list-content" v-html="item.content"></div>
+                    <router-link :to="{name:'activePost'}">
+                        <flexbox align="start">
+                            <flexbox-item class="list-head">
+                                <b>{{item.title}}</b>
+                                <p>{{item.date}}</p>
+                            </flexbox-item>
+                            <flexbox-item class="list-close">
+                                <a><img src="@/assets/images/x.png"></a>
+                            </flexbox-item>
+                        </flexbox>
+                        <div class="list-content" v-html="item.content"></div>
+                    </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(item, index) in imgs" :key="index">
                             <div><img v-clipping="item"></div>
@@ -28,7 +30,7 @@
                             <a class="btn-plus" @click="chooseImage"></a>
                         </flexbox-item>
                     </flexbox>
-                    <div v-for="(item, index) in localIds" :key="index">
+                    <div v-for="(item, index) in imgIds" :key="index">
                         {{ item }}
                     </div>
                 </flexbox-item>
@@ -39,6 +41,9 @@
 
 <script>
 import { XHeader, Flexbox, FlexboxItem } from 'vux';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/zip';
+import 'rxjs/add/observable/forkJoin';
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
 
@@ -128,7 +133,7 @@ export default {
                 require('@/assets/images/preview2.jpg'),
                 require('@/assets/images/preview3.jpg')
             ],
-            localIds: []
+            imgIds: []
         };
     },
     mounted() {
@@ -137,48 +142,40 @@ export default {
     methods: {
         chooseImage() {
             wx.chooseImage({
-                // count: 1, // 默认9
+                count: 9, // 默认9
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: res => {
-                    // const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    const promiseList = [];
-                    (res.localIds || []).map(localId => promiseList.push(this.uploadImage(localId)));
-                    Promise.all(promiseList).then(serverIds => {
-                        const promiseList = [];
-                        serverIds.map(serverId => promiseList.push(this.pictureUpload(serverId)));
-                        Promise.all(promiseList).then(pictureIds => {
-                            this.localIds.push(result);
-                        });
+                    let oblistWX = [];
+                    (res.localIds || []).map(localId => oblistWX.push(this.uploadImage(localId)));
+                    Observable.zip(...oblistWX).subscribe(serverIds => {
+                        let oblistDJ = [];
+                        serverIds.map(serverId => oblistDJ.push(this.pictureUpload(serverId)));
+                        Observable.forkJoin(...oblistDJ).subscribe(pictureIds =>
+                            this.imgIds.push('pictureIds:' + pictureIds)
+                        );
                     });
                 }
             });
         },
         uploadImage: localId =>
-            new Promise(resolve => {
+            Observable.create(observer =>
                 wx.uploadImage({
                     localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
                     isShowProgressTips: 1, // 默认为1，显示进度提示
-                    success: res => resolve(res.serverId)
-                });
-            }),
+                    success: res => observer.next(res.serverId)
+                })
+            ),
         pictureUpload: serverId =>
-            new Promise(resolve => {
+            Observable.create(observer =>
                 this.$http
                     .get('picture/upload', {
                         params: {
                             mediaId: serverId
                         }
                     })
-                    .then(
-                        result => {
-                            this.localIds.push(result);
-                            resolve(result.data);
-                            // this.$http.get('picture/show',{params:{pictureId:result.id}})
-                        },
-                        error => this.localIds.push(error)
-                    );
-            })
+                    .then(result => observer.next(result.data))
+            )
     }
 };
 </script>
@@ -219,6 +216,9 @@ export default {
     padding: 0.1rem 0;
 }
 .vux-flexbox-item.list-head {
+    b {
+        color: #444;
+    }
     p {
         font-size: 0.12rem;
         color: #999;
@@ -234,6 +234,7 @@ export default {
     margin-top: 0.1rem;
     padding-right: 0.15rem;
     font-size: 0.14rem;
+    color: #494949;
 }
 .images-preview {
     margin-top: 0.1rem;

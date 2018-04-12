@@ -46,6 +46,7 @@ export const routes = [
             },
             {
                 path: 'party/member',
+                name:'Members',
                 component: () => import('@/views/party/member')
             },
             {
@@ -94,7 +95,7 @@ export const routes = [
                 component: () => import('@/views/points/pointDetail')
             },
             {
-                path: 'points/addPoint',
+                path: 'points/addPoint/:projectId/:moduleId',
                 name:'addPoint',
                 component: () => import('@/views/points/addPoint')
             },
@@ -108,6 +109,7 @@ export const routes = [
             },
             {
                 path: 'active/activeMore',
+                name:'activeMore',
                 component: () => import('@/views/active/activeMore')
             },
             {
@@ -116,10 +118,12 @@ export const routes = [
             },
             {
                 path: 'active/post',
+                name:'activePost',
                 component: () => import('@/views/active/post')
             },
             {
                 path: 'active/new',
+                name:'activeNews',
                 component: () => import('@/views/active/new')
             },
             {

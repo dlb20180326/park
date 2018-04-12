@@ -57,7 +57,8 @@
 	                            </div>
 	                            </router-link>
 
-	                        	<router-link :to="{name:'addPoint',params:{id:progres.id,moduleId:projectList[[progres.id]]}}" v-else-if="progres.id === 1 ||progres.id === 2 || progres.id === 6">
+
+	                        	<router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id" v-else-if="progres.id === 1 ||progres.id === 2 || progres.id === 6">
 		                            <div class="content">
 		                                <x-button mini type="warn" v-if="projectList[progres.id]">
 		                                    点击+积分 模块ID{{projectList[progres.id].id}} 项目id{{progres.id}}
@@ -129,7 +130,7 @@ export default {
     },
     methods:{
     	progress(){
-    		axios.get('/dangjian/pscoreparty/getProjectScoreByUserId',{
+    		axios.get('pscoreparty/getProjectScoreByUserId',{
     			params:{
     				userId:this.$store.getters.user.userId,
     				year:this.years
@@ -141,7 +142,7 @@ export default {
     		})
     	},
     	project(){
-    		axios.get('/dangjian/pscoredetail/queryByRoleMenu',{
+    		axios.get('pscoredetail/queryByRoleMenu',{
     			params:{
     				roleid:4,
     			}
@@ -159,7 +160,7 @@ export default {
 
     	},
     	getDetail(){
-    		axios.get('/dangjian/pscoreparty/queryByUserId',{
+    		axios.get('pscoreparty/queryByUserId',{
     			params:{
     				userid:this.$store.getters.user.userid,
     				year:this.years
@@ -174,7 +175,7 @@ export default {
     	rating(){
     		let that = this;
     		that.score();
-    		axios.get('/dangjian/pscorelevel/getList')
+    		axios.get('pscorelevel/getList')
     		.then( res => {
     			this.rate = res.data;
     			for(let c in this.rate){
@@ -188,7 +189,7 @@ export default {
 
     	},
     	score(){
-    		axios.get('/dangjian/pscoreparty/getSumScoreByUserId',{
+    		axios.get('pscoreparty/getSumScoreByUserId',{
     			params:{
     				userId:this.$store.getters.user.userid,
 					year:new Date().getFullYear()
