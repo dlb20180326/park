@@ -39,6 +39,9 @@
 
 <script>
 import { XHeader, Flexbox, FlexboxItem } from 'vux';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/zip';
+import 'rxjs/add/observable/forkJoin';
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
 
@@ -137,48 +140,39 @@ export default {
     methods: {
         chooseImage() {
             wx.chooseImage({
-                // count: 1, // 默认9
+                count: 9, // 默认9
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: res => {
-                    // const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    const promiseList = [];
-                    (res.localIds || []).map(localId => promiseList.push(this.uploadImage(localId)));
-                    Promise.all(promiseList).then(serverIds => {
-                        const promiseList = [];
-                        serverIds.map(serverId => promiseList.push(this.pictureUpload(serverId)));
-                        Promise.all(promiseList).then(pictureIds => {
-                            this.localIds.push(result);
-                        });
+                    const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                    const oblist = [];
+                    (res.localIds || []).map(localId => oblist.push(this.uploadImage(localId)));
+                    Observable.zip(...oblist).subscribe(serverIds => {
+                        const oblist = [];
+                        serverIds.map(serverId => oblist.push(this.pictureUpload(serverId)));
+                        Observable.forkJoin(...oblist).subscribe(pictureIds => this.localIds.push(pictureIds));
                     });
                 }
             });
         },
         uploadImage: localId =>
-            new Promise(resolve => {
+            Observable.create(observer =>
                 wx.uploadImage({
                     localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
                     isShowProgressTips: 1, // 默认为1，显示进度提示
-                    success: res => resolve(res.serverId)
-                });
-            }),
+                    success: res => observer.next(res.serverId)
+                })
+            ),
         pictureUpload: serverId =>
-            new Promise(resolve => {
+            Observable.create(observer =>
                 this.$http
                     .get('picture/upload', {
                         params: {
                             mediaId: serverId
                         }
                     })
-                    .then(
-                        result => {
-                            this.localIds.push(result);
-                            resolve(result.data);
-                            // this.$http.get('picture/show',{params:{pictureId:result.id}})
-                        },
-                        error => this.localIds.push(error)
-                    );
-            })
+                    .then(result => observer.next(result.data))
+            )
     }
 };
 </script>
