@@ -2,7 +2,7 @@
     <div class="page-body disabled-tabbar">
         <x-header>全部活动</x-header>
         <div class="group-item" >
-            <section  class="mainbox"  v-for="(item,index) in active" :key="index">
+            <section class="mainbox"  v-for="(item,index) in active" :key="index">
                 <div style="padding:2vw 3.5vw 0;">
                     <table width="100%" class="table">
                         <tr>
