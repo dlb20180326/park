@@ -13,14 +13,14 @@
                     <router-link :to="{name:'activePost'}">
                         <flexbox align="start">
                             <flexbox-item class="list-head">
-                                <b>{{item.title}}</b>
-                                <p>{{item.date}}</p>
+                                <b>{{item.activeName}}</b>
+                                <p>{{datePick(item.createTime)}}</p>
                             </flexbox-item>
-                            <flexbox-item class="list-close">
+                <!--            <flexbox-item class="list-close">
                                 <a><img src="@/assets/images/x.png"></a>
-                            </flexbox-item>
+                            </flexbox-item>-->
                         </flexbox>
-                        <div class="list-content" v-html="item.content"></div>
+                        <div class="list-content" v-html="item.activeContext"></div>
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(item, index) in imgs" :key="index">
@@ -68,62 +68,7 @@ export default {
     },
     data() {
         return {
-            list: [
-                {
-                    title: '汇丰银行 - 支部',
-                    date: '4月5日',
-                    content:
-                        '天文学家一直在研究他们称之为婴儿宇宙的大型3D地图。该地图由兰开斯特大学的David Sobral博士领导的一个团队在欧洲揭幕。巨大的地图是使用夏威夷的斯巴鲁望远镜和加那利群岛的伊萨克牛顿望远镜获得数据制作。'
-                },
-                {
-                    title: '上海中心 - 支部',
-                    date: '4月5日',
-                    content:
-                        '天文学家一直在研究他们称之为婴儿宇宙的大型3D地图。该地图由兰开斯特大学的David Sobral博士领导的一个团队在欧洲揭幕。巨大的地图是使用夏威夷的斯巴鲁望远镜和加那利群岛的伊萨克牛顿望远镜获得数据制作。'
-                },
-                {
-                    title: '金领驿站',
-                    date: '4月5日',
-                    content:
-                        '天文学家一直在研究他们称之为婴儿宇宙的大型3D地图。该地图由兰开斯特大学的David Sobral博士领导的一个团队在欧洲揭幕。巨大的地图是使用夏威夷的斯巴鲁望远镜和加那利群岛的伊萨克牛顿望远镜获得数据制作。'
-                },
-                {
-                    title: '汇丰银行 - 支部',
-                    date: '4月5日',
-                    content:
-                        '天文学家一直在研究他们称之为婴儿宇宙的大型3D地图。该地图由兰开斯特大学的David Sobral博士领导的一个团队在欧洲揭幕。巨大的地图是使用夏威夷的斯巴鲁望远镜和加那利群岛的伊萨克牛顿望远镜获得数据制作。'
-                },
-                {
-                    title: '上海中心 - 支部',
-                    date: '4月5日',
-                    content:
-                        '天文学家一直在研究他们称之为婴儿宇宙的大型3D地图。该地图由兰开斯特大学的David Sobral博士领导的一个团队在欧洲揭幕。巨大的地图是使用夏威夷的斯巴鲁望远镜和加那利群岛的伊萨克牛顿望远镜获得数据制作。'
-                },
-                {
-                    title: '金领驿站',
-                    date: '4月5日',
-                    content:
-                        '天文学家一直在研究他们称之为婴儿宇宙的大型3D地图。该地图由兰开斯特大学的David Sobral博士领导的一个团队在欧洲揭幕。巨大的地图是使用夏威夷的斯巴鲁望远镜和加那利群岛的伊萨克牛顿望远镜获得数据制作。'
-                },
-                {
-                    title: '汇丰银行 - 支部',
-                    date: '4月5日',
-                    content:
-                        '天文学家一直在研究他们称之为婴儿宇宙的大型3D地图。该地图由兰开斯特大学的David Sobral博士领导的一个团队在欧洲揭幕。巨大的地图是使用夏威夷的斯巴鲁望远镜和加那利群岛的伊萨克牛顿望远镜获得数据制作。'
-                },
-                {
-                    title: '上海中心 - 支部',
-                    date: '4月5日',
-                    content:
-                        '天文学家一直在研究他们称之为婴儿宇宙的大型3D地图。该地图由兰开斯特大学的David Sobral博士领导的一个团队在欧洲揭幕。巨大的地图是使用夏威夷的斯巴鲁望远镜和加那利群岛的伊萨克牛顿望远镜获得数据制作。'
-                },
-                {
-                    title: '金领驿站',
-                    date: '4月5日',
-                    content:
-                        '天文学家一直在研究他们称之为婴儿宇宙的大型3D地图。该地图由兰开斯特大学的David Sobral博士领导的一个团队在欧洲揭幕。巨大的地图是使用夏威夷的斯巴鲁望远镜和加那利群岛的伊萨克牛顿望远镜获得数据制作。'
-                }
-            ],
+           list:[],
             imgs: [
                 require('@/assets/images/preview.jpg'),
                 require('@/assets/images/preview1.jpg'),
@@ -135,8 +80,33 @@ export default {
     },
     mounted() {
         weixin.init(['chooseImage', 'uploadImage']);
+        this.getList();
     },
     methods: {
+    	datePick(s){
+    		Date.prototype.toLocaleString = function() {
+          		return (this.getMonth() + 1) + "月" + this.getDate() + "日 ";
+    		};
+    		return new Date(s).toLocaleString();
+  
+    		
+    	},
+    	getList(){
+    		this.$http.get('/dangjian/active/getParticipateActive',{
+    			params:{
+    				pageNum:1,
+    				pageSize:200,
+    				departmentid:this.$store.getters.user.departmentid,
+    				userId:this.$store.getters.user.userid
+    			}
+    		}).then(res => {
+    			this.list = res.data.list;
+    			console.log(this.list);
+    		}).catch(err => {
+    			console.log('fail'+err.data);
+    			
+    		})
+    	},
         chooseImage() {
             wx.chooseImage({
                 count: 9, // 默认9

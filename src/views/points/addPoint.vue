@@ -146,13 +146,22 @@
                 }).then(res => {
                     this.users[1].integral = res.data;
                     if(res.success){
-                        this.$vux.loading.show({ title: '增加成功' });
+                    	this.$vux.alert.show({title:'增加成功'});
+                        setTimeout(() => {
+        					this.$vux.alert.hide();
+      					}, 1000)
                     }else{
-                        this.$vux.loading.ashow({ title: '增加失败' });
+                    	this.$vux.alert.show({title:'增加失败'});
+                        setTimeout(() => {
+        					this.$vux.alert.hide();
+      					}, 1000)
                     }
-                }).catch(err => {
-                    this.$vux.loading.show({ title: '增加失败' });
-                });
+                	}).catch(err => {
+                   		this.$vux.alert.show({title:'增加失败'});
+                        setTimeout(() => {
+        					this.$vux.alert.hide();
+      					}, 1000)
+                	});
             },
 
             getActivity(){

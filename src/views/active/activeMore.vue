@@ -1,8 +1,8 @@
 <template>
     <div class="page-body disabled-tabbar">
         <x-header>全部活动</x-header>
-        <div class="group-item" >
-            <section class="mainbox"  v-for="(item,index) in active" :key="index">
+        <div class="group-item">
+            <div class="mainbox"  v-for="(item,index) in active" :key="index">
                 <div style="padding:2vw 3.5vw 0;">
                     <table width="100%" class="table">
                         <tr>
@@ -27,7 +27,7 @@
                 <div class="book">
                     <a @click="submit(item.id)">报名</a>
                 </div>
-            </section>
+            </div>
         </div>
         <div v-transfer-dom>
             <alert v-model="show" :title="msg" @on-show="onShow" @on-hide="onHide">谢谢</alert>
@@ -68,7 +68,8 @@ export default {
                 params: {
                     pageNum:1,
                     pageSize:3,
-                    departmentid:this.departmentid
+                    departmentid:this.departmentid,
+                    userId:this.$store.getters.user.userid
                 }
             }) .then((res)=> {
                 console.log(res.data.list)
@@ -116,6 +117,7 @@ export default {
     } ,
     mounted() {
         this.getActivityMore();
+        console.log(this.$store.getters.user.userid);
 
     }
 };
@@ -239,7 +241,7 @@ input {
 }
 .mainbox {
     background:#fff;
-    padding:2vw 2vw 0;
+    width:100%;
     margin-bottom:2vw;
 }
 .weui-cell1 {

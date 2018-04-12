@@ -88,7 +88,7 @@
                     <div class="p15">
                         <div class=" clearfix  display">
                             <span class="fl weui-cell__bd1">已参与组织生活</span>
-                            <a href="#" class=" fr">查看全部 ></a>
+                            <a href="#" class=" fr"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
                         </div>
                         <ul class="news" >
                             <li v-for="(item,index) in activeComplete" :key="index" >
@@ -382,6 +382,7 @@ export default {
         color:#666;
         background:#f4f4f4;
         font-size:4vw;
+        overflow-x:hidden;
     }
 
     table {
@@ -422,7 +423,7 @@ export default {
     }
     .mainbox {
         background:#fff;
-        padding:2vw 2vw 0;
+        width:100%;
         margin-bottom:2vw;
     }
     .weui-cell1 {
@@ -440,7 +441,8 @@ export default {
     }
 
     .mainbox1 {
-        padding:4vw 4vw 1vw 4vw;
+       padding-top:2vw;
+       padding-bottom:0.1vw;
     }
     .barbg {
         background:#f5f5f5;
@@ -496,7 +498,7 @@ export default {
     .title_p {
         padding:2vw 0 3vw;
     }
-
+.p15 span{background-color:#FFFFFF!important;}
 
 
 
