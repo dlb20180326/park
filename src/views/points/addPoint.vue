@@ -138,8 +138,8 @@
                         departmentid:this.$store.getters.user.departmentid,
                         createUserid:this.$store.getters.user.userid,
                         roleid:this.$store.getters.user.roleid,
-                        starttime:this.startTime.replace(' ','%20'),
-                        endtime:this.endTime.replace(' ','%20'),
+                        starttime:new Date(this.startTime.replace(/-/gi,'/')).getTime(),
+                        endtime:new Date(this.endTime.replace(/-/gi,'/')).getTime(),
                         projectid:this.$route.params.projectId,
                         moduleid:this.$route.params.moduleId,
                         content:this.activeContent
