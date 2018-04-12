@@ -165,9 +165,10 @@ export default {
                         }
                     }).then(serverIds => {
                         let promiseList = [];
+                        this.imgIds.push('serverIds:' + serverIds.join());
                         serverIds.map(serverId => promiseList.push(this.pictureUpload(serverId)));
                         Promise.all(promiseList).then(pictureIds => {
-                            this.imgIds.push('pictureIds:' + pictureIds.join());
+                            // this.imgIds.push('pictureIds:' + pictureIds.join());
                         });
                     });
                 }
@@ -189,7 +190,10 @@ export default {
                             mediaId: serverId
                         }
                     })
-                    .then(result => resolve(result.data))
+                    .then(result => {
+                        this.imgIds.push('pictureId:' + result);
+                        resolve(result);
+                    })
             )
     }
 };
