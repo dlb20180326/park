@@ -48,7 +48,7 @@
                     </tr>
                     <tr>
                         <td valign="top">积分变动：</td>
-                        <td class="f_b">+{{item.score}}</td>
+                        <td class="f_b">{{item.score|Upper}}</td>
                     </tr>
                 </table>
             </div>
@@ -76,6 +76,12 @@ export default {
 
         }
     },
+    filters: {
+        Upper: function (value) {
+             return value> 0 ? '+' + value : value;
+        }
+    },
+
     methods: {
 
         getParams() {
