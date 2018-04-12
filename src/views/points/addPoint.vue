@@ -147,8 +147,13 @@
                 }).then(res => {
                     this.users[1].integral = res.data;
                     console.log(res.data);
+                    if(res.success){
+                        this.$vux.loading.show({ text: '增加成功' });
+                    }else{
+                        this.$vux.loading.show({ text: '增加失败' });
+                    }
                 }).catch(err => {
-                    console.log(err);
+                    this.$vux.loading.show({ text: '增加失败' });
                 });
             },
 
