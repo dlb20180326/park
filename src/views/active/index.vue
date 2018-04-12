@@ -146,32 +146,28 @@ export default {
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: res => {
-                    const localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
-                    let oblist = [];
-                    (res.localIds || []).map(localId => oblist.push(this.uploadImage(localId)));
-                    Observable.zip(...oblist).subscribe(serverIds => {
-                        let oblist = [];
-                        serverIds.map(serverId => oblist.push(this.pictureUpload(serverId)));
-                        Observable.forkJoin(...oblist).subscribe(pictureIds =>
+                    let oblistWX = [];
+                    (res.localIds || []).map(localId => oblistWX.push(this.uploadImage(localId)));
+                    Observable.zip(...oblistWX).subscribe(serverIds => {
+                        let oblistDJ = [];
+                        serverIds.map(serverId => oblistDJ.push(this.pictureUpload(serverId)));
+                        Observable.forkJoin(...oblistDJ).subscribe(pictureIds =>
                             this.imgIds.push('pictureIds:' + pictureIds)
                         );
                     });
                 }
             });
         },
-        uploadImage: localId => {
-            this.imgIds.push('localId:' + localId);
-            return Observable.create(observer =>
+        uploadImage: localId =>
+            Observable.create(observer =>
                 wx.uploadImage({
                     localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
                     isShowProgressTips: 1, // 默认为1，显示进度提示
                     success: res => observer.next(res.serverId)
                 })
-            );
-        },
-        pictureUpload: serverId => {
-            this.imgIds.push('serverId:' + serverId);
-            return Observable.create(observer =>
+            ),
+        pictureUpload: serverId =>
+            Observable.create(observer =>
                 this.$http
                     .get('picture/upload', {
                         params: {
@@ -179,8 +175,7 @@ export default {
                         }
                     })
                     .then(result => observer.next(result.data))
-            );
-        }
+            )
     }
 };
 </script>
