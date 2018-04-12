@@ -151,10 +151,8 @@ export default {
                     let localIds = res.localIds || [];
                     new Promise(resolve => {
                         let serverIds = [];
-                        let toUpload = localId => {
-                            this.imgIds.push('localId:' + localId);
+                        let toUpload = localId =>
                             this.uploadImage(localId).then(serverId => {
-                                this.imgIds.push('serverId:' + serverId);
                                 serverIds.push(serverId);
                                 if (localIds.length) {
                                     toUpload(localIds.shift());
@@ -162,7 +160,6 @@ export default {
                                     resolve(serverIds);
                                 }
                             });
-                        };
                         if (localIds.length) {
                             toUpload(localIds.shift());
                         } else {
@@ -170,17 +167,8 @@ export default {
                         }
                     }).then(serverIds => {
                         let promiseList = [];
-                        this.imgIds.push('serverIds:' + serverIds.join());
-                        serverIds.map(serverId =>
-                            promiseList.push(
-                                this.$http.get('picture/upload', {
-                                    params: {
-                                        mediaId: serverId
-                                    }
-                                })
-                            )
-                        );
-                        Promise.all(promiseList).then(result => {
+                        serverIds.map(serverId => promiseList.push(this.pictureUpload(serverId)));
+                        Promise.all(promiseList).then(pictureIds => {
                             this.imgIds.push('pictureIds:' + pictureIds.join());
                         });
                     });
@@ -203,10 +191,7 @@ export default {
                             mediaId: serverId
                         }
                     })
-                    .then(result => {
-                        this.imgIds.push('pictureId:' + result);
-                        resolve(result);
-                    })
+                    .then(result => resolve(result.data))
             )
     }
 };
