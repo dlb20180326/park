@@ -155,7 +155,7 @@ export default {
             };
         },
         infoDetail() {
-            axios.get('/dangjian/pdepartment/queryById', {
+            axios.get('pdepartment/queryById', {
                 params: {
                     departmentid: this.$store.getters.user.departmentid
                 }
@@ -168,7 +168,7 @@ export default {
             });
         },
         userName() {
-            axios.get('/dangjian/ppartymember/queryByUserId', {
+            axios.get('ppartymember/queryByUserId', {
                 params: {
                     userid: this.$store.getters.user.userid
                 }
@@ -181,7 +181,7 @@ export default {
             });
         },
         getScoreByType(){
-            axios.get('/dangjian/pscoreparty/getProjectScoreByUserId', {
+            axios.get('pscoreparty/getProjectScoreByUserId', {
                 params: {
                     userId: this.$store.getters.user.userid,
                     year:new Date().getFullYear()
@@ -201,9 +201,14 @@ export default {
             });
         },
         getUserByActiveInfo(){
-            axios.post('/dangjian/active/getParticipateCount', {
-                    userId: this.$store.getters.user.userid,
-                    year:this.years
+            axios({
+                url:'active/getParticipateCount',
+                method:'post',
+                headers: {'contentType':'application/x-www-form-urlencode'},
+                params:{
+                  userId: this.$store.getters.user.userid,
+                  year: new Date().getFullYear()
+                }
             }).then(res => {
                 this.users[1].integral = res.data;
                 console.log(res.data);
@@ -212,7 +217,7 @@ export default {
             });
         },
         getUserByScoreInfo(){
-            axios.get('/dangjian/pscoreparty/getSumScoreByUserId', {
+            axios.get('pscoreparty/getSumScoreByUserId', {
                 params: {
                     userId: this.$store.getters.user.userid,
                     year:new Date().getFullYear()
