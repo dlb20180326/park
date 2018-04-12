@@ -1,15 +1,15 @@
 <template>
-	
+
 	<div style="height:100%;">
    		<view-box ref="viewBox" body-padding-top=".46rem">
 			<r-header :rfs="contents"></r-header>
 			<table id="table-style">
 				<tbody>
-					<tr v-for="(con,index) in list">
+					<tr v-for="(con,index) in list" :key="index">
 						<td>{{index+1}}</td>
 						<td>{{con.name}}</td>
 						<td>
-							<input type="button" class="btnSub" :value="con.btn" :class="{yellowC:con.isYellow}" @click="changeItem"></input>
+							<input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="changeItem"></input>
 						</td>
 					</tr>
 				</tbody>
@@ -31,29 +31,46 @@
  	</div>
 </template>
 <script>
+    import axios from 'axios'
 import Xheader from '@/components/comother/rheader'
 import Vue from 'vue';
 import {ViewBox,TransferDom,Popup} from 'vux'
 Vue.component(Popup.name, Popup);
 	export default {
 		data(){
-			let list = [{name:'王俊凯',btn:'去处理'},{name:'李琳',btn:'去处理'},{name:'潘旭',btn:'去处理'},{name:'赵杨',btn:'待审批'}];
-				for(let i=0;i<list.length;i++){
-					if(list[i].btn == '待审批'){
-					list[i].isYellow = true;
-					}
-					else{
-						list[i].isYellow = false;
-						
-					}
-				}
+
 			return {
 				contents:{rights:'',title:'支部党员'},
-				list:list,
+				list:"",
 				isYellow:false,
 				showPop:false
 			}
-		},
+		}, filters: {
+            Upper: function (value) {
+                try {
+                    if(value===null) throw "去处理";
+                    if(value=== 2) throw "审核通过";
+                    if(value=== 3)  throw "已拒绝";
+                    if(value=== 1)  throw "待审核";
+                }
+                catch(err) {
+                    return value=err;
+                }
+
+            },
+            Upper1: function (value) {
+                try {
+                    if(value===null) throw "";
+                    if(value=== 2) throw "yellowA";
+                    if(value=== 3)  throw "yellowB";
+                    if(value=== 1)  throw "yellowC";
+                }
+                catch(err) {
+                    return value=err;
+                }
+
+            }
+        },
 		components:{
 			'r-header':Xheader,
 			ViewBox,
@@ -63,6 +80,23 @@ Vue.component(Popup.name, Popup);
 			TransferDom
 		},
 		methods:{
+            getlist(){
+                axios({
+                    method: 'get',
+                    url: 'ppartymember/getPartymemberByDepartmentid',
+                    params: {
+                       departmentid:1
+                    }
+                }) .then((res)=> {
+                    console.log(res)
+                this.list=res.data
+
+
+            })
+            .catch(function (error) {
+                    console.log(error);
+                });
+            },
 			changeItem(){
 				this.showPop = true
 			},
@@ -71,7 +105,8 @@ Vue.component(Popup.name, Popup);
 			}
 		},
 		mounted(){
-			
+            this.getlist()
+
 		}
 	}
 </script>
@@ -90,6 +125,8 @@ html,body{
 #table-style tbody tr td{height:.28rem;padding-top:.2rem;font-size:.2rem;width:33.33%;text-align:left;}
 #table-style tbody tr td:nth-child(3){text-align:right;}
 .btnSub{width:.6rem;height:.24rem;font-size:.14rem;line-height:.24rem;border-radius: 4px;font-family:PingFangSC-Medium;border:0px;color:#FFFFFF;background-color:rgba(185, 54, 71, 1);}
+.yellowA{background-color:#BABABA;}
+.yellowB{background-color:#F84D2B;}
 .yellowC{background-color:rgba(244,151,74,1);}
 .middle{width:2.8rem;height:3rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:15%;}
 .mint-popup-left{left:15%;}

@@ -100,6 +100,12 @@ export const routes = [
                 component: () => import('@/views/points/addPoint')
             },
             {
+                path: 'points/pointEvaluate',
+                name:'pointEvaluate',
+                component: () => import('@/views/points/pointEvaluate')
+            }
+            ,
+            {
                 path: 'active',
                 component: () => import('@/views/active')
             },
