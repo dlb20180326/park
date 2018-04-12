@@ -4,11 +4,13 @@
 			<x-header :left-options="{showBack: false}" class="bgColors" slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">支部党员积分评定</x-header>
 			<flexbox>
       			<flexbox-item v-for="(info,index) in collect" :key="index">
+      				<router-link :to="{name:'Members'}">
   					<div class="flex-demo">
   						<div class="iconImg" :style="{backgroundImage:'url('+info.bgImg+')'}"></div>
   						<div class="fonts-label">{{info.label}}</div>
   					</div>
   					<div class="flag">{{info.score}}</div>
+  					</router-link>
       				</flexbox-item>
     		</flexbox>
 			<!--<footers :selec='select'></footers>-->
@@ -61,6 +63,6 @@ html,body{
 .vux-flexbox-item:nth-child(even){margin-right:-1%;}
 .vux-flexbox .vux-flexbox-item{min-width: 49%;width: 49%;margin-bottom:.1rem;-webkit-flex:0;position:relative;}
 .iconImg{width:.24rem;height:.25rem;margin:0 auto .07rem auto;background-repeat:no-repeat;background-size:100% 100%;}
-.fonts-label{width:100%;height:.21rem;line-height:.21rem;text-align: center;font-size:.14rem;}
+.fonts-label{width:100%;height:.21rem;line-height:.21rem;text-align: center;font-size:.14rem;color:#5B5B5B;}
 .flag{width:.24rem;height:.42rem;position:absolute;right:.15rem;top:-0.08rem;background: url(../../assets/images/icon-flag.png) no-repeat;font-size:.12rem;color:#FFFFFF;writing-mode:lr-tb;text-align:center;line-height:.16rem;}
 </style>
