@@ -30,7 +30,7 @@
                             <a class="btn-plus" @click="chooseImage"></a>
                         </flexbox-item>
                     </flexbox>
-                    <div v-for="(item, index) in localIds" :key="index">
+                    <div v-for="(item, index) in imgIds" :key="index">
                         {{ item }}
                     </div>
                 </flexbox-item>
@@ -133,7 +133,7 @@ export default {
                 require('@/assets/images/preview2.jpg'),
                 require('@/assets/images/preview3.jpg')
             ],
-            localIds: []
+            imgIds: []
         };
     },
     mounted() {
@@ -152,21 +152,26 @@ export default {
                     Observable.zip(...oblist).subscribe(serverIds => {
                         const oblist = [];
                         serverIds.map(serverId => oblist.push(this.pictureUpload(serverId)));
-                        Observable.forkJoin(...oblist).subscribe(pictureIds => this.localIds.push(pictureIds));
+                        Observable.forkJoin(...oblist).subscribe(pictureIds =>
+                            this.imgIds.push('pictureIds:' + pictureIds)
+                        );
                     });
                 }
             });
         },
-        uploadImage: localId =>
-            Observable.create(observer =>
+        uploadImage: localId => {
+            this.imgIds.push('localId:' + localId);
+            return Observable.create(observer =>
                 wx.uploadImage({
                     localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
                     isShowProgressTips: 1, // 默认为1，显示进度提示
                     success: res => observer.next(res.serverId)
                 })
-            ),
-        pictureUpload: serverId =>
-            Observable.create(observer =>
+            );
+        },
+        pictureUpload: serverId => {
+            this.imgIds.push('serverId:' + serverId);
+            return Observable.create(observer =>
                 this.$http
                     .get('picture/upload', {
                         params: {
@@ -174,7 +179,8 @@ export default {
                         }
                     })
                     .then(result => observer.next(result.data))
-            )
+            );
+        }
     }
 };
 </script>
