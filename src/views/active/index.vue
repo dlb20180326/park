@@ -221,6 +221,9 @@ export default {
     padding: 0.1rem 0;
 }
 .vux-flexbox-item.list-head {
+    b {
+        color: #444;
+    }
     p {
         font-size: 0.12rem;
         color: #999;
