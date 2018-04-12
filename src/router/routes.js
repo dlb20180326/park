@@ -100,7 +100,7 @@ export const routes = [
                 component: () => import('@/views/points/addPoint')
             },
             {
-                path: 'points/pointEvaluate/:partmentId/:name',
+                path: 'points/pointEvaluate/:partmentId/:name/:departmentId/:userId',
                 name:'pointEvaluate',
                 component: () => import('@/views/points/pointEvaluate')
             }

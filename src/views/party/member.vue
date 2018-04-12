@@ -101,13 +101,12 @@ Vue.component(Popup.name, Popup);
                 this.$router.push({
                     path: '/points/pointEvaluate',
                     name: 'pointEvaluate',
-
                     params: {
-                        item:item
-                    },query: {
-                        item:item
+                        partmentId:item.id,
+                        name:encodeURI(item.name),
+                        departmentId:item.departmentid,
+                        userId:item.userid
                     }
-
                 })
 			},
 			know(){
