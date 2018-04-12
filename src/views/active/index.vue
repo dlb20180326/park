@@ -10,17 +10,18 @@
                     <img src="@/assets/images/icon-head.png">
                 </flexbox-item>
                 <flexbox-item class="list-body">
-                    <flexbox align="start">
-                        <flexbox-item class="list-head">
-                            <b>{{item.title}}</b>
-                            <p>{{item.date}}</p>
-                        </flexbox-item>
-                        <flexbox-item class="list-close">
-                            <a><img src="@/assets/images/x.png"></a>
-                        </flexbox-item>
-                    </flexbox>
                     <router-link :to="{name:'activePost'}">
-                    <div class="list-content" v-html="item.content"></div>
+                        <flexbox align="start">
+                            <flexbox-item class="list-head">
+                                <b>{{item.title}}</b>
+                                <p>{{item.date}}</p>
+                            </flexbox-item>
+                            <flexbox-item class="list-close">
+                                <a><img src="@/assets/images/x.png"></a>
+                            </flexbox-item>
+                        </flexbox>
+                        <div class="list-content" v-html="item.content"></div>
+                    </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(item, index) in imgs" :key="index">
                             <div><img v-clipping="item"></div>
@@ -32,9 +33,7 @@
                     <div v-for="(item, index) in localIds" :key="index">
                         {{ item }}
                     </div>
-                    </router-link>
                 </flexbox-item>
-             
             </flexbox>
         </div>
     </div>
@@ -231,7 +230,7 @@ export default {
     margin-top: 0.1rem;
     padding-right: 0.15rem;
     font-size: 0.14rem;
-    color:#494949;
+    color: #494949;
 }
 .images-preview {
     margin-top: 0.1rem;
