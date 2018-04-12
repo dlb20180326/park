@@ -9,7 +9,7 @@
 						<td>{{index+1}}</td>
 						<td>{{con.name}}</td>
 						<td>
-							<input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="changeItem"></input>
+							<input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="changeItem(con)"></input>
 						</td>
 					</tr>
 				</tbody>
@@ -97,8 +97,18 @@ Vue.component(Popup.name, Popup);
                     console.log(error);
                 });
             },
-			changeItem(){
-				this.showPop = true
+			changeItem(item){
+                this.$router.push({
+                    path: '/points/pointEvaluate',
+                    name: 'pointEvaluate',
+
+                    params: {
+                        item:item
+                    },query: {
+                        item:item
+                    }
+
+                })
 			},
 			know(){
 				this.showPop = false
