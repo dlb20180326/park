@@ -45,7 +45,7 @@
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
-            <div class="square" @click="chooseImage1()">
+            <div class="square" @click="chooseImage">
                 <div class="fileLoad"  ></div>
             </div>
         </div>
@@ -61,7 +61,7 @@
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
-            <div class="square"  @click="chooseImage(picList15)">
+            <div class="square"  @click="chooseImage">
                 <div class="fileLoad"></div>
             </div>
         </div>
@@ -143,12 +143,9 @@ export default {
             ;
         }
         ,
+
         chooseImage() {
-            this.$vux.alert.show({title: '增加失败222'});
-        }
-        ,
-        chooseImage1() {
-            this.$vux.alert.show({title: '增加失败222'});
+
             wx.chooseImage({
                     count: 9, // 默认9
                     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
