@@ -72,12 +72,6 @@
         </div>
         <div class="group-item">
             <group-title slot="title">
-                <b>活动发起人</b>
-            </group-title>
-            <input type="text"  v-model='activeCreatePeople'>
-        </div>
-        <div class="group-item">
-            <group-title slot="title">
                 <b>活动负责人</b>
             </group-title>
             <input type="text"  v-model='activePrincipalPeople'>
@@ -135,7 +129,7 @@ export default {
             activityName:'',
             activePace:'',
             activeTitle:'',
-            activeCreatePeople:'',
+            activeCreatePeople,
             activePrincipalPeople:'',
             activeContex:'',
             activeContent:'',
@@ -191,7 +185,7 @@ export default {
                     activeType:this.activeType,
                     activityProjectId:this.activeProjectActive,
                     activePace:this.activePace,
-                    activeCreatePeople:this.activeCreatePeople,
+                    activeCreatePeople:this.$store.getters.user.userid,
                     activePrincipalPeople:this.activePrincipalPeople,
                     activeContex:this.activeContex,
                     activeStatus:this.activeStatus,

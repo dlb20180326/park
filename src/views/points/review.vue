@@ -11,7 +11,7 @@
 			</div>
 			    <tab>
 				    <tab-item selected @on-item-click="slide">待审核（{{length1}}）</tab-item>
-				    <tab-item @on-item-click="slide1">已审核（{{length2}}）</tab-item>
+				    <tab-item @on-item-click="slide1">已审核（{{length2 || 0}}）</tab-item>
 			    </tab>
 			<div class="trans-black" v-show="showTrans"></div>
 			<div class="animate-down" v-show="topShow">
@@ -96,9 +96,9 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
                     url: '/dangjian/pdepartment/getList',
                 }) .then((res)=> {
                     this.department=res.data;
-                console.log(res.data)
+                    this.partyBranch1 = this.department[0].departmentname
+                console.log(this.department)
 
-                console.log(res.data)
             }).catch(function (error) {
                     console.log(error);
                 })
@@ -213,7 +213,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 </script>
 <style scoped  lang="less">
 	.header-list{width:calc(100% - 2px);height:.5rem;border-bottom:1px solid #E4E4E4;}
-	.list-left{width:54%;margin:.15rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;}
+	.list-left{width:54%;margin:.08rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;}
 	.left-now{color:#666666;}
 	.left-active{color:#333;}
 	.right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}

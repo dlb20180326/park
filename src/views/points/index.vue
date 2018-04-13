@@ -132,7 +132,7 @@ export default {
     	progress(){
     		axios.get('pscoreparty/getProjectScoreByUserId',{
     			params:{
-    				userId:this.$store.getters.user.userId,
+    				userId:this.$store.getters.user.userid,
     				year:this.years
     			}
     		}).then( res => {

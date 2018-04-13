@@ -60,7 +60,6 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
     					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
     					this.list.push(obj);
-    					console.log(this.list);
     				}
     			}).catch(err =>{
     				console.log(err)

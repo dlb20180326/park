@@ -148,10 +148,6 @@ export const routes = [
             {
                 path: 'life/lifePack',
                 component: () => import('@/views/life/lifePack')
-            },
-            {
-                path: 'life/organize',
-                component: () => import('@/views/life/organize')
             }
         ]
     }
