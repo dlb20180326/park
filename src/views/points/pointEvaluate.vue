@@ -148,8 +148,7 @@ export default {
                 obj.pic15= this.picList15.arr.join(",");
             }
             axios.post("/dangjian/pavantgrade/save", obj).then(res => {
-                console.log(res.data);
-                if(res.suceess){
+                if(res.success){
                     this.$vux.alert.show({title:'提交成功'});
                 }else {
                     this.$vux.alert.show({title:'提交失败'});
