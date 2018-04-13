@@ -24,9 +24,8 @@
                     	<div class="book">
                     		<a @click="submit(item.id)">报名</a>
                 		</div>
-                		
+                		<div class="grayLine"></div>
                 	</div>
-                	<!--<div class="grayLine"></div>-->
         </div>
         <div v-transfer-dom>
             <alert v-model="show" :title="msg" @on-show="onShow" @on-hide="onHide">谢谢</alert>
@@ -133,14 +132,10 @@ export default {
 .page-body{
 	flex: 1;
 }
-/*.grayLine{width:100%;height:.1rem;background:#F3F3F3;}*/
+.grayLine{width:100%;height:.1rem;background:#F3F3F3;}
+.allLine:last-child .grayLine{height:0;}
 .group-item {
-	width:calc(100% - 0.4rem);
-	padding-left:0.2rem;
-	padding-right:0.2rem;  
-    &:last-child {
-        margin-bottom: 0.2rem;
-    }
+	width:100%;
     input,
     textarea {
         display: block;
@@ -253,7 +248,6 @@ input {
 .mainbox {
     background:#fff;
     width:100%;
-    margin-bottom:2vw;
 }
 .weui-cell1 {
     padding-bottom:0;
@@ -284,7 +278,7 @@ input {
 }
 .book {
     text-align:center;
-    padding:2vw 0 5vw 0;
+    padding:.2rem 0 .2rem 0;
 }
 .book a {
     display:inline-block;
@@ -357,7 +351,7 @@ input {
 
     .allLine {
         padding-top: .1rem;
-        padding-bottom: .08rem
+        /*padding-bottom: .08rem*/
     }
 
     .allLine span {
@@ -371,6 +365,7 @@ input {
         font-size: .14rem;
         font-family: PingFangSC-Regular;
         color:#999;
+        padding-left:0.2rem;
         line-height: .3rem;
         margin-left: 5.3%;
     }
@@ -382,6 +377,7 @@ input {
         color:#666;
         line-height: .3rem;
         margin-left: .1rem;
+        padding-right:0.2rem; 
     }
 
 
