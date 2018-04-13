@@ -198,7 +198,7 @@ export default {
             result.map(item => pictureIds.push(item.data)
         )
             ;
-            it.list.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + pictureIds.join());
+            it.list.push("require('http://www.dlbdata.cn/dangjian/picture/show?pictureId=" + pictureIds.join()+"')");
             it.arr.push(pictureIds.join());
         })
             ;
