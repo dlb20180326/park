@@ -140,7 +140,10 @@ export default {
                 });
         }
     },
-    chooseImage(it) {
+    chooseImage() {
+        this.$vux.alert.show({title:'增加失败222'});}
+    ,
+    chooseImage1(it) {
         this.$vux.alert.show({title:'增加失败222'});
         wx.chooseImage({
             count: 9, // 默认9
