@@ -2,32 +2,31 @@
     <div class="page-body disabled-tabbar">
         <x-header>全部活动</x-header>
         <div class="group-item">
-            <div class="mainbox"  v-for="(item,index) in active" :key="index">
-                <div style="padding:2vw 3.5vw 0;">
-                    <table width="100%" class="table">
-                        <tr>
-                            <td width="90">时间：</td>
-                            <td class="f_b">{{item.startTime}}</td>
-                        </tr>
-                        <tr>
-                            <td>地点：</td>
-                            <td class="f_b">{{item.activePace}}</td>
-                        </tr>
-                        <tr>
-                            <td>发起人：</td>
-                            <td class="f_b">{{item.activeCreatePeopleName}}</td>
-                        </tr>
-                        <tr>
-                            <td valign="top">活动内容：</td>
-                            <td class="f_b weui-media-box__desc">{{item.activeContext}}</td>
-                        </tr>
-                    </table>
-                </div>
+                    <div class="allLine" v-for="(item,index) in active" :key="index">
+                        <div>
+                            <span class="colorL">时间：</span>
+                            <span class="colorW">{{datePick(item.startTime)}}</span>
+                        </div>
+                        <div>
+                            <span class="colorL">地点：</span>
+                            <span class="colorW">{{item.activePace}}</span>
+                        </div>
+                        <div>
+                            <span class="colorL">发起人：</span>
+                            <span class="colorW">{{item.activeCreatePeopleName}}</span>
 
-                <div class="book">
-                    <a @click="submit(item.id)">报名</a>
-                </div>
-            </div>
+                        </div>
+                        <div>
+                            <span class="colorL">活动内容：</span>
+                            <span class="colorW">{{item.activeContext}}</span>
+
+                        </div>
+                    	<div class="book">
+                    		<a @click="submit(item.id)">报名</a>
+                		</div>
+                		
+                	</div>
+                	<!--<div class="grayLine"></div>-->
         </div>
         <div v-transfer-dom>
             <alert v-model="show" :title="msg" @on-show="onShow" @on-hide="onHide">谢谢</alert>
@@ -113,7 +112,14 @@ export default {
     },
     onShow () {
         console.log('on show')
-    }
+    },
+    datePick(s){
+	Date.prototype.toLocaleString = function(){
+		return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
+	}
+	return new Date(s).toLocaleString();
+
+	}
     } ,
     mounted() {
         this.getActivityMore();
@@ -124,6 +130,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.grayLine{width:100%;height:.1rem;background:#F3F3F3;}
 .group-item {
     margin-left: 0.2rem;
     margin-right: 0.2rem;
@@ -338,6 +345,40 @@ input {
 
 
 
+ .allLine {
+        width: 100%;
+        overflow: hidden;
+        margin: 0.1rem auto;
+    }
+
+    .allLine {
+        padding-top: .1rem;
+        padding-bottom: .08rem
+    }
+
+    .allLine span {
+        display: table-cell;
+        line-height: 1.44
+    }
+
+    .colorL {
+        width: .78rem;
+        height: .3rem;
+        font-size: .14rem;
+        font-family: PingFangSC-Regular;
+        color:#999;
+        line-height: .3rem;
+        margin-left: 5.3%;
+    }
+
+    .colorW {
+        height: .3rem;
+        font-size: .14rem;
+        font-family: PingFangSC-Medium;
+        color:#666;
+        line-height: .3rem;
+        margin-left: .1rem;
+    }
 
 
 

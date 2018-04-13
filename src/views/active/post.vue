@@ -1,13 +1,12 @@
 <template>
-	<div style="height:100%;">
+	<div class="page-body">
 		<view-box ref="viewBox" body-padding-top=".46rem">
 			<r-header :rfs="contents"></r-header>
-			<p class="titles">上海中心支部组织除草活动</p>
-			<p class="time">时间：<span class="dark">{{dateTime}}</span></p>
-			<p class="time">地点：<span class="dark">{{location}}</span></p>
+			<p class="titles">{{activeData.activeName}}</p>
+			<p class="time">时间：<span class="dark">{{dataPick(activeData.startTime)}}</span></p>
+			<p class="time">地点：<span class="dark">{{activeData.activePace}}</span></p>
 			<div class="artical">
-				<p>以“亮党员身份，树党员形象，尽党员义务，建和谐爱民”为主题，组织发动党员在社区内广泛开展党员志愿者服务活动。社区党员本着“奉献、服务、互助、和谐”的精神，自愿利用业余时间，根据自身特长和专业特点，无偿为居民提供帮助和服务。在活动中，党员志愿者以“有困难找党员志愿者，有时间做党员志愿者”为口号，认领了环境保护、治安防范、关爱服务、心理疏导、法律援助。</p>
-				<p>以“亮党员身份，树党员形象，尽党员义务，建和谐爱民”为主题，组织发动党员在社区内广泛开展党员志愿者服务活动。社区党员本着“奉献、服务、互助、和谐”的精神，自愿利用业余时间，根据自身特长和专业特点，无偿为居民提供帮助和服务。在活动中，党员志愿者以“有困难找党员志愿者，有时间做党员志愿者”为口号，认领了环境保护、治安防范、关爱服务、心理疏导、法律援助。</p>
+				{{activeData.activeContext}}
 			</div>
 			<p class="allPic">
 			<span class="bg-line"></span>
@@ -43,22 +42,57 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     		},
     	  	logIndexChange (arg) {
       			console.log(arg)
+    		},
+    		getData(){
+    			this.$http.post('/dangjian/active/queryById?activeId='+this.$route.params.activeId
+    		).then(res =>{
+    				this.activeData = res.data
+    			}).catch(err =>{
+    				console.log(err)
+    			})
+    		},
+    		getPic(){
+    			this.$http.post('/dangjian/active/getActivePictures?activeId='+this.$route.params.activeId
+    			).then(res =>{
+    				this.picInfo= res.data
+    				for(let d in this.picInfo){
+    					var obj = {};
+    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
+    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
+    					this.list.push(obj);
+    					console.log(this.list);
+    				}
+    			}).catch(err =>{
+    				console.log(err)
+    			})
+    		},
+    		dataPick(s){
+        	Date.prototype.toLocaleString = function(){
+        		return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDay()+'日'
+        	}
+        	return new Date(s).toLocaleString();
     		}
+		},
+		mounted(){
+			this.getData();
+			this.getPic();
 		},
 		data(){
 			return {
 				contents:{rights:'',title:'驿站活动详情'},
-				dateTime:'2019年2月18日',
-				location:'陆家嘴',
 				num:10,
-				list: [{
-        			msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-        			src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwu9ze86j20m80b40t2.jpg'
+				activeData:{},
+				picInfo:[],
+				list: [],
+/*				{
+        			msrc: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=89',
+        			src: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=89'
       			},
       			{
         			msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
         			src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg'
-      			}],
+      			}*/
+      			
       			options: {
         			getThumbBoundsFn (index) {
           			// find thumbnail element
@@ -84,6 +118,9 @@ html,body{
 	width:100%;
 	height:100%;
 	overflow-x:hidden;
+}
+.page-body{
+	flex: 1;
 }
 .titles{width:80%;height:.25rem; font-size:.2rem;font-family:PingFangSC-Medium;color:rgba(51,51,51,1);line-height:.28rem;margin:.2rem 12% .1rem 8%;}
 .time{width:80%;height:.17rem; font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.17rem;margin-left:8%;margin-top:.1rem;}

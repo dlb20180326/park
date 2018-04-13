@@ -150,7 +150,7 @@
     }
 
     .allLine {
-        width: 96%;
+        width: 90%;
         overflow: hidden;
         margin: 0.1rem auto;
         border-bottom: 1px solid #EFEFEF;

@@ -124,7 +124,7 @@ export const routes = [
                 component: () => import('@/views/active/detailPack')
             },
             {
-                path: 'active/post',
+                path: 'active/post/:activeId',
                 name:'activePost',
                 component: () => import('@/views/active/post')
             },

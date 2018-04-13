@@ -10,7 +10,7 @@
                     <img src="@/assets/images/icon-head.png">
                 </flexbox-item>
                 <flexbox-item class="list-body">
-                    <router-link :to="{name:'activePost'}">
+                    <router-link :to="{name:'activePost',params:{activeId:item.id}}">
                         <flexbox align="start">
                             <flexbox-item class="list-head">
                                 <b>{{item.activeName}}</b>
@@ -101,6 +101,7 @@ export default {
     			}
     		}).then(res => {
     			this.list = res.data.list;
+    			console.log(this.list);
     		}).catch(err => {
     			console.log('fail'+err.data);
     			
