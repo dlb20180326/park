@@ -52,7 +52,7 @@
         <div class="group-item">
         	<span class="addPic">添加照片</span>
             <img style="float: left" v-for="(item,index) in picList.list" :key="index" width="100" :src="item">
-            <div class="square" @click="chooseImage(picList15)">
+            <div class="square" @click="chooseImage(picList)">
                 <div class="fileLoad" ></div>
             </div>
         </div>
@@ -69,7 +69,8 @@
 <script>
     import axios from 'axios'
     import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker } from 'vux';
-
+    import wx from 'weixin-js-sdk';
+    import weixin from '@/services/weixin';
     export default {
 
         components: {
