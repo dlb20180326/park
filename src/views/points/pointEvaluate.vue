@@ -76,6 +76,8 @@
 
 <script>
 import axios from "axios";
+import wx from 'weixin-js-sdk';
+import weixin from '@/services/weixin';
 import {
     XHeader,
     GroupTitle,
