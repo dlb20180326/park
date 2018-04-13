@@ -52,7 +52,7 @@ const tabs = {
             icon: require('@/assets/images/gray-info.png'),
             iconActive: require('@/assets/images/iconw-partyMembe.png'),
             label: '党员信息',
-            link: '/party'
+            link: '/party/branch'
         },
         {
             icon: require('@/assets/images/gray-active.png'),
