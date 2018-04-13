@@ -16,7 +16,8 @@
             <span class="addPic">添加凭证</span>
             <flexbox class="img-list" :gutter="0" wrap="wrap">
                 <flexbox-item :span="1/3"  v-for="(item, index) in picList13.list" :key="index">
-                    <img src="'picture/show?pictureId='+item" alt="">
+
+                    <img :src="item" alt="">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
                     <div class="square" @click="chooseImage(picList13)">
@@ -35,7 +36,7 @@
             <span class="addPic">添加凭证</span>
             <flexbox class="img-list" :gutter="0" wrap="wrap">
                 <flexbox-item :span="1/3"  v-for="(item, index) in picList14.list" :key="index">
-                    <img src="'picture/show?pictureId='+item" alt="">
+                    <img :src="item">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
                     <div class="square" @click="chooseImage(picList14)">
@@ -53,9 +54,12 @@
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
+
             <flexbox class="img-list" :gutter="0" wrap="wrap">
+                <img src="http://www.dlbdata.cn/dangjian/picture/show?pictureId=89" alt="">
                 <flexbox-item :span="1/3"  v-for="(item, index) in picList15.list" :key="index">
-                    <img src="'picture/show?pictureId='+item" alt="">
+
+                    <img src="item" alt="">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
                     <div class="square" @click="chooseImage(picList15)">
@@ -112,9 +116,10 @@ export default {
             Messge14: "",
             Messge15: "",
             itemscore: 0,
-            picList15:{list:[]},
-            picList14:{list:[]},
-            picList13:{list:[]}
+            baseUrl:"http://www.dlbdata.cn/dangjian/picture/show?pictureId=",
+            picList15:{list:[],arr:[]},
+            picList14:{list:[],arr:[]},
+            picList13:{list:[],arr:[]}
         };
     },
     computed: {
@@ -192,7 +197,8 @@ export default {
             result.map(item => pictureIds.push(item.data)
         )
             ;
-            it.list.push('pictureIds:' + pictureIds.join());
+            it.list.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + pictureIds.join());
+            it.arr.push(pictureIds.join());
         })
             ;
         })
