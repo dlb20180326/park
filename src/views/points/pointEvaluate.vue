@@ -129,27 +129,38 @@ export default {
         submit() {
             let {departmentId, userId, partmentId} = this.$route.params;
             let {Messge13, Messge14, Messge15, itemscore} = this;
-            axios
-                .post("/dangjian/pavantgrade/save", {
-                    Messge13,
-                    Messge14,
-                    Messge15,
-                    itemscore,
-                    departmentid: +departmentId,
-                    userid: +userId,
-                    partmentid: +partmentId
-                })
-                .then(res => {
+            let obj = {
+                Messge13,
+                Messge14,
+                Messge15,
+                itemscore,
+                departmentid: +departmentId,
+                userid: +userId,
+                partmentid: +partmentId,
+            };
+            if(this.picList13.arr.length!=0) {
+                obj.pic13 = this.picList13.arr.join(",");
+            }
+            if(this.picList14.arr.length!=0){
+                obj.pic14= this.picList14.arr.join(",");
+            }
+            if(this.picList15.arr.length!=0){
+                obj.pic15= this.picList15.arr.join(",");
+            }
+            axios.post("/dangjian/pavantgrade/save", obj).then(res => {
                 console.log(res.data);
-        })
-            ;
+                if(res.suceess){
+                    this.$vux.alert.show({title:'提交成功'});
+                }else {
+                    this.$vux.alert.show({title:'提交失败'});
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
         ,
 
         chooseImage(it) {
-
-
-
             wx.chooseImage({
                     count: 1, // 默认9
                     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
