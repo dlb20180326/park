@@ -15,11 +15,11 @@
         <div class="group-item">
             <span class="addPic">添加凭证</span>
             <flexbox class="img-list" :gutter="0" wrap="wrap">
-                <flexbox-item :span="1/3"  v-for="(item, index) in picList15" :key="index">
+                <flexbox-item :span="1/3"  v-for="(item, index) in picList13.list" :key="index">
                     <img src="'picture/show/'+{{item}}" alt="">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
-                    <div class="square" @click="chooseImage(it)">
+                    <div class="square" @click="chooseImage(picList13)">
                         <div class="fileLoad"  ></div>
                     </div>
                 </flexbox-item>
@@ -47,12 +47,12 @@
             <inline-x-number v-model="itemscore" class="inline-x-number" :min="0" :max="5"></inline-x-number>
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge15'></textarea>
         </div>
-        <div v-for="(item, index) in picList15" :key="index">
+        <div v-for="(item, index) in picList15.list" :key="index">
             {{ item }}
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
-            <div class="square"  @click="chooseImage">
+            <div class="square"  @click="chooseImage(picList15)">
                 <div class="fileLoad"></div>
             </div>
         </div>
@@ -104,7 +104,7 @@ export default {
             Messge14: "",
             Messge15: "",
             itemscore: 0,
-            picList15:[],
+            picList15:{list:[]},
             picList14:{list:[]},
             picList13:{list:[]}
         };
@@ -135,7 +135,7 @@ export default {
         }
         ,
 
-        chooseImage() {
+        chooseImage(it) {
 
 
 
@@ -184,7 +184,7 @@ export default {
             result.map(item => pictureIds.push(item.data)
         )
             ;
-            this.picList15.push('pictureIds:' + pictureIds.join());
+            it.list.push('pictureIds:' + pictureIds.join());
         })
             ;
         })
@@ -196,8 +196,7 @@ export default {
     }
     ,
     mounted() {
-        this.$vux.alert.show({title:'增加失败'});
-        weixin.init(['chooseImage', 'uploadImage']);
+          weixin.init(['chooseImage', 'uploadImage']);
     }
 };
 </script>
