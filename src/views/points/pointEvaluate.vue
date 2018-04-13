@@ -29,7 +29,7 @@
                 </div>
                 <flexbox-item :span="1/3">
                     <div class="square">
-                        <div @click="chooseImage(picList13)"></div>
+                        <div @click="chooseImage()"></div>
                     </div>
                 </flexbox-item>
             </flexbox>
@@ -78,6 +78,7 @@
 import axios from "axios";
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
+
 import {
     XHeader,
     GroupTitle,
@@ -140,7 +141,7 @@ export default {
                 });
         }
     },
-    chooseImage(it) {
+    chooseImage() {
         wx.chooseImage({
             count: 9, // 默认9
             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -181,7 +182,7 @@ export default {
             Promise.all(promiseList).then(result => {
                 let pictureIds = [];
                 result.map(item => pictureIds.push(item.data));
-                it.list.push('pictureIds:' + pictureIds.join());});});
+                //it.list.push('pictureIds:' + pictureIds.join());});});
             }
         });
 
