@@ -15,7 +15,7 @@
         <div class="group-item">
             <span class="addPic">添加凭证</span>
             <flexbox class="img-list" :gutter="0" wrap="wrap">
-                <flexbox-item :span="1/3"  v-for="(item, index) in picList13.list" :key="index">
+                <flexbox-item :span="1/3"  v-for="(item, index) in picList15" :key="index">
                     <img src="'picture/show/'+{{item}}" alt="">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
@@ -31,7 +31,7 @@
             </group-title>
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge14'></textarea>
         </div>
-        <div v-for="(item, index) in picList14.list" :key="index">
+        <div v-for="(item, index) in picList15" :key="index">
             {{ item }}
         </div>
         <div class="group-item">
@@ -47,7 +47,7 @@
             <inline-x-number v-model="itemscore" class="inline-x-number" :min="0" :max="5"></inline-x-number>
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge15'></textarea>
         </div>
-        <div v-for="(item, index) in picList15.list" :key="index">
+        <div v-for="(item, index) in picList15" :key="index">
             {{ item }}
         </div>
         <div class="group-item">
