@@ -15,10 +15,8 @@
         <div class="group-item">
             <span class="addPic">添加凭证</span>
             <flexbox class="img-list" :gutter="0" wrap="wrap">
-                <flexbox-item :span="1/3"  >
-
+                <flexbox-item :span="1/3" >
                     <img class="111111111" v-for="(item,index) in picList13.list" :key="index" width="100" :src="item">
-                    <img src="http://www.dlbdata.cn/dangjian/picture/show?pictureId=106">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
                     <div class="square" @click="chooseImage(picList13)">
@@ -60,9 +58,7 @@
                <!--<img src="http://www.dlbdata.cn/dangjian/picture/show?pictureId=89" alt="">-->
                 <flexbox-item :span="1/3"  >
                     <img v-for="(item,index) in list" :src="item.src" width="100"  @click="show(index)">
-                    1222222
-                    <img class="111111111" v-for="(item,index) in picList15.list" :key="index" width="100" :src="item">
-
+                    <img class="111111111" v-for="(item,index) in picList15.list" :key="index" width="30" height="30" :src="item">
                     <img src="item" alt="">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
@@ -120,8 +116,8 @@ export default {
             Messge14: "",
             Messge15: "",
             itemscore: 0,
-            baseUrl:"http://www.dlbdata.cn/dangjian/picture/show?pictureId=",
-            picList15:{list:["http://www.dlbdata.cn/dangjian/picture/show?pictureId=106","http://www.dlbdata.cn/dangjian/picture/show?pictureId=106"],arr:[]},
+
+            picList15:{list:[],arr:[]},
             picList14:{list:[],arr:[]},
             picList13:{list:[],arr:[]}
         };
