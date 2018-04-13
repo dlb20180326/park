@@ -62,13 +62,13 @@
                             <li v-for="(item,index) in activeComplete" :key="index" >
                                 <a class=" display clearfix " href="javascript:;">
                                     <div class=" fl">{{item.activeName}}</div>
-                                    <div class=" fr">{{item.endTime}}</div>
+                                    <div class=" fr">{{datePick(item.endTime)}}</div>
                                 </a>
                             </li>
 
                         </ul>
                         
-                         <x-table :cell-bordered="false">
+<!--                         <x-table :cell-bordered="false">
 					        <thead>
 					          <tr>
 					            <th>Product</th>
@@ -81,7 +81,7 @@
 					            <td>$1.25</td>
 					          </tr>
 					        </tbody>
-				      </x-table>
+				      </x-table>-->
                         
                     </div>
                 </section>
@@ -220,6 +220,13 @@ export default {
 
 
         },
+        datePick(s){
+        	        	Date.prototype.toLocaleString = function(){
+        		return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
+        	}
+        	return new Date(s).toLocaleString();
+
+        }
 
     },
     mounted() {
@@ -383,9 +390,18 @@ export default {
     }
     .fl {
         float:left;
+        width:50.6%;
+        overflow:hidden;
+        height:.45rem;
+        line-height:.45rem;
+        white-space:nowrap;
+        text-overflow: ellipsis;
     }
     .fr {
         float:right;
+        overflow:hidden;
+        height:.45rem;
+        line-height:.45rem;
     }
     .p15 {
         padding:0 .2rem .2rem;
@@ -457,7 +473,7 @@ export default {
         padding:3px;
     }
     .news {
-        margin-top:4vw;
+        margin-top:0;
     }
     .news li {
         border-bottom:1px solid #f3f3f3;

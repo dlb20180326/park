@@ -118,7 +118,6 @@ export default {
                     this.people=res.data.people;
 
 
-            console.log(res.data)
         }).catch(function (error) {
                 console.log(error);
             })
