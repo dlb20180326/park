@@ -18,7 +18,7 @@
                 <flexbox-item :span="1/3" >
                     <img style="display: inline-block" v-for="(item,index) in picList13.list" :key="index" width="100" :src="item">
                 </flexbox-item>
-                <flexbox-item :span="1/3">
+                <flexbox-item >
                     <div class="square" @click="chooseImage(picList13)">
                         <div class="fileLoad"  ></div>
                     </div>
