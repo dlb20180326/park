@@ -24,9 +24,12 @@
                 <flexbox-item :span="1/3">
                     <img src="../../assets/images/preview.jpg" alt="">
                 </flexbox-item>
+                <div v-for="(item, index) in picList13.list" :key="index">
+                    {{ item }}
+                </div>
                 <flexbox-item :span="1/3">
                     <div class="square">
-                        <input type="file" class="fileLoad" />
+                        <div @click="chooseImage(picList13)"></div>
                     </div>
                 </flexbox-item>
             </flexbox>
@@ -37,10 +40,13 @@
             </group-title>
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge14'></textarea>
         </div>
+        <div v-for="(item, index) in picList14.list" :key="index">
+            {{ item }}
+        </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
             <div class="square">
-                <input type="file" class="fileLoad" />
+                <div class="fileLoad"  @click="chooseImage(picList14)"></div>
             </div>
         </div>
         <div class="group-item">
@@ -50,10 +56,13 @@
             <inline-x-number v-model="itemscore" class="inline-x-number" :min="0" :max="5"></inline-x-number>
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge15'></textarea>
         </div>
+        <div v-for="(item, index) in picList15.list" :key="index">
+            {{ item }}
+        </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
             <div class="square">
-                <input type="file" class="fileLoad" />
+                <div class="fileLoad" @click="chooseImage(picList15)"></div>
             </div>
         </div>
         <div class="group-item">
@@ -99,7 +108,10 @@ export default {
             Messge13: "",
             Messge14: "",
             Messge15: "",
-            itemscore: 0
+            itemscore: 0,
+            picList15:{list:[]},
+            picList14:{list:[]},
+            picList13:{list:[]}
         };
     },
     computed: {
@@ -126,7 +138,56 @@ export default {
                 });
         }
     },
-    mounted() {}
+    chooseImage(it) {
+        wx.chooseImage({
+            count: 9, // 默认9
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: res => {
+            let localIds = res.localIds || [];
+            new Promise(resolve => {
+                let serverIds = [];
+                let toUpload = localId =>
+            wx.uploadImage({
+                localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                isShowProgressTips: 1, // 默认为1，显示进度提示
+                success: res => {
+                    serverIds.push(res.serverId);
+                    if (localIds.length) {
+                        toUpload(localIds.shift());
+                    } else {
+                        resolve(serverIds);
+                    }
+                }
+            });
+            if (localIds.length) {
+                toUpload(localIds.shift());
+            } else {
+                resolve(serverIds);
+            }
+         }).then(serverIds => {
+            let promiseList = [];
+            serverIds.map(serverId =>
+            promiseList.push(
+                this.$http.get('picture/upload', {
+                    params: {
+                        mediaId: serverId
+                    }
+                })
+            )
+        );
+            Promise.all(promiseList).then(result => {
+                let pictureIds = [];
+                result.map(item => pictureIds.push(item.data));
+                it.list.push('pictureIds:' + pictureIds.join());});});
+            }
+        });
+
+
+    },
+    mounted() {
+        weixin.init(['chooseImage', 'uploadImage']);
+    }
 };
 </script>
 
