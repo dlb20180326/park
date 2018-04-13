@@ -14,7 +14,7 @@
 			<span class="numberz">{{num}}张</span>
 			</p>
 			<div class="img-show">
-				<img class="previewer-demo-img" v-for="(item, index) in list" :src="item.src" width="100"  @click="show(index)">
+				<img class="previewer-demo-img" v-for="(item,index) in list" :src="item.src" width="100"  @click="show(index)">
 				<div v-transfer-dom>
 	      		<previewer :list="list" ref="previewer" :options="options" @on-index-change="logIndexChange">
 	      		</previewer>
