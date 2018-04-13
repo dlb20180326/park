@@ -10,7 +10,7 @@
                         片区负责人：
                     </flexbox-item>
                     <flexbox-item>
-                        金领驿站
+                        {{headName.name}}
                     </flexbox-item>
                 </flexbox>
                 <flexbox>
@@ -18,7 +18,7 @@
                         现有党支部：
                     </flexbox-item>
                     <flexbox-item>
-                        上海中心片区
+                        {{headName.branchSum}}个
                     </flexbox-item>
                 </flexbox>
                 <flexbox>
@@ -26,7 +26,7 @@
                         所属党委：
                     </flexbox-item>
                     <flexbox-item>
-                        三级党支部
+                        陆家嘴中心
                     </flexbox-item>
                 </flexbox>
                 <flexbox>
@@ -34,7 +34,7 @@
                         现有党员：
                     </flexbox-item>
                     <flexbox-item>
-                        <span class="number">25</span>
+                        <span class="number">{{headName.peopleSum}}</span>
                         人
                     </flexbox-item>
                 </flexbox>
@@ -89,16 +89,11 @@
 <script>
 import { XHeader, GroupTitle, Flexbox, FlexboxItem, XButton, cookie } from 'vux';
 
-import axios from 'axios';
 
 export default {
     data() {
         return {
-            users: [{ id: 1, fonts: '年度积分', integral: 0 }, { id: 2, fonts: '活动次数', integral: 0 }],
-            userAbout: {},
-            dateTime: '',
-            charts: '',
-            partAbout: {}
+        	headName:{}
         };
     },
     components: {
@@ -110,58 +105,22 @@ export default {
         XButton
     },
     mounted() {
-        let datime = new Date().getHours();
-        if (datime >= 5 && datime < 8) {
-            this.dateTime = '早上好';
-        } else if (datime >= 8 && datime < 11) {
-            this.dateTime = '上午好';
-        } else if (datime >= 11 && datime < 13) {
-            this.dateTime = '中午好';
-        } else if (datime >= 13 && datime < 19) {
-            this.dateTime = '下午好';
-        } else {
-            this.dateTime = '晚上好';
-        }
-
-        this.$nextTick(function() {
-            //this.drawAxis('echartShow');
-        });
-        this.userName();
-        this.infoDetail();
-        /*this.getUserByScoreInfo();
-        this.getUserByActiveInfo();
-        this.getScoreByType();*/
+    	this.getHead();
     },
     methods: {
-        infoDetail() {
-            axios
-                .get('/dangjian/pdepartment/queryById', {
-                    params: {
-                        departmentid: this.$store.getters.user.departmentid
-                    }
-                })
-                .then(res => {
-                    this.partAbout = res.data;
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        },
-        userName() {
-            axios
-                .get('/dangjian/ppartymember/queryByUserId', {
-                    params: {
-                        userid: this.$store.getters.user.userid
-                    }
-                })
-                .then(res => {
-                    console.log(res);
-                    this.userAbout = res.data;
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        }
+		getHead(){
+			this.$http.get('/dangjian/ppartymember/queryByRoleId',{
+				params:{
+					roleid:this.$store.getters.user.roleid
+				}
+			}).then(res => {
+				this.headName = JSON.parse(res.data);
+			}).
+			catch(err =>{
+				console.log('fail'+err);
+			})
+		}
+        
     }
 };
 </script>

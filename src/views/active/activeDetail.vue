@@ -5,7 +5,7 @@
         </x-header>
         <flexbox orient="vertical">
             <flexbox-item>
-                <section class="mainbox mainbox1">
+                <section class="mainbox">
                     <div class="barbg" >
                         年度共参与组织活动：<span style="display: inline">{{number1}}</span> 次
                     </div>
@@ -13,27 +13,17 @@
                         年度共参与紧邻一战活动：<span style="display: inline">{{number2}}</span> 次
                     </div>
                 </section>
+                <div class="grayLine"></div>
             </flexbox-item>
-           <!-- <flexbox-item>
-                    <span class="">年度共参与活动次数：<b>{{userId}}</b>次</span>
-            </flexbox-item>
-            <flexbox-item>
-                    <span >年度共参与公益活动次数：<b>{{number2}}</b>次</span>
-            </flexbox-item>-->
         </flexbox>
         <flexbox orient="vertical">
-          <!--  <flexbox-item>
-                <group>
-                    <cell title="党员生活通知" value="查看全部" is-link="true" link="/activity/activityMore" ></cell>
 
-                </group>
-            </flexbox-item>-->
-            <section class="mainbox">
+            <section class="mainbox1">
                 <div class=" clearfix p15 display">
                     <span class="fl weui-cell__bd1">党员生活通知</span>
                     <a  class=" fr"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
                 </div>
-                <div style="padding:2vw 3.5vw 0;">
+                <div class="content">
                     <table width="100%" class="table">
                         <tr>
                             <td width="100">时间：</td>
@@ -58,29 +48,7 @@
                     <a  @click="submit()">报名</a>
                 </div>
             </section>
-            <!--<x-table :cell-bordered="false" :content-bordered="false" style="background-color:#fff;" >
-                <tbody>
-                <tr >
-                    <td >时间：</td>
-                    <td>{{startTime1}}</td>
-                </tr>
-                <tr>
-                    <td>地点：</td>
-                    <td>{{activePace}}</td>
-                </tr>
-                <tr>
-                    <td>发起人：</td>
-                    <td> {{activeCreatePeople}}</td>
-                </tr>
-                <tr>
-                    <td>活动内容：</td>
-                    <td>{{activeContext}}</td>
-                </tr>
-                </tbody>
-            </x-table>-->
-                   <!-- <flexbox-item  style="text-align: center">
-                        <x-button mini type="warn">报名</x-button>
-                    </flexbox-item>-->
+
         </flexbox>
         <flexbox orient="vertical">
             <flexbox-item>
@@ -90,7 +58,7 @@
                             <span class="fl weui-cell__bd1">已参与组织生活</span>
                             <a href="#" class=" fr"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
                         </div>
-                        <ul class="news" >
+                        <ul class="news">
                             <li v-for="(item,index) in activeComplete" :key="index" >
                                 <a class=" display clearfix " href="javascript:;">
                                     <div class=" fl">{{item.activeName}}</div>
@@ -99,14 +67,24 @@
                             </li>
 
                         </ul>
+                        
+                         <x-table :cell-bordered="false">
+					        <thead>
+					          <tr>
+					            <th>Product</th>
+					            <th>Price</th>
+					          </tr>
+					        </thead>
+					        <tbody>
+					          <tr>
+					            <td>Apple</td>
+					            <td>$1.25</td>
+					          </tr>
+					        </tbody>
+				      </x-table>
+                        
                     </div>
                 </section>
-                <!--<cell title="已参与组织生活" value="查看全部" is-link></cell>
-                <group>
-                    <cell title="title" value="value"></cell>
-                    <cell title="title" value="value"></cell>
-                    <cell title="title" value="value"></cell>
-                </group>-->
             </flexbox-item>
         </flexbox>
 
@@ -254,13 +232,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.grayLine{width:100%;height:.1rem;background:rgba(244,244,244,1);}
     table {
         border-collapse:collapse;
     }
     .table td {
         padding:3px;
     }
-
 
     .custom-primary-red {
         border-radius: 99px!important;
@@ -275,7 +253,8 @@ export default {
 .page-body {
     background-color: #efefef;
 }
-
+.content{width:89%;
+        margin:0 auto;}
  span{ display: block;font-size: 0.8em;background-color:#F5F5F5}
 .vux-flexbox.list-item {
     background-color: #fff;
@@ -381,7 +360,7 @@ export default {
     body {
         color:#666;
         background:#f4f4f4;
-        font-size:4vw;
+        font-size:.14rem;
         overflow-x:hidden;
     }
 
@@ -409,7 +388,7 @@ export default {
         float:right;
     }
     .p15 {
-        padding:4vw;
+        padding:0 .2rem .2rem;
     }
     .display {
         display:block;
@@ -424,13 +403,18 @@ export default {
     .mainbox {
         background:#fff;
         width:100%;
-        margin-bottom:2vw;
+        padding:.2rem 0 .06rem 0;
+    }
+    .mainbox1 {
+        background:#fff;
+        width:100%;
+        padding-top:.1rem;
     }
     .weui-cell1 {
         padding-bottom:0;
     }
     .weui-cell__bd1 {
-        font-size:6vw;
+        font-size:.2rem;
     }
     .weui-cells {
         font-size:4.5vw;
@@ -439,16 +423,13 @@ export default {
         text-align:left;
 
     }
-
-    .mainbox1 {
-       padding-top:2vw;
-       padding-bottom:0.1vw;
-    }
     .barbg {
         background:#f5f5f5;
-        border-radius:1vw;
-        padding:0vw 4vw 2vw;
-        margin-bottom:3vw;
+        border-radius:4px;
+        width:89%;
+        margin:0 auto;
+        margin-bottom:.14rem;
+        padding-left:.2rem;
     }
     .barbg span {
         color:#fa7e07;
@@ -456,7 +437,7 @@ export default {
     }
     .book {
         text-align:center;
-        padding:2vw 0 5vw 0;
+     	padding-top:.2rem;
     }
     .book a {
         display:inline-block;

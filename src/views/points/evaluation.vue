@@ -1,5 +1,5 @@
 <template>
-	<div style="height:100%;">
+	<div class="page-body">
    		<view-box ref="viewBox" body-padding-top=".46rem" body-padding-bottom=".55rem">
 			<x-header :left-options="{showBack: false}" class="bgColors" slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">支部党员积分评定</x-header>
 			<flexbox>
@@ -55,6 +55,9 @@ html,body{
 	width:100%;
 	height:100%;
 	overflow-x:hidden;
+}
+.page-body{
+	flex: 1;
 }
 .bgColors{background: linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));
 		background: -webkit-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));

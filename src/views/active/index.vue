@@ -101,7 +101,6 @@ export default {
     			}
     		}).then(res => {
     			this.list = res.data.list;
-    			console.log(this.list);
     		}).catch(err => {
     			console.log('fail'+err.data);
     			

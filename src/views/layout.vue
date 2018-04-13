@@ -64,7 +64,7 @@ const tabs = {
             icon: require('@/assets/images/gray-item.png'),
             iconActive: require('@/assets/images/iconw-integral.png'),
             label: '积分评定',
-            link: '/points/assess'
+            link: '/points/evaluation'
         }
     ],
     4: [

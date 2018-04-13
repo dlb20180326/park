@@ -77,7 +77,6 @@
                         departmentid: this.$store.getters.user.departmentid
                     }
                 }).then(res => {
-                    console.log(res)
                     this.navName = res.data;
                 }).catch(err => {
                     console.log('fail' + err);
