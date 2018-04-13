@@ -28,7 +28,9 @@
                     {{ item }}
                 </div>
                 <flexbox-item :span="1/3">
-                    <div class="square" @click="chooseImage"></div>
+                    <div class="square" @click="chooseImage">
+                        <div class="fileLoad"  ></div>
+                    </div>
                 </flexbox-item>
             </flexbox>
         </div>
@@ -43,7 +45,7 @@
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
-            <div class="square" @click="chooseImage(picList14)">
+            <div class="square" @click="chooseImage1()">
                 <div class="fileLoad"  ></div>
             </div>
         </div>
@@ -123,8 +125,8 @@ export default {
     },
     methods: {
         submit() {
-            let { departmentId, userId, partmentId } = this.$route.params;
-            let { Messge13, Messge14, Messge15, itemscore } = this;
+            let {departmentId, userId, partmentId} = this.$route.params;
+            let {Messge13, Messge14, Messge15, itemscore} = this;
             axios
                 .post("/dangjian/pavantgrade/save", {
                     Messge13,
@@ -136,43 +138,47 @@ export default {
                     partmentid: +partmentId
                 })
                 .then(res => {
-                    console.log(res.data);
-                });
+                console.log(res.data);
+        })
+            ;
         }
-    },
-    chooseImage() {
-        this.$vux.alert.show({title:'增加失败222'});}
-    ,
-    chooseImage1(it) {
-        this.$vux.alert.show({title:'增加失败222'});
-        wx.chooseImage({
-            count: 9, // 默认9
-            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-            success: res => {
-            let localIds = res.localIds || [];
+        ,
+        chooseImage() {
+            this.$vux.alert.show({title: '增加失败222'});
+        }
+        ,
+        chooseImage1() {
+            this.$vux.alert.show({title: '增加失败222'});
+            wx.chooseImage({
+                    count: 9, // 默认9
+                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                    success: res => {
+                    let localIds = res.localIds || [];
             new Promise(resolve => {
                 let serverIds = [];
-                let toUpload = localId =>
+            let toUpload = localId =>
             wx.uploadImage({
-                localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                isShowProgressTips: 1, // 默认为1，显示进度提示
-                success: res => {
+                    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                    success: res => {
                     serverIds.push(res.serverId);
-                    if (localIds.length) {
-                        toUpload(localIds.shift());
-                    } else {
-                        resolve(serverIds);
-                    }
-                }
-            });
             if (localIds.length) {
                 toUpload(localIds.shift());
             } else {
                 resolve(serverIds);
             }
-         }).then(serverIds => {
-            let promiseList = [];
+        }
+        })
+            ;
+            if (localIds.length) {
+                toUpload(localIds.shift());
+            } else {
+                resolve(serverIds);
+            }
+        }).
+            then(serverIds => {
+                let promiseList = [];
             serverIds.map(serverId =>
             promiseList.push(
                 this.$http.get('picture/upload', {
@@ -181,18 +187,24 @@ export default {
                     }
                 })
             )
-        );
+        )
+            ;
             Promise.all(promiseList).then(result => {
                 let pictureIds = [];
-                result.map(item => pictureIds.push(item.data));
-                //it.list.push('pictureIds:' + pictureIds.join());
-
-            });});
-            }
-        });
-
-
-    },
+            result.map(item => pictureIds.push(item.data)
+        )
+            ;
+            this.imgIds.push('pictureIds:' + pictureIds.join());
+        })
+            ;
+        })
+            ;
+        }
+        })
+            ;
+        }
+    }
+    ,
     mounted() {
         this.$vux.alert.show({title:'增加失败'});
         weixin.init(['chooseImage', 'uploadImage']);
