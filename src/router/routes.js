@@ -46,7 +46,7 @@ export const routes = [
             },
             {
                 path: 'party/member/',
-                name:'Members',
+                name:'member',
                 component: () => import('@/views/party/member')
             },
             {
