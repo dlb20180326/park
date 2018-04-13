@@ -3,14 +3,14 @@
         <x-header>先锋作用评定</x-header>
         <div class="group-item">
             <group-title slot="title">
-                <b>党员姓名：{{name1}}</b>
+                <b>党员姓名：{{userName}}</b>
             </group-title>
         </div>
         <div class="group-item">
             <group-title slot="title">
                 <b>获得荣誉（本项评定即获 5 分）：</b>
             </group-title>
-            <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='activeContent'></textarea>
+            <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge13'></textarea>
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
@@ -35,7 +35,7 @@
             <group-title slot="title">
                 <b>先锋表彰（本项评定即获 5 分）：</b>
             </group-title>
-            <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='activeContent'></textarea>
+            <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge14'></textarea>
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
@@ -47,8 +47,8 @@
             <group-title slot="title">
                 <b>先锋模范（本项总分 5 分，请打分）：</b>
             </group-title>
-            <inline-x-number class="inline-x-number" width="50px"></inline-x-number>
-            <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='activeContent'></textarea>
+            <inline-x-number v-model="itemscore" class="inline-x-number" :min="0" :max="5"></inline-x-number>
+            <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge15'></textarea>
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
@@ -58,11 +58,10 @@
         </div>
         <div class="group-item">
             <group-title slot="title"></group-title>
-            <x-button type="warn" @click.native="submit()">
+            <x-button type="warn" @click.native="submit">
                 确认并提交
             </x-button>
         </div>
-
     </div>
 </template>
 
@@ -97,86 +96,37 @@ export default {
     },
     data() {
         return {
-            value1: "",
-            startTime: "",
-            endTime: "",
-            hourListValue: "",
-            hot: "",
-            ListValue: "",
-            activeContent: "",
-            listSingle: {},
-            userName: "",
-            name1: ""
+            Messge13: "",
+            Messge14: "",
+            Messge15: "",
+            itemscore: 0
         };
     },
-    methods: {
-        getList() {
-            let item = this.$route.params;
-            this.name1 = item.item.name;
-        },
-        getUser() {},
-        openPicker() {
-            this.$refs.picker.open();
-        },
-
-        submit() {
-            this.$router.push({
-                path: "/party/member"
-            });
-        },
-
-        getActivity() {},
-        log(str1, str2 = "") {},
-        showPlugin() {
-            this.$vux.datetime.show({
-                cancelText: "取消",
-                confirmText: "确定",
-                format: "YYYY-MM-DD HH",
-                value: "2017-05-20 18",
-                onConfirm(val) {
-                    console.log("plugin confirm", val);
-                },
-                onShow() {
-                    console.log("plugin show");
-                },
-                onHide() {
-                    console.log("plugin hide");
-                }
-            });
-        },
-        toggleFormat() {
-            this.format =
-                this.format === "YYYY-MM-DD HH:mm"
-                    ? "YYYY-MM-DD"
-                    : "YYYY-MM-DD HH:mm";
-        },
-        changeStart(value) {
-            this.startTime = value;
-        },
-        changeEnd(value) {
-            this.endTime = value;
-        },
-        clearValue(value) {
-            this.value6 = "";
-        },
-        clearValue8(value) {
-            this.value8 = "";
-        },
-        setToday(value) {
-            let now = new Date();
-            let cmonth = now.getMonth() + 1;
-            let day = now.getDate();
-            if (cmonth < 10) cmonth = "0" + cmonth;
-            if (day < 10) day = "0" + day;
-            this.value7 = now.getFullYear() + "-" + cmonth + "-" + day;
-            console.log("set today ok");
+    computed: {
+        userName() {
+            return decodeURIComponent(this.$route.params.name);
         }
     },
-    mounted() {
-        this.getActivity();
-        this.getList();
-        this.getUser();
-    }
+    methods: {
+        submit() {
+            let { departmentId, userId, partmentId } = this.$route.params;
+            let { Messge13, Messge14, Messge15, itemscore } = this;
+            axios
+                .post("/dangjian/pavantgrade/save", {
+                    Messge13,
+                    Messge14,
+                    Messge15,
+                    itemscore,
+                    departmentid: +departmentId,
+                    userid: +userId,
+                    partmentid: +partmentId
+                })
+                .then(res => {
+                    console.log(res.data);
+                });
+        }
+    },
+    mounted() {}
 };
 </script>
 
@@ -309,15 +259,19 @@ input[type="file"] {
     .inline-x-number {
         .vux-number-selector {
             background-color: #b93647;
-            padding: 4px 7px 2px 7px;
+            padding: 0;
+            &.vux-number-selector-sub {
+                padding: 0 1px;
+            }
             svg {
                 fill: #fff;
             }
         }
         input[readonly] {
-            width: 33px !important;
-            padding: 4px 0;
+            padding: 0;
             border: 0;
+            height: 22px;
+            line-height: 22px;
         }
     }
 }

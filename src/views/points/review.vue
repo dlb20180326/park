@@ -5,7 +5,7 @@
 			<div class="header-list">
 				<div class="list-left">
 				<span class="left-now">当前支部：</span>
-				<span class="left-active">{{partyBranch}}</span>
+				<span class="left-active">{{partyBranch1}}</span>
 				</div>
 				<div class="right-btn" @click="showDet">切换<span></span></div>
 			</div>
@@ -15,8 +15,8 @@
 			    </tab>
 			<div class="trans-black" v-show="showTrans"></div>
 			<div class="animate-down" v-show="topShow">
-				<div  v-for="(park,index) in parks" :key="index" class="bg-flag" @click="change(park)">
-					{{park.part}}
+				<div  v-for="(park,index) in department" :key="index" class="bg-flag" @click="change(park)">
+					{{park.departmentname}}
 				</div>
 			</div>
 			<div class="points-table">
@@ -26,10 +26,10 @@
 	                <flexbox-item>积分</flexbox-item>
 	                <flexbox-item>操作</flexbox-item>
 	            </flexbox>
-	            <flexbox :gutter="0">
-	                <flexbox-item>张海丽</flexbox-item>
-	                <flexbox-item>韩式</flexbox-item>
-	                <flexbox-item>28</flexbox-item>
+	            <flexbox :gutter="0" v-for="(item,index) in list1" :key="index">
+	                <flexbox-item>{{item.name}}</flexbox-item>
+	                <flexbox-item>{{}}</flexbox-item>
+	                <flexbox-item>{{item.totalscore}}</flexbox-item>
 	                <flexbox-item>
 	                	<router-link :to="{name:'Audit'}">
 	                	<button class="go-btn">去处理</button>
@@ -42,6 +42,7 @@
 </template>
 <script>
 import rHeader from '@/components/comother/rheader';
+import axios from 'axios'
 import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem} from 'vux';
 	export default{
 		data(){
@@ -50,9 +51,12 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 				topShow:false,
 				showTrans:false,
 				slides:-1,
-				parks:[{part:'金领驿站'},{part:'花期银行第一支部'},{part:'花期银行第二支部'}],
-				partyBranch:''
-				
+				parks:'',
+				partyBranch1:'',
+                department:'',
+                list1:'',
+                list2:'',
+                list3:''
 			}
 		},
 		components:{
@@ -62,7 +66,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 			Sticky,
 			Flexbox,
 			FlexboxItem,
-			Tab, 
+			Tab,
 			TabItem
 		},
 		directives: {
@@ -80,6 +84,24 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
             });
         },
 		methods:{
+            getlist(){
+                console.log("12321");
+                axios({
+                    method: 'get',
+                    url: '/dangjian/pdepartment/getList',
+
+                }) .then((res)=> {
+                    this.department=res.data;
+                console.log(res.data)
+
+                console.log(res.data)
+            }).catch(function (error) {
+                    console.log(error);
+                })
+
+
+
+            },
 			showDet(){
 				this.topShow = !this.topShow
 				this.showTrans = !this.showTrans
@@ -88,12 +110,43 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 				this.slides =1
 			},
 			change(park){
-				this.partyBranch = park.part
+				this.partyBranch1 = park.departmentname
+
+                console.log(park.departmentid)
 				this.topShow = !this.topShow
 				this.showTrans = !this.showTrans
+                axios({
+                    method: 'get',
+                    url: '/dangjian/ppartymember/getPartymemberByDepartmentid',
+                    params: {
+                        departmentid:park.departmentid,
+                        status:1//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
+                    }
+                }) .then((res)=> {
+                    this.list1=res.data;
+                console.log(res.data)
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
+                /*axios({
+                    method: 'get',
+                    url: '/dangjian/ppartymember/getPartymemberByDepartmentid',
+                    params: {
+                        departmentid:park.departmentid
+                        status:3//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
+                    }
+                }) .then((res)=> {
+                    this.list1=res.data;
+                }).catch(function (error) {
+                    console.log(error);
+                })*/
+
+
 			}
 		},
 		mounted(){
+            this.getlist()
 		}
 	}
 </script>
@@ -110,7 +163,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 	.bg-flag{height:.2rem;margin-top:.2rem;}
 	.animate-down{padding:0 .2rem .2rem .21rem;position: absolute;z-index:30;width: calc(100% - 0.41rem);background-color:#FFFFFF;top:.97rem;}
 	.trans-black{position:absolute;z-index:20;background-color:rgba(0,0,0,0.3);top:.96rem;bottom:0px;left:0px;right:0px;}
-	
+
 	ul,li{list-style: none}
         .tabClick{ background: #FFFFFF; overflow: hidden;font-family: simsun;border-bottom:1px solid #e4e4e4;
         clear:both}
@@ -141,7 +194,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 		color:#fff;
 		line-height:.2rem;
 		background:rgba(185,54,71,1);
-		border-radius: 4px 
+		border-radius: 4px
 	}
 	.points-table {
             box-sizing: border-box;
@@ -156,7 +209,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
             	text-align: center;
                 &:first-child {
                     color: #FA7A00;
-                    
+
                 }
             }
         }

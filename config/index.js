@@ -8,14 +8,18 @@ module.exports = {
     dev: {
         // Paths
         assetsSubDirectory: 'static',
-        assetsPublicPath: '',
+        assetsPublicPath: '/',
         proxyTable: {
             '/dangjian/': {
                 changeOrigin: true,
                 target: 'http://www.dlbdata.cn/',
-                //target:'http://192.168.1.145:8080/'
+                // target:'192.168.1.173:8080/',
                 pathRewrite: { '^/dangjian/': '/dangjian/' }
             }
+            /*'/': {
+                changeOrigin: true,
+                target:'http://192.168.1.145:8080/'
+            }*/
         },
 
         // Various Dev Server settings

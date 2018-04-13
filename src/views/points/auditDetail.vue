@@ -70,6 +70,7 @@
     </div>
 </template>
 <script>
+import axios from "axios";
 import {
     XHeader,
     Flexbox,
@@ -103,8 +104,26 @@ export default {
             showRejectDialog: false
         };
     },
-    mounted() {},
+    mounted() {
+        this.getlist()
+    },
     methods: {
+        getlist() {
+            axios({
+                method: "get",
+                url: "/dangjian/pavantgrade/getList",
+                params: {
+                    userId: this.$route.params.userId
+                }
+            })
+                .then(res => {
+                    console.log(res);
+                    this.list = res.data;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        },
         auditReject() {
             this.showRejectDialog = true;
         },
@@ -153,7 +172,7 @@ export default {
         .item-list {
             .item {
                 margin: 10px;
-                border-bottom: 1px solid #D9D9D9;
+                border-bottom: 1px solid #d9d9d9;
                 .header,
                 .body,
                 .footer {
