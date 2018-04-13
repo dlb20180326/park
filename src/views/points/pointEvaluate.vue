@@ -16,7 +16,7 @@
             <span class="addPic">添加凭证</span>
             <flexbox class="img-list" :gutter="0" wrap="wrap">
                 <flexbox-item :span="1/3"  v-for="(item, index) in picList13.list" :key="index">
-                    <img src="'picture/show/'+{{item}}" alt="">
+                    <img src="'picture/show?pictureId='+item" alt="">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
                     <div class="square" @click="chooseImage(picList13)">
@@ -31,14 +31,18 @@
             </group-title>
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge14'></textarea>
         </div>
-        <div v-for="(item, index) in picList15" :key="index">
-            {{ item }}
-        </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
-            <div class="square" @click="chooseImage">
-                <div class="fileLoad"  ></div>
-            </div>
+            <flexbox class="img-list" :gutter="0" wrap="wrap">
+                <flexbox-item :span="1/3"  v-for="(item, index) in picList14.list" :key="index">
+                    <img src="'picture/show?pictureId='+item" alt="">
+                </flexbox-item>
+                <flexbox-item :span="1/3">
+                    <div class="square" @click="chooseImage(picList14)">
+                        <div class="fileLoad" ></div>
+                    </div>
+                </flexbox-item>
+            </flexbox>
         </div>
         <div class="group-item">
             <group-title slot="title">
@@ -47,14 +51,18 @@
             <inline-x-number v-model="itemscore" class="inline-x-number" :min="0" :max="5"></inline-x-number>
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge15'></textarea>
         </div>
-        <div v-for="(item, index) in picList15.list" :key="index">
-            {{ item }}
-        </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
-            <div class="square"  @click="chooseImage(picList15)">
-                <div class="fileLoad"></div>
-            </div>
+            <flexbox class="img-list" :gutter="0" wrap="wrap">
+                <flexbox-item :span="1/3"  v-for="(item, index) in picList15.list" :key="index">
+                    <img src="'picture/show?pictureId='+item" alt="">
+                </flexbox-item>
+                <flexbox-item :span="1/3">
+                    <div class="square" @click="chooseImage(picList15)">
+                        <div class="fileLoad" ></div>
+                    </div>
+                </flexbox-item>
+            </flexbox>
         </div>
         <div class="group-item">
             <group-title slot="title"></group-title>
@@ -140,7 +148,7 @@ export default {
 
 
             wx.chooseImage({
-                    count: 9, // 默认9
+                    count: 1, // 默认9
                     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                     success: res => {
