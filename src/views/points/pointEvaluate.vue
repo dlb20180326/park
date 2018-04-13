@@ -28,9 +28,7 @@
                     {{ item }}
                 </div>
                 <flexbox-item :span="1/3">
-                    <div class="square">
-                        <div @click="chooseImage"></div>
-                    </div>
+                    <div class="square" @click="chooseImage"></div>
                 </flexbox-item>
             </flexbox>
         </div>
@@ -45,8 +43,8 @@
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
-            <div class="square">
-                <div class="fileLoad"  @click="chooseImage(picList14)"></div>
+            <div class="square" @click="chooseImage(picList14)">
+                <div class="fileLoad"  ></div>
             </div>
         </div>
         <div class="group-item">
@@ -61,8 +59,8 @@
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
-            <div class="square">
-                <div class="fileLoad" @click="chooseImage(picList15)"></div>
+            <div class="square"  @click="chooseImage(picList15)">
+                <div class="fileLoad"></div>
             </div>
         </div>
         <div class="group-item">
@@ -142,7 +140,7 @@ export default {
                 });
         }
     },
-    chooseImage() {
+    chooseImage(it) {
         this.$vux.alert.show({title:'增加失败222'});
         wx.chooseImage({
             count: 9, // 默认9
