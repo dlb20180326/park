@@ -16,7 +16,7 @@
             <span class="addPic">添加凭证</span>
             <flexbox class="img-list" :gutter="0" wrap="wrap">
                 <flexbox-item :span="1/3" >
-                    <img style="display: inline-block" v-for="(item,index) in picList13.list" :key="index" width="100" :src="item">
+                    <img style="float: left" v-for="(item,index) in picList13.list" :key="index" width="100" :src="item">
                 </flexbox-item>
                 <flexbox-item >
                     <div class="square" @click="chooseImage(picList13)">
@@ -34,8 +34,8 @@
         <div class="group-item">
             <span class="addPic">添加凭证</span>
             <flexbox class="img-list" :gutter="0" wrap="wrap">
-                <flexbox-item :span="1/3"  v-for="(item, index) in picList14.list" :key="index">
-                    <img :src="item">
+                <flexbox-item :span="1/3" >
+                    <img style="float: left" v-for="(item,index) in picList14.list" :key="index" width="100" :src="item">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
                     <div class="square" @click="chooseImage(picList14)">
@@ -57,9 +57,7 @@
             <flexbox class="img-list" :gutter="0" wrap="wrap">
                <!--<img src="http://www.dlbdata.cn/dangjian/picture/show?pictureId=89" alt="">-->
                 <flexbox-item :span="1/3"  >
-                    <img v-for="(item,index) in list" :src="item.src" width="100"  @click="show(index)" >
-                    <img class="111111111" v-for="(item,index) in picList15.list" :key="index" width="30" height="30" :src="item">
-                    <img src="item" alt="">
+                    <img style="float: left" v-for="(item,index) in picList15.list" :key="index" width="100" :src="item">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
                     <div class="square" @click="chooseImage(picList15)">
