@@ -194,14 +194,14 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 			},gohandle(item){
                 console.log("7777777777777777777777",item)
                this.$router.push({
-                    path: '/points/audit/:userId/:Id/:name/:departmentId/:totalscore',
+                    // path: '/points/audit/:userId/:Id/:name/:departmentId/:totalscore',
                     name: 'Audit',
                     params: {
                         Id:item.id,
                         name:encodeURI(item.name),
                         departmentId:item.departmentid,
                         userId:item.userid,
-                        totalscore:item.totalscore
+                        totalscore:item.totalscore||0
                     }
                 })
             }

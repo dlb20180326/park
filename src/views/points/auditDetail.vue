@@ -28,37 +28,28 @@
         <flexbox orient="vertical" align="initial">
             <view-box class="view-box">
                 <group label-width="80px" label-margin-right="20px">
-                    <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="name" value-align="left"></cell>
-                    <cell :border-intent="false" disabled title="获得总分" :value="totalscore||0.0" value-align="left"></cell>
+                    <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="userName" value-align="left"></cell>
+                    <cell :border-intent="false" disabled title="获得总分" :value="totalscore" value-align="left"></cell>
                 </group>
-                <div class="item-list">
+                <div class="item-list" v-for="(item,i) of list" :key="i">
                     <div class="item">
-                        <div class="header">获得荣誉:</div>
+                        <div class="header">{{item.title}}</div>
                         <div class="body">
-                            <span class="desc">王俊凯大家肯定是多萨科了解对方会计法萨科夫i</span>
+                            <span class="desc">{{item.message}}</span>
                             <flexbox class="img-list" :gutter="0" wrap="wrap">
-                                <flexbox-item :span="1/3">
-                                    <img src="../../assets/images/preview.jpg" alt="">
-                                </flexbox-item>
-                                <flexbox-item :span="1/3">
-                                    <img src="../../assets/images/preview.jpg" alt="">
-                                </flexbox-item>
-                                <flexbox-item :span="1/3">
-                                    <img src="../../assets/images/preview.jpg" alt="">
-                                </flexbox-item>
-                                <flexbox-item :span="1/3">
-                                    <img src="../../assets/images/preview.jpg" alt="">
+                                <flexbox-item v-for="(img,ii) of item.memo" :key="ii" :span="1/3">
+                                    <img :src="'picture/show/'+img" alt="">
                                 </flexbox-item>
                             </flexbox>
                         </div>
                         <flexbox class="footer">
                             <flexbox-item>
-                                <x-button @click.native="auditReject" :mini="true" type="warn">
+                                <x-button @click.native="auditReject(item)" :mini="true" type="warn">
                                     驳回
                                 </x-button>
                             </flexbox-item>
                             <flexbox-item>
-                                <x-button @click.native="auditResolve" :mini="true" type="warn">
+                                <x-button @click.native="auditResolve(item)" :mini="true" type="warn">
                                     通过审核
                                 </x-button>
                             </flexbox-item>
@@ -98,51 +89,76 @@ export default {
         XDialog,
         XTextarea
     },
+    props: ["userId", "Id", "name", "departmentId", "totalscore"],
     data() {
         return {
+            currItem: null,
             rejectReason: "",
             showRejectDialog: false,
-            name:"",
-            totalscore:""
+            list: []
         };
+    },
+    computed: {
+        userName() {
+            return decodeURIComponent(this.name);
+        }
     },
     mounted() {
         this.getlist();
-        this.getItem()
     },
     methods: {
-        getItem(){
-            let item= this.$route.params;
-            this.name=decodeURIComponent(this.$route.params.name);
-            this.totalscore=this.$route.params.totalscore
-
-
-
-            console.log("66666666666",decodeURIComponent(this.$route.params.name))
-
-        },
         getlist() {
             axios({
                 method: "get",
                 url: "/dangjian/pavantgrade/getList",
                 params: {
-                    userId: this.$route.params.userId
+                    userId: this.userId
                 }
             })
                 .then(res => {
                     console.log(res);
                     this.list = res.data;
+                    this.list.forEach(item => {
+                        item.memo = (item.memo && item.memo.split(",")) || [];
+                    });
                 })
                 .catch(function(error) {
                     console.log(error);
                 });
         },
-        auditReject() {
+        auditReject(item) {
+            this.currItem = item;
             this.showRejectDialog = true;
         },
-        auditResolve() {},
-        dialogConfirm() {},
-        dialogCancel() {}
+        auditResolve(item) {},
+        dialogConfirm() {
+            axios({
+                method: "post",
+                url: "/dangjian/pavantgrade/examineNo",
+                params: {
+                    id: this.currItem.id,
+                    rejectReson: this.rejectReason
+                }
+            })
+                .then(res => {
+                    if (res.data && res.data.success) {
+                        this.$vux.toast.show({
+                            text: "操作成功",
+                            type: "text",
+                            position: "top"
+                        });
+                        this.rejectReason = "";
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+            this.showRejectDialog = false;
+        },
+        dialogCancel() {
+            this.rejectReason = "";
+            this.showRejectDialog = false;
+        }
     }
 };
 </script>

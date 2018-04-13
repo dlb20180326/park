@@ -88,6 +88,7 @@ export const routes = [
             {
                 path: 'points/audit/:userId/:Id/:name/:departmentId/:totalscore',
                 name: 'Audit',
+                props:true,
                 component: () => import('@/views/points/auditDetail')
             },
             {
