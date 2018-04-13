@@ -18,6 +18,7 @@
                 <flexbox-item :span="1/3"  v-for="(item, index) in picList13.list" :key="index">
                     {{item}}
                     <img src="item">
+                    <img src="http://www.dlbdata.cn/dangjian/picture/show?pictureId=106">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
                     <div class="square" @click="chooseImage(picList13)">
