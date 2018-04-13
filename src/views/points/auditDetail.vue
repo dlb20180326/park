@@ -28,8 +28,8 @@
         <flexbox orient="vertical" align="initial">
             <view-box class="view-box">
                 <group label-width="80px" label-margin-right="20px">
-                    <cell class="no-border" :border-intent="false" disabled title="党员姓名" value="王俊凯" value-align="left"></cell>
-                    <cell :border-intent="false" disabled title="获得总分" value="13" value-align="left"></cell>
+                    <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="name" value-align="left"></cell>
+                    <cell :border-intent="false" disabled title="获得总分" :value="totalscore||0.0" value-align="left"></cell>
                 </group>
                 <div class="item-list">
                     <div class="item">
@@ -101,13 +101,26 @@ export default {
     data() {
         return {
             rejectReason: "",
-            showRejectDialog: false
+            showRejectDialog: false,
+            name:"",
+            totalscore:""
         };
     },
     mounted() {
-        this.getlist()
+        this.getlist();
+        this.getItem()
     },
     methods: {
+        getItem(){
+            let item= this.$route.params;
+            this.name=decodeURIComponent(this.$route.params.name);
+            this.totalscore=this.$route.params.totalscore
+
+
+
+            console.log("66666666666",decodeURIComponent(this.$route.params.name))
+
+        },
         getlist() {
             axios({
                 method: "get",

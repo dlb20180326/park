@@ -10,8 +10,8 @@
 				<div class="right-btn" @click="showDet">切换<span></span></div>
 			</div>
 			    <tab>
-				    <tab-item selected @on-item-click="slide">待审核（20）</tab-item>
-				    <tab-item @on-item-click="slide">已审核（1）</tab-item>
+				    <tab-item selected @on-item-click="slide">待审核（{{length1}}）</tab-item>
+				    <tab-item @on-item-click="slide1">已审核（{{length2}}）</tab-item>
 			    </tab>
 			<div class="trans-black" v-show="showTrans"></div>
 			<div class="animate-down" v-show="topShow">
@@ -28,12 +28,13 @@
 	            </flexbox>
 	            <flexbox :gutter="0" v-for="(item,index) in list1" :key="index">
 	                <flexbox-item>{{item.name}}</flexbox-item>
-	                <flexbox-item>{{}}</flexbox-item>
-	                <flexbox-item>{{item.totalscore}}</flexbox-item>
+	                <flexbox-item>{{partyBranch}}</flexbox-item>
+	                <flexbox-item>{{item.totalscore||0.0}}</flexbox-item>
 	                <flexbox-item>
-	                	<router-link :to="{name:'Audit'}">
+	                	<!--<router-link :to="{name:'Audit'}">
 	                	<button class="go-btn">去处理</button>
-	                	</router-link>
+	                	</router-link>-->
+                        <button class="go-btn" @click="gohandle(item)">去处理</button>
 	                </flexbox-item>
 	            </flexbox>
 	        </div>
@@ -56,7 +57,11 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
                 department:'',
                 list1:'',
                 list2:'',
-                list3:''
+                list3:'',
+                departmentid:'',
+                length1:'',
+                length2:'',
+                partyBranch:''
 			}
 		},
 		components:{
@@ -89,7 +94,6 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
                 axios({
                     method: 'get',
                     url: '/dangjian/pdepartment/getList',
-
                 }) .then((res)=> {
                     this.department=res.data;
                 console.log(res.data)
@@ -107,27 +111,71 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 				this.showTrans = !this.showTrans
 			},
 			slide(){
-				this.slides =1
-			},
+                axios({
+                    method: 'get',
+                    url: '/dangjian/ppartymember/getPartymemberByDepartmentid',
+                    params: {
+                        departmentid:this.departmentid,
+                        status:1//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
+                    }
+                }) .then((res)=> {
+                    this.list1=res.data;
+                this.length1=res.data.length
+
+                console.log("12132131",res.data.length)
+
+
+                console.log(res.data)
+            }).catch(function (error) {
+                    console.log(error);
+                });
+			},slide1(){
+                axios({
+                    method: 'get',
+                    url: '/dangjian/ppartymember/getPartymemberByDepartmentid',
+                    params: {
+                        departmentid:this.departmentid,
+                        status:2//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
+                    }
+                }).then((res)=> {
+                    this.list1=res.data;
+                    axios({
+                        method: 'get',
+                        url: '/dangjian/ppartymember/getPartymemberByDepartmentid',
+                        params: {
+                            departmentid:this.departmentid,
+                            status:3//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
+                        }
+                    }).then((res1)=> {
+                        let temp = this.list1;
+                        this.list1 = temp.concat(res1.data);
+                    })
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            },
 			change(park){
 				this.partyBranch1 = park.departmentname
-
-                console.log(park.departmentid)
+                this.departmentid=park.departmentid;
+                this.partyBranch=park.partyBranch
+                console.log("1888888888888",park.partyBranch)
 				this.topShow = !this.topShow
 				this.showTrans = !this.showTrans
                 axios({
                     method: 'get',
                     url: '/dangjian/ppartymember/getPartymemberByDepartmentid',
                     params: {
-                        departmentid:park.departmentid,
+                        departmentid:this.departmentid,
                         status:1//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
                     }
                 }) .then((res)=> {
+                    this.length1=res.data.length
                     this.list1=res.data;
                 console.log(res.data)
-                }).catch(function (error) {
+            }).catch(function (error) {
                     console.log(error);
                 });
+
 
                 /*axios({
                     method: 'get',
@@ -143,7 +191,20 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
                 })*/
 
 
-			}
+			},gohandle(item){
+                console.log("7777777777777777777777",item)
+               this.$router.push({
+                    path: '/points/audit/:userId/:Id/:name/:departmentId/:totalscore',
+                    name: 'Audit',
+                    params: {
+                        Id:item.id,
+                        name:encodeURI(item.name),
+                        departmentId:item.departmentid,
+                        userId:item.userid,
+                        totalscore:item.totalscore
+                    }
+                })
+            }
 		},
 		mounted(){
             this.getlist()
