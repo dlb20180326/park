@@ -1,6 +1,6 @@
 <template>
-    <div style="height:100%;">
-        <view-box ref="viewBox" body-padding-top=".46rem" body-padding-bottom=".55rem">
+    <div class="page-body">
+        <view-box ref="viewBox" body-padding-top=".46rem">
             <x-header :left-options="{showBack: false}" class="bgColors" slot="header"
                       style="width:100%;position:absolute;left:0;top:0;z-index:100;">支部党员信息
             </x-header>
@@ -34,7 +34,6 @@
                     </router-link>
                 </div>
             </div>
-            <!--<footers :selec='select'></footers>-->
         </view-box>
     </div>
 </template>
@@ -106,7 +105,10 @@
         height: 100%;
         overflow-x: hidden;
     }
-
+	.page-body {
+	    display: flex;
+	    flex-direction: column;
+	}
     .bgColors {
         background: linear-gradient(to right, rgba(185, 54, 71, 1), rgba(155, 10, 26, 1));
         background: -webkit-linear-gradient(to right, rgba(185, 54, 71, 1), rgba(155, 10, 26, 1));
