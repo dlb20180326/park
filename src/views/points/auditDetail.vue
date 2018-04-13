@@ -31,7 +31,7 @@
                     <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="userName" value-align="left"></cell>
                     <cell :border-intent="false" disabled title="获得总分" :value="totalscore" value-align="left"></cell>
                 </group>
-                <div class="item-list" v-for="(item,i) of list" :key="i">
+                <div class="item-list" v-if="item.status != null" v-for="(item,i) of list" :key="i">
                     <div class="item">
                         <div class="header">{{item.title}}</div>
                         <div class="body">
@@ -42,7 +42,7 @@
                                 </flexbox-item>
                             </flexbox>
                         </div>
-                        <flexbox class="footer">
+                        <flexbox class="footer" v-if="item.status == 1">
                             <flexbox-item>
                                 <x-button @click.native="auditReject(item)" :mini="true" type="warn">
                                     驳回
@@ -53,6 +53,12 @@
                                     通过审核
                                 </x-button>
                             </flexbox-item>
+                        </flexbox>
+                        <flexbox class="footer" justify= "center" v-if="item.status == 2">
+                            审核成功
+                        </flexbox>
+                        <flexbox class="footer" justify= "center" v-if="item.status == 3">
+                            已拒绝
                         </flexbox>
                     </div>
                 </div>
@@ -130,7 +136,26 @@ export default {
             this.currItem = item;
             this.showRejectDialog = true;
         },
-        auditResolve(item) {},
+        auditResolve(item) {
+            axios({
+                method: "post",
+                url: "/dangjian/pavantgrade/examineOK",
+                params: {
+                    id: item.id
+                }
+            })
+                .then(res => {
+                    this.$vux.toast.show({
+                        text: res.data.msg,
+                        type: "text",
+                        position: "top"
+                    });
+                    this.rejectReason = "";
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        },
         dialogConfirm() {
             axios({
                 method: "post",
@@ -141,14 +166,12 @@ export default {
                 }
             })
                 .then(res => {
-                    if (res.data && res.data.success) {
-                        this.$vux.toast.show({
-                            text: "操作成功",
-                            type: "text",
-                            position: "top"
-                        });
-                        this.rejectReason = "";
-                    }
+                    this.$vux.toast.show({
+                        text: res.data.msg,
+                        type: "text",
+                        position: "top"
+                    });
+                    this.rejectReason = "";
                 })
                 .catch(function(error) {
                     console.log(error);
@@ -156,6 +179,7 @@ export default {
             this.showRejectDialog = false;
         },
         dialogCancel() {
+            this.currItem = null;
             this.rejectReason = "";
             this.showRejectDialog = false;
         }
