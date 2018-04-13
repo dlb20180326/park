@@ -107,6 +107,7 @@ export const routes = [
             ,
             {
                 path: 'active',
+                name:'Active',
                 component: () => import('@/views/active')
             },
             {

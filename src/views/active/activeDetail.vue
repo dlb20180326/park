@@ -68,21 +68,6 @@
 
                         </ul>
                         
-<!--                         <x-table :cell-bordered="false">
-					        <thead>
-					          <tr>
-					            <th>Product</th>
-					            <th>Price</th>
-					          </tr>
-					        </thead>
-					        <tbody>
-					          <tr>
-					            <td>Apple</td>
-					            <td>$1.25</td>
-					          </tr>
-					        </tbody>
-				      </x-table>-->
-                        
                     </div>
                 </section>
             </flexbox-item>
