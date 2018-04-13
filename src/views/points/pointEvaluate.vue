@@ -15,20 +15,11 @@
         <div class="group-item">
             <span class="addPic">添加凭证</span>
             <flexbox class="img-list" :gutter="0" wrap="wrap">
-                <flexbox-item :span="1/3">
-                    <img src="../../assets/images/preview.jpg" alt="">
+                <flexbox-item :span="1/3"  v-for="(item, index) in picList13.list" :key="index">
+                    <img src="'picture/show/'+{{item}}" alt="">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
-                    <img src="../../assets/images/preview.jpg" alt="">
-                </flexbox-item>
-                <flexbox-item :span="1/3">
-                    <img src="../../assets/images/preview.jpg" alt="">
-                </flexbox-item>
-                <div v-for="(item, index) in picList13.list" :key="index">
-                    {{ item }}
-                </div>
-                <flexbox-item :span="1/3">
-                    <div class="square" @click="chooseImage">
+                    <div class="square" @click="chooseImage(it)">
                         <div class="fileLoad"  ></div>
                     </div>
                 </flexbox-item>
@@ -113,7 +104,7 @@ export default {
             Messge14: "",
             Messge15: "",
             itemscore: 0,
-            picList15:{list:[]},
+            picList15:[],
             picList14:{list:[]},
             picList13:{list:[]}
         };
@@ -145,6 +136,8 @@ export default {
         ,
 
         chooseImage() {
+
+
 
             wx.chooseImage({
                     count: 9, // 默认9
@@ -191,7 +184,7 @@ export default {
             result.map(item => pictureIds.push(item.data)
         )
             ;
-            this.imgIds.push('pictureIds:' + pictureIds.join());
+            this.picList15.push('pictureIds:' + pictureIds.join());
         })
             ;
         })
