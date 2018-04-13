@@ -21,7 +21,7 @@
             <section class="mainbox1">
                 <div class=" clearfix p15 display">
                     <span class="fl weui-cell__bd1">党员生活通知</span>
-                    <a  class=" fr"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
+                    <a  class="fRight"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
                 </div>
                 <div class="content">
                     <table width="100%" class="table">
@@ -56,13 +56,13 @@
                     <div class="p15">
                         <div class=" clearfix  display">
                             <span class="fl weui-cell__bd1">已参与组织生活</span>
-                            <a href="#" class=" fr"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
+                            <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
                         </div>
                         <ul class="news">
                             <li v-for="(item,index) in activeComplete" :key="index" >
                                 <a class=" display clearfix " href="javascript:;">
                                     <div class=" fl">{{item.activeName}}</div>
-                                    <div class=" fr">{{datePick(item.endTime)}}</div>
+                                    <div class=" fr">{{datePick(item.endTime)}}<span class="rightBtn"></span></div>
                                 </a>
                             </li>
 
@@ -221,7 +221,7 @@ export default {
 
         },
         datePick(s){
-        	        	Date.prototype.toLocaleString = function(){
+        	Date.prototype.toLocaleString = function(){
         		return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
         	}
         	return new Date(s).toLocaleString();
@@ -260,8 +260,17 @@ export default {
 .page-body {
     background-color: #efefef;
 }
+.fAll{
+	float:right;
+	margin-right:.2rem;
+}
+.fRight{
+	float:right;
+}
 .content{width:89%;
-        margin:0 auto;}
+        margin:0 auto;
+        }
+.rightBtn{display:inline-block;width:.15rem;height:.15rem;background-image:url(../../assets/images/icon-rights.png);margin-left:.2rem;background-size:100% 100%;}
  span{ display: block;font-size: 0.8em;background-color:#F5F5F5}
 .vux-flexbox.list-item {
     background-color: #fff;
@@ -397,11 +406,12 @@ export default {
         white-space:nowrap;
         text-overflow: ellipsis;
     }
-    .fr {
+    .fr{
         float:right;
         overflow:hidden;
         height:.45rem;
         line-height:.45rem;
+        width:32%;
     }
     .p15 {
         padding:0 .2rem .2rem;
