@@ -29,7 +29,7 @@
                 </div>
                 <flexbox-item :span="1/3">
                     <div class="square">
-                        <div @click.native="chooseImage()"></div>
+                        <div @click="chooseImage"></div>
                     </div>
                 </flexbox-item>
             </flexbox>
@@ -104,7 +104,8 @@ export default {
         Datetime,
         Group,
         Picker,
-        InlineXNumber
+        InlineXNumber,
+        Alert,
     },
     data() {
         return {
@@ -142,6 +143,7 @@ export default {
         }
     },
     chooseImage() {
+        this.$vux.alert.show({title:'增加失败222'});
         wx.chooseImage({
             count: 9, // 默认9
             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -191,6 +193,7 @@ export default {
 
     },
     mounted() {
+        this.$vux.alert.show({title:'增加失败'});
         weixin.init(['chooseImage', 'uploadImage']);
     }
 };
