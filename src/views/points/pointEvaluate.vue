@@ -16,8 +16,8 @@
             <span class="addPic">添加凭证</span>
             <flexbox class="img-list" :gutter="0" wrap="wrap">
                 <flexbox-item :span="1/3"  v-for="(item, index) in picList13.list" :key="index">
-
-                    <img :src="item" alt="">
+                    {{item}}
+                    <img src="item">
                 </flexbox-item>
                 <flexbox-item :span="1/3">
                     <div class="square" @click="chooseImage(picList13)">
