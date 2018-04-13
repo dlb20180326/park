@@ -52,9 +52,9 @@
         <div class="group-item">
         	<span class="addPic">添加照片</span>
             <img style="float: left" v-for="(item,index) in picList.list" :key="index" width="100" :src="item">
-        	<div class="square">
-        		<input type="file" class="fileLoad" />
-        	</div>
+            <div class="square" @click="chooseImage(picList15)">
+                <div class="fileLoad" ></div>
+            </div>
         </div>
         <div class="group-item">
             <group-title slot="title"></group-title>
