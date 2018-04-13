@@ -130,10 +130,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.grayLine{width:100%;height:.1rem;background:#F3F3F3;}
+.page-body{
+	flex: 1;
+}
+/*.grayLine{width:100%;height:.1rem;background:#F3F3F3;}*/
 .group-item {
-    margin-left: 0.2rem;
-    margin-right: 0.2rem;
+	width:calc(100% - 0.4rem);
+	padding-left:0.2rem;
+	padding-right:0.2rem;  
     &:last-child {
         margin-bottom: 0.2rem;
     }
