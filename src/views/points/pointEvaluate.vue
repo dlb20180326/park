@@ -29,7 +29,7 @@
                 </div>
                 <flexbox-item :span="1/3">
                     <div class="square">
-                        <div @click="chooseImage()"></div>
+                        <div @click.native="chooseImage()"></div>
                     </div>
                 </flexbox-item>
             </flexbox>
@@ -182,7 +182,9 @@ export default {
             Promise.all(promiseList).then(result => {
                 let pictureIds = [];
                 result.map(item => pictureIds.push(item.data));
-                //it.list.push('pictureIds:' + pictureIds.join());});});
+                //it.list.push('pictureIds:' + pictureIds.join());
+
+            });});
             }
         });
 
