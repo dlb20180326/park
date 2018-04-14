@@ -1,7 +1,15 @@
+import Vue from 'vue';
 import axios from 'axios';
 // import qs from 'qs';
 const baseURL = '/dangjian/';
 //const baseURL = '/';
+
+let requestCount = 0;
+let requestLoading = count => {
+    requestCount += count;
+    requestCount === 0 && setTimeout(() => Vue.$vux.loading.hide(), 60);
+    requestCount === 1 && Vue.$vux.loading.show({ text: '加载中' });
+};
 
 // Add a request interceptor
 axios.interceptors.request.use(
@@ -14,6 +22,7 @@ axios.interceptors.request.use(
         //     config.data = qs.stringify(config.data);
         //     config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
         // }
+        requestLoading(1);
         return config;
     },
     error => Promise.reject(error)
@@ -23,10 +32,14 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         // Do something with response data
-       /* if (!response.data.status) {
+        /* if (!response.data.status) {
             return Promise.reject(response.data);
         }*/
+        requestLoading(-1);
         return response.data;
     },
-    error => Promise.reject(error)
+    error => {
+        requestLoading(-1);
+        return Promise.reject(error);
+    }
 );
