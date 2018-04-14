@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+import axios from 'axios'
 import { XHeader, GroupTitle, cookie,Flexbox, FlexboxItem, XButton ,Alert,TransferDomDirective as TransferDom} from 'vux';
 export default {
     directives: {

@@ -155,12 +155,12 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
                 });
             },
 			change(park){
-				this.partyBranch1 = park.departmentname
+				this.partyBranch1 = park.departmentname;
                 this.departmentid=park.departmentid;
-                this.partyBranch=park.partyBranch
-                console.log("1888888888888",park.partyBranch)
-				this.topShow = !this.topShow
-				this.showTrans = !this.showTrans
+                this.partyBranch=park.partyBranch;
+                console.log("1888888888888",park.partyBranch);
+				this.topShow = !this.topShow;
+				this.showTrans = !this.showTrans;
                 axios({
                     method: 'get',
                     url: 'ppartymember/getPartymemberByDepartmentid',
@@ -192,7 +192,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 
 
 			},gohandle(item){
-                console.log("7777777777777777777777",item)
+                console.log("7777777777777777777777",item);
                this.$router.push({
                     // path: '/points/audit/:userId/:Id/:name/:departmentId/:totalscore',
                     name: 'Audit',

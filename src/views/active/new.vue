@@ -176,30 +176,31 @@ export default {
             var endtimeHaoMiao = (new Date(endtime)).getTime();
 
             if(starttimeHaoMiao<endtimeHaoMiao){
-            axios({
-                method: 'post',
-                url: 'active/create',
-                params: {
-                    startTime:starttimeHaoMiao,
-                    endTime:endtimeHaoMiao,
-                    activeType:this.activeType,
-                    activityProjectId:this.activeProjectActive,
-                    activePace:this.activePace,
-                    activeCreatePeople:this.$store.getters.user.userid,
-                    activePrincipalPeople:this.activePrincipalPeople,
-                    activeContex:this.activeContex,
-                    activeStatus:this.activeStatus,
-                    departmentid:this.departmentid
-                }
-            }) .then((res)=> {
-                alert(res.msg);
-                this.showQR(res.data);
-                console.log(res.data);
+                axios({
+                    method: 'post',
+                    url: 'active/create',
+                    params: {
+                        startTime:starttimeHaoMiao,
+                        endTime:endtimeHaoMiao,
+                        activeType:this.activeType,
+                        activityProjectId:this.activeProjectActive,
+                        activePace:this.activePace,
+                        activeCreatePeople:this.$store.getters.user.userid,
+                        activePrincipalPeople:this.activePrincipalPeople,
+                        activeContex:this.activeContex,
+                        activeStatus:this.activeStatus,
+                        departmentid:this.departmentid
+                    }
+                }) .then((res)=> {
+                    alert(res.msg);
+                    this.showQR(res.data);
+                    console.log(res.data);
 
-                console.log(res)
-            }).catch(function (error) {
-                console.log(error);
-            });}else {
+                    console.log(res)
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }else {
                 alert("开始日期不能大于结束日期");
             }
         },

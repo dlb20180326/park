@@ -88,8 +88,6 @@ export default {
           		return (this.getMonth() + 1) + "月" + this.getDate() + "日 ";
     		};
     		return new Date(s).toLocaleString();
-
-
     	},
     	getList(){
     		this.$http.get('active/getParticipateActive',{

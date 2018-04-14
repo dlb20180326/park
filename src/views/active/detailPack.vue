@@ -27,7 +27,7 @@
 			<span class="numberz"><span class="color-num">20</span>/23</span>
 			</p>
 			<div class="wz-fonts" style="-webkit-line-clamp: 5;">
-				王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 李薇薇 王俊凯 李薇薇 维吾尔 王俊凯 
+				王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 李薇薇 王俊凯 李薇薇 维吾尔 王俊凯
 			</div>
 			<div class="btnMore">收起<span class="up"></span></div>
 			<p class="allPic">
@@ -36,7 +36,7 @@
 			<span class="numberz"><span class="color-num">3</span>/23</span>
 			</p>
 			<div class="wz-fonts">
-				王俊凯 李薇薇 维吾尔 
+				王俊凯 李薇薇 维吾尔
 			</div>
 	 	</view-box>
 	</div>
@@ -83,19 +83,19 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
       			options: {
         			getThumbBoundsFn (index) {
           			// find thumbnail element
-		            let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
-		            // get window scroll Y
-		            let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
-		            // optionally get horizontal scroll
-		            // get position of element relative to viewport
-		            let rect = thumbnail.getBoundingClientRect()
-		            // w = width
-		            return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
-		            // Good guide on how to get element coordinates:
-		            // http://javascript.info/tutorial/coordinates
+                        let thumbnail = document.querySelectorAll('.previewer-demo-img')[index];
+                        // get window scroll Y
+                        let pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
+                        // optionally get horizontal scroll
+                        // get position of element relative to viewport
+                        let rect = thumbnail.getBoundingClientRect();
+                        // w = width
+		                return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
+                        // Good guide on how to get element coordinates:
+                        // http://javascript.info/tutorial/coordinates
         			}
       			}
-				
+
 			}
 		}
 	}
