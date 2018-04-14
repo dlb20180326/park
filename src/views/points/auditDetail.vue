@@ -33,7 +33,7 @@
                 </group>
                 <div class="item-list" v-if="item.status != null" v-for="(item,i) of list" :key="i">
                     <div class="item">
-                        <div class="header">{{item.title}}</div>
+                        <div class="header">{{item.title}} <span v-if="i==2">支部书记评分{{item.itemscore}}分</span>  </div>
                         <div class="body">
                             <span class="desc">{{item.message}}</span>
                             <flexbox class="img-list" :gutter="0" wrap="wrap">

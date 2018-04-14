@@ -10,7 +10,7 @@
 				<div class="right-btn" @click="showDet">切换<span></span></div>
 			</div>
 			    <tab>
-				    <tab-item selected @on-item-click="slide">待审核（{{length1}}）</tab-item>
+				    <tab-item selected @on-item-click="slide">待审核（{{length1  || 0}}）</tab-item>
 				    <tab-item @on-item-click="slide1">已审核（{{length2 || 0}}）</tab-item>
 			    </tab>
 			<div class="trans-black" v-show="showTrans"></div>
@@ -20,24 +20,47 @@
 				</div>
 			</div>
 			<div class="points-table">
-	            <flexbox :gutter="0">
-	                <flexbox-item>姓名</flexbox-item>
-	                <flexbox-item>支部书记</flexbox-item>
-	                <flexbox-item>积分</flexbox-item>
-	                <flexbox-item>操作</flexbox-item>
-	            </flexbox>
-	            <flexbox :gutter="0" v-for="(item,index) in list1" :key="index">
-	                <flexbox-item>{{item.name}}</flexbox-item>
-	                <flexbox-item>{{partyBranch}}</flexbox-item>
-	                <flexbox-item>{{item.totalscore||0.0}}</flexbox-item>
-	                <flexbox-item>
-	                	<!--<router-link :to="{name:'Audit'}">
-	                	<button class="go-btn">去处理</button>
-	                	</router-link>-->
-                        <button class="go-btn" @click="gohandle(item)">去处理</button>
-	                </flexbox-item>
-	            </flexbox>
+                <div  v-show="table1">
+                    <flexbox :gutter="0">
+                        <flexbox-item>姓名</flexbox-item>
+                        <flexbox-item>支部书记</flexbox-item>
+                        <flexbox-item>积分</flexbox-item>
+                        <flexbox-item>操作</flexbox-item>
+                    </flexbox>
+                    <flexbox :gutter="0" v-for="(item,index) in list1" :key="index">
+                        <flexbox-item>{{item.name}}</flexbox-item>
+                        <flexbox-item>{{item.branchName}}</flexbox-item>
+                        <flexbox-item>{{item.totalscore||0.0}}</flexbox-item>
+                        <flexbox-item>
+                            <!--<router-link :to="{name:'Audit'}">
+                            <button class="go-btn">去处理</button>
+                            </router-link>-->
+                            <button class="go-btn" @click="gohandle(item)">去处理</button>
+                        </flexbox-item>
+                    </flexbox>
+                </div>
+
+                <div v-show="!table1">
+                    <flexbox :gutter="0">
+                        <flexbox-item>姓名</flexbox-item>
+                        <flexbox-item>支部书记</flexbox-item>
+                        <flexbox-item>积分</flexbox-item>
+                        <flexbox-item>操作</flexbox-item>
+                    </flexbox>
+                    <flexbox :gutter="0" v-for="(item,index) in list2" :key="index">
+                        <flexbox-item>{{item.name}}</flexbox-item>
+                        <flexbox-item>{{item.branchName}}</flexbox-item>
+                        <flexbox-item>{{item.totalscore||0.0}}</flexbox-item>
+                        <flexbox-item>
+                            <!--<router-link :to="{name:'Audit'}">
+                            <button class="go-btn">去处理</button>
+                            </router-link>-->
+                            <button class="go-btn" @click="gohandle(item)">已审核</button>
+                        </flexbox-item>
+                    </flexbox>
+                </div>
 	        </div>
+
 		</view-box>
 	</div>
 </template>
@@ -58,6 +81,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
                 list1:'',
                 list2:'',
                 list3:'',
+                table1:true,
                 departmentid:'',
                 length1:'',
                 length2:'',
@@ -90,27 +114,52 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
         },
 		methods:{
             getlist(){
-                console.log("12321");
                 axios({
                     method: 'get',
                     url: 'pdepartment/getList',
                 }) .then((res)=> {
                     this.department=res.data;
-                    this.partyBranch1 = this.department[0].departmentname
-                console.log(this.department)
-
-            }).catch(function (error) {
+                    this.partyBranch1 = this.department[0].departmentname;
+                    this.departmentid= this.department[0].departmentid;
+                    this.slide();
+                    axios({
+                        method: 'get',
+                        url: 'ppartymember/getPartymemberByDepartmentid',
+                        params: {
+                            departmentid:this.departmentid,
+                            status:1//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
+                        }
+                    }).then((res)=> {
+                        this.length2=res.data.length;
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }).catch(function (error) {
                     console.log(error);
                 })
-
-
-
             },
 			showDet(){
-				this.topShow = !this.topShow
-				this.showTrans = !this.showTrans
+				this.topShow = !this.topShow;
+				this.showTrans = !this.showTrans;
 			},
 			slide(){
+                this.table1 = true;
+                axios({
+                    method: 'get',
+                    url: 'ppartymember/getPartymemberByDepartmentid',
+                    params: {
+                        departmentid:this.departmentid,
+                        status:0//status 0 是待审核  status 1 已审核  tempint 2 是审核通过 tempint 3 已拒绝
+                    }
+                }) .then((res)=> {
+                    this.list1=res.data;
+                    this.length1=res.data.length;
+                }).catch(function (error) {
+                    console.log(error);
+                });
+			},
+            slide1(){
+                this.table1 = false;
                 axios({
                     method: 'get',
                     url: 'ppartymember/getPartymemberByDepartmentid',
@@ -118,38 +167,9 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
                         departmentid:this.departmentid,
                         status:1//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
                     }
-                }) .then((res)=> {
-                    this.list1=res.data;
-                this.length1=res.data.length
-
-                console.log("12132131",res.data.length)
-
-
-                console.log(res.data)
-            }).catch(function (error) {
-                    console.log(error);
-                });
-			},slide1(){
-                axios({
-                    method: 'get',
-                    url: 'ppartymember/getPartymemberByDepartmentid',
-                    params: {
-                        departmentid:this.departmentid,
-                        status:2//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
-                    }
                 }).then((res)=> {
-                    this.list1=res.data;
-                    axios({
-                        method: 'get',
-                        url: 'ppartymember/getPartymemberByDepartmentid',
-                        params: {
-                            departmentid:this.departmentid,
-                            status:3//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
-                        }
-                    }).then((res1)=> {
-                        let temp = this.list1;
-                        this.list1 = temp.concat(res1.data);
-                    })
+                    this.list2=res.data;
+                    this.length2=res.data.length;
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -161,38 +181,11 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
                 console.log("1888888888888",park.partyBranch);
 				this.topShow = !this.topShow;
 				this.showTrans = !this.showTrans;
-                axios({
-                    method: 'get',
-                    url: 'ppartymember/getPartymemberByDepartmentid',
-                    params: {
-                        departmentid:this.departmentid,
-                        status:1//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
-                    }
-                }) .then((res)=> {
-                    this.length1=res.data.length
-                    this.list1=res.data;
-                console.log(res.data)
-            }).catch(function (error) {
-                    console.log(error);
-                });
+                this.slide();
+                this.slide1();
+			},
+            gohandle(item){
 
-
-                /*axios({
-                    method: 'get',
-                    url: 'ppartymember/getPartymemberByDepartmentid',
-                    params: {
-                        departmentid:park.departmentid
-                        status:3//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
-                    }
-                }) .then((res)=> {
-                    this.list1=res.data;
-                }).catch(function (error) {
-                    console.log(error);
-                })*/
-
-
-			},gohandle(item){
-                console.log("7777777777777777777777",item);
                this.$router.push({
                     // path: '/points/audit/:userId/:Id/:name/:departmentId/:totalscore',
                     name: 'Audit',

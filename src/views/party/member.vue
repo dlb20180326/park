@@ -49,9 +49,8 @@ Vue.component(Popup.name, Popup);
             Upper: function (value) {
                 try {
                     if(value===null) throw "去处理";
-                    if(value=== 2) throw "审核通过";
-                    if(value=== 3)  throw "已拒绝";
-                    if(value=== 1)  throw "待审核";
+                    if(value=== 1)  throw "已审核";
+                    if(value=== 0)  throw "待审核";
                 }
                 catch(err) {
                     return value=err;
@@ -62,8 +61,8 @@ Vue.component(Popup.name, Popup);
                 try {
                     if(value===null) throw "";
                     if(value=== 2) throw "yellowA";
-                    if(value=== 3)  throw "yellowB";
-                    if(value=== 1)  throw "yellowC";
+                    if(value=== 1)  throw "yellowB";
+                    if(value=== 0)  throw "yellowC";
                 }
                 catch(err) {
                     return value=err;

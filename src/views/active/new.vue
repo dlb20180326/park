@@ -129,7 +129,7 @@ export default {
             activityName:'',
             activePace:'',
             activeTitle:'',
-            activeCreatePeople,
+            activeCreatePeople:this.$store.getters.user.userid,
             activePrincipalPeople:'',
             activeContex:'',
             activeContent:'',
