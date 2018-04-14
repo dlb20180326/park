@@ -39,16 +39,20 @@
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
-            <flexbox class="img-list" :gutter="0" wrap="wrap">
-                <flexbox-item :span="1/3" >
-                    <img style="float: left" v-for="(item,index) in picList14.list" :key="index" width="100" :src="item">
-                </flexbox-item>
-                <flexbox-item :span="1/3">
-                    <div class="square" @click="chooseImage(picList14)">
-                        <div class="fileLoad" ></div>
-                    </div>
-                </flexbox-item>
-            </flexbox>
+            <div class="photo-list cl">
+                <ul>
+                    <li  v-for="(item,index) in picList14.list">
+                        <div class="preview">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="preview" @click="chooseImage(picList14)">
+                            <span class="add-bg"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="group-item">
             <group-title slot="title">
@@ -60,17 +64,20 @@
         <div class="group-item">
             <span class="addPic">添加凭证</span>
 
-            <flexbox class="img-list" :gutter="0" wrap="wrap">
-               <!--<img src="http://www.dlbdata.cn/dangjian/picture/show?pictureId=89" alt="">-->
-
-                <img style="float: left" v-for="(item,index) in picList15.list" :key="index" width="100" :src="item">
-
-                <flexbox-item :span="1/3">
-                    <div class="square" @click="chooseImage(picList15)">
-                        <div class="fileLoad" ></div>
-                    </div>
-                </flexbox-item>
-            </flexbox>
+            <div class="photo-list cl">
+                <ul>
+                    <li  v-for="(item,index) in picList15.list">
+                        <div class="preview">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="preview" @click="chooseImage(picList15)">
+                            <span class="add-bg"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="group-item">
             <group-title slot="title"></group-title>
@@ -226,8 +233,7 @@ export default {
         })
             ;
         }
-    }
-    ,
+    },
     mounted() {
           weixin.init(['chooseImage', 'uploadImage']);
     }
