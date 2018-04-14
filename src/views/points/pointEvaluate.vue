@@ -171,53 +171,55 @@ export default {
         },
         chooseImage(it) {
             this.$vux.alert.show({title: '选择菜单'});
-            wx.chooseImage({
-                count: 1, // 默认9
-                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-                success: res => {
-                    let localIds = res.localIds || [];
-                    new Promise(resolve => {
-                        let serverIds = [];
-                        let toUpload = localId =>
-                            wx.uploadImage({
-                                localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                                isShowProgressTips: 1, // 默认为1，显示进度提示
-                                success: res => {
-                                    serverIds.push(res.serverId);
-                                    if (localIds.length) {
-                                        toUpload(localIds.shift());
-                                    } else {
-                                        resolve(serverIds);
+            wx.ready( () =>{
+                wx.chooseImage({
+                    count: 1, // 默认9
+                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                    success: res => {
+                        let localIds = res.localIds || [];
+                        new Promise(resolve => {
+                            let serverIds = [];
+                            let toUpload = localId =>
+                                wx.uploadImage({
+                                    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                                    success: res => {
+                                        serverIds.push(res.serverId);
+                                        if (localIds.length) {
+                                            toUpload(localIds.shift());
+                                        } else {
+                                            resolve(serverIds);
+                                        }
                                     }
-                                }
+                                });
+                            if (localIds.length) {
+                                toUpload(localIds.shift());
+                            } else {
+                                resolve(serverIds);
+                            }
+                        }).then(serverIds => {
+                            let promiseList = [];
+                            serverIds.map(serverId =>
+                                promiseList.push(
+                                    this.$http.get('picture/upload', {
+                                        params: {
+                                            mediaId: serverId
+                                        }
+                                    })
+                                )
+                            );
+                            Promise.all(promiseList).then(result => {
+                                let pictureIds = [];
+                                result.map(item => pictureIds.push(item.data));
+                                this.$vux.alert.show(pictureIds);
+                                it.list.push("http://www.dlbdata.cn/dangjian/picture/show?pictureId=" + pictureIds);
+                                it.arr.push(pictureIds);
                             });
-                        if (localIds.length) {
-                            toUpload(localIds.shift());
-                        } else {
-                            resolve(serverIds);
-                        }
-                    }).then(serverIds => {
-                        let promiseList = [];
-                        serverIds.map(serverId =>
-                            promiseList.push(
-                                this.$http.get('picture/upload', {
-                                    params: {
-                                        mediaId: serverId
-                                    }
-                                })
-                            )
-                        );
-                        Promise.all(promiseList).then(result => {
-                            let pictureIds = [];
-                            result.map(item => pictureIds.push(item.data));
-                            this.$vux.alert.show(pictureIds);
-                            it.list.push("http://www.dlbdata.cn/dangjian/picture/show?pictureId=" + pictureIds);
-                            it.arr.push(pictureIds);
                         });
-                    });
-                }
-            });
+                    }
+                });
+            })
         },
         mounted() {
             weixin.init(['chooseImage', 'uploadImage']);
@@ -349,7 +351,7 @@ input[type="file"] {
     height: 0.32rem;
     padding: 0;
 }
-.photo-list{padding:.2rem 0;border-bottom:1px solid #e9e9e9;}
+.photo-list{padding:0.1rem 0 0;}
 .photo-list.border0{border-bottom:0;padding-bottom: 0;}
 .photo-list ul{font-size:0;list-style:none;}
 .photo-list ul li{font-size:0;display:inline-block;
