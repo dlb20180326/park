@@ -116,7 +116,7 @@ export default {
         getlist() {
             axios({
                 method: "get",
-                url: "/dangjian/pavantgrade/getList",
+                url: "pavantgrade/getList",
                 params: {
                     userId: this.userId
                 }
@@ -139,7 +139,7 @@ export default {
         auditResolve(item) {
             axios({
                 method: "post",
-                url: "/dangjian/pavantgrade/examineOK",
+                url: "pavantgrade/examineOK",
                 params: {
                     id: item.id
                 }
@@ -159,7 +159,7 @@ export default {
         dialogConfirm() {
             axios({
                 method: "post",
-                url: "/dangjian/pavantgrade/examineNo",
+                url: "pavantgrade/examineNo",
                 params: {
                     id: this.currItem.id,
                     rejectReson: this.rejectReason

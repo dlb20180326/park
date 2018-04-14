@@ -60,7 +60,7 @@
         },
         methods: {
             infor() {
-                axios.get('/dangjian/ppartymember/queryByDepartmentId', {
+                axios.get('ppartymember/queryByDepartmentId', {
                     params: {
                         departmentid: this.$store.getters.user.departmentid
                     }
@@ -72,7 +72,7 @@
 
             },
             nav() {
-                axios.get('/dangjian/pdepartment/queryById', {
+                axios.get('pdepartment/queryById', {
                     params: {
                         departmentid: this.$store.getters.user.departmentid
                     }

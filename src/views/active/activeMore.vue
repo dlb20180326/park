@@ -62,7 +62,7 @@ export default {
         getActivityMore(){
             axios({
                 method: 'get',
-                url: '/dangjian/active/getParticipateActive',
+                url: 'active/getParticipateActive',
                 params: {
                     pageNum:1,
                     pageSize:3,
@@ -84,7 +84,7 @@ export default {
 
        axios({
             method: 'post',
-            url: '/dangjian/active/participate',
+            url: 'active/participate',
             params: {
                 userId:this.userId,
                 activeId:id,
@@ -377,7 +377,7 @@ input {
         color:#666;
         line-height: .3rem;
         margin-left: .1rem;
-        padding-right:0.2rem; 
+        padding-right:0.2rem;
     }
 
 

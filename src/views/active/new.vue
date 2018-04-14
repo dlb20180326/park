@@ -158,7 +158,7 @@ export default {
             this.PickerVisible2=true;
             axios({
                 method: 'get',
-                url: '/dangjian/pscoredetail/queryByJoinList'
+                url: 'pscoredetail/queryByJoinList'
             }) .then((res)=> {
                 this.list= res.data;
             }).catch(function (error) {
@@ -178,7 +178,7 @@ export default {
             if(starttimeHaoMiao<endtimeHaoMiao){
             axios({
                 method: 'post',
-                url: '/dangjian/active/create',
+                url: 'active/create',
                 params: {
                     startTime:starttimeHaoMiao,
                     endTime:endtimeHaoMiao,
@@ -204,7 +204,7 @@ export default {
             }
         },
         showQR(data){
-            document.getElementById('fei').src = '/dangjian/active/showQrCode?activeId='+data;
+            document.getElementById('fei').src = 'active/showQrCode?activeId='+data;
             this.showQrcodeDialog = true;
         },
         submit1(it){

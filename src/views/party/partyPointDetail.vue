@@ -92,7 +92,7 @@ export default {
             this.totalscore=item.totalscore;
             axios({
                 method: 'get',
-                url: '/dangjian/pdepartment/queryById',
+                url: 'pdepartment/queryById',
                 params: {
                     departmentid:item.departmentid
 
@@ -110,7 +110,7 @@ export default {
             let item= this.$route.params.item;
             axios({
                 method: 'get',
-                url: '/dangjian/pscoreparty/queryByUserId',
+                url: 'pscoreparty/queryByUserId',
                 params: {
                     userid:item.id,
                     year:2018

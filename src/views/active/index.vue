@@ -88,11 +88,11 @@ export default {
           		return (this.getMonth() + 1) + "月" + this.getDate() + "日 ";
     		};
     		return new Date(s).toLocaleString();
-  
-    		
+
+
     	},
     	getList(){
-    		this.$http.get('/dangjian/active/getParticipateActive',{
+    		this.$http.get('active/getParticipateActive',{
     			params:{
     				pageNum:1,
     				pageSize:200,
@@ -104,7 +104,7 @@ export default {
     			console.log(this.list);
     		}).catch(err => {
     			console.log('fail'+err.data);
-    			
+
     		})
     	},
         chooseImage() {

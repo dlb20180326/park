@@ -1,8 +1,8 @@
 import axios from 'axios';
 // import qs from 'qs';
 
-const baseURL = '/dangjian/';
-//const baseURL = '/';
+//const baseURL = '/dangjian/';
+const baseURL = '/';
 
 // Add a request interceptor
 axios.interceptors.request.use(

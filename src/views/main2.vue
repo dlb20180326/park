@@ -109,7 +109,7 @@ export default {
     },
     methods: {
 		getHead(){
-			this.$http.get('/dangjian/ppartymember/queryByRoleId',{
+			this.$http.get('ppartymember/queryByRoleId',{
 				params:{
 					roleid:this.$store.getters.user.roleid
 				}
@@ -120,7 +120,7 @@ export default {
 				console.log('fail'+err);
 			})
 		}
-        
+
     }
 };
 </script>

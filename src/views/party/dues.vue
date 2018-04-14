@@ -59,7 +59,7 @@ import axios from 'axios'
 			FlexboxItem
 		},
 		mounted(){
-			axios.get('/dangjian/ppartymemberdues/queryByUserId',{
+			axios.get('ppartymemberdues/queryByUserId',{
 	        	params:{
 	        		userid:this.userId
 	        	}
@@ -74,9 +74,9 @@ import axios from 'axios'
 				})
 		},
 		methods:{
-			
+
 		}
-		
+
 	}
 </script>
 <style scoped>

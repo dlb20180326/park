@@ -1,5 +1,5 @@
 <template>
-	
+
 	<div style="height:100%;width:100%;overflow-x:hidden;">
    		<view-box ref="viewBox" body-padding-top=".46rem">
 			<r-header :rfs="contents"></r-header>
@@ -13,7 +13,7 @@ import Gain from '@/components/comother/gain'
 import {ViewBox} from 'vux'
 import axios from 'axios'
 	export default {
-		data(){			
+		data(){
 			return {
 				contents:{rights:'',title:'积分获取明细'},
 				list:[]
@@ -26,7 +26,7 @@ import axios from 'axios'
 		},
 		methods:{
 			details(){
-				axios.get('/dangjian/pscoreparty/queryByUserId',{
+				axios.get('pscoreparty/queryByUserId',{
 					params:{
 						userid:this.$route.params.userid,
 						year:this.$route.params.year

@@ -41,47 +41,34 @@ export default {
     },
     methods: {
         handle(id){
-            console.log('11111111111111',id)
-
             this.$router.push({
                 path: '/party/information',
                 name: 'information',
-
-              params: {
-
-
+                params: {
                     departmentid:id
-
-                },query: {
-
+                },
+                query: {
                     departmentid:id
-                 }
-
+                }
             })
-        }
-
-
-
-
-        ,
+        },
         getDepartment(){
             axios({
                 method: 'get',
-                url: '/dangjian/pdepartment/getList',
+                url: 'pdepartment/getList',
 
             }) .then((res)=> {
-                this.partyDetail=res.data
+                this.partyDetail=res.data;
             console.log(res.data)
         }).catch(function (error) {
                 console.log(error);
             })
         }
 
-    },mounted() {
-        this.getDepartment()
     },
-
-
+    mounted() {
+        this.getDepartment()
+    }
 };
 </script>
 

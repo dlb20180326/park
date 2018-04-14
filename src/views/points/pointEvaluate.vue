@@ -148,7 +148,7 @@ export default {
                 obj.pic15 = this.picList15.arr.join(",");
             }
             axios({
-                url: "/dangjian/pavantgrade/save",
+                url: "pavantgrade/save",
                 method: 'post',
                 headers: {'contentType': 'application/json'},
                 params: obj

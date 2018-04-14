@@ -81,7 +81,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
             this.PickerVisible5=true;
             axios({
                 method: 'get',
-                url: '/dangjian/pdepartment/getList'
+                url: 'pdepartment/getList'
             }) .then((res)=> {
                 this.list1= res.data;
             }).catch(function (error) {
@@ -93,7 +93,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
                 console.log("12321");
                 axios({
                     method: 'get',
-                    url: '/dangjian/pdepartment/getList',
+                    url: 'pdepartment/getList',
                 }) .then((res)=> {
                     this.department=res.data;
                     this.partyBranch1 = this.department[0].departmentname
@@ -113,7 +113,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 			slide(){
                 axios({
                     method: 'get',
-                    url: '/dangjian/ppartymember/getPartymemberByDepartmentid',
+                    url: 'ppartymember/getPartymemberByDepartmentid',
                     params: {
                         departmentid:this.departmentid,
                         status:1//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
@@ -132,7 +132,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 			},slide1(){
                 axios({
                     method: 'get',
-                    url: '/dangjian/ppartymember/getPartymemberByDepartmentid',
+                    url: 'ppartymember/getPartymemberByDepartmentid',
                     params: {
                         departmentid:this.departmentid,
                         status:2//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
@@ -141,7 +141,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
                     this.list1=res.data;
                     axios({
                         method: 'get',
-                        url: '/dangjian/ppartymember/getPartymemberByDepartmentid',
+                        url: 'ppartymember/getPartymemberByDepartmentid',
                         params: {
                             departmentid:this.departmentid,
                             status:3//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
@@ -163,7 +163,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 				this.showTrans = !this.showTrans
                 axios({
                     method: 'get',
-                    url: '/dangjian/ppartymember/getPartymemberByDepartmentid',
+                    url: 'ppartymember/getPartymemberByDepartmentid',
                     params: {
                         departmentid:this.departmentid,
                         status:1//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝
@@ -179,7 +179,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 
                 /*axios({
                     method: 'get',
-                    url: '/dangjian/ppartymember/getPartymemberByDepartmentid',
+                    url: 'ppartymember/getPartymemberByDepartmentid',
                     params: {
                         departmentid:park.departmentid
                         status:3//tempint 1 是待审核  tempint null 去处理  tempint 2 是审核通过 tempint 3 已拒绝

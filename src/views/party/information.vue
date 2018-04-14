@@ -75,7 +75,7 @@ export default {
 
             axios({
                 method: 'get',
-                url: '/dangjian/pdepartment/queryById',
+                url: 'pdepartment/queryById',
                 params: {
                     departmentid:departmentId
                 }
@@ -97,7 +97,7 @@ export default {
             let departmentId = this.$route.params.departmentid;
             axios({
                 method: 'get',
-                url: '/dangjian/ppartymember/queryByDepartmentId',
+                url: 'ppartymember/queryByDepartmentId',
                 params: {
                     departmentid:departmentId
                 }

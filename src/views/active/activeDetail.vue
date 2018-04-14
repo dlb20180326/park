@@ -67,7 +67,7 @@
                             </li>
 
                         </ul>
-                        
+
                     </div>
                 </section>
             </flexbox-item>
@@ -107,7 +107,7 @@ export default {
         getActivity(){
             axios({
                 method: 'get',
-                url: '/dangjian/active/getRunningActive',
+                url: 'active/getRunningActive',
                 params: {
                     pageNum:1,
                     pageSize:1
@@ -129,7 +129,7 @@ export default {
         gettimes1(){
             axios({
                 method: 'post',
-                url: '/dangjian/active/getParticipateCount',
+                url: 'active/getParticipateCount',
                 params: {
                     userId:this.userId,
                     activeType:3
@@ -150,7 +150,7 @@ export default {
         gettimes2(){
             axios({
                 method: 'post',
-                url: '/dangjian/active/getParticipateCount',
+                url: 'active/getParticipateCount',
                 params: {
                     userId:this.userId,
                     activeType:5
@@ -170,7 +170,7 @@ export default {
 
             axios({
                 method: 'post',
-                url: '/dangjian/active/participate',
+                url: 'active/participate',
                 params: {
                     userId:this.userId,
                     activeId:this.activeId
@@ -189,7 +189,7 @@ export default {
         getAlreadyActive(){
             axios({
                 method: 'get',
-                url: '/dangjian/active/getAlreadyActive',
+                url: 'active/getAlreadyActive',
                 params: {
                     pageNum:1,
                     pageSize:4
