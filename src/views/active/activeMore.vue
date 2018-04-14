@@ -70,7 +70,6 @@ export default {
                     userId:this.$store.getters.user.userid
                 }
             }) .then((res)=> {
-                console.log(res.data.list)
                 this.active=res.data.list;
             })
                 .catch(function (error) {
@@ -80,26 +79,17 @@ export default {
 
         },
     submit(id){
-        console.log(id)
-
        axios({
             method: 'post',
             url: 'active/participate',
             params: {
                 userId:this.userId,
                 activeId:id,
-                departmentid:this.departmentid,
-
-
+                departmentid:this.departmentid
             }
         }) .then((res)=> {
-
-
             this.msg=res.msg,
-                this.show=true
-
-
-
+            this.show=true
         })
             .catch(function (error) {
                 console.log(error);
@@ -117,7 +107,6 @@ export default {
 		return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
 	}
 	return new Date(s).toLocaleString();
-
 	}
     } ,
     mounted() {

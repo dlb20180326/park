@@ -58,29 +58,6 @@
                     <a  @click="submit()">报名</a>
                 </div>
             </section>
-            <!--<x-table :cell-bordered="false" :content-bordered="false" style="background-color:#fff;" >
-                <tbody>
-                <tr >
-                    <td >时间：</td>
-                    <td>{{startTime1}}</td>
-                </tr>
-                <tr>
-                    <td>地点：</td>
-                    <td>{{activePace}}</td>
-                </tr>
-                <tr>
-                    <td>发起人：</td>
-                    <td> {{activeCreatePeople}}</td>
-                </tr>
-                <tr>
-                    <td>活动内容：</td>
-                    <td>{{activeContext}}</td>
-                </tr>
-                </tbody>
-            </x-table>-->
-                   <!-- <flexbox-item  style="text-align: center">
-                        <x-button mini type="warn">报名</x-button>
-                    </flexbox-item>-->
         </flexbox>
         <flexbox orient="vertical">
             <flexbox-item>
@@ -101,12 +78,6 @@
                         </ul>
                     </div>
                 </section>
-                <!--<cell title="已参与组织生活" value="查看全部" is-link></cell>
-                <group>
-                    <cell title="title" value="value"></cell>
-                    <cell title="title" value="value"></cell>
-                    <cell title="title" value="value"></cell>
-                </group>-->
             </flexbox-item>
         </flexbox>
         <div v-transfer-dom>
@@ -147,7 +118,7 @@ export default {
             activeContext:'',
             activeComplete:[],
             show:false,
-            msg:'',
+            msg:''
 
 
 
@@ -164,18 +135,14 @@ export default {
                     pageSize:1
                 }
             }) .then((res)=> {
-                console.log(res.data)
                 this.startTime1=res.data.list[0].startTime;
                 this.activePace=res.data.list[0].activePace;
                 this.activeCreatePeople=res.data.list[0].activeCreatePeople;
                 this.activeContext=res.data.list[0].activeContext;
                 this.activeId=res.data.list[0].id;
-            })
-                .catch(function (error) {
+            }) .catch(function (error) {
                     console.log(error);
                 });
-
-
         },
         gettimes1(){
             axios({
@@ -188,14 +155,10 @@ export default {
             }) .then((res)=> {
                 console.log(res)
                 this.number1=res.data
-
-
             })
                 .catch(function (error) {
                     console.log(error);
                 });
-
-
         }
         ,
         gettimes2(){
@@ -218,7 +181,6 @@ export default {
 
 
         },submit(){
-
             axios({
                 method: 'post',
                 url: 'active/participate',
@@ -228,12 +190,8 @@ export default {
                     departmentid:this.departmentid,
                 }
             }) .then((res)=> {
-
                 this.msg=res.msg,
                 this.show=true
-
-
-
             })
                 .catch(function (error) {
                     console.log(error);
@@ -249,10 +207,8 @@ export default {
                     pageSize:4
                 }
             }) .then((res)=> {
-                console.log("112132132132131",res.data.list)
-                 this.activeComplete=res.data.list
-                console.log(this.activeComplete)
-            })
+                this.activeComplete=res.data.list
+                })
                 .catch(function (error) {
                     console.log(error);
                 });

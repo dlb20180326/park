@@ -83,15 +83,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 				activeData:{},
 				picInfo:[],
 				list: [],
-/*				{
-        			msrc: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=89',
-        			src: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=89'
-      			},
-      			{
-        			msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-        			src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg'
-      			}*/
-      			
+
       			options: {
         			getThumbBoundsFn (index) {
           			// find thumbnail element
@@ -107,7 +99,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 		            // http://javascript.info/tutorial/coordinates
         			}
       			}
-				
+
 			}
 		}
 	}

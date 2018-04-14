@@ -278,6 +278,7 @@
             }
         },
         mounted() {
+            weixin.init(['chooseImage', 'uploadImage']);
             this.getActivity();
             this.getList();
             this.getUser();

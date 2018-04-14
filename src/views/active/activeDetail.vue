@@ -137,16 +137,10 @@ export default {
             }) .then((res)=> {
                 console.log(res)
                 this.number1=res.data
-
-
-            })
-                .catch(function (error) {
+            }) .catch(function (error) {
                     console.log(error);
                 });
-
-
-        }
-        ,
+        } ,
         gettimes2(){
             axios({
                 method: 'post',
@@ -167,7 +161,6 @@ export default {
 
 
         },submit(){
-
             axios({
                 method: 'post',
                 url: 'active/participate',
@@ -177,9 +170,6 @@ export default {
                 }
             }) .then((res)=> {
                 alert(res.msg)
-
-
-
             })
                 .catch(function (error) {
                     console.log(error);
@@ -195,7 +185,6 @@ export default {
                     pageSize:4
                 }
             }) .then((res)=> {
-                console.log("112132132132131",res.data.list)
                  this.activeComplete=res.data.list
                 console.log(this.activeComplete)
             })
@@ -210,7 +199,6 @@ export default {
         		return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
         	}
         	return new Date(s).toLocaleString();
-
         }
 
     },
