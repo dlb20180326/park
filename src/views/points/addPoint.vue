@@ -51,10 +51,16 @@
         </div>
         <div class="group-item">
         	<span class="addPic">添加照片</span>
-            <img style="float: left" v-for="(item,index) in picList.list" :key="index" width="100" :src="item">
-            <div class="square" @click="chooseImage(picList)">
-                <div class="fileLoad" ></div>
-            </div>
+            <flexbox class="img-list" :gutter="0" wrap="wrap">
+                <flexbox-item :span="1/3" >
+                    <img style="float: left" v-for="(item,index) in picList.list" :key="index" width="100" :src="item">
+                </flexbox-item>
+                <flexbox-item >
+                    <div class="square" @click="chooseImage(picList)">
+                        <div class="fileLoad"  ></div>
+                    </div>
+                </flexbox-item>
+            </flexbox>
         </div>
         <div class="group-item">
             <group-title slot="title"></group-title>
