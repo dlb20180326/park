@@ -179,18 +179,19 @@ export default {
                     let localIds = res.localIds || [];
                     new Promise(resolve => {
                         let serverIds = [];
-                        let toUpload = localId => wx.uploadImage({
-                            localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                            isShowProgressTips: 1, // 默认为1，显示进度提示
-                            success: res => {
-                                serverIds.push(res.serverId);
-                                if (localIds.length) {
-                                    toUpload(localIds.shift());
-                                } else {
-                                    resolve(serverIds);
+                        let toUpload = localId =>
+                            wx.uploadImage({
+                                localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                isShowProgressTips: 1, // 默认为1，显示进度提示
+                                success: res => {
+                                    serverIds.push(res.serverId);
+                                    if (localIds.length) {
+                                        toUpload(localIds.shift());
+                                    } else {
+                                        resolve(serverIds);
+                                    }
                                 }
-                            }
-                        });
+                            });
                         if (localIds.length) {
                             toUpload(localIds.shift());
                         } else {
@@ -198,20 +199,21 @@ export default {
                         }
                     }).then(serverIds => {
                         let promiseList = [];
-                        serverIds.map(serverId => promiseList.push(
-                            this.$http.get('picture/upload', {
-                                params: {
-                                    mediaId: serverId
-                                }
-                            })
-                        ));
+                        serverIds.map(serverId =>
+                            promiseList.push(
+                                this.$http.get('picture/upload', {
+                                    params: {
+                                        mediaId: serverId
+                                    }
+                                })
+                            )
+                        );
                         Promise.all(promiseList).then(result => {
                             let pictureIds = [];
-                            result.map(item => {
-                                this.$vux.alert.show({title: item.data});
-                                it.list.push("http://www.dlbdata.cn/dangjian/picture/show?pictureId=" + item.data);
-                                it.arr.push(item.data);
-                            });
+                            result.map(item => pictureIds.push(item.data));
+                            this.$vux.alert.show(pictureIds);
+                            it.list.push("http://www.dlbdata.cn/dangjian/picture/show?pictureId=" + pictureIds);
+                            it.arr.push(pictureIds);
                         });
                     });
                 }
