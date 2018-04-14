@@ -16,20 +16,10 @@
                     </div>
                 </section>
             </flexbox-item>
-            <!-- <flexbox-item>
-                    <span class="">年度共参与活动次数：<b>{{userId}}</b>次</span>
-            </flexbox-item>
-            <flexbox-item>
-                    <span >年度共参与公益活动次数：<b>{{number2}}</b>次</span>
-            </flexbox-item>-->
+
         </flexbox>
         <flexbox orient="vertical">
-            <!--  <flexbox-item>
-                <group>
-                    <cell title="党员生活通知" value="查看全部" is-link="true" link="/activity/activityMore" ></cell>
 
-                </group>
-            </flexbox-item>-->
             <section class="mainbox">
                 <div class=" clearfix p15 display">
                     <span class="fl weui-cell__bd1">党员生活通知</span>
@@ -41,7 +31,7 @@
                     <table width="100%" class="table">
                         <tr>
                             <td width="100">时间：</td>
-                            <td class="f_b">{{startTime1}}</td>
+                            <td class="f_b">{{startTime1|formatDuring}}</td>
                         </tr>
                         <tr>
                             <td>地点：</td>
@@ -62,29 +52,7 @@
                     <a @click="submit()">报名</a>
                 </div>
             </section>
-            <!--<x-table :cell-bordered="false" :content-bordered="false" style="background-color:#fff;" >
-                <tbody>
-                <tr >
-                    <td >时间：</td>
-                    <td>{{startTime1}}</td>
-                </tr>
-                <tr>
-                    <td>地点：</td>
-                    <td>{{activePace}}</td>
-                </tr>
-                <tr>
-                    <td>发起人：</td>
-                    <td> {{activeCreatePeople}}</td>
-                </tr>
-                <tr>
-                    <td>活动内容：</td>
-                    <td>{{activeContext}}</td>
-                </tr>
-                </tbody>
-            </x-table>-->
-            <!-- <flexbox-item  style="text-align: center">
-                        <x-button mini type="warn">报名</x-button>
-                    </flexbox-item>-->
+
         </flexbox>
         <flexbox orient="vertical">
             <flexbox-item>
@@ -92,26 +60,21 @@
                     <div class="p15">
                         <div class=" clearfix  display">
                             <span class="fl weui-cell__bd1">已参与组织生活</span>
-                            <!-- <a class="fr">查看全部 ></a> -->
+
                             <router-link class="fr" slot="right" to="/active/partyMoment">查看全部 ></router-link>
                         </div>
                         <ul class="news">
                             <li v-for="(item,index) in activeComplete" :key="index">
                                 <a class=" display clearfix " href="javascript:;">
                                     <div class=" fl newsa">{{item.activeName}}</div>
-                                    <div class=" fr">{{item.endTime}}</div>
+                                    <div class=" fr">{{item.endTime|formatDuring}}</div>
                                 </a>
                             </li>
 
                         </ul>
                     </div>
                 </section>
-                <!--<cell title="已参与组织生活" value="查看全部" is-link></cell>
-                <group>
-                    <cell title="title" value="value"></cell>
-                    <cell title="title" value="value"></cell>
-                    <cell title="title" value="value"></cell>
-                </group>-->
+
             </flexbox-item>
         </flexbox>
         <div v-transfer-dom>
@@ -164,6 +127,16 @@ export default {
             show: false,
             msg: ''
         };
+    },
+    filters: {
+        formatDuring: function (value) {
+
+            Date.prototype.toLocaleString = function(){
+                return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
+            }
+            return new Date(value).toLocaleString();
+
+        }
     },
     methods: {
         getActivity() {

@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="book">
-                    <a  @click="submit()">报名</a>
+                    <a :class="{'active1':isActive,'active2':!isActive}" @click="submit()">报名</a>
                 </div>
             </section>
 
@@ -97,7 +97,8 @@ export default {
             activeId:'',
             activeContext:'',
 
-            activeComplete:[]
+            activeComplete:[],
+            isActive:true,
 
 
 
@@ -180,6 +181,14 @@ export default {
                 }
             }) .then((res)=> {
                 alert(res.msg)
+
+            if(res.success==false){
+                 return this.isActive=false;
+
+            }
+
+
+
             })
                 .catch(function (error) {
                     console.log(error);
@@ -451,15 +460,18 @@ export default {
     .book a {
         display:inline-block;
         border-radius:1vw;
-        background:#9d0e1e;
+
         color:#fff;
         padding:2vw 0;
         width:35vw;
 
     }
-    .book.on a {
-        background:#d8d8d8;
-    }
+    .active1 {
+           background:#9d0e1e;
+       }
+    .active2 {
+           background:#d8d8d8;
+     }
     .f_b {
     }
     .table td {
