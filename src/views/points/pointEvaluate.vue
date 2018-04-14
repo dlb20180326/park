@@ -170,6 +170,7 @@ export default {
 
         },
         chooseImage(it) {
+            this.$vux.alert.show({title: '选择菜单'});
             wx.chooseImage({
                 count: 1, // 默认9
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -207,6 +208,7 @@ export default {
                         Promise.all(promiseList).then(result => {
                             let pictureIds = [];
                             result.map(item => {
+                                this.$vux.alert.show({title: item.data});
                                 it.list.push("http://www.dlbdata.cn/dangjian/picture/show?pictureId=" + item.data);
                                 it.arr.push(item.data);
                             });
