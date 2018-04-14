@@ -205,8 +205,11 @@ export default {
                             })
                         ));
                         Promise.all(promiseList).then(result => {
-                            it.list.push("http://www.dlbdata.cn/dangjian/picture/show?pictureId=" + item.data);
-                            it.arr.push(item.data);
+                            let pictureIds = [];
+                            result.map(item => {
+                                it.list.push("http://www.dlbdata.cn/dangjian/picture/show?pictureId=" + item.data);
+                                it.arr.push(item.data);
+                            });
                         });
                     });
                 }
