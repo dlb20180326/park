@@ -138,87 +138,79 @@ export default {
                 userid: +userId,
                 partmentid: +partmentId,
             };
-            if(this.picList13.arr.length!=0) {
+            if (this.picList13.arr.length != 0) {
                 obj.pic13 = this.picList13.arr.join(",");
             }
-            if(this.picList14.arr.length!=0){
-                obj.pic14= this.picList14.arr.join(",");
+            if (this.picList14.arr.length != 0) {
+                obj.pic14 = this.picList14.arr.join(",");
             }
-            if(this.picList15.arr.length!=0){
-                obj.pic15= this.picList15.arr.join(",");
+            if (this.picList15.arr.length != 0) {
+                obj.pic15 = this.picList15.arr.join(",");
             }
-            axios.post("/dangjian/pavantgrade/save", obj).then(res => {
-                if(res.success){
-                    this.$vux.alert.show({title:'提交成功'});
-                }else {
-                    this.$vux.alert.show({title:'提交失败'});
+            axios({
+                url: "/dangjian/pavantgrade/save",
+                method: 'post',
+                headers: {'contentType': 'application/json'},
+                params: obj
+            }).then(res => {
+                if (res.success) {
+                    this.$vux.alert.show({title: '提交成功'});
+                } else {
+                    this.$vux.alert.show({title: '提交失败'});
                 }
-            }).catch(function (error) {
-                console.log(error);
+            }).catch(err => {
+                this.$vux.alert.show({title: '提交失败'});
             });
-        }
-        ,
 
+        },
         chooseImage(it) {
             wx.chooseImage({
-                    count: 1, // 默认9
-                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-                    success: res => {
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: res => {
                     let localIds = res.localIds || [];
-            new Promise(resolve => {
-                let serverIds = [];
-            let toUpload = localId =>
-            wx.uploadImage({
-                    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                    isShowProgressTips: 1, // 默认为1，显示进度提示
-                    success: res => {
-                    serverIds.push(res.serverId);
-            if (localIds.length) {
-                toUpload(localIds.shift());
-            } else {
-                resolve(serverIds);
-            }
+                    new Promise(resolve => {
+                        let serverIds = [];
+                        let toUpload = localId => wx.uploadImage({
+                            localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                            isShowProgressTips: 1, // 默认为1，显示进度提示
+                            success: res => {
+                                serverIds.push(res.serverId);
+                                if (localIds.length) {
+                                    toUpload(localIds.shift());
+                                } else {
+                                    resolve(serverIds);
+                                }
+                            }
+                        });
+                        if (localIds.length) {
+                            toUpload(localIds.shift());
+                        } else {
+                            resolve(serverIds);
+                        }
+                    }).then(serverIds => {
+                        let promiseList = [];
+                        serverIds.map(serverId => promiseList.push(
+                            this.$http.get('picture/upload', {
+                                params: {
+                                    mediaId: serverId
+                                }
+                            })
+                        ));
+                        Promise.all(promiseList).then(result => {
+                            let pictureIds = [];
+                            result.map(item => pictureIds.push(item.data));
+                            it.list.push("http://www.dlbdata.cn/dangjian/picture/show?pictureId=" + pictureIds.join());
+                            it.arr.push(pictureIds.join());
+                        });
+                    });
+                }
+            });
+        },
+        mounted() {
+            weixin.init(['chooseImage', 'uploadImage']);
         }
-        })
-            ;
-            if (localIds.length) {
-                toUpload(localIds.shift());
-            } else {
-                resolve(serverIds);
-            }
-        }).
-            then(serverIds => {
-                let promiseList = [];
-            serverIds.map(serverId =>
-            promiseList.push(
-                this.$http.get('picture/upload', {
-                    params: {
-                        mediaId: serverId
-                    }
-                })
-            )
-        )
-            ;
-            Promise.all(promiseList).then(result => {
-                let pictureIds = [];
-            result.map(item => pictureIds.push(item.data)
-        )
-            ;
-            it.list.push("http://www.dlbdata.cn/dangjian/picture/show?pictureId=" + pictureIds.join());
-            it.arr.push(pictureIds.join());
-        })
-            ;
-        })
-            ;
-        }
-        })
-            ;
-        }
-    }
-    ,
-    mounted() {
-          weixin.init(['chooseImage', 'uploadImage']);
     }
 };
 </script>
