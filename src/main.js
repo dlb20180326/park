@@ -12,8 +12,8 @@ import * as utils from './utils';
 //引入vux
 import { AjaxPlugin, LoadingPlugin, ToastPlugin, ConfirmPlugin,AlertPlugin } from 'vux';
 Vue.use(AjaxPlugin);
-Vue.use(LoadingPlugin);
 Vue.use(ToastPlugin);
+Vue.use(LoadingPlugin);
 Vue.use(ConfirmPlugin);
 Vue.use(AlertPlugin)
 

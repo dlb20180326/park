@@ -27,7 +27,7 @@
                     <table width="100%" class="table">
                         <tr>
                             <td width="100">时间：</td>
-                            <td class="f_b">{{startTime1}}</td>
+                            <td class="f_b">{{startTime1|formatDuring}}</td>
                         </tr>
                         <tr>
                             <td>地点：</td>
@@ -62,7 +62,7 @@
                             <li v-for="(item,index) in activeComplete" :key="index" >
                                 <a class=" display clearfix " href="javascript:;">
                                     <div class=" fl">{{item.activeName}}</div>
-                                    <div class=" fr">{{datePick(item.endTime)}}<span class="rightBtn"></span></div>
+                                    <div class=" fr">{{item.endTime|formatDuring}}<span class="rightBtn"></span></div>
                                 </a>
                             </li>
 
@@ -102,6 +102,16 @@ export default {
 
 
         };
+    },
+    filters: {
+        formatDuring: function (value) {
+
+                Date.prototype.toLocaleString = function(){
+                    return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
+                }
+                return new Date(value).toLocaleString();
+
+        }
     },
     methods:{
         getActivity(){
@@ -195,10 +205,10 @@ export default {
 
         },
         datePick(s){
-        	Date.prototype.toLocaleString = function(){
-        		return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
-        	}
-        	return new Date(s).toLocaleString();
+            Date.prototype.toLocaleString = function(){
+                return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
+            }
+            return new Date(s).toLocaleString();
         }
 
     },
