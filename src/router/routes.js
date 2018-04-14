@@ -37,7 +37,7 @@ export const routes = [
             },
             {
                 path: 'party/dues',
-                name:'Dues',
+                name: 'Dues',
                 component: () => import('@/views/party/dues')
             },
             {
@@ -46,7 +46,7 @@ export const routes = [
             },
             {
                 path: 'party/member/',
-                name:'member',
+                name: 'member',
                 component: () => import('@/views/party/member')
             },
             {
@@ -88,7 +88,7 @@ export const routes = [
             {
                 path: 'points/audit/:userId/:Id/:name/:departmentId/:totalscore',
                 name: 'Audit',
-                props:true,
+                props: true,
                 component: () => import('@/views/points/auditDetail')
             },
             {
@@ -97,19 +97,22 @@ export const routes = [
             },
             {
                 path: 'points/addPoint/:projectId/:moduleId',
-                name:'addPoint',
+                name: 'addPoint',
                 component: () => import('@/views/points/addPoint')
             },
             {
                 path: 'points/pointEvaluate/:partmentId/:name/:departmentId/:userId',
-                name:'pointEvaluate',
+                name: 'pointEvaluate',
                 component: () => import('@/views/points/pointEvaluate')
-            }
-            ,
+            },
             {
                 path: 'active',
-                name:'Active',
+                name: 'Active',
                 component: () => import('@/views/active')
+            },
+            {
+                path: 'active/partyActivity',
+                component: () => import('@/views/active/partyActivity')
             },
             {
                 path: 'active/detail',
@@ -117,8 +120,12 @@ export const routes = [
             },
             {
                 path: 'active/activeMore',
-                name:'activeMore',
+                name: 'activeMore',
                 component: () => import('@/views/active/activeMore')
+            },
+            {
+                path: 'active/partyMoment',
+                component: () => import('@/views/active/partyMoment')
             },
             {
                 path: 'active/detailPack',
@@ -126,18 +133,18 @@ export const routes = [
             },
             {
                 path: 'active/post/:activeId',
-                name:'activePost',
+                name: 'activePost',
                 component: () => import('@/views/active/post')
             },
             {
                 path: 'active/new',
-                name:'activeNews',
+                name: 'activeNews',
                 component: () => import('@/views/active/new')
             },
             {
-            	path: 'active/new2',
+                path: 'active/new2',
                 component: () => import('@/views/active/new2')
-        	},
+            },
             {
                 path: 'active/activeDetail',
                 component: () => import('@/views/active/activeDetail')

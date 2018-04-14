@@ -84,7 +84,7 @@ const tabs = {
             icon: require('@/assets/images/gray-active.png'),
             iconActive: require('@/assets/images/iconw-activity.png'),
             label: '党员活动',
-            link: '/active'
+            link: '/active/partyActivity'
         }
     ]
 };
@@ -112,7 +112,7 @@ export default {
                 if (item.link === '/') {
                     return /^\/main/.test(this.$route.path) || item.link === this.$route.path;
                 } else {
-                    return new RegExp('^' + item.link).test(this.$route.path);
+                    return new RegExp('^' + /^\/\w+/.exec(item.link)[0]).test(this.$route.path);
                 }
             });
         }
