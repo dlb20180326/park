@@ -96,6 +96,8 @@ Vue.component(Popup.name, Popup);
                 });
             },
 			changeItem(item){
+                console.log(item.tempint)
+                if(item.tempint!=1){
                 this.$router.push({
                     path: '/points/pointEvaluate',
                     name: 'pointEvaluate',
@@ -105,7 +107,7 @@ Vue.component(Popup.name, Popup);
                         departmentId:item.departmentid,
                         userId:item.userid
                     }
-                })
+                })}
 			},
 			know(){
 				this.showPop = false
