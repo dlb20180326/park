@@ -192,7 +192,8 @@ export default {
                         departmentid:this.departmentid
                     }
                 }) .then((res)=> {
-                    alert(res.msg);
+                    this.$vux.alert.show({title:res.msg});
+
                     this.showQR(res.data);
                     console.log(res.data);
 
@@ -201,8 +202,9 @@ export default {
                     console.log(error);
                 });
             }else {
-                alert("开始日期不能大于结束日期");
-            }
+                this.$vux.alert.show({title:'开始日期不能大于结束日期'});
+
+                            }
         },
         showQR(data){
             document.getElementById('fei').src = 'active/showQrCode?activeId='+data;
