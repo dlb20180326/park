@@ -90,7 +90,6 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     				this.peopleNum = this.activeData.notParticipate.length + this.activeData.participate.length;
     				this.participants = this.activeData.participate.length;
     				this.Noparticipants = this.activeData.notParticipate.length;
-    				console.log(this.participants);
     				if(this.participants >= 4){
     					this.btnAn = true
     				}

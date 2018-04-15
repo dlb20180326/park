@@ -5,7 +5,7 @@
             <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>
         </x-header>
         <div class="box">
-            <flexbox class="list-item" v-for="(item, index) in list" :key="index" :gutter="0" align="stretch">
+            <flexbox class="list-item" v-for="(item,index) in list" :key="index" :gutter="0" align="stretch">
                 <flexbox-item class="list-avatar">
                     <img src="@/assets/images/icon-head.png">
                 </flexbox-item>
@@ -16,16 +16,17 @@
                                 <b>{{item.activeName}}</b>
                                 <p>{{datePick(item.createTime)}}</p>
                             </flexbox-item>
-                <!--            <flexbox-item class="list-close">
-                                <a><img src="@/assets/images/x.png"></a>
-                            </flexbox-item>-->
                         </flexbox>
                         <div class="list-content" v-html="item.activeContext"></div>
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
-                        <flexbox-item :span="1/3" v-for="(item, index) in imgs" :key="index">
-                            <div><img v-clipping="item"></div>
+                        <flexbox-item :span="1/3" v-for="(it,second) in item.pictureList" :key="second">
+                            <div><img :src="it.src" class="previewer-demo-img" @click="atShow(second,index)"></div>
                         </flexbox-item>
+                        <div v-transfer-dom>
+				      		<previewer :list="item.pictureList" ref="previewer" :options="options" @on-index-change="logIndexChange">
+				      		</previewer>
+			    		</div>
                         <flexbox-item :span="1/3">
                             <a class="btn-plus" @click="chooseImage"></a>
                         </flexbox-item>
@@ -40,7 +41,7 @@
 </template>
 
 <script>
-import { XHeader, Flexbox, FlexboxItem } from 'vux';
+import { XHeader, Flexbox, FlexboxItem,TransferDom,Previewer} from 'vux';
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
 
@@ -48,7 +49,8 @@ export default {
     components: {
         XHeader,
         Flexbox,
-        FlexboxItem
+        FlexboxItem,
+        Previewer
     },
     directives: {
         clipping: {
@@ -64,18 +66,30 @@ export default {
                 };
                 img.src = binding.value;
             }
-        }
+        },
+         TransferDom
     },
     data() {
         return {
            list:[],
-            imgs: [
-                require('@/assets/images/preview.jpg'),
-                require('@/assets/images/preview1.jpg'),
-                require('@/assets/images/preview2.jpg'),
-                require('@/assets/images/preview3.jpg')
-            ],
-            imgIds: []
+            imgs:[],
+            imgIds: [],
+            pictures:[],
+            options: {
+				getThumbBoundsFn (index) {
+	  			// find thumbnail element
+	            let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
+	            // get window scroll Y
+	            let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
+	            // optionally get horizontal scroll
+	            // get position of element relative to viewport
+	            let rect = thumbnail.getBoundingClientRect()
+	            // w = width
+	            return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
+	            // Good guide on how to get element coordinates:
+	            // http://javascript.info/tutorial/coordinates
+				}
+			}
         };
     },
     mounted() {
@@ -89,6 +103,12 @@ export default {
     		};
     		return new Date(s).toLocaleString();
     	},
+	 	logIndexChange (arg) {
+  			console.log(arg)
+		},
+		atShow(second,index){
+			this.$refs.previewer[index].show(second);
+		},
     	getList(){
     		this.$http.get('active/getParticipateActive',{
     			params:{
@@ -100,6 +120,17 @@ export default {
     		}).then(res => {
     			this.list = res.data.list;
     			console.log(this.list);
+    			this.list.forEach(item =>{
+    					item.pictureList=[];
+    				    for(let i=0;i<item.pictures.length;i++){
+	    					var obj = {};
+	    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
+	    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
+	    					item.pictureList.push(obj);
+    					}
+    				    console.log(item.pictureList);
+    			})
+
     		}).catch(err => {
     			console.log('fail'+err.data);
 
