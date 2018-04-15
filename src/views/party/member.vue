@@ -60,7 +60,6 @@ Vue.component(Popup.name, Popup);
             Upper1: function (value) {
                 try {
                     if(value===null) throw "";
-                    if(value=== 2) throw "yellowA";
                     if(value=== 1)  throw "yellowB";
                     if(value=== 0)  throw "yellowC";
                 }
@@ -97,6 +96,8 @@ Vue.component(Popup.name, Popup);
                 });
             },
 			changeItem(item){
+                console.log(item.tempint)
+                if(item.tempint!=1){
                 this.$router.push({
                     path: '/points/pointEvaluate',
                     name: 'pointEvaluate',
@@ -106,7 +107,7 @@ Vue.component(Popup.name, Popup);
                         departmentId:item.departmentid,
                         userId:item.userid
                     }
-                })
+                })}
 			},
 			know(){
 				this.showPop = false

@@ -36,13 +36,15 @@
                         <div class="header">{{item.title}} <span v-if="i==2">支部书记评分{{item.itemscore}}分</span>  </div>
                         <div class="body">
                             <span class="desc">{{item.message}}</span>
-                            <flexbox class="img-list" :gutter="0" wrap="wrap">
-                                <flexbox-item v-for="(img,ii) of item.memo" :key="ii" :span="1/3">
-                                    <img :src="'picture/show/'+img" alt="">
-                                </flexbox-item>
-                            </flexbox>
+                            <div class="img-show">
+                                <img class="previewer-demo-img" v-for="(it,idx) in item.memos" :src="it.src" width="100"  @click="atBig(idx,i)">
+                                <div v-transfer-dom>
+                                <previewer :list="item.memos" ref="previewer"  slot="names"  :options="options" @on-index-change="logIndexChange">
+                                </previewer>
+                                </div>
+                            </div>
                         </div>
-                        <flexbox class="footer" v-if="item.status == 1">
+                        <flexbox class="footer" v-if="item.status == 0">
                             <flexbox-item>
                                 <x-button @click.native="auditReject(item)" :mini="true" type="warn">
                                     驳回
@@ -55,10 +57,18 @@
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="footer" justify= "center" v-if="item.status == 2">
-                            审核成功
+                            <x-button type="warn">审核成功</x-button>
                         </flexbox>
                         <flexbox class="footer" justify= "center" v-if="item.status == 3">
-                            已拒绝
+                            <x-button style="color:gray">已拒绝</x-button>
+                        </flexbox>
+                        <flexbox class="footer" justify= "left" v-if="item.status == 3" style="text-align:left;">
+                            <table>
+                                <tr>
+                                <td style="width:5em">拒绝原因:</td>
+                                <td>{{item.rejectReson}}</td>
+                                </tr>
+                            </table>
                         </flexbox>
                     </div>
                 </div>
@@ -72,6 +82,7 @@ import {
     XHeader,
     Flexbox,
     FlexboxItem,
+    Previewer,
     ViewBox,
     Group,
     Cell,
@@ -93,7 +104,8 @@ export default {
         Cell,
         XButton,
         XDialog,
-        XTextarea
+        XTextarea,
+        Previewer
     },
     props: ["userId", "Id", "name", "departmentId", "totalscore"],
     data() {
@@ -101,7 +113,22 @@ export default {
             currItem: null,
             rejectReason: "",
             showRejectDialog: false,
-            list: []
+            list: [],
+            options: {
+                getThumbBoundsFn (index) {
+                // find thumbnail element
+                let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
+                // get window scroll Y
+                let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
+                // optionally get horizontal scroll
+                // get position of element relative to viewport
+                let rect = thumbnail.getBoundingClientRect()
+                // w = width
+                return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
+                // Good guide on how to get element coordinates:
+                // http://javascript.info/tutorial/coordinates
+                }
+            }
         };
     },
     computed: {
@@ -113,6 +140,10 @@ export default {
         this.getlist();
     },
     methods: {
+        atBig (index,i) {
+            console.log(this.$refs);
+            this.$refs.previewer[i].show(index);
+        },
         getlist() {
             axios({
                 method: "get",
@@ -126,11 +157,27 @@ export default {
                     this.list = res.data;
                     this.list.forEach(item => {
                         item.memo = (item.memo && item.memo.split(",")) || [];
+
+                        item.memos =[];
+
+                        for(var i=0;i<item.memo.length;i++){
+                            var obj = {};
+                            obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+ item.memo[i];
+                            obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.memo[i];
+                            item.memos.push(obj);
+                        }
+
+
                     });
+
+
                 })
                 .catch(function(error) {
                     console.log(error);
                 });
+        },
+        logIndexChange (arg) {
+                    console.log(arg)
         },
         auditReject(item) {
             this.currItem = item;
@@ -145,15 +192,15 @@ export default {
                 }
             })
                 .then(res => {
-                    this.$vux.toast.show({
-                        text: res.data.msg,
-                        type: "text",
-                        position: "top"
-                    });
-                    this.rejectReason = "";
+                    if(res.success){
+                        this.$vux.alert.show({title: '审核成功'});
+                    }else{
+                        this.$vux.alert.show({title: '提交失败'});
+                    }
+
                 })
                 .catch(function(error) {
-                    console.log(error);
+                    this.$vux.alert.show({title: '提交失败'});
                 });
         },
         dialogConfirm() {
@@ -164,18 +211,19 @@ export default {
                     id: this.currItem.id,
                     rejectReson: this.rejectReason
                 }
+            }).then(res => {
+                if(res.success){
+                    this.$vux.alert.show({title: '拒绝成功'});
+                }else{
+                    this.$vux.alert.show({title: '提交失败'});
+                }
+
+                this.rejectReason = "";
             })
-                .then(res => {
-                    this.$vux.toast.show({
-                        text: res.data.msg,
-                        type: "text",
-                        position: "top"
-                    });
-                    this.rejectReason = "";
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
+            .catch(function(error) {
+                this.$vux.alert.show({title: '提交失败'});
+                console.log(error);
+            });
             this.showRejectDialog = false;
         },
         dialogCancel() {
@@ -187,6 +235,12 @@ export default {
 };
 </script>
 <style lang="less">
+
+td {
+    word-wrap: break-word;
+    word-break: break-all;
+    vertical-align:top;
+}
 .points-auditDetail-dialog {
     .weui-dialog {
         .vux-header {
@@ -248,6 +302,13 @@ export default {
                 }
             }
         }
+
     }
 }
+.page-body.points-auditDetail .view-box .item-list:last-child .item{border-bottom:0}
+.img-show{width:100%;height:auto;}
+.img-show img{width:31%;height:1rem;margin-top:.1rem;margin-right:10px}
+.img-show img:nth-child(3n+3){margin-right:0}
+.img-left{width:.37rem;height:.37rem;position:absolute;left:.1rem;top:3.15rem;;z-index:900;}
+.img-right{width:.37rem;height:.37rem;position:absolute;right:.1rem;top:3.15rem;z-index:900;}
 </style>

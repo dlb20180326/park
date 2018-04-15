@@ -366,8 +366,7 @@ input[type="file"] {
 .photo-list{padding:0.1rem 0 0;}
 .photo-list.border0{border-bottom:0;padding-bottom: 0;}
 .photo-list ul{font-size:0;list-style:none;}
-.photo-list ul li{font-size:0;display:inline-block;
-    margin-right:.2rem;position:relative;vertical-align:top;width:.6rem;height:.6rem;overflow:hidden;margin-bottom:.2rem;}
+.photo-list ul li{font-size:0;display:inline-block;margin-right:.2rem;position:relative;vertical-align:top;width:.6rem;height:.6rem;overflow:hidden;margin-bottom:.2rem;}
 .photo-list ul li:first-child{margin-left:0;}
 .photo-list .operate{display:none;background:rgba(33,33,33,.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);z-index:5;position:absolute;bottom:0;left:0;right:0;height:12px;padding-bottom:7px;font-size:12px;color:#fff;text-align: center}
 .photo-list .info{line-height:.6rem;text-align:center}

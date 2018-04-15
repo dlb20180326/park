@@ -221,7 +221,6 @@ export default {
                 }
             })
                 .then(res => {
-                    console.log('112132132132131', res.data.list);
                     this.activeComplete = res.data.list;
                     console.log(this.activeComplete);
                 })
