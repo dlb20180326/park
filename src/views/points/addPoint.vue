@@ -58,7 +58,6 @@
                             <img style="float:left;width:100%" :key="index" width="100" :src="item"  @click="atBig(idx,i)">
                         </div>
                     </li>
-
                     <li>
                         <div class="preview" @click="chooseImage(picList)">
                             <span class="add-bg"></span>
