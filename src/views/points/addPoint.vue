@@ -55,19 +55,15 @@
                 <ul>
                     <li v-for="(item,index) in picList.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item"  @click="atBig(idx,i)">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
                         </div>
                     </li>
                     <li>
-                        <div class="preview" @click="chooseImage(picList)">
+                        <div class="preview addUpload" @click="chooseImage(picList)">
                             <span class="add-bg"></span>
                         </div>
                     </li>
                 </ul>
-                <div v-transfer-dom>
-                    <previewer :list="picList.list" ref="previewer"  slot="names"  :options="options" @on-index-change="logIndexChange">
-                    </previewer>
-                </div>
             </div>
         </div>
         <div class="group-item">
@@ -82,7 +78,7 @@
 
 <script>
     import axios from 'axios'
-    import { XHeader, GroupTitle, Flexbox, TransferDomDirective as TransferDom,Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker } from 'vux';
+    import { XHeader, GroupTitle, Flexbox, TransferDomDirective as TransferDom,Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker,Previewer} from 'vux';
     import wx from 'weixin-js-sdk';
     import weixin from '@/services/weixin';
     export default {
@@ -118,9 +114,7 @@
             };
         },
         methods: {
-            atBig (index,i) {
-                console.log(this.$refs);
-                this.$refs.previewer[i].show(index);
+            atBig (item) {
             },
         	getList(){
         		axios.get('pscoredetail/queryById',{
@@ -382,7 +376,7 @@
     .photo-list .operate{display:none;background:rgba(33,33,33,.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);z-index:5;position:absolute;bottom:0;left:0;right:0;height:12px;padding-bottom:7px;font-size:12px;color:#fff;text-align: center}
     .photo-list .info{line-height:.6rem;text-align:center}
     .photo-list .preview{width: 0.6rem;height:.6rem;z-index:4;line-height:.6rem;font-family:arial;background-color: #dbdbdb;background-repeat:no-repeat;position:absolute;bottom:0;left:0;text-align:center;right:0;cursor: pointer;border:1px solid #fff;box-sizing: border-box;}
-    .photo-list .preview#addUpload{background-color:#fff;border: 1px solid #b53141;}
+    .photo-list .preview.addUpload{background-color:#fff;border: 1px solid #b53141;}
     .photo-list .preview img{max-height:.6rem;max-width:.6rem;vertical-align:middle;}
     .photo-list .photo-primary-text{color:#ffA500;font-size:12px;}
     .photo-list .add-bg{

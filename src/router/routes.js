@@ -116,6 +116,11 @@ export const routes = [
                 component: () => import('@/views/active')
             },
             {
+                path: 'active/partyIndex',
+                name:'Active',
+                component: () => import('@/views/active/partyIndex')
+            },
+            {
                 path: 'active/partyActivity',
                 component: () => import('@/views/active/partyActivity')
             },

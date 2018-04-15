@@ -11,7 +11,7 @@
 			<p class="allPic">
 			<span class="bg-line"></span>
 			<span class="picture">活动图集</span>
-			<span class="numberz">{{num}}张</span>
+			<span class="numberz">{{list&& list.length || num}}张</span>
 			</p>
 			<div class="img-show">
 				<img class="previewer-demo-img" v-for="(item,index) in list" :src="item.src"  @click="show(index)">
@@ -96,7 +96,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     				if(this.Noparticipants >= 4){
     					this.nobtnAn = true
     				}
-    				
+
     			}).catch(err =>{
     				console.log(err)
     			})
@@ -129,7 +129,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 		data(){
 			return {
 				contents:{rights:'',title:'驿站活动详情'},
-				num:10,
+				num:0,
 				activeData:{},
 				picInfo:[],
 				list: [],
@@ -171,7 +171,7 @@ html,body{
 .page-body{
 	flex: 1;
 }
-.titles{width:80%;height:.25rem; font-size:.2rem;font-family:PingFangSC-Medium;color:rgba(51,51,51,1);line-height:.28rem;margin:.2rem 12% .1rem 8%;}
+.titles{width:80%;min-height:.25rem; font-size:.2rem;font-family:PingFangSC-Medium;color:rgba(51,51,51,1);line-height:.28rem;margin:.2rem 12% .1rem 8%;}
 .time{width:80%;height:.17rem; font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.17rem;margin-left:8%;margin-top:.1rem;}
 .time .dark{color:#6b6b6b;}
 .artical{width:84%;height:auto; font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(102,102,102,1);line-height:.24rem;margin:.18rem 8% .2rem 8%;text-indent:2em;}
@@ -190,7 +190,7 @@ html,body{
 .color-num{color:rgba(185, 54, 71, 1);}
 .line-pic{width:87.2%;margin:.1rem 4.8% .2rem 8%;height:.36rem;overflow:hidden;}
 .line-pic img{width:.36rem;height:.36rem;margin-left:.07rem;display:block;float:left;}
-.wz-fonts{	
+.wz-fonts{
     font-family: PingFangSC-Medium;
     color:rgba(153,153,153,1);
     line-height: .24rem;
@@ -203,7 +203,7 @@ html,body{
 	text-overflow:ellipsis;
 	white-space: pre-wrap;
 }
-.wz-fonts.auto{	
+.wz-fonts.auto{
     height:auto;
     overflow:auto;
 }
