@@ -27,7 +27,7 @@
 				      		<previewer :list="item.pictureList" ref="previewer" :options="options" @on-index-change="logIndexChange">
 				      		</previewer>
 			    		</div>
-                        <flexbox-item :span="1/3">
+                        <flexbox-item :span="1/3" v-show="roleid != 4">
                             <a class="btn-plus" @click="chooseImage"></a>
                         </flexbox-item>
                     </flexbox>
@@ -89,7 +89,8 @@ export default {
 	            // Good guide on how to get element coordinates:
 	            // http://javascript.info/tutorial/coordinates
 				}
-			}
+			},
+			roleid:this.$store.getters.user.roleid
         };
     },
     mounted() {
@@ -128,7 +129,6 @@ export default {
 	    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
 	    					item.pictureList.push(obj);
     					}
-    				    console.log(item.pictureList);
     			})
 
     		}).catch(err => {
