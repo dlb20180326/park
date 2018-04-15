@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                         </div>
-                        <flexbox class="footer" v-if="item.status == 1">
+                        <flexbox class="footer" v-if="item.status == 0">
                             <flexbox-item>
                                 <x-button @click.native="auditReject(item)" :mini="true" type="warn">
                                     驳回
@@ -61,6 +61,14 @@
                         </flexbox>
                         <flexbox class="footer" justify= "center" v-if="item.status == 3">
                             <x-button style="color:gray">已拒绝</x-button>
+                        </flexbox>
+                        <flexbox class="footer" justify= "left" v-if="item.status == 3" style="text-align:left;">
+                            <table>
+                                <tr>
+                                <td style="width:5em">拒绝原因:</td>
+                                <td>{{item.rejectReson}}</td>
+                                </tr>
+                            </table>
                         </flexbox>
                     </div>
                 </div>
@@ -184,15 +192,15 @@ export default {
                 }
             })
                 .then(res => {
-                    this.$vux.toast.show({
-                        text: res.data.msg,
-                        type: "text",
-                        position: "top"
-                    });
-                    this.rejectReason = "";
+                    if(res.success){
+                        this.$vux.alert.show({title: '审核成功'});
+                    }else{
+                        this.$vux.alert.show({title: '提交失败'});
+                    }
+
                 })
                 .catch(function(error) {
-                    console.log(error);
+                    this.$vux.alert.show({title: '提交失败'});
                 });
         },
         dialogConfirm() {
@@ -203,18 +211,19 @@ export default {
                     id: this.currItem.id,
                     rejectReson: this.rejectReason
                 }
+            }).then(res => {
+                if(res.success){
+                    this.$vux.alert.show({title: '拒绝成功'});
+                }else{
+                    this.$vux.alert.show({title: '提交失败'});
+                }
+
+                this.rejectReason = "";
             })
-                .then(res => {
-                    this.$vux.toast.show({
-                        text: res.data.msg,
-                        type: "text",
-                        position: "top"
-                    });
-                    this.rejectReason = "";
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
+            .catch(function(error) {
+                this.$vux.alert.show({title: '提交失败'});
+                console.log(error);
+            });
             this.showRejectDialog = false;
         },
         dialogCancel() {
@@ -226,6 +235,12 @@ export default {
 };
 </script>
 <style lang="less">
+
+td {
+    word-wrap: break-word;
+    word-break: break-all;
+    vertical-align:top;
+}
 .points-auditDetail-dialog {
     .weui-dialog {
         .vux-header {
