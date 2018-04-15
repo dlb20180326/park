@@ -60,7 +60,6 @@ Vue.component(Popup.name, Popup);
             Upper1: function (value) {
                 try {
                     if(value===null) throw "";
-                    if(value=== 2) throw "yellowA";
                     if(value=== 1)  throw "yellowB";
                     if(value=== 0)  throw "yellowC";
                 }
