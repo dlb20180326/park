@@ -156,7 +156,8 @@ export default {
                 url: 'active/getParticipateCount',
                 params: {
                     userId:this.userId,
-                    activeType:3
+                    activeType:3,
+                    year: new Date().getFullYear()
                 }
             }) .then((res)=> {
 
@@ -171,7 +172,8 @@ export default {
                 url: 'active/getParticipateCount',
                 params: {
                     userId:this.userId,
-                    activeType:5
+                    activeType:5,
+                    year: new Date().getFullYear()
                 }
             }) .then((res)=> {
 
@@ -209,7 +211,8 @@ export default {
                 url: 'active/getAlreadyActive',
                 params: {
                     pageNum:1,
-                    pageSize:4
+                    pageSize:4,
+
                 }
             }) .then((res)=> {
                  this.activeComplete=res.data.list
