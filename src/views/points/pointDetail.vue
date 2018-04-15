@@ -257,20 +257,4 @@ input {
 .title_p {
     padding:2vw 0 3vw;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>

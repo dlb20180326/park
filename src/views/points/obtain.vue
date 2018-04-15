@@ -1,5 +1,4 @@
 <template>
-
 	<div style="height:100%;width:100%;overflow-x:hidden;">
    		<view-box ref="viewBox" body-padding-top=".46rem">
 			<r-header :rfs="contents"></r-header>
