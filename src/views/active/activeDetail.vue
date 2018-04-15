@@ -43,9 +43,11 @@
                         </tr>
                     </table>
                 </div>
-
-                <div class="book">
-                    <a :class="{'active1':isActive,'active2':!isActive}" @click="submit()">报名</a>
+                <div class="book" v-if="signupstatus == 2">
+                    <a @click="submit()">报名</a>
+                </div>
+                <div class="book"  v-if="signupstatus == 1">
+                    <a  style="background-color: #8b8b8b" @click="submit1()">已报名</a>
                 </div>
             </section>
 
@@ -56,7 +58,7 @@
                     <div class="p15">
                         <div class=" clearfix  display">
                             <span class="fl weui-cell__bd1">已参与组织生活</span>
-                            <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
+                            <a href="#" class=" fAll"><router-link slot="right" :to="{name:'partyMoment'}">查看全部 ></router-link></a>
                         </div>
                         <ul class="news">
                             <li v-for="(item,index) in activeComplete" :key="index" >
@@ -72,19 +74,25 @@
                 </section>
             </flexbox-item>
         </flexbox>
+        <div v-transfer-dom>
+            <alert v-model="show" :title="msg" @on-show="onShow" @on-hide="onHide"></alert>
+        </div>
 
     </div>
 </template>
 
 <script>
     import axios from 'axios'
-import { XHeader, Flexbox, FlexboxItem, cookie,Cell,Group,XButton,XTable } from 'vux';
+import { XHeader, Flexbox, FlexboxItem,Alert ,cookie,Cell,Group,XButton,XTable,TransferDomDirective as TransferDom, } from 'vux';
 
 export default {
+    directives: {
+        TransferDom
+    },
     components: {
         XHeader,
         Flexbox,
-        FlexboxItem,Cell,Group,XButton,XTable
+        FlexboxItem,Cell,Group,XButton,XTable,Alert
     },
     data() {
         return {
@@ -96,9 +104,11 @@ export default {
             activeCreatePeople:'',
             activeId:'',
             activeContext:'',
-
+            show:false,
             activeComplete:[],
             isActive:true,
+            signupstatus:'',
+            msg:''
 
 
 
@@ -118,18 +128,21 @@ export default {
         getActivity(){
             axios({
                 method: 'get',
-                url: 'active/getRunningActive',
+                url: 'active/getParticipateActive',
                 params: {
                     pageNum:1,
-                    pageSize:1
+                    pageSize:1,
+                    departmentid:this.departmentid,
+                    userId:this.$store.getters.user.userid
                 }
             }) .then((res)=> {
-                console.log(res.data)
+
                 this.startTime1=res.data.list[0].startTime;
                 this.activePace=res.data.list[0].activePace;
                 this.activeCreatePeople=res.data.list[0].activeCreatePeople;
                 this.activeContext=res.data.list[0].activeContext;
                 this.activeId=res.data.list[0].id;
+               this.signupstatus=res.data.list[0].signupstatus;
             })
                 .catch(function (error) {
                     console.log(error);
@@ -146,7 +159,7 @@ export default {
                     activeType:3
                 }
             }) .then((res)=> {
-                console.log(res)
+
                 this.number1=res.data
             }) .catch(function (error) {
                     console.log(error);
@@ -161,7 +174,7 @@ export default {
                     activeType:5
                 }
             }) .then((res)=> {
-                console.log(res)
+
                 this.number2=res.data
 
 
@@ -180,14 +193,9 @@ export default {
                     activeId:this.activeId
                 }
             }) .then((res)=> {
-                alert(res.msg)
-
-            if(res.success==false){
-                 return this.isActive=false;
-
-            }
-
-
+                console.log(res);
+                this.msg=res.msg
+                this.show=true
 
             })
                 .catch(function (error) {
@@ -218,7 +226,16 @@ export default {
                 return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
             }
             return new Date(s).toLocaleString();
-        }
+        },
+    onHide () {
+        this.$router.go(0)
+    },
+    onShow () {
+        console.log('on show')
+    },submit1(){
+            this.$vux.alert.show({title:'请勿重复报名'});
+
+        },
 
     },
     mounted() {
