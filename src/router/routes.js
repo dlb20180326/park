@@ -81,7 +81,7 @@ export const routes = [
                 component: () => import('@/views/points/evaluation')
             },
             {
-                path: 'points/obtain',
+                path: 'points/obtain/:userid/:year',
                 name: 'Obtain',
                 component: () => import('@/views/points/obtain')
             },

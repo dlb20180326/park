@@ -3,7 +3,7 @@
 			<div class="allLine" v-for="(context,index) in list" :key="index">
 			    <div>
                     <span class="colorL">时间：</span>
-                    <span class="colorW">{{context.scoreTime}}</span>
+                    <span class="colorW">{{dataPick(context.scoreTime)}}</span>
 				</div>
 				<div>
 				<span class="colorL">积分类型：</span>
@@ -33,6 +33,14 @@
 
 
 
+		},
+		methods:{
+		dataPick(s){
+        	Date.prototype.toLocaleString = function(){
+        		return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDay()+'日'
+        	}
+        	return new Date(s).toLocaleString();
+    	}
 		},
 		props:['list']
 	}

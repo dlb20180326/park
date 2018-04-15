@@ -3,6 +3,7 @@
    		<view-box ref="viewBox" body-padding-top=".46rem">
 			<r-header :rfs="contents"></r-header>
 			<gain :list='list'></gain>
+			<div v-show="temporarily" class="temp">暂无数据。。。</div>
    		</view-box>
  	</div>
 </template>
@@ -15,7 +16,8 @@ import axios from 'axios'
 		data(){
 			return {
 				contents:{rights:'',title:'积分获取明细'},
-				list:[]
+				list:[],
+				temporarily:false
 			}
 		},
 		components:{
@@ -32,6 +34,9 @@ import axios from 'axios'
 					}
 				}).then(res =>{
 					console.log(res);
+					if(res.data.length == 0){
+						this.temporarily = true;
+					}
 					this.list = res.data;
 				}).catch(err =>{
 					console.log('fail'+err);
@@ -50,5 +55,5 @@ html,body{
 	height:100%;
 	overflow-x:hidden;
 }
-
+.temp{width:100%;height:.5rem;line-height:.5rem;text-align:center;}
 </style>
