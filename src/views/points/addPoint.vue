@@ -56,10 +56,6 @@
                     <li v-for="(item,index) in picList.list">
                         <div class="preview">
                             <img style="float:left;width:100%" :key="index" width="100" :src="item"  @click="atBig(idx,i)">
-                            <div v-transfer-dom>
-                                <previewer :list="item.memos" ref="previewer"  slot="names"  :options="options" @on-index-change="logIndexChange">
-                                </previewer>
-                            </div>
                         </div>
                     </li>
                     <li>
@@ -68,6 +64,10 @@
                         </div>
                     </li>
                 </ul>
+                <div v-transfer-dom>
+                    <previewer :list="picList.list" ref="previewer"  slot="names"  :options="options" @on-index-change="logIndexChange">
+                    </previewer>
+                </div>
             </div>
         </div>
         <div class="group-item">
