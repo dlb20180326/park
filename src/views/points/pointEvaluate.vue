@@ -19,7 +19,7 @@
                 <ul>
                     <li id="photoPrimary" v-for="(item,index) in picList13.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item" @click="atBig(idx,0)">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
                         </div>
                     </li>
                     <li>
