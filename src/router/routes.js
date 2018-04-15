@@ -107,7 +107,6 @@ export const routes = [
             },
             {
                 path: 'active',
-                name: 'Active',
                 component: () => import('@/views/active')
             },
             {
@@ -125,6 +124,7 @@ export const routes = [
             },
             {
                 path: 'active/partyMoment',
+                name:'partyMoment',
                 component: () => import('@/views/active/partyMoment')
             },
             {

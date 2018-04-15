@@ -56,7 +56,7 @@
                     <div class="p15">
                         <div class=" clearfix  display">
                             <span class="fl weui-cell__bd1">已参与组织生活</span>
-                            <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
+                            <a href="#" class=" fAll"><router-link slot="right" :to="{name:'partyMoment'}">查看全部 ></router-link></a>
                         </div>
                         <ul class="news">
                             <li v-for="(item,index) in activeComplete" :key="index" >
@@ -254,7 +254,6 @@ export default {
 }
 .fAll{
 	float:right;
-	margin-right:.2rem;
 }
 .fRight{
 	float:right;
@@ -262,8 +261,9 @@ export default {
 .content{width:89%;
         margin:0 auto;
         }
-.rightBtn{display:inline-block;width:.15rem;height:.15rem;background-image:url(../../assets/images/icon-rights.png);margin-left:.2rem;background-size:100% 100%;}
- span{ display: block;font-size: 0.8em;background-color:#F5F5F5}
+.rightBtn{display:inline-block;width:.15rem;height:.15rem;background-image:url(../../assets/images/icon-rights.png);background-size:100% 100%;float: right;
+    margin-top: .15rem;}
+ span{ display: block;font-size: 0.8em;}
 .vux-flexbox.list-item {
     background-color: #fff;
     &:not(:last-child) {
@@ -375,6 +375,7 @@ export default {
     table {
         border-collapse:collapse;
     }
+    table tr td{ font-size:.14rem;}
     input {
         border:0;
     }
@@ -403,7 +404,7 @@ export default {
         overflow:hidden;
         height:.45rem;
         line-height:.45rem;
-        width:32%;
+        width:27%;
     }
     .p15 {
         padding:0 .2rem .2rem;
@@ -445,6 +446,8 @@ export default {
         background:#f5f5f5;
         border-radius:4px;
         width:89%;
+        height:.38rem;
+        line-height:.3rem;
         margin:0 auto;
         margin-bottom:.14rem;
         padding-left:.2rem;
@@ -483,6 +486,7 @@ export default {
     .news li {
         border-bottom:1px solid #f3f3f3;
         line-height:12vw;
+        font-size:.14rem;
     }
     .header a {
         position:absolute;
