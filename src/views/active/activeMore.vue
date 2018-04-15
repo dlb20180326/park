@@ -21,9 +21,12 @@
                             <span class="colorW">{{item.activeContext}}</span>
 
                         </div>
-                    	<div class="book">
+                    	<div class="book" v-if="item.signupstatus == 2">
                     		<a @click="submit(item.id)">报名</a>
                 		</div>
+                        <div class="book"  v-if="item.signupstatus == 1">
+                            <a  style="background-color: #8b8b8b" @click="submit1(item.id)">已报名</a>
+                        </div>
                 		<div class="grayLine"></div>
                 	</div>
         </div>
@@ -90,14 +93,19 @@ export default {
         }) .then((res)=> {
             this.msg=res.msg,
             this.show=true
+
         })
             .catch(function (error) {
                 console.log(error);
             });
 
     },
+        submit1(id){
+            this.$vux.alert.show({title:'请勿重复报名'});
+
+        },
     onHide () {
-        console.log('on hide')
+        this.$router.go(0)
     },
     onShow () {
         console.log('on show')
@@ -111,7 +119,7 @@ export default {
     } ,
     mounted() {
         this.getActivityMore();
-        console.log(this.$store.getters.user.userid);
+
 
     }
 };

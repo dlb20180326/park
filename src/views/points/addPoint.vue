@@ -53,9 +53,13 @@
         	<span class="addPic">添加照片</span>
             <div class="photo-list cl">
                 <ul>
-                    <li v-for="(item,index) in picList15.list">
+                    <li v-for="(item,index) in picList.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item"  @click="atBig(idx,i)">
+                            <div v-transfer-dom>
+                                <previewer :list="item.memos" ref="previewer"  slot="names"  :options="options" @on-index-change="logIndexChange">
+                                </previewer>
+                            </div>
                         </div>
                     </li>
                     <li>
@@ -78,11 +82,13 @@
 
 <script>
     import axios from 'axios'
-    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker } from 'vux';
+    import { XHeader, GroupTitle, Flexbox, TransferDomDirective as TransferDom,Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker } from 'vux';
     import wx from 'weixin-js-sdk';
     import weixin from '@/services/weixin';
     export default {
-
+        directives: {
+            TransferDom
+        },
         components: {
             XHeader,
             GroupTitle,
@@ -93,7 +99,8 @@
             Datetime,
             Group,
             Picker,
-            Alert
+            Alert,
+            Previewer
 
         },
         data() {
@@ -111,6 +118,10 @@
             };
         },
         methods: {
+            atBig (index,i) {
+                console.log(this.$refs);
+                this.$refs.previewer[i].show(index);
+            },
         	getList(){
         		axios.get('pscoredetail/queryById',{
         		    params: {
