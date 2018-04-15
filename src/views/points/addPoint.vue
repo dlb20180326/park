@@ -51,16 +51,20 @@
         </div>
         <div class="group-item">
         	<span class="addPic">添加照片</span>
-            <flexbox class="img-list" :gutter="0" wrap="wrap">
-                <flexbox-item :span="1/3" >
-                    <img style="float: left" v-for="(item,index) in picList.list" :key="index" width="100" :src="item">
-                </flexbox-item>
-                <flexbox-item >
-                    <div class="square" @click="chooseImage(picList)">
-                        <div class="fileLoad"  ></div>
-                    </div>
-                </flexbox-item>
-            </flexbox>
+            <div class="photo-list cl">
+                <ul>
+                    <li v-for="(item,index) in picList15.list">
+                        <div class="preview">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                        </div>
+                    </li>
+                    <li>
+                        <div class="preview" @click="chooseImage(picList)">
+                            <span class="add-bg"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="group-item">
             <group-title slot="title"></group-title>
@@ -358,6 +362,34 @@
   	opacity: 0;
 	}
 	.square{width:.4rem;height:.4rem;border:1px solid #B53141;background: url(../../assets/images/icon-plug.png) no-repeat;background-size:50% 50%;background-position: center;}
+
+	.photo-list{padding:0.1rem 0 0;}
+    .photo-list.border0{border-bottom:0;padding-bottom: 0;}
+    .photo-list ul{font-size:0;list-style:none;}
+    .photo-list ul li{font-size:0;display:inline-block;margin-right:.2rem;position:relative;vertical-align:top;width:.6rem;height:.6rem;overflow:hidden;margin-bottom:.2rem;}
+    .photo-list ul li:first-child{margin-left:0;}
+    .photo-list .operate{display:none;background:rgba(33,33,33,.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);z-index:5;position:absolute;bottom:0;left:0;right:0;height:12px;padding-bottom:7px;font-size:12px;color:#fff;text-align: center}
+    .photo-list .info{line-height:.6rem;text-align:center}
+    .photo-list .preview{width: 0.6rem;height:.6rem;z-index:4;line-height:.6rem;font-family:arial;background-color: #dbdbdb;background-repeat:no-repeat;position:absolute;bottom:0;left:0;text-align:center;right:0;cursor: pointer;border:1px solid #fff;box-sizing: border-box;}
+    .photo-list .preview#addUpload{background-color:#fff;border: 1px solid #b53141;}
+    .photo-list .preview img{max-height:.6rem;max-width:.6rem;vertical-align:middle;}
+    .photo-list .photo-primary-text{color:#ffA500;font-size:12px;}
+    .photo-list .add-bg{
+        width: 0.2rem;
+        height: 0.2rem;
+        margin-left: .2rem;
+        margin-top: .2rem;
+        display: block;
+        background: url(../../assets/images/add_icon_bg.png) no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+    .photo-list ul li:hover .operate{display:block;}
+    .photo-list ul .operate a{color:#fff;cursor:pointer;text-decoration:none}
+    .photo-list ul li.no-operate:hover .operate{display:none;}
+    .photo-list .upload-file-input{opacity: 0;position: absolute;z-index: 99;top: 0;right: 0;left: 0;width: .6rem;bottom: 0;}
+
+
 </style>
 <style>
     .date-no-box{position: absolute;top:0px;left: 0;right: 0;bottom: 0;height: 0.32rem;overflow: hidden;opacity: 0}
