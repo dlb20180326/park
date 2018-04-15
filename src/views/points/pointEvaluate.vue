@@ -19,7 +19,7 @@
                 <ul>
                     <li id="photoPrimary" v-for="(item,index) in picList13.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item" @click="atBig(idx,0)">
                         </div>
                     </li>
                     <li>
@@ -28,6 +28,10 @@
                         </div>
                     </li>
                 </ul>
+                <div v-transfer-dom>
+                    <previewer :list="picList13.list" ref="previewer" :options="options" @on-index-change="logIndexChange">
+                    </previewer>
+                </div>
             </div>
 
         </div>
@@ -43,7 +47,7 @@
                 <ul>
                     <li  v-for="(item,index) in picList14.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item" @click="atBig(idx,1)">
                         </div>
                     </li>
                     <li>
@@ -52,6 +56,10 @@
                         </div>
                     </li>
                 </ul>
+                <div v-transfer-dom>
+                    <previewer :list="picList14.list" ref="previewer" :options="options" @on-index-change="logIndexChange">
+                    </previewer>
+                </div>
             </div>
         </div>
         <div class="group-item">
@@ -66,9 +74,9 @@
 
             <div class="photo-list cl">
                 <ul>
-                    <li  v-for="(item,index) in picList15.list">
+                    <li v-for="(item,index) in picList15.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item" @click="atBig(idx,2)">
                         </div>
                     </li>
                     <li>
@@ -77,6 +85,10 @@
                         </div>
                     </li>
                 </ul>
+                <div v-transfer-dom>
+                    <previewer :list="picList15.list" ref="previewer" :options="options" @on-index-change="logIndexChange">
+                    </previewer>
+                </div>
             </div>
         </div>
         <div class="group-item">
@@ -139,6 +151,9 @@ export default {
         }
     },
     methods: {
+        show (index,i) {
+            this.$refs.previewer[i].show(index);
+        },
         submit() {
             let {departmentId, userId, partmentId} = this.$route.params;
             let {Messge13, Messge14, Messge15, itemscore} = this;
