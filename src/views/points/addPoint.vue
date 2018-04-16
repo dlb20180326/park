@@ -97,7 +97,6 @@
             Picker,
             Alert,
             Previewer
-
         },
         data() {
             return {
@@ -129,23 +128,21 @@
         		})
         	},
         	getUser() {
-            axios.get('ppartymember/queryByUserId', {
-                params: {
-                    userid: this.$store.getters.user.userid
-                }
-            })
-            .then(res => {
-                this.userName = res.data.name;
-            })
-            .catch(err => {
-                console.log(err);
-            });
-        },
+                axios.get('ppartymember/queryByUserId', {
+                    params: {
+                        userid: this.$store.getters.user.userid
+                    }
+                })
+                .then(res => {
+                    this.userName = res.data.name;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            },
             openPicker() {
                 this.$refs.picker.open();
             },
-
-
             submit(){
                  axios({
                     url:'pstudy/save',
@@ -159,7 +156,8 @@
                         endtime:new Date(this.endTime.replace(/-/gi,'/')).getTime(),
                         projectid:this.$route.params.projectId,
                         moduleid:this.$route.params.moduleId,
-                        content:this.activeContent
+                        content:this.activeContent,
+                        picids:this.picList.arr.join()
                     }
                 }).then(res => {
                     this.users[1].integral = res.data;
@@ -174,12 +172,12 @@
         					this.$vux.alert.hide();
       					}, 1000)
                     }
-                	}).catch(err => {
-                   		this.$vux.alert.show({title:'增加失败'});
-                        setTimeout(() => {
-        					this.$vux.alert.hide();
-      					}, 1000)
-                	});
+                }).catch(err => {
+                    this.$vux.alert.show({title:'增加失败'});
+                    setTimeout(() => {
+                        this.$vux.alert.hide();
+                    }, 1000)
+                });
             },
 
             getActivity(){
