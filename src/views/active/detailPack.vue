@@ -1,43 +1,39 @@
 <template>
-	<div style="height:100%;">
+	<div class="page-body">
 		<view-box ref="viewBox" body-padding-top=".46rem">
 			<r-header :rfs="contents"></r-header>
-			<p class="titles">上海中心支部组织除草活动</p>
-			<p class="time">时间：<span class="dark">{{dateTime}}</span></p>
-			<p class="time">地点：<span class="dark">{{location}}</span></p>
+			<p class="allPic">
+				<span class="bg-line"></span>
+				<span class="picture">党员姓名:</span>
+				<span class="numberz">王俊凯</span>
+			</p>
+			<p class="allPic">
+				<span class="bg-line"></span>
+				<span class="picture">时间:</span>
+				<span class="numberz">2018.08.08</span>
+			</p>
+			<p class="allPic">
+				<span class="bg-line"></span>
+				<span class="picture">政治学习主要内容:</span>
+			</p>
 			<div class="artical">
-				<p>以“亮党员身份，树党员形象，尽党员义务，建和谐爱民”为主题，组织发动党员在社区内广泛开展党员志愿者服务活动。社区党员本着“奉献、服务、互助、和谐”的精神，自愿利用业余时间，根据自身特长和专业特点，无偿为居民提供帮助和服务。在活动中，党员志愿者以“有困难找党员志愿者，有时间做党员志愿者”为口号，认领了环境保护、治安防范、关爱服务、心理疏导、法律援助。</p>
-				<p>以“亮党员身份，树党员形象，尽党员义务，建和谐爱民”为主题，组织发动党员在社区内广泛开展党员志愿者服务活动。社区党员本着“奉献、服务、互助、和谐”的精神，自愿利用业余时间，根据自身特长和专业特点，无偿为居民提供帮助和服务。在活动中，党员志愿者以“有困难找党员志愿者，有时间做党员志愿者”为口号，认领了环境保护、治安防范、关爱服务、心理疏导、法律援助。</p>
+			<!--	{{activeData.activeContext}}-->
+			以“亮党员身份，树党员形象，尽党员义务，建和谐爱民”为主题，组织发动党员在社区内广泛开展党员志愿者服务活动。社区党员本着“奉献、服务、互助、和谐”的精神，自愿利用业余时间，根据自身特长和专业特点，无偿为居民提供帮助和服务。在活动中，口号。
 			</div>
 			<p class="allPic">
 			<span class="bg-line"></span>
 			<span class="picture">活动图集</span>
-			<span class="numberz">{{num}}张</span>
+			<span class="numberz">{{list&& list.length || num}}张</span>
 			</p>
 			<div class="img-show">
-				<img class="previewer-demo-img" v-for="(item, index) in list" :src="item.src" width="100"  @click="show(index)">
+				<img class="previewer-demo-img" v-for="(item,index) in list" :src="item.src"  @click="show(index)">
 				<div v-transfer-dom>
 	      		<previewer :list="list" ref="previewer" :options="options" @on-index-change="logIndexChange">
 	      		</previewer>
 	    	</div>
 			</div>
-			<p class="allPic">
-			<span class="bg-line"></span>
-			<span class="picture">参与人员</span>
-			<span class="numberz"><span class="color-num">20</span>/23</span>
-			</p>
-			<div class="wz-fonts" style="-webkit-line-clamp: 5;">
-				王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 维吾尔 王俊凯 李薇薇 李薇薇 王俊凯 李薇薇 维吾尔 王俊凯
-			</div>
-			<div class="btnMore">收起<span class="up"></span></div>
-			<p class="allPic">
-			<span class="bg-line"></span>
-			<span class="no-picture">未参与人员</span>
-			<span class="numberz"><span class="color-num">3</span>/23</span>
-			</p>
-			<div class="wz-fonts">
-				王俊凯 李薇薇 维吾尔
-			</div>
+			<!--<div class="btnRed">点击通过并加分</div>-->
+			<button class="btnRed">已评分 (评分人：毛不易)</button>
 	 	</view-box>
 	</div>
 </template>
@@ -58,41 +54,101 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 			show (index) {
       			this.$refs.previewer.show(index)
     		},
+    		spread(){
+    			this.spr = true;
+    			this.btnAn = !this.btnAn;
+    			this.btnPack = !this.btnPack;
+    		},
+    		folding(){
+    			this.spr = !this.spr;
+    			this.btnAn = !this.btnAn;
+    			this.btnPack = !this.btnPack;
+    		},
+    		noSpread(){
+    			this.noSpr = true;
+    			this.nobtnAn = !this.nobtnAn;
+    			this.nobtnPack = !this.nobtnPack;
+    		},
+    		noFolding(){
+    			this.noSpr = !this.noSpr;
+    			this.nobtnAn = !this.nobtnAn;
+    			this.nobtnPack = !this.nobtnPack;
+    		},
     	  	logIndexChange (arg) {
       			console.log(arg)
+    		},
+    		getData(){
+    			this.$http.post('/dangjian/active/queryById?activeId='+this.$route.params.activeId
+    		).then(res =>{
+    				this.activeData = res.data;
+    				this.peopleNum = this.activeData.notParticipate.length + this.activeData.participate.length;
+    				this.participants = this.activeData.participate.length;
+    				this.Noparticipants = this.activeData.notParticipate.length;
+    				if(this.participants >= 4){
+    					this.btnAn = true
+    				}
+    				if(this.Noparticipants >= 4){
+    					this.nobtnAn = true
+    				}
+
+    			}).catch(err =>{
+    				console.log(err)
+    			})
+    		},
+    		getPic(){
+    			this.$http.post('/dangjian/active/getActivePictures?activeId='+this.$route.params.activeId
+    			).then(res =>{
+    				this.picInfo= res.data
+    				for(let d in this.picInfo){
+    					var obj = {};
+    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
+    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
+    					this.list.push(obj);
+    				}
+    			}).catch(err =>{
+    				console.log(err)
+    			})
+    		},
+    		dataPick(s){
+        	Date.prototype.toLocaleString = function(){
+        		return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDay()+'日'
+        	}
+        	return new Date(s).toLocaleString();
     		}
+		},
+		mounted(){
+			this.getData();
+			this.getPic();
 		},
 		data(){
 			return {
-				contents:{rights:'',title:'驿站活动详情'},
-				dateTime:'2019年2月18日',
-				location:'陆家嘴',
-				num:10,
-				list: [{
-        			msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwu9ze86j20m80b40t2.jpg',
-        			src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwu9ze86j20m80b40t2.jpg'
-      			},
-      			{
-        			msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg',
-        			src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwvqwuoaj20xc0p0t9s.jpg'
-      			},
-      			{
-        			msrc: 'http://ww1.sinaimg.cn/thumbnail/663d3650gy1fplwwcynw2j20p00b4js9.jpg',
-        			src: 'http://ww1.sinaimg.cn/large/663d3650gy1fplwwcynw2j20p00b4js9.jpg'
-      			}],
+				contents:{rights:'评分说明',title:'驿站活动详情'},
+				num:0,
+				activeData:{},
+				picInfo:[],
+				list: [],
+				spr:false,
+				noSpr:false,
+				nobtnPack:false,
+				nobtnAn:false,
+				btnPack:false,
+				btnAn:false,
+				peopleNum:null,
+				participants:null,
+				Noparticipants:null,
       			options: {
         			getThumbBoundsFn (index) {
           			// find thumbnail element
-                        let thumbnail = document.querySelectorAll('.previewer-demo-img')[index];
-                        // get window scroll Y
-                        let pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
-                        // optionally get horizontal scroll
-                        // get position of element relative to viewport
-                        let rect = thumbnail.getBoundingClientRect();
-                        // w = width
-		                return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
-                        // Good guide on how to get element coordinates:
-                        // http://javascript.info/tutorial/coordinates
+		            let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
+		            // get window scroll Y
+		            let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
+		            // optionally get horizontal scroll
+		            // get position of element relative to viewport
+		            let rect = thumbnail.getBoundingClientRect()
+		            // w = width
+		            return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
+		            // Good guide on how to get element coordinates:
+		            // http://javascript.info/tutorial/coordinates
         			}
       			}
 
@@ -106,15 +162,16 @@ html,body{
 	height:100%;
 	overflow-x:hidden;
 }
-.titles{width:80%;height:.25rem; font-size:.2rem;font-family:PingFangSC-Medium;color:rgba(51,51,51,1);line-height:.28rem;margin:.2rem 12% .1rem 8%;}
-.time{width:80%;height:.17rem; font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.17rem;margin-left:8%;margin-top:.1rem;}
-.time .dark{color:#6b6b6b;}
-.artical{width:84%;height:auto; font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(102,102,102,1);line-height:.24rem;margin:.18rem 8% .2rem 8%;text-indent:2em;}
+.page-body{
+	display:flex;
+	flex-direction: column;
+}
+.artical{width:84%;height:auto; font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(102,102,102,1);line-height:.24rem;margin:.2rem 8% 0 8%;text-indent:2em;}
 .artical p{margin-bottom:.1rem;}
-.picture{width:0.9rem;font-size:.2rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);display:block;float: left;margin-left:.1rem;}
 .allPic .bg-line{width:.04rem;height:.18rem;margin-left:8%;background: url(../../assets/images/icon-rectangle.png) no-repeat;background-size:100% 100%;display:block;float: left;margin-top:.07rem;}
-.numberz{ font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);display:block;float: left;margin-top:.02rem;}
-.allPic{height:.3rem;line-height:.3rem;overflow:hidden;}
+.picture{font-size:.14rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);margin-left:.1rem;display:block;float: left;}
+.numberz{font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);display:block;float: left;margin-left:.1rem;}
+.allPic{height:.3rem;line-height:.3rem;overflow:hidden;margin-top:.2rem;}
 .img-show{width:84%;height:auto;margin-left:8%;}
 .img-show img{width:32%;height:0.9rem;margin-top:.1rem;}
 .img-show img:not(:first-child){margin-left:2%;}
@@ -123,11 +180,37 @@ html,body{
 .color-num{color:rgba(185, 54, 71, 1);}
 .line-pic{width:87.2%;margin:.1rem 4.8% .2rem 8%;height:.36rem;overflow:hidden;}
 .line-pic img{width:.36rem;height:.36rem;margin-left:.07rem;display:block;float:left;}
-.wz-fonts{font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.24rem;width:87.2%;margin:.1rem 4.8% .2rem 8%;word-spacing:.24rem;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 4;overflow: hidden;}
-.no-picture{width:1.1rem;font-size:.2rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);margin-left:.1rem;display:block;float: left;}
+.wz-fonts{
+    font-family: PingFangSC-Medium;
+    color:rgba(153,153,153,1);
+    line-height: .24rem;
+    width: 87.2%;
+    margin: 10px auto;
+    word-spacing: .24rem;
+    height: 44px;
+    overflow: hidden;
+    padding: 0;
+	text-overflow:ellipsis;
+	white-space: pre-wrap;
+}
+.wz-fonts.auto{
+    height:auto;
+    overflow:auto;
+}
+.wz-fonts span{
+	display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+    line-height: 22px;
+    vertical-align: top;
+}
+.no-picture{width:1.1rem;font-size:.2rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);display:block;float: left;margin-left:.1rem;}
 .btnMore{width:1.6rem;height:.3rem;border-radius:15px;margin:.2rem auto;font-size:.1rem;
 font-family:PingFangSC-Medium;
 color:rgba(204,204,204,1);border:1px solid #E4E4E4;line-height:.3rem;text-align:center;
 }
+.down{width:0.1rem;height:0.1rem;display:inline-block;background: url(../../assets/images/icon-down.png) no-repeat;background-size:100% 100%;margin-left:.05rem;}
 .up{width:0.1rem;height:0.1rem;display:inline-block;background: url(../../assets/images/icon-up.png) no-repeat;background-size:100% 100%;float:right;margin-right:.2rem;margin-top:.1rem;}
+.btnRed{width:89.4%;height:.4rem;background:rgba(185,54,71,1);border-radius: 4px;font-size:.16rem;font-family:PingFangSC-Medium;color:rgba(255,255,255,1);line-height:.4rem;text-align:center;position:absolute;bottom: .2rem;left:5.3%;border:0;}
+.grayBtn{background:rgba(216,216,216,1);}
 </style>
