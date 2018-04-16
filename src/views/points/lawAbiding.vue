@@ -7,8 +7,8 @@
                     <flexbox :gutter="0">
                         <flexbox-item>序号</flexbox-item>
                         <flexbox-item>党员姓名</flexbox-item>
-                        <flexbox-item>时间</flexbox-item>
-                        <flexbox-item>评分状态</flexbox-item>
+                        <flexbox-item>分数</flexbox-item>
+                        <flexbox-item>一票否决</flexbox-item>
                     </flexbox>
                     <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
@@ -48,9 +48,9 @@ Vue.component(Popup.name, Popup);
 				contents:{rights:'评分说明',title:'政治学习评分'},
 				list:[
                     {name:"王俊凯",score:"20",tempint:3},
+                    {name:"王俊凯",score:"21",tempint:3},
                     {name:"王俊凯",score:"20",tempint:3},
-                    {name:"王俊凯",score:"20",tempint:3},
-                    {name:"王俊凯",score:"20",tempint:3},
+                    {name:"王俊凯",score:"18",tempint:3},
 
                 ],
 				isYellow:false,
@@ -104,7 +104,6 @@ Vue.component(Popup.name, Popup);
                     })
             },
             show(){
-                alert('1111111111')
                 this.showPop=true
             }
         }

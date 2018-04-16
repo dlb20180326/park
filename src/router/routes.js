@@ -112,7 +112,7 @@ export const routes = [
                 component: () => import('@/views/points/pointEvaluate')
             },
             {
-                path: 'points/political',
+                path: 'points/political/:moduleid',
                 component: () => import('@/views/points/political')
             },
             {
