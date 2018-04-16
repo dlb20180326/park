@@ -182,8 +182,17 @@ export default {
 
                             //this.imgIds.push('pictureIds:' + pictureIds.join());
                             alert(pictureIds.join());
+                            alert(it.pictures.length);
+                            if(!it.pictures){
+                                it.pictures=[]
+                            }
+                            if(!it.pictureList){
+                                it.pictureList=[]
+                            }
                             for(var i=0;i<pictureIds.length;i++){
+
                                 it.pictures.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i]);
+                                alert('http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i]);
                                 var obj = {};
                                 obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
                                 obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
