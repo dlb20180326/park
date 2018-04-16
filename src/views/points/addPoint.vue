@@ -156,6 +156,14 @@
                 this.$refs.picker.open();
             },
             submit(){
+                var starttime = this.startTime.replace(new RegExp("-","gm"),"/");
+                var starttimeHaoMiao = (new Date(starttime)).getTime();
+                var endtime = this.endTime.replace(new RegExp("-","gm"),"/");
+                var endtimeHaoMiao = (new Date(endtime)).getTime();
+
+                if(starttimeHaoMiao<endtimeHaoMiao){
+
+
                  axios({
                     url:'pstudy/save',
                     method:'post',
@@ -194,7 +202,9 @@
                         }, 1000)
                     }
 
-                });
+                });}else {
+                    alert("开始日期不能大于结束日期");
+                }
             },
 
             getActivity(){
