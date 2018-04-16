@@ -3,15 +3,14 @@
    		<view-box ref="viewBox" body-padding-top=".46rem" body-padding-bottom=".55rem">
 			<x-header :left-options="{showBack: false}" class="bgColors" slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">支部党员积分评定</x-header>
 			<flexbox>
-      			<flexbox-item v-for="(info,index) in collect" :key="index" @click.native="submit(index)">
+      			<flexbox-item v-for="(info,index) in collect" :key="index" @click.native="submit(info,index)">
   					<div class="flex-demo">
   						<div class="iconImg" :style="{backgroundImage:'url('+info.bgImg+')'}"></div>
   						<div class="fonts-label">{{info.label}}</div>
   					</div>
   					<div class="flag">{{info.score}}</div>
       				</flexbox-item>
-    		</flexbox>
-			<!--<footers :selec='select'></footers>-->
+    	</flexbox>
    		</view-box>
  	</div>
 </template>
@@ -21,9 +20,9 @@ import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
 	export default {
 		data(){
 			return {
-				collect:[{bgImg:require('@/assets/images/icon-idea.png'),label:'政治学习',score:'10分'},		{bgImg:require('@/assets/images/icon-life.png'),label:'组织生活双报道',score:'20分'},
-						{bgImg:require('@/assets/images/icon-much.png'),label:'党费缴纳',score:'10分'},		{bgImg:require('@/assets/images/icon-idea.png'),label:'思想汇报',score:'15分'},		{bgImg:require('@/assets/images/icon-before.png'),label:'先锋作用',score:'10分'},		{bgImg:require('@/assets/images/icon-law.png'),label:'遵纪守法一票否决',score:'20分'},
-						{bgImg:require('@/assets/images/icon-server.png'),label:'公益服务',score:'10分'}],
+				collect:[{moduleid:2,bgImg:require('@/assets/images/icon-idea.png'),label:'政治学习',score:'10分'},		{moduleid:4,bgImg:require('@/assets/images/icon-life.png'),label:'组织生活双报道',score:'20分'},
+						{bgImg:require('@/assets/images/icon-much.png'),label:'党费缴纳',score:'10分'},		{moduleid:11,bgImg:require('@/assets/images/icon-idea.png'),label:'思想汇报',score:'15分'},		{bgImg:require('@/assets/images/icon-before.png'),label:'先锋作用',score:'10分'},		{bgImg:require('@/assets/images/icon-law.png'),label:'遵纪守法一票否决',score:'20分'},
+						{moduleid:8,bgImg:require('@/assets/images/icon-server.png'),label:'公益服务',score:'10分'}],
 						select:{infos:'积分详情',inte:false}
 			}
 		},
@@ -35,14 +34,19 @@ import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
 
 		},
 		methods:{
-            submit(index){
+            submit(it,index){
                 if(index===4){
-                this.$router.push({
-                    path: '/party/member',
-                    name: 'member',
-
-
-                })}
+	                this.$router.push({
+	                    path: '/party/member',
+	                    name: 'member',
+	                })
+                }
+                if(index==0 || index==1 || index==3 || index==6){
+                	this.$router.push({
+	                    path: '/points/political/'+it.moduleid,
+	                })
+                }
+         
 
             }
 

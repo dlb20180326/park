@@ -2,7 +2,8 @@
 
 	<div style="height:100%;">
    		<view-box ref="viewBox" body-padding-top=".46rem">
-			<r-header :rfs="contents"></r-header>
+			<!--<r-header :rfs="contents"></r-header>-->
+			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">政治学习评分<a slot="right" @click="showMenu">评分说明</a></x-header>
 			    <div class="points-table">
                     <flexbox :gutter="0">
                         <flexbox-item>序号</flexbox-item>
@@ -12,9 +13,9 @@
                     </flexbox>
                     <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
-                        <flexbox-item>{{con.name}}</flexbox-item>
-                        <flexbox-item>2018.09.08</flexbox-item>
-                        <flexbox-item><input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="changeItem(con)"></input></flexbox-item>
+                        <flexbox-item>{{con.partyname}}</flexbox-item>
+                        <flexbox-item>{{datePick(con.starttime)}}</flexbox-item>
+                        <flexbox-item><input type="button" class="btnSub" :value="con.status|Upper" :class="con.status|Upper1" @click="changeItem(con)"></input></flexbox-item>
                     </flexbox>
                </div>
 			<div v-transfer-dom>
@@ -34,10 +35,10 @@
  	</div>
 </template>
 <script>
-    import axios from 'axios'
-import Xheader from '@/components/comother/rheader'
+import axios from 'axios'
+/*import Xheader from '@/components/comother/rheader'*/
 import Vue from 'vue';
-import {ViewBox,TransferDom,Popup,Flexbox, FlexboxItem} from 'vux'
+import {ViewBox,TransferDom,Popup,Flexbox, FlexboxItem,XHeader} from 'vux'
 Vue.component(Popup.name, Popup);
 	export default {
 		data(){
@@ -46,14 +47,14 @@ Vue.component(Popup.name, Popup);
 				contents:{rights:'评分说明',title:'政治学习评分'},
 				list:"",
 				isYellow:false,
-				showPop:true
+				showPop:false
 			}
-		}, filters: {
+		}, 
+		filters: {
             Upper: function (value) {
                 try {
-                    if(value===null) throw "去处理";
-                    if(value=== 1)  throw "已审核";
-                    if(value=== 0)  throw "待审核";
+                    if(value=== 1)  throw "已拒绝";
+                    if(value=== 2)  throw "已通过";
                 }
                 catch(err) {
                     return value=err;
@@ -62,7 +63,7 @@ Vue.component(Popup.name, Popup);
             },
             Upper1: function (value) {
                 try {
-                    if(value===null) throw "";
+                   /* if(value===null) throw "";*/
                     if(value=== 1)  throw "yellowB";
                     if(value=== 0)  throw "yellowC";
                 }
@@ -73,11 +74,11 @@ Vue.component(Popup.name, Popup);
             }
         },
 		components:{
-			'r-header':Xheader,
+			XHeader,
 			ViewBox,
 			Popup,
 			Flexbox,
-			FlexboxItem
+			FlexboxItem,
 		},
 		directives:{
 			TransferDom
@@ -86,12 +87,13 @@ Vue.component(Popup.name, Popup);
             getlist(){
                 axios({
                     method: 'get',
-                    url: 'ppartymember/getPartymemberByDepartmentid',
+                    url: '/dangjian/pstudy/getPartymemberByDepartmentid',
                     params: {
-                       departmentid:1
+                       departmentid:1,
+                       activeType:this.$route.params.moduleid
                     }
                 }) .then((res)=> {
-                this.list=res.data
+                this.list=res.data;
 
 
             })
@@ -115,10 +117,19 @@ Vue.component(Popup.name, Popup);
 			},
 			know(){
 				this.showPop = false
-			}
+			},
+			datePick(s){
+            Date.prototype.toLocaleString = function(){
+                return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
+            }
+            return new Date(s).toLocaleString();
+        },
+        showMenu(){
+        	this.showPop = true;
+        }
 		},
 		mounted(){
-            this.getlist()
+            this.getlist();
 
 		}
 	}
@@ -151,13 +162,6 @@ font-size: .14rem;
 .vux-flexbox .vux-flexbox-item:nth-child(1){
 	-webkit-box-flex: 0.5;
 }
-/*#table-style{
-	width:86.7%;
-	height:auto;
-	margin:0px auto;
-}
-#table-style tbody tr td{height:.28rem;padding-top:.2rem;font-size:.2rem;width:33.33%;text-align:left;}
-#table-style tbody tr td:nth-child(3){text-align:right;}*/
 .btnSub{width:.6rem;height:.24rem;font-size:.14rem;line-height:.24rem;border-radius: 4px;font-family:PingFangSC-Medium;border:0px;color:#FFFFFF;background-color:rgba(185, 54, 71, 1);}
 .yellowA{background-color:#BABABA;}
 .yellowB{background-color:#F84D2B;}
