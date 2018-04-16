@@ -20,33 +20,17 @@
                         <div class="list-content" v-html="item.activeContext"></div>
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
-                        <!--<flexbox-item :span="1/3" v-for="(it,second) in item.pictureList" :key="second">
-                            <div><img :src="it.src" class="previewer-demo-img widthSet" @click="atShow(second,index)"></div>
-                        </flexbox-item>-->
-                        <div class="photo-list cl">
-                            <ul>
-                                <li id="photoPrimary" v-for="(it,index) in item.pictureList">
-                                    <div class="preview">
-                                        <img style="float:left;width:100%" :key="index" width="100" :src="it.src">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="preview addUpload" @click="chooseImage(item.pictureList,index)">
-                                        <span class="add-bg"></span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                       <!-- <div v-transfer-dom>
-				      		<previewer :list="item.pictureList" ref="previewer" :options="options" @on-index-change="logIndexChange">
-				      		</previewer>
-			    		</div>-->
-                        <!--<flexbox-item :span="1/3" v-show="roleid != 4 &&  item.pictureList.length<=9">
+                        <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
+                            <!-- 缩略图显示 -->
+                            <div><img :class="item.previewerClassName" v-clipping="img.src" @click="preview(index,idx)"></div>
+                        </flexbox-item>
+                        <flexbox-item :span="1/3" v-if="roleid!==4 && item.pictures.length<9">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
-                        </flexbox-item>-->
+                        </flexbox-item>
                     </flexbox>
-                    <div v-for="(item, index) in imgIds" :key="index">
-                        {{ item }}
+                    <div v-transfer-dom>
+                        <!-- 大图显示 -->
+                        <previewer :list="item.pictures" :options="item.previewerOptions" ref="previewer"></previewer>
                     </div>
                 </flexbox-item>
             </flexbox>
@@ -55,7 +39,7 @@
 </template>
 
 <script>
-import { XHeader, Flexbox, FlexboxItem,TransferDom,Previewer} from 'vux';
+import { XHeader, Flexbox, FlexboxItem, TransferDom, Previewer } from 'vux';
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
 
@@ -81,30 +65,13 @@ export default {
                 img.src = binding.value;
             }
         },
-         TransferDom
+        TransferDom
     },
     data() {
         return {
-           list:[],
-            imgs:[],
-            imgIds: [],
-            pictures:[],
-            options: {
-				getThumbBoundsFn (index) {
-	  			// find thumbnail element
-	            let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
-	            // get window scroll Y
-	            let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
-	            // optionally get horizontal scroll
-	            // get position of element relative to viewport
-	            let rect = thumbnail.getBoundingClientRect()
-	            // w = width
-	            return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
-	            // Good guide on how to get element coordinates:
-	            // http://javascript.info/tutorial/coordinates
-				}
-			},
-			roleid:this.$store.getters.user.roleid
+            list: [],
+            imgs: [],
+            roleid: this.$store.getters.user.roleid
         };
     },
     mounted() {
@@ -112,114 +79,103 @@ export default {
         this.getList();
     },
     methods: {
-    	datePick(s){
-    		Date.prototype.toLocaleString = function() {
-          		return (this.getMonth() + 1) + "月" + this.getDate() + "日 ";
-    		};
-    		return new Date(s).toLocaleString();
-    	},
-	 	logIndexChange (arg) {
-  			console.log(arg)
-		},
-		atShow(second,index){
-			this.$refs.previewer[index].show(second);
-		},
-    	getList(){
-    		this.$http.get('active/getParticipateActive',{
-    			params:{
-    				pageNum:1,
-    				pageSize:200,
-    				departmentid:this.$store.getters.user.departmentid,
-    				userId:this.$store.getters.user.userid
-    			}
-    		}).then(res => {
-    			this.list = res.data.list;
-    			console.log(this.list);
-    			this.list.forEach(item =>{
-                    item.pictureList=[];
-                    for(let i=0;i<item.pictures.length;i++){
-                        var obj = {};
-                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
-                        item.pictureList.push(obj);
+        datePick(s) {
+            Date.prototype.toLocaleString = function() {
+                return this.getMonth() + 1 + '月' + this.getDate() + '日 ';
+            };
+            return new Date(s).toLocaleString();
+        },
+        preview(index, idx) {
+            this.$refs.previewer[index].show(idx);
+        },
+        getList() {
+            this.$http
+                .get('active/getParticipateActive', {
+                    params: {
+                        pageNum: 1,
+                        pageSize: 200,
+                        departmentid: this.$store.getters.user.departmentid,
+                        userId: this.$store.getters.user.userid
                     }
-    			})
-
-    		}).catch(err => {
-    			console.log('fail'+err.data);
-
-    		})
-    	},
-        chooseImage(its,idx){
-
-            var count = its.pictureList.length;
-            var it = its;
-            wx.chooseImage({
-                count: 9-count, // 默认9
-                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-                success: res => {
-                    let localIds = res.localIds || [];
-                    new Promise(resolve => {
-                        let serverIds = [];
-                        let toUpload = localId =>
-                            wx.uploadImage({
-                                localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                                isShowProgressTips: 1, // 默认为1，显示进度提示
-                                success: res => {
-                                    serverIds.push(res.serverId);
-                                    if (localIds.length) {
-                                        toUpload(localIds.shift());
-                                    } else {
-                                        resolve(serverIds);
-                                    }
-                                }
-                            });
-                        if (localIds.length) {
-                            toUpload(localIds.shift());
-                        } else {
-                            resolve(serverIds);
-                        }
-                    }).then(serverIds => {
-                        let promiseList = [];
-                        serverIds.map(serverId =>
-                            promiseList.push(
-                                this.$http.get('picture/upload', {
-                                    params: {
-                                        mediaId: serverId
-                                    }
-                                })
-                            )
-                        );
-                        Promise.all(promiseList).then(result => {
-                            let pictureIds = [];
-                            result.map(item => pictureIds.push(item.data));
-
-                            //this.imgIds.push('pictureIds:' + pictureIds.join());
-                            alert(pictureIds.join());
-                            alert(it.pictures.length);
-                            if(!it.pictures){
-                                it.pictures=[]
+                })
+                .then(res => {
+                    this.list = res.data.list;
+                    this.list.forEach((item, index) => {
+                        item.previewerClassName = `previewer-${index}-img`;
+                        item.previewerOptions = {
+                            getThumbBoundsFn(idx) {
+                                // find thumbnail element
+                                let thumbnail = document.querySelectorAll(`.${item.previewerClassName}`)[idx];
+                                // get window scroll Y
+                                let pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
+                                // optionally get horizontal scroll
+                                // get position of element relative to viewport
+                                let rect = thumbnail.getBoundingClientRect();
+                                // w = width
+                                return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
+                                // Good guide on how to get element coordinates:
+                                // http://javascript.info/tutorial/coordinates
                             }
-                            if(!it.pictureList){
-                                it.pictureList=[]
-                            }
-                            var aaa = [];
-                            for(var i=0;i<pictureIds.length;i++){
-
-                                it.pictures.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i]);
-                                alert('http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i]);
-                                var obj = {};
-                                obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
-                                obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
-                                it.pictureList.push(obj);
-                                aaa.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i]);
-                            }
-                            this.list[index].pictures = aaa;
+                        };
+                        item.pictures = item.pictures || [];
+                        item.pictures.forEach(item => {
+                            item.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + item.pictureId;
                         });
                     });
-                }
-            });
+                });
+        },
+        chooseImage(item) {
+            // 最多只能传9张
+            const limit = 9 - item.pictures.length;
+            if (limit) {
+                wx.chooseImage({
+                    count: limit, // 默认9
+                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                    success: res => {
+                        let localIds = res.localIds || [];
+                        new Promise(resolve => {
+                            let serverIds = [];
+                            let toUpload = localId =>
+                                wx.uploadImage({
+                                    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                                    success: res => {
+                                        serverIds.push(res.serverId);
+                                        if (localIds.length) {
+                                            toUpload(localIds.shift());
+                                        } else {
+                                            resolve(serverIds);
+                                        }
+                                    }
+                                });
+                            if (localIds.length) {
+                                toUpload(localIds.shift());
+                            } else {
+                                resolve(serverIds);
+                            }
+                        }).then(serverIds => {
+                            let promiseList = [];
+                            serverIds.map(serverId =>
+                                promiseList.push(
+                                    this.$http.get('picture/upload', {
+                                        params: {
+                                            mediaId: serverId
+                                        }
+                                    })
+                                )
+                            );
+                            Promise.all(promiseList).then(results => {
+                                results.map(result => {
+                                    item.pictures.push({
+                                        src: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + result.data
+                                    });
+                                });
+                            });
+                        });
+                    }
+                });
+            }
         }
     }
 };
@@ -231,8 +187,8 @@ export default {
     flex-direction: column;
     background-color: #efefef;
 }
-.widthSet{
-	width:100%;
+.widthSet {
+    width: 100%;
 }
 .box {
     flex: 1;
@@ -319,34 +275,110 @@ export default {
         }
     }
 }
-.photo-list{padding:0.1rem 0 0;}
-.photo-list.border0{border-bottom:0;padding-bottom: 0;}
-.photo-list ul{font-size:0;list-style:none;}
-.photo-list ul li{font-size:0;display:inline-block;
-    margin-right:.1rem;
-    position:relative;vertical-align:top;width:.6rem;height:.6rem;overflow-y:hidden;margin-bottom:.2rem;
-    box-sizing:border-box;
+.photo-list {
+    padding: 0.1rem 0 0;
 }
-.photo-list ul li:first-child{margin-left:0;}
-.photo-list .operate{display:none;background:rgba(33,33,33,.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);z-index:5;position:absolute;bottom:0;left:0;right:0;height:12px;padding-bottom:7px;font-size:12px;color:#fff;text-align: center}
-.photo-list .info{line-height:.6rem;text-align:center}
-.photo-list .preview{width: 0.6rem;height:.6rem;z-index:4;line-height:.6rem;font-family:arial;background-color: #dbdbdb;background-repeat:no-repeat;position:absolute;bottom:0;left:0;text-align:center;right:0;cursor: pointer;border:1px solid #fff;box-sizing: border-box;}
-.photo-list .preview.addUpload{background-color:#fff;border: 1px solid #b53141;}
-.photo-list .preview img{max-height:.6rem;max-width:.6rem;vertical-align:middle;}
-.photo-list .photo-primary-text{color:#ffA500;font-size:12px;}
-.photo-list .add-bg{
+.photo-list.border0 {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+.photo-list ul {
+    font-size: 0;
+    list-style: none;
+}
+.photo-list ul li {
+    font-size: 0;
+    display: inline-block;
+    margin-right: 0.1rem;
+    position: relative;
+    vertical-align: top;
+    width: 0.6rem;
+    height: 0.6rem;
+    overflow-y: hidden;
+    margin-bottom: 0.2rem;
+    box-sizing: border-box;
+}
+.photo-list ul li:first-child {
+    margin-left: 0;
+}
+.photo-list .operate {
+    display: none;
+    background: rgba(33, 33, 33, 0.6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);
+    z-index: 5;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 12px;
+    padding-bottom: 7px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+}
+.photo-list .info {
+    line-height: 0.6rem;
+    text-align: center;
+}
+.photo-list .preview {
+    width: 0.6rem;
+    height: 0.6rem;
+    z-index: 4;
+    line-height: 0.6rem;
+    font-family: arial;
+    background-color: #dbdbdb;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    right: 0;
+    cursor: pointer;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+}
+.photo-list .preview.addUpload {
+    background-color: #fff;
+    border: 1px solid #b53141;
+}
+.photo-list .preview img {
+    max-height: 0.6rem;
+    max-width: 0.6rem;
+    vertical-align: middle;
+}
+.photo-list .photo-primary-text {
+    color: #ffa500;
+    font-size: 12px;
+}
+.photo-list .add-bg {
     width: 0.2rem;
     height: 0.2rem;
-    margin-left: .2rem;
-    margin-top: .2rem;
+    margin-left: 0.2rem;
+    margin-top: 0.2rem;
     display: block;
     background: url(../../assets/images/add_icon_bg.png) no-repeat;
     background-size: contain;
     background-position: center;
 }
-.photo-list ul li:hover .operate{display:block;}
-.photo-list ul .operate a{color:#fff;cursor:pointer;text-decoration:none}
-.photo-list ul li.no-operate:hover .operate{display:none;}
-.photo-list .upload-file-input{opacity: 0;position: absolute;z-index: 99;top: 0;right: 0;left: 0;width: .6rem;bottom: 0;}
-
+.photo-list ul li:hover .operate {
+    display: block;
+}
+.photo-list ul .operate a {
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+.photo-list ul li.no-operate:hover .operate {
+    display: none;
+}
+.photo-list .upload-file-input {
+    opacity: 0;
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 0.6rem;
+    bottom: 0;
+}
 </style>

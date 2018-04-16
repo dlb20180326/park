@@ -84,7 +84,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import {
     XHeader,
     Flexbox,
@@ -129,25 +128,22 @@ export default {
         };
     },
     filters: {
-        formatDuring: function (value) {
-
-            Date.prototype.toLocaleString = function(){
-                return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
-            }
+        formatDuring: function(value) {
+            Date.prototype.toLocaleString = function() {
+                return this.getFullYear() + '.' + (this.getMonth() + 1) + '.' + this.getDay();
+            };
             return new Date(value).toLocaleString();
-
         }
     },
     methods: {
         getActivity() {
-            axios({
-                method: 'get',
-                url: 'active/getRunningActive',
-                params: {
-                    pageNum: 1,
-                    pageSize: 1
-                }
-            })
+            this.$http
+                .get('active/getRunningActive', {
+                    params: {
+                        pageNum: 1,
+                        pageSize: 1
+                    }
+                })
                 .then(res => {
                     console.log(res.data);
                     this.startTime1 = res.data.list[0].startTime;
@@ -161,14 +157,11 @@ export default {
                 });
         },
         gettimes1() {
-            axios({
-                method: 'post',
-                url: 'active/getParticipateCount',
-                params: {
+            this.$http
+                .post('active/getParticipateCount', {
                     userId: this.userId,
                     activeType: 3
-                }
-            })
+                })
                 .then(res => {
                     console.log(res);
                     this.number1 = res.data;
@@ -178,14 +171,11 @@ export default {
                 });
         },
         gettimes2() {
-            axios({
-                method: 'post',
-                url: 'active/getParticipateCount',
-                params: {
+            this.$http
+                .post('active/getParticipateCount', {
                     userId: this.userId,
                     activeType: 5
-                }
-            })
+                })
                 .then(res => {
                     console.log(res);
                     this.number2 = res.data;
@@ -195,15 +185,12 @@ export default {
                 });
         },
         submit() {
-            axios({
-                method: 'post',
-                url: 'active/participate',
-                params: {
+            this.$http
+                .post('active/participate', {
                     userId: this.userId,
                     activeId: this.activeId,
                     departmentid: this.departmentid
-                }
-            })
+                })
                 .then(res => {
                     (this.msg = res.msg), (this.show = true);
                 })
@@ -212,14 +199,13 @@ export default {
                 });
         },
         getAlreadyActive() {
-            axios({
-                method: 'get',
-                url: 'active/getAlreadyActive',
-                params: {
-                    pageNum: 1,
-                    pageSize: 4
-                }
-            })
+            this.$http
+                .get('active/getAlreadyActive', {
+                    params: {
+                        pageNum: 1,
+                        pageSize: 4
+                    }
+                })
                 .then(res => {
                     this.activeComplete = res.data.list;
                     console.log(this.activeComplete);

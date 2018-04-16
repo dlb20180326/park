@@ -28,7 +28,7 @@
                             <div><img :class="item.previewerClassName" v-clipping="img.src" @click="preview(index,idx)"></div>
                         </flexbox-item>
                         <flexbox-item :span="1/3" v-if="item.pictures.length<9">
-                            <a class="btn-plus" @click="chooseImage(item.pictures.length)"></a>
+                            <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>
                     <div v-transfer-dom>
@@ -115,24 +115,19 @@ export default {
                                 // http://javascript.info/tutorial/coordinates
                             }
                         };
-                        // ============================== 以下是示例代码，如果没有图片，则默认添加这些示例图片用于调试 ==============================
-                        if (!item.pictures.length) {
-                            item.pictures = [
-                                { src: require('@/assets/images/preview.jpg') },
-                                { src: require('@/assets/images/preview1.jpg') },
-                                { src: require('@/assets/images/preview2.jpg') },
-                                { src: require('@/assets/images/preview3.jpg') }
-                            ];
-                        }
+                        item.pictures = item.pictures || [];
+                        item.pictures.forEach(item => {
+                            item.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + item.pictureId;
+                        });
                     });
                 });
         },
         preview(index, idx) {
             this.$refs.previewer[index].show(idx);
         },
-        chooseImage(length) {
+        chooseImage(item) {
             // 最多只能传9张
-            const limit = 9 - length;
+            const limit = 9 - item.pictures.length;
             if (limit) {
                 wx.chooseImage({
                     count: limit, // 默认9
@@ -171,10 +166,12 @@ export default {
                                     })
                                 )
                             );
-                            Promise.all(promiseList).then(result => {
-                                let pictureIds = [];
-                                result.map(item => pictureIds.push(item.data));
-                                console.log(pictureIds);
+                            Promise.all(promiseList).then(results => {
+                                results.map(result => {
+                                    item.pictures.push({
+                                        src: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + result.data
+                                    });
+                                });
                             });
                         });
                     }
