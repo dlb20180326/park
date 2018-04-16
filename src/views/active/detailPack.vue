@@ -17,7 +17,6 @@
 				<span class="picture">政治学习主要内容:</span>
 			</p>
 			<div class="artical">
-			<!--	{{activeData.activeContext}}-->
 			以“亮党员身份，树党员形象，尽党员义务，建和谐爱民”为主题，组织发动党员在社区内广泛开展党员志愿者服务活动。社区党员本着“奉献、服务、互助、和谐”的精神，自愿利用业余时间，根据自身特长和专业特点，无偿为居民提供帮助和服务。在活动中，口号。
 			</div>
 			<p class="allPic">
@@ -77,32 +76,14 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     	  	logIndexChange (arg) {
       			console.log(arg)
     		},
-    		getData(){
-    			this.$http.post('/dangjian/active/queryById?activeId='+this.$route.params.activeId
-    		).then(res =>{
-    				this.activeData = res.data;
-    				this.peopleNum = this.activeData.notParticipate.length + this.activeData.participate.length;
-    				this.participants = this.activeData.participate.length;
-    				this.Noparticipants = this.activeData.notParticipate.length;
-    				if(this.participants >= 4){
-    					this.btnAn = true
-    				}
-    				if(this.Noparticipants >= 4){
-    					this.nobtnAn = true
-    				}
-
-    			}).catch(err =>{
-    				console.log(err)
-    			})
-    		},
     		getPic(){
-    			this.$http.post('/dangjian/active/getActivePictures?activeId='+this.$route.params.activeId
+    			this.$http.get('pstudy/queryById?studyid='+this.$route.params.studyid
     			).then(res =>{
-    				this.picInfo= res.data
-    				for(let d in this.picInfo){
+    				this.picInfo= res.data;
+    				for(let d in this.picInfo.pictures){
     					var obj = {};
-    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
-    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
+    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo.pictures[d].pictureId;
+    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo.pictures[d].pictureId;
     					this.list.push(obj);
     				}
     			}).catch(err =>{
@@ -117,7 +98,6 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     		}
 		},
 		mounted(){
-			this.getData();
 			this.getPic();
 		},
 		data(){
@@ -173,7 +153,7 @@ html,body{
 .numberz{font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);display:block;float: left;margin-left:.1rem;}
 .allPic{height:.3rem;line-height:.3rem;overflow:hidden;margin-top:.2rem;}
 .img-show{width:84%;height:auto;margin-left:8%;}
-.img-show img{width:32%;height:0.9rem;margin-top:.1rem;}
+.img-show img{width:49%;height:1.5rem;margin-top:.1rem;}
 .img-show img:not(:first-child){margin-left:2%;}
 .img-left{width:.37rem;height:.37rem;position:absolute;left:.1rem;top:3.15rem;;z-index:900;}
 .img-right{width:.37rem;height:.37rem;position:absolute;right:.1rem;top:3.15rem;z-index:900;}
@@ -211,6 +191,6 @@ color:rgba(204,204,204,1);border:1px solid #E4E4E4;line-height:.3rem;text-align:
 }
 .down{width:0.1rem;height:0.1rem;display:inline-block;background: url(../../assets/images/icon-down.png) no-repeat;background-size:100% 100%;margin-left:.05rem;}
 .up{width:0.1rem;height:0.1rem;display:inline-block;background: url(../../assets/images/icon-up.png) no-repeat;background-size:100% 100%;float:right;margin-right:.2rem;margin-top:.1rem;}
-.btnRed{width:89.4%;height:.4rem;background:rgba(185,54,71,1);border-radius: 4px;font-size:.16rem;font-family:PingFangSC-Medium;color:rgba(255,255,255,1);line-height:.4rem;text-align:center;position:absolute;bottom: .2rem;left:5.3%;border:0;}
+.btnRed{width:89.4%;height:.4rem;background:rgba(185,54,71,1);border-radius: 4px;font-size:.16rem;font-family:PingFangSC-Medium;color:rgba(255,255,255,1);line-height:.4rem;text-align:center;position:relative;left:5.3%;border:0;top:.24rem;}
 .grayBtn{background:rgba(216,216,216,1);}
 </style>

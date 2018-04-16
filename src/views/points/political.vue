@@ -15,7 +15,7 @@
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.partyname}}</flexbox-item>
                         <flexbox-item>{{datePick(con.starttime)}}</flexbox-item>
-                        <flexbox-item><input type="button" class="btnSub" :value="con.status|Upper" :class="con.status|Upper1" @click="changeItem(con)"></input></flexbox-item>
+                        <flexbox-item><router-link :to="{name:'detailPack',params:{studyid:con.studyid}}"><input type="button" class="btnSub" :value="con.status|Upper" :class="con.status|Upper1"></input></router-link></flexbox-item>
                     </flexbox>
                </div>
 			<div v-transfer-dom>
@@ -101,20 +101,6 @@ Vue.component(Popup.name, Popup);
                     console.log(error);
                 });
             },
-			changeItem(item){
-                console.log(item.tempint)
-                if(item.tempint!=1){
-                this.$router.push({
-                    path: '/points/pointEvaluate',
-                    name: 'pointEvaluate',
-                    params: {
-                        partmentId:item.id,
-                        name:encodeURI(item.name),
-                        departmentId:item.departmentid,
-                        userId:item.userid
-                    }
-                })}
-			},
 			know(){
 				this.showPop = false
 			},
