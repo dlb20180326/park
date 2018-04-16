@@ -1,5 +1,5 @@
 <template>
-	<div  style="height:100%;">
+	<div style="height:100%;">
 		<view-box ref="viewBox" body-padding-top=".46rem" body-padding-bottom=".55rem">
 			<r-header :rfs='itegal'></r-header>
 			<div class="header-list">

@@ -138,7 +138,6 @@ export default {
     	},
         chooseImage(its) {
             var count = its.pictureList.length;
-            var it = its;
             wx.chooseImage({
                 count: 9-count, // 默认9
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -183,11 +182,11 @@ export default {
                             //this.imgIds.push('pictureIds:' + pictureIds.join());
                             alert(pictureIds.join());
                             for(var i=0;i<pictureIds.length;i++){
-                                it.pictures.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i]);
+                                its.pictures.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i]);
                                 var obj = {};
                                 obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
                                 obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
-                                it.pictureList.push(obj);
+                                its.pictureList.push(obj);
                             }
 
                         });
