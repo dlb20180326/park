@@ -5,7 +5,7 @@
                 <div class="header-top">
                     <div class="top-head">
                         <div class="top-left">{{dateTime}}，{{userAbout.name}}</div>
-                        <div class="top-right"></div>
+                        <div class="top-right" :style="{background: 'url('+userAbout.avatar+')'}"></div>
                     </div>
                     <div class="top-second">
                         <div class="second-left">
@@ -84,7 +84,6 @@ export default {
         this.$nextTick(function() {
 //            this.drawAxis('echartShow');
         });
-        console.log(this.years);
         this.userName();
         this.infoDetail();
         this.getUserByScoreInfo();
@@ -211,7 +210,6 @@ export default {
                 }
             }).then(res => {
                 this.users[1].integral = res.data;
-                console.log(res.data);
             }).catch(err => {
                 console.log(err);
             });
@@ -270,7 +268,7 @@ export default {
     font-weight: 600;
     float: right;
     margin: 0.24rem 0.2rem 0.15rem 0;
-    background: url(../assets/images/icon-head.png) no-repeat;
+    background-repeat:no-repeat;
     background-size: 100% 100%;
 }
 .top-second,
