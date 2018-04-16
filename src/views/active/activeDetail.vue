@@ -274,6 +274,7 @@ export default {
 }
 .fAll{
 	float:right;
+    margin-top: 0.1rem;
 }
 .fRight{
 	float:right;

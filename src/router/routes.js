@@ -125,6 +125,10 @@ export const routes = [
                 component: () => import('@/views/active/partyIndex')
             },
             {
+                path: 'active/partyBranch',
+                component: () => import('@/views/active/partyBranchIndex')
+            },
+            {
                 path: 'active/partyActivity',
                 component: () => import('@/views/active/partyActivity')
             },
