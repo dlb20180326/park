@@ -58,7 +58,6 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
       			this.$refs.previewer.show(index)
     		},
             pass() {
-			    alert(1);
                 axios.get('pstudy/pass', {
                     params: {
                         userid: this.$store.getters.user.userid,
