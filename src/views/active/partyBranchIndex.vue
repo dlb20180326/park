@@ -25,25 +25,25 @@
                         </flexbox-item>-->
                         <div class="photo-list cl">
                             <ul>
-                                <li id="photoPrimary" v-for="(item,index) in  item.pictureList">
+                                <li id="photoPrimary" v-for="(it,index) in item.pictureList">
                                     <div class="preview">
-                                        <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                                        <img style="float:left;width:100%" :key="index" width="100" :src="it.src">
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="preview addUpload" @click="chooseImage(picList13)">
+                                    <div class="preview addUpload" @click="chooseImage(item.pictureList,index)">
                                         <span class="add-bg"></span>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        <div v-transfer-dom>
+                       <!-- <div v-transfer-dom>
 				      		<previewer :list="item.pictureList" ref="previewer" :options="options" @on-index-change="logIndexChange">
 				      		</previewer>
-			    		</div>
-                        <flexbox-item :span="1/3" v-show="roleid != 4 &&  item.pictureList.length<=9">
+			    		</div>-->
+                        <!--<flexbox-item :span="1/3" v-show="roleid != 4 &&  item.pictureList.length<=9">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
-                        </flexbox-item>
+                        </flexbox-item>-->
                     </flexbox>
                     <div v-for="(item, index) in imgIds" :key="index">
                         {{ item }}
@@ -150,7 +150,7 @@ export default {
 
     		})
     	},
-        chooseImage(its){
+        chooseImage(its,idx){
 
             var count = its.pictureList.length;
             var it = its;
@@ -204,6 +204,7 @@ export default {
                             if(!it.pictureList){
                                 it.pictureList=[]
                             }
+                            var aaa = [];
                             for(var i=0;i<pictureIds.length;i++){
 
                                 it.pictures.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i]);
@@ -212,8 +213,9 @@ export default {
                                 obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
                                 obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
                                 it.pictureList.push(obj);
+                                aaa.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i]);
                             }
-
+                            this.list[index].pictures = aaa;
                         });
                     });
                 }
