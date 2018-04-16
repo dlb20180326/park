@@ -20,8 +20,11 @@
                         <div class="list-content" v-html="item.activeContext"></div>
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
-                        <flexbox-item :span="1/3" v-for="(it,second) in item.pictureList" :key="second">
-                            <div><img :src="it.src" class="previewer-demo-img widthSet"  width="100" @click="atShow(second,index)"></div>
+                        <flexbox-item :span="1/3"  >
+
+                            <div class="preview">
+                                <img style="float:left;width:100%"  v-for="(it,index) in item.pictureList" :key="index"  :src="it.src"  >
+                            </div>
                         </flexbox-item>
                         <div v-transfer-dom>
 				      		<previewer :list="item.pictureList" ref="previewer" :options="options" @on-index-change="logIndexChange">
