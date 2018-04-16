@@ -32,7 +32,7 @@
                         <i class="iconfont dlb-icon-rili" ></i>
                     </x-button>
                     <group class="date-no-box">
-                        <datetime v-model="hot" format="YYYY/MM-DD HH:mm" @on-change="change1"></datetime>
+                        <datetime v-model="hot" format="YYYY-MM-DD HH:mm" @on-change="change1"></datetime>
                     </group>
                 </flexbox-item>
             </flexbox>
