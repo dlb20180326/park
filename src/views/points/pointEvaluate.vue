@@ -19,7 +19,7 @@
                 <ul>
                     <li id="photoPrimary" v-for="(item,index) in picList13.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
                         </div>
                     </li>
                     <li>
@@ -43,7 +43,7 @@
                 <ul>
                     <li  v-for="(item,index) in picList14.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
                         </div>
                     </li>
                     <li>
@@ -68,11 +68,11 @@
                 <ul>
                     <li v-for="(item,index) in picList15.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item" @touchend="clearLoop" @touchstart="showDeleteButton(picList15,index)">
                         </div>
                     </li>
                     <li>
-                        <div class="preview addUpload" @click="chooseImage(picList15)">
+                        <div class="preview addUpload" @click="chooseImage(picList15)"  >
                             <span class="add-bg"></span>
                         </div>
                     </li>
@@ -139,6 +139,18 @@ export default {
         }
     },
     methods: {
+        showDeleteButton(it,idx) {
+            clearInterval(this.Loop);//再次清空定时器，防止重复注册定时器
+            var This = it;
+            this.Loop=setTimeout(function(){
+                This.list.splice(idx,1);
+                This.arr.splice(idx,1);
+                This.$vux.alert.show({title:'删除成功'});
+            },1000);
+        },
+        clearLoop() {
+            clearInterval(this.Loop);
+        },
         submit() {
             let {departmentId, userId, partmentId} = this.$route.params;
             let {Messge13, Messge14, Messge15, itemscore} = this;
