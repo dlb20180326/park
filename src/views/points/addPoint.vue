@@ -109,7 +109,8 @@
                 activeContent:'',
 				listSingle:{},
 				userName:'',
-                picList:{list:[],arr:[]},
+                picList:{list:["http://www.dlbdata.cn/dangjian/picture/show?pictureId=145",
+                    "http://www.dlbdata.cn/dangjian/picture/show?pictureId=146"],arr:[]},
             };
         },
         methods: {
@@ -117,8 +118,9 @@
                 clearInterval(this.Loop);//再次清空定时器，防止重复注册定时器
                 var This = this;
                 this.Loop=setTimeout(function(){
-                    alert(it)
-                    This.$vux.alert.show({title:'增加失败'});
+                    This.picList.list.splice(it,1);
+                    This.picList.arr.splice(it,1);
+                    This.$vux.alert.show({title:'删除成功'});
                 },1000);
             },
             clearLoop() {
