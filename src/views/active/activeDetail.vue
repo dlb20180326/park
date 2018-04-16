@@ -58,7 +58,7 @@
                     <div class="p15">
                         <div class=" clearfix  display">
                             <span class="fl weui-cell__bd1">已参与组织生活</span>
-                            <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
+                            <a href="#" class="fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
                         </div>
                         <ul class="news">
                             <li v-for="(item,index) in activeComplete" :key="index" >
@@ -273,10 +273,12 @@ export default {
     background-color: #efefef;
 }
 .fAll{
+    margin-top: 0.2rem;
 	float:right;
 }
 .fRight{
 	float:right;
+    margin-top: 0.1rem;
 }
 .content{width:89%;
         margin:0 auto;
