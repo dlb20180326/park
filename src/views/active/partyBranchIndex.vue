@@ -154,28 +154,33 @@ export default {
                             } else {
                                 resolve(serverIds);
                             }
-                        }).then(serverIds => {
-                            let promiseList = [];
-                            serverIds.map(serverId =>
-                                promiseList.push(
-                                    this.$http.get('picture/upload', {
-                                        params: {
-                                            mediaId: serverId
-                                        }
-                                    })
-                                )
-                            );
-                            Promise.all(promiseList).then(results => {
-                                results.map(result => {
-                                    item.pictures.push({
-                                        src: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + result.data
-                                    });
-                                });
-                            });
-                        });
+                        }).then(serverIds => this.uploadImage(item, serverIds));
                     }
                 });
             }
+        },
+        uploadImage(item, serverIds) {
+            let promiseList = [];
+            serverIds.map(serverId =>
+                promiseList.push(
+                    this.$http.get('picture/upload', {
+                        params: {
+                            mediaId: serverId
+                        }
+                    })
+                )
+            );
+            Promise.all(promiseList).then(results =>
+                results.map(result => {
+                    item.pictures.push({
+                        src: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + result.data
+                    });
+                    this.$http.post('active/savePicture', {
+                        activeId: item.id,
+                        pictureId: result.data
+                    });
+                })
+            );
         }
     }
 };
