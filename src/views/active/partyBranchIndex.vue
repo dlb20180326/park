@@ -21,7 +21,7 @@
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(it,second) in item.pictureList" :key="second">
-                            <div><img :src="it.src" class="previewer-demo-img widthSet" @click="atShow(second,index)"></div>
+                            <div><img :src="it.src" class="previewer-demo-img widthSet"  width="100" @click="atShow(second,index)"></div>
                         </flexbox-item>
                         <div v-transfer-dom>
 				      		<previewer :list="item.pictureList" ref="previewer" :options="options" @on-index-change="logIndexChange">
@@ -137,7 +137,6 @@ export default {
     		})
     	},
         chooseImage(its){
-            alert("111111111111")
             console.log(its)
             var count = its.pictureList.length;
             var it = its;
