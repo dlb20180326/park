@@ -238,7 +238,7 @@
                 }
             },
             showQR(data){
-                document.getElementById('fei').src = 'active/showQrCode?activeId='+data;
+                document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
                 this.showQrcodeDialog = true;
             },
             submit1(it){

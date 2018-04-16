@@ -27,8 +27,8 @@
 				      		<previewer :list="item.pictureList" ref="previewer" :options="options" @on-index-change="logIndexChange">
 				      		</previewer>
 			    		</div>
-                        <flexbox-item :span="1/3" v-show="roleid != 4">
-                            <a class="btn-plus" @click="chooseImage"></a>
+                        <flexbox-item :span="1/3" v-show="roleid != 4 &&  item.pictureList.length<=9">
+                            <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>
                     <div v-for="(item, index) in imgIds" :key="index">
@@ -122,13 +122,13 @@ export default {
     			this.list = res.data.list;
     			console.log(this.list);
     			this.list.forEach(item =>{
-    					item.pictureList=[];
-    				    for(let i=0;i<item.pictures.length;i++){
-	    					var obj = {};
-	    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
-	    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
-	    					item.pictureList.push(obj);
-    					}
+                    item.pictureList=[];
+                    for(let i=0;i<item.pictures.length;i++){
+                        var obj = {};
+                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
+                        item.pictureList.push(obj);
+                    }
     			})
 
     		}).catch(err => {
@@ -136,9 +136,10 @@ export default {
 
     		})
     	},
-        chooseImage() {
+        chooseImage(its) {
+            var count = its.pictureList.length;
             wx.chooseImage({
-                count: 9, // 默认9
+                count: 9-count, // 默认9
                 sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
                 sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
                 success: res => {
@@ -177,7 +178,17 @@ export default {
                         Promise.all(promiseList).then(result => {
                             let pictureIds = [];
                             result.map(item => pictureIds.push(item.data));
-                            this.imgIds.push('pictureIds:' + pictureIds.join());
+
+                            //this.imgIds.push('pictureIds:' + pictureIds.join());
+                            alert(pictureIds.join());
+                            for(var i=0;i<pictureIds.length;i++){
+                                its.pictures.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i]);
+                                var obj = {};
+                                obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
+                                obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
+                                its.pictureList.push(obj);
+                            }
+
                         });
                     });
                 }
