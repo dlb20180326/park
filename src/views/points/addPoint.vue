@@ -55,7 +55,7 @@
                 <ul>
                     <li v-for="(item,index) in picList.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
                         </div>
                     </li>
                     <li>
@@ -113,6 +113,19 @@
             };
         },
         methods: {
+            showDeleteButton(it) {
+                clearInterval(this.Loop);//再次清空定时器，防止重复注册定时器
+
+                var This = this;
+                this.Loop = setTimeout(function(){
+                    alert(it)
+
+                },1000);
+            },
+            clearLoop() {
+                clearInterval(this.Loop);
+            },
+
             atBig (item) {
             },
         	getList(){
