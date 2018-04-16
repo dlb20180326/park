@@ -69,7 +69,8 @@
         dateTime: '',
         charts: '',
         partAbout: {},
-        todoList: []
+        todoList: [],
+        headName:{},
       };
     },
     components: {
@@ -93,7 +94,7 @@
       } else {
         this.dateTime = '晚上好';
       }
-      getHead();
+      this.getHead();
       this.$nextTick(function () {
         //this.drawAxis('echartShow');
       });
@@ -124,7 +125,6 @@
             }
           })
           .then(res => {
-            console.log(res);
             this.todoList = res.data;
           })
           .catch(err => {
@@ -139,7 +139,6 @@
             }
           })
           .then(res => {
-            console.log(res);
             this.userAbout = res.data;
           })
           .catch(err => {
@@ -153,6 +152,7 @@
             }
         }).then(res => {
             this.headName = JSON.parse(res.data);
+            console.log(this.headName);
         }).
         catch(err =>{
             console.log('fail'+err);

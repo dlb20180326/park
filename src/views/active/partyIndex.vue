@@ -199,6 +199,7 @@ export default {
 .box {
     flex: 1;
     overflow-y: auto;
+    -webkit-overflow-scrolling : touch;
 }
 .vux-flexbox.list-item {
     background-color: #fff;

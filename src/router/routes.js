@@ -91,12 +91,12 @@ export const routes = [
                 props: true,
                 component: () => import('@/views/points/auditDetail1')
             },
-        {
-            path: 'points/audit/:userId/:Id/:name/:departmentId/:totalscore',
-                name: 'Audit',
-            props: true,
-            component: () => import('@/views/points/auditDetail1')
-        },
+	        {
+	            path: 'points/audit/:userId/:Id/:name/:departmentId/:totalscore',
+	                name: 'Audit',
+	            props: true,
+	            component: () => import('@/views/points/auditDetail1')
+	        },
             {
                 path: 'points/pointDetail',
                 component: () => import('@/views/points/pointDetail')
@@ -110,6 +110,10 @@ export const routes = [
                 path: 'points/pointEvaluate/:partmentId/:name/:departmentId/:userId',
                 name: 'pointEvaluate',
                 component: () => import('@/views/points/pointEvaluate')
+            },
+            {
+                path: 'points/political',
+                component: () => import('@/views/points/political')
             },
             {
                 path: 'active',
