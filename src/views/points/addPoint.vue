@@ -160,7 +160,8 @@
                         picids:this.picList.arr.join()
                     }
                 }).then(res => {
-                    this.users[1].integral = res.data;
+                    console.log(res);
+                    //this.users[1].integral = res.data;
                     if(res.success){
                     	this.$vux.alert.show({title:'增加成功'});
                         setTimeout(() => {
@@ -173,10 +174,14 @@
       					}, 1000)
                     }
                 }).catch(err => {
-                    this.$vux.alert.show({title:'增加失败'});
-                    setTimeout(() => {
-                        this.$vux.alert.hide();
-                    }, 1000)
+
+                    if(err.success){
+                        this.$vux.alert.show({title:'增加失败'});
+                        setTimeout(() => {
+                            this.$vux.alert.hide();
+                        }, 1000)
+                    }
+
                 });
             },
 
