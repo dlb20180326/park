@@ -55,7 +55,7 @@
                             <!--<router-link :to="{name:'Audit'}">
                             <button class="go-btn">去处理</button>
                             </router-link>-->
-                            <button class="go-btn" @click="gohandle(item)">已审核</button>
+                            <button class="go-btn" @click="gohandle1(item)">已审核</button>
                         </flexbox-item>
                     </flexbox>
                 </div>
@@ -178,15 +178,28 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
 				this.partyBranch1 = park.departmentname;
                 this.departmentid=park.departmentid;
                 this.partyBranch=park.partyBranch;
-                console.log("1888888888888",park.partyBranch);
 				this.topShow = !this.topShow;
 				this.showTrans = !this.showTrans;
                 this.slide();
                 this.slide1();
 			},
-            gohandle(item){
+            gohandle1(item){
 
                this.$router.push({
+                   path: '/points/audit/:userId/:Id/:name/:departmentId/:totalscore',
+                    name: 'Audit',
+                    params: {
+                        Id:item.id,
+                        name:encodeURI(item.name),
+                        departmentId:item.departmentid,
+                        userId:item.userid,
+                        totalscore:item.totalscore||0
+                    }
+                })
+            },
+            gohandle(item){
+
+                this.$router.push({
                     // path: '/points/audit/:userId/:Id/:name/:departmentId/:totalscore',
                     name: 'Audit',
                     params: {
