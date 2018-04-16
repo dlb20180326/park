@@ -96,8 +96,8 @@ Vue.component(Popup.name, Popup);
                 });
             },
 			changeItem(item){
-                console.log(item.tempint)
-                if(item.tempint!=1){
+                console.log(item)
+                if(!item.tempint && item.tempint!==0 ){
                 this.$router.push({
                     path: '/points/pointEvaluate',
                     name: 'pointEvaluate',
@@ -106,8 +106,34 @@ Vue.component(Popup.name, Popup);
                         name:encodeURI(item.name),
                         departmentId:item.departmentid,
                         userId:item.userid
+
                     }
-                })}
+                })
+                }else if(item.tempint==1){
+                    this.$router.push({
+                    path: 'points/audit1/:userId/:Id/:name/:departmentId/:totalscore',
+                    name: 'Audit1',
+                    params: {
+                        partmentId:item.id,
+                        name:encodeURI(item.name),
+                        departmentId:item.departmentid,
+                        userId:item.userid,
+                        totalscore:item.totalscore
+                    }
+                })
+                }else {
+                    this.$router.push({
+                        path: 'points/audit1/:userId/:Id/:name/:departmentId/:totalscore',
+                        name: 'Audit1',
+                        params: {
+                            partmentId:item.id,
+                            name:encodeURI(item.name),
+                            departmentId:item.departmentid,
+                            userId:item.userid,
+                            totalscore:item.totalscore
+                        }
+                    })
+                }
 			},
 			know(){
 				this.showPop = false
