@@ -196,7 +196,7 @@ export default {
                 }
             }) .then((res)=> {
                 console.log(res);
-                this.msg=res.msg
+                this.msg=res.msg;
                 this.show=true
 
             })

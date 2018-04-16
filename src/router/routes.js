@@ -94,6 +94,7 @@ export const routes = [
 	        {
 	            path: 'points/audit/:partmentId/:name/:departmentId/:userId',
                 name: 'Audit',
+                props:true,
 	            component: () => import('@/views/points/auditDetail')
 	        },
             {
