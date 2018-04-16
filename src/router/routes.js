@@ -87,9 +87,9 @@ export const routes = [
             },
             {
                 path: 'points/audit1/:userId/:Id/:name/:departmentId/:totalscore',
-                name: 'Audit',
+                name: 'Audit1',
                 props: true,
-                component: () => import('@/views/points/auditDetail')
+                component: () => import('@/views/points/auditDetail1')
             },
         {
             path: 'points/audit/:userId/:Id/:name/:departmentId/:totalscore',

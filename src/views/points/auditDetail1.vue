@@ -57,10 +57,10 @@
                             </flexbox-item>
                         </flexbox>
                         <flexbox class="footer" justify= "center" v-if="item.status == 2">
-                            <x-button type="warn">审核通过</x-button>
+                            <x-button  :mini="true" type="warn" >审核通过</x-button>
                         </flexbox>
                         <flexbox class="footer" justify= "center" v-if="item.status == 3">
-                            <x-button style="color:gray">已拒绝</x-button>
+                            <x-button  :mini="true" style="color:gray">已拒绝</x-button>
                         </flexbox>
                         <flexbox class="footer" justify= "left" v-if="item.status == 3" style="text-align:left;">
                             <table>

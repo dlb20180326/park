@@ -32,9 +32,6 @@
                         <flexbox-item>{{item.branchName}}</flexbox-item>
                         <flexbox-item>{{item.totalscore||0.0}}</flexbox-item>
                         <flexbox-item>
-                            <!--<router-link :to="{name:'Audit'}">
-                            <button class="go-btn">去处理</button>
-                            </router-link>-->
                             <button class="go-btn" @click="gohandle(item)">去处理</button>
                         </flexbox-item>
                     </flexbox>
@@ -52,9 +49,6 @@
                         <flexbox-item>{{item.branchName}}</flexbox-item>
                         <flexbox-item>{{item.totalscore||0.0}}</flexbox-item>
                         <flexbox-item>
-                            <!--<router-link :to="{name:'Audit'}">
-                            <button class="go-btn">去处理</button>
-                            </router-link>-->
                             <button class="go-btn" @click="gohandle1(item)">已审核</button>
                         </flexbox-item>
                     </flexbox>
@@ -186,8 +180,8 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
             gohandle1(item){
 
                this.$router.push({
-                   path: '/points/audit/:userId/:Id/:name/:departmentId/:totalscore',
-                    name: 'Audit',
+                   path: '/points/audit1/:userId/:Id/:name/:departmentId/:totalscore',
+                    name: 'Audit1',
                     params: {
                         Id:item.id,
                         name:encodeURI(item.name),
@@ -200,7 +194,7 @@ import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem}
             gohandle(item){
 
                 this.$router.push({
-                    // path: '/points/audit/:userId/:Id/:name/:departmentId/:totalscore',
+                    path: '/points/audit/:userId/:Id/:name/:departmentId/:totalscore',
                     name: 'Audit',
                     params: {
                         Id:item.id,
