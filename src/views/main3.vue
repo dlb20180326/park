@@ -1,7 +1,7 @@
 <template>
   <div class="page-body">
     <x-header :left-options="{showBack: false}">
-      花旗银行第二党支部
+      {{info.departmentname}}
     </x-header>
     <div class="head">
       <flexbox>
@@ -9,7 +9,7 @@
           党支部书记：
         </flexbox-item>
         <flexbox-item>
-          {{partyBranch}}
+          {{info.partyBranch}}
 
         </flexbox-item>
       </flexbox>
@@ -18,7 +18,7 @@
           所属片区：
         </flexbox-item>
         <flexbox-item>
-          {{address}}
+          {{info.address}}
 
         </flexbox-item>
       </flexbox>
@@ -27,7 +27,7 @@
           党支部评级：
         </flexbox-item>
         <flexbox-item>
-          {{honor}}
+          {{info.honor}}
         </flexbox-item>
       </flexbox>
       <flexbox>
@@ -35,7 +35,7 @@
           现有党员：
         </flexbox-item>
         <flexbox-item>
-          <span class="number">25</span>
+          <span class="number">{{info.people}}</span>
           人
         </flexbox-item>
       </flexbox>
@@ -69,7 +69,8 @@
         address: '',
         honor: '',
         people: '',
-        todoList: []
+        todoList: [],
+        info:[]
       };
     },
     methods: {
@@ -82,6 +83,7 @@
 
           }
         }).then((res) => {
+        	this.info = res.data;
           this.partyBranch = res.data.partyBranch;
           this.address = res.data.address;
           this.honor = res.data.honor;
