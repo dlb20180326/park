@@ -15,7 +15,9 @@
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.partyname}}</flexbox-item>
                         <flexbox-item>{{datePick(con.starttime)}}</flexbox-item>
-                        <flexbox-item><router-link :to="{name:'detailPack',params:{studyid:con.studyid}}"><input type="button" class="btnSub" :value="con.status|Upper" :class="con.status|Upper1"></input></router-link></flexbox-item>
+                        <flexbox-item>
+                            <input type="button" class="btnSub" :value="con.status|Upper" :class="con.status|Upper1" @click="clickLink(con)" />
+                        </flexbox-item>
                     </flexbox>
                </div>
 			<div v-transfer-dom>
@@ -49,10 +51,11 @@ Vue.component(Popup.name, Popup);
 				isYellow:false,
 				showPop:false
 			}
-		}, 
+		},
 		filters: {
             Upper: function (value) {
                 try {
+                    if(value=== 0)  throw "去处理";
                     if(value=== 1)  throw "已拒绝";
                     if(value=== 2)  throw "已通过";
                 }
@@ -84,22 +87,29 @@ Vue.component(Popup.name, Popup);
 			TransferDom
 		},
 		methods:{
+            clickLink(item) {
+                this.$router.push({
+                    path: '/active/detailPack/',
+                    name: 'detailPack',
+                    params:{studyid:item.studyid,createUserid:item.createUserid}
+                })
+
+            },
             getlist(){
                 axios({
                     method: 'get',
-                    url: '/dangjian/pstudy/getPartymemberByDepartmentid',
+                    url: 'pstudy/getPartymemberByDepartmentid',
                     params: {
-                       departmentid:1,
+                       departmentid:this.$store.getters.user.departmentid,
                        activeType:this.$route.params.moduleid
                     }
                 }) .then((res)=> {
-                this.list=res.data;
+                    this.list=res.data;
 
-
-            })
-            .catch(function (error) {
-                    console.log(error);
-                });
+                })
+                .catch(function (error) {
+                        console.log(error);
+                    });
             },
 			know(){
 				this.showPop = false

@@ -83,20 +83,17 @@ Vue.component(Popup.name, Popup);
                     method: 'get',
                     url: 'ppartymember/getPartymemberByDepartmentid',
                     params: {
-                       departmentid:1
+                       departmentid:this.$store.getters.user.departmentid
                     }
-                }) .then((res)=> {
-                    console.log(res)
-                this.list=res.data
-
-
-            })
-            .catch(function (error) {
+                }).then((res)=> {
+                    console.log(res);
+                    this.list=res.data
+                }).catch(function (error) {
                     console.log(error);
                 });
             },
 			changeItem(item){
-                console.log(item)
+
                 if(!item.tempint && item.tempint!==0 ){
                 this.$router.push({
                     path: '/points/pointEvaluate',
@@ -109,28 +106,26 @@ Vue.component(Popup.name, Popup);
 
                     }
                 })
-                }else if(item.tempint==1){
+                }else if(item.tempint===1){
                     this.$router.push({
-                    path: 'points/audit1/:userId/:Id/:name/:departmentId/:totalscore',
-                    name: 'Audit1',
-                    params: {
-                        partmentId:item.id,
-                        name:encodeURI(item.name),
-                        departmentId:item.departmentid,
-                        userId:item.userid,
-                        totalscore:item.totalscore
-                    }
-                })
-                }else {
-                    this.$router.push({
-                        path: 'points/audit1/:userId/:Id/:name/:departmentId/:totalscore',
+                        path: '/points/audit1',
                         name: 'Audit1',
                         params: {
                             partmentId:item.id,
                             name:encodeURI(item.name),
                             departmentId:item.departmentid,
-                            userId:item.userid,
-                            totalscore:item.totalscore
+                            userId:item.userid
+                        }
+                    })
+                }else {
+                    this.$router.push({
+                        path: '/points/audit1',
+                        name: 'Audit1',
+                        params: {
+                            partmentId:item.id,
+                            name:encodeURI(item.name),
+                            departmentId:item.departmentid,
+                            userId:item.userid
                         }
                     })
                 }

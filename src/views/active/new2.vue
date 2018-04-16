@@ -109,7 +109,7 @@
         </div>
         <div v-transfer-dom class="qrcode-dialog">
             <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{width: '80%',height:'300px'}" >
-                <h1 style="text-align: center">{{activeTitle}}</h1> <br><br>
+                <h1 style="text-align: center;margin-top:20px;margin-bottom:20px;">{{activeTitle}}</h1>
                 <img id="fei" alt="">
             </x-dialog>
         </div>

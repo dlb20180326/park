@@ -5,40 +5,44 @@
 			<p class="allPic">
 				<span class="bg-line"></span>
 				<span class="picture">党员姓名:</span>
-				<span class="numberz">王俊凯</span>
+				<span class="numberz">{{content.partyname}}</span>
 			</p>
 			<p class="allPic">
 				<span class="bg-line"></span>
 				<span class="picture">时间:</span>
-				<span class="numberz">2018.08.08</span>
+				<span class="numberz">{{new Date(content.starttime).toLocaleString()}}</span>
 			</p>
 			<p class="allPic">
 				<span class="bg-line"></span>
 				<span class="picture">政治学习主要内容:</span>
 			</p>
 			<div class="artical">
-			以“亮党员身份，树党员形象，尽党员义务，建和谐爱民”为主题，组织发动党员在社区内广泛开展党员志愿者服务活动。社区党员本着“奉献、服务、互助、和谐”的精神，自愿利用业余时间，根据自身特长和专业特点，无偿为居民提供帮助和服务。在活动中，口号。
+			{{content.content}}
 			</div>
 			<p class="allPic">
 			<span class="bg-line"></span>
 			<span class="picture">活动图集</span>
-			<span class="numberz">{{list&& list.length || num}}张</span>
+			<span class="numberz">{{ num}}张</span>
 			</p>
 			<div class="img-show">
-				<img class="previewer-demo-img" v-for="(item,index) in list" :src="item.src"  @click="show(index)">
+				<img class="previewer-demo-img" v-for="(item,index) in content.picture" :src="item.src"  @click="show(index)">
 				<div v-transfer-dom>
-	      		<previewer :list="list" ref="previewer" :options="options" @on-index-change="logIndexChange">
+	      		<previewer :list="content.picture" ref="previewer" :options="options" @on-index-change="logIndexChange">
 	      		</previewer>
+
 	    	</div>
 			</div>
-			<button class="btnRed">点击通过并加分</button>
-			<!--<button class="btnRed">已评分 (评分人：毛不易)</button>-->
+
+			<button class="btnRed" v-if="content.status==0" @click="pass()">点击通过并加分</button>
+			<button class="btnRed"  v-if="content.status==2">已评分 (评分人：{{content.branch}})</button>
+            <button class="btnRed"  v-if="content.status==3">审核失败 (审核人：{{content.branch}})</button>
 	 	</view-box>
 	</div>
 </template>
 
 <script>
-import Xheader from '@/components/comother/rheader'
+    import axios from 'axios';
+import Xheader from '@/components/comother/rheader';
 import {Previewer, TransferDom,ViewBox} from 'vux'
 	export default {
 		directives: {
@@ -53,6 +57,26 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 			show (index) {
       			this.$refs.previewer.show(index)
     		},
+            pass() {
+			    alert(1);
+                axios.get('pstudy/pass', {
+                    params: {
+                        userid: this.$store.getters.user.userid,
+                        studyid:this.$route.params.studyid
+                    }
+                })
+                .then(res => {
+                    if(res.success){
+                        this.$vux.alert.show({title: res.msg});
+                        userName();
+                    }else{
+                        this.$vux.alert.show({title:res.msg});
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            },
     		spread(){
     			this.spr = true;
     			this.btnAn = !this.btnAn;
@@ -76,29 +100,34 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     	  	logIndexChange (arg) {
       			console.log(arg)
     		},
-    		getPic(){
+            getDetail(){
     			this.$http.get('pstudy/queryById?studyid='+this.$route.params.studyid
     			).then(res =>{
-    				this.picInfo= res.data;
-    				for(let d in this.picInfo.pictures){
-    					var obj = {};
-    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo.pictures[d].pictureId;
-    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo.pictures[d].pictureId;
-    					this.list.push(obj);
-    				}
+    				this.content= res.data;
+                    this.content.picture = [];
+
+                    this.num = res.data.pictures.length;
+    				this.content.pictures.forEach(it=>{
+    				    console.log(it);
+                        var obj = {};
+                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
+                        this.content.picture.push(obj);
+                    });
+
     			}).catch(err =>{
     				console.log(err)
     			})
     		},
     		dataPick(s){
-        	Date.prototype.toLocaleString = function(){
-        		return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDay()+'日'
-        	}
-        	return new Date(s).toLocaleString();
+                Date.prototype.toLocaleString = function(){
+                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDay()+'日'
+                };
+                return new Date(s).toLocaleString();
     		}
 		},
 		mounted(){
-			this.getPic();
+			this.getDetail();
 		},
 		data(){
 			return {
@@ -107,6 +136,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 				activeData:{},
 				picInfo:[],
 				list: [],
+                content:{},
 				spr:false,
 				noSpr:false,
 				nobtnPack:false,
@@ -124,7 +154,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 		            let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
 		            // optionally get horizontal scroll
 		            // get position of element relative to viewport
-		            let rect = thumbnail.getBoundingClientRect()
+		            let rect = thumbnail.getBoundingClientRect();
 		            // w = width
 		            return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
 		            // Good guide on how to get element coordinates:

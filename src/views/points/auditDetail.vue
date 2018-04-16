@@ -31,7 +31,7 @@
                     <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="userName" value-align="left"></cell>
                     <cell :border-intent="false" disabled title="获得总分" :value="totalscore" value-align="left"></cell>
                 </group>
-                <div class="item-list" v-if="item.status != null" v-for="(item,i) of list" :key="i">
+                <div class="item-list" v-if="item.message != null" v-for="(item,i) of list" :key="i">
                     <div class="item">
                         <div class="header">{{item.title}} <span v-if="i==2">支部书记评分{{item.itemscore}}分</span>  </div>
                         <div class="body">
@@ -131,6 +131,7 @@ export default {
             }
         };
     },
+
     computed: {
         userName() {
             return decodeURIComponent(this.name);
@@ -140,6 +141,19 @@ export default {
         this.getlist();
     },
     methods: {
+        userName() {
+            axios.get('ppartymember/queryByUserId', {
+                params: {
+                    userid: this.userId
+                }
+            })
+            .then(res => {
+                this.totalscore = res.data.totalscore;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        },
         atBig (index,i) {
             console.log(this.$refs);
             this.$refs.previewer[i].show(index);
@@ -175,6 +189,7 @@ export default {
                 .catch(function(error) {
                     console.log(error);
                 });
+            userName();
         },
         logIndexChange (arg) {
                     console.log(arg)
@@ -193,7 +208,8 @@ export default {
             })
                 .then(res => {
                     if(res.success){
-                        this.$vux.alert.show({title: '审核成功'});
+                        this.$vux.alert.show({title: res.msg});
+                        userName();
                     }else{
                         this.$vux.alert.show({title: '提交失败'});
                     }

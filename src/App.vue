@@ -21,12 +21,12 @@ body {
     width:100%;
     height:100%;
     overflow-x:hidden;
-    
+
 }
 body {
     font-size: 0.16rem;
 }
-
+input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
 .vux-header {
     background-color: #a0333b !important;
     .vux-header-left a,
