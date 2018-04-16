@@ -116,9 +116,11 @@
             showDeleteButton(it) {
                 clearInterval(this.Loop);//再次清空定时器，防止重复注册定时器
 
-                var This = this;
+
                 this.Loop = setTimeout(function(){
-                    alert(it)
+                    this.picList.list.splice(it,1);
+                    this.$vux.alert.show({title:'删除成功'});
+                    
 
                 },1000);
             },
