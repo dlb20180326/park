@@ -136,7 +136,9 @@ export default {
 
     		})
     	},
-        chooseImage(its) {
+        chooseImage(its){
+            alert("111111111111")
+            console.log(its)
             var count = its.pictureList.length;
             var it = its;
             wx.chooseImage({
