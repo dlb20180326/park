@@ -51,6 +51,11 @@ import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
 	                    path:'/party/dues'
 	                })
                 }
+                if(index==5){
+                	this.$router.push({
+	                    path:'/points/lawAbiding'
+	                })
+                }
          
 
             }
