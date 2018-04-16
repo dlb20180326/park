@@ -29,7 +29,7 @@
             <view-box class="view-box">
                 <group label-width="80px" label-margin-right="20px">
                     <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="userName" value-align="left"></cell>
-                    <cell :border-intent="false" disabled title="获得总分" :value="totalscore" value-align="left"></cell>
+                    <cell :border-intent="false" disabled title="获得总分" :value="totalscore||0.0" value-align="left"></cell>
                 </group>
                 <div class="item-list" v-if="item.status != null" v-for="(item,i) of list" :key="i">
                     <div class="item">
@@ -45,16 +45,7 @@
                             </div>
                         </div>
                         <flexbox class="footer" v-if="item.status == 0">
-                            <flexbox-item>
-                                <x-button @click.native="auditReject(item)" :mini="true" type="warn">
-                                    驳回
-                                </x-button>
-                            </flexbox-item>
-                            <flexbox-item>
-                                <x-button @click.native="auditResolve(item)" :mini="true" type="warn">
-                                    通过审核
-                                </x-button>
-                            </flexbox-item>
+                            <x-button  :mini="true" type="warn" >等待领导  审核中</x-button>
                         </flexbox>
                         <flexbox class="footer" justify= "center" v-if="item.status == 2">
                             <x-button  :mini="true" type="warn" >审核通过</x-button>
