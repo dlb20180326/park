@@ -7,12 +7,15 @@
                 <img slot="icon-active" :src="item.iconActive">
                 <span slot="label">{{item.label}}</span>
             </tabbar-item>
+            <tabbar-item>
+                <span slot="label" @click="logout">注销</span>
+            </tabbar-item>
         </tabbar>
     </div>
 </template>
 
 <script>
-import { Tabbar, TabbarItem } from 'vux';
+import { Tabbar, TabbarItem, cookie } from 'vux';
 
 const tabs = {
     2: [
@@ -107,6 +110,14 @@ export default {
         $route: 'selectTab'
     },
     methods: {
+        logout() {
+            cookie.remove('ptoken');
+            cookie.remove('roleId');
+            cookie.remove('userId');
+            this.$router.push({
+                path: '/login'
+            });
+        },
         selectTab() {
             this.tabsSelected = this.tabs.findIndex(item => {
                 if (item.link === '/') {

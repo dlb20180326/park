@@ -27,7 +27,7 @@
                             <!-- 缩略图显示 -->
                             <div><img :class="item.previewerClassName" v-clipping="img.src" @click="preview(index,idx)"></div>
                         </flexbox-item>
-                        <flexbox-item :span="1/3" v-if="item.pictures.length<9">
+                        <flexbox-item :span="1/3" v-show="item.pictures.length<9">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>
