@@ -32,8 +32,8 @@
 	      		</previewer>
 	    	</div>
 			</div>
-			<!--<div class="btnRed">点击通过并加分</div>-->
-			<button class="btnRed">已评分 (评分人：毛不易)</button>
+			<button class="btnRed">点击通过并加分</button>
+			<!--<button class="btnRed">已评分 (评分人：毛不易)</button>-->
 	 	</view-box>
 	</div>
 </template>

@@ -91,7 +91,6 @@ Vue.component(Popup.name, Popup);
                        departmentid:1
                     }
                 }) .then((res)=> {
-                    console.log(res)
                 this.list=res.data
 
 
