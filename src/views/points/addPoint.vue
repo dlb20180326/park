@@ -109,8 +109,7 @@
                 activeContent:'',
 				listSingle:{},
 				userName:'',
-                picList:{list:["http://www.dlbdata.cn/dangjian/picture/show?pictureId=145",
-                    "http://www.dlbdata.cn/dangjian/picture/show?pictureId=146"],arr:[]},
+                picList:{list:[],arr:[]},
             };
         },
         methods: {
