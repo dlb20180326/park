@@ -115,18 +115,14 @@
         methods: {
             showDeleteButton(it) {
                 clearInterval(this.Loop);//再次清空定时器，防止重复注册定时器
-
-
-                this.Loop = setTimeout(function(){
-                  //  this.picList.list.splice(it,1);
-                    this.$vux.alert.show({title:it});
-                    this.$vux.alert.show({title:'删除成功'});
+                this.Loop=setTimeout(function(){
+                    alert(it)
+                    this.$vux.alert.show({title:'增加失败'});
                 },1000);
             },
             clearLoop() {
                 clearInterval(this.Loop);
             },
-
             atBig (item) {
             },
         	getList(){
