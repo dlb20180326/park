@@ -58,7 +58,7 @@ const tabs = {
             icon: require('@/assets/images/gray-active.png'),
             iconActive: require('@/assets/images/iconw-activity.png'),
             label: '支部活动',
-            link: '/active'
+            link: '/active/partyBranch'
         },
         {
             icon: require('@/assets/images/gray-item.png'),
