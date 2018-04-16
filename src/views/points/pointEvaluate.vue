@@ -19,7 +19,7 @@
                 <ul>
                     <li id="photoPrimary" v-for="(item,index) in picList13.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(picList13,index)">
                         </div>
                     </li>
                     <li>
@@ -43,7 +43,7 @@
                 <ul>
                     <li  v-for="(item,index) in picList14.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
+                            <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(picList14,index)">
                         </div>
                     </li>
                     <li>
@@ -141,10 +141,10 @@ export default {
     methods: {
         showDeleteButton(it,idx) {
             clearInterval(this.Loop);//再次清空定时器，防止重复注册定时器
-            var This = it;
+            var This =this;
             this.Loop=setTimeout(function(){
-                This.list.splice(idx,1);
-                This.arr.splice(idx,1);
+                This.it.list.splice(idx,1);
+                This.it.arr.splice(idx,1);
                 This.$vux.alert.show({title:'删除成功'});
             },1000);
         },
