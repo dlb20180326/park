@@ -106,7 +106,7 @@ line-height:.2rem;float:left;padding-top:0.03rem;}
 .greenStatus{color:rgba(24,193,25,1);}
 .redStatus{color:rgba(218,16,55,1);}
 .btnPay{width:89.4%;height:.4rem;line-height:.4rem;text-align:center;font-size:.16rem;font-family:PingFangSC-Medium;color:rgba(255,255,255,1);position:relative;bottom:.2rem;background:rgba(185,54,71,1);border-radius: 4px;margin-left:5.3%;}
-.vux-flexbox .vux-flexbox-item{min-width: 47%;width: 48%;margin-bottom:.1rem;}
+.vux-flexbox .vux-flexbox-item{min-width: 47%;width: 48%;margin-bottom:.1rem;-webkit-flex:0;position:relative;}
 .payinfo{width:1.16rem;height:.25rem; font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(79,79,79,1);line-height:.2rem;margin:.37rem 0 .2rem .2rem;}
 .payBtn{width:.76rem;height:.2rem;border-radius:.1rem;font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(157,14,30,1);line-height:.2rem; margin:.34rem .24rem .24rem .19rem;border:1px solid #C24747;text-align:center;}
 .pay span{display:block;float:left;}

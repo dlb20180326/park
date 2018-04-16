@@ -46,6 +46,11 @@ import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
 	                    path: '/points/political/'+it.moduleid,
 	                })
                 }
+                if(index==2){
+                	this.$router.push({
+	                    path:'/party/dues'
+	                })
+                }
          
 
             }
