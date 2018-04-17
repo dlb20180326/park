@@ -7,9 +7,6 @@
                 <img slot="icon-active" :src="item.iconActive">
                 <span slot="label">{{item.label}}</span>
             </tabbar-item>
-            <tabbar-item>
-                <span slot="label" @click="logout">注销</span>
-            </tabbar-item>
         </tabbar>
     </div>
 </template>
