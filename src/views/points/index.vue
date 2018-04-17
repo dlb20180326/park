@@ -18,7 +18,7 @@
                     <flexbox-item>
                         <div class="piece">
                             <div>现党员积分</div>
-                            <span>{{itegral}}</span>
+                            <span>{{itegral || 0.0}}</span>
                         </div>
                     </flexbox-item>
                     <flexbox-item>
@@ -173,7 +173,7 @@ export default {
 
     	},
     	rating(){
-    		let that = this;
+    		/*let that = this;
     		that.score();
     		axios.get('pscorelevel/getList')
     		.then( res => {
@@ -185,8 +185,8 @@ export default {
     			}
     		}).catch(err => {
     			console.log('fail'+err);
-    		})
-
+    		})*/
+            this.results ='暂无';
     	},
     	score(){
     		axios.get('pscoreparty/getSumScoreByUserId',{
@@ -218,7 +218,7 @@ export default {
    		this.project();
    		this.getDetail();
    		this.rating();
-
+        this.score();
 
    	}
 };
