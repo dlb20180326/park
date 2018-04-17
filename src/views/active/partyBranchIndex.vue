@@ -42,6 +42,7 @@
 import { XHeader, Flexbox, FlexboxItem, TransferDom, Previewer } from 'vux';
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
+import axios from "axios";
 
 export default {
     components: {
@@ -175,9 +176,18 @@ export default {
                     item.pictures.push({
                         src: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + result.data
                     });
-                    this.$http.post('active/savePicture', {
-                        activeId: item.id,
-                        pictureId: result.data
+                    axios({
+                        url: "active/savePicture",
+                        method: 'post',
+                        headers: {'contentType': 'application/x-www-form-urlencoded'},
+                        params: {
+                            activeId: item.id,
+                            pictureId: result.data
+                        }
+                    }).then(res => {
+                        this.$vux.alert.show({title:  res.msg});
+                    }).catch(err => {
+                        this.$vux.alert.show({title: '提交失败'});
                     });
                 })
             );

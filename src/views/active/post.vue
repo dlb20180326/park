@@ -84,7 +84,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
       			console.log(arg)
     		},
     		getData(){
-    			this.$http.post('/dangjian/active/queryById?activeId='+this.$route.params.activeId
+    			this.$http.post('active/queryById?activeId='+this.$route.params.activeId
     		).then(res =>{
     				this.activeData = res.data;
     				this.peopleNum = this.activeData.notParticipate.length + this.activeData.participate.length;
@@ -102,13 +102,13 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     			})
     		},
     		getPic(){
-    			this.$http.post('/dangjian/active/getActivePictures?activeId='+this.$route.params.activeId
+    			this.$http.post('active/getActivePictures?activeId='+this.$route.params.activeId
     			).then(res =>{
     				this.picInfo= res.data
     				for(let d in this.picInfo){
     					var obj = {};
-    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
-    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
+    					obj.msrc = 'http://www.dlbdata.cnpicture/show?pictureId='+this.picInfo[d].pictureId;
+    					obj.src = 'http://www.dlbdata.cnpicture/show?pictureId='+this.picInfo[d].pictureId;
     					this.list.push(obj);
     				}
     			}).catch(err =>{
@@ -180,7 +180,7 @@ html,body{
 .picture{width:0.9rem;font-size:.2rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);margin-left:.1rem;display:block;float: left;}
 .numberz{ font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);display:block;float: left;margin-top: .02rem;}
 .allPic{height:.3rem;line-height:.3rem;overflow:hidden;}
-.img-show{width:84%;height:auto;margin-left:8%;}
+.img-show{width:84%;height:auto;margin-left:8%;    min-height: 44px;}
 .img-show img{width:32%;height:0.9rem;margin-top:.1rem;}
 .img-show img:not(:first-child){margin-left:2%;}
 .img-left{width:.37rem;height:.37rem;position:absolute;left:.1rem;top:3.15rem;;z-index:900;}

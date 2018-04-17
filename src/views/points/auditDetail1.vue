@@ -31,7 +31,7 @@
                     <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="userName" value-align="left"></cell>
                     <cell :border-intent="false" disabled title="获得总分" :value="totalscore||0.0" value-align="left"></cell>
                 </group>
-                <div class="item-list" v-if="!item.message" v-for="(item,i) of list" :key="i">
+                <div class="item-list" v-if="item.message!=''" v-for="(item,i) of list" :key="i">
                     <div class="item">
                         <div class="header">{{item.title}} <span v-if="i==2">支部书记评分{{item.itemscore}}分</span>  </div>
                         <div class="body">
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <flexbox class="footer" v-if="item.status == 0">
-                            <x-button  :mini="true" type="warn" >等待领导  审核中</x-button>
+                            <x-button  :mini="true" type="warn" >等待领导审核中</x-button>
                         </flexbox>
                         <flexbox class="footer" justify= "center" v-if="item.status == 2">
                             <x-button  :mini="true" type="warn" >审核通过</x-button>
@@ -157,7 +157,6 @@ export default {
                 }
             })
                 .then(res => {
-                    console.log(res);
                     this.list = res.data;
                     this.list.forEach(item => {
                         item.memo = (item.memo && item.memo.split(",")) || [];

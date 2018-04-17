@@ -221,7 +221,7 @@ export default {
                     year:new Date().getFullYear()
                 }
             }).then(res => {
-                this.users[0].integral = res.data;
+                this.users[0].integral = res.data || 0;
             }).catch(err => {
                 console.log(err);
             });
