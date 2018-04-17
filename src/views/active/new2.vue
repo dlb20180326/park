@@ -99,7 +99,7 @@
             <group-title slot="title">
                 <b>活动内容</b>
             </group-title>
-            <textarea cols="30" rows="10"  maxlength="300" v-model='activeContent'></textarea>
+            <textarea cols="30" rows="10"  maxlength="300" v-model='activeContext'></textarea>
         </div>
         <div class="group-item">
             <group-title slot="title"></group-title>
@@ -222,8 +222,9 @@
                             activePace:this.activePace,
                             activeCreatePeople:this.$store.getters.user.userid,
                             activePrincipalPeople:this.activePrincipalPeople,
-                            activeContex:this.activeContex,
-                            activeStatus:this.activeStatus,
+                            activeContext:this.activeContext,
+                            activeName:this.activeTitle,
+                            activeStatus:1,
                             departmentid:this.departmentid1
                         }
                     }) .then((res)=> {
