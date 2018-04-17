@@ -14,7 +14,7 @@
 			</p>
 			<p class="allPic">
 				<span class="bg-line"></span>
-				<span class="picture">政治学习主要内容:</span>
+				<span class="picture">主要内容:</span>
 			</p>
 			<div class="artical">
 			{{content.content}}
@@ -118,6 +118,34 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     				console.log(err)
     			})
     		},
+            getModule(){
+                this.$http.get('pscoredetail/queryById?id='+this.$route.params.moduleid
+                ).then(res =>{
+                    this.contents.title = res.data.projectName+'评分';
+                }).catch(err =>{
+                    console.log(err)
+                })
+
+            },
+            getDetail(){
+                this.$http.get('pstudy/queryById?studyid='+this.$route.params.studyid
+                ).then(res =>{
+                    this.content= res.data;
+                    this.content.picture = [];
+
+                    this.num = res.data.pictures.length;
+                    this.content.pictures.forEach(it=>{
+                        console.log(it);
+                        var obj = {};
+                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
+                        this.content.picture.push(obj);
+                    });
+
+                }).catch(err =>{
+                    console.log(err)
+                })
+            },
     		dataPick(s){
                 Date.prototype.toLocaleString = function(){
                     return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDay()+'日'
@@ -127,10 +155,11 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 		},
 		mounted(){
 			this.getDetail();
+            this.getModule();
 		},
 		data(){
 			return {
-				contents:{rights:'评分说明',title:'驿站活动详情'},
+				contents:{title:''},
 				num:0,
 				activeData:{},
 				picInfo:[],

@@ -3,7 +3,8 @@
 	<div style="height:100%;">
    		<view-box ref="viewBox" body-padding-top=".46rem">
 			<!--<r-header :rfs="contents"></r-header>-->
-			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">政治学习评分<a slot="right" @click="showMenu">评分说明</a></x-header>
+			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
+                {{contents.title}}<a slot="right" @click="showMenu">评分说明</a></x-header>
 			    <div class="points-table">
                     <flexbox :gutter="0">
                         <flexbox-item>序号</flexbox-item>
@@ -46,7 +47,7 @@ Vue.component(Popup.name, Popup);
 		data(){
 
 			return {
-				contents:{rights:'评分说明',title:'政治学习评分'},
+				contents:{rights:'评分说明',title:''},
 				list:"",
 				isYellow:false,
 				showPop:false
@@ -91,9 +92,17 @@ Vue.component(Popup.name, Popup);
                 this.$router.push({
                     path: '/active/detailPack/',
                     name: 'detailPack',
-                    params:{studyid:item.studyid,createUserid:item.createUserid}
+                    params:{studyid:item.studyid,createUserid:item.createUserid,moduleid:this.$route.params.moduleid}
                 })
 
+            },
+            getModule(){
+                this.$http.get('pscoredetail/queryById?id='+this.$route.params.moduleid
+                ).then(res =>{
+                    this.contents.title = res.data.projectName+'评分';
+                }).catch(err =>{
+                    console.log(err)
+                })
             },
             getlist(){
                 axios({
@@ -117,7 +126,7 @@ Vue.component(Popup.name, Popup);
 			datePick(s){
             Date.prototype.toLocaleString = function(){
                 return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
-            }
+            };
             return new Date(s).toLocaleString();
         },
         showMenu(){
@@ -126,7 +135,7 @@ Vue.component(Popup.name, Popup);
 		},
 		mounted(){
             this.getlist();
-
+            this.getModule();
 		}
 	}
 </script>
