@@ -2,7 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 // import qs from 'qs';
 /*const baseURL = '/dangjian/';*/
-const baseURL = '/';
+const baseURL = '/dangjian/';
 
 let requestCount = 0;
 let requestLoading = count => {
