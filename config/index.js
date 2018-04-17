@@ -18,7 +18,7 @@ module.exports = {
             }*/
             '/': {
                 changeOrigin: true,
-                target:'http://www.dlbdata.cn/dangjian/'
+                target:'http://www.dlbdata.cn/dangjian'
             }
         },
 
