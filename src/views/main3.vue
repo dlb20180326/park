@@ -46,7 +46,7 @@
         <div class="item">
           <div class="title">{{index+1}}. {{item.title}}{{item.type=='SCORE'?'积分加分确认':'图片上传'}}</div>
           <div class="content">
-            <x-button type="warn" :link="item.type=='SCORE'?'/points/review':'/active'">
+            <x-button type="warn" :link="item.type=='SCORE'?'/points/pointEvaluate':'/active'">
               {{item.beginYn=='Y'?'去处理':'活动二维码'}}
             </x-button>
           </div>

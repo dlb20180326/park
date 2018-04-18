@@ -131,7 +131,7 @@ export default {
             activeTitle:'',
             activeCreatePeople:this.$store.getters.user.userid,
             activePrincipalPeople:'',
-            activeContex:'',
+            activeContext:'',
             activeContent:'',
             activeStatus:0,
             activeProjectActive:'',
@@ -196,9 +196,7 @@ export default {
                     this.$vux.alert.show({title:res.msg});
 
                     this.showQR(res.data);
-                    console.log(res.data);
 
-                    console.log(res)
                 }).catch(function (error) {
                     console.log(error);
                 });

@@ -150,7 +150,7 @@
                 activeTitle:'',
                 activeCreatePeople:'',
                 activePrincipalPeople:'',
-                activeContex:'',
+                activeContext:'',
                 activeContent:'',
                 activeStatus:0,
                 activeProjectActive:'',
