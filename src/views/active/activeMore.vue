@@ -133,7 +133,8 @@ export default {
 .grayLine{width:100%;height:.1rem;background:#F3F3F3;}
 .allLine:last-child .grayLine{height:0;}
 .group-item {
-	width:100%;
+    -webkit-overflow-scrolling : touch;
+    width:100%;
     input,
     textarea {
         display: block;
