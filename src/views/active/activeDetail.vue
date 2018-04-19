@@ -10,7 +10,7 @@
                         年度共参与组织活动：<span style="display: inline">{{number1}}</span> 次
                     </div>
                     <div class="barbg">
-                        年度共参与紧邻一战活动：<span style="display: inline">{{number2}}</span> 次
+                        年度共参与金领驿站活动：<span style="display: inline">{{number2}}</span> 次
                     </div>
                 </section>
                 <div class="grayLine"></div>
