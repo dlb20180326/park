@@ -49,9 +49,7 @@
               <x-button type="warn"  @click.native="refer(item)">
                   {{item.beginYn=='Y'?'去处理':'活动二维码'}}
               </x-button>
-           <!-- <x-button type="warn" :link="item.type=='SCORE'?'/points/pointEvaluate':'/active'">
-              {{item.beginYn=='Y'?'去处理':'活动二维码'}}
-            </x-button>-->
+
           </div>
         </div>
       </template>
@@ -96,14 +94,14 @@
         todoList: [],
         activeTitle:'',
         info:[],
-         showQrcodeDialog: false
+        showQrcodeDialog: false
       };
     },
     methods: {
         refer (item){
             console.log(item);
 
-            if(item.type == 'SCORE'){
+            if(item.type == 'ACTIVE'){
                 this.$router.push({
                     path:'points/review'
                 })

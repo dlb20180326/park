@@ -119,10 +119,6 @@ export default {
             activeComplete:[],
             show:false,
             msg:''
-
-
-
-
         };
     },
     methods:{
@@ -141,8 +137,8 @@ export default {
                 this.activeContext=res.data.list[0].activeContext;
                 this.activeId=res.data.list[0].id;
             }) .catch(function (error) {
-                    console.log(error);
-                });
+                console.log(error);
+            });
         },
         gettimes1(){
             axios({
