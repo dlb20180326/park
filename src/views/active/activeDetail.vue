@@ -61,7 +61,7 @@
                         </div>
                         <ul class="news">
                             <li v-for="(item,index) in activeComplete" :key="index" >
-                                <a class=" display clearfix " href="javascript:;">
+                                <a class=" display clearfix " >
                                     <div class=" fl">{{item.activeName}}</div>
                                     <div class=" fr">{{item.endTime|formatDuring}}<span class="rightBtn"></span></div>
                                 </a>
@@ -104,7 +104,7 @@ export default {
             activeId:'',
             activeContext:'',
             show:false,
-            activeComplete:[],
+            activeComplete:'',
             isActive:true,
             signupstatus:'',
             msg:''
@@ -205,15 +205,18 @@ export default {
         getAlreadyActive(){
             axios({
                 method: 'get',
-                url: 'active/getAlreadyActive',
+                url: 'active/getEnjoyActiveByUserId',
                 params: {
+                    userId:this.userId,
                     pageNum:1,
-                    pageSize:4,
+                    pageSize:4
 
                 }
-            }) .then((res)=> {
-                 this.activeComplete=res.data.list
-                console.log(this.activeComplete)
+            }) .then((res)=>{
+
+
+                 this.activeComplete=res.data
+
             })
                 .catch(function (error) {
                     console.log(error);
@@ -223,7 +226,7 @@ export default {
         },
         datePick(s){
             Date.prototype.toLocaleString = function(){
-                return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()
+                return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
             }
             return new Date(s).toLocaleString();
         },

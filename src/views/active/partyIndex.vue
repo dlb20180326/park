@@ -111,7 +111,7 @@ export default {
 			this.$refs.previewer[index].show(second);
 		},
     	getList(){
-    		this.$http.get('active/getParticipateActive',{
+    		this.$http.get('active/getEnjoyActiveByUserId',{
     			params:{
     				pageNum:1,
     				pageSize:200,
@@ -119,7 +119,7 @@ export default {
     				userId:this.$store.getters.user.userid
     			}
     		}).then(res => {
-    			this.list = res.data.list;
+    			this.list = res.data;
     			console.log(this.list);
     			this.list.forEach(item =>{
     					item.pictureList=[];
