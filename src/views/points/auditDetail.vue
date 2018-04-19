@@ -198,6 +198,7 @@ export default {
         auditReject(item) {
             this.currItem = item;
             this.showRejectDialog = true;
+
         },
         auditResolve(item) {
             axios({
@@ -232,6 +233,7 @@ export default {
             }).then(res => {
                 if(res.success){
                     this.$vux.alert.show({title: '拒绝成功'});
+                    window.location.reload();
                 }else{
                     this.$vux.alert.show({title: '提交失败'});
                 }
