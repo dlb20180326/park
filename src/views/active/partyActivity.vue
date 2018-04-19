@@ -130,7 +130,7 @@ export default {
     filters: {
         formatDuring: function(value) {
             Date.prototype.toLocaleString = function() {
-                return this.getFullYear() + '.' + (this.getMonth() + 1) + '.' + this.getDay();
+                return this.getFullYear() + '.' + (this.getMonth() + 1) + '.' + this.getDate();
             };
             return new Date(value).toLocaleString();
         }

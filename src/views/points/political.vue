@@ -139,7 +139,7 @@ Vue.component(Popup.name, Popup);
 			},
 			datePick(s){
             Date.prototype.toLocaleString = function(){
-                return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
+                return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()
             };
             return new Date(s).toLocaleString();
         },
