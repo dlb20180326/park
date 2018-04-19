@@ -164,9 +164,9 @@ export const routes = [
                 component: () => import('@/views/active/partyMoment')
             },
             {
-                path: 'active/detailPack/:studyid/:createUserid/:moduleid',
+                path: 'points/detailPack/:studyid/:createUserid/:moduleid',
                 name:'detailPack',
-                component: () => import('@/views/active/detailPack')
+                component: () => import('@/views/points/detailPack')
             },
             {
                 path: 'active/post/:activeId',
