@@ -1,8 +1,7 @@
 <template>
-
-	<div style="height:100%;">
-   		<view-box ref="viewBox" body-padding-top=".46rem">
-			<r-header :rfs="contents"></r-header>
+	<div class="page-body">
+   		<view-box ref="viewBox">
+			<r-header :rfs="contents" body-padding-top=".46rem"></r-header>
 			<table id="table-style">
 				<tbody>
 					<tr v-for="(con,index) in list" :key="index">
@@ -147,10 +146,14 @@ html,body{
 	height:100%;
 	overflow-x:hidden;
 }
+.page-body{
+	flex: 1;
+}
 #table-style{
 	width:86.7%;
 	height:auto;
-	margin:0px auto;
+	margin:0 auto;
+	padding-top:.4rem;
 }
 #table-style tbody tr td{height:.28rem;padding-top:.2rem;font-size:.2rem;width:33.33%;text-align:left;}
 #table-style tbody tr td:nth-child(3){text-align:right;}
