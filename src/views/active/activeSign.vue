@@ -7,7 +7,7 @@
                 组织生活名称：
                 </span>
                     <span>
-                    花期银行第一党支部党课
+                    {{activeName}}
                     </span>
                 </p>
                 <p class="p-line">
@@ -34,12 +34,14 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     data(){
         return{
         userName:'',
         dateTime:'',
-        activeId:''
+        activeId:'',
+        activeName:''
         }
         },
     methods:{
@@ -61,6 +63,21 @@ export default {
        .catch(err => {
            console.log(err);
        });
+    },
+    getActiveName(){
+			axios({
+                url:'active/queryById',
+                method:'post',
+                headers: {'contentType':'application/x-www-form-urlencode'},
+                params:{
+               		activeId:this.$route.params.activeId
+                }
+            }).then(res => {
+               this.activeName = res.data.activeName;
+            }).catch(err => {
+                console.log(err);
+            });
+       
     },
     getUser() {
         this.$http.get('ppartymember/queryByUserId', {
@@ -88,6 +105,7 @@ export default {
     mounted(){
         this.getUser();
         this.getSign();
+        this.getActiveName();
         console.log(new Date());
     },
 };

@@ -2,7 +2,7 @@
     <div class="page-body">
         <x-header>
             党员活动
-            <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>
+       <!--     <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>-->
         </x-header>
         <div class="box">
             <flexbox class="list-item" v-for="(item,index) in list" :key="index" :gutter="0" align="stretch">
