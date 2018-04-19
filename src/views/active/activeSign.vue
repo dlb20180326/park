@@ -1,12 +1,35 @@
 <template>
-    <div>
-    <div class="card" >
-        <div class="delete-button" :class="{'delete-button-show': isDeleting}" v-for="(floor,index) in items"
-             @touchend="clearLoop" @touchstart="showDeleteButton(index)" >{{floor.text}}</div>
+    <div class="page-body">
+        <div class="all-bg">
+            <div class="header-title">
+                <p class="p-line">
+                <span>
+                组织生活名称：
+                </span>
+                    <span>
+                    花期银行第一党支部党课
+                    </span>
+                </p>
+                <p class="p-line">
+                <span>
+                签到时间：
+                </span>
+                    <span>
+                    {{datePick(new Date())}}
+                    </span>
+                </p>
+            </div>
+            <div class="success">
+                <h2>
+                恭喜
+                </h2>
+                <h1>
+                {{userName}}
+                </h1>
+                <button class="btn-return"><router-link to="/" style="color:#fff">点击返回</router-link></button>
+            </div>
         </div>
-        <div>11111</div>
-        <div>2222</div>
-        <div>3333</div>
+
     </div>
 </template>
 
@@ -14,35 +37,141 @@
 export default {
     data(){
         return{
-            isDeleting:false,
-        items:[
-            {text:"第一组"},
-{text:"第二组"},
-
-{text:"第三组"},
-]
-}},
+        userName:'',
+        dateTime:'',
+        activeId:''
+        }
+        },
     methods:{
-        showDeleteButton(it) {
-            clearInterval(this.Loop);//再次清空定时器，防止重复注册定时器
+     getId(){
+        this.activeId =this.$route.params.activeId;
+        this.$vux.alert.show({title:this.$route.params.activeId});
+    },
+    getSign(){
 
-            var This = this;
-            this.Loop = setTimeout(function(){
-               alert(it)
-
-            },1000);
-        },
-        clearLoop() {
-            clearInterval(this.Loop);
-        },
+       this.$http.get('/active/approved', {
+           params: {
+               userid: this.$store.getters.user.userid,
+               activeId:this.$route.params.activeId
+           }
+       })
+       .then(res => {
+           console.log('ok',res);
+       })
+       .catch(err => {
+           console.log(err);
+       });
+    },
+    getUser() {
+        this.$http.get('ppartymember/queryByUserId', {
+            params: {
+                userid: this.$store.getters.user.userid
+            }
+        })
+        .then(res => {
+            this.userName = res.data.name;
+            console.log(this.userName);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    },
+    datePick(s){
+        Date.prototype.toLocaleString = function(){
+            return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'
+        }
+        return new Date(s).toLocaleString();
+    }
+    },
+    components:{
     },
     mounted(){
-
+        this.getUser();
+        this.getSign();
+        console.log(new Date());
     },
 };
 </script>
 
 <style scoped>
-    .delete-button-show {background-color:red}
-
+.page-body{
+display:flex;
+ background: url(../../assets/images/img-bg.png) no-repeat;
+ background-size:100% 100%;
+ }
+.all-bg{
+width:100%;
+height:100%;
+position:absolute;
+top:0;
+left:0;
+bottom:0;
+background-color:rgba(0,0,0,0.6)
+}
+.header-title{
+padding-top:.1rem;
+width:89.3%;
+height:.8rem;
+background:rgba(250,184,0,1);
+border-radius: 4px ;
+margin:.3rem auto;
+}
+.p-line{
+width:91%;
+height:.2rem;
+font-size:.14rem;
+color:rgba(0,0,0,1);
+margin:.1rem .2rem 0 .1rem;
+}
+.p-line span{
+display:inline-block;
+}
+.p-line span:nth-child(1){
+font-family:PingFangSC-Regular;
+width:1rem;
+}
+.p-line span:nth-child(2){
+font-family:PingFangSC-Medium;
+}
+.success{
+width:80%;
+height:2.25rem;
+margin:.4rem auto;
+ background: url(../../assets/images/img-success.png) no-repeat;
+ background-size:80% 88%;
+  background-position:50% 56%;
+  position:relative;
+}
+.success h2{
+position:absolute;
+font-size:.16rem;
+top:.95rem;
+text-align:center;
+height:.24rem;
+width:100%;
+color:#FA7A00;
+}
+.success h1{
+position:absolute;
+font-size:.2rem;
+top:1.27rem;
+text-align:center;
+height:.28rem;
+line-height:.28rem;
+width:100%;
+color:#000000;
+}
+.btn-return{
+position:absolute;
+top:1.7rem;
+left:26.65%;
+width:46.7%;
+height:.3rem;
+background:rgba(185,54,71,1);
+border-radius:4px;
+border:0;
+color:#fff;
+font-size:.16rem;
+font-family:PingFangSC-Medium;
+ }
 </style>
