@@ -32,7 +32,7 @@
 	    	</div>
 			</div>
 
-			<button class="btnRed" ></button>
+			<button class="btnRed" >去处理</button>
 			<button class="btnRed"  v-if="content.status==2">已评分 (评分人：{{content.branch}})</button>
             <button class="btnRed"  v-if="content.status==3">审核失败 (审核人：{{content.branch}})</button>
 	 	</view-box>
