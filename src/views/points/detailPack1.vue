@@ -156,7 +156,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
             },
     		dataPick(s){
                 Date.prototype.toLocaleString = function(){
-                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDay()+'日'
+                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'
                 };
                 return new Date(s).toLocaleString();
     		}
