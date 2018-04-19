@@ -5,19 +5,19 @@
 			<p class="allPic">
 				<span class="bg-line"></span>
 				<span class="picture">党员姓名:</span>
-				<span class="numberz">{{content.username}}</span>
+				<span class="numberz">{{userName}}</span>
 			</p>
 			<p class="allPic">
 				<span class="bg-line"></span>
 				<span class="picture">时间:</span>
-				<span class="numberz">{{new Date(content.starttime).toLocaleString()}}</span>
+				<span class="numberz">2018年5月</span>
 			</p>
 			<p class="allPic">
 				<span class="bg-line"></span>
 				<span class="picture">主要内容:</span>
 			</p>
 			<div class="artical">
-			{{content.content}}
+			党员汇报
 			</div>
 			<p class="allPic">
 			<span class="bg-line"></span>
@@ -32,7 +32,7 @@
 	    	</div>
 			</div>
 
-			<button class="btnRed" v-if="content.status==0" @click="pass()">点击通过并加分</button>
+			<button class="btnRed" ></button>
 			<button class="btnRed"  v-if="content.status==2">已评分 (评分人：{{content.branch}})</button>
             <button class="btnRed"  v-if="content.status==3">审核失败 (审核人：{{content.branch}})</button>
 	 	</view-box>
@@ -52,10 +52,19 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 			Previewer,
 			ViewBox
 		},
+        computed: {
+            userName() {
+                return decodeURIComponent(this.$route.params.username);
+            }
+        },
 		methods:{
 			show (index) {
       			this.$refs.previewer.show(index)
     		},
+
+            getname(){
+                this.name=this.$route.params.username
+            },
            /* pass() {
                 axios.get('pstudy/pass', {
                     params: {
@@ -155,11 +164,13 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 		mounted(){
 			this.getDetail();
             this.getModule();
+
 		},
 		data(){
 			return {
 				contents:{title:''},
 				num:0,
+                name:'',
 				activeData:{},
 				picInfo:[],
 				list: [],

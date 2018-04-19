@@ -99,7 +99,7 @@ Vue.component(Popup.name, Popup);
                 this.$router.push({
                     path: '/active/detailPack1/:username',
                     name: 'detailPack1',
-                    params:{username:item.name}
+                    params:{username:encodeURI(item.name),}
                 })
 
             },
