@@ -106,7 +106,7 @@ export default {
 
         },
     onHide () {
-        this.$router.go(0)
+        window.location.reload()
     },
     onShow () {
         console.log('on show')

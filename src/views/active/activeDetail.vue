@@ -43,7 +43,7 @@
                     </table>
                 </div>
                 <div class="book" v-if="signupstatus == 2">
-                    <a  style="background-color: #8b8b8b" @click="submit()">报名</a>
+                    <a  style="background-color:#B93647" @click="submit()">报名</a>
                 </div>
                 <div class="book"  v-if="signupstatus == 1">
                     <a  style="background-color: #8b8b8b" @click="submit1()">已报名</a>
@@ -192,7 +192,7 @@ export default {
                     activeId:this.activeId
                 }
             }) .then((res)=> {
-                console.log(res);
+
                 this.msg=res.msg;
                 this.show=true
 
@@ -228,12 +228,13 @@ export default {
             return new Date(s).toLocaleString();
         },
     onHide () {
-        this.$router.go(0)
+        window.location.reload()
     },
     onShow () {
         console.log('on show')
     },submit1(){
             this.$vux.alert.show({title:'请勿重复报名'});
+
 
         },
 
