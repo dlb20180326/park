@@ -48,10 +48,10 @@ Vue.component(Popup.name, Popup);
 			return {
 				contents:{rights:'评分说明',title:'遵纪守法评分'},
 				list:[
-                    {name:"王俊凯",score:"20",tempint:3},
-                    {name:"王俊凯",score:"21",tempint:3},
-                    {name:"王俊凯",score:"20",tempint:3},
-                    {name:"王俊凯",score:"18",tempint:3}
+                    {name:"侯宇茜",score:"20",tempint:3},
+                    {name:"申竣华",score:"21",tempint:3},
+                    {name:"海依沄",score:"20",tempint:3},
+                    {name:"卞漫诗",score:"18",tempint:3}
                 ],
 				isYellow:false,
 				showPop:false
