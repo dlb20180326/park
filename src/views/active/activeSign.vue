@@ -3,7 +3,11 @@
     <div class="card" >
         <div class="delete-button" :class="{'delete-button-show': isDeleting}" v-for="(floor,index) in items"
              @touchend="clearLoop" @touchstart="showDeleteButton(index)" >{{floor.text}}</div>
-    </div></div>
+        </div>
+        <div>11111</div>
+        <div>2222</div>
+        <div>3333</div>
+    </div>
 </template>
 
 <script>
@@ -31,7 +35,10 @@ export default {
         clearLoop() {
             clearInterval(this.Loop);
         },
-    }
+    },
+    mounted(){
+
+    },
 };
 </script>
 

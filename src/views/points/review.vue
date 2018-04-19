@@ -121,6 +121,7 @@
                     this.department=res.data;
                     this.partyBranch1 = this.department[0].departmentname;
                     this.departmentid= this.department[0].departmentid;
+                    console.log(this.department);
                     this.slide();
                     axios({
                         method: 'get',
@@ -154,6 +155,7 @@
                 }) .then((res)=> {
                     this.list1=res.data;
                     this.length1=res.data.length;
+                    console.log(this.list1);
                 }).catch(function (error) {
                     console.log(error);
                 });
