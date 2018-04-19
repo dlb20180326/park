@@ -181,10 +181,11 @@
                 this.partyBranch1 = park.departmentname;
                 this.departmentid=park.departmentid;
                 this.partyBranch=park.partyBranch;
+                console.log("1888888888888",park.partyBranch);
                 this.topShow = !this.topShow;
                 this.showTrans = !this.showTrans;
-                this.slide();
                 this.slide1();
+                this.slide();
                 this.table1 = temp;
             },
             gohandle(item){
