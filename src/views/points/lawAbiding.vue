@@ -2,7 +2,8 @@
 
 	<div style="height:100%;">
    		<view-box ref="viewBox" body-padding-top=".46rem">
-			<r-header :rfs="contents"></r-header>
+            <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
+                {{contents.title}}<a slot="right" @click="showMenu">评分说明</a></x-header>
 			    <div class="points-table">
                     <flexbox :gutter="0">
                         <flexbox-item>序号</flexbox-item>
@@ -24,8 +25,8 @@
 				<div class="middle">
 					<div class="middle-top" @click="show()">评分说明</div>
 					<div class="middle-content">
-						<p>
-							党员自学或参加其他党组织组织的学习教育活动，经所属党支部书记确认后，每参加一次加2.5分（共5分）。
+						<p>                            1、党员在支部民主评议党员活动中，被评定为“不合格党员”或受限期改正等组织处置的扣20分；<br>
+                            2、党员受到党内纪律处分或行政处罚以上的，实行“一票否决”。
 						</p>
 					</div>
 					<div class="knowBtn" @click="know">我知道了</div>
@@ -37,21 +38,20 @@
 </template>
 <script>
     import axios from 'axios'
-import Xheader from '@/components/comother/rheader'
+
 import Vue from 'vue';
-import {ViewBox,TransferDom,Popup,Flexbox, FlexboxItem} from 'vux'
+import {ViewBox,TransferDom,Popup,Flexbox,FlexboxItem,XHeader} from 'vux'
 Vue.component(Popup.name, Popup);
 	export default {
 		data(){
 
 			return {
-				contents:{rights:'评分说明',title:'政治学习评分'},
+				contents:{rights:'评分说明',title:'遵纪守法评分'},
 				list:[
                     {name:"王俊凯",score:"20",tempint:3},
                     {name:"王俊凯",score:"21",tempint:3},
                     {name:"王俊凯",score:"20",tempint:3},
-                    {name:"王俊凯",score:"18",tempint:3},
-
+                    {name:"王俊凯",score:"18",tempint:3}
                 ],
 				isYellow:false,
 				showPop:false
@@ -66,7 +66,6 @@ Vue.component(Popup.name, Popup);
                 catch(err) {
                     return value=err;
                 }
-
             },
             Upper1: function (value) {
                 try {
@@ -81,7 +80,7 @@ Vue.component(Popup.name, Popup);
             }
         },
 		components:{
-			'r-header':Xheader,
+            XHeader,
 			ViewBox,
 			Popup,
 			Flexbox,
@@ -92,7 +91,6 @@ Vue.component(Popup.name, Popup);
 		},
 		methods:{
             changeItem(item){
-
                     this.$router.push({
                         path: 'lawAbidingDetail',
                         params: {
@@ -103,9 +101,12 @@ Vue.component(Popup.name, Popup);
                         }
                     })
             },
-            show(){
-                this.showPop=true
-            }
+            showMenu(){
+                this.showPop = true;
+            },
+            know(){
+                this.showPop = false
+            },
         }
 
 
@@ -151,13 +152,13 @@ font-size: .14rem;
 .yellowA{background-color:#BABABA;}
 .yellowB{background-color:#F84D2B;}
 .yellowC{background-color:rgba(244,151,74,1);}
-.middle{width:2.8rem;height:2.02rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
+.middle{width:2.8rem;height:2.5rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
 .mint-popup-left{left:15%;}
 .middle .middle-top{width:100%;height:.4rem; background:linear-gradient(90deg,rgba(185,54,71,1),rgba(155,10,26,1));box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#FFFFFF;text-align:center;line-height:.4rem;border-radius:10px 10px 0 0;}
-.middle-content{width:2.4rem;height:0.8rem;margin:.21rem .19rem .21rem .21rem;}
+.middle-content{width:2.4rem;height:1.2rem;margin:.21rem .19rem .21rem .21rem;}
 .middle-content p{font-size:.14rem;color:#828282;line-height:.24rem;}
 .dark{color:#333333;}
-.knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
+.knowBtn{width:1.2rem;height:.3rem;margin:0rem auto;color:#FFFFFF;background:rgba(185,54,71,1);
 border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
 </style>

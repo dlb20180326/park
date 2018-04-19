@@ -32,7 +32,7 @@ const tabs = {
             icon: require('@/assets/images/gray-item.png'),
             iconActive: require('@/assets/images/iconw-integral.png'),
             label: '片区活动',
-            link: '/active'
+            link: '/active/partyBranch1'
         },
         {
             icon: require('@/assets/images/gray-active.png'),

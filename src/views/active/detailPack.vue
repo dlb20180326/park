@@ -29,7 +29,6 @@
 				<div v-transfer-dom>
 	      		<previewer :list="content.picture" ref="previewer" :options="options" @on-index-change="logIndexChange">
 	      		</previewer>
-
 	    	</div>
 			</div>
 

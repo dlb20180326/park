@@ -136,15 +136,13 @@ export default {
                     userId:this.$store.getters.user.userid
                 }
             }) .then((res)=> {
-
                 this.startTime1=res.data.list[0].startTime;
                 this.activePace=res.data.list[0].activePace;
                 this.activeCreatePeople=res.data.list[0].activeCreatePeople;
                 this.activeContext=res.data.list[0].activeContext;
                 this.activeId=res.data.list[0].id;
                this.signupstatus=res.data.list[0].signupstatus;
-            })
-                .catch(function (error) {
+            }) .catch(function (error) {
                     console.log(error);
                 });
 

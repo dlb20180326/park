@@ -43,12 +43,12 @@ import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
                 }
                 if(index==0 || index==1 || index==3 || index==6){
                 	this.$router.push({
-	                    path: '/points/political/'+it.moduleid,
+	                    path: '/points/political/'+it.moduleid
 	                })
                 }
                 if(index==2){
                 	this.$router.push({
-	                    path:'/party/dues'
+	                    path:'/party/dues1'
 	                })
                 }
                 if(index==5){
@@ -56,7 +56,7 @@ import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
 	                    path:'/points/lawAbiding'
 	                })
                 }
-         
+
 
             }
 

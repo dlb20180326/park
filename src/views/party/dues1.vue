@@ -1,8 +1,7 @@
 <template>
 	<div style="height:100%">
-        <x-header title="党员缴费" :left-options="{preventGoBack:true}" @on-click-back="backhome()"></x-header>
 		<view-box ref="viewBox" body-padding-top='.46rem'>
-
+		<r-header :rfs="contents"></r-header>
 		<div class="card-top">
 		<div class="card-img"></div>
 		<div class="nr-info">
@@ -38,13 +37,13 @@
 </template>
 <script>
 import {XHeader,ViewBox,Group,Cell,Flexbox,FlexboxItem,cookie} from 'vux'
-
+import Rheader from '../../components/comother/rheader'
 import axios from 'axios'
 	export default {
 		data(){
 			return {
 				userId:cookie.get('userId'),
-				contents:{title:'党建'},
+				contents:{rights:'编辑',title:'党建'},
 				info:{name:'王大陆',cardId:'6282451745218551527'},
 				collect:[],
 				pay:''
@@ -52,6 +51,7 @@ import axios from 'axios'
 		},
 		components:{
 			XHeader,
+			'r-header':Rheader,
 			ViewBox,
 			Group,
 			Cell,
@@ -74,11 +74,7 @@ import axios from 'axios'
 				})
 		},
 		methods:{
-            backhome(){
-                this.$router.push({
-                    path:'/main3'
-                })
-            }
+
 		}
 
 	}

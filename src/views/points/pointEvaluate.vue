@@ -14,7 +14,6 @@
         </div>
         <div class="group-item">
             <span class="addPic">添加凭证</span>
-
             <div class="photo-list cl">
                 <ul>
                     <li id="photoPrimary" v-for="(item,index) in picList13.list">

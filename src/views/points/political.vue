@@ -26,9 +26,19 @@
 				<div class="middle">
 					<div class="middle-top">评分说明</div>
 					<div class="middle-content">
-						<p>
-							党员自学或参加其他党组织组织的学习教育活动，经所属党支部书记确认后，每参加一次加2.5分（共5分）。
+
+						<p v-if="moduleid === '2'">
+							2党员自学或参加其他党组织组织的学习教育活动，经所属党支部书记确认后，每参加一次加2.5分（共5分）。
 						</p>
+                        <p v-else-if="moduleid === '4'">
+                            党员在金领驿站参加政治活动，或“双报到”参加居民区党组织组织的党日活动，经所属党支部书记确认后，每次加2分（共10分）。
+                        </p>
+                        <p v-else-if="moduleid === '11'">
+                            党员积极参加公益活动，每次加3分(最高不超过20分)。
+                        </p>
+                        <p v-else="moduleid === '8'">
+                            党员积极参加公益活动，每次加3分(最高不超过20分)。
+                        </p>
 					</div>
 					<div class="knowBtn" @click="know">我知道了</div>
 				</div>
@@ -50,7 +60,8 @@ Vue.component(Popup.name, Popup);
 				contents:{rights:'评分说明',title:''},
 				list:"",
 				isYellow:false,
-				showPop:false
+				showPop:false,
+                moduleid:''
 			}
 		},
 		filters: {
@@ -63,7 +74,6 @@ Vue.component(Popup.name, Popup);
                 catch(err) {
                     return value=err;
                 }
-
             },
             Upper1: function (value) {
                 try {
@@ -88,6 +98,10 @@ Vue.component(Popup.name, Popup);
 			TransferDom
 		},
 		methods:{
+            getmoduleid(){
+                this.moduleid=this.$route.params.moduleid
+
+            },
             clickLink(item) {
                 this.$router.push({
                     path: '/active/detailPack/',
@@ -136,6 +150,7 @@ Vue.component(Popup.name, Popup);
 		mounted(){
             this.getlist();
             this.getModule();
+            this.getmoduleid()
 		}
 	}
 </script>
