@@ -57,7 +57,6 @@
 	                            </div>
 	                            </router-link>
 
-
 	                        	<router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id " v-else-if="progres.id === 1 ||progres.id === 2 || progres.id === 6">
 		                            <div class="content">
 		                                <x-button mini type="warn" v-if="projectList[progres.id]">
