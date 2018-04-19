@@ -67,6 +67,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
                     if(res.success){
                         this.$vux.alert.show({title: res.msg});
                         userName();
+                        this.content.status =2;
                     }else{
                         this.$vux.alert.show({title:res.msg});
                     }
