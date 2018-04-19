@@ -6,7 +6,7 @@
         </x-header>
         <div class="box">
             <flexbox>
-            <div class="header-list">2
+            <div class="header-list">
                 <div class="list-left">
                     <span class="left-now">当前支部：</span>
                     <span class="left-active">{{partyBranch1}}</span>
