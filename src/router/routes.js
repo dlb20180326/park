@@ -159,7 +159,7 @@ export const routes = [
             },
 
              {
-                 path: 'active/activeSign',
+                 path: 'active/activeSign/:activeId',
                 name: 'activeSign',
                 component: () => import('@/views/active/activeSign')
              },
@@ -196,6 +196,7 @@ export const routes = [
             },
             {
                 path: 'active/new2',
+                    name: 'activeNews2',
                 component: () => import('@/views/active/new2')
             },
             {

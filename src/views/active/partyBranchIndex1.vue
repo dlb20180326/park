@@ -2,11 +2,11 @@
     <div class="page-body">
         <x-header>
             党员活动
-            <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>
+            <router-link slot="right" :to="{name:'activeNews2'}">发起活动</router-link>
         </x-header>
         <div class="box">
             <flexbox>
-            <div class="header-list">
+            <div class="header-list">2
                 <div class="list-left">
                     <span class="left-now">当前支部：</span>
                     <span class="left-active">{{partyBranch1}}</span>

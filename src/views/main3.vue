@@ -46,22 +46,46 @@
         <div class="item">
           <div class="title">{{index+1}}. {{item.title}}{{item.type=='SCORE'?'积分加分确认':'图片上传'}}</div>
           <div class="content">
-            <x-button type="warn" :link="item.type=='SCORE'?'/points/pointEvaluate':'/active'">
+              <x-button type="warn"  @click.native="refer(item)">
+                  {{item.beginYn=='Y'?'去处理':'活动二维码'}}
+              </x-button>
+           <!-- <x-button type="warn" :link="item.type=='SCORE'?'/points/pointEvaluate':'/active'">
               {{item.beginYn=='Y'?'去处理':'活动二维码'}}
-            </x-button>
+            </x-button>-->
           </div>
         </div>
       </template>
     </div>
+      <div v-transfer-dom class="qrcode-dialog">
+          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{width: '80%',height:'300px'}" >
+              <h1 style="text-align: center;margin-top:20px;margin-bottom:20px;">{{activeTitle}}</h1>
+              <img id="fei" alt="">
+          </x-dialog>
+      </div>
   </div>
 </template>
 
 <script>
-  import axios from 'axios';
-  import {XHeader, GroupTitle, Flexbox, FlexboxItem, XButton} from 'vux';
+    import axios from 'axios';
+    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker ,XDialog, TransferDomDirective as TransferDom ,cookie } from 'vux';
 
-  export default {
-    components: {XHeader, GroupTitle, Flexbox, FlexboxItem, XButton},
+    export default {
+        directives: {
+            TransferDom
+        },
+        components: {
+            XHeader,
+            GroupTitle,
+            Flexbox,
+            FlexboxItem,
+            XButton,
+            DatetimePlugin,
+            Datetime,
+            Group,
+            Picker,
+            Alert,
+            XDialog
+        },
     data() {
       return {
         departmentid: this.$store.getters.user.departmentid,
@@ -70,10 +94,28 @@
         honor: '',
         people: '',
         todoList: [],
-        info:[]
+        activeTitle:'',
+        info:[],
+         showQrcodeDialog: false
       };
     },
     methods: {
+        refer (item){
+            console.log(item);
+
+            if(item.type == 'SCORE'){
+                this.$router.push({
+                    path:'points/review'
+                })
+            }else{
+                this.activeTitle = item.name;
+                this.showQR(item.masId)
+            }
+        },
+        showQR(data){
+            document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
+            this.showQrcodeDialog = true;
+        },
       getDepartment() {
         axios({
           method: 'get',
