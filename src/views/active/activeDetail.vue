@@ -17,7 +17,6 @@
             </flexbox-item>
         </flexbox>
         <flexbox orient="vertical">
-
             <section class="mainbox1">
                 <div class=" clearfix p15 display">
                     <span class="fl weui-cell__bd1">党员生活通知</span>
