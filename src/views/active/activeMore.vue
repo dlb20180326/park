@@ -68,9 +68,10 @@ export default {
                 url: 'active/getParticipateActive',
                 params: {
                     pageNum:1,
-                    pageSize:3,
+                    pageSize:200,
                     departmentid:this.departmentid,
-                    userId:this.$store.getters.user.userid
+                    userId:this.$store.getters.user.userid,
+                    all:'Y'
                 }
             }) .then((res)=> {
                 this.active=res.data.list;
@@ -112,7 +113,7 @@ export default {
     },
     datePick(s){
 	Date.prototype.toLocaleString = function(){
-		return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
+		return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()
 	}
 	return new Date(s).toLocaleString();
 	}
