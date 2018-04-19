@@ -41,7 +41,7 @@ import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
 	                    name: 'member',
 	                })
                 }
-                if(index==0 || index==1 || index==3 || index==6){
+                if(index==0 || index==1  || index==6){
                 	this.$router.push({
 	                    path: '/points/political/'+it.moduleid
 	                })
@@ -50,6 +50,11 @@ import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
                 	this.$router.push({
 	                    path:'/party/dues1'
 	                })
+                }
+                if(index==3){
+                    this.$router.push({
+                        path:'/points/political1/'
+                    })
                 }
                 if(index==5){
                 	this.$router.push({

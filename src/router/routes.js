@@ -120,6 +120,10 @@ export const routes = [
                 path: 'points/political/:moduleid',
                 component: () => import('@/views/points/political')
             },
+        {
+            path: 'points/political1',
+                component: () => import('@/views/points/political1')
+        },
             {
                 path: 'points/politicalSimple/:moduleid',
                 component: () => import('@/views/points/politicalSimple')
@@ -153,11 +157,18 @@ export const routes = [
                 path: 'active/partyActivity',
                 component: () => import('@/views/active/partyActivity')
             },
+
+             {
+                 path: 'active/activeSign',
+                name: 'activeSign',
+                component: () => import('@/views/active/activeSign')
+             },
             {
                 path: 'active/activeMore',
                 name: 'activeMore',
                 component: () => import('@/views/active/activeMore')
             },
+
             {
                 path: 'active/partyMoment',
                 name:'partyMoment',
@@ -168,6 +179,11 @@ export const routes = [
                 name:'detailPack',
                 component: () => import('@/views/points/detailPack')
             },
+             {
+                 path: 'points/detailPack1/:username',
+                name:'detailPack1',
+                component: () => import('@/views/points/detailPack1')
+              },
             {
                 path: 'active/post/:activeId',
                 name: 'activePost',
