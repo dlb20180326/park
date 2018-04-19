@@ -49,9 +49,9 @@ export default {
     },
     getSign(){
 
-       this.$http.get('/active/approved', {
+       this.$http.get('active/approved', {
            params: {
-               userid: this.$store.getters.user.userid,
+               userId: this.$store.getters.user.userid,
                activeId:this.$route.params.activeId
            }
        })
