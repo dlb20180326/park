@@ -76,7 +76,7 @@
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
-                    <input type="text" v-model='departmentname1'>
+                    <input type="text" v-model='departmentidNames'>
                 </flexbox-item>
                 <flexbox-item class="input-addon">
                     <x-button mini type="warn" @click.native="handlePicker1()">
@@ -160,6 +160,7 @@
                 year1: [''],
                 list:'',
                 list1:'',
+                departmentidItem:[],
                 PickerVisible2:false,
                 PickerVisible3:false,
                 PickerVisible5:false,
@@ -167,7 +168,8 @@
                 showQrcodeDialog: false,
                 Qrcode:'',
                 departmentname1:'',
-                departmentid1:'',
+                departmentidId:'',
+                departmentidNames:'',
                 str:[],String:''
 
             };
@@ -252,20 +254,24 @@
 
             },
             submit2(it){
-                var str = this.str;
-                let ss=[]
-                if([].indexOf(str.departmentid)==-1){
-                    let ss = str.push(it.departmentid)
+                //得到一个空数组，该数组和modelinPUT值
+                var arr = this.departmentidItem;
+
+                if(this.departmentidId.indexOf(it.departmentid)==-1){
+                    arr.push(it)
                 }
-               this.String = ss.join(str);
-                console.log(this.String)
 
+                let ss=[];
+                let ssTemp=[];
+                for(var i= 0 ;i<arr.length;i++){
+                    ss.push(arr[i].departmentid);
+                    ssTemp.push(arr[i].departmentname);
+                }
+                this.departmentidId = ssTemp;
 
+                this.departmentidNames = ssTemp.join();
 
-
-               /* this.departmentid1= it.departmentid;
-                this.departmentname1= it.departmentname;*/
-                /*this.PickerVisible5=false*/
+                this.PickerVisible5=false;
 
             },
             getActivity(){
