@@ -41,7 +41,7 @@
       </flexbox>
     </div>
     <div class="list">
-      <h3>书记代办事宜</h3>
+      <h3>书记待办事宜</h3>
       <template v-for="(item,index) in todoList">
         <div class="item">
             <div class="title">{{index+1}}.
