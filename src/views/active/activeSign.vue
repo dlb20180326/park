@@ -142,7 +142,7 @@ margin:.3rem auto;
     width:100%;
     text-align:center;
     color:#fff;
-    font-size:.18rem;
+    font-size:.16rem;
     font-weight:700;
 }
 .p-line{

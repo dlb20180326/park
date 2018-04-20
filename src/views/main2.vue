@@ -243,6 +243,9 @@
     h3 {
       line-height: 1;
     }
+    a{
+      color:#000;
+    }
     .item {
       margin-top: 0.15rem;
       padding: 0.1rem 0;
