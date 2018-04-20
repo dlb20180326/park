@@ -58,7 +58,7 @@ export default {
                 })
                 .then(
                     result =>{
-                        if(result.res){
+                        if(result.status){
                             this.$router.push({
                                 path: '/'
                             })
