@@ -43,11 +43,29 @@
         <h3>书记代办事宜</h3>
         <template v-for="(item,index) in todoList">
           <div class="item">
-            <div class="title">{{index+1}}. {{item.title}}{{item.type=='SCORE'?'积分加分确认':'图片上传'}}</div>
+           <div class="title">{{index+1}}.
+               <span v-if="item.type=='SCORE'">{{item.title}}积分加分确认</span>
+               <span v-else="item.type=='ACTIVE'">
+                   <router-link :to="{  name:'activePost', params:{ activeId:item.masId}}">{{item.title}}</router-link>
+               </span>
+              </div>
             <div class="content">
-                <x-button type="warn"  @click.native="refer(item)">
-                    {{item.beginYn=='Y'?'去处理':'活动二维码'}}
+                <div v-if="item.type=='SCORE'">
+                <x-button type="warn"  v-if="item.beginYn=='Y'" @click.native="refer(item)">
+                    去处理
                 </x-button>
+                <x-button type="warn"  v-else="item.beginYn=='N'" @click.native="refer(item)">
+                    去处理
+                </x-button>
+                    </div>
+                <div v-if="item.type=='ACTIVE'">
+                    <x-button type="warn"  v-if="item.beginYn=='Y'" @click.native="refer(item)">
+                        上传图片
+                    </x-button>
+                    <x-button type="warn"  v-else="item.beginYn=='N'" @click.native="refer(item)">
+                        活动二维码
+                    </x-button>
+                </div>
              <!-- <x-button type="warn" :link="item.type=='SCORE'?'points/review':'/active'">
                 {{item.beginYn=='Y'?'去处理':'活动二维码'}}
               </x-button>-->
@@ -133,9 +151,11 @@
               this.$router.push({
                   path:'points/review'
               })
-          }else{
-              this.activeTitle = item.name;
-              this.showQR(item.masId);
+          }else if(item.type == 'ACTIVE'){if(item.beginYn=='Y'){
+              this.$router.push({
+                  path:'active/partyBranch'
+              })}else{ this.activeTitle = item.name;
+                  this.showQR(item.masId);}
           }
       },
         showQR(data){
@@ -150,6 +170,7 @@
             }
           })
           .then(res => {
+            console.log("2222",res.data);
             this.partAbout = res.data;
           })
           .catch(err => {
@@ -162,6 +183,7 @@
             }
           })
           .then(res => {
+            console.log("11111111",res.data);
             this.todoList = res.data;
           })
           .catch(err => {
