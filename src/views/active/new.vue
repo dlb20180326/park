@@ -14,7 +14,7 @@
                         <i class="iconfont dlb-icon-rili" ></i>
                     </x-button>
                     <group class="date-no-box">
-                        <datetime v-model="hourListValue" format="YYYY-MM-DD HH:mm" @on-change="change"></datetime>
+                        <datetime v-model="hourListValue" format="YYYY-MM-DD HH:mm" @on-change="change" year-row="{value}年" month-row="{value}月" day-row="{value}日" hour-row="{value}点" minute-row="{value}分" ></datetime>
                     </group>
                 </flexbox-item>
             </flexbox>
@@ -32,7 +32,7 @@
                         <i class="iconfont dlb-icon-rili" ></i>
                     </x-button>
                     <group class="date-no-box">
-                        <datetime v-model="hot" format="YYYY-MM-DD HH:mm" @on-change="change1"></datetime>
+                        <datetime v-model="hot" format="YYYY-MM-DD HH:mm" @on-change="change1" year-row="{value}年" month-row="{value}月" day-row="{value}日" hour-row="{value}点" minute-row="{value}分" ></datetime>
                     </group>
                 </flexbox-item>
             </flexbox>
