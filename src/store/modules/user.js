@@ -33,7 +33,7 @@ const user = {
             })
     },
     mutations: {
-        setUser(state, data) {
+        setUser(state, data) {  
             Object.keys(data).map(key => {
                 state[key] = data[key];
             });

@@ -42,7 +42,7 @@ export default {
     methods: {
         handle(id){
             this.$router.push({
-                path: '/party/information',
+                path: '/party/information/:departmentid',
                 name: 'information',
                 params: {
                     departmentid:id
