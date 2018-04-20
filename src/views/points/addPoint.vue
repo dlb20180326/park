@@ -3,7 +3,7 @@
         <x-header>{{listSingle.projectName}}</x-header>
         <div class="group-item">
             <group-title slot="title">
-                <b>党员姓名：{{userName}}</b>
+                <b>党员姓名：<span style="color: #999999">{{userName}}</span></b>
             </group-title>
 
         </div>
@@ -45,7 +45,7 @@
         </div>
         <div class="group-item">
             <group-title slot="title">
-                <b>学习内容</b>
+                <b>主要内容</b>
             </group-title>
             <textarea cols="30" rows="10"  maxlength="300" v-model='activeContent'></textarea>
         </div>
