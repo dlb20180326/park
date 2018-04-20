@@ -167,7 +167,9 @@
                 showQrcodeDialog: false,
                 Qrcode:'',
                 departmentname1:'',
-                departmentid1:''
+                departmentid1:'',
+                str:[],String:''
+
             };
         },
         methods: {
@@ -250,10 +252,20 @@
 
             },
             submit2(it){
-                this.departmentid1= it.departmentid;
+                var str = this.str;
+                let ss=[]
+                if([].indexOf(str.departmentid)==-1){
+                    let ss = str.push(it.departmentid)
+                }
+               this.String = ss.join(str);
+                console.log(this.String)
 
-                this.departmentname1= it.departmentname;
-                this.PickerVisible5=false
+
+
+
+               /* this.departmentid1= it.departmentid;
+                this.departmentname1= it.departmentname;*/
+                /*this.PickerVisible5=false*/
 
             },
             getActivity(){
