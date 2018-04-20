@@ -36,8 +36,8 @@
                 <div style="padding:2vw 3.5vw 0;">
                     <table width="100%" class="table">
                         <tr>
-                            <td width="100">时间：</td>
-                            <td class="f_b">{{startTime1}}</td>
+                            <td width="100">活动时间：</td>
+                            <td class="f_b">{{startTime1|formatDuring}}~{{endTime1|formatDuring}}</td>
                         </tr>
                         <tr>
                             <td>地点：</td>
@@ -104,6 +104,15 @@ export default {
         XTable,
         Alert
 
+    },
+    filters: {
+        formatDuring: function (value) {
+
+            Date.prototype.toLocaleString = function(){
+                return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
+            }
+            return new Date(value).toLocaleString();
+        }
     },
     data() {
         return {

@@ -3,7 +3,7 @@
 		<view-box ref="viewBox" body-padding-top=".46rem">
 			<r-header :rfs="contents"></r-header>
 			<p class="titles">{{activeData.activeName}}</p>
-			<p class="time">时间：<span class="dark">{{dataPick(activeData.startTime)}}</span></p>
+			<p class="time">活动时间：<span class="dark">{{item.startTime|formatDuring}}~{{item.endTime|formatDuring}}</span></p>
 			<p class="time">地点：<span class="dark">{{activeData.activePace}}</span></p>
 			<div class="artical">
 				{{activeData.activeContext}}
@@ -126,6 +126,15 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 			this.getData();
 			this.getPic();
 		},
+        filters: {
+            formatDuring: function (value) {
+
+                Date.prototype.toLocaleString = function(){
+                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
+                }
+                return new Date(value).toLocaleString();
+            }
+        },
 		data(){
 			return {
 				contents:{rights:'',title:'驿站活动详情'},

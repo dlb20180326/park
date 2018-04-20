@@ -8,13 +8,13 @@
                     <flexbox :gutter="0">
                         <flexbox-item>序号</flexbox-item>
                         <flexbox-item>审核人</flexbox-item>
-                        <flexbox-item>时间</flexbox-item>
+                        <flexbox-item>活动时间</flexbox-item>
                         <flexbox-item>评分状态</flexbox-item>
                     </flexbox>
                     <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.partyname}}</flexbox-item>
-                        <flexbox-item>{{datePick(con.starttime)}}</flexbox-item>
+                        <flexbox-item>{{startTime1|formatDuring}}~{{endTime1|formatDuring}}</flexbox-item>
                         <flexbox-item>
                             <input type="button" class="btnSub" :value="con.status|Upper" :class="con.status|Upper1" @click="clickLink(con)" />
                         </flexbox-item>
@@ -74,7 +74,16 @@ Vue.component(Popup.name, Popup);
                     return value=err;
                 }
 
-            }
+            },
+
+                formatDuring: function (value) {
+
+                    Date.prototype.toLocaleString = function(){
+                        return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
+                    }
+                    return new Date(value).toLocaleString();
+                }
+
         },
 		components:{
 			XHeader,

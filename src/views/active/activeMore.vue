@@ -4,8 +4,8 @@
         <div class="group-item">
                     <div class="allLine" v-for="(item,index) in active" :key="index">
                         <div>
-                            <span class="colorL">时间：</span>
-                            <span class="colorW">{{datePick(item.startTime)}}</span>
+                            <span class="colorL">活动时间：</span>
+                            <span class="colorW">{{item.startTime|formatDuring}}~{{item.endTime|formatDuring}}</span>
                         </div>
                         <div>
                             <span class="colorL">地点：</span>
@@ -50,6 +50,15 @@ export default {
         FlexboxItem,
         XButton,
         Alert,
+    },
+    filters: {
+        formatDuring: function (value) {
+
+            Date.prototype.toLocaleString = function(){
+                return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
+            }
+            return new Date(value).toLocaleString();
+        }
     },
     data() {
         return {
