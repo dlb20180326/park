@@ -29,7 +29,7 @@
                             <td class="f_b">{{activeTitle}}</td>
                         </tr>
                         <tr>
-                            <td width="100">时间：</td>
+                            <td width="100">活动时间：</td>
                             <td class="f_b">{{startTime1|formatDuring}}~{{endTime1|formatDuring}}</td>
                         </tr>
                         <tr>
@@ -122,10 +122,9 @@ export default {
         formatDuring: function (value) {
 
                 Date.prototype.toLocaleString = function(){
-                    return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()
+                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
                 }
                 return new Date(value).toLocaleString();
-
         }
     },
     methods:{
@@ -231,12 +230,7 @@ export default {
 
 
         },
-        datePick(s){
-            Date.prototype.toLocaleString = function(){
-                return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDay()
-            }
-            return new Date(s).toLocaleString();
-        },
+
     onHide () {
         window.location.reload()
     },

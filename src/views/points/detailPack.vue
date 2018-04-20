@@ -9,8 +9,8 @@
 			</p>
 			<p class="allPic">
 				<span class="bg-line"></span>
-				<span class="picture">时间:</span>
-				<span class="numberz">{{new Date(content.starttime).toLocaleString()}}</span>
+				<span class="picture">活动时间:</span>
+				<span class="numberz">{{startTime1|formatDuring}}~{{endTime1|formatDuring}}</span>
 			</p>
 			<p class="allPic">
 				<span class="bg-line"></span>
@@ -52,6 +52,15 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 			Previewer,
 			ViewBox
 		},
+        filters: {
+            formatDuring: function (value) {
+
+                Date.prototype.toLocaleString = function(){
+                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
+                }
+                return new Date(value).toLocaleString();
+            }
+        },
 		methods:{
 			show (index) {
       			this.$refs.previewer.show(index)
