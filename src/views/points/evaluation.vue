@@ -19,13 +19,8 @@ import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
 /*import footers from '../layout/footer'*/
 	export default {
 		data(){
-			let collect = [{moduleid:2,bgImg:require('@/assets/images/icon-idea.png'),label:'政治学习',score:'10分'},{moduleid:4,bgImg:require('@/assets/images/icon-life.png'),label:'组织生活双报道',score:'20分'},
-					{bgImg:require('@/assets/images/icon-much.png'),label:'党费缴纳',score:'10分'},		{moduleid:11,bgImg:require('@/assets/images/icon-idea.png'),label:'思想汇报',score:'15分'},		{bgImg:require('@/assets/images/icon-before.png'),label:'先锋作用',score:'10分'},		{bgImg:require('@/assets/images/icon-law.png'),label:'遵纪守法一票否决',score:'20分'},
-					{moduleid:8,bgImg:require('@/assets/images/icon-server.png'),label:'公益服务',score:'10分'}]
-			if(this.$store.getters.user.roleid == 3){
-				}
 			return {
-					collect:collect,
+					collect:[],
 					select:{infos:'积分详情',inte:false}
 			}
 		},
@@ -68,25 +63,22 @@ import {XHeader,Flexbox,FlexboxItem,ViewBox} from 'vux'
 
 
             },
-			remove(){
-				return Array.prototype.remove=function(obj){  
-    				for(var i =0;i <this.length;i++){  
-        				var temp = this[i];  
-        				if(!isNaN(obj)){  
-            				temp=i;  
-        				}  
-        		if(temp == obj){  
-            		for(var j = i;j <this.length;j++){  
-                		this[j]=this[j+1];  
-            	}  
-            	this.length = this.length-1;  
-        }     
-    }  
-} 
+			removes(){
+				if(this.$store.getters.user.roleid == 3){
+					this.collect = [{moduleid:2,bgImg:require('@/assets/images/icon-idea.png'),label:'政治学习',score:'10分'},{moduleid:4,bgImg:require('@/assets/images/icon-life.png'),label:'组织生活双报道',score:'20分'},
+					{moduleid:11,bgImg:require('@/assets/images/icon-idea.png'),label:'思想汇报',score:'15分'},		{bgImg:require('@/assets/images/icon-before.png'),label:'先锋作用',score:'10分'},		{bgImg:require('@/assets/images/icon-law.png'),label:'遵纪守法一票否决',score:'20分'},
+					{moduleid:8,bgImg:require('@/assets/images/icon-server.png'),label:'公益服务',score:'10分'}]
+					
+				}else{
+					this.collect = [{moduleid:2,bgImg:require('@/assets/images/icon-idea.png'),label:'政治学习',score:'10分'},{moduleid:4,bgImg:require('@/assets/images/icon-life.png'),label:'组织生活双报道',score:'20分'},
+					{bgImg:require('@/assets/images/icon-much.png'),label:'党费缴纳',score:'10分'},		{moduleid:11,bgImg:require('@/assets/images/icon-idea.png'),label:'思想汇报',score:'15分'},		{bgImg:require('@/assets/images/icon-before.png'),label:'先锋作用',score:'10分'},		{bgImg:require('@/assets/images/icon-law.png'),label:'遵纪守法一票否决',score:'20分'},
+					{moduleid:8,bgImg:require('@/assets/images/icon-server.png'),label:'公益服务',score:'10分'}]
+				}
 			}
 
 		},
 		mounted(){
+			this.removes();
 		}
 	}
 </script>
