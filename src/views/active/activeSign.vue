@@ -20,6 +20,9 @@
                 </p>
             </div>
             <div class="success">
+                <div class="msgActive">
+                {{activeMsg}}
+                </div>
                 <h2>
                 恭喜
                 </h2>
@@ -41,7 +44,8 @@ export default {
         userName:'',
         dateTime:'',
         activeId:'',
-        activeName:''
+        activeName:'',
+        activeMsg:''
         }
         },
     methods:{
@@ -50,7 +54,6 @@ export default {
         this.$vux.alert.show({title:this.$route.params.activeId});
     },
     getSign(){
-
        this.$http.get('active/approved', {
            params: {
                userId: this.$store.getters.user.userid,
@@ -58,7 +61,7 @@ export default {
            }
        })
        .then(res => {
-           console.log('ok',res);
+           this.activeMsg = res.msg;
        })
        .catch(err => {
            console.log(err);
@@ -87,7 +90,6 @@ export default {
         })
         .then(res => {
             this.userName = res.data.name;
-            console.log(this.userName);
         })
         .catch(err => {
             console.log(err);
@@ -133,6 +135,15 @@ height:.8rem;
 background:rgba(250,184,0,1);
 border-radius: 4px ;
 margin:.3rem auto;
+}
+.msgActive{
+    position:absolute;
+    top:.3rem;
+    width:100%;
+    text-align:center;
+    color:#fff;
+    font-size:.18rem;
+    font-weight:700;
 }
 .p-line{
 width:91%;
