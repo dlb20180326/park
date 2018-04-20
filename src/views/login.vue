@@ -51,25 +51,27 @@ export default {
                     type: 'text',
                     position: 'top'
                 });
-            this.$store
-                .dispatch('login', {
+            this.$store.dispatch('login', {
                     name: this.account,
                     password: this.pass,
                     openId: this.$route.query.openId || undefined
                 })
                 .then(
-                    result =>
-                        this.$router.push({
-                            path: '/'
-                        }),
-                    error =>
-                        this.$vux.toast.show({
-                            text: error.message,
-                            width: '18em',
-                            type: 'text',
-                            position: 'top'
-                        })
-                );
+                    result =>{
+                        if(result.res){
+                            this.$router.push({
+                                path: '/'
+                            })
+                        }else{
+                            this.$vux.toast.show({
+                                text: result.message,
+                                width: '18em',
+                                type: 'text',
+                                position: 'top'
+                            })
+                        }
+                    }
+                )
         }
     }
 };
