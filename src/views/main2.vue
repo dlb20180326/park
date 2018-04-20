@@ -170,7 +170,6 @@
             }
           })
           .then(res => {
-            console.log("2222",res.data);
             this.partAbout = res.data;
           })
           .catch(err => {
@@ -183,7 +182,6 @@
             }
           })
           .then(res => {
-            console.log("11111111",res.data);
             this.todoList = res.data;
           })
           .catch(err => {

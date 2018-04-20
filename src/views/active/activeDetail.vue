@@ -25,8 +25,12 @@
                 <div class="content">
                     <table width="100%" class="table">
                         <tr>
+                            <td width="100">标题：</td>
+                            <td class="f_b">{{activeTitle}}</td>
+                        </tr>
+                        <tr>
                             <td width="100">时间：</td>
-                            <td class="f_b">{{startTime1|formatDuring}}</td>
+                            <td class="f_b">{{startTime1|formatDuring}}~{{endTime1|formatDuring}}</td>
                         </tr>
                         <tr>
                             <td>地点：</td>
@@ -99,6 +103,7 @@ export default {
             number2:1,
             userId:cookie.get('userId'),
             startTime1:'',
+            activeTitle:'',
             activePace:'',
             activeCreatePeople:'',
             activeId:'',
@@ -131,17 +136,19 @@ export default {
                 params: {
                     pageNum:1,
                     pageSize:1,
-                    departmentid:this.departmentid,
+
                     userId:this.$store.getters.user.userid
                 }
             }) .then((res)=> {
+                this.activeTitle=res.data.list[0].activeName;
                 this.startTime1=res.data.list[0].startTime;
+                this.endTime1=res.data.list[0].endTime;
                 this.activePace=res.data.list[0].activePace;
                 this.activeCreatePeople=res.data.list[0].activeCreatePeople;
                 this.activeContext=res.data.list[0].activeContext;
                 this.activeId=res.data.list[0].id;
                this.signupstatus=res.data.list[0].signupstatus;
-            }) .catch(function (error) {
+            }).catch(function (error) {
                     console.log(error);
                 });
 

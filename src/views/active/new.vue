@@ -155,7 +155,7 @@ export default {
             this.startTime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + '';
         },
         handlePicker(){
-            this.PickerVisible2=true;
+            this.PickerVisible2=!this.PickerVisible2;
             axios({
                 method: 'get',
                 url: 'pscoredetail/queryByJoinList'
