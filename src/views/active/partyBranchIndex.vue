@@ -101,6 +101,7 @@ export default {
                 })
                 .then(res => {
                     this.list = res.data.list;
+                    console.log(this.list.pictures);
                     this.list.forEach((item, index) => {
                         item.previewerClassName = `previewer-${index}-img`;
                         item.previewerOptions = {

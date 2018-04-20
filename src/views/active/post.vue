@@ -107,8 +107,8 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     				this.picInfo= res.data
     				for(let d in this.picInfo){
     					var obj = {};
-    					obj.msrc = 'http://www.dlbdata.cnpicture/show?pictureId='+this.picInfo[d].pictureId;
-    					obj.src = 'http://www.dlbdata.cnpicture/show?pictureId='+this.picInfo[d].pictureId;
+    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
+    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
     					this.list.push(obj);
     				}
     			}).catch(err =>{
