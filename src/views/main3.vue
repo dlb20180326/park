@@ -210,6 +210,9 @@
       margin-top: 0.1rem;
       text-align: center;
     }
+    a{
+      color:#000;
+    }
   }
 
   .number {
