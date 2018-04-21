@@ -88,6 +88,7 @@
 
         <ul class="active-type-list" v-show="PickerVisible5">
             <li v-for="(item,index) in list1" :key="index" @click="submit2(item)">{{item.departmentname}}</li>
+            <li  @click="resetDepartment()" style="color:#999;">清空所选部门</li>
         </ul>
         <div class="group-item">
             <group-title slot="title">
@@ -229,17 +230,16 @@
                             activeContext:this.activeContext,
                             activeName:this.activeTitle,
                             activeStatus:1,
-                            departmentid:this.departmentid1
+                            departmentid:this.departmentidId[0]
                         }
                     }) .then((res)=> {
-                        alert(res.msg);
+                        this.$vux.alert.show({title:res.msg});
                         this.showQR(res.data);
-
-                        console.log(res)
                     }).catch(function (error) {
                         console.log(error);
-                    });}else {
-                    alert("开始日期不能大于结束日期");
+                    });
+                }else {
+                    this.$vux.alert.show({title:'开始日期不能大于结束日期'});
                 }
             },
             showQR(data){
@@ -273,6 +273,12 @@
 
                 this.PickerVisible5=false;
 
+            },
+            resetDepartment(){
+                this.departmentidItem = [];
+                this.departmentidNames = "";
+                this.departmentidId=[];
+                this.PickerVisible5=false;
             },
             getActivity(){
             },
