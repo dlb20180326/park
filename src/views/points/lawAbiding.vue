@@ -39,7 +39,6 @@
 </template>
 <script>
     import axios from 'axios'
-
 import Vue from 'vue';
 import {ViewBox,TransferDom,Popup,Flexbox,FlexboxItem,XHeader} from 'vux'
 Vue.component(Popup.name, Popup);
