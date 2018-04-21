@@ -104,7 +104,7 @@ export default {
 
             }) .then((res)=> {
                 this.total=res.data
-                console.log('12321312',res.data)
+
             }).catch(function (error) {
                 console.log(error);
             })
