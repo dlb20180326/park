@@ -13,10 +13,11 @@
                     </flexbox>
                     <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
-                        <flexbox-item>{{con.name}}</flexbox-item>
-                        <flexbox-item>{{con.score}}</flexbox-item>
+                        <flexbox-item>{{con.approvedName}}</flexbox-item>
+                        <flexbox-item v-if="con.validYn=='Y'">0</flexbox-item>
+                        <flexbox-item v-else>{{con.typetotalscore}}</flexbox-item>
                         <flexbox-item>
-                            <input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="changeItem(con)"></input>
+                            <input type="button" class="btnSub" :value="3|Upper" :class="con.tempint|Upper1" @click="changeItem(con)"></input>
                         </flexbox-item>
                     </flexbox>
                </div>
@@ -48,15 +49,13 @@ Vue.component(Popup.name, Popup);
 			return {
 				contents:{rights:'评分说明',title:'遵纪守法评分'},
 				list:[
-                    {name:"侯宇茜",score:"20",tempint:3},
-                    {name:"申竣华",score:"21",tempint:3},
-                    {name:"海依沄",score:"20",tempint:3},
-                    {name:"卞漫诗",score:"18",tempint:3}
                 ],
 				isYellow:false,
 				showPop:false
 			}
 		}, filters: {
+
+
             Upper: function (value) {
                 try {
                     if(value===3) throw "去处理";
@@ -90,6 +89,26 @@ Vue.component(Popup.name, Popup);
 			TransferDom
 		},
 		methods:{
+
+            getlist(){
+                axios({
+                    method: 'get',
+                    url: 'pscoreparty/getDakDetialByDepartmentId',
+                    params: {
+                        departmentId:1
+                       //departmentId:this.$store.getters.user.departmentid
+
+                    }
+                }) .then((res)=> {
+                    console.log(res)
+                    this.list=res.data;
+
+            })
+            .catch(function (error) {
+                    console.log(error);
+                });
+            },
+
             changeItem(item){
                     this.$router.push({
                         path: 'lawAbidingDetail',
@@ -107,7 +126,11 @@ Vue.component(Popup.name, Popup);
             know(){
                 this.showPop = false
             },
+        },
+        mounted() {
+            this.getlist()
         }
+
 
 
 
