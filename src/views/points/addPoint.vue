@@ -185,7 +185,11 @@
                     if(res.success){
                     	this.$vux.alert.show({title:'增加成功'});
                         setTimeout(() => {
-        					this.$vux.alert.hide();
+                            this.$vux.alert.hide();
+                            this.$router.push({
+                            path: '/points'
+                        })
+
       					}, 1000)
                     }else{
                     	this.$vux.alert.show({title:res.msg});
