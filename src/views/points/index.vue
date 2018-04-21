@@ -306,11 +306,11 @@ export default {
 }
 </style>
 <style scoped>
-.vux-tab-item{
-	color:#999;
+.vux-tab .vux-tab-item{
+	color:#999!important;
 }
-.vux-tab-selected{
-	color: #333;
+.vux-tab .vux-tab-selected{
+	color: #333!important;
 }
 .number{
 	color: #B93647;
