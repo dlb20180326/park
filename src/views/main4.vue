@@ -242,9 +242,10 @@ export default {
     border-radius: 5px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0 3px 8px 0 rgba(174, 174, 174, 0.5);
-    position: absolute;
-    top: 0.24rem;
-    left: 5%;
+    /*margin: 0 auto;*/
+    position:relative;
+    top:.24rem;
+    left:5%;
 }
 .top-head {
     width: 86%;
@@ -318,7 +319,7 @@ export default {
     font-family: PingFangSC-Semibold;
     color: rgba(49, 49, 49, 1);
     line-height: 0.28rem;
-    margin: 0.76rem 0rem 0.13rem 6.6%;
+    margin: 0.9rem 0rem 0.13rem 6.6%;
     font-weight: 600;
 }
 .fonts-au {
