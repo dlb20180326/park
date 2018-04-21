@@ -230,17 +230,16 @@
                             activeContext:this.activeContext,
                             activeName:this.activeTitle,
                             activeStatus:1,
-                            departmentid:this.departmentid1
+                            departmentid:this.departmentidId[0]
                         }
                     }) .then((res)=> {
-                        alert(res.msg);
+                        this.$vux.alert.show({title:res.msg});
                         this.showQR(res.data);
-
-                        console.log(res)
                     }).catch(function (error) {
                         console.log(error);
-                    });}else {
-                    alert("开始日期不能大于结束日期");
+                    });
+                }else {
+                    this.$vux.alert.show({title:'开始日期不能大于结束日期'});
                 }
             },
             showQR(data){
