@@ -14,10 +14,10 @@
                     <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.approvedName}}</flexbox-item>
-                        <flexbox-item v-if="con.validYn=='Y'">0</flexbox-item>
-                        <flexbox-item v-else>{{con.typetotalscore}}</flexbox-item>
+
+                        <flexbox-item >{{con.typetotalscore}}</flexbox-item>
                         <flexbox-item>
-                            <input type="button" class="btnSub" :value="3|Upper" :class="con.tempint|Upper1" @click="changeItem(con)"></input>
+                            <input type="button" class="btnSub" :value="con.validYn|Upper" :class="con.tempint|Upper1" @click="changeItem(con)"></input>
                         </flexbox-item>
                     </flexbox>
                </div>
@@ -57,8 +57,8 @@ Vue.component(Popup.name, Popup);
 
             Upper: function (value) {
                 try {
-                    if(value===3) throw "去处理";
-                    if(value=== 1)  throw "已审核";
+                    if(value==="N") throw "去处理";
+                    if(value==="Y")  throw "已审核";
                     if(value=== 0)  throw "待审核";
                 }
                 catch(err) {
@@ -68,8 +68,8 @@ Vue.component(Popup.name, Popup);
             Upper1: function (value) {
                 try {
                    /* if(value===null) throw "yellowA";*/
-                    if(value=== 1)  throw "yellowB";
-                    if(value=== 0)  throw "yellowC";
+                    if(value==="N")  throw "yellowB";
+                    if(value==="Y")  throw "yellowC";
                 }
                 catch(err) {
                     return value=err;
@@ -109,13 +109,16 @@ Vue.component(Popup.name, Popup);
             },
 
             changeItem(item){
+                console.log("11111",item)
+
                     this.$router.push({
                         path: 'lawAbidingDetail',
+                        name:'lawAbidingDetail',
                         params: {
-                            partmentId:item.id,
+
                             name:encodeURI(item.name),
-                            departmentId:item.departmentid,
-                            userId:item.userid
+
+                            userId:1111
                         }
                     })
             },

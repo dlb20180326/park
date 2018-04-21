@@ -88,6 +88,24 @@
             };
         },
         methods: {
+            submit() {
+                axios.get('pscoreparty/scoreClean', {
+                    params: {
+                        detailld:6,
+                        adderId: this.$store.getters.user.userid,
+                        userid:'',
+                        img:'',
+                        remark:''
+
+                    }
+                })
+                    .then(res => {
+                    this.userName = res.data.name;
+            })
+            .catch(err => {
+                    console.log(err);
+            });
+            },
             showDeleteButton(it) {
                 clearInterval(this.Loop);//再次清空定时器，防止重复注册定时器
                 var This = this;
