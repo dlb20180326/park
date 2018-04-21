@@ -84,12 +84,20 @@
                                    {{knoew.detailTitle}}
                                 </flexbox-item>
                             </flexbox>
-                            <flexbox>
+                            <flexbox v-if="knoew.approvedName">
                                 <flexbox-item class="label">
                                     审核人：
                                 </flexbox-item>
                                 <flexbox-item>
                                     {{knoew.approvedName}}
+                                </flexbox-item>
+                            </flexbox>
+                            <flexbox v-if="!knoew.approvedName">
+                                <flexbox-item class="label">
+                                    加分人：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    {{knoew.adderName}}
                                 </flexbox-item>
                             </flexbox>
                             <flexbox>
@@ -241,7 +249,7 @@ export default {
 .body{
 	 background-color: #fff;
      line-height: 2;
-} 
+}
 .head {
     .label {
         font-size: 0.14rem;
