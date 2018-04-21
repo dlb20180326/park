@@ -52,6 +52,7 @@
                 <div class="book"  v-if="signupstatus == 1">
                     <a  style="background-color: #8b8b8b" @click="submit1()">已报名</a>
                 </div>
+                <div class="grayLine margin-top"></div>
             </section>
 
         </flexbox>
@@ -254,6 +255,7 @@ export default {
 
 <style lang="less" scoped>
 .grayLine{width:100%;height:.1rem;background:rgba(244,244,244,1);}
+.margin-top{margin-top: .24rem;}
     table {
         border-collapse:collapse;
     }
@@ -277,10 +279,12 @@ export default {
 .fAll{
 	float:right;
     margin-top: 0.1rem;
+    font-size: .12rem;
 }
 .fRight{
 	float:right;
     margin-top: 0.1rem;
+    font-size:.12rem;
 }
 .content{width:89%;
         margin:0 auto;
@@ -421,6 +425,7 @@ export default {
         height:.45rem;
         line-height:.45rem;
         white-space:nowrap;
+        font-weight:700;
         text-overflow: ellipsis;
     }
     .fr{
