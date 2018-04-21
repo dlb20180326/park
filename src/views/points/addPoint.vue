@@ -188,7 +188,7 @@
         					this.$vux.alert.hide();
       					}, 1000)
                     }else{
-                    	this.$vux.alert.show({title:'增加失败'});
+                    	this.$vux.alert.show({title:res.msg});
                         setTimeout(() => {
         					this.$vux.alert.hide();
       					}, 1000)
