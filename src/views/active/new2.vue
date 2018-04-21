@@ -88,6 +88,7 @@
 
         <ul class="active-type-list" v-show="PickerVisible5">
             <li v-for="(item,index) in list1" :key="index" @click="submit2(item)">{{item.departmentname}}</li>
+            <li  @click="resetDepartment()" style="color:#999;">清空所选部门</li>
         </ul>
         <div class="group-item">
             <group-title slot="title">
@@ -273,6 +274,12 @@
 
                 this.PickerVisible5=false;
 
+            },
+            resetDepartment(){
+                this.departmentidItem = [];
+                this.departmentidNames = "";
+                this.departmentidId=[];
+                this.PickerVisible5=false;
             },
             getActivity(){
             },
