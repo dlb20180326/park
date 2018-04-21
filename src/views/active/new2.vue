@@ -230,7 +230,7 @@
                             activeContext:this.activeContext,
                             activeName:this.activeTitle,
                             activeStatus:1,
-                            departmentid:this.departmentidId[0]
+                            departmentid:this.departmentidId.join()
                         }
                     }) .then((res)=> {
                         this.$vux.alert.show({title:res.msg});
@@ -267,7 +267,7 @@
                     ss.push(arr[i].departmentid);
                     ssTemp.push(arr[i].departmentname);
                 }
-                this.departmentidId = ssTemp;
+                this.departmentidId = ss;
 
                 this.departmentidNames = ssTemp.join();
 

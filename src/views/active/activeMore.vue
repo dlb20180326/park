@@ -22,7 +22,7 @@
                         </div>
                         <div>
                             <span class="colorL">活动内容：</span>
-                            <span class="colorW">{{item.activeContext}}</span>
+                            <span class="colorW">{{item.active_Context}}</span>
 
                         </div>
                     	<div class="book" v-if="item.signupstatus == 2">
@@ -83,8 +83,7 @@ export default {
                     pageNum:1,
                     pageSize:200,
                     departmentid:this.departmentid,
-                    userId:this.$store.getters.user.userid,
-                    all:'Y'
+                    userId:this.$store.getters.user.userid
                 }
             }) .then((res)=> {
                 console.log(res.data.list);

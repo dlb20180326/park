@@ -38,11 +38,11 @@
                         </tr>
                         <tr>
                             <td>发起人：</td>
-                            <td class="f_b">{{activeCreatePeople}}</td>
+                            <td class="f_b">{{activeCreatePeopleName}}</td>
                         </tr>
                         <tr>
                             <td valign="top">活动内容：</td>
-                            <td class="f_b">{{activeContext}}</td>
+                            <td class="f_b">{{active_Context}}</td>
                         </tr>
                     </table>
                 </div>
@@ -106,9 +106,9 @@ export default {
             startTime1:'',
             activeTitle:'',
             activePace:'',
-            activeCreatePeople:'',
+            activeCreatePeopleName:'',
             activeId:'',
-            activeContext:'',
+            active_Context:'',
             show:false,
             activeComplete:'',
             isActive:true,
@@ -144,8 +144,8 @@ export default {
                 this.startTime1=res.data.list[0].startTime;
                 this.endTime1=res.data.list[0].endTime;
                 this.activePace=res.data.list[0].activePace;
-                this.activeCreatePeople=res.data.list[0].activeCreatePeople;
-                this.activeContext=res.data.list[0].activeContext;
+                this.activeCreatePeopleName=res.data.list[0].activeCreatePeopleName;
+                this.active_Context=res.data.list[0].active_Context;
                 this.activeId=res.data.list[0].id;
                this.signupstatus=res.data.list[0].signupstatus;
             }).catch(function (error) {

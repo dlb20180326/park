@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                             <td valign="top">活动内容：</td>
-                            <td class="f_b weui-media-box__desc">{{activeContext}}</td>
+                            <td class="f_b weui-media-box__desc">{{active_Context}}</td>
                         </tr>
                     </table>
                 </div>
@@ -121,7 +121,7 @@ export default {
             activePace: '',
             activeCreatePeople: '',
             activeId: '',
-            activeContext: '',
+            active_Context: '',
             activeComplete: [],
             show: false,
             msg: ''
@@ -150,7 +150,7 @@ export default {
                     this.startTime1 = res.data.list[0].startTime;
                     this.activePace = res.data.list[0].activePace;
                     this.activeCreatePeople = res.data.list[0].activeCreatePeople;
-                    this.activeContext = res.data.list[0].activeContext;
+                    this.active_Context = res.data.list[0].active_Context;
                     this.activeId = res.data.list[0].id;
                 })
                 .catch(function(error) {

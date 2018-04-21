@@ -32,7 +32,7 @@
                                 <p>{{datePick(item.createTime)}}</p>
                             </flexbox-item>
                         </flexbox>
-                        <div class="list-content" v-html="item.activeContext"></div>
+                        <div class="list-content" v-html="item.active_Context"></div>
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
