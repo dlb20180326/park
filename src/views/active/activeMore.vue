@@ -4,6 +4,10 @@
         <div class="group-item">
                     <div class="allLine" v-for="(item,index) in active" :key="index">
                         <div>
+                            <span class="colorL">活动名称：</span>
+                            <span class="colorW">{{item.activeName}}</span>
+                        </div>
+                        <div>
                             <span class="colorL">活动时间：</span>
                             <span class="colorW">{{item.startTime|formatDuring}}~{{item.endTime|formatDuring}}</span>
                         </div>
@@ -83,6 +87,7 @@ export default {
                     all:'Y'
                 }
             }) .then((res)=> {
+                console.log(res.data.list);
                 this.active=res.data.list;
             })
                 .catch(function (error) {
