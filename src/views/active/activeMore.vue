@@ -296,7 +296,7 @@ input {
 .book a {
     display:inline-block;
     border-radius:1vw;
-    background:#9d0e1e;
+    background:#B93647;
     color:#fff;
     padding:2vw 0;
     width:35vw;
