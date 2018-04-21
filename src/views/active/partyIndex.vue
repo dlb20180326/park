@@ -1,7 +1,7 @@
 <template>
     <div class="page-body">
         <x-header>
-            党员活动
+            历史参与活动
        <!--     <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>-->
         </x-header>
         <div class="box">
