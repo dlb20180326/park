@@ -4,7 +4,7 @@
             党员活动
             <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>
         </x-header>
-        <div class="box">
+        <div class="box" style="-webkit-overflow-scrolling: touch;">
             <flexbox class="list-item" v-for="(item,index) in list" :key="index" :gutter="0" align="stretch">
                 <flexbox-item class="list-avatar">
                     <img src="@/assets/images/icon-head.png">
