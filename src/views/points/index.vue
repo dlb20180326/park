@@ -233,12 +233,15 @@ export default {
     flex: 1;
     overflow-y: auto;
 }
-.head,
-.body {
+.head,{
     background-color: #fff;
-    // line-height: 2;
-    padding: 0.15rem;
+     line-height: 2;
+    padding: 0.1rem;
 }
+.body{
+	 background-color: #fff;
+     line-height: 2;
+} 
 .head {
     .label {
         font-size: 0.14rem;
@@ -274,7 +277,7 @@ export default {
     margin-top: 0.1rem;
     padding: 0.1rem;
     border-radius: 5px;
-    background-color: #efefef;
+    background-color: rgba(246,246,246,1);
     text-align: center;
     span {
         font-size: 0.24rem;
@@ -292,8 +295,9 @@ export default {
         color: #666;
     }
     .content {
-        margin-top: 0.15rem;
+       margin: .15rem auto;
         text-align: center;
+        width:89.3%;
     }
     .space {
         display: inline-block;
@@ -302,6 +306,18 @@ export default {
 }
 </style>
 <style scoped>
+.vux-tab-item{
+	color:#999;
+}
+.vux-tab-selected{
+	color: #333;
+}
+.number{
+	color: #B93647;
+}
+.weui-btn_warn{
+	background-color:#B93647;
+}
 .vux-tab-warp>>>.vux-tab-bar-inner {
     border-radius: 5px;
 }
