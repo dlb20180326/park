@@ -5,14 +5,14 @@
             <div class="input-all clearfix">
                 <div class="left-content">
                     <i class="img-phone"></i>
-                    <label for="in-phone" class="font-label">账号</label>
+                    <label class="font-label">账号</label>
                 </div>
                 <input type="text" v-model="account" />
             </div>
             <div class="input-all clearfix">
                 <div class="left-content">
                     <i class="img-locks"></i>
-                    <label for="in-phone" class="label-lock">密码</label>
+                    <label  class="label-lock">密码</label>
                 </div>
                 <input type="password" v-model="pass" />
             </div>
