@@ -45,7 +45,7 @@
         </div>
         <div class="group-item">
             <group-title slot="title">
-                <b>主要内容</b>
+                <b class="colorSet">主要内容</b>
             </group-title>
             <textarea cols="30" rows="10"  maxlength="300" v-model='activeContent'></textarea>
         </div>
@@ -422,6 +422,9 @@
 
 </style>
 <style>
+.colorSet{
+	color:#494949;
+}
     .date-no-box{position: absolute;top:0px;left: 0;right: 0;bottom: 0;height: 0.32rem;overflow: hidden;opacity: 0}
     .date-no-box .vux-no-group-title{margin-top:0!important;}
     .date-no-box .weui-cell{
