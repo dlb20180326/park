@@ -5,8 +5,8 @@
     </x-header>
     <div class="head">
       <flexbox>
-        <flexbox-item class="label">
-          党支部书记：
+        <flexbox-item class="dateLable">
+          {{dateTimes}},
         </flexbox-item>
         <flexbox-item>
           {{info.partyBranch}}
@@ -42,11 +42,11 @@
     </div>
     <div class="list">
       <h3>书记待办事宜</h3>
-      <template v-for="(item,index) in todoList">
+      <div v-for="(item,index) in todoList" :key="index">
         <div class="item">
             <div class="title">{{index+1}}.
                 <span v-if="item.type=='SCORE'">{{item.title}}积分加分确认</span>
-                <span v-else="item.type=='ACTIVE'">
+                <span v-else-if="item.type=='ACTIVE'">
                    <router-link :to="{  name:'activePost', params:{ activeId:item.masId}}">{{item.title}}</router-link>
                </span>
             </div>
@@ -55,7 +55,7 @@
                     <x-button type="warn"  v-if="item.beginYn=='Y'" @click.native="refer(item)">
                         去处理
                     </x-button>
-                    <x-button type="warn"  v-else="item.beginYn=='N'" @click.native="refer(item)">
+                    <x-button type="warn"  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
                         去处理
                     </x-button>
                 </div>
@@ -63,7 +63,7 @@
                     <x-button type="warn"  v-if="item.beginYn=='Y'" @click.native="refer(item)">
                         上传图片
                     </x-button>
-                    <x-button type="warn"  v-else="item.beginYn=='N'" @click.native="refer(item)">
+                    <x-button type="warn"  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
                         活动二维码
                     </x-button>
                 </div>
@@ -72,7 +72,7 @@
                  </x-button>-->
           </div>
         </div>
-      </template>
+      </div>
     </div>
       <div v-transfer-dom class="qrcode-dialog">
           <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{width: '80%',height:'300px'}" >
@@ -114,12 +114,12 @@
         todoList: [],
         activeTitle:'',
         info:[],
+        dateTimes:'',
         showQrcodeDialog: false
       };
     },
     methods: {
         refer (item){
-            console.log(item);
             if(item.type == 'SCORE'){
                 this.$router.push({
                     path:'points/evaluation'
@@ -130,6 +130,25 @@
                 })}else{ this.activeTitle = item.name;
                 this.showQR(item.masId);}
             }
+        },
+      getDate(){
+        let datime = new Date().getHours();
+        if(datime>=5 & datime<8){
+          this.dateTimes = '早上好'
+        }
+        else if(datime>=8 & datime<11){
+          this.dateTimes = '上午好'
+          
+        }
+        else if(datime>=11 & datime<13){
+          this.dateTimes = '中午好'
+        }
+        else if(datime>=13 & datime<19){
+          this.dateTimes = '下午好'
+        }
+        else{
+          this.dateTimes = '晚上好'
+        }
         },
         showQR(data){
             document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
@@ -149,9 +168,6 @@
           this.address = res.data.address;
           this.honor = res.data.honor;
           this.people = res.data.people;
-
-
-          console.log(res.data);
         }).catch(function (error) {
           console.log(error);
         });
@@ -162,7 +178,6 @@
             }
           })
           .then(res => {
-            console.log(res);
             this.todoList = res.data;
           })
           .catch(err => {
@@ -172,6 +187,7 @@
 
     }, mounted() {
       this.getDepartment();
+      this.getDate();
     }
 
 
@@ -191,7 +207,7 @@
   }
 
   .list {
-    margin-top: 0.15rem;
+    margin-top: 0.1rem;
     h3 {
       line-height: 1;
     }
@@ -218,10 +234,16 @@
   .number {
     color: #a0333b;
   }
-
   .vux-flexbox-item.label {
     flex: 0 0 auto;
     width: auto;
     color: #8b8b8b;
+  }
+  .vux-flexbox-item.dateLable{
+    flex:0 0 auto;
+    width:auto;
+  }
+  button.weui-btn,input.weui-btn{
+    width:32%!important;
   }
 </style>
