@@ -125,7 +125,6 @@
                     }
                 })
                     .then(res => {
-
                 this.$vux.alert.show({title:res.msg});
             })
             .catch(err => {
