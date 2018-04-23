@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <x-header>
+        <x-header :left-options="{showBack: false}">
             党员活动
             <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>
         </x-header>
@@ -214,7 +214,7 @@ export default {
 .vux-flexbox.list-item {
     background-color: #fff;
     &:not(:last-child) {
-        margin-bottom: 0.15rem;
+        margin-bottom: 0.1rem;
     }
 }
 .vux-flexbox-item.list-avatar {
@@ -234,7 +234,7 @@ export default {
     }
 }
 .vux-flexbox-item.list-body {
-    padding: 0.1rem 0;
+    padding: 0.1rem 0.08rem;
 }
 .vux-flexbox-item.list-head {
     b {

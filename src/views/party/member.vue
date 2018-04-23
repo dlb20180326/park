@@ -39,7 +39,7 @@ Vue.component(Popup.name, Popup);
 		data(){
 
 			return {
-				contents:{rights:'',title:'支部党员'},
+				contents:{rights:'评分说明',title:'支部党员'},
 				list:"",
 				isYellow:false,
 				showPop:false
