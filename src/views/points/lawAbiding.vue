@@ -108,15 +108,24 @@ Vue.component(Popup.name, Popup);
             },
 
             changeItem(item){
-
-
+                if(item.validYn=="Y"){
                     this.$router.push({
-                        path: 'lawAbidingDetail/:userId',
-                        name:'lawAbidingDetail',
+                        path: 'points/lawAbidingDetailFinish/:userId',
+                        name: 'lawAbidingDetailFinish',
                         params: {
-                            userId:item.userId
+                            userId: item.userId
                         }
                     })
+
+                }else {
+                    this.$router.push({
+                        path: 'lawAbidingDetail/:userId',
+                        name: 'lawAbidingDetail',
+                        params: {
+                            userId: item.userId
+                        }
+                    })
+                }
             },
             showMenu(){
                 this.showPop = true;
