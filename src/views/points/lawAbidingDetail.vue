@@ -120,8 +120,8 @@
                         detailId:6,
                         adderId:this.$store.getters.user.userid,
                         userId:this.userid,
-                        imgs:201,
-                        remark:JSON.stringify({"title":this.Content1,"remark":this.Content1})
+                        imgs:this.picList.arr,
+                        remark:JSON.stringify({"title":this.Content1,"remark":this.Content2})
                     }
                 })
                     .then(res => {

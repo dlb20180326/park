@@ -14,7 +14,7 @@
                     </flexbox>
                     <flexbox  style="text-align: center" v-if="list.length===0">暂无支部人员提交信息</flexbox>
                     <flexbox  :gutter="0"  v-for="(con,index) in list" :key="index">
-                        <flexbox-item>{{index+1}</flexbox-item>
+                        <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.partyname}}</flexbox-item>
                         <flexbox-item>{{datePick(con.starttime)}}</flexbox-item>
                         <flexbox-item>
