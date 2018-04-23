@@ -1,9 +1,9 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <x-header>先锋作用评定</x-header>
+        <r-header :rfs="contents" body-padding-top=".46rem"></r-header>
         <div class="group-item">
             <group-title slot="title">
-                <b>党员姓名：{{userName}}</b>
+                <b>党员姓名：<span class="grayColor">{{userName}}</span></b>
             </group-title>
         </div>
         <div class="group-item">
@@ -16,7 +16,7 @@
             <span class="addPic">添加凭证</span>
             <div class="photo-list cl">
                 <ul>
-                    <li id="photoPrimary" v-for="(item,index) in picList13.list">
+                    <li id="photoPrimary" v-for="(item,index) in picList13.list" :key="index">
                         <div class="preview">
                             <img style="float:left;width:100%" :key="index" width="100" :src="item">
                         </div>
@@ -40,7 +40,7 @@
             <span class="addPic">添加凭证</span>
             <div class="photo-list cl">
                 <ul>
-                    <li  v-for="(item,index) in picList14.list">
+                    <li  v-for="(item,index) in picList14.list" :key="index">
                         <div class="preview">
                             <img style="float:left;width:100%" :key="index" width="100" :src="item">
                         </div>
@@ -65,7 +65,7 @@
 
             <div class="photo-list cl">
                 <ul>
-                    <li v-for="(item,index) in picList15.list">
+                    <li v-for="(item,index) in picList15.list" :key="index">
                         <div class="preview">
                             <img style="float:left;width:100%" :key="index" width="100" :src="item">
                         </div>
@@ -77,6 +77,10 @@
                     </li>
                 </ul>
             </div>
+            <group-title slot="title">
+                <b class="widthSet">总分 (15分) :</b>
+                <span class="colorSet">0</span>
+            </group-title>
         </div>
         <div class="group-item">
             <group-title slot="title"></group-title>
@@ -91,6 +95,7 @@
 import axios from "axios";
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
+import Xheaders from '@/components/comother/rheader'
 
 import {
     XHeader,
@@ -119,6 +124,7 @@ export default {
         Picker,
         InlineXNumber,
         Alert,
+        'r-header':Xheaders
     },
     data() {
         return {
@@ -126,7 +132,7 @@ export default {
             Messge14: "",
             Messge15: "",
             itemscore: 0,
-
+            contents:{rights:'评分说明',title:'先锋作用评定'},
             picList15:{list:[],arr:[]},
             picList14:{list:[],arr:[]},
             picList13:{list:[],arr:[]}
@@ -240,6 +246,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.widthSet{width:35%;display:inline-block;}
+.colorSet{color:#B93647;}
 ul,
 li {
     list-style: none;
@@ -391,7 +399,8 @@ box-sizing:border-box;
 .photo-list ul .operate a{color:#fff;cursor:pointer;text-decoration:none}
 .photo-list ul li.no-operate:hover .operate{display:none;}
 .photo-list .upload-file-input{opacity: 0;position: absolute;z-index: 99;top: 0;right: 0;left: 0;width: .6rem;bottom: 0;}
-
+.grayColor{color:#999;}
+.group-item:nth-child(2){margin-top:.52rem;}
 </style>
 <style lang="less">
 .group-item {
