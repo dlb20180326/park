@@ -7,7 +7,9 @@
             <flexbox-item>
                 <section class="mainbox">
                     <div class="barbg" >
-                        年度共参与组织活动：<span style="display: inline">{{number1}}</span> 次
+                        年度共参与组织活动：
+                        <span style="display: inline">{{number1}}</span>
+                         次
                     </div>
                     <div class="barbg">
                         年度共参与金领驿站活动：<span style="display: inline">{{number2}}</span> 次
@@ -476,7 +478,7 @@ export default {
         border-radius:4px;
         width:89%;
         height:.38rem;
-        line-height:.3rem;
+        line-height:.38rem;
         margin:0 auto;
         margin-bottom:.14rem;
         padding-left:.2rem;
