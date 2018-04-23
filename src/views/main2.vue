@@ -41,11 +41,11 @@
             </div>
       <div class="list">
         <h3>书记待办事宜</h3>
-        <template v-for="(item,index) in todoList">
+        <div v-for="(item,index) in todoList" :key="index">
           <div class="item">
            <div class="title">{{index+1}}.
                <span v-if="item.type=='SCORE'">{{item.title}}积分加分确认</span>
-               <span v-else="item.type=='ACTIVE'">
+               <span v-else-if="item.type=='ACTIVE'">
                    <router-link :to="{  name:'activePost', params:{ activeId:item.masId}}">{{item.title}}</router-link>
                </span>
               </div>
@@ -54,7 +54,7 @@
                 <x-button type="warn"  v-if="item.beginYn=='Y'" @click.native="refer(item)">
                     去处理
                 </x-button>
-                <x-button type="warn"  v-else="item.beginYn=='N'" @click.native="refer(item)">
+                <x-button type="warn"  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
                     去处理
                 </x-button>
                     </div>
@@ -62,7 +62,7 @@
                     <x-button type="warn"  v-if="item.beginYn=='Y'" @click.native="refer(item)">
                         上传图片
                     </x-button>
-                    <x-button type="warn"  v-else="item.beginYn=='N'" @click.native="refer(item)">
+                    <x-button type="warn"  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
                         活动二维码
                     </x-button>
                 </div>
@@ -71,7 +71,7 @@
               </x-button>-->
             </div>
           </div>
-        </template>
+        </div>
       </div>
     </div>
 
