@@ -120,7 +120,7 @@
                         detailId:6,
                         adderId:this.$store.getters.user.userid,
                         userId:this.userid,
-                        imgs:this.picList.arr.join(),
+                        imgs:this.picList.arr,
                         remark:JSON.stringify({"title":this.Content1,"remark":this.Content2})
                     }
                 })
