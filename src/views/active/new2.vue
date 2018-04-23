@@ -44,7 +44,7 @@
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
-                    <input type="text" v-model='activityName'>
+                    <input type="text" v-model='activityName' readonly="readonly">
                 </flexbox-item>
                 <flexbox-item class="input-addon">
                     <x-button mini type="warn" @click.native="handlePicker()">
