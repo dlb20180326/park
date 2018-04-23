@@ -117,15 +117,14 @@
             submit() {
                 axios.get('pscoreparty/scoreClean', {
                     params: {
-                        detailld:6,
-                        adderId: this.$store.getters.user.userid,
-                        userid:this.userid,
-                        img:this.picList.arr,
-                        remark:JSON.stringify({"title":this.Content1,"remark":this.Content1})
+                        detailId:6,
+                        adderId:this.$store.getters.user.userid,
+                        userId:this.userid,
+                        imgs:this.picList.arr.join(),
+                        remark:JSON.stringify({"title":this.Content1,"remark":this.Content2})
                     }
                 })
                     .then(res => {
-
                 this.$vux.alert.show({title:res.msg});
             })
             .catch(err => {
