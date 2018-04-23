@@ -24,7 +24,7 @@
                 {{activeMsg}}
                 </div>
                 <h2>
-                恭喜
+                {{sucStates}}
                 </h2>
                 <h1>
                 {{userName}}
@@ -45,7 +45,8 @@ export default {
         dateTime:'',
         activeId:'',
         activeName:'',
-        activeMsg:''
+        activeMsg:'',
+        sucStates:''
         }
         },
     methods:{
@@ -62,6 +63,11 @@ export default {
        })
        .then(res => {
            this.activeMsg = res.msg;
+           if(res.success == false){
+               this.sucStates = '签到失败';
+           }else{
+               this.sucStates = '恭喜';
+           }
        })
        .catch(err => {
            console.log(err);
@@ -97,7 +103,7 @@ export default {
     },
     datePick(s){
         Date.prototype.toLocaleString = function(){
-            return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'
+            return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
         }
         return new Date(s).toLocaleString();
     }
@@ -108,7 +114,6 @@ export default {
         this.getUser();
         this.getSign();
         this.getActiveName();
-        console.log(new Date());
     },
 };
 </script>
@@ -129,12 +134,12 @@ bottom:0;
 background-color:rgba(0,0,0,0.6)
 }
 .header-title{
-padding-top:.1rem;
-width:89.3%;
-height:.8rem;
-background:rgba(250,184,0,1);
-border-radius: 4px ;
-margin:.3rem auto;
+    padding-top: .1rem;
+    width: 89.3%;
+    background: rgba(250,184,0,1);
+    border-radius: 4px;
+    padding-bottom: .1rem;
+    margin: .3rem auto;
 }
 .msgActive{
     position:absolute;
@@ -147,7 +152,6 @@ margin:.3rem auto;
 }
 .p-line{
 width:91%;
-height:.2rem;
 font-size:.14rem;
 color:rgba(0,0,0,1);
 margin:.1rem .2rem 0 .1rem;

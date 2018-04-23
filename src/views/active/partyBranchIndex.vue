@@ -16,6 +16,9 @@
                                 <b>{{item.activeName}}</b>
                                 <p>{{datePick(item.createTime)}}</p>
                             </flexbox-item>
+                            <flexbox-item class="list-close">
+                                <a><img src="@/assets/images/x.png"></a>
+                            </flexbox-item>
                         </flexbox>
                         <div class="list-content" v-html="item.active_Context"></div>
                     </router-link>
@@ -225,8 +228,8 @@ export default {
     width: 0.8rem;
     min-height: 0.8rem;
     img {
-        width: 0.6rem;
-        height: 0.6rem;
+        width: 0.36rem;
+        height: 0.36rem;
         margin-top: 0.1rem;
         border-radius: 50%;
         box-shadow: 0 0 0.05rem rgba(0, 0, 0, 0.15);
@@ -234,7 +237,7 @@ export default {
     }
 }
 .vux-flexbox-item.list-body {
-    padding: 0.1rem 0.08rem;
+    padding: 0.1rem 0;
 }
 .vux-flexbox-item.list-head {
     b {

@@ -16,7 +16,7 @@
             </flexbox>
             <div class="trans-black" v-show="showTrans"></div>
             <div class="animate-down" style="background-color:#FFFFFF;" v-show="topShow">
-                <div  v-for="(park,index) in department" :key="index" class="bg-flag" @click="change(park)">
+                <div  v-for="(park,index) in department" :key="index" class="bg-flag activeColors" @click="change(park)">
                     {{park.departmentname}}
                 </div>
             </div>
@@ -30,6 +30,9 @@
                             <flexbox-item class="list-head">
                                 <b>{{item.activeName}}</b>
                                 <p>{{datePick(item.createTime)}}</p>
+                            </flexbox-item>
+                            <flexbox-item class="list-close">
+                                <a><img src="@/assets/images/x.png"></a>
                             </flexbox-item>
                         </flexbox>
                         <div class="list-content" v-html="item.active_Context"></div>
@@ -92,7 +95,8 @@ export default {
             topShow:false,
             showTrans:false,
             department:'',
-            departmentids:''
+            departmentids:'',
+            activeS:false
         };
     },
     mounted() {
@@ -268,6 +272,7 @@ export default {
     flex-direction: column;
     background-color: #efefef;
 }
+.trans-black{position:absolute;z-index:520;background-color:rgba(0,0,0,0.3);top:1.07rem;bottom:0px;left:0px;right:0px;}
 .widthSet {
     width: 100%;
 }
@@ -282,6 +287,12 @@ export default {
         margin-bottom: 0.15rem;
     }
 }
+// .activeColors{
+//     color:#CB2F00;
+// }
+.activeColors:first-child{
+    color:#CB2F00;
+}
 .vux-flexbox-item.list-avatar {
     display: flex;
     align-items: stretch;
@@ -290,8 +301,8 @@ export default {
     width: 0.8rem;
     min-height: 0.8rem;
     img {
-        width: 0.6rem;
-        height: 0.6rem;
+        width: 0.36rem;
+        height: 0.36rem;
         margin-top: 0.1rem;
         border-radius: 50%;
         box-shadow: 0 0 0.05rem rgba(0, 0, 0, 0.15);
@@ -299,7 +310,7 @@ export default {
     }
 }
 .vux-flexbox-item.list-body {
-    padding: 0.1rem 0.08rem;
+    padding: 0.1rem 0;
 }
 .vux-flexbox-item.list-head {
     b {
@@ -358,7 +369,7 @@ export default {
     }
 }
     .bg-flag{height:.2rem;margin-top:.2rem;}
-    .animate-down{padding:0 .2rem .2rem .21rem;position: absolute;z-index:30;width: calc(100% - 0.41rem);background-color:#FFFFFF;top:.97rem;}
+    .animate-down{padding:0 .2rem .2rem .21rem;position: absolute;z-index:521;width: calc(100% - 0.41rem);background-color:#FFFFFF;top:1.06rem;border: 1px solid #E4E4E4;}
 
 .photo-list {
     padding: 0.1rem 0 0;

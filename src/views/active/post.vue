@@ -210,12 +210,12 @@
         line-height: .24rem;
         width: 87.2%;
         margin: 10px auto;
-        word-spacing: .24rem;
+        /* word-spacing: .1rem; */
         height: 44px;
         overflow: hidden;
         padding: 0;
         text-overflow:ellipsis;
-        white-space: pre-wrap;
+        white-space: pre-line;
     }
     .wz-fonts.auto{
         height:auto;
