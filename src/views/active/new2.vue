@@ -7,7 +7,7 @@
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
-                    <input type="text" v-model='startTime'>
+                    <input type="text" v-model='startTime' readonly="readonly">
                 </flexbox-item>
                 <flexbox-item class="input-addon" style="position: relative">
                     <x-button mini type="warn">
@@ -25,7 +25,7 @@
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
-                    <input type="text"  v-model='endTime'>
+                    <input type="text"  v-model='endTime' readonly="readonly">
                 </flexbox-item>
                 <flexbox-item class="input-addon" style="position: relative">
                     <x-button mini type="warn">
@@ -44,7 +44,7 @@
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
-                    <input type="text" v-model='activityName'>
+                    <input type="text" v-model='activityName' readonly="readonly">
                 </flexbox-item>
                 <flexbox-item class="input-addon">
                     <x-button mini type="warn" @click.native="handlePicker()">

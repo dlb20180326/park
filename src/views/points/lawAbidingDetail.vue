@@ -3,12 +3,12 @@
         <x-header>遵纪守法评分</x-header>
         <div class="group-item">
             <group-title slot="title">
-                <b>党员姓名：<span style="color: #999999">王俊凯</span></b>
+                <b>党员姓名：<span style="color: #999999">{{name}}</span></b>
             </group-title>
         </div>
         <div class="group-item">
             <group-title slot="title">
-                <b>所属支部：<span style="color: #999999">花旗银行第一支部</span></b>
+                <b>所属支部：<span style="color: #999999">{{departmentname}}</span></b>
             </group-title>
         </div>
 
@@ -85,18 +85,40 @@
                 listSingle:{},
                 userName:'',
                 picList:{list:[],arr:[]},
+                userid:'',
+                departmentid:'',
+                name:'',
+                departmentname:''
+
             };
         },
         methods: {
+            getUser1() {
+                axios.get('ppartymember/queryByUserId', {
+                    params: {
+                        userid:this.$route.params.userId
+                    }
+                }) .then(res => {
+
+                this.userid=res.data.userid;
+                this.departmentid=res.data.departmentid;
+                this.name=res.data.name;
+                this.departmentname=res.data.departmentname
+
+
+            })
+            .catch(err => {
+                    console.log(err);
+            });
+            },
             submit() {
                 axios.get('pscoreparty/scoreClean', {
                     params: {
                         detailld:6,
                         adderId: this.$store.getters.user.userid,
-                        userid:'',
+                        userid:this.userid,
                         img:'',
                         remark:''
-
                     }
                 })
                     .then(res => {
@@ -120,7 +142,7 @@
             },
             atBig (item) {
             },
-            getList(){
+          /*  getList(){
                 axios.get('pscoredetail/queryById',{
                     params: {
                         id:this.$route.params.moduleId
@@ -131,20 +153,8 @@
                     console.log('fail'+err.data)
 
             })
-            },
-            getUser() {
-                axios.get('ppartymember/queryByUserId', {
-                    params: {
-                        userid: this.$store.getters.user.userid
-                    }
-                })
-                    .then(res => {
-                    this.userName = res.data.name;
-            })
-            .catch(err => {
-                    console.log(err);
-            });
-            },
+            },*/
+
             openPicker() {
                 this.$refs.picker.open();
             },
@@ -256,9 +266,10 @@
         },
         mounted() {
             weixin.init(['chooseImage', 'uploadImage']);
-            this.getActivity();
-            this.getList();
-            this.getUser();
+           /* this.getActivity();
+            this.getList();*/
+
+            this.getUser1();
         }
     };
 </script>

@@ -133,7 +133,7 @@ export const routes = [
                 component: () => import('@/views/points/lawAbiding')
               },
              {
-                 path: 'points/lawAbidingDetail/:name/:userId',
+                 path: 'points/lawAbidingDetail/:userId',
                      name:'lawAbidingDetail',
                  props:true,
                 component: () => import('@/views/points/lawAbidingDetail')

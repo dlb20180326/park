@@ -44,13 +44,13 @@ import {ViewBox,TransferDom,Popup,Flexbox,FlexboxItem,XHeader} from 'vux'
 Vue.component(Popup.name, Popup);
 	export default {
 		data(){
-
 			return {
 				contents:{rights:'评分说明',title:'遵纪守法评分'},
 				list:[
                 ],
 				isYellow:false,
-				showPop:false
+				showPop:false,
+                uuserId:''
 			}
 		}, filters: {
 
@@ -89,6 +89,7 @@ Vue.component(Popup.name, Popup);
 		},
 		methods:{
 
+
             getlist(){
                 axios({
                     method: 'get',
@@ -99,9 +100,7 @@ Vue.component(Popup.name, Popup);
 
                     }
                 }) .then((res)=> {
-                    console.log(res)
                     this.list=res.data;
-
             })
             .catch(function (error) {
                     console.log(error);
@@ -109,16 +108,13 @@ Vue.component(Popup.name, Popup);
             },
 
             changeItem(item){
-                console.log("11111",item)
+
 
                     this.$router.push({
-                        path: 'lawAbidingDetail',
+                        path: 'lawAbidingDetail/:userId',
                         name:'lawAbidingDetail',
                         params: {
-
-                            name:encodeURI(item.name),
-
-                            userId:1111
+                            userId:item.userId
                         }
                     })
             },
