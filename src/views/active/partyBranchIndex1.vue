@@ -39,7 +39,7 @@
                             <!-- 缩略图显示 -->
                             <div><img :class="item.previewerClassName" v-clipping="img.src" @click="preview(index,idx)"></div>
                         </flexbox-item>
-                        <flexbox-item :span="1/3" v-if="roleid!==4 && item.pictures.length<9">
+                        <flexbox-item :span="1/3" v-if="roleid!==4 && item.pictures.length<9" v-show="item.startTime > new Date().getTime()">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>
@@ -98,7 +98,6 @@ export default {
     mounted() {
     this.getlist1();
         weixin.init(['chooseImage', 'uploadImage']);
-
 
     },
     methods: {
@@ -179,6 +178,7 @@ export default {
                             }
                         };
                         item.pictures = item.pictures || [];
+                        item.startTime = item.startTime;
                         item.pictures.forEach(item => {
                             item.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + item.pictureId;
                         });
