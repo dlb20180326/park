@@ -146,7 +146,7 @@ export default {
                     }
                 })
                 .then(res => {
-                    console.log(res.data);
+
                     this.startTime1 = res.data.list[0].startTime;
                     this.activePace = res.data.list[0].activePace;
                     this.activeCreatePeople = res.data.list[0].activeCreatePeople;
