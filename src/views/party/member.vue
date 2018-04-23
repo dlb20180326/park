@@ -30,7 +30,7 @@
  	</div>
 </template>
 <script>
-    import axios from 'axios'
+import axios from 'axios'
 import Xheader from '@/components/comother/rheader'
 import Vue from 'vue';
 import {ViewBox,TransferDom,Popup} from 'vux'

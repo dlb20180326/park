@@ -1,6 +1,7 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <x-header>遵纪守法评分</x-header>
+        <!-- <x-header>遵纪守法评分</x-header> -->
+        <r-header :rfs="contents" body-padding-top=".46rem"></r-header>
         <div class="group-item">
             <group-title slot="title">
                 <b>党员姓名：<span style="color: #999999">{{name}}</span></b>
@@ -25,10 +26,10 @@
             <textarea cols="30" rows="10"  maxlength="300" v-model='Content2' placeholder="请详细描述扣分原因"></textarea>
         </div>
         <div class="group-item">
-            <span class="addPic">添加照片</span>
+            <span class="addPic">添加凭证</span>
             <div class="photo-list cl">
                 <ul>
-                    <li v-for="(item,index) in picList.list">
+                    <li v-for="(item,index) in picList.list" :key="index">
                         <div class="preview">
                             <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
                         </div>
@@ -53,6 +54,7 @@
 
 <script>
     import axios from 'axios'
+    import Xheader from '@/components/comother/rheader'
     import { XHeader, GroupTitle, Flexbox, TransferDomDirective as TransferDom,Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker,Previewer} from 'vux';
     import wx from 'weixin-js-sdk';
     import weixin from '@/services/weixin';
@@ -71,7 +73,8 @@
             Group,
             Picker,
             Alert,
-            Previewer
+            Previewer,
+            'r-header':Xheader
         },
         data() {
             return {
@@ -90,7 +93,8 @@
                 name:'',
                 departmentname:'',
                 Content1:'',
-                Content2:''
+                Content2:'',
+                contents:{rights:'评分说明',title:'遵纪守法评分'}
 
 
             };
@@ -284,6 +288,9 @@
         margin-right: 0.2rem;
     &:last-child {
          margin-bottom: 0.2rem;
+     }
+     &:nth-child(2){
+         margin-top: .6rem;
      }
     input,
     textarea {
