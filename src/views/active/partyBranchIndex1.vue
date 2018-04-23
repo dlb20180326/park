@@ -299,7 +299,7 @@ export default {
     }
 }
 .vux-flexbox-item.list-body {
-    padding: 0.1rem 0;
+    padding: 0.1rem 0.08rem;
 }
 .vux-flexbox-item.list-head {
     b {
