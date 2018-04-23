@@ -14,32 +14,34 @@
                 <span class="numberz"><span style="color:#ff0000">{{list&& list.length || num}}</span>张</span>
             </p>
             <div class="img-show">
-                <img class="previewer-demo-img" v-for="(item,index) in list" :src="item.src"  @click="show(index)">
+                <img class="previewer-demo-img" v-for="(item,index) in list" :src="item.src" :key="index"  @click="show(index)">
                 <div v-transfer-dom>
                     <previewer :list="list" ref="previewer" :options="options" @on-index-change="logIndexChange">
                     </previewer>
                 </div>
             </div>
-            <p class="allPic">
-                <span class="bg-line"></span>
-                <span class="picture">参与人员</span>
-                <span class="numberz"><span class="color-num">{{participants}}</span>/{{peopleNum}}</span>
-            </p>
-            <div class="wz-fonts" :class="[spr?'auto':'']">
-                <span  v-for="(peopleName,index) in activeData.participate">{{peopleName.name}}</span>
-            </div>
-            <div class="btnMore" @click="spread" v-show="btnAn">查看全部参与人员名单<span class="down"></span></div>
-            <div class="btnMore" v-show="btnPack" @click="folding">收起<span class="up"></span></div>
-            <p class="allPic">
-                <span class="bg-line"></span>
-                <span class="no-picture">未参与人员</span>
-                <span class="numberz"><span class="color-num">{{Noparticipants}}</span>/{{peopleNum}}</span>
-            </p>
-            <div class="wz-fonts" :class="[noSpr?'auto':'']">
-                <span  v-for="(peopleName,index) in activeData.notParticipate">{{peopleName.name}}</span>
-            </div>
-            <div class="btnMore" @click="noSpread" v-show="nobtnAn">查看全部参与人员名单<span class="down"></span></div>
-            <div class="btnMore" v-show="nobtnPack" @click="noFolding">收起<span class="up"></span></div>
+            <div v-show="roleId != 4">
+                <p class="allPic">
+                    <span class="bg-line"></span>
+                    <span class="picture">参与人员</span>
+                    <span class="numberz"><span class="color-num">{{participants}}</span>/{{peopleNum}}</span>
+                </p>
+                <div class="wz-fonts" :class="[spr?'auto':'']">
+                    <span  v-for="(peopleName,index) in activeData.participate" :key="index">{{peopleName.name}}</span>
+                </div>
+                <div class="btnMore" @click="spread" v-show="btnAn">查看全部参与人员名单<span class="down"></span></div>
+                <div class="btnMore" v-show="btnPack" @click="folding">收起<span class="up"></span></div>
+                <p class="allPic">
+                    <span class="bg-line"></span>
+                    <span class="no-picture">未参与人员</span>
+                    <span class="numberz"><span class="color-num">{{Noparticipants}}</span>/{{peopleNum}}</span>
+                </p>
+                <div class="wz-fonts" :class="[noSpr?'auto':'']">
+                    <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span>
+                </div>
+                <div class="btnMore" @click="noSpread" v-show="nobtnAn">查看全部参与人员名单<span class="down"></span></div>
+                <div class="btnMore" v-show="nobtnPack" @click="noFolding">收起<span class="up"></span></div>
+                </div>
         </view-box>
     </div>
 </template>
@@ -128,11 +130,15 @@
         },
         filters: {
             formatDuring: function (value) {
-
                 Date.prototype.toLocaleString = function(){
                     return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
                 }
-                return new Date(value).toLocaleString();
+                if(value =="" || value == null){
+                    return "暂无时间数据"
+                }else{
+                    return new Date(value).toLocaleString();
+                }
+               
             }
         },
         data(){
@@ -151,6 +157,7 @@
                 peopleNum:null,
                 participants:null,
                 Noparticipants:null,
+                roleId:this.$store.getters.user.roleid,
                 options: {
                     getThumbBoundsFn (index) {
                         // find thumbnail element
@@ -181,7 +188,7 @@
         flex: 1;
     }
     .titles{width:80%;min-height:.25rem; font-size:.2rem;font-family:PingFangSC-Medium;color:rgba(51,51,51,1);line-height:.28rem;margin:.2rem 12% .1rem 8%;}
-    .time{width:80%;height:.17rem; font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.17rem;margin-left:8%;margin-top:.1rem;}
+    .time{width:80%;font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.17rem;margin-left:8%;margin-top:.1rem;}
     .time .dark{color:#6b6b6b;}
     .artical{width:84%;height:auto; font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(102,102,102,1);line-height:.24rem;margin:.18rem 8% .2rem 8%;text-indent:2em;}
     .artical p{margin-bottom:.1rem;}
