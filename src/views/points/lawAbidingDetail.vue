@@ -16,13 +16,13 @@
             <group-title slot="title">
                 <b>扣分原因</b>
             </group-title>
-            <textarea cols="30" rows="10"  maxlength="300" v-model='activeContent' placeholder="请简单总结扣分原因"></textarea>
+            <textarea cols="30" rows="10"  maxlength="300" v-model='Content1' placeholder="请简单总结扣分原因"></textarea>
         </div>
         <div class="group-item">
             <group-title slot="title">
                 <b>原因描述</b>
             </group-title>
-            <textarea cols="30" rows="10"  maxlength="300" v-model='activeContent' placeholder="请详细描述扣分原因"></textarea>
+            <textarea cols="30" rows="10"  maxlength="300" v-model='Content2' placeholder="请详细描述扣分原因"></textarea>
         </div>
         <div class="group-item">
             <span class="addPic">添加照片</span>
@@ -88,7 +88,10 @@
                 userid:'',
                 departmentid:'',
                 name:'',
-                departmentname:''
+                departmentname:'',
+                Content1:'',
+                Content2:''
+
 
             };
         },
@@ -117,12 +120,13 @@
                         detailld:6,
                         adderId: this.$store.getters.user.userid,
                         userid:this.userid,
-                        img:'',
-                        remark:''
+                        img:this.picList.arr,
+                        remark:JSON.stringify({"title":this.Content1,"remark":this.Content1})
                     }
                 })
                     .then(res => {
-                    this.userName = res.data.name;
+
+                this.$vux.alert.show({title:res.msg});
             })
             .catch(err => {
                     console.log(err);
