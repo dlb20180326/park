@@ -37,7 +37,7 @@
                         <p v-else-if="moduleid === '11'">
                             党员积极参加公益活动，每次加3分(最高不超过20分)。
                         </p>
-                        <p v-else="moduleid === '8'">
+                        <p v-else-if="moduleid === '8'">
                             党员积极参加公益活动，每次加3分(最高不超过20分)。
                         </p>
 					</div>
@@ -189,7 +189,9 @@ font-size: .14rem;
 	padding-bottom:.2rem;
 }
 .vux-flexbox .vux-flexbox-item:nth-child(1){
-	-webkit-box-flex: 0.5;
+    flex:0 0 auto;
+    width: 14%;
+    
 }
 .btnSub{width:.6rem;height:.24rem;font-size:.14rem;line-height:.24rem;border-radius: 4px;font-family:PingFangSC-Medium;border:0px;color:#FFFFFF;background-color:rgba(185, 54, 71, 1);}
 .yellowA{background-color:#BABABA;}
