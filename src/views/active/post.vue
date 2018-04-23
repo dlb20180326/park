@@ -234,5 +234,5 @@
         color:rgba(204,204,204,1);border:1px solid #E4E4E4;line-height:.3rem;text-align:center;
     }
     .down{width:0.1rem;height:0.1rem;display:inline-block;background: url(../../assets/images/icon-down.png) no-repeat;background-size:100% 100%;margin-left:.05rem;}
-    .up{width:0.1rem;height:0.1rem;display:inline-block;background: url(../../assets/images/icon-up.png) no-repeat;background-size:100% 100%;float:right;margin-right:.2rem;margin-top:.1rem;}
+    .up{width:0.1rem;height:0.1rem;display:block;background: url(../../assets/images/icon-up.png) no-repeat;background-size:100% 100%;float:right;margin-right:.2rem;margin-top:.1rem;}
 </style>
