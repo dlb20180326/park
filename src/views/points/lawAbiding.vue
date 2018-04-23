@@ -17,7 +17,7 @@
 
                         <flexbox-item >{{con.typetotalscore}}</flexbox-item>
                         <flexbox-item>
-                            <input type="button" class="btnSub" :value="con.validYn|Upper" :class="con.tempint|Upper1" @click="changeItem(con)"></input>
+                            <input type="button" class="btnSub" :value="con.validYn|Upper" :class="con.validYn|Upper1" @click="changeItem(con)"></input>
                         </flexbox-item>
                     </flexbox>
                </div>

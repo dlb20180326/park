@@ -10,7 +10,7 @@
 			<p class="allPic">
 				<span class="bg-line"></span>
 				<span class="picture">活动时间:</span>
-				<span class="numberz">{{startTime1|formatDuring}}~{{endTime1|formatDuring}}</span>
+				<span class="numberz1">{{content.starttime|formatDuring}}~{{content.endtime|formatDuring}}</span>
 			</p>
 			<p class="allPic">
 				<span class="bg-line"></span>
@@ -139,6 +139,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
             getDetail(){
                 this.$http.get('pstudy/queryById?studyid='+this.$route.params.studyid
                 ).then(res =>{
+                    console.log("1111",res.data);
                     this.content= res.data;
                     this.content.picture = [];
 
@@ -218,6 +219,7 @@ html,body{
 .allPic .bg-line{width:.04rem;height:.18rem;margin-left:8%;background: url(../../assets/images/icon-rectangle.png) no-repeat;background-size:100% 100%;display:block;float: left;margin-top:.07rem;}
 .picture{font-size:.14rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);margin-left:.1rem;display:block;float: left;}
 .numberz{font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);display:block;float: left;margin-left:.1rem;}
+.numberz1{font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);margin-left:.1rem;}
 .allPic{height:.3rem;line-height:.3rem;overflow:hidden;margin-top:.2rem;}
 .img-show{width:84%;height:auto;margin-left:8%;}
 .img-show img{width:49%;height:1.5rem;margin-top:.1rem;}
