@@ -71,7 +71,7 @@ import {Previewer, TransferDom,ViewBox,XHeader,XButton} from 'vux'
                 this.content1 = jsonObj.title;
                 this.content2 = jsonObj.remark;
                 this.adderName = res.data.adderName;
-                console.log("1111", res.data.imgs);
+               
                 if (res.data.imgs) {
                     var imgs = res.data.imgs.split(",");
                     this.imgpics = [];
