@@ -26,9 +26,14 @@ body {
 body {
     font-size: 0.16rem;
 }
+.bgColors{background: linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1)); 
+		background: -webkit-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));  
+        background: -o-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));  
+        background: -moz-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));  
+        background: -mos-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));}
 input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none; }
 .vux-header {
-    background-color: #a0333b !important;
+    // background-color: #a0333b !important;
     .vux-header-left a,
     .vux-header-left button,
     .vux-header-right a,

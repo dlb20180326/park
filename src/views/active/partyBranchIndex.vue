@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <x-header :left-options="{showBack: false}">
+        <x-header :left-options="{showBack: false}" class="bgColors">
             党员活动
             <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>
         </x-header>
@@ -17,7 +17,7 @@
                                 <p>{{datePick(item.createTime)}}</p>
                             </flexbox-item>
                             <flexbox-item class="list-close">
-                                <a><img src="@/assets/images/x.png"></a>
+                                <img src="@/assets/images/x.png">
                             </flexbox-item>
                         </flexbox>
                         <div class="list-content" v-html="item.active_Context"></div>
