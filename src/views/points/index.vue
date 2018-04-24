@@ -115,6 +115,76 @@
                 </transition>
             </div>
         </div>
+
+        <!--弹出框-->
+        <div class="swiper-all">
+            <ul class="cl">
+                <li class="swiper-one">
+                    <div class="swiper-one-inner">
+                        <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">张一山</span></h4>
+                        <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span class="vb">党员姓名：</span><span class="text-gray vb">张一山</span></h4>
+                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>时间：</span><span class="text-gray">2018</span></h4>
+                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>主要内容：</span></h4>
+                        <div class="text-gray-box">
+                            党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费
+                        </div>
+                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>政治学习图片：</span><span class="text-gray">18张</span></h4>
+                        <div class="show-list cl">
+                            <ul>
+                                <li>
+                                    <div class="preview">
+                                        <img src="@/assets/images/icon-head.png">
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="preview">
+                                        <img src="@/assets/images/icon-head.png">
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="preview">
+                                        <img src="@/assets/images/icon-head.png">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="swiper-one">
+                    <div class="swiper-one-inner">
+                        <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">张一山</span></h4>
+                        <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span class="vb">党员姓名：</span><span class="text-gray vb">张一山</span></h4>
+                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>时间：</span><span class="text-gray">2018</span></h4>
+                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>主要内容：</span></h4>
+                        <div class="text-gray-box">
+                            党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费
+                        </div>
+                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>政治学习图片：</span><span class="text-gray">18张</span></h4>
+                        <div class="show-list cl">
+                            <ul>
+                                <li>
+                                    <div class="preview">
+                                        <img src="@/assets/images/icon-head.png">
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="preview">
+                                        <img src="@/assets/images/icon-head.png">
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="preview">
+                                        <img src="@/assets/images/icon-head.png">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="bg-cross"></div>
+        <div class="bg-dark"></div>
     </div>
 </template>
 
@@ -234,6 +304,86 @@ export default {
 </script>
 
 <style lang="less" scoped>
+ol,ul,li{
+    list-style:none;
+}
+.bg-dark{position:fixed;left:0;top:0;width:100%;height:100%;z-index:998;opacity:0.3;background-color:#000;filter:alpha(opacity=30)}
+.bg-cross{position:fixed;left:0;z-index:1000;
+    width: .4rem;height: .4rem;right: 0;display: inline-block;margin: auto;
+    bottom:12%;
+background-image:url(../../assets/images/icon-del.png);background-size:contain;background-repeat:no-repeat;background-position:50% 50%;
+}
+
+.swiper-all{
+    position: absolute;
+    left:5%;
+    top:20%;
+    bottom:20%;
+    right:0;
+}
+.swiper-one{
+    position: relative;
+    width: 390px;
+    float: left;
+    border-radius: 5px;
+    background: #fff;
+    z-index: 1001;
+    height: 100%;
+    margin-right: 20px;
+}
+.swiper-one-inner{
+    padding:.3rem .2rem;
+}
+.sinfo-title{
+    height: .16rem;
+    line-height: .16rem;
+    font-size: .14rem;
+    margin-bottom: .16rem;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow:ellipsis ;
+}
+.sinfo-title.pr4{
+    padding-right:1rem;
+}
+.sinfo-title span{
+    vertical-align: top;
+}
+.sinfo-title span.vb{
+    vertical-align:top;
+}
+.sinfo-title .text-gray{
+    color:#999;
+    vertical-align: top;
+}
+.sinfo-border{
+    width: 5px;
+    height:.16rem;;
+    background: #b93647;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: .1rem;
+}
+.text-gray-box{
+    margin-bottom:.16rem;
+    line-height: 1.6;
+    color:#999;
+    font-size: .14rem;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.show-list{padding:0 0 0.1rem;}
+.show-list.border0{border-bottom:0;padding-bottom: 0;}
+.show-list ul{font-size:0;list-style:none;}
+.show-list ul li{font-size:0;display:inline-block;margin-right:.1rem;position:relative;vertical-align:top;
+    width:.6rem;height:.6rem;overflow:hidden;margin-bottom:.2rem;}
+.show-list ul li:first-child{margin-left:0;}
+.show-list .operate{display:none;background:rgba(33,33,33,.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);z-index:5;position:absolute;bottom:0;left:0;right:0;height:12px;padding-bottom:7px;font-size:12px;color:#fff;text-align: center}
+.show-list .info{line-height:.6rem;text-align:center}
+.show-list .preview{width:0.6rem;height:.6rem;z-index:4;line-height:.6rem;font-family:arial;background-color:#fff;
+    background-repeat:no-repeat;position:absolute;bottom:0;left:0;text-align:center;right:0;cursor: pointer;border:1px solid #fff;box-sizing: border-box;}
+.show-list .preview img{max-height:.6rem;max-width:.6rem;vertical-align:middle;}
 .page-body {
     display: flex;
     flex-direction: column;
@@ -248,7 +398,7 @@ export default {
     flex: 1;
     overflow-y: auto;
 }
-.head,{
+.head{
     background-color: #fff;
      line-height: 2;
     padding: 0.1rem;
