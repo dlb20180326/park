@@ -169,7 +169,8 @@ font-size: .14rem;
 	padding-bottom:.2rem;
 }
 .vux-flexbox .vux-flexbox-item:nth-child(1){
-	-webkit-box-flex: 0.5;
+    flex:0 0 auto;
+    width:16%;
 }
 /*#table-style{
 	width:86.7%;

@@ -1,18 +1,26 @@
 <template>
 	<div class="page-body">
    		<view-box ref="viewBox">
-			<r-header :rfs="contents" body-padding-top=".46rem"></r-header>
-			<table id="table-style">
-				<tbody>
-					<tr v-for="(con,index) in list" :key="index">
-						<td>{{index+1}}</td>
-						<td>{{con.name}}</td>
-						<td>
-							<input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="changeItem(con)"></input>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+            <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" class="bgColors">
+            {{contents.title}}<a slot="right" @click="showPops">评分说明</a></x-header>
+                <div class="points-table">
+                    <flexbox :gutter="0">
+                        <flexbox-item>序号</flexbox-item>
+                        <flexbox-item>姓名</flexbox-item>
+                        <flexbox-item>评分状态</flexbox-item>
+                    </flexbox>
+                    <flexbox style="text-align: center" v-if="list.length===0">暂无支部人员提交信息</flexbox>
+                    <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
+                        <flexbox-item>{{index+1}}</flexbox-item>
+                        <flexbox-item>{{con.name}}</flexbox-item>
+                        <flexbox-item>
+                            <input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="changeItem(con)" />
+                        </flexbox-item>
+                    </flexbox>
+                </div>
+
+
+
 			<div v-transfer-dom>
 				<popup v-model="showPop" position="left" width="100%">
 				<div class="middle">
@@ -31,9 +39,8 @@
 </template>
 <script>
 import axios from 'axios'
-import Xheader from '@/components/comother/rheader'
 import Vue from 'vue';
-import {ViewBox,TransferDom,Popup} from 'vux'
+import {ViewBox,TransferDom,Popup,Flexbox,FlexboxItem,XHeader} from 'vux'
 Vue.component(Popup.name, Popup);
 	export default {
 		data(){
@@ -69,9 +76,11 @@ Vue.component(Popup.name, Popup);
             }
         },
 		components:{
-			'r-header':Xheader,
 			ViewBox,
-			Popup
+            Popup,
+            Flexbox,
+            FlexboxItem,
+            XHeader
 		},
 		directives:{
 			TransferDom
@@ -86,7 +95,8 @@ Vue.component(Popup.name, Popup);
                     }
                 }).then((res)=> {
                     console.log(res);
-                    this.list=res.data
+                    this.list=res.data;
+                    console.log(list)
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -131,7 +141,10 @@ Vue.component(Popup.name, Popup);
 			},
 			know(){
 				this.showPop = false
-			}
+            },
+            showPops(){
+                this.showPop = !this.showPop;
+            }
 		},
 		mounted(){
             this.getlist()
@@ -170,4 +183,31 @@ html,body{
 .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
 border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
+
+.vux-flexbox{
+	width:88%;
+	margin-left:6%;
+	text-align: center;
+	margin-top:.2rem;
+}
+.vux-flexbox-item{
+font-size: .14rem;
+}
+.vux-flexbox:nth-child(1){
+	color:rgba(250,122,0,1);
+	border:0;
+	padding-bottom:0px;
+    margin-top:.55rem;
+}
+.vux-flexbox{
+	border-bottom:1px solid #E8E8E8;
+	padding-bottom:.2rem;
+}
+.vux-flexbox .vux-flexbox-item:nth-child(1){
+    flex:0 0 auto;
+    width: 22%;
+    
+}
+
+
 </style>
