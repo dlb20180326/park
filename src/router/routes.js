@@ -137,7 +137,14 @@ export const routes = [
                      name:'lawAbidingDetail',
                  props:true,
                 component: () => import('@/views/points/lawAbidingDetail')
-                },
+                }
+                ,
+                {
+                    path: 'points/lawAbidingDetailFinish/:userId',
+                    name:'lawAbidingDetailFinish',
+                    props:true,
+                    component: () => import('@/views/points/lawAbidingDetailFinish')
+        },
             {
                 path: 'active',
                 component: () => import('@/views/active')

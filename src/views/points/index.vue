@@ -41,10 +41,11 @@
                 <transition name="fade">
                     <div class="tab-content" v-if="tabIndex===0">
                         <div class="item-detail" v-for="(progres,index) in proTotal">
-	                            <div class="title">
+	                            <div class="title cl">
 	                                <b>{{index+1}}. {{progres.projectName}}</b>
 	                                <div class="space"></div>
 	                                <span class="number">{{progres.totalScore}}</span>/{{progres.score}}
+                                    <span class="fr" v-if="progres.id === 1 ||progres.id === 2 || progres.id === 6">审批进度</span>
 	                            </div>
 	                            <div class="content">
 	                                <x-progress :percent="progres.totalScore/progres.score*100" :show-cancel="false"></x-progress>
@@ -57,13 +58,14 @@
 	                            </div>
 	                            </router-link>
 
-	                        	<router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id " v-else-if="progres.id === 1 ||progres.id === 2 || progres.id === 6">
-		                            <div class="content">
-		                                <x-button mini type="warn" v-if="projectList[progres.id]">
-		                                    点击+积分
-		                                </x-button>
-		                            </div>
-	                        	</router-link>
+                                <div class="content"  v-else-if="projectList[progres.id]">
+                                    <router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id ">
+                                    <x-button mini type="warn" v-if="projectList[progres.id]">
+                                        点击+积分
+                                    </x-button>
+                                    </router-link>
+                                </div>
+
                         </div>
                     </div>
                     <div class="tab-content" v-if="tabIndex===1">
@@ -237,6 +239,11 @@ export default {
     flex-direction: column;
     background-color: #efefef;
 }
+.fr{
+    float:right;
+    margin-right: 20px;
+    color:#ea8031;
+}
 .box {
     flex: 1;
     overflow-y: auto;
@@ -343,4 +350,15 @@ export default {
 }
 .colorGreen{color:rgba(24,193,25,1);}
 .colored{color:rgba(185,54,71,1);}
+.cl {
+    *zoom: 1
+}
+
+.cl:after {
+    clear: both;
+    content: '\20';
+    display: block;
+    height: 0;
+    visibility: hidden
+}
 </style>

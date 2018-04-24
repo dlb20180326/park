@@ -34,7 +34,7 @@
 			<div class="img-show">
 				<img class="previewer-demo-img" v-for="(item,index) in imgpics" :src="item.src"  @click="show(index)">
 				<div v-transfer-dom>
-	      		<previewer :list="content.picture" ref="previewer" :options="options" @on-index-change="logIndexChange">
+	      		<previewer :list="imgpics" ref="previewer" :options="options" @on-index-change="logIndexChange">
 	      		</previewer>
 	    	</div>
 			</div>
@@ -71,7 +71,7 @@ import {Previewer, TransferDom,ViewBox,XHeader,XButton} from 'vux'
                 this.content1 = jsonObj.title;
                 this.content2 = jsonObj.remark;
                 this.adderName = res.data.adderName;
-                console.log("1111", res.data.imgs);
+               
                 if (res.data.imgs) {
                     var imgs = res.data.imgs.split(",");
                     this.imgpics = [];
@@ -136,21 +136,10 @@ import {Previewer, TransferDom,ViewBox,XHeader,XButton} from 'vux'
                 console.log(arg)
             }
 
-            /*
-            getModule(){
-                this.$http.get('pscoredetail/queryById?id='+this.$route.params.moduleid
-                ).then(res =>{
-                    this.contents.title = res.data.projectName+'评分';
-                }).catch(err =>{
-                    console.log(err)
-                })
-
-            },*/
 
         },
 		mounted(){
-			//this.getDetail();
-            /*this.getModule();*/
+
             this.getUser1();
             this.getList1();
 		},
@@ -161,6 +150,7 @@ import {Previewer, TransferDom,ViewBox,XHeader,XButton} from 'vux'
                 adderName:'',
                 name:'',
                 content1:'',
+                content2:'',
                 departmentname:'',
 				activeData:{},
 				picInfo:[],
