@@ -20,7 +20,7 @@
                     </tr>
                     <tr>
                         <td>现有积分：</td>
-                        <td class="f_b"><span class="red">{{totalscore}}</span></td>
+                        <td class="f_b"><span class="red">{{totalscore||0}}</span></td>
                     </tr>
                 </table>
             </div>
@@ -36,7 +36,7 @@
                 <table width="100%" class="table">
                     <tr>
                         <td width="100">获取时间：</td>
-                        <td class="f_b">{{item.scoreTime}}</td>
+                        <td class="f_b">{{item.scoreTime|formatDuring}}</td>
                     </tr>
                     <tr>
                         <td>积分类型：</td>
@@ -71,30 +71,56 @@ export default {
             name1:'',
             departmentname:'',
             totalscore:'',
-            pointdetail:''
+            pointdetail:'',
 
 
         }
     },
     filters: {
+
+            formatDuring: function (value) {
+
+                Date.prototype.toLocaleString = function(){
+                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
+                }
+                return new Date(value).toLocaleString();
+            }
+        ,
         Upper: function (value) {
              return value> 0 ? '+' + value : value;
         }
     },
 
     methods: {
+        getUser1() {
+            axios.get('ppartymember/queryByUserId', {
+                params: {
+                    userid:this.$route.params.userid
 
-        getParams() {
+                }
+            }) .then(res => {
+                console.log(res.data)
+            this.partyBranch=decodeURIComponent(this.$route.params.partyBranch)
 
-            let item= this.$route.params.item;
-            this.name1=item.name;
-            this.departmentname=item.departmentname;
-            this.totalscore=item.totalscore;
+                this.totalscore=res.data.totalscore;
+             this.name1=res.data.name;
+            this.departmentname=res.data.departmentname
+            this.departmentid=res.data.departmentid
+
+        })
+        .catch(err => {
+                console.log(err);
+        });
+        },
+
+      /*  getParams() {
+
+
             axios({
                 method: 'get',
                 url: 'pdepartment/queryById',
                 params: {
-                    departmentid:item.departmentid
+                    departmentid:this.departmentid
 
                 }
             }) .then((res)=> {
@@ -105,21 +131,21 @@ export default {
             }).catch(function (error) {
                 console.log(error);
             })
-        },
+        },*/
         getPoint() {
-            let item= this.$route.params.item;
+
             axios({
                 method: 'get',
                 url: 'pscoreparty/queryByUserId',
                 params: {
-                    userid:item.id,
-                    year:2018
+                    userid:this.$route.params.userid,
+                    year:new Date().getFullYear()
                 }
             }) .then((res)=> {
                 this.pointdetail=res.data
 
 
-                console.log("1212121212",res.data)
+
             }).catch(function (error) {
                 console.log(error);
             })
@@ -129,9 +155,12 @@ export default {
 
         }
     },mounted() {
-        this.getParams();
+     /*
+        this.getPoint();*/
+        this.getUser1();
         this.getPoint()
-    }
+        /*this.getParams();*/
+    },
 
 
 };

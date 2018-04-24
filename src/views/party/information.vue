@@ -55,14 +55,15 @@ export default {
         submit(item){
 
             this.$router.push({
-                path: '/party/partypointdetail',
+                path: '/party/partypointdetail/:userid/:partyBranch',
                 name: 'partypointdetail',
 
                 params: {
-                    item:item
-                },query: {
-                    item:item
-                }
+                    userid:item.id,
+                    partyBranch:encodeURI(this.partyBranch)
+                }/*query: {
+                    userid:item.id
+                }*/
 
             })
 

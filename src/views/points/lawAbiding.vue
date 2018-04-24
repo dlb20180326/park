@@ -95,8 +95,8 @@ Vue.component(Popup.name, Popup);
                     method: 'get',
                     url: 'pscoreparty/getDakDetialByDepartmentId',
                     params: {
-                        departmentId:1
-                       //departmentId:this.$store.getters.user.departmentid
+                      /*  departmentId:1*/
+                       departmentId:this.$store.getters.user.departmentid
 
                     }
                 }) .then((res)=> {
