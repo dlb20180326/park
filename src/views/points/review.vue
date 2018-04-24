@@ -15,7 +15,7 @@
             </tab>
             <div class="trans-black" v-show="showTrans"></div>
             <div class="animate-down" v-show="topShow">
-                <div  v-for="(park,index) in department" :key="index" class="bg-flag" @click="change(park)">
+                <div  v-for="(park,index) in department" :key="index" class="bg-flag" :class="[park.departmentid === activesId?'activeColor':'']" @click="change(park)">
                     {{park.departmentname}}
                 </div>
             </div>
@@ -55,7 +55,7 @@
                             <!--<router-link :to="{name:'Audit'}">
                             <button class="go-btn">去处理</button>
                             </router-link>-->
-                            <button class="go-btn" @click="gohandle(item)">已审核</button>
+                            <button class="go-btns" @click="gohandle(item)">已审核</button>
                         </flexbox-item>
                     </flexbox>
                 </div>
@@ -85,7 +85,8 @@
                 departmentid:'',
                 length1:'',
                 length2:'',
-                partyBranch:''
+                partyBranch:'',
+                activesId:1
             }
         },
         components:{
@@ -121,7 +122,6 @@
                     this.department=res.data;
                     this.partyBranch1 = this.department[0].departmentname;
                     this.departmentid= this.department[0].departmentid;
-                    console.log(this.department);
                     this.slide();
                     axios({
                         method: 'get',
@@ -155,7 +155,6 @@
                 }) .then((res)=> {
                     this.list1=res.data;
                     this.length1=res.data.length;
-                    console.log(this.list1);
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -178,9 +177,10 @@
             },
             change(park){
                 let temp = this.table1;
+                this.activesId = park.departmentid;
                 this.partyBranch1 = park.departmentname;
-                this.departmentid=park.departmentid;
-                this.partyBranch=park.partyBranch;
+                this.departmentid = park.departmentid;
+                this.partyBranch = park.partyBranch;
 
                 this.topShow = !this.topShow;
                 this.showTrans = !this.showTrans;
@@ -206,7 +206,13 @@
         }
     }
 </script>
+<style>
+    .vux-tab-ink-bar{
+        background-color:#B93647!important;
+    }
+</style>
 <style scoped  lang="less">
+    .activeColor{color:#CB2F00;}
     .header-list{width:calc(100% - 2px);height:.5rem;border-bottom:1px solid #E4E4E4;}
     .list-left{width:54%;margin:.08rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;}
     .left-now{color:#666666;}
@@ -217,9 +223,8 @@
     .vux-popup-dialog{background-color: transparent;}
     .vux-popup-dialog.vux-popup-top{top:.96rem;}
     .bg-flag{height:.2rem;margin-top:.2rem;}
-    .animate-down{padding:0 .2rem .2rem .21rem;position: absolute;z-index:30;width: calc(100% - 0.41rem);background-color:#FFFFFF;top:.97rem;}
-    .trans-black{position:absolute;z-index:20;background-color:rgba(0,0,0,0.3);top:.96rem;bottom:0px;left:0px;right:0px;}
-
+    .animate-down{padding:0 .2rem .2rem .21rem;position: absolute;z-index:521;width: calc(100% - 0.41rem);background-color:#FFFFFF;top:0.96rem;border: 1px solid #E4E4E4;}
+    .trans-black{position:absolute;z-index:520;background-color:rgba(0,0,0,0.3);top:.96rem;bottom:0px;left:0px;right:0px;}
     ul,li{list-style: none}
     .tabClick{ background: #FFFFFF; overflow: hidden;font-family: simsun;border-bottom:1px solid #e4e4e4;
         clear:both}
@@ -252,6 +257,15 @@
         background:rgba(185,54,71,1);
         border-radius: 4px
     }
+    .go-btns{
+        padding: .05rem .08rem;
+        border: 0;
+        font-size:.15rem;
+        color:#fff;
+        line-height:.2rem;
+        background:#F4974A;
+        border-radius: 4px
+    }
     .points-table {
         box-sizing: border-box;
         border-radius: 5px;
@@ -268,5 +282,8 @@
 
             }
         }
+    }
+    .vux-tab .vux-tab-item.vux-tab-selected{
+        color: #B93647;
     }
 </style>
