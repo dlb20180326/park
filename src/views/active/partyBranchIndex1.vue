@@ -31,7 +31,8 @@
                                 <b>{{item.activeName}}</b>
                                 <p>{{datePick(item.createTime)}}</p>
                             </flexbox-item>
-                            <flexbox-item class="list-close">
+                            <!-- 删除 -->
+                            <flexbox-item class="list-close"  v-show="roleid == 2 || roleid == 3">
                                 <a><img src="@/assets/images/x.png"></a>
                             </flexbox-item>
                         </flexbox>
@@ -261,7 +262,6 @@ export default {
     },
 };
 </script>
-
 <style lang="less" scoped>
     .header-list{width:calc(100% - 2px);height:.6rem;border-bottom:1px solid #E4E4E4;background-color:#FFFFFF}
     .list-left{width:54%;margin:.15rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;}
@@ -274,6 +274,9 @@ export default {
     flex-direction: column;
     background-color: #efefef;
 }
+.vux-flexbox-item.list-body {
+        padding: 0.1rem !important;
+    }
 .trans-black{position:absolute;z-index:520;background-color:rgba(0,0,0,0.3);top:1.07rem;bottom:0px;left:0px;right:0px;}
 .widthSet {
     width: 100%;
@@ -307,9 +310,6 @@ export default {
         box-shadow: 0 0 0.05rem rgba(0, 0, 0, 0.15);
         background-color: rgba(0, 0, 0, 0.03);
     }
-}
-.vux-flexbox-item.list-body {
-    padding: 0.1rem 0;
 }
 .vux-flexbox-item.list-head {
     b {

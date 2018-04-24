@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <x-header :left-options="{showBack: false}">
+        <x-header :left-options="{showBack: false}" class="">
             党员活动
         </x-header>
         <flexbox orient="vertical">
