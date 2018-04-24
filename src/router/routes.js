@@ -40,11 +40,11 @@ export const routes = [
                 name: 'Dues',
                 component: () => import('@/views/party/dues')
             },
-            {
+            /*{
                  path: 'party/dues1',
                 name: 'Dues',
                 component: () => import('@/views/party/dues1')
-             },
+             },*/
             {
                 path: 'party/branch',
                 component: () => import('@/views/party/branch')

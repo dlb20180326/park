@@ -115,46 +115,46 @@
                 </transition>
             </div>
         </div>
-
         <!--弹出框-->
-        <div class="swiper-all">
-            <scroller lock-y :scrollbar-x=false>
-            <div class="cl swiper-box" >
-                <div class="swiper-one" v-for="i in 7" :key="i">
-                        <div class="swiper-one-inner">
-                        <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">张一山</span></h4>
-                        <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span class="vb">党员姓名：</span><span class="text-gray vb">张一山</span></h4>
-                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>时间：</span><span class="text-gray">2018</span></h4>
-                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>主要内容：</span></h4>
-                        <div class="text-gray-box">
-                            党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费
+        <div  id="showBox">
+            <div class="swiper-all xs-container">
+                <ul class="cl swiper-box xs-content" id="xsContent">
+                    <li class="swiper-one xs-row" v-for="i in 2" :key="i">
+                            <div class="swiper-one-inner">
+                            <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">张一山</span></h4>
+                            <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span class="vb">党员姓名：</span><span class="text-gray vb">张一山</span></h4>
+                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>时间：</span><span class="text-gray">2018</span></h4>
+                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>主要内容：</span></h4>
+                            <div class="text-gray-box">
+                                党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费
+                            </div>
+                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>政治学习图片：</span><span class="text-gray">18张</span></h4>
+                            <div class="show-list cl">
+                                <dl>
+                                    <dd>
+                                        <div class="preview">
+                                            <img src="@/assets/images/icon-head.png">
+                                        </div>
+                                    </dd>
+                                    <dd>
+                                        <div class="preview">
+                                            <img src="@/assets/images/icon-head.png">
+                                        </div>
+                                    </dd>
+                                    <dd>
+                                        <div class="preview">
+                                            <img src="@/assets/images/icon-head.png">
+                                        </div>
+                                    </dd>
+                                </dl>
+                            </div>
                         </div>
-                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>政治学习图片：</span><span class="text-gray">18张</span></h4>
-                        <div class="show-list cl">
-                            <ul>
-                                <li>
-                                    <div class="preview">
-                                        <img src="@/assets/images/icon-head.png">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="preview">
-                                        <img src="@/assets/images/icon-head.png">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="preview">
-                                        <img src="@/assets/images/icon-head.png">
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
-            </scroller>
+            <div class="bg-cross"></div>
         </div>
-        <div class="bg-cross"></div>
+
         <div class="bg-dark"></div>
     </div>
 </template>
@@ -162,9 +162,10 @@
 <script>
 import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton} from 'vux';
 import XScroll from 'vux-xscroll/build/cmd/xscroll.js'
+import Snap from 'vux-xscroll/build/cmd/plugins/snap.js'
 import axios from 'axios'
 export default {
-    components: { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton, XScroll},
+    components: { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton, XScroll,Snap},
     data() {
         return {
             tabIndex: 0,
@@ -224,20 +225,38 @@ export default {
 
     	},
     	rating(){
-    		/*let that = this;
-    		that.score();
-    		axios.get('pscorelevel/getList')
-    		.then( res => {
-    			this.rate = res.data;
-    			for(let c in this.rate){
-    				if(that.itegral >= this.rate[c].min && that.itegral <= this.rate[c].max){
-    					this.results = this.rate[c].level
-    				}
-    			}
-    		}).catch(err => {
-    			console.log('fail'+err);
-    		})*/
+
             this.results ='暂无';
+
+            /*样式渲染*/
+            let $width = document.documentElement.clientWidth;
+            let myWidth = 0.88*$width;
+
+            var t = document.querySelectorAll(".swiper-one");
+            if(t){
+                t.forEach((value, index, array)=>{
+                    value.style.width = myWidth + 'px';
+                });
+
+                var s = t.length;
+
+                document.getElementById("xsContent").style.width = ((myWidth+20)*s) +'px';
+            }
+
+            var xscroll = new XScroll({
+                renderTo: "#showBox",
+                preventDefault:false,
+                preventTouchMove:false,
+                touchAction:'pan-y'
+            });
+
+           xscroll.on('panstart',function(e){
+               console.log(e);
+            });
+            xscroll.on('panend',function(e){
+                xscroll._resetLockConfig();
+            });
+            xscroll.render();
     	},
     	score(){
     		axios.get('pscoreparty/getSumScoreByUserId',{
@@ -254,7 +273,7 @@ export default {
 
     	},
     	dataPickers(dates){
-    		let times = new Date(dates).toLocaleString()
+    		let times = new Date(dates).toLocaleString();
          	Date.prototype.toLocaleString = function() {
           		return this.getFullYear() + "年" + (this.getMonth()+1) + "月" + this.getDate() + "日 "
     		};
@@ -299,30 +318,32 @@ ol,ul,li{
     list-style:none;
 }
 .bg-dark{position:fixed;left:0;top:0;width:100%;height:100%;z-index:998;opacity:0.3;background-color:#000;filter:alpha(opacity=30)}
-.bg-cross{position:fixed;left:0;z-index:1000;
-    width: .4rem;height: .4rem;right: 0;display: inline-block;margin: auto;
-    bottom:11%;
+.bg-cross{
+    width: .4rem;height: .4rem;right: 0;display: inline-block;margin:.3rem auto 0;
+
 background-image:url(../../assets/images/icon-del.png);background-size:contain;background-repeat:no-repeat;background-position:50% 50%;
 }
-
-.swiper-all{
+#showBox{
     position: absolute;
     left:5%;
     top:20%;
-    bottom:20%;
     right:0;
     z-index: 1001;
+    text-align: center;
+}
+.swiper-all{
+
 }
 .swiper-box{
     position: relative;
     z-index: 10001;
+    text-align: left;
 }
 .swiper-one{
-    width: 300px;
     float: left;
-    border-radius: 5px;
+    border-radius: 10px;
     background: #fff;
-    height: 100%;
+    max-height: 4.0rem;
     margin-right: 20px;
 }
 .swiper-one-inner{
@@ -369,10 +390,10 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
 }
 .show-list{padding:0;}
 .show-list.border0{border-bottom:0;padding-bottom: 0;}
-.show-list ul{font-size:0;list-style:none;}
-.show-list ul li{font-size:0;display:inline-block;margin-right:.1rem;position:relative;vertical-align:top;
+.show-list dl{font-size:0;list-style:none;}
+.show-list dl dd{font-size:0;display:inline-block;margin-right:.1rem;position:relative;vertical-align:top;
     width:.6rem;height:.6rem;overflow:hidden;margin-bottom:.2rem;}
-.show-list ul li:first-child{margin-left:0;}
+.show-list dl dd:first-child{margin-left:0;}
 .show-list .operate{display:none;background:rgba(33,33,33,.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);z-index:5;position:absolute;bottom:0;left:0;right:0;height:12px;padding-bottom:7px;font-size:12px;color:#fff;text-align: center}
 .show-list .info{line-height:.6rem;text-align:center}
 .show-list .preview{width:0.6rem;height:.6rem;z-index:4;line-height:.6rem;font-family:arial;background-color:#fff;
