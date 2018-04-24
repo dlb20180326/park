@@ -8,7 +8,7 @@
             <div class="header-list">
                 <div class="list-left">
                     <span class="left-now">汇报状态：</span>
-                    <span class="left-active">{{text}}</span>
+                    <span class="left-active">{{text||"书面汇报"}}</span>
                 </div>
                 <div class="right-btn" @click="showDet">切换<span></span></div>
             </div>
@@ -24,16 +24,20 @@
                         <flexbox-item>时间</flexbox-item>
                         <flexbox-item>评分状态</flexbox-item>
                     </flexbox>
+                    <div v-if="moduleId==11" style="text-align: center">暂无提交内容</div>
+                    <template  v-else>
                     <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.name}}</flexbox-item>
                         <flexbox-item>上半年</flexbox-item>
                         <flexbox-item>
 
-                            <input type="button" class="btnSub" value="去处理"  @click="clickLink(con)" />
-                            <!--<input type="button" class="btnSub" :value="con.status|Upper" :class="con.status|Upper1" @click="clickLink(con)" />-->
+                            <!--<input type="button" class="btnSub" value="去处理"  @click="clickLink(con)" />-->
+                            <input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="clickLink(con)" />
                         </flexbox-item>
                     </flexbox>
+                        </template>
+
                </div>
 			<div v-transfer-dom>
 				<popup v-model="showPop" position="left" width="100%">
@@ -65,25 +69,26 @@ Vue.component(Popup.name, Popup);
 				contents:{rights:'评分说明',title:''},
 				list:"",
                 list1:[
-                    {text:"口头汇报",textId:"1"},
-                    {text:"书面汇报",textId:"2"}
+                    {text:"口头汇报",moduleId:11},
+                    {text:"书面汇报",moduleId:12}
 
 
                 ],
 				isYellow:false,
 				showPop:false,
-                moduleid:'',
+
                 topShow:false,
                 showTrans:false,
-                text:''
+                text:'',
+                moduleId:''
 			}
 		},
 		filters: {
             Upper: function (value) {
                 try {
-                    if(value=== 0)  throw "去处理";
-                    if(value=== 1)  throw "已拒绝";
-                    if(value=== 2)  throw "已通过";
+                    if(value=== 1)  throw "待审批";
+                    if(value=== 2)  throw "已审批";
+                    if(value=== 3)  throw "已过期";
                 }
                 catch(err) {
                     return value=err;
@@ -91,9 +96,9 @@ Vue.component(Popup.name, Popup);
             },
             Upper1: function (value) {
                 try {
-                   /* if(value===null) throw "";*/
-                    if(value=== 1)  throw "yellowB";
-                    if(value=== 0)  throw "yellowC";
+                    if(value===1) throw "";
+                    if(value=== 2)  throw "yellowB";
+                    if(value=== 3)  throw "yellowC";
                 }
                 catch(err) {
                     return value=err;
@@ -113,14 +118,11 @@ Vue.component(Popup.name, Popup);
 		},
 		methods:{
             change(it){
-                this.text=it.text
-
-                this.partyBranch1 = park.departmentname;
-                this.departmentid=park.departmentid;
-                this.partyBranch=park.partyBranch;
-
+                this.text=it.text;
+                this.moduleId=it.moduleId;
                 this.topShow = !this.topShow;
                 this.showTrans = !this.showTrans;
+
              /*   this.slide1();
                 this.slide();*/
 
@@ -130,25 +132,33 @@ Vue.component(Popup.name, Popup);
                 this.showTrans = !this.showTrans;
             },
             clickLink(item) {
+                if(item.tempint==2){
+
                 this.$router.push({
-                    path: '/active/detailPack1/:username',
-                    name: 'detailPack1',
-                    params:{username:encodeURI(item.name),}
-                })
+                    path: '/active/detailPack2/:userId',
+                    name: 'detailPack2',
+                    params:{userId:item.id}
+                })}else{
+                    this.$router.push({
+                        path: '/active/detailPack3/:userId',
+                        name: 'detailPack3',
+                        params:{userId:item.id}
+                })}
 
             },
 
-            getlist(){
+            getlist1(){
                 axios({
                     method: 'get',
-                    url: 'ppartymember/queryByDepartmentId',
+                    url: 'ppartymember/getReportByDepartmentid',
                     params: {
                        departmentid:this.$store.getters.user.departmentid,
+                        moudleId:12
 
                     }
                 }) .then((res)=> {
                     this.list=res.data;
-
+                console.log("11111111111111",res.data);
                 })
                 .catch(function (error) {
                         console.log(error);
@@ -168,7 +178,7 @@ Vue.component(Popup.name, Popup);
         }
 		},
 		mounted(){
-            this.getlist();
+            this.getlist1();
            /* this.getModule();
             this.getmoduleid()*/
 		}
@@ -216,9 +226,12 @@ font-size: .14rem;
 border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
 .header-list{width:calc(100% - 2px);height:.5rem;border-bottom:1px solid #E4E4E4;}
-.list-left{width:54%;margin:.08rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;}
+.list-left{width:54%;margin:.08rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;margin-top:0.15rem }
 .left-now{color:#666666;}
 .left-active{color:#333;}
 .right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
 .right-btn span{width:.1rem;height:.1rem;display:block;float:right;margin:0.07rem ;background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
+.bg-flag{height:.2rem;margin-top:.2rem;}
+.animate-down{padding:0 .2rem .2rem .21rem;position: absolute;z-index:521;width: calc(100% - 0.41rem);background-color:#FFFFFF;top:1.06rem;border: 1px solid #E4E4E4;}
+
 </style>

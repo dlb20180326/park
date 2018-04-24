@@ -192,7 +192,18 @@ export const routes = [
                  path: 'points/detailPack1/:username',
                 name:'detailPack1',
                 component: () => import('@/views/points/detailPack1')
-              },
+              }
+                ,
+                {
+                path: 'points/detailPack2/:userId',
+                name:'detailPack2',
+                component: () => import('@/views/points/detailPack2')
+        },
+        {
+            path: 'points/detailPack3/:userId',
+                name:'detailPack3',
+            component: () => import('@/views/points/detailPack3')
+        },
             {
                 path: 'active/post/:activeId',
                 name: 'activePost',
