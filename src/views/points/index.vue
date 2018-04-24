@@ -40,7 +40,7 @@
                 </tab>
                 <transition name="fade">
                     <div class="tab-content" v-if="tabIndex===0">
-                        <div class="item-detail" v-for="(progres,index) in proTotal">
+                        <div class="item-detail" v-for="(progres,index) in proTotal" :key="index">
 	                            <div class="title cl">
 	                                <b>{{index+1}}. {{progres.projectName}}</b>
 	                                <div class="space"></div>
@@ -118,9 +118,10 @@
 
         <!--弹出框-->
         <div class="swiper-all">
-            <ul class="cl">
-                <li class="swiper-one">
-                    <div class="swiper-one-inner">
+            <scroller lock-y :scrollbar-x=false>
+            <ul class="cl swiper-box" >
+                <li class="swiper-one" v-for="i in 7" :key="i">
+                        <div class="swiper-one-inner">
                         <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">张一山</span></h4>
                         <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span class="vb">党员姓名：</span><span class="text-gray vb">张一山</span></h4>
                         <h4 class="sinfo-title"><b class="sinfo-border"></b><span>时间：</span><span class="text-gray">2018</span></h4>
@@ -149,39 +150,9 @@
                             </ul>
                         </div>
                     </div>
-                </li>
-                <li class="swiper-one">
-                    <div class="swiper-one-inner">
-                        <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">张一山</span></h4>
-                        <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span class="vb">党员姓名：</span><span class="text-gray vb">张一山</span></h4>
-                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>时间：</span><span class="text-gray">2018</span></h4>
-                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>主要内容：</span></h4>
-                        <div class="text-gray-box">
-                            党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费
-                        </div>
-                        <h4 class="sinfo-title"><b class="sinfo-border"></b><span>政治学习图片：</span><span class="text-gray">18张</span></h4>
-                        <div class="show-list cl">
-                            <ul>
-                                <li>
-                                    <div class="preview">
-                                        <img src="@/assets/images/icon-head.png">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="preview">
-                                        <img src="@/assets/images/icon-head.png">
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="preview">
-                                        <img src="@/assets/images/icon-head.png">
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
+                </li>    
             </ul>
+            </scroller>
         </div>
         <div class="bg-cross"></div>
         <div class="bg-dark"></div>
@@ -189,10 +160,10 @@
 </template>
 
 <script>
-import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton } from 'vux';
+import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton,Scroller} from 'vux';
 import axios from 'axios'
 export default {
-    components: { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton },
+    components: { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton, Scroller},
     data() {
         return {
             tabIndex: 0,
@@ -215,7 +186,7 @@ export default {
     				year:this.years
     			}
     		}).then( res => {
-    			this.proTotal = res.data;
+                this.proTotal = res.data;
     		}).catch(err => {
     			console.log('fail'+err);
     		})
@@ -299,18 +270,37 @@ export default {
    		this.rating();
         this.score();
 
-   	}
+    }
 };
 </script>
 
 <style lang="less" scoped>
+
+.box1 {
+  height: 100px;
+  position: relative;
+  width: 1490px;
+  border:1px solid red;
+  z-index:999;
+}
+.box1-item {
+  width: 200px;
+  height: 100px;
+  background-color: #ccc;
+  display:inline-block;
+  margin-left: 15px;
+  float: left;
+  text-align: center;
+  line-height: 100px;
+}
+
 ol,ul,li{
     list-style:none;
 }
 .bg-dark{position:fixed;left:0;top:0;width:100%;height:100%;z-index:998;opacity:0.3;background-color:#000;filter:alpha(opacity=30)}
 .bg-cross{position:fixed;left:0;z-index:1000;
     width: .4rem;height: .4rem;right: 0;display: inline-block;margin: auto;
-    bottom:12%;
+    bottom:11%;
 background-image:url(../../assets/images/icon-del.png);background-size:contain;background-repeat:no-repeat;background-position:50% 50%;
 }
 
@@ -320,19 +310,22 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     top:20%;
     bottom:20%;
     right:0;
+    z-index: 1001;
+}
+.swiper-box{
+    position: relative;
+    z-index: 10001;
 }
 .swiper-one{
-    position: relative;
-    width: 390px;
+    width: 300px;
     float: left;
     border-radius: 5px;
     background: #fff;
-    z-index: 1001;
     height: 100%;
     margin-right: 20px;
 }
 .swiper-one-inner{
-    padding:.3rem .2rem;
+    padding:.3rem .2rem .15rem;
 }
 .sinfo-title{
     height: .16rem;
@@ -373,7 +366,7 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     word-break: break-all;
     word-wrap: break-word;
 }
-.show-list{padding:0 0 0.1rem;}
+.show-list{padding:0;}
 .show-list.border0{border-bottom:0;padding-bottom: 0;}
 .show-list ul{font-size:0;list-style:none;}
 .show-list ul li{font-size:0;display:inline-block;margin-right:.1rem;position:relative;vertical-align:top;
