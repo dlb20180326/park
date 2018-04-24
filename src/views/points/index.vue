@@ -119,8 +119,8 @@
         <!--弹出框-->
         <div class="swiper-all">
             <scroller lock-y :scrollbar-x=false>
-            <ul class="cl swiper-box" >
-                <li class="swiper-one" v-for="i in 7" :key="i">
+            <div class="cl swiper-box" >
+                <div class="swiper-one" v-for="i in 7" :key="i">
                         <div class="swiper-one-inner">
                         <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">张一山</span></h4>
                         <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span class="vb">党员姓名：</span><span class="text-gray vb">张一山</span></h4>
@@ -150,8 +150,8 @@
                             </ul>
                         </div>
                     </div>
-                </li>    
-            </ul>
+                </div>
+            </div>
             </scroller>
         </div>
         <div class="bg-cross"></div>
@@ -160,10 +160,11 @@
 </template>
 
 <script>
-import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton,Scroller} from 'vux';
+import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton} from 'vux';
+import XScroll from 'vux-xscroll/build/cmd/xscroll.js'
 import axios from 'axios'
 export default {
-    components: { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton, Scroller},
+    components: { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton, XScroll},
     data() {
         return {
             tabIndex: 0,
