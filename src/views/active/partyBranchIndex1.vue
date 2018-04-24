@@ -16,7 +16,7 @@
             </flexbox>
             <div class="trans-black" v-show="showTrans"></div>
             <div class="animate-down" style="background-color:#FFFFFF;" v-show="topShow">
-                <div  v-for="(park,index) in department" :key="index" class="bg-flag activeColors" @click="change(park)">
+                <div  v-for="(park,index) in department" :key="index" class="bg-flag" :class="[park.departmentid === activesId?'activeColors':'']" @click="change(park)">
                     {{park.departmentname}}
                 </div>
             </div>
@@ -96,7 +96,8 @@ export default {
             showTrans:false,
             department:'',
             departmentids:'',
-            activeS:false
+            activeS:false,
+            activesId:1
         };
     },
     mounted() {
@@ -106,6 +107,7 @@ export default {
     },
     methods: {
         change(park){
+            this.activesId = park.departmentid;
             this.partyBranch1 = park.departmentname;
             this.departmentids=park.departmentid;
             this.partyBranch=park.partyBranch;
@@ -287,10 +289,7 @@ export default {
         margin-bottom: 0.15rem;
     }
 }
-// .activeColors{
-//     color:#CB2F00;
-// }
-.activeColors:first-child{
+.activeColors{
     color:#CB2F00;
 }
 .vux-flexbox-item.list-avatar {
