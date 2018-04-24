@@ -20,7 +20,7 @@
                     </tr>
                     <tr>
                         <td>现有积分：</td>
-                        <td class="f_b"><span class="red">{{totalscore}}</span></td>
+                        <td class="f_b"><span class="red">{{totalscore||0}}</span></td>
                     </tr>
                 </table>
             </div>
