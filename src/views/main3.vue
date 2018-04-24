@@ -52,24 +52,24 @@
             </div>
             <div class="content">
                 <div v-if="item.type=='SCORE'">
-                    <x-button type="warn"  v-if="item.beginYn=='Y'" @click.native="refer(item)">
+                    <button  v-if="item.beginYn=='Y'" @click.native="refer(item)">
                         去处理
-                    </x-button>
-                    <x-button type="warn"  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
+                    </button>
+                    <button  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
                         去处理
-                    </x-button>
+                    </button>
                 </div>
                 <div v-if="item.type=='ACTIVE'">
-                    <x-button type="warn"  v-if="item.beginYn=='Y'" @click.native="refer(item)">
+                    <button  v-if="item.beginYn=='Y'" @click.native="refer(item)">
                         上传图片
-                    </x-button>
-                    <x-button type="warn"  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
+                    </button>
+                    <button  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
                         活动二维码
-                    </x-button>
+                    </button>
                 </div>
-                <!-- <x-button type="warn" :link="item.type=='SCORE'?'points/review':'/active'">
+                <!-- <button :link="item.type=='SCORE'?'points/review':'/active'">
                    {{item.beginYn=='Y'?'去处理':'活动二维码'}}
-                 </x-button>-->
+                 </button>-->
           </div>
         </div>
       </div>
@@ -223,7 +223,6 @@
       color: #666;
     }
     .content {
-      margin-top: 0.1rem;
       text-align: center;
     }
     a{
@@ -245,5 +244,15 @@
   }
   button.weui-btn,input.weui-btn{
     width:32%!important;
+  }
+  .content button{
+    padding:.1rem .2rem;
+    border:0;
+    background:rgba(185,54,71,1);
+    border-radius: 2px ;
+    font-size:.16rem;
+    font-family:PingFangSC-Medium;
+    color:#fff;
+    margin:.2rem auto;
   }
 </style>
