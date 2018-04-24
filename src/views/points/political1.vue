@@ -5,6 +5,18 @@
 			<!--<r-header :rfs="contents"></r-header>-->
 			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
               思想汇报<a slot="right" @click="showMenu">评分说明</a></x-header>
+            <div class="header-list">
+                <div class="list-left">
+                    <span class="left-now">汇报状态：</span>
+                    <span class="left-active">{{text}}</span>
+                </div>
+                <div class="right-btn" @click="showDet">切换<span></span></div>
+            </div>
+            <div class="animate-down" v-show="topShow">
+                <div  v-for="(item,index) in list1" :key="index" class="bg-flag" @click="change(item)">
+                    {{item.text}}
+                </div>
+            </div>
 			    <div class="points-table">
                     <flexbox :gutter="0">
                         <flexbox-item>序号</flexbox-item>
@@ -29,7 +41,7 @@
 					<div class="middle-top">评分说明</div>
 					<div class="middle-content">
                         <p >
-                            党员积极参加公益活动，每次加3分(最高不超过20分)。
+                            1、党员每上半年口头向支部书记汇报一次，经支部书记审核通过后加5分； 2、党员每下半年书面向支部汇报一次，经支部书记审核通过后加5分。
                         </p>
 
 					</div>
@@ -52,9 +64,18 @@ Vue.component(Popup.name, Popup);
 			return {
 				contents:{rights:'评分说明',title:''},
 				list:"",
+                list1:[
+                    {text:"口头汇报",textId:"1"},
+                    {text:"书面汇报",textId:"2"}
+
+
+                ],
 				isYellow:false,
 				showPop:false,
-                moduleid:''
+                moduleid:'',
+                topShow:false,
+                showTrans:false,
+                text:''
 			}
 		},
 		filters: {
@@ -91,10 +112,23 @@ Vue.component(Popup.name, Popup);
 			TransferDom
 		},
 		methods:{
-          /*  getmoduleid(){
-                this.moduleid=this.$route.params.moduleid
+            change(it){
+                this.text=it.text
 
-            },*/
+                this.partyBranch1 = park.departmentname;
+                this.departmentid=park.departmentid;
+                this.partyBranch=park.partyBranch;
+
+                this.topShow = !this.topShow;
+                this.showTrans = !this.showTrans;
+             /*   this.slide1();
+                this.slide();*/
+
+            },
+            showDet(){
+                this.topShow = !this.topShow;
+                this.showTrans = !this.showTrans;
+            },
             clickLink(item) {
                 this.$router.push({
                     path: '/active/detailPack1/:username',
@@ -181,4 +215,10 @@ font-size: .14rem;
 .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
 border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
+.header-list{width:calc(100% - 2px);height:.5rem;border-bottom:1px solid #E4E4E4;}
+.list-left{width:54%;margin:.08rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;}
+.left-now{color:#666666;}
+.left-active{color:#333;}
+.right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
+.right-btn span{width:.1rem;height:.1rem;display:block;float:right;margin:0.07rem ;background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
 </style>
