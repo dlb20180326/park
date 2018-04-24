@@ -1,8 +1,7 @@
 <template>
 	<div style="height:100%">
         <x-header title="党员缴费" :left-options="{preventGoBack:true}" @on-click-back="backhome()"></x-header>
-		<view-box ref="viewBox" body-padding-top='.46rem'>
-
+		<view-box ref="viewBox">
 		<div class="card-top">
 		<div class="card-img"></div>
 		<div class="nr-info">
@@ -91,7 +90,7 @@ html,body {
   overflow-x:hidden;
 }
 	.card-top{width:100%;height:3.15rem;}
-	.card-img{width:82%;height:1.89rem;margin:.29rem auto .27rem auto;background: url(../../assets/images/icon-card.jpg) no-repeat;background-size:cover;}
+	.card-img{width:82%;height:2.1rem;margin:0 auto .1rem auto;background: url(../../assets/images/icon-card.jpg) no-repeat;background-size:cover;}
 	.nr-info{width:100%;height:.25rem;font-size:.14rem;font-family:PingFangSC-Regular;line-height:.2rem;margin-top:0.07rem;overflow:hidden;}
 .left-info{width:1.05rem;color:rgba(153,153,153,1);margin-left:.2rem;}
 .right-info{height:.25rem;font-size:.14rem;font-family:PingFangSC-Semibold;color:rgba(102,102,102,1);}
