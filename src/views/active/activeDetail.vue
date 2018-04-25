@@ -134,8 +134,8 @@ export default {
                 Date.prototype.toLocaleString = function(){
                     return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
                 }
-<<<<<<< HEAD
                 return new Date(value).toLocaleString();
+            }
         },
         formatDurings: function (value) {
 
@@ -144,14 +144,11 @@ export default {
             if(minutes < 10){
                 minutes = '0' + minutes; 
             }
-            return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()
+            return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate();
         }
-        return new Date(value).toLocaleString();
-=======
-                return new Date(value).toLocaleString();}
-
-
->>>>>>> cb63a78d790dcc2b9941e2a89184a4e6639f1ff3
+            return new Date(value).toLocaleString();
+                return new Date(value).toLocaleString();
+            
         }
     },
     methods:{

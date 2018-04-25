@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <x-header>
+        <x-header :left-options="{showBack: false}">
             片区活动
             <router-link slot="right" :to="{name:'activeNews2'}">发起活动</router-link>
         </x-header>
@@ -289,7 +289,7 @@ export default {
 .vux-flexbox.list-item {
     background-color: #fff;
     &:not(:last-child) {
-        margin-bottom: 0.15rem;
+        margin-bottom: 0.07rem;
     }
 }
 .activeColors{

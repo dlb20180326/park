@@ -27,6 +27,7 @@ body {
     font-size: 0.16rem;
 }
 .vux-header {
+        height: .46rem;
         background: linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1)); 
 		background: -webkit-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));  
         background: -o-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));  

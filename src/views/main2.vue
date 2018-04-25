@@ -239,7 +239,7 @@
   }
 
   .list {
-    margin-top: 0.1rem;
+    margin-top: 0.07rem;
     h3 {
       line-height: 1;
     }

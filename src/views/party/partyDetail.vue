@@ -1,29 +1,53 @@
 <template>
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
-            花旗银行第二党支部
+            党务信息
         </x-header>
-        <section class="mainbox" v-for="(item,index) in partyDetail" :key="index" @click="handle(item.departmentid)">
-            <div style="padding:2vw 3.5vw 2vw;"  >
+        <div class="header-top">上海中心片区支部信息一览</div>
+        <div class="overFs">
+            <section class="mainbox" v-for="(item,index) in partyDetail" :key="index" @click="handle(item.departmentid)">
+            <div style="padding:2vw 3.5vw 2vw;" >
                 <table width="100%" class="table" >
-                    <tr>
-                        <td width="100">支部名称：</td>
-                        <td class="f_b">{{item.departmentname}}</td>
+                    <tr valign="top">
+                        <td width="70" class="grayColors">支部名称：</td>
+                        <td class="f_b blackColors">{{item.departmentname}}</td>
+                        <td rowspan="3" style="width:.24rem;position:relative;"><span class="pic-icon"></span></td>
                     </tr>
                     <tr>
-                        <td>支部书记：</td>
-                        <td class="f_b">{{item.partyBranch}}</td>
+                        <td class="grayColors">支部书记：</td>
+                        <td class="f_b blackColors">{{item.partyBranch}}</td>
                     </tr>
                     <tr>
-                        <td>支部人数：</td>
-                        <td class="f_b"><span class="red">{{item.people}}</span> 人</td>
+                        <td class="grayColors">支部人数：</td>
+                        <td class="f_b blackColors"><span class="red">{{item.people}}</span> 人</td>
                     </tr>
                 </table>
             </div>
 
 
         </section>
+        <section class="mainbox" v-for="(item,index) in partyDetail" :key="index" @click="handle(item.departmentid)">
+            <div style="padding:2vw 3.5vw 2vw;" >
+                <table width="100%" class="table" >
+                    <tr valign="top">
+                        <td width="70" class="grayColors">支部名称：</td>
+                        <td class="f_b blackColors">{{item.departmentname}}</td>
+                        <td rowspan="3" style="width:.24rem;position:relative;"><span class="pic-icon"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="grayColors">支部书记：</td>
+                        <td class="f_b blackColors">{{item.partyBranch}}</td>
+                    </tr>
+                    <tr>
+                        <td class="grayColors">支部人数：</td>
+                        <td class="f_b blackColors"><span class="red">{{item.people}}</span> 人</td>
+                    </tr>
+                </table>
+            </div>
 
+
+        </section>
+        </div>
 
     </div>
 </template>
@@ -73,6 +97,44 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.floaLft{
+    float: left;
+}
+.pic-icon{
+    position:absolute;
+    display: block;
+    width:.24rem;
+    height: .24rem;
+    margin-top:-.12rem;
+    top:50%;
+    background: url(../../assets/images/icon-ses.png) no-repeat;background-size: 100% 100%;
+}
+.overFs{
+    height:calc(100% - .46rem);
+    overflow-y: scroll;
+}
+.header-top{
+    width:100%;
+    height: .57rem;
+    line-height:.57rem;
+    text-align: center;
+    font-size:.16rem;
+    font-family:PingFangSC-Semibold;
+    color:rgba(51,51,51,1);
+    background-color:#fff;
+    position: fixed;
+    z-index: 500;
+     font-weight: 700;
+     box-shadow:0 2px 5px 1px rgba(0, 0, 0, 0.05);
+
+}
+.blackColors{
+    color:#333;
+    font-weight: 600;
+    font-family:PingFangSC-Medium;
+
+
+}
 .page-body {
     background-color: #efefef;
 }
@@ -106,6 +168,9 @@ body {
 
 table {
     border-collapse:collapse;
+}
+.table{
+    font-size:.14rem;
 }
 input {
     border:0;
@@ -150,8 +215,10 @@ input {
 }
 .mainbox {
     background:#fff;
-    padding:2vw 2vw 0;
-    margin-bottom:2vw;
+    padding:2vw 2vw;
+    margin:.15rem 5.3%; 
+    border-radius: 4px;
+    box-shadow: 0px 3px 8px 6px rgba(0,0,0,0.01);
 }
 .weui-cell1 {
     padding-bottom:0;
@@ -194,12 +261,15 @@ input {
     width:35vw;
 
 }
+.grayColors{
+    color:#999;
+}
 .book.on a {
     background:#d8d8d8;
 }
 
 .table td {
-    padding:3px;
+    padding:1px;
 }
 .news {
     margin-top:4vw;
@@ -215,7 +285,7 @@ input {
     color:#fff;
 }
 .red {
-    color:red;
+    color:#BB3D47;
 }
 .dbsy li {
     border-bottom:1px solid #f3f3f3;
