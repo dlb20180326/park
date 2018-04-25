@@ -6,6 +6,7 @@
         </x-header>
         <div class="box">
             <flexbox>
+            <div class="trans-black" v-show="showTrans"></div>    
             <div class="header-list">
                 <div class="list-left">
                     <span class="left-now">当前支部：</span>
@@ -14,7 +15,6 @@
                 <div class="right-btn" @click="showDet">切换<span></span></div>
             </div>
             </flexbox>
-            <div class="trans-black" v-show="showTrans"></div>
             <div class="animate-down" style="background-color:#FFFFFF;" v-show="topShow">
                 <div  v-for="(park,index) in department" :key="index" class="bg-flag" :class="[park.departmentid === activesId?'activeColors':'']" @click="change(park)">
                     {{park.departmentname}}
@@ -263,11 +263,24 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-    .header-list{width:calc(100% - 2px);height:.6rem;border-bottom:1px solid #E4E4E4;background-color:#FFFFFF}
-    .list-left{width:54%;margin:.15rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;}
-    .left-now{color:#666666;}
+.box{
+    padding-top:51px;
+}
+    .header-list{width:calc(100% - 2px);height:.5rem;border-bottom:1px solid #E4E4E4;background-color:#FFFFFF}
+    .list-left{
+    width: 62%;
+    margin: .15rem 0 .15rem 5.3%;
+    height: .2rem;
+    line-height: .2rem;
+    font-size: .14rem;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    }
+    .left-now{color:#999;}
     .left-active{color:#333;}
-    .right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
+    .right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;font-size:.14rem;}
     .right-btn span{width:.1rem;height:.1rem;display:block;float:right;margin:0.07rem ;background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
 .page-body {
     display: flex;
@@ -277,7 +290,7 @@ export default {
 .vux-flexbox-item.list-body {
         padding: 0.1rem !important;
     }
-.trans-black{position:absolute;z-index:520;background-color:rgba(0,0,0,0.3);top:1.07rem;bottom:0px;left:0px;right:0px;}
+.trans-black{position:absolute;z-index:520;background-color:rgba(0,0,0,0.6);top:1.07rem;bottom:0px;left:0px;right:0px;}
 .widthSet {
     width: 100%;
 }
@@ -372,7 +385,7 @@ export default {
     }
 }
     .bg-flag{height:.2rem;margin-top:.2rem;}
-    .animate-down{padding:0 .2rem .2rem .21rem;position: absolute;z-index:521;width: calc(100% - 0.41rem);background-color:#FFFFFF;top:1.06rem;border: 1px solid #E4E4E4;}
+    .animate-down{padding:0 .2rem .2rem .21rem;position: absolute;z-index:521;width: calc(100% - 0.41rem);background-color:#FFFFFF;top:0.96rem;border: 1px solid #E4E4E4;}
 
 .photo-list {
     padding: 0.1rem 0 0;
@@ -481,5 +494,26 @@ export default {
     width: 0.6rem;
     bottom: 0;
 
+}
+
+.header-list{width:100%;height:50px;border-bottom:1px solid #E4E4E4;position: fixed;top:46px;left:0;right:0;background:#fff;line-height:50px;z-index:1005}
+.list-left{width:54%;margin:.08rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;margin-top:0.15rem }
+.left-now{color:#666;font-size: 14px;}
+.left-active{
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
+.right-btn{font-size:.14rem;width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
+.right-btn span{
+    width: 10px;
+    height: 10px;
+    display: block;
+    float: right;
+    margin: 7px 8px 0 3px;
+    background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
+.bg-flag{height:.2rem;margin-top:.2rem;}
+.animate-down{padding:0 .2rem .2rem .21rem;z-index:521;background-color:#FFFFFF;top:96px;border: 1px solid #E4E4E4;
+position:fixed;left:0;right:0;
 }
 </style>
