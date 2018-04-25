@@ -1,4 +1,4 @@
-<template>
+w<template>
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
             党员积分
@@ -128,26 +128,24 @@
                 <ul class="cl swiper-box xs-content" id="xsContent" v-bind:style="{ width: ((myWidth+20)*infoList.length) +'px'}">
                     <li class="swiper-one xs-row" v-for="(item,i) in infoList" v-bind:style="{ width:myWidth +'px' }">
                             <div class="swiper-one-inner">
-                            <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">张一山</span></h4>
-                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>开始时间：</span><span class="text-gray">{{item.starttime}}</span></h4>
-                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>开始时间：</span><span class="text-gray">{{item.endtime}}</span></h4>
+                            <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">{{item.branch}}</span></h4>
+                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>开始时间：</span><span class="text-gray">{{item.starttime|formatDuring}}</span></h4>
+                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>开始时间：</span><span class="text-gray">{{item.endtime|formatDuring}}</span></h4>
                             <h4 class="sinfo-title"><b class="sinfo-border"></b><span>主要内容：</span></h4>
                             <div class="text-gray-box">
                                 {{item.content}}
                             </div>
-                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>政治学习图片：</span><span class="text-gray">18张</span></h4>
+                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>政治学习图片：</span><span class="text-gray">{{imgpics.length}}</span></h4>
                             <div class="show-list cl">
                                 <dl>
                                     <dd>
                                         <div class="preview">
-                                            <img src="@/assets/images/icon-head.png">
+
+                                                <img class="previewer-demo-img" v-for="(item,index) in imgpics" :src="item.src"  @click="show(index)">
+
                                         </div>
                                     </dd>
-                                    <dd>
-                                        <div class="preview">
-                                            <img src="@/assets/images/icon-head.png">
-                                        </div>
-                                    </dd>
+
                                 </dl>
                             </div>
                         </div>
@@ -180,12 +178,25 @@ export default {
             projectList:{},
             getList:[],
             rate:[],
+            imgpics:[],
             itegral:'',
             results:'',
             infoList:[{}],
             darkbgShow:false,
             myWidth: 0.88*document.documentElement.clientWidth
         };
+    },
+    filters: {
+        formatDuring: function (value) {
+            if(value == "" || value == null || value == undefined){
+                var value="无"
+                return value
+
+            }else {
+                Date.prototype.toLocaleString = function(){
+                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
+                }
+                return new Date(value).toLocaleString();}}
     },
     methods:{
     	progress(){
@@ -242,9 +253,44 @@ export default {
             this.results ='暂无';
     	},
         moreInfo(itemList){
+            console.log(itemList);
 
             this.darkbgShow = true;
             this.infoList = itemList;
+            if (itemList) {
+                var imgs=itemList;
+
+               /* for(var i in imgs){
+
+                    for (var j in imgs[i]) {
+                        var obj = {};
+
+                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i][j];
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i][j];
+                        this.imgpics.push(obj);
+                    }
+                }*/
+               /* console.log(obj);
+                let data = res.data;
+                let obj = {};
+                for(var i=0;i<data.length;i++){
+                    obj[data[i].projectId] = data[i];
+                    this.projectId = obj[data[i].projectId]
+                }
+                this.projectList  = obj;
+*/
+              /*  var imgs = itemList.pictures.split(",");
+                this.imgpics = [];
+                for (var i = 0; i < imgs.length; i++) {
+                    var obj = {};
+                    obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
+                    obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
+                    this.imgpics.push(obj);
+                }*/
+            } else {
+                this.imgpics = [];
+            }
+
             /*样式渲染*/
             setTimeout(function () {
                 var xscroll = new XScroll({
