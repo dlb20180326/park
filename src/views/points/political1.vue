@@ -28,7 +28,7 @@
                     </flexbox>
                     <template v-if="moduleId==11" >
 
-                        <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
+                        <flexbox :gutter="0"  v-for="(con,index) in list3" :key="index">
                             <flexbox-item>{{index+1}}</flexbox-item>
                             <flexbox-item>{{con.name}}</flexbox-item>
                             <flexbox-item>上半年</flexbox-item>
@@ -43,7 +43,7 @@
                     <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.name}}</flexbox-item>
-                        <flexbox-item>上半年</flexbox-item>
+                        <flexbox-item>下半年</flexbox-item>
                         <flexbox-item>
 
                             <!--<input type="button" class="btnSub" value="去处理"  @click="clickLink(con)" />-->
@@ -82,6 +82,7 @@ Vue.component(Popup.name, Popup);
 			return {
 				contents:{rights:'评分说明',title:''},
 				list:"",
+                list3:"",
                 list1:[
                     {text:"口头汇报",moduleId:11},
                     {text:"书面汇报",moduleId:12}
@@ -165,6 +166,7 @@ Vue.component(Popup.name, Popup);
             },
 //书面汇报
             getlist1(){
+
                 axios({
                     method: 'get',
                     url: 'ppartymember/getReportByDepartmentid',
@@ -183,6 +185,7 @@ Vue.component(Popup.name, Popup);
             },
 //口头汇报
             getlist2(){
+
                 axios({
                     method: 'get',
                     url: 'ppartymember/getReportByDepartmentid',
@@ -192,7 +195,7 @@ Vue.component(Popup.name, Popup);
 
                     }
                 }) .then((res)=> {
-                    this.list=res.data;
+                    this.list3=res.data;
                 console.log("222222222222",res.data);
             })
             .catch(function (error) {

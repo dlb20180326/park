@@ -77,8 +77,7 @@
                 axios.get('pscoreparty/showDakDetialByUserId', {
                     params: {
                         userId: this.$route.params.userId,
-                        moudleId:12
-                    }
+                        moudleId:12     }
                 }).then(res => {
                     console.log("12313123",res);
                 this.scoreTime=res.data.scoreTime
