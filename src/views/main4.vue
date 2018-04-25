@@ -272,16 +272,19 @@ export default {
     background-repeat:no-repeat;
     background-size: 100% 100%;
 }
-.top-second,
 .top-second2 {
     width: 82%;
     margin: 0 auto;
-    font-size: 0.12rem;
+    font-size: 0.14rem;
     line-height: 0.17rem;
-    padding-top: 0.15rem;
+    padding-top: 0.32rem;
 }
-.top-second2 {
-    padding-top: 0.25rem;
+.top-second{
+    width: 82%;
+    margin: 0 auto;
+    font-size: 0.14rem;
+    line-height: 0.17rem;
+    padding-top: 0.21rem;
 }
 .second-left {
     width: 1.32rem;

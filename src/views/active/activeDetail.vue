@@ -1,8 +1,9 @@
 <template>
     <div class="page-body">
-        <x-header :left-options="{showBack: false}" class="">
+        <x-header :left-options="{showBack: false}">
             党员活动
         </x-header>
+        <div class="box">
         <flexbox orient="vertical">
             <flexbox-item>
                 <section class="mainbox">
@@ -80,6 +81,7 @@
                 </section>
             </flexbox-item>
         </flexbox>
+        </div>
         <div v-transfer-dom>
             <alert v-model="show" :title="msg" @on-show="onShow" @on-hide="onHide"></alert>
         </div>
@@ -453,7 +455,7 @@ export default {
     .mainbox {
         background:#fff;
         width:100%;
-        padding:.2rem 0 .06rem 0;
+        padding:.1rem 0 .06rem 0;
     }
     .mainbox1 {
         background:#fff;

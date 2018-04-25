@@ -116,7 +116,7 @@
             </div>
         </div>
         <!--弹出框-->
-        <div  id="showBox">
+        <!-- <div  id="showBox">
             <div class="swiper-all xs-container">
                 <ul class="cl swiper-box xs-content" id="xsContent">
                     <li class="swiper-one xs-row" v-for="i in 2" :key="i">
@@ -155,7 +155,7 @@
             <div class="bg-cross"></div>
         </div>
 
-        <div class="bg-dark"></div>
+        <div class="bg-dark"></div> -->
     </div>
 </template>
 
