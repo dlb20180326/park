@@ -155,7 +155,7 @@
                         return this.getFullYear() +'.'+months+'.'+dates+' '+hours+':'+minutes
                     }
                     return new Date(value).toLocaleString();
-            }
+            }}
         },
         data(){
             return {

@@ -86,7 +86,7 @@
                     return new Date(value).toLocaleString();
 
 
-            }
+            }}
         },
         methods: {
             getList1(){

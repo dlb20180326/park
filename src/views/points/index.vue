@@ -205,7 +205,7 @@ export default {
                     }
                     return this.getFullYear() +'.'+months+'.'+dates+' '+hours+':'+minutes
                 }
-                return new Date(value).toLocaleString();
+                return new Date(value).toLocaleString();}}
     },
     methods:{
     	progress(){

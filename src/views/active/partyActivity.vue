@@ -155,7 +155,7 @@ export default {
                 return new Date(value).toLocaleString();
 
 
-        }
+        }}
     },
     methods: {
         getActivity() {

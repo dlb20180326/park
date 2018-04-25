@@ -81,7 +81,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
                     return new Date(value).toLocaleString();
 
 
-            }
+            }}
         },
 		methods:{
 			show (index) {

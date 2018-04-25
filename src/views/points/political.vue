@@ -114,7 +114,7 @@ Vue.component(Popup.name, Popup);
                     return new Date(value).toLocaleString();
 
 
-            }
+            }}
 
         },
 		components:{
