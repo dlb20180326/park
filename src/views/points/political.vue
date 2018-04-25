@@ -87,11 +87,17 @@ Vue.component(Popup.name, Popup);
 
             },
             formatDuring: function (value) {
-                console.log(value);
-                Date.prototype.toLocaleString = function(){
-                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'
-                };
-                return new Date(value).toLocaleString();
+                if(value == "" || value == null || value == undefined){
+                    var value="无";
+                    return value
+
+                }else {
+                    Date.prototype.toLocaleString = function(){
+                        return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
+                    }
+                    return new Date(value).toLocaleString();}
+
+
             }
 
         },
@@ -190,7 +196,7 @@ font-size: .14rem;
 .vux-flexbox .vux-flexbox-item:nth-child(1){
     flex:0 0 auto;
     width: 14%;
-    
+
 }
 .btnSub{width:.6rem;height:.24rem;font-size:.14rem;line-height:.24rem;border-radius: 4px;font-family:PingFangSC-Medium;border:0px;color:#FFFFFF;background-color:rgba(185, 54, 71, 1);}
 .yellowA{background-color:#BABABA;}

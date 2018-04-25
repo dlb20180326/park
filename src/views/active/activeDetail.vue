@@ -125,15 +125,17 @@ export default {
     },
     filters: {
         formatDuring: function (value) {
+            if(value == "" || value == null || value == undefined){
+                var value="无";
+                return value
 
+            }else {
                 Date.prototype.toLocaleString = function(){
-                    let minutes = this.getMinutes();
-                    if(minutes < 10){
-                        minutes = '0' + minutes; 
-                    }
-                    return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()+' '+this.getHours()+':'+minutes
+                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
                 }
-                return new Date(value).toLocaleString();
+                return new Date(value).toLocaleString();}
+
+
         }
     },
     methods:{
