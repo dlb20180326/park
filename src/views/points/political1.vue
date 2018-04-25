@@ -1,9 +1,11 @@
 <template>
 
-	<div style="height:100%;">
+	<div style="height:100%;" id="myQs">
    		<view-box ref="viewBox" body-padding-top=".46rem">
 			<!--<r-header :rfs="contents"></r-header>-->
-			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
+			<x-header slot="header" style="position: fixed !important;
+        left:0;
+        right:0;">
               思想汇报<a slot="right" @click="showMenu">评分说明</a></x-header>
             <div class="header-list">
                 <div class="list-left">
@@ -83,8 +85,6 @@ Vue.component(Popup.name, Popup);
                 list1:[
                     {text:"口头汇报",moduleId:11},
                     {text:"书面汇报",moduleId:12}
-
-
                 ],
 				isYellow:false,
 				showPop:false,
@@ -248,6 +248,7 @@ font-size: .14rem;
 .vux-flexbox .vux-flexbox-item:nth-child(1){
 	-webkit-box-flex: 0.5;
 }
+.points-table{padding-top:46px;}
 .btnSub{width:.6rem;height:.24rem;font-size:.14rem;line-height:.24rem;border-radius: 4px;font-family:PingFangSC-Medium;border:0px;color:#FFFFFF;background-color:rgba(185, 54, 71, 1);}
 .yellowA{background-color:#BABABA;}
 .yellowB{background-color:#F84D2B;}
@@ -261,13 +262,32 @@ font-size: .14rem;
 .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
 border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
-.header-list{width:calc(100% - 2px);height:.5rem;border-bottom:1px solid #E4E4E4;}
+.header-list{width:100%;height:50px;border-bottom:1px solid #E4E4E4;position: fixed;top:46px;left:0;right:0;background:#fff;line-height:50px;}
 .list-left{width:54%;margin:.08rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;margin-top:0.15rem }
-.left-now{color:#666666;}
-.left-active{color:#333;}
+.left-now{color:#666;font-size: 14px;}
+.left-active{
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
 .right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
-.right-btn span{width:.1rem;height:.1rem;display:block;float:right;margin:0.07rem ;background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
+.right-btn span{
+    width: 10px;
+    height: 10px;
+    display: block;
+    float: right;
+    margin: 7px 8px 0 3px;
+    background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
 .bg-flag{height:.2rem;margin-top:.2rem;}
-.animate-down{padding:0 .2rem .2rem .21rem;position: absolute;z-index:521;width: calc(100% - 0.41rem);background-color:#FFFFFF;top:1.06rem;border: 1px solid #E4E4E4;}
+.animate-down{padding:0 .2rem .2rem .21rem;z-index:521;background-color:#FFFFFF;top:96px;border: 1px solid #E4E4E4;
+position:fixed;left:0;right:0;
+}
+</style>
+<style scoped>
+    .vux-header{
 
+    }
+    .weui-tabbar[slot="bottom"]{
+        display: none !important;
+    }
 </style>
