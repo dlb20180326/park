@@ -23,7 +23,8 @@
             <section class="mainbox1">
                 <div class=" clearfix p15 display">
                     <span class="fl weui-cell__bd1">党员生活通知</span>
-                    <a  class="fRight"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
+                    <!-- <a  class="fRight"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a> -->
+                     <router-link slot="right" :to="{name:'Active'}" class=" fRight">查看全部<span class="rightBtn"></span></router-link>
                 </div>
                 <div class="content">
                     <table width="100%" class="table">
@@ -53,7 +54,7 @@
                     <a  style="background-color:#B93647" @click="submit()">报名</a>
                 </div>
                 <div class="book"  v-if="signupstatus == 1">
-                    <a  style="background-color: #8b8b8b" @click="submit1()">已报名</a>
+                    <a  style="background-color:#D8D8D8" @click="submit1()">已报名</a>
                 </div>
                 <div class="grayLine margin-top"></div>
             </section>
@@ -65,13 +66,13 @@
                     <div class="p15">
                         <div class=" clearfix  display">
                             <span class="fl weui-cell__bd1">已参与组织生活</span>
-                            <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
+                                <router-link slot="right" :to="{name:'Active'}" class=" fAll">查看全部<span class="rightBtn"></span></router-link>
                         </div>
                         <ul class="news">
                             <li v-for="(item,index) in activeComplete" :key="index" >
                                 <a class=" display clearfix " >
                                     <div class=" fl">{{item.activeName}}</div>
-                                    <div class=" fr">{{item.endTime|formatDuring}}<span class="rightBtn"></span></div>
+                                    <div class=" fr">{{item.endTime|formatDurings}}<span class="rightBtn"></span></div>
                                 </a>
                             </li>
 
@@ -134,6 +135,17 @@ export default {
                     return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()+' '+this.getHours()+':'+minutes
                 }
                 return new Date(value).toLocaleString();
+        },
+        formatDurings: function (value) {
+
+        Date.prototype.toLocaleString = function(){
+            let minutes = this.getMinutes();
+            if(minutes < 10){
+                minutes = '0' + minutes; 
+            }
+            return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()
+        }
+        return new Date(value).toLocaleString();
         }
     },
     methods:{
@@ -285,20 +297,17 @@ export default {
 .page-body {
     background-color: #efefef;
 }
-.fAll{
-	float:right;
-    margin-top: 0.1rem;
-    font-size: .12rem;
-}
 .fRight{
 	float:right;
     margin-top: 0.1rem;
-    font-size:.12rem;
+    font-size:.14rem;
+    line-height: .42rem;
+    width: 22%;
 }
 .content{width:89%;
         margin:0 auto;
         }
-.rightBtn{display:inline-block;width:.15rem;height:.15rem;background-image:url(../../assets/images/icon-rights.png);background-size:100% 100%;float: right;
+.rightBtn{display:inline-block;width:.12rem;height:.12rem;background-image:url(../../assets/images/icon-rights.png);background-size:100% 100%;float: right;
     margin-top: .15rem;}
  span{ display: block;font-size: 0.8em;}
 .vux-flexbox.list-item {
@@ -442,7 +451,14 @@ export default {
         overflow:hidden;
         height:.45rem;
         line-height:.45rem;
-        width:27%;
+        width:24%;
+    }
+    .fAll{
+    float: right;
+    margin-top: 0.1rem;
+    font-size: .14rem;
+    line-height: .42rem;
+    width: 22%;
     }
     .p15 {
         padding:0 .2rem .2rem;

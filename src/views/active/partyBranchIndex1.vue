@@ -1,7 +1,7 @@
 <template>
     <div class="page-body">
         <x-header>
-            党员活动
+            片区活动
             <router-link slot="right" :to="{name:'activeNews2'}">发起活动</router-link>
         </x-header>
         <div class="box">
@@ -294,6 +294,10 @@ export default {
 }
 .activeColors{
     color:#CB2F00;
+}
+.vux-header .vux-header-left,
+.vux-header .vux-header-right{
+    color:#fff;
 }
 .vux-flexbox-item.list-avatar {
     display: flex;

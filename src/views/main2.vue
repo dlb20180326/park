@@ -18,7 +18,7 @@
                         现有党支部：
                     </flexbox-item>
                     <flexbox-item>
-                      <span class="number">{{headName.branchSum}}</span>个
+                      <span class="number">{{headName.branchSum}}</span> 个
                     </flexbox-item>
                 </flexbox>
                 <flexbox>
@@ -239,7 +239,7 @@
   }
 
   .list {
-    margin-top: 0.15rem;
+    margin-top: 0.1rem;
     h3 {
       line-height: 1;
     }
@@ -272,7 +272,9 @@
     color: #8b8b8b;
   }
   .content button{
-    padding:.1rem .2rem;
+    padding: 0 .2rem;
+    height: .3rem;
+    line-height:.3rem;
     border:0;
     background:rgba(185,54,71,1);
     border-radius: 2px ;
