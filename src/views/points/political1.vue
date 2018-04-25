@@ -24,7 +24,19 @@
                         <flexbox-item>时间</flexbox-item>
                         <flexbox-item>评分状态</flexbox-item>
                     </flexbox>
-                    <div v-if="moduleId==11" style="text-align: center">暂无提交内容</div>
+                    <template v-if="moduleId==11" >
+
+                        <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
+                            <flexbox-item>{{index+1}}</flexbox-item>
+                            <flexbox-item>{{con.name}}</flexbox-item>
+                            <flexbox-item>上半年</flexbox-item>
+                            <flexbox-item>
+
+                                <!--<input type="button" class="btnSub" value="去处理"  @click="clickLink(con)" />-->
+                                <input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="clickLink(con)" />
+                            </flexbox-item>
+                        </flexbox>
+                    </template>
                     <template  v-else>
                     <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
@@ -132,21 +144,26 @@ Vue.component(Popup.name, Popup);
                 this.showTrans = !this.showTrans;
             },
             clickLink(item) {
-                if(item.tempint==2){
+                if(item.tempint==1){
 
                 this.$router.push({
-                    path: '/active/detailPack2/:userId',
+                    path: '/active/detailPack2/:userId/:departmentid',
                     name: 'detailPack2',
-                    params:{userId:item.id}
+                    params:{
+                        userId:item.id,
+                        departmentid:item.departmentid
+                    }
                 })}else{
                     this.$router.push({
-                        path: '/active/detailPack3/:userId',
+                        path: '/active/detailPack3/:userId/:departmentid',
                         name: 'detailPack3',
-                        params:{userId:item.id}
+                        params:{
+                            userId:item.id,
+                            departmentid:item.departmentid}
                 })}
 
             },
-
+//书面汇报
             getlist1(){
                 axios({
                     method: 'get',
@@ -164,6 +181,24 @@ Vue.component(Popup.name, Popup);
                         console.log(error);
                     });
             },
+//口头汇报
+            getlist2(){
+                axios({
+                    method: 'get',
+                    url: 'ppartymember/getReportByDepartmentid',
+                    params: {
+                        departmentid:this.$store.getters.user.departmentid,
+                        moudleId:11
+
+                    }
+                }) .then((res)=> {
+                    this.list=res.data;
+                console.log("222222222222",res.data);
+            })
+            .catch(function (error) {
+                    console.log(error);
+                });
+            },
 			know(){
 				this.showPop = false
 			},
@@ -179,6 +214,7 @@ Vue.component(Popup.name, Popup);
 		},
 		mounted(){
             this.getlist1();
+            this.getlist2();
            /* this.getModule();
             this.getmoduleid()*/
 		}

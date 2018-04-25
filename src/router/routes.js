@@ -200,7 +200,7 @@ export const routes = [
                 component: () => import('@/views/points/detailPack2')
         },
         {
-            path: 'points/detailPack3/:userId',
+            path: 'points/detailPack3/:userId/:departmentid',
                 name:'detailPack3',
             component: () => import('@/views/points/detailPack3')
         },
