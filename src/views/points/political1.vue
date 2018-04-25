@@ -1,6 +1,6 @@
 <template>
 
-	<div style="height:100%;" id="myQs">
+	<div style="height:100%;" class="disabled-tabbar">
    		<view-box ref="viewBox" body-padding-top=".46rem">
 			<!--<r-header :rfs="contents"></r-header>-->
 			<x-header slot="header" style="position: fixed !important;
