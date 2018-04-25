@@ -68,7 +68,7 @@
                             <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
                         </div>
                         <ul class="news">
-                            <li v-for="(item,index) in activeComplete" :key="index" >
+                            <li v-for="(item,index) in activeComplete" :key="item.departmentid">
                                 <a class=" display clearfix " >
                                     <div class=" fl">{{item.activeName}}</div>
                                     <div class=" fr">{{item.endTime|formatDuring}}<span class="rightBtn"></span></div>
@@ -130,7 +130,6 @@ export default {
                 Date.prototype.toLocaleString = function(){
                     return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
                 }
-<<<<<<< HEAD
                 return new Date(value).toLocaleString();
             }
         },
@@ -145,11 +144,8 @@ export default {
         }
             return new Date(value).toLocaleString();
                 return new Date(value).toLocaleString();
-            
-        }
-=======
-                return new Date(value).toLocaleString();}}
->>>>>>> e408bf25aaf0c1cd245f0e76335868bed007ea4d
+
+                }
     },
     methods:{
         getActivity(){
@@ -245,7 +241,7 @@ export default {
             }) .then((res)=>{
 
 
-                 this.activeComplete=res.data
+                 this.activeComplete=res.data;
 
             })
                 .catch(function (error) {
@@ -313,7 +309,7 @@ export default {
 .content{width:89%;
         margin:0 auto;
         }
-.rightBtn{display:inline-block;width:.15rem;height:.15rem;background-image:url(../../assets/images/icon-rights.png);background-size:100% 100%;float: right;
+.rightBtn{display:block;width:.15rem;height:.15rem;background-image:url(../../assets/images/icon-rights.png);background-size:100% 100%;float: right;
     margin-top: .15rem;}
  span{ display: block;font-size: 0.8em;}
 .vux-flexbox.list-item {
