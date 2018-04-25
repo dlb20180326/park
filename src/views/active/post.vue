@@ -136,9 +136,25 @@
 
                 }else {
                     Date.prototype.toLocaleString = function(){
-                        return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
+                        let months = this.getMonth()+1;
+                        if(months < 10){
+                            months = '0' + months;
+                        }
+                        let dates = this.getDate();
+                        if(dates < 10){
+                            dates = '0' + dates;
+                        }
+                        let hours = this.getHours();
+                        if(hours < 10){
+                            hours = '0' + hours;
+                        }
+                        let minutes = this.getMinutes();
+                        if(minutes < 10){
+                            minutes = '0' + minutes;
+                        }
+                        return this.getFullYear() +'.'+months+'.'+dates+' '+hours+':'+minutes
                     }
-                    return new Date(value).toLocaleString();}
+                    return new Date(value).toLocaleString();
             }
         },
         data(){
