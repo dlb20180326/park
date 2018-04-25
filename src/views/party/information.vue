@@ -7,6 +7,7 @@
             <view-box>
                 <div class="header">
                     <div class="group-name">
+                        <!-- 啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦 -->
                         {{departmentname}}
                     </div>
                     <flexbox :gutter="0">
@@ -130,6 +131,9 @@ export default {
 };
 </script>
 <style lang="less">
+.vux-flex-row{
+    margin-bottom:.1rem;
+}
 .page-body.party-information {
     background: #f4f4f4;
     #vux_view_box_body {
@@ -139,7 +143,7 @@ export default {
             border-radius: 5px;
             height: 100px;
             width: 100%;
-            margin: 5px 0 30px;
+            margin: 10px 0 20px;
             padding: 10px;
             background: url(../../assets/images/party-info-bg.jpg) 100% / cover
                 no-repeat;
@@ -147,14 +151,17 @@ export default {
             box-shadow: 5px 5px 10px #ddd;
             .group-name {
                 text-align: center;
-                font-size: 18px;
-                line-height: 3;
+                font-size: 16px;
+                height: .48rem;
+                line-height: .48rem;
                 color: #fff;
-                font-weight: 700;
+                font-weight: 600;
+                margin-top: .06rem;
             }
             .vux-flexbox {
                 .vux-flexbox-item {
                     text-align: center;
+                    font-size:.14rem;
                 }
             }
         }
