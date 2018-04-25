@@ -45,7 +45,9 @@
 	                                <b>{{index+1}}. {{progres.projectName}}</b>
 	                                <div class="space"></div>
 	                                <span class="number">{{progres.totalScore}}</span>/{{progres.score}}
-                                    <span class="fr" v-if="progres.id === 1 ||progres.id === 2 || progres.id === 6">审批进度</span>
+                                    <span class="fr" v-if="progres.info&&progres.info.length!=0" @click="moreInfo(progres.info)">
+                                        审批进度
+                                    </span>
 	                            </div>
 	                            <div class="content">
 	                                <x-progress :percent="progres.totalScore/progres.score*100" :show-cancel="false"></x-progress>
@@ -107,7 +109,7 @@
                                     积分变动：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    <span class="number" :class="[knoew.score >= 0?'colored':'colorGreen']">{{plus(knoew.score)}}</span>
+                                    <span class="number" :class="[knoew.score >= 0?'colored':'colorGreen']">{{knoew.score}}</span>
                                 </flexbox-item>
                             </flexbox>
                         </div>
@@ -115,27 +117,27 @@
                 </transition>
             </div>
         </div>
+
+
+
+
+
         <!--弹出框-->
-        <!-- <div  id="showBox">
+        <div  id="showBox" v-if="darkbgShow">
             <div class="swiper-all xs-container">
-                <ul class="cl swiper-box xs-content" id="xsContent">
-                    <li class="swiper-one xs-row" v-for="i in 2" :key="i">
+                <ul class="cl swiper-box xs-content" id="xsContent" v-bind:style="{ width: ((myWidth+20)*infoList.length) +'px'}">
+                    <li class="swiper-one xs-row" v-for="(item,i) in infoList" v-bind:style="{ width:myWidth +'px' }">
                             <div class="swiper-one-inner">
                             <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">张一山</span></h4>
-                            <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span class="vb">党员姓名：</span><span class="text-gray vb">张一山</span></h4>
-                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>时间：</span><span class="text-gray">2018</span></h4>
+                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>开始时间：</span><span class="text-gray">{{item.starttime}}</span></h4>
+                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>开始时间：</span><span class="text-gray">{{item.endtime}}</span></h4>
                             <h4 class="sinfo-title"><b class="sinfo-border"></b><span>主要内容：</span></h4>
                             <div class="text-gray-box">
-                                党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费党员按月足额缴纳党费
+                                {{item.content}}
                             </div>
                             <h4 class="sinfo-title"><b class="sinfo-border"></b><span>政治学习图片：</span><span class="text-gray">18张</span></h4>
                             <div class="show-list cl">
                                 <dl>
-                                    <dd>
-                                        <div class="preview">
-                                            <img src="@/assets/images/icon-head.png">
-                                        </div>
-                                    </dd>
                                     <dd>
                                         <div class="preview">
                                             <img src="@/assets/images/icon-head.png">
@@ -152,18 +154,20 @@
                     </li>
                 </ul>
             </div>
-            <div class="bg-cross"></div>
+            <div class="bg-cross" @click =closeBg()></div>
         </div>
 
-        <div class="bg-dark"></div> -->
+        <div class="bg-dark" v-if="darkbgShow"></div>
     </div>
 </template>
 
+
 <script>
+
 import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton} from 'vux';
-import XScroll from 'vux-xscroll/build/cmd/xscroll.js'
-import Snap from 'vux-xscroll/build/cmd/plugins/snap.js'
-import axios from 'axios'
+import XScroll from 'vux-xscroll/build/cmd/xscroll.js';
+import Snap from 'vux-xscroll/build/cmd/plugins/snap.js';
+import axios from 'axios';
 export default {
     components: { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton, XScroll,Snap},
     data() {
@@ -177,7 +181,10 @@ export default {
             getList:[],
             rate:[],
             itegral:'',
-            results:''
+            results:'',
+            infoList:[{}],
+            darkbgShow:false,
+            myWidth: 0.88*document.documentElement.clientWidth
         };
     },
     methods:{
@@ -232,39 +239,35 @@ export default {
 
     	},
     	rating(){
-
             this.results ='暂无';
+    	},
+        moreInfo(itemList){
 
+            this.darkbgShow = true;
+            this.infoList = itemList;
             /*样式渲染*/
-            let $width = document.documentElement.clientWidth;
-            let myWidth = 0.88*$width;
-
-            var t = document.querySelectorAll(".swiper-one");
-            if(t){
-                t.forEach((value, index, array)=>{
-                    value.style.width = myWidth + 'px';
+            setTimeout(function () {
+                var xscroll = new XScroll({
+                    renderTo: "#showBox",
+                    preventDefault:false,
+                    preventTouchMove:false,
+                    touchAction:'pan-y'
                 });
 
-                var s = t.length;
+                xscroll.on('panstart',function(e){
+                    console.log(e);
+                });
+                xscroll.on('panend',function(e){
+                    xscroll._resetLockConfig();
+                });
+                xscroll.render();
+            },1000)
 
-                document.getElementById("xsContent").style.width = ((myWidth+20)*s) +'px';
-            }
 
-            var xscroll = new XScroll({
-                renderTo: "#showBox",
-                preventDefault:false,
-                preventTouchMove:false,
-                touchAction:'pan-y'
-            });
-
-           xscroll.on('panstart',function(e){
-               console.log(e);
-            });
-            xscroll.on('panend',function(e){
-                xscroll._resetLockConfig();
-            });
-            xscroll.render();
-    	},
+        },
+        closeBg(){
+            this.darkbgShow = false;
+        },
     	score(){
     		axios.get('pscoreparty/getSumScoreByUserId',{
     			params:{
@@ -296,6 +299,7 @@ export default {
    		this.getDetail();
    		this.rating();
         this.score();
+
 
     }
 };
@@ -337,6 +341,9 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     right:0;
     z-index: 1001;
     text-align: center;
+}
+.swiper-all{
+
 }
 .swiper-box{
     position: relative;

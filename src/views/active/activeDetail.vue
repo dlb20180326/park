@@ -23,8 +23,7 @@
             <section class="mainbox1">
                 <div class=" clearfix p15 display">
                     <span class="fl weui-cell__bd1">党员生活通知</span>
-                    <!-- <a  class="fRight"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a> -->
-                     <router-link slot="right" :to="{name:'Active'}" class=" fRight">查看全部<span class="rightBtn"></span></router-link>
+                    <a  class="fRight"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
                 </div>
                 <div class="content">
                     <table width="100%" class="table">
@@ -54,7 +53,7 @@
                     <a  style="background-color:#B93647" @click="submit()">报名</a>
                 </div>
                 <div class="book"  v-if="signupstatus == 1">
-                    <a  style="background-color:#D8D8D8" @click="submit1()">已报名</a>
+                    <a  style="background-color: #8b8b8b" @click="submit1()">已报名</a>
                 </div>
                 <div class="grayLine margin-top"></div>
             </section>
@@ -66,13 +65,13 @@
                     <div class="p15">
                         <div class=" clearfix  display">
                             <span class="fl weui-cell__bd1">已参与组织生活</span>
-                                <router-link slot="right" :to="{name:'Active'}" class=" fAll">查看全部<span class="rightBtn"></span></router-link>
+                            <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
                         </div>
                         <ul class="news">
                             <li v-for="(item,index) in activeComplete" :key="index" >
                                 <a class=" display clearfix " >
                                     <div class=" fl">{{item.activeName}}</div>
-                                    <div class=" fr">{{item.endTime|formatDurings}}<span class="rightBtn"></span></div>
+                                    <div class=" fr">{{item.endTime|formatDuring}}<span class="rightBtn"></span></div>
                                 </a>
                             </li>
 
@@ -119,21 +118,19 @@ export default {
             isActive:true,
             signupstatus:'',
             msg:''
-
-
-
         };
     },
     filters: {
         formatDuring: function (value) {
             if(value == "" || value == null || value == undefined){
-                var value="无";
+                var value="无"
                 return value
 
             }else {
                 Date.prototype.toLocaleString = function(){
                     return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
                 }
+<<<<<<< HEAD
                 return new Date(value).toLocaleString();
             }
         },
@@ -150,6 +147,9 @@ export default {
                 return new Date(value).toLocaleString();
             
         }
+=======
+                return new Date(value).toLocaleString();}}
+>>>>>>> e408bf25aaf0c1cd245f0e76335868bed007ea4d
     },
     methods:{
         getActivity(){
@@ -300,17 +300,20 @@ export default {
 .page-body {
     background-color: #efefef;
 }
+.fAll{
+	float:right;
+    margin-top: 0.1rem;
+    font-size: .12rem;
+}
 .fRight{
 	float:right;
     margin-top: 0.1rem;
-    font-size:.14rem;
-    line-height: .42rem;
-    width: 22%;
+    font-size:.12rem;
 }
 .content{width:89%;
         margin:0 auto;
         }
-.rightBtn{display:inline-block;width:.12rem;height:.12rem;background-image:url(../../assets/images/icon-rights.png);background-size:100% 100%;float: right;
+.rightBtn{display:inline-block;width:.15rem;height:.15rem;background-image:url(../../assets/images/icon-rights.png);background-size:100% 100%;float: right;
     margin-top: .15rem;}
  span{ display: block;font-size: 0.8em;}
 .vux-flexbox.list-item {
@@ -454,14 +457,7 @@ export default {
         overflow:hidden;
         height:.45rem;
         line-height:.45rem;
-        width:24%;
-    }
-    .fAll{
-    float: right;
-    margin-top: 0.1rem;
-    font-size: .14rem;
-    line-height: .42rem;
-    width: 22%;
+        width:27%;
     }
     .p15 {
         padding:0 .2rem .2rem;

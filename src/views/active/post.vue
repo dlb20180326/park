@@ -139,8 +139,6 @@
                         return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
                     }
                     return new Date(value).toLocaleString();}
-
-
             }
         },
         data(){

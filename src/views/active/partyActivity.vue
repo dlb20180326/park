@@ -132,7 +132,6 @@ export default {
             if(value == "" || value == null || value == undefined){
                 var value="无";
                 return value
-
             }else {
                 Date.prototype.toLocaleString = function(){
                     return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
