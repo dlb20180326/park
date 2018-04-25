@@ -27,9 +27,9 @@ import {XHeader} from 'vux'
         background: -o-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));  
         background: -moz-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));  
         background: -mos-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));}
-.vux-header .vux-header-left a, .vux-header .vux-header-left button, .vux-header .vux-header-right a, .vux-header .vux-header-right button{color:#FFF!important;font-size:.12rem!important;}
-.vux-header .vux-header-left, .vux-header .vux-header-right{color:#FFFFFF!important;}
-.vux-header .vux-header-left .left-arrow:before{border:1px solid #FFFFFF!important;border-width:1px 0 0 1px!important;width:10px!important;height:10px!important;}
+.vux-header .vux-header-left a, .vux-header .vux-header-left button, .vux-header .vux-header-right a, .vux-header .vux-header-right button{color:#fff!important;font-size:.12rem!important;}
+.vux-header .vux-header-left, .vux-header .vux-header-right{color:#fff!important;}
+.vux-header .vux-header-left .left-arrow:before{border:1px solid #fff!important;border-width:1px 0 0 1px!important;width:10px!important;height:10px!important;top:10px!important;}
 .vux-header .vux-header-title{font-size:.17rem!important;}
 .vux-header .vux-header-left, .vux-header .vux-header-right{font-size:.12rem;}
 .vux-header .vux-header-left .left-arrow {

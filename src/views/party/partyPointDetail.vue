@@ -7,19 +7,19 @@
             <div style="padding:2vw 3.5vw 2vw;">
                 <table width="100%" class="table">
                     <tr>
-                        <td width="100">姓名：</td>
-                        <td class="f_b">{{name1}}</td>
+                        <td width="100" class="grayColors">姓名：</td>
+                        <td class="f_b blackColors">{{name1}}</td>
                     </tr>
                     <tr>
-                        <td>现有党支部：</td>
-                        <td class="f_b">{{departmentname}}</td>
+                        <td class="grayColors">现有党支部：</td>
+                        <td class="f_b blackColors">{{departmentname}}</td>
                     </tr>
                     <tr>
-                        <td>党支部书记：</td>
-                        <td class="f_b">{{partyBranch}}</td>
+                        <td class="grayColors">党支部书记：</td>
+                        <td class="f_b blackColors">{{partyBranch}}</td>
                     </tr>
                     <tr>
-                        <td>现有积分：</td>
+                        <td class="grayColors">现有积分：</td>
                         <td class="f_b"><span class="red">{{totalscore||0}}</span></td>
                     </tr>
                 </table>
@@ -35,20 +35,24 @@
             <div style="padding:2vw 3.5vw 6vw;" v-for="(item,index) in pointdetail" :key="index">
                 <table width="100%" class="table">
                     <tr>
-                        <td width="100">获取时间：</td>
+                        <td width="100" class="grayColors">获取时间：</td>
                         <td class="f_b">{{item.scoreTime|formatDuring}}</td>
                     </tr>
                     <tr>
-                        <td>积分类型：</td>
+                        <td class="grayColors">积分类型：</td>
                         <td class="f_b">{{item.detailTitle}}</td>
                     </tr>
-                    <tr>
-                        <td>审核人：</td>
+                    <tr v-if="item.approvedName">
+                        <td class="grayColors">审核人：</td>
                         <td class="f_b">{{item.approvedName}}</td>
                     </tr>
+                    <tr v-hide="item.approvedName">
+                        <td class="grayColors">加分人：</td>
+                        <td class="f_b">{{item.adderName||'系统自动'}}</td>
+                    </tr>
                     <tr>
-                        <td valign="top">积分变动：</td>
-                        <td class="f_b">{{item.score|Upper}}</td>
+                        <td valign="top" class="grayColors">积分变动：</td>
+                        <td class="f_b"><span :class="[item.score>0?'darkColors':'lightColors']">{{item.score|Upper}}</span></td>
                     </tr>
                 </table>
             </div>
@@ -169,6 +173,21 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.darkColors{
+    color:#b93647;
+}
+.lightColor{
+    color:#18c119;
+}
+.grayColors{
+    color:#999;
+}
+.blackColors{
+    color:#333;
+    font-weight: 600;
+    font-family:PingFangSC-Medium;
+
+}
 .page-body {
     background-color: #efefef;
 }
@@ -224,7 +243,7 @@ input {
     float:right;
 }
 .p15 {
-    padding:4vw;
+    padding:2vw;
 }
 .display {
     display:block;
@@ -246,14 +265,15 @@ input {
 }
 .mainbox {
     background:#fff;
-    padding:2vw 2vw 0;
+    padding:2vw 2vw;
     margin-bottom:2vw;
 }
 .weui-cell1 {
     padding-bottom:0;
 }
 .weui-cell__bd1 {
-    font-size:6vw;
+    font-size:.2rem;
+    font-weight: 600;
 
 }
 .weui-cells {
@@ -311,7 +331,8 @@ input {
     color:#fff;
 }
 .red {
-    color:red;
+    color:#b93647;
+    font-weight: 600;
 }
 .dbsy li {
     border-bottom:1px solid #f3f3f3;

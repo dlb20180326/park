@@ -16,13 +16,13 @@
                     </flexbox>
                 </div>
                 <div class="points-table">
-                    <flexbox :gutter="0">
+                    <flexbox :gutter="0" class="colors">
                         <flexbox-item>姓名</flexbox-item>
                         <flexbox-item>性别</flexbox-item>
                         <flexbox-item>年龄</flexbox-item>
                         <flexbox-item>积分</flexbox-item>
                     </flexbox>
-                    <flexbox :gutter="0"  v-for="(item,index) in total" :key="index"   @click.native="submit(item)">
+                    <flexbox :gutter="0"  v-for="(item,index) in total" :key="index"   @click.native="submit(item)" class="diffrent">
                         <flexbox-item>{{item.name}}</flexbox-item>
                         <flexbox-item>{{item.sex}}</flexbox-item>
                         <flexbox-item>{{item.age}}</flexbox-item>
@@ -145,10 +145,10 @@ export default {
             width: 100%;
             margin: 10px 0 20px;
             padding: 10px;
+             box-shadow: 0px 3px 8px 6px rgba(0,0,0,0.01);
             background: url(../../assets/images/party-info-bg.jpg) 100% / cover
                 no-repeat;
             color: #fff;
-            box-shadow: 5px 5px 10px #ddd;
             .group-name {
                 text-align: center;
                 font-size: 16px;
@@ -170,24 +170,22 @@ export default {
             border-radius: 5px;
             margin: 5px 0 30px;
             padding: 10px;
+            font-size:.12rem;
             color: #000;
             background: #fff;
-            box-shadow: 5px 5px 10px #ddd;
             text-align: center;
+             box-shadow: 0px 3px 8px 6px rgba(0,0,0,0.01);
             .vux-flexbox {
                 &:first-child {
                     margin-bottom: 10px;
-                    color: #a31525;
+                    color: #cb2f00!important;
                 }
                 .vux-flexbox-item {
                     text-align: center;
-                    &:last-child {
-                        color: #a31525;
-                    }
                 }
             }
         }
     }
 }
-
+.diffrent .vux-flexbox-item:last-child{color:#b93647;}
 </style>
