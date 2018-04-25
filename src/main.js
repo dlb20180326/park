@@ -21,6 +21,8 @@ FastClick.attach(document.body);
 
 Vue.config.productionTip = false;
 
+
+
 new Vue({
     el: '#app',
     router,

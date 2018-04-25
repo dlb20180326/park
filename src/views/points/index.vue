@@ -107,7 +107,7 @@
                                     积分变动：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    <span class="number" :class="[knoew.score >= 0?'colored':'colorGreen']">{{knoew.score}}</span>
+                                    <span class="number" :class="[knoew.score >= 0?'colored':'colorGreen']">{{plus(knoew.score)}}</span>
                                 </flexbox-item>
                             </flexbox>
                         </div>
@@ -192,7 +192,14 @@ export default {
     		}).catch(err => {
     			console.log('fail'+err);
     		})
-    	},
+        },
+        plus(score){
+            if(score > 0){
+                return '+'+score+'分';
+            }else{
+              return score+'分';
+            }
+        },
     	project(){
     		axios.get('pscoredetail/queryByRoleMenu',{
     			params:{
@@ -330,9 +337,6 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     right:0;
     z-index: 1001;
     text-align: center;
-}
-.swiper-all{
-
 }
 .swiper-box{
     position: relative;

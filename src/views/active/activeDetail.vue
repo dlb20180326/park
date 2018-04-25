@@ -127,7 +127,11 @@ export default {
         formatDuring: function (value) {
 
                 Date.prototype.toLocaleString = function(){
-                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
+                    let minutes = this.getMinutes();
+                    if(minutes < 10){
+                        minutes = '0' + minutes; 
+                    }
+                    return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()+' '+this.getHours()+':'+minutes
                 }
                 return new Date(value).toLocaleString();
         }
@@ -258,6 +262,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.vux-header-title-area, .vux-header .vux-header-title{height: .46rem;}
 .grayLine{width:100%;height:.1rem;background:rgba(244,244,244,1);}
 .margin-top{margin-top: .24rem;}
     table {
@@ -508,8 +513,6 @@ export default {
     .active2 {
            background:#d8d8d8;
      }
-    .f_b {
-    }
     .table td {
         padding:3px;
     }
