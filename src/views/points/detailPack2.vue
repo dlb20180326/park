@@ -181,14 +181,13 @@
                         url:'pscoreparty/scoreCustom',
                         method:'post',
                         params:{
-                            detailid:12,
+                            detailId:12,
                             userId:this.$route.params.userId,
                             adderId:this.$store.getters.user.userid,
                             score:5,
                             imgs:this.picList.arr.join(),
                             remark:this.activeContent,
                             addTimes:new Date(this.startTime.replace(/-/gi,'/')).getTime()
-
                         }
                     }).then(res => {
                         console.log(res);
