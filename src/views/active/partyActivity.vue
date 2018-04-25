@@ -129,11 +129,17 @@ export default {
     },
     filters: {
         formatDuring: function (value) {
+            if(value == "" || value == null || value == undefined){
+                var value="无";
+                return value
 
-            Date.prototype.toLocaleString = function(){
-                return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
-            }
-            return new Date(value).toLocaleString();
+            }else {
+                Date.prototype.toLocaleString = function(){
+                    return this.getFullYear() +'年'+ (this.getMonth()+1)+'月'+this.getDate()+'日'+this.getHours()+'时'+this.getMinutes()+'分'
+                }
+                return new Date(value).toLocaleString();}
+
+
         }
     },
     methods: {
@@ -146,7 +152,7 @@ export default {
                     }
                 })
                 .then(res => {
-
+                    console.log(res.data);
                     this.startTime1 = res.data.list[0].startTime;
                     this.activePace = res.data.list[0].activePace;
                     this.activeCreatePeople = res.data.list[0].activeCreatePeople;
