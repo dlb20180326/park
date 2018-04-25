@@ -273,7 +273,7 @@ border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
     font-size: 14px;
     font-weight: 600;
 }
-.right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
+.right-btn{font-size:.14rem;width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
 .right-btn span{
     width: 10px;
     height: 10px;

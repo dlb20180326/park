@@ -50,7 +50,7 @@
                    <router-link :to="{  name:'activePost', params:{ activeId:item.masId}}">{{item.title}}</router-link>
                </span>
             </div>
-            <div class="content">
+            <div class="content" >
                 <div v-if="item.type=='SCORE'">
                     <button  v-if="item.beginYn=='Y'" @click.native="refer(item)">
                         去处理
@@ -58,6 +58,7 @@
                     <button  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
                         去处理
                     </button>
+                    <p></p>
                 </div>
                 <div v-if="item.type=='ACTIVE'">
                     <button  v-if="item.beginYn=='Y'" @click.native="refer(item)">
@@ -66,6 +67,7 @@
                     <button  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
                         活动二维码
                     </button>
+                    <p></p>
                 </div>
                 <!-- <button :link="item.type=='SCORE'?'points/review':'/active'">
                    {{item.beginYn=='Y'?'去处理':'活动二维码'}}
@@ -210,9 +212,10 @@
     margin-top: 0.1rem;
     h3 {
       line-height: 1;
+      margin-bottom: 0.08rem;
     }
     .item {
-      margin-top: 0.15rem;
+      /*margin-top: 0.1rem;*/
       padding: 0.1rem 0;
       border-top: 1px solid #eee;
       &:first-child {
@@ -246,7 +249,7 @@
     width:32%!important;
   }
   .content button{
-    padding:.1rem .2rem;
+    padding:.03rem .26rem;
     border:0;
     background:rgba(185,54,71,1);
     border-radius: 2px ;
@@ -254,5 +257,11 @@
     font-family:PingFangSC-Medium;
     color:#fff;
     margin:.2rem auto;
+  }
+  .content p{
+  	width: 9999px;
+    height: .01rem;
+    background-color: #efefef;
+    margin-left: -4%;
   }
 </style>
