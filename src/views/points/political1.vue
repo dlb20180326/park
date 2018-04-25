@@ -40,10 +40,10 @@
                         </flexbox>
                     </template>
                     <template  v-else>
-                    <flexbox :gutter="0"  v-for="(con,index) in list2" :key="index">
+                    <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.name}}</flexbox-item>
-                        <flexbox-item>下半年</flexbox-item>
+                        <flexbox-item>上半年</flexbox-item>
                         <flexbox-item>
 
                             <!--<input type="button" class="btnSub" value="去处理"  @click="clickLink(con)" />-->
@@ -81,8 +81,7 @@ Vue.component(Popup.name, Popup);
 
 			return {
 				contents:{rights:'评分说明',title:''},
-                list:"",
-                list2:"",
+				list:"",
                 list1:[
                     {text:"口头汇报",moduleId:11},
                     {text:"书面汇报",moduleId:12}
@@ -136,7 +135,6 @@ Vue.component(Popup.name, Popup);
                 this.topShow = !this.topShow;
                 this.showTrans = !this.showTrans;
 
-
              /*   this.slide1();
                 this.slide();*/
 
@@ -146,7 +144,6 @@ Vue.component(Popup.name, Popup);
                 this.showTrans = !this.showTrans;
             },
             clickLink(item) {
-
                 if(item.tempint==1){
 
                 this.$router.push({
@@ -156,9 +153,7 @@ Vue.component(Popup.name, Popup);
                         userId:item.id,
                         departmentid:item.departmentid
                     }
-
                 })}else{
-
                     this.$router.push({
                         path: '/active/detailPack3/:userId/:departmentid',
                         name: 'detailPack3',
@@ -166,7 +161,6 @@ Vue.component(Popup.name, Popup);
                             userId:item.id,
                             departmentid:item.departmentid}
                 })}
-
 
             },
 //书面汇报
@@ -180,7 +174,7 @@ Vue.component(Popup.name, Popup);
 
                     }
                 }) .then((res)=> {
-                    this.list2=res.data;
+                    this.list=res.data;
                 console.log("11111111111111",res.data);
                 })
                 .catch(function (error) {
