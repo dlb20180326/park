@@ -4,7 +4,7 @@
             党务积分信息
         </x-header>
         <section class="mainbox">
-            <div style="padding:2vw 3.5vw 2vw;">
+            <div style="padding:0 .2rem;">
                 <table width="100%" class="table">
                     <tr>
                         <td width="100" class="grayColors">姓名：</td>
@@ -27,8 +27,8 @@
 
 
         </section>
-
-        <section class="mainbox" >
+ 
+        <section class="mainboss" >
             <div class=" clearfix p15 display">
                 <span class="fl weui-cell__bd1">积分获取明细</span>
             </div>
@@ -173,6 +173,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.mainboss{
+    height:calc(100% - .46rem);
+    background: #fff;
+    padding:2vw 2vw;
+}
 .darkColors{
     color:#b93647;
 }
@@ -313,7 +318,10 @@ input {
 .book.on a {
     background:#d8d8d8;
 }
-
+.table{
+    margin-bottom:.2rem;
+    padding: 0 .2rem;
+}
 .table td {
     padding:3px;
 }
