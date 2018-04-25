@@ -1,11 +1,8 @@
 <template>
-
-	<div style="height:100%;" id="myQs">
+	<div style="height:100%;" class="disabled-tabbar">
    		<view-box ref="viewBox" body-padding-top=".46rem">
 			<!--<r-header :rfs="contents"></r-header>-->
-			<x-header slot="header" style="position: fixed !important;
-        left:0;
-        right:0;">
+			<x-header slot="header" style="position: fixed !important;left:0;right:0;">
               思想汇报<a slot="right" @click="showMenu">评分说明</a></x-header>
             <div class="header-list">
                 <div class="list-left">
@@ -45,7 +42,6 @@
                         <flexbox-item>{{con.name}}</flexbox-item>
                         <flexbox-item>上半年</flexbox-item>
                         <flexbox-item>
-
                             <!--<input type="button" class="btnSub" value="去处理"  @click="clickLink(con)" />-->
                             <input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="clickLink(con)" />
                         </flexbox-item>
@@ -88,7 +84,6 @@ Vue.component(Popup.name, Popup);
                 ],
 				isYellow:false,
 				showPop:false,
-
                 topShow:false,
                 showTrans:false,
                 text:'',
@@ -153,7 +148,9 @@ Vue.component(Popup.name, Popup);
                         userId:item.id,
                         departmentid:item.departmentid
                     }
-                })}else{
+                })
+
+                }else{
                     this.$router.push({
                         path: '/active/detailPack3/:userId/:departmentid',
                         name: 'detailPack3',
@@ -282,12 +279,4 @@ border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .animate-down{padding:0 .2rem .2rem .21rem;z-index:521;background-color:#FFFFFF;top:96px;border: 1px solid #E4E4E4;
 position:fixed;left:0;right:0;
 }
-</style>
-<style scoped>
-    .vux-header{
-
-    }
-    .weui-tabbar[slot="bottom"]{
-        display: none !important;
-    }
 </style>
