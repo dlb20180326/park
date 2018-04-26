@@ -99,8 +99,8 @@ Vue.component(Popup.name, Popup);
 		filters: {
             Upper: function (value) {
                 try {
-                    if(value=== 1)  throw "待审批";
-                    if(value=== 2)  throw "已审批";
+                    if(value=== 1)  throw "未评分";
+                    if(value=== 2)  throw "已评分";
                     if(value=== 3)  throw "已过期";
                 }
                 catch(err) {
@@ -251,7 +251,7 @@ font-size: .14rem;
 .vux-flexbox .vux-flexbox-item:nth-child(1){
 	-webkit-box-flex: 0.5;
 }
-.points-table{padding-top:46px;}
+.points-table{padding-top:0.46rem;}
 .btnSub{width:.6rem;height:.24rem;font-size:.14rem;line-height:.24rem;border-radius: 4px;font-family:PingFangSC-Medium;border:0px;color:#FFFFFF;background-color:rgba(185, 54, 71, 1);}
 .yellowA{background-color:#BABABA;}
 .yellowB{background-color:#F84D2B;}
@@ -265,7 +265,7 @@ font-size: .14rem;
 .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
 border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
-.header-list{width:100%;height:50px;border-bottom:1px solid #E4E4E4;position: fixed;top:46px;left:0;right:0;background:#fff;line-height:50px;}
+.header-list{width:100%;height:50px;border-bottom:1px solid #E4E4E4;position: fixed;top:0.46rem;left:0;right:0;background:#fff;line-height:50px;}
 .list-left{width:54%;margin:.08rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;margin-top:0.15rem }
 .left-now{color:#666;font-size: 14px;}
 .left-active{
