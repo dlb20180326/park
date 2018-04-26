@@ -66,6 +66,7 @@
                         活动二维码
                     </button>
                 </div>
+                <p></p>
              <!-- <x-button type="warn" :link="item.type=='SCORE'?'points/review':'/active'">
                 {{item.beginYn=='Y'?'去处理':'活动二维码'}}
               </button>-->
@@ -259,6 +260,9 @@
     .title {
       color: #666;
     }
+    .title a{
+        color: #666!important;
+    }
     .content {
       text-align: center;
     }
@@ -284,5 +288,12 @@
     font-family:PingFangSC-Medium;
     color:#fff;
     margin:.2rem auto;
+  }
+
+  .content p{
+      width: 108%;
+      height: .01rem;
+      background-color: #efefef;
+      margin-left: -4%;
   }
 </style>

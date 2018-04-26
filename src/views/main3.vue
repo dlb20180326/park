@@ -140,7 +140,7 @@
         }
         else if(datime>=8 & datime<11){
           this.dateTimes = '上午好'
-          
+
         }
         else if(datime>=11 & datime<13){
           this.dateTimes = '中午好'
@@ -197,71 +197,74 @@
 </script>
 
 <style lang="less" scoped>
-  .page-body {
-    background-color: #efefef;
-  }
+.page-body {
+background-color: #efefef;
+}
 
-  .head,
-  .list {
-    background-color: #fff;
-    line-height: 2;
-    padding: 0.15rem;
-  }
+.head,
+.list {
+background-color: #fff;
+line-height: 2;
+padding: 0.15rem;
+}
 
-  .list {
-    margin-top: 0.1rem;
-    h3 {
-      line-height: 1;
-      margin-bottom: 0.08rem;
-    }
-    .item {
-      /*margin-top: 0.1rem;*/
-      padding: 0.1rem 0;
-      border-top: 1px solid #eee;
-      &:first-child {
-        border-top: 0;
-      }
-    }
-    .title {
-      color: #666;
-    }
-    .content {
-      text-align: center;
-    }
-    a{
-      color:#000;
-    }
+.list {
+margin-top: 0.1rem;
+h3 {
+  line-height: 1;
+  margin-bottom: 0.08rem;
+}
+.item {
+  /*margin-top: 0.1rem;*/
+  padding: 0.1rem 0;
+  border-top: 1px solid #eee;
+  &:first-child {
+    border-top: 0;
   }
+}
+.title {
+  color: #666;
+}
+.title a{
+    color: #666!important;
+}
+.content {
+  text-align: center;
+}
+a{
+  color:#000;
+}
+}
 
-  .number {
-    color: #a0333b;
-  }
-  .vux-flexbox-item.label {
-    flex: 0 0 auto;
-    width: auto;
-    color: #8b8b8b;
-  }
-  .vux-flexbox-item.dateLable{
-    flex:0 0 auto;
-    width:auto;
-  }
-  button.weui-btn,input.weui-btn{
-    width:32%!important;
-  }
-  .content button{
-    padding:.03rem .26rem;
-    border:0;
-    background:rgba(185,54,71,1);
-    border-radius: 2px ;
-    font-size:.16rem;
-    font-family:PingFangSC-Medium;
-    color:#fff;
-    margin:.2rem auto;
-  }
-  .content p{
-  	width: 9999px;
+.number {
+color: #a0333b;
+}
+.vux-flexbox-item.label {
+flex: 0 0 auto;
+width: auto;
+color: #8b8b8b;
+}
+.vux-flexbox-item.dateLable{
+flex:0 0 auto;
+width:auto;
+}
+button.weui-btn,input.weui-btn{
+width:32%!important;
+}
+.content button{
+padding:.03rem .26rem;
+border:0;
+background:rgba(185,54,71,1);
+border-radius: 2px ;
+font-size:.16rem;
+font-family:PingFangSC-Medium;
+color:#fff;
+margin:.2rem auto;
+}
+.content p{
+    width: 108%;
     height: .01rem;
     background-color: #efefef;
     margin-left: -4%;
-  }
+}
 </style>
