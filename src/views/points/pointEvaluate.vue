@@ -77,10 +77,10 @@
                     </li>
                 </ul>
             </div>
-            <group-title slot="title">
+            <!-- <group-title slot="title">
                 <b class="widthSet">总分 (15分) :</b>
                 <span class="colorSet">0</span>
-            </group-title>
+            </group-title> -->
         </div>
         <div class="group-item">
             <group-title slot="title"></group-title>
