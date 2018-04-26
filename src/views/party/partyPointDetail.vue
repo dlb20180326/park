@@ -190,7 +190,6 @@ export default {
 
 <style lang="less" scoped>
 .mainboss{
-    height:calc(100% - .46rem);
     background: #fff;
     padding:2vw 2vw;
 }

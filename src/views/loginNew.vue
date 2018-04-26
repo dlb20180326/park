@@ -11,13 +11,14 @@
             </div>
             <div class="inputs">
                 <div class="input-all clearfix">
-                <!-- <div class="left-content">
-                    <i class="img-phone"></i>
-                    <label class="font-label">账号</label>
-                </div> -->
-                <input type="text" v-model="account" />
+                <span class="icon-phone"></span>
+                <input type="text" v-model="account" placeholder="输入登陆用户" />
             </div>
-            <button class="btnSub">登陆</button>
+            <div class="input-all clearfix">
+                <span class="icon-key"></span>
+                <input type="password" v-model="pass" placeholder="输入登陆密码" />
+            </div>
+            <button class="btnSub" @click="login">登陆</button>
             </div>
             
         </div>
@@ -29,7 +30,7 @@
         data(){
             return {
                 account: '',
-                pass: '12345678'
+                pass: ''
             }
         },
         methods:{
@@ -150,11 +151,6 @@
     border-radius:18px;
     margin-bottom:.26rem;
     }
-    /* .input-all .left-content{
-        float: left;
-        width:.34rem;
-        border:1px solid red;
-    } */
     .input-all input{
         width: 79%;
         outline: 0px;
@@ -164,12 +160,29 @@
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         border: 0px;
-        color: #B2B2B2;
+        color:#B2B2B2;
         position: absolute;
         font-size: 0.14rem;
         margin-left: 0.05rem;
     }
-
+    .icon-phone{
+        display:block;
+        float: left;
+        width:.1rem;
+        height: .16rem;
+        background:url(../assets/images/new-phone.png) no-repeat;
+        background-size:100% 100%;
+        margin:.1rem .11rem .1rem -.2rem;
+    }
+    .icon-key{
+        display:block;
+        float: left;
+        width:.14rem;
+        height: .16rem;
+        background:url(../assets/images/new-sock.png) no-repeat;
+        background-size:100% 100%;
+        margin:.1rem .11rem .1rem -.24rem;
+    }
     .btnSub{
         width:100%;
         height:.36rem;

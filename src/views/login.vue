@@ -7,14 +7,14 @@
                     <i class="img-phone"></i>
                     <label class="font-label">账号</label>
                 </div>
-                <input type="text" v-model="account" />
+                <input type="text" v-model="account" placeholder="输入登陆账号" />
             </div>
             <div class="input-all clearfix">
                 <div class="left-content">
                     <i class="img-locks"></i>
                     <label  class="label-lock">密码</label>
                 </div>
-                <input type="password" v-model="pass" />
+                <input type="password" v-model="pass" placeholder="输入登陆密码" />
             </div>
             <button type="button" class="btn-dl" @click="login">登录</button>
         </div>
@@ -26,7 +26,7 @@ export default {
     data() {
         return {
             account: '',
-            pass: '12345678'
+            pass: ''
         };
     },
     components: {
