@@ -51,18 +51,18 @@
               </div>
             <div class="content">
                 <div v-if="item.type=='SCORE'">
-                <button  v-if="item.beginYn=='Y'" @click.native="refer(item)">
+                <button  v-if="item.beginYn=='Y'" @click="refer(item)">
                     去处理
                 </button>
-                <button  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
+                <button  v-else-if="item.beginYn=='N'" @click="refer(item)">
                     去处理
                 </button>
                     </div>
                 <div v-if="item.type=='ACTIVE'">
-                    <button  v-if="item.beginYn=='Y'" @click.native="refer(item)">
+                    <button  v-if="item.beginYn=='Y'" @click="refer(item)">
                         上传图片
                     </button>
-                    <button  v-else-if="item.beginYn=='N'" @click.native="refer(item)">
+                    <button  v-else-if="item.beginYn=='N'" @click="refer(item)">
                         活动二维码
                     </button>
                 </div>
@@ -145,8 +145,9 @@
       this.getScoreByType();*/
     },
     methods: {
-      refer (item){
-          console.log(item);
+      refer(item){
+        console.log("11111");
+        console.log(item);
           if(item.type == 'SCORE'){
               this.$router.push({
                   path:'points/review'
@@ -183,6 +184,7 @@
           })
           .then(res => {
             this.todoList = res.data;
+            console.log(this.todoList);
           })
           .catch(err => {
             console.log(err);

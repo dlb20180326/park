@@ -2,7 +2,12 @@
     <div class="page-body">
         <div class="logo-top"></div>
         <div class="logo-pic"></div>
-        <div class="tiles"></div>
+        <div class="last-content">
+            <span class="icon-star"></span>
+            <div class="tiles">上海陆家嘴金融贸易区综合党委</div>
+            
+        </div>
+        
     </div>
 </template>
 <script>
@@ -50,14 +55,31 @@
         background:#fff url(../assets/images/iconw-bigpic.png) no-repeat center;
         background-size:70% 70%;
     }
+    .last-content{
+        width:80%;
+        height: auto;
+        margin:.81rem auto;
+    }
     .tiles{
-        width:67%;
-        height:.22rem;
-        line-height:.22rem;
+        padding: 0 8%;
+        border:1px solid yellowgreen;
+        /* height:.22rem;
+        line-height:.22rem; */
         text-align: center;
         font-size:.16rem;
         font-family:PingFang-SC-Bold;
         color:rgba(227,192,140,1);
+        margin:0 auto;
+        border:1px solid red;
+        text-shadow:0 1px 1px #F2CE8F;
+    }
+    .icon-star{
+        width:.16rem;
+        height:.15rem;
+        display:block;
+        background:url(../assets/images/icon-star.png) no-repeat;
+        background-size:100% 100%;
+        float: left;
 
     }
 
