@@ -2,7 +2,7 @@ import store from '../store';
 
 export const routes = [
     {
-        path: '/loginNew',
+        path: '/login',
         component: () => import('@/views/loginNew')
     },
     {

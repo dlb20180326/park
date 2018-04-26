@@ -16,7 +16,7 @@
                     </tr>
                     <tr>
                         <td class="grayColors">党支部书记：</td>
-                        <td class="f_b blackColors">{{partyBranch}}</td>
+                        <td class="f_b blackColors">{{partyBranch ||''}}</td>
                     </tr>
                     <tr>
                         <td class="grayColors">现有积分：</td>
@@ -32,7 +32,7 @@
             <div class=" clearfix p15 display">
                 <span class="fl weui-cell__bd1">积分获取明细</span>
             </div>
-            <div style="padding:2vw 3.5vw 6vw;" v-for="(item,index) in pointdetail" :key="index">
+            <div style="padding:0 .2rem;" v-for="(item,index) in pointdetail" :key="index">
                 <table width="100%" class="table">
                     <tr>
                         <td width="100" class="grayColors">获取时间：</td>
@@ -191,7 +191,7 @@ export default {
 <style lang="less" scoped>
 .mainboss{
     background: #fff;
-    padding:2vw 2vw;
+    padding:2vw 0;
 }
 .darkColors{
     color:#b93647;
@@ -285,7 +285,7 @@ input {
 }
 .mainbox {
     background:#fff;
-    padding:2vw 2vw;
+    padding:2vw 0;
     margin-bottom:2vw;
 }
 .weui-cell1 {
@@ -334,7 +334,7 @@ input {
     background:#d8d8d8;
 }
 .table{
-    margin-bottom:.2rem;
+    // margin-bottom:.2rem;
     padding: 0 .2rem;
 }
 .table td {
