@@ -1,10 +1,8 @@
 <template>
     <div class="page-body">
-        <div class="logo-top">
-        </div>
-        <div class="logo-pic">
-
-        </div>
+        <div class="logo-top"></div>
+        <div class="logo-pic"></div>
+        <div class="tiles"></div>
     </div>
 </template>
 <script>
@@ -51,6 +49,16 @@
         border-radius:18px;
         background:#fff url(../assets/images/iconw-bigpic.png) no-repeat center;
         background-size:70% 70%;
+    }
+    .tiles{
+        width:67%;
+        height:.22rem;
+        line-height:.22rem;
+        text-align: center;
+        font-size:.16rem;
+        font-family:PingFang-SC-Bold;
+        color:rgba(227,192,140,1);
+
     }
 
 
