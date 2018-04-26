@@ -54,10 +54,8 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
 		},
         filters: {
             formatDuring: function (value) {
-                if(value == "" || value == null || value == undefined){
-                    var value="无";
-                    return value
-
+                if(!value){
+                    return "无";
                 }else {
                     Date.prototype.toLocaleString = function(){
                         let months = this.getMonth()+1;
@@ -77,11 +75,10 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
                             minutes = '0' + minutes;
                         }
                         return this.getFullYear() +'.'+months+'.'+dates+' '+hours+':'+minutes
-                    }
+                    };
                     return new Date(value).toLocaleString();
-
-
-            }}
+                }
+            }
         },
 		methods:{
 			show (index) {

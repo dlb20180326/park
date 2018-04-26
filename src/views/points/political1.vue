@@ -148,7 +148,7 @@ Vue.component(Popup.name, Popup);
                 if(item.tempint==1){
 
                 this.$router.push({
-                    path: '/active/detailPack2/:userId/:departmentid',
+                    path: '/active/detailPack2/',
                     name: 'detailPack2',
                     params:{
                         userId:item.id,
@@ -156,7 +156,7 @@ Vue.component(Popup.name, Popup);
                     }
                 })}else{
                     this.$router.push({
-                        path: '/active/detailPack3/:userId/:departmentid',
+                        path: '/active/detailPack3',
                         name: 'detailPack3',
                         params:{
                             userId:item.id,

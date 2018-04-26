@@ -55,7 +55,7 @@
         </div>
 
         <ul class="active-type-list" v-show="PickerVisible2">
-            <li v-for="(item,index) in list" :key="index" @click="submit1(item)">{{item.projectName}}</li>
+            <li v-for="(item,index) in list" :key="index" @click="submit1(item)">{{item.title}}</li>
         </ul>
 
         <div class="group-item">
@@ -160,7 +160,11 @@ export default {
                 method: 'get',
                 url: 'pscoredetail/queryByJoinList'
             }) .then((res)=> {
-                this.list= res.data;
+                let t = res.data;
+                t.forEach((value)=>{
+                    value.title = value.title.substring(0,4);
+                })
+                this.list = t;
             }).catch(function (error) {
                 console.log(error);
             });
@@ -212,7 +216,7 @@ export default {
         submit1(it){
             this.activeType=it.id;
             this.activeProjectActive = it.projectId;
-            this.activityName = it.projectName;
+            this.activityName = it.title;
             this.PickerVisible2=false
 
         },

@@ -56,7 +56,7 @@
         <div style="position:relative" v-show="PickerVisible2">
         <div class="srcw"></div>
         <ul class="active-type-list">
-            <li v-for="(item,index) in list" :key="index" @click="submit1(item)">{{item.projectName}}</li>
+            <li v-for="(item,index) in list" :key="index" @click="submit1(item)">{{item.title}}</li>
         </ul>
         </div>
         <div class="group-item">
@@ -188,18 +188,22 @@
                 this.startTime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + '';
             },
             handlePicker(){
-                this.PickerVisible2=true;
+                this.PickerVisible2=!this.PickerVisible2;
                 axios({
                     method: 'get',
                     url: 'pscoredetail/queryByJoinList'
                 }) .then((res)=> {
-                    this.list= res.data;
+                    var t = res.data;
+                    t.forEach((value)=>{
+                        value.title = value.title.substring(0,4);
+                    });
+                    this.list = t;
                 }).catch(function (error) {
                     console.log(error);
                 });
             },
             handlePicker1(){
-                this.PickerVisible5=true;
+                this.PickerVisible5=!this.PickerVisible5;
                 axios({
                     method: 'get',
                     url: 'pdepartment/getList'
@@ -253,7 +257,7 @@
             submit1(it){
                 this.activeType=it.id;
                 this.activeProjectActive = it.projectId;
-                this.activityName = it.projectName;
+                this.activityName = it.title;
                 this.PickerVisible2=false
 
             },

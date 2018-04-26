@@ -46,7 +46,7 @@
                         <td class="grayColors">审核人：</td>
                         <td class="f_b">{{item.approvedName}}</td>
                     </tr>
-                    <tr v-hide="item.approvedName">
+                    <tr v-show="!item.approvedName">
                         <td class="grayColors">加分人：</td>
                         <td class="f_b">{{item.adderName||'系统自动'}}</td>
                     </tr>
@@ -120,19 +120,24 @@ export default {
                     userid:this.$route.params.userid
 
                 }
-            }) .then(res => {
-                console.log(res.data)
-            this.partyBranch=decodeURIComponent(this.$route.params.partyBranch)
-
+            }).then(res => {
                 this.totalscore=res.data.totalscore;
-             this.name1=res.data.name;
-            this.departmentname=res.data.departmentname
-            this.departmentid=res.data.departmentid
+                this.name1=res.data.name;
+                this.departmentname=res.data.departmentname;
+                this.departmentid=res.data.departmentid;
 
-        })
-        .catch(err => {
-                console.log(err);
-        });
+
+                    axios.get('pdepartment/queryById', {
+                        params: {
+                            departmentid:this.departmentid
+
+                        }
+                    }).then(res1 => {
+
+                        console.log(res1);
+                    })
+
+            });
         },
 
       /*  getParams() {
