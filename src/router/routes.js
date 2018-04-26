@@ -50,11 +50,6 @@ export const routes = [
                 component: () => import('@/views/party/branch')
             },
             {
-                path: 'party/member/',
-                name: 'member',
-                component: () => import('@/views/party/member')
-            },
-            {
                 path: 'party/information/:departmentid',
                 name: 'information',
                 component: () => import('@/views/party/information')
@@ -78,6 +73,11 @@ export const routes = [
                 component: () => import('@/views/points/assess')
             },
             {
+                path: 'points/member/',
+                name: 'member',
+                component: () => import('@/views/points/member')
+            },
+            {
                 path: 'points/review',
                 component: () => import('@/views/points/review')
             },
@@ -93,15 +93,15 @@ export const routes = [
             {
                 path: 'points/audit1/:partmentId/:name/:departmentId/:userId',
                 name: 'Audit1',
-                props:true,
+                props: true,
                 component: () => import('@/views/points/auditDetail1')
             },
-	        {
-	            path: 'points/audit/:partmentId/:name/:departmentId/:userId',
+            {
+                path: 'points/audit/:partmentId/:name/:departmentId/:userId',
                 name: 'Audit',
-                props:true,
-	            component: () => import('@/views/points/auditDetail')
-	        },
+                props: true,
+                component: () => import('@/views/points/auditDetail')
+            },
             {
                 path: 'points/pointDetail',
                 component: () => import('@/views/points/pointDetail')
@@ -120,45 +120,44 @@ export const routes = [
                 path: 'points/political/:moduleid',
                 component: () => import('@/views/points/political')
             },
-        {
-            path: 'points/political1',
+            {
+                path: 'points/political1',
                 component: () => import('@/views/points/political1')
-        },
+            },
             {
                 path: 'points/politicalSimple/:moduleid',
                 component: () => import('@/views/points/politicalSimple')
             },
             {
-                 path: 'points/lawAbiding',
+                path: 'points/lawAbiding',
                 component: () => import('@/views/points/lawAbiding')
-              },
-             {
-                 path: 'points/lawAbidingDetail/:userId',
-                     name:'lawAbidingDetail',
-                 props:true,
+            },
+            {
+                path: 'points/lawAbidingDetail/:userId',
+                name: 'lawAbidingDetail',
+                props: true,
                 component: () => import('@/views/points/lawAbidingDetail')
-                }
-                ,
-                {
-                    path: 'points/lawAbidingDetailFinish/:userId',
-                    name:'lawAbidingDetailFinish',
-                    props:true,
-                    component: () => import('@/views/points/lawAbidingDetailFinish')
-        },
+            },
+            {
+                path: 'points/lawAbidingDetailFinish/:userId',
+                name: 'lawAbidingDetailFinish',
+                props: true,
+                component: () => import('@/views/points/lawAbidingDetailFinish')
+            },
             {
                 path: 'active',
                 component: () => import('@/views/active')
             },
             {
                 path: 'active/partyIndex',
-                name:'Active',
+                name: 'Active',
                 component: () => import('@/views/active/partyIndex')
             },
             {
                 path: 'active/partyBranch',
                 component: () => import('@/views/active/partyBranchIndex')
             },
-             {
+            {
                 path: 'active/partyBranch1',
                 component: () => import('@/views/active/partyBranchIndex1')
             },
@@ -167,11 +166,11 @@ export const routes = [
                 component: () => import('@/views/active/partyActivity')
             },
 
-             {
-                 path: 'active/activeSign/:activeId',
+            {
+                path: 'active/activeSign/:activeId',
                 name: 'activeSign',
                 component: () => import('@/views/active/activeSign')
-             },
+            },
             {
                 path: 'active/activeMore',
                 name: 'activeMore',
@@ -180,30 +179,29 @@ export const routes = [
 
             {
                 path: 'active/partyMoment',
-                name:'partyMoment',
+                name: 'partyMoment',
                 component: () => import('@/views/active/partyMoment')
             },
             {
                 path: 'points/detailPack/:studyid/:createUserid/:moduleid',
-                name:'detailPack',
+                name: 'detailPack',
                 component: () => import('@/views/points/detailPack')
             },
-             {
-                 path: 'points/detailPack1/:username',
-                name:'detailPack1',
+            {
+                path: 'points/detailPack1/:username',
+                name: 'detailPack1',
                 component: () => import('@/views/points/detailPack1')
-              }
-                ,
-                {
+            },
+            {
                 path: 'points/detailPack2/:userId',
-                name:'detailPack2',
+                name: 'detailPack2',
                 component: () => import('@/views/points/detailPack2')
-        },
-        {
-            path: 'points/detailPack3/:userId/:departmentid',
-                name:'detailPack3',
-            component: () => import('@/views/points/detailPack3')
-        },
+            },
+            {
+                path: 'points/detailPack3/:userId/:departmentid',
+                name: 'detailPack3',
+                component: () => import('@/views/points/detailPack3')
+            },
             {
                 path: 'active/post/:activeId',
                 name: 'activePost',
@@ -216,7 +214,7 @@ export const routes = [
             },
             {
                 path: 'active/new2',
-                    name: 'activeNews2',
+                name: 'activeNews2',
                 component: () => import('@/views/active/new2')
             },
             {
