@@ -2,10 +2,6 @@ import store from '../store';
 
 export const routes = [
     {
-        path: '/login',
-        component: () => import('@/views/login')
-    },
-    {
         path: '/loginNew',
         component: () => import('@/views/loginNew')
     },
