@@ -26,27 +26,6 @@
 
 
         </section>
-        <section class="mainbox" v-for="(item,index) in partyDetail" :key="index" @click="handle(item.departmentid)">
-            <div style="padding:2vw 3.5vw 2vw;" >
-                <table width="100%" class="table" >
-                    <tr valign="top">
-                        <td width="70" class="grayColors">支部名称：</td>
-                        <td class="f_b blackColors">{{item.departmentname}}</td>
-                        <td rowspan="3" style="width:.24rem;position:relative;"><span class="pic-icon"></span></td>
-                    </tr>
-                    <tr>
-                        <td class="grayColors">支部书记：</td>
-                        <td class="f_b blackColors">{{item.partyBranch}}</td>
-                    </tr>
-                    <tr>
-                        <td class="grayColors">支部人数：</td>
-                        <td class="f_b blackColors"><span class="red">{{item.people}}</span> 人</td>
-                    </tr>
-                </table>
-            </div>
-
-
-        </section>
         </div>
 
     </div>
@@ -112,6 +91,7 @@ export default {
 .overFs{
     height:calc(100% - .46rem);
     overflow-y: scroll;
+    margin-top:.57rem;
 }
 .header-top{
     width:100%;
