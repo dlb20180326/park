@@ -75,7 +75,7 @@ import axios from 'axios'
 		methods:{
             backhome(){
                 this.$router.push({
-                    path:'/main3'
+                    path:'/'
                 })
             }
 		}

@@ -61,11 +61,14 @@ w<template>
 	                            </router-link>
 
                                 <div class="content"  v-else-if="projectList[progres.id]">
-                                    <router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id ">
-                                    <x-button mini type="warn" v-if="projectList[progres.id]">
+                                    <router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id "  v-show="progres.totalScore != progres.score">
+                                    <x-button mini type="warn">
                                         点击+积分
                                     </x-button>
                                     </router-link>
+                                    <x-button mini type="disable" v-show="progres.totalScore == progres.score">
+                                        点击+积分
+                                    </x-button>
                                 </div>
 
                         </div>
