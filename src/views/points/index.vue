@@ -46,7 +46,7 @@ w<template>
 	                                <div class="space"></div>
 	                                <span class="number">{{progres.totalScore}}</span>/{{progres.score}}
                                     <span class="fr" v-if="progres.info&&progres.info.length!=0" @click="moreInfo(progres.info)">
-                                        审批进度
+                                        审批进度 <span class="icon-arrows"></span>
                                     </span>
 	                            </div>
 	                            <div class="content">
@@ -122,8 +122,17 @@ w<template>
         <div  id="showBox" v-if="darkbgShow">
             <div class="swiper-all xs-container">
                 <ul class="cl swiper-box xs-content" id="xsContent" v-bind:style="{ width: ((myWidth+20)*infoList.length) +'px'}">
-                    <li class="swiper-one xs-row" v-for="(item,i) in infoList" v-bind:style="{ width:myWidth +'px' }">
+                    <li class="swiper-one xs-row" v-for="(item,i) in infoList" v-bind:style="{ width:myWidth +'px' }" :key="i">
                             <div class="swiper-one-inner">
+                            <div class="states" v-if="item.status==0">
+                                待审核
+                            </div>
+                            <div class="states" v-if="item.status==2">
+                                已通过
+                            </div>
+                            <div class="states" v-if="item.status==3">
+                                已拒绝
+                            </div>
                             <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">{{item.branch}}</span></h4>
                             <h4 class="sinfo-title"><b class="sinfo-border"></b><span>开始时间：</span><span class="text-gray">{{item.starttime|formatDuring}}</span></h4>
                             <h4 class="sinfo-title"><b class="sinfo-border"></b><span>结束时间：</span><span class="text-gray">{{item.endtime|formatDuring}}</span></h4>
@@ -134,7 +143,7 @@ w<template>
                             <h4 class="sinfo-title"><b class="sinfo-border"></b><span>政治学习图片：</span><span class="text-gray">{{item.pictures.length}}</span></h4>
                             <div class="show-list cl">
                                 <dl>
-                                    <dd v-for="(it,index) in item.pictures">
+                                    <dd v-for="(it,index) in item.pictures" :key="index">
                                         <div class="preview">
                                              <img class="previewer-demo-img"  :src="'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId" >
                                         </div>
@@ -373,13 +382,24 @@ export default {
   width: 200px;
   height: 100px;
   background-color: #ccc;
-  display:inline-block;
+  display:block;
   margin-left: 15px;
   float: left;
   text-align: center;
   line-height: 100px;
 }
-
+.states{
+    text-align: center;
+    border-radius: 4px;
+    border: 2px solid #B93647;
+    position: absolute;
+    right: .2rem;
+    z-index: 999;
+    top: .2rem;
+    font-size: .14rem;
+    color: #B93647;
+    padding: .02rem .1rem;
+}
 ol,ul,li{
     list-style:none;
 }
@@ -397,9 +417,6 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     z-index: 1001;
     text-align: center;
 }
-.swiper-all{
-
-}
 .swiper-box{
     position: relative;
     z-index: 10001;
@@ -414,6 +431,7 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
 }
 .swiper-one-inner{
     padding:.3rem .2rem .15rem;
+    position: relative;
 }
 .sinfo-title{
     height: .16rem;
@@ -477,6 +495,15 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     float:right;
     margin-right: 20px;
     color:#ea8031;
+    font-size:.12rem;
+}
+.icon-arrows{
+    width: .05rem;
+    height: .1rem;
+    margin-left:.06rem;
+    display: inline-block;
+    background: url(../../assets/images/icon-arrows.png) no-repeat;
+    background-size:100% 100%;
 }
 .box {
     flex: 1;
