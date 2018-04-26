@@ -385,9 +385,11 @@
         color: #464646;
     }
     .active-type-list{
-        margin: .1rem auto;
-        width: 92%;
+        margin: .1rem .2rem;
+        // margin-left: .2rem;
+        // margin-right: .2rem;
         position: relative;
+        border-radius: 20px;
     li{
         background: #FFF5E6;
         height: 0.3rem;

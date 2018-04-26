@@ -38,13 +38,20 @@ input[type=button], input[type=submit], input[type=file], button { cursor: point
     .vux-header-left button,
     .vux-header-right a,
     .vux-header-right button {
-        color: #fff !important;
+        color: #fff!important;
     }
 }
 .disabled-tabbar + .weui-tabbar {
     display: none !important;
 }
-
+.vux-header .vux-header-left a,
+.vux-header .vux-header-left button,
+.vux-header .vux-header-right a,
+.vux-header .vux-header-right button {
+  float: left;
+  margin-right: 8px;
+  color: #ffffff!important;
+}
 .page-body {
     flex: 1;
     overflow: auto;
