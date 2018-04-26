@@ -133,7 +133,7 @@ export default {
 
                         }
                     }).then(res1 => {
-
+                        this.partyBranch = res1.data.partyBranch
                         console.log(res1);
                     })
 
