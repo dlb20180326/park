@@ -186,8 +186,8 @@
     }
 
     .rights {
-        width: .12rem;
-        height: .12rem;
+        width: .14rem;
+        height: .14rem;
         display: inline-block;
         margin-left: 0.2rem;
         margin-top: .1rem;
