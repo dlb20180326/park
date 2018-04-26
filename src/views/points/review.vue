@@ -1,5 +1,5 @@
 <template>
-    <div  style="height:100%;">
+    <div  style="height:100%;overflow-x:hidden;">
         <view-box ref="viewBox" body-padding-top=".46rem" body-padding-bottom=".55rem">
             <r-header :rfs='itegal'></r-header>
             <div class="header-list">
@@ -207,14 +207,34 @@
     }
 </script>
 <style>
+.vux-tab .vux-tab-item{
+    font-size: .16rem!important;
+}
     .vux-tab-ink-bar{
+        position: absolute;
+        height: 2px;
+        bottom: 0;
+        left: 0;
         background-color:#B93647!important;
+        text-align: center;
+        width: .8rem;
+        border:0;
+        border-radius:100px;
+        margin-left: calc(25% - .45rem);
     }
 </style>
 <style scoped  lang="less">
     .activeColor{color:#CB2F00;}
     .header-list{width:calc(100% - 2px);height:.5rem;border-bottom:1px solid #E4E4E4;}
-    .list-left{width:54%;margin:.08rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;}
+    .list-left{    width: 54%;
+    margin: .08rem 0 .15rem 5.3%;
+    height: .3rem;
+    line-height: .3rem;
+    font-size: .14rem;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;}
     .left-now{color:#666666;}
     .left-active{color:#333;}
     .right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
@@ -244,7 +264,7 @@
         transition: 0.1s;
         font-weight: bold;
         padding: 0 .2rem .12rem;
-        border-bottom: 3px solid #B93647;
+        border-bottom: 2px solid #B93647;
     }
 
     /*@import url("animate.css");*/

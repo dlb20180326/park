@@ -91,7 +91,6 @@ export default {
 .overFs{
     height:calc(100% - .46rem);
     overflow-y: scroll;
-    margin-top:.57rem;
 }
 .header-top{
     width:100%;
@@ -102,7 +101,7 @@ export default {
     font-family:PingFangSC-Semibold;
     color:rgba(51,51,51,1);
     background-color:#fff;
-    position: fixed;
+    position: relative;
     z-index: 500;
      font-weight: 700;
      box-shadow:0 2px 5px 1px rgba(0, 0, 0, 0.05);

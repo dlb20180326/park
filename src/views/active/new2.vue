@@ -53,11 +53,12 @@
                 </flexbox-item>
             </flexbox>
         </div>
-
-        <ul class="active-type-list" v-show="PickerVisible2">
+        <div style="position:relative" v-show="PickerVisible2">
+        <div class="srcw"></div>
+        <ul class="active-type-list">
             <li v-for="(item,index) in list" :key="index" @click="submit1(item)">{{item.projectName}}</li>
         </ul>
-
+        </div>
         <div class="group-item">
             <group-title slot="title">
                 <b>活动名称</b>
@@ -85,11 +86,14 @@
                 </flexbox-item>
             </flexbox>
         </div>
-
-        <ul class="active-type-list" v-show="PickerVisible5">
+        <div></div>
+        <div style="position:relative" v-show="PickerVisible5">
+        <div class="srcw"></div>
+        <ul class="active-type-list" >
             <li v-for="(item,index) in list1" :key="index" @click="submit2(item)">{{item.departmentname}}</li>
             <li  @click="resetDepartment()" style="color:#999;">清空所选部门</li>
         </ul>
+        </div>
         <div class="group-item">
             <group-title slot="title">
                 <b>活动负责人</b>
@@ -402,6 +406,17 @@
 
 </style>
 <style>
+    .srcw{
+          width: 0;
+         height: 0;
+         border-left: 6px solid transparent;
+         border-right: 6px solid transparent;
+         border-bottom: 8px solid #FFF5E6;
+         position: absolute;
+         right:.3rem;
+         top:-.07rem;
+         z-index:999;
+        }
     .date-no-box{position: absolute;top:0px;left: 0;right: 0;bottom: 0;height: 0.32rem;overflow: hidden;opacity: 0}
     .date-no-box .vux-no-group-title{margin-top:0!important;}
     .date-no-box .weui-cell{

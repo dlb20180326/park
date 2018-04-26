@@ -11,10 +11,10 @@
             </div>
             <div class="inputs">
                 <div class="input-all clearfix">
-                <div class="left-content">
+                <!-- <div class="left-content">
                     <i class="img-phone"></i>
                     <label class="font-label">账号</label>
-                </div>
+                </div> -->
                 <input type="text" v-model="account" />
             </div>
             <button class="btnSub">登陆</button>
@@ -139,20 +139,37 @@
         height:auto;
     }
 
-    /* 内容 */
-
-
     .input-all {
     height: 0.36rem;
     line-height: 0.36rem;
-    padding-left: 0.61rem;
-    padding-right: 0.3rem;
+    padding-left: 0.36rem;
+    padding-right: 0.11rem;
     position: relative;
     background:rgba(255,255,255,1);
     box-shadow: 0px 1px 5px 0px rgba(150,150,150,0.5);
     border-radius:18px;
     margin-bottom:.26rem;
     }
+    /* .input-all .left-content{
+        float: left;
+        width:.34rem;
+        border:1px solid red;
+    } */
+    .input-all input{
+        width: 79%;
+        outline: 0px;
+        background-color: transparent;
+        display: block;
+        height: 0.36rem;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 0px;
+        color: #B2B2B2;
+        position: absolute;
+        font-size: 0.14rem;
+        margin-left: 0.05rem;
+    }
+
     .btnSub{
         width:100%;
         height:.36rem;
