@@ -164,11 +164,14 @@
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         border: 0px;
-        color:#B2B2B2;
+        color:#999;
         position: absolute;
         font-size: 0.14rem;
         margin-left: 0.05rem;
     }
+     ::-webkit-input-placeholder{
+         color:#ccc;
+     }
     .icon-phone{
         display:block;
         float: left;
