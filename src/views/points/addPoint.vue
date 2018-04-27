@@ -1,6 +1,6 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <x-header>{{listSingle.projectName}}</x-header>
+        <x-header>{{listSingle.projectName}}<a slot="right">评分说明</a></x-header>
         <div class="group-item">
             <group-title slot="title">
                 <b>党员姓名：<span style="color: #999999">{{userName}}</span></b>
@@ -425,7 +425,7 @@
 
 
 </style>
-<style>
+<style scoped>
 .colorSet{
 	color:#494949;
 }

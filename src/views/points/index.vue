@@ -2,6 +2,7 @@ w<template>
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
             党员积分
+            <a slot="right">评分说明</a>
         </x-header>
         <div class="box">
             <div class="head">
@@ -130,6 +131,7 @@ w<template>
                             <div class="states" v-if="item.status==2">
                                 已通过
                             </div>
+                            <div class="btn-return" v-if="item.status==2">重新提交</div>
                             <div class="states" v-if="item.status==3">
                                 已拒绝
                             </div>
@@ -154,7 +156,10 @@ w<template>
                     </li>
                 </ul>
             </div>
-            <div class="bg-cross" @click =closeBg()></div>
+            <div style="width:316.8px;">
+                <div class="bg-cross" @click =closeBg()></div>
+            </div>
+            
         </div>
 
         <div class="bg-dark" v-if="darkbgShow"></div>
@@ -275,6 +280,7 @@ export default {
 
             this.darkbgShow = true;
             this.infoList = itemList;
+            console.log(this.infoList);
             if (itemList) {
                 var imgs=itemList;
 
@@ -391,14 +397,27 @@ export default {
 .states{
     text-align: center;
     border-radius: 4px;
-    border: 2px solid #B93647;
+    border: 0.5px solid #B93647;
     position: absolute;
     right: .2rem;
     z-index: 999;
     top: .2rem;
     font-size: .14rem;
     color: #B93647;
-    padding: .02rem .1rem;
+    width:.74rem;
+}
+.btn-return{
+    text-align: center;
+    border-radius: 4px;
+    border: 0.5px solid #B93647;
+    position: absolute;
+    right: .2rem;
+    z-index: 999;
+    background-color:#B93647;
+    top: .6rem;
+    font-size: .14rem;
+    color: #fff;
+     width:.74rem;
 }
 ol,ul,li{
     list-style:none;
@@ -427,16 +446,16 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     border-radius: 10px;
     background: #fff;
     max-height: 4.0rem;
-    margin-right: 20px;
+    margin-right: .1rem;
 }
 .swiper-one-inner{
     padding:.3rem .2rem .15rem;
     position: relative;
 }
 .sinfo-title{
-    height: .16rem;
-    line-height: .16rem;
-    font-size: .14rem;
+    height: .14rem;
+    line-height: .14rem;
+    font-size: 0;
     margin-bottom: .16rem;
     vertical-align: top;
     overflow: hidden;
@@ -446,20 +465,25 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     padding-right:1rem;
 }
 .sinfo-title span{
-    vertical-align: top;
+    vertical-align: text-bottom;
+    font-size:.14rem;
+    padding:0;
+    height: .14rem;
+    font-weight: normal;
+    display: inline-block;
 }
-.sinfo-title span.vb{
-    vertical-align:top;
-}
+// .sinfo-title span.vb{
+//     vertical-align:top;
+// }
 .sinfo-title .text-gray{
     color:#999;
-    vertical-align: top;
+    vertical-align: text-bottom;
 }
 .sinfo-border{
-    width: 5px;
-    height:.16rem;;
+    width: 3px;
+    height:.14rem;;
     background: #b93647;
-    border-radius: 4px;
+    border-radius: 40px;
     display: inline-block;
     vertical-align: top;
     margin-right: .1rem;

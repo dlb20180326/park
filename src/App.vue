@@ -50,11 +50,15 @@ input[type=button], input[type=submit], input[type=file], button { cursor: point
 .vux-header .vux-header-right button {
   float: left;
   margin-right: 8px;
-  color: #ffffff!important;
+  color: #fff!important;
 }
 .page-body {
     flex: 1;
     overflow: auto;
     background-color: #fff;
+}
+.vux-header .vux-header-left .left-arrow:before{
+    border:1px solid #fff!important;
+        border-width: 1px 0 0 1px!important;
 }
 </style>

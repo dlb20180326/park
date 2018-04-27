@@ -87,14 +87,14 @@
         }
     .logo-top{
         width:100%;
-        height: 27%;
+        height: 1.79rem;
         background: url(../assets/images/new-logo.png) no-repeat;
         background-size:100% 100%;
         z-index:500;
     }
     .logo-pic{
         position: absolute;
-        top:20%;
+        top:1.35rem;
         left:50%;
         z-index:999;
         width:1.1rem;
