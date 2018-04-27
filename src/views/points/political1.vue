@@ -140,7 +140,8 @@ export default {
                     name: 'detailPack2',
                     params: {
                         userId: item.id,
-                        departmentid: item.departmentid
+                        departmentid: item.departmentid,
+                        moduleid: this.list1Selected.moduleId
                     }
                 });
             } else {
@@ -149,7 +150,8 @@ export default {
                     name: 'detailPack3',
                     params: {
                         userId: item.id,
-                        departmentid: item.departmentid
+                        departmentid: item.departmentid,
+                        moduleid: this.list1Selected.moduleId
                     }
                 });
             }

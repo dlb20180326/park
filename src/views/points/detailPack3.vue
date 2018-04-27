@@ -15,7 +15,7 @@
             <p class="allPic">
                 <span class="bg-line"></span>
                 <span class="picture">汇报类型:</span>
-                <span class="numberz1">口头汇报</span>
+                <span class="numberz1">{{list1Selected.text}}</span>
             </p>
 
             <p class="allPic">
@@ -196,6 +196,7 @@ export default {
         }
     },
     mounted() {
+        this.list1Selected = this.list1.find(item => item.moduleId == this.$route.params.moduleid);
         this.getUser1();
         this.getList1();
     },
@@ -213,6 +214,8 @@ export default {
             activeData: {},
             picInfo: [],
             list: [],
+            list1: [{ text: '口头汇报', moduleId: 11 }, { text: '书面汇报', moduleId: 12 }],
+            list1Selected: {},
             content: {},
             imgpics: [],
             imgs: '',
