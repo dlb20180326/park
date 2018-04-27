@@ -3,7 +3,9 @@
         <r-header :rfs="contents" body-padding-top=".46rem"></r-header>
         <div class="group-item">
             <group-title slot="title">
-                <b>党员姓名：<span class="grayColor">{{userName}}</span></b>
+                <b>党员姓名：
+                    <span class="grayColor">{{userName}}</span>
+                </b>
             </group-title>
         </div>
         <div class="group-item">
@@ -40,7 +42,7 @@
             <span class="addPic">添加凭证</span>
             <div class="photo-list cl">
                 <ul>
-                    <li  v-for="(item,index) in picList14.list" :key="index">
+                    <li v-for="(item,index) in picList14.list" :key="index">
                         <div class="preview">
                             <img style="float:left;width:100%" :key="index" width="100" :src="item">
                         </div>
@@ -92,10 +94,10 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
-import Xheaders from '@/components/comother/rheader'
+import Xheaders from '@/components/comother/rheader';
 
 import {
     XHeader,
@@ -109,7 +111,7 @@ import {
     Group,
     Picker,
     InlineXNumber
-} from "vux";
+} from 'vux';
 
 export default {
     components: {
@@ -124,18 +126,18 @@ export default {
         Picker,
         InlineXNumber,
         Alert,
-        'r-header':Xheaders
+        'r-header': Xheaders
     },
     data() {
         return {
-            Messge13: "",
-            Messge14: "",
-            Messge15: "",
+            Messge13: '',
+            Messge14: '',
+            Messge15: '',
             itemscore: 0,
-            contents:{rights:'评分说明',title:'先锋作用评定'},
-            picList15:{list:[],arr:[]},
-            picList14:{list:[],arr:[]},
-            picList13:{list:[],arr:[]}
+            contents: { rights: '评分说明', title: '先锋作用评定' },
+            picList15: { list: [], arr: [] },
+            picList14: { list: [], arr: [] },
+            picList13: { list: [], arr: [] }
         };
     },
     computed: {
@@ -145,8 +147,8 @@ export default {
     },
     methods: {
         submit() {
-            let {departmentId, userId, partmentId} = this.$route.params;
-            let {Messge13, Messge14, Messge15, itemscore} = this;
+            let { departmentId, userId, partmentId } = this.$route.params;
+            let { Messge13, Messge14, Messge15, itemscore } = this;
             let obj = {
                 Messge13,
                 Messge14,
@@ -154,100 +156,132 @@ export default {
                 itemscore,
                 departmentid: +departmentId,
                 userid: +userId,
-                partmentid: +partmentId,
+                partmentid: +partmentId
             };
-            if (this.picList13.arr.length != 0) {
-                obj.pic13 = this.picList13.arr.join(",");
+            if (!this.Messge13) {
+                return this.$vux.toast.show({
+                    text: '请填写获得荣誉评定内容',
+                    type: 'text'
+                });
             }
-            if (this.picList14.arr.length != 0) {
-                obj.pic14 = this.picList14.arr.join(",");
+            if (this.picList13.arr.length) {
+                obj.pic13 = this.picList13.arr.join(',');
+            } else {
+                return this.$vux.toast.show({
+                    text: '请上传荣誉凭证',
+                    type: 'text'
+                });
             }
-            if (this.picList15.arr.length != 0) {
-                obj.pic15 = this.picList15.arr.join(",");
+            if (!this.Messge14) {
+                return this.$vux.toast.show({
+                    text: '请填写先锋表彰评定内容',
+                    type: 'text'
+                });
+            }
+            if (this.picList14.arr.length) {
+                obj.pic14 = this.picList14.arr.join(',');
+            } else {
+                return this.$vux.toast.show({
+                    text: '请上传表彰凭证',
+                    type: 'text',
+                    position: 'center'
+                });
+            }
+            if (!this.Messge15) {
+                return this.$vux.toast.show({
+                    text: '请填写先锋模范评定内容',
+                    type: 'text'
+                });
+            }
+            if (this.picList15.arr.length) {
+                obj.pic15 = this.picList15.arr.join(',');
+            } else {
+                return this.$vux.toast.show({
+                    text: '请上传模范凭证',
+                    type: 'text',
+                    position: 'center'
+                });
             }
             axios({
-                url: "pavantgrade/save",
+                url: 'pavantgrade/save',
                 method: 'post',
-                headers: {'contentType': 'application/json'},
+                headers: { contentType: 'application/json' },
                 params: obj
-            }).then(res => {
-                if (res.success) {
-                    this.$vux.alert.show({title: '提交成功'});
-                } else {
-                    this.$vux.alert.show({title: '提交失败'});
-                }
-            }).catch(err => {
-                this.$vux.alert.show({title: '提交失败'});
-            });
-        }
-        ,
-
-        chooseImage(it) {
-            wx.chooseImage({
-                    count: 1, // 默认9
-                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-                    success: res => {
-                    let localIds = res.localIds || [];
-            new Promise(resolve => {
-                let serverIds = [];
-            let toUpload = localId =>
-            wx.uploadImage({
-                    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                    isShowProgressTips: 1, // 默认为1，显示进度提示
-                    success: res => {
-                    serverIds.push(res.serverId);
-            if (localIds.length) {
-                toUpload(localIds.shift());
-            } else {
-                resolve(serverIds);
-            }
-        }
-        })
-            ;
-            if (localIds.length) {
-                toUpload(localIds.shift());
-            } else {
-                resolve(serverIds);
-            }
-        }).
-            then(serverIds => {
-                let promiseList = [];
-            serverIds.map(serverId =>
-            promiseList.push(
-                this.$http.get('picture/upload', {
-                    params: {
-                        mediaId: serverId
+            })
+                .then(res => {
+                    if (res.success) {
+                        this.$vux.alert.show({ title: '提交成功' });
+                    } else {
+                        this.$vux.alert.show({ title: '提交失败' });
                     }
                 })
-            )
-        )
-            ;
-            Promise.all(promiseList).then(result => {
-                let pictureIds = [];
-            result.map(item => pictureIds.push(item.data)
-        )
-            ;
-            it.list.push("http://www.dlbdata.cn/dangjian/picture/show?pictureId=" + pictureIds.join());
-            it.arr.push(pictureIds.join());
-        })
-            ;
-        })
-            ;
-        }
-        })
-            ;
+                .catch(err => {
+                    this.$vux.alert.show({ title: '提交失败' });
+                });
+        },
+        chooseImage(it) {
+            wx.chooseImage({
+                count: 1, // 默认9
+                sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                success: res => {
+                    let localIds = res.localIds || [];
+                    new Promise(resolve => {
+                        let serverIds = [];
+                        let toUpload = localId =>
+                            wx.uploadImage({
+                                localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                isShowProgressTips: 1, // 默认为1，显示进度提示
+                                success: res => {
+                                    serverIds.push(res.serverId);
+                                    if (localIds.length) {
+                                        toUpload(localIds.shift());
+                                    } else {
+                                        resolve(serverIds);
+                                    }
+                                }
+                            });
+                        if (localIds.length) {
+                            toUpload(localIds.shift());
+                        } else {
+                            resolve(serverIds);
+                        }
+                    }).then(serverIds => {
+                        let promiseList = [];
+                        serverIds.map(serverId =>
+                            promiseList.push(
+                                this.$http.get('picture/upload', {
+                                    params: {
+                                        mediaId: serverId
+                                    }
+                                })
+                            )
+                        );
+                        Promise.all(promiseList).then(result => {
+                            let pictureIds = [];
+                            result.map(item => pictureIds.push(item.data));
+                            it.list.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + pictureIds.join());
+                            it.arr.push(pictureIds.join());
+                        });
+                    });
+                }
+            });
         }
     },
     mounted() {
-          weixin.init(['chooseImage', 'uploadImage']);
+        weixin.init(['chooseImage', 'uploadImage']);
     }
 };
 </script>
 
 <style lang="less" scoped>
-.widthSet{width:35%;display:inline-block;}
-.colorSet{color:#B93647;}
+.widthSet {
+    width: 35%;
+    display: inline-block;
+}
+.colorSet {
+    color: #b93647;
+}
 ul,
 li {
     list-style: none;
@@ -332,7 +366,7 @@ li {
     color: rgba(153, 153, 153, 1);
     line-height: 0.17rem;
 }
-input[type="file"] {
+input[type='file'] {
     color: transparent;
     opacity: 0;
 }
@@ -370,37 +404,118 @@ input[type="file"] {
     height: 0.32rem;
     padding: 0;
 }
-.photo-list{padding:0.1rem 0 0;}
-.photo-list.border0{border-bottom:0;padding-bottom: 0;}
-.photo-list ul{font-size:0;list-style:none;}
-.photo-list ul li{font-size:0;display:inline-block;
-margin-right:.1rem;
-position:relative;vertical-align:top;width:.6rem;height:.6rem;overflow-y:hidden;margin-bottom:.2rem;
-box-sizing:border-box;
+.photo-list {
+    padding: 0.1rem 0 0;
 }
-.photo-list ul li:first-child{margin-left:0;}
-.photo-list .operate{display:none;background:rgba(33,33,33,.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);z-index:5;position:absolute;bottom:0;left:0;right:0;height:12px;padding-bottom:7px;font-size:12px;color:#fff;text-align: center}
-.photo-list .info{line-height:.6rem;text-align:center}
-.photo-list .preview{width: 0.6rem;height:.6rem;z-index:4;line-height:.6rem;font-family:arial;background-color: #dbdbdb;background-repeat:no-repeat;position:absolute;bottom:0;left:0;text-align:center;right:0;cursor: pointer;border:1px solid #fff;box-sizing: border-box;}
-.photo-list .preview.addUpload{background-color:#fff;border: 1px solid #b53141;}
-.photo-list .preview img{max-height:.6rem;max-width:.6rem;vertical-align:middle;}
-.photo-list .photo-primary-text{color:#ffA500;font-size:12px;}
-.photo-list .add-bg{
+.photo-list.border0 {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+.photo-list ul {
+    font-size: 0;
+    list-style: none;
+}
+.photo-list ul li {
+    font-size: 0;
+    display: inline-block;
+    margin-right: 0.1rem;
+    position: relative;
+    vertical-align: top;
+    width: 0.6rem;
+    height: 0.6rem;
+    overflow-y: hidden;
+    margin-bottom: 0.2rem;
+    box-sizing: border-box;
+}
+.photo-list ul li:first-child {
+    margin-left: 0;
+}
+.photo-list .operate {
+    display: none;
+    background: rgba(33, 33, 33, 0.6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);
+    z-index: 5;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 12px;
+    padding-bottom: 7px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+}
+.photo-list .info {
+    line-height: 0.6rem;
+    text-align: center;
+}
+.photo-list .preview {
+    width: 0.6rem;
+    height: 0.6rem;
+    z-index: 4;
+    line-height: 0.6rem;
+    font-family: arial;
+    background-color: #dbdbdb;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    right: 0;
+    cursor: pointer;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+}
+.photo-list .preview.addUpload {
+    background-color: #fff;
+    border: 1px solid #b53141;
+}
+.photo-list .preview img {
+    max-height: 0.6rem;
+    max-width: 0.6rem;
+    vertical-align: middle;
+}
+.photo-list .photo-primary-text {
+    color: #ffa500;
+    font-size: 12px;
+}
+.photo-list .add-bg {
     width: 0.2rem;
     height: 0.2rem;
-    margin-left: .2rem;
-    margin-top: .2rem;
+    margin-left: 0.2rem;
+    margin-top: 0.2rem;
     display: block;
     background: url(../../assets/images/add_icon_bg.png) no-repeat;
     background-size: contain;
     background-position: center;
 }
-.photo-list ul li:hover .operate{display:block;}
-.photo-list ul .operate a{color:#fff;cursor:pointer;text-decoration:none}
-.photo-list ul li.no-operate:hover .operate{display:none;}
-.photo-list .upload-file-input{opacity: 0;position: absolute;z-index: 99;top: 0;right: 0;left: 0;width: .6rem;bottom: 0;}
-.grayColor{color:#999;}
-.group-item:nth-child(2){margin-top:.52rem;}
+.photo-list ul li:hover .operate {
+    display: block;
+}
+.photo-list ul .operate a {
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+.photo-list ul li.no-operate:hover .operate {
+    display: none;
+}
+.photo-list .upload-file-input {
+    opacity: 0;
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 0.6rem;
+    bottom: 0;
+}
+.grayColor {
+    color: #999;
+}
+.group-item:nth-child(2) {
+    margin-top: 0.52rem;
+}
 </style>
 <style lang="less">
 .group-item {
