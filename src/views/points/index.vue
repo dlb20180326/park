@@ -630,7 +630,7 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     font-size: 0.18rem;
 }
 .weui-progress>>>.weui-progress__bar {
-    height: 0.2rem;
+    height: 0.15rem;
     border-radius: 0.2rem;
 }
 .weui-progress>>>.weui-progress__inner-bar {
