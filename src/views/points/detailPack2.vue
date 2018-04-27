@@ -50,7 +50,7 @@
             <span class="bg-line"></span>
             <group-title slot="title" style="margin-left: 0.15rem">
                 <b>思想汇报图片：
-                    <span style="color: #999999">最多可传10张</span>
+                    <span style="color: #999999">最多可传3张</span>
                 </b>
             </group-title>
             <div class="photo-list cl">
