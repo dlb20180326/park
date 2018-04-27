@@ -92,7 +92,6 @@
                     this.activeData = res.data;
                     this.contents.title = res.data.activeTypeName+'详情';
                     this.activeNames = this.activeData.activeTypeName;
-                    console.log(this.activeData);
                     this.peopleNum = this.activeData.notParticipate.length + this.activeData.participate.length;
                     this.participants = this.activeData.participate.length;
                     this.Noparticipants = this.activeData.notParticipate.length;

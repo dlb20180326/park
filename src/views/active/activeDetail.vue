@@ -68,7 +68,7 @@
                             <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
                         </div>
                         <ul class="news">
-                            <li v-for="(item,index) in activeComplete" :key="item.departmentid">
+                            <li v-for="(item,index) in activeComplete" :key="index">
                                 <a class=" display clearfix " >
                                     <div class=" fl">{{item.activeName}}</div>
                                     <div class=" fr">{{item.endTime|formatDuring}}<span class="rightBtn"></span></div>
@@ -117,7 +117,8 @@ export default {
             activeComplete:'',
             isActive:true,
             signupstatus:'',
-            msg:''
+            msg:'',
+            endTime1:''
         };
     },
     filters: {
