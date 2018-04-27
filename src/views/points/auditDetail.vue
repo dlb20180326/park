@@ -28,14 +28,28 @@
         <flexbox orient="vertical" align="initial">
             <view-box class="view-box">
                 <group label-width="80px" label-margin-right="20px">
-                    <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="userName" value-align="left"></cell>
-                    <cell :border-intent="false" disabled title="获得总分" :value="totalscore" value-align="left"></cell>
+                    <cell class="no-border" :border-intent="false" disabled title="党员姓名 :" value-align="left"><span class="nav">{{userName}}</span></cell>
+                    <cell :border-intent="false" disabled title="获得总分 :" value-align="left"><span class="nav">{{totalscore}}</span></cell>
                 </group>
                 <div class="item-list" v-if="item.message!=''" v-for="(item,i) of list" :key="i">
                     <div class="item">
-                        <div class="header">{{item.title}} <span v-if="i==2">支部书记评分{{item.itemscore}}分</span>  </div>
-                        <div class="body">
-                            <span class="desc">{{item.message}}</span>
+                        <!--<div class="header">{{item.title}}：（ 得分：5 分 ）<span v-if="i==2">支部书记评分{{item.itemscore}}分</span>  </div>-->
+                        <div class="header">{{item.title}}：（ 得分：<span v-show="item.status == 3">0</span>
+                        											<span v-show="item.status != 3">5</span> 分 ）
+                        	<x-button v-if="item.status == 3" class="passN" :mini="true">已拒绝</x-button>
+                        	<x-button v-if="item.status == 2" class="passY">审核通过</x-button>
+                        </div>
+                        <flexbox class="footer" justify= "left" v-if="item.status == 3" style="text-align:left;">
+                            <table>
+                                <tr>
+                                <td style="width:5em;color: #a0333b;">拒绝原因:</td>
+                                <td style="color: #a0333b;">{{item.rejectReson}}</td>
+                                </tr>
+                            </table>
+                        </flexbox>
+                        <div class="body" style="margin-bottom: .1rem;">
+                            <span v-show="item.status == 3" style="color: #b2b2b2;">{{item.message}}</span>
+                            <span v-show="item.status != 3" style="color: #b2b2b2;" class="desc">{{item.message}}</span>
                             <div class="img-show">
                                 <img class="previewer-demo-img" v-for="(it,idx) in item.memos" :src="it.src" width="100"  @click="atBig(idx,i)">
                                 <div v-transfer-dom>
@@ -50,26 +64,18 @@
                                     驳回
                                 </x-button>
                             </flexbox-item>
-                            <flexbox-item>
+                            <flexbox-item>+
                                 <x-button @click.native="auditResolve(item)" :mini="true" type="warn">
                                     通过审核
                                 </x-button>
                             </flexbox-item>
                         </flexbox>
-                        <flexbox class="footer" justify= "center" v-if="item.status == 2">
-                            <x-button type="warn">审核通过</x-button>
-                        </flexbox>
-                        <flexbox class="footer" justify= "center" v-if="item.status == 3">
+                        <!--<flexbox class="footer" justify= "center" v-if="item.status == 2">-->
+                            <!--<x-button type="warn">审核通过</x-button>-->
+                        <!--</flexbox>-->
+                        <!--<flexbox class="footer" justify= "center" v-if="item.status == 3">
                             <x-button style="color:gray">已拒绝</x-button>
-                        </flexbox>
-                        <flexbox class="footer" justify= "left" v-if="item.status == 3" style="text-align:left;">
-                            <table>
-                                <tr>
-                                <td style="width:5em">拒绝原因:</td>
-                                <td>{{item.rejectReson}}</td>
-                                </tr>
-                            </table>
-                        </flexbox>
+                        </flexbox>-->
                     </div>
                 </div>
             </view-box>
@@ -286,27 +292,73 @@ td {
 }
 .page-body.points-auditDetail {
     background: #fff;
+    .vux-header .vux-header-left .left-arrow:before{
+    	border-color: #fff;
+    	height: 9px;
+    	width: 9px;
+    	top:11px;
+    }
+    .vux-header-back{
+    	color: #fff;
+    }
     .view-box {
         padding: 10px 20px;
         .weui-cells,
         .weui-cell {
             margin-top: 0;
+            padding-bottom: .1rem;
             &:before {
                 border-top: 0;
             }
         }
-
+		.nav{
+		    font-weight: Medium;
+		    font-family: PingFangSC;
+		    font-size: .16rem;
+		    color: #333333;
+		}
         .item-list {
             .item {
                 margin: 10px;
                 border-bottom: 1px solid #d9d9d9;
+                width:97%;
                 .header,
                 .body,
                 .footer {
                     margin: 10px 0;
                 }
+                
+                /*.desc{
+                	font-weight: 550;
+    				font-size: .16rem;
+                }*/
                 .header {
                     color: #b2b2b2;
+                    padding: .1rem 0;
+                }
+                .passN{
+                	width:.65rem;
+                	display:inline-block;
+                	padding: 0;
+                	line-height: 2.3;
+                	color:#a0333b;
+                	background-color:#FFFFFF;
+                	border:.005rem solid #a0333b;
+                	float: right;
+                }
+                .passY{
+                	width:.65rem;
+                	display:inline-block;
+                	padding: 0;
+                	line-height: 2.3;
+					color:#6BD46B;
+					background-color:#FFFFFF;
+					font-size:13px;
+					border:.005rem solid #6BD46B;
+					float: right;
+                }
+                .number{
+                	color: #a0333b;
                 }
                 .body {
                     .img-list {
