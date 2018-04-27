@@ -158,49 +158,61 @@ export default {
                 userid: +userId,
                 partmentid: +partmentId
             };
-            if (!this.Messge13) {
+            const empty1 = !this.Messge13 && !this.picList13.arr.length;
+            const empty2 = !this.Messge14 && !this.picList14.arr.length;
+            const empty3 = !this.Messge15 && !this.picList15.arr.length;
+            if (empty1 && empty2 && empty3) {
                 return this.$vux.toast.show({
-                    text: '请填写获得荣誉评定内容',
+                    text: '请填写评定内容并上传凭证',
                     type: 'text'
                 });
             }
-            if (this.picList13.arr.length) {
+            if (!empty1) {
+                if (!this.Messge13) {
+                    return this.$vux.toast.show({
+                        text: '请填写获得荣誉评定内容',
+                        type: 'text'
+                    });
+                }
+                if (!this.picList13.arr.length) {
+                    return this.$vux.toast.show({
+                        text: '请上传荣誉凭证',
+                        type: 'text'
+                    });
+                }
                 obj.pic13 = this.picList13.arr.join(',');
-            } else {
-                return this.$vux.toast.show({
-                    text: '请上传荣誉凭证',
-                    type: 'text'
-                });
             }
-            if (!this.Messge14) {
-                return this.$vux.toast.show({
-                    text: '请填写先锋表彰评定内容',
-                    type: 'text'
-                });
-            }
-            if (this.picList14.arr.length) {
+            if (!empty2) {
+                if (!this.Messge14) {
+                    return this.$vux.toast.show({
+                        text: '请填写先锋表彰评定内容',
+                        type: 'text'
+                    });
+                }
+                if (!this.picList14.arr.length) {
+                    return this.$vux.toast.show({
+                        text: '请上传表彰凭证',
+                        type: 'text',
+                        position: 'center'
+                    });
+                }
                 obj.pic14 = this.picList14.arr.join(',');
-            } else {
-                return this.$vux.toast.show({
-                    text: '请上传表彰凭证',
-                    type: 'text',
-                    position: 'center'
-                });
             }
-            if (!this.Messge15) {
-                return this.$vux.toast.show({
-                    text: '请填写先锋模范评定内容',
-                    type: 'text'
-                });
-            }
-            if (this.picList15.arr.length) {
+            if (!empty3) {
+                if (!this.Messge15) {
+                    return this.$vux.toast.show({
+                        text: '请填写先锋模范评定内容',
+                        type: 'text'
+                    });
+                }
+                if (!this.picList15.arr.length) {
+                    return this.$vux.toast.show({
+                        text: '请上传模范凭证',
+                        type: 'text',
+                        position: 'center'
+                    });
+                }
                 obj.pic15 = this.picList15.arr.join(',');
-            } else {
-                return this.$vux.toast.show({
-                    text: '请上传模范凭证',
-                    type: 'text',
-                    position: 'center'
-                });
             }
             axios({
                 url: 'pavantgrade/save',
