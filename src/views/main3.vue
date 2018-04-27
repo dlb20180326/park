@@ -77,191 +77,239 @@
       </div>
     </div>
       <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{width: '80%',height:'300px'}" >
-              <h1 style="text-align: center;margin-top:20px;margin-bottom:20px;">{{activeTitle}}</h1>
-              <img id="fei" alt="">
+          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'300px'}" >
+               <div class="title">
+                    <label for="">活动名称:</label>
+                    <div class="activeTitle">{{activeTitle}}</div>
+                </div>
+                <div class="qrcode">
+                  <img id="fei" alt="">
+                </div>
           </x-dialog>
       </div>
   </div>
 </template>
 
 <script>
-    import axios from 'axios';
-    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker ,XDialog, TransferDomDirective as TransferDom ,cookie } from 'vux';
+import axios from "axios";
+import {
+    XHeader,
+    GroupTitle,
+    Flexbox,
+    Alert,
+    FlexboxItem,
+    XButton,
+    DatetimePlugin,
+    Datetime,
+    Group,
+    Picker,
+    XDialog,
+    TransferDomDirective as TransferDom,
+    cookie
+} from "vux";
 
-    export default {
-        directives: {
-            TransferDom
-        },
-        components: {
-            XHeader,
-            GroupTitle,
-            Flexbox,
-            FlexboxItem,
-            XButton,
-            DatetimePlugin,
-            Datetime,
-            Group,
-            Picker,
-            Alert,
-            XDialog
-        },
+export default {
+    directives: {
+        TransferDom
+    },
+    components: {
+        XHeader,
+        GroupTitle,
+        Flexbox,
+        FlexboxItem,
+        XButton,
+        DatetimePlugin,
+        Datetime,
+        Group,
+        Picker,
+        Alert,
+        XDialog
+    },
     data() {
-      return {
-        departmentid: this.$store.getters.user.departmentid,
-        partyBranch: '',
-        address: '',
-        honor: '',
-        people: '',
-        todoList: [],
-        activeTitle:'',
-        info:[],
-        dateTimes:'',
-        showQrcodeDialog: false
-      };
+        return {
+            departmentid: this.$store.getters.user.departmentid,
+            partyBranch: "",
+            address: "",
+            honor: "",
+            people: "",
+            todoList: [],
+            activeTitle: "",
+            info: [],
+            dateTimes: "",
+            showQrcodeDialog: false
+        };
     },
     methods: {
-        refer (item){
-            if(item.type == 'SCORE'){
+        refer(item) {
+            if (item.type == "SCORE") {
                 this.$router.push({
-                    path:'points/evaluation'
-                })
-            }else if(item.type == 'ACTIVE'){if(item.beginYn=='Y'){
-                this.$router.push({
-                    path:'active/partyBranch'
-                })}else{ this.activeTitle = item.name;
-                this.showQR(item.masId);}
+                    path: "points/evaluation"
+                });
+            } else if (item.type == "ACTIVE") {
+                if (item.beginYn == "Y") {
+                    this.$router.push({
+                        path: "active/partyBranch"
+                    });
+                } else {
+                    this.activeTitle = item.name;
+                    this.showQR(item.masId);
+                }
             }
         },
-      getDate(){
-        let datime = new Date().getHours();
-        if(datime>=5 & datime<8){
-          this.dateTimes = '早上好'
-        }
-        else if(datime>=8 & datime<11){
-          this.dateTimes = '上午好'
-          
-        }
-        else if(datime>=11 & datime<13){
-          this.dateTimes = '中午好'
-        }
-        else if(datime>=13 & datime<19){
-          this.dateTimes = '下午好'
-        }
-        else{
-          this.dateTimes = '晚上好'
-        }
+        getDate() {
+            let datime = new Date().getHours();
+            if ((datime >= 5) & (datime < 8)) {
+                this.dateTimes = "早上好";
+            } else if ((datime >= 8) & (datime < 11)) {
+                this.dateTimes = "上午好";
+            } else if ((datime >= 11) & (datime < 13)) {
+                this.dateTimes = "中午好";
+            } else if ((datime >= 13) & (datime < 19)) {
+                this.dateTimes = "下午好";
+            } else {
+                this.dateTimes = "晚上好";
+            }
         },
-        showQR(data){
-            document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
+        showQR(data) {
+            document.getElementById("fei").src =
+                "http://www.dlbdata.cn/dangjian/active/showQrCode?activeId=" +
+                data;
             this.showQrcodeDialog = true;
         },
-      getDepartment() {
-        axios({
-          method: 'get',
-          url: 'pdepartment/queryById',
-          params: {
-            departmentid: this.departmentid
-
-          }
-        }).then((res) => {
-        	this.info = res.data;
-          this.partyBranch = res.data.partyBranch;
-          this.address = res.data.address;
-          this.honor = res.data.honor;
-          this.people = res.data.people;
-        }).catch(function (error) {
-          console.log(error);
-        });
-        axios
-          .get('pscoredetail/todoList', {
-            params: {
-              userId: this.$store.getters.user.userid
-            }
-          })
-          .then(res => {
-            this.todoList = res.data;
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
-
-    }, mounted() {
-      this.getDepartment();
-      this.getDate();
+        getDepartment() {
+            axios({
+                method: "get",
+                url: "pdepartment/queryById",
+                params: {
+                    departmentid: this.departmentid
+                }
+            })
+                .then(res => {
+                    this.info = res.data;
+                    this.partyBranch = res.data.partyBranch;
+                    this.address = res.data.address;
+                    this.honor = res.data.honor;
+                    this.people = res.data.people;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+            axios
+                .get("pscoredetail/todoList", {
+                    params: {
+                        userId: this.$store.getters.user.userid
+                    }
+                })
+                .then(res => {
+                    this.todoList = res.data;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    },
+    mounted() {
+        this.getDepartment();
+        this.getDate();
     }
-
-
-  };
+};
 </script>
+<style lang="less">
+.qrcode-dialog {
+    .weui-dialog {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        .title {
+            text-align: left;
+            word-break: break-all;
+            label{
+              color: #999;
+            }
+            .activeTitle {
+                color: #000;
+            }
+        }
+        .qrcode {
+            flex: 1;
+            img {
+                height: 100%;
+            }
+        }
+    }
+}
+</style>
 
 <style lang="less" scoped>
-  .page-body {
+.page-body {
     background-color: #efefef;
-  }
+}
 
-  .head,
-  .list {
+.head,
+.list {
     background-color: #fff;
     line-height: 2;
     padding: 0.15rem;
-  }
+}
 
-  .list {
+.list {
     margin-top: 0.1rem;
     h3 {
-      line-height: 1;
-      margin-bottom: 0.08rem;
+        line-height: 1;
+        margin-bottom: 0.08rem;
     }
     .item {
-      /*margin-top: 0.1rem;*/
-      padding: 0.1rem 0;
-      border-top: 1px solid #eee;
-      &:first-child {
-        border-top: 0;
-      }
+        /*margin-top: 0.1rem;*/
+        padding: 0.1rem 0;
+        border-top: 1px solid #eee;
+        &:first-child {
+            border-top: 0;
+        }
     }
     .title {
-      color: #666;
+        color: #666;
+    }
+    .title a {
+        color: #666 !important;
     }
     .content {
-      text-align: center;
+        text-align: center;
     }
-    a{
-      color:#000;
+    a {
+        color: #000;
     }
-  }
+}
 
-  .number {
+.number {
     color: #a0333b;
-  }
-  .vux-flexbox-item.label {
+}
+.vux-flexbox-item.label {
     flex: 0 0 auto;
     width: auto;
     color: #8b8b8b;
-  }
-  .vux-flexbox-item.dateLable{
-    flex:0 0 auto;
-    width:auto;
-  }
-  button.weui-btn,input.weui-btn{
-    width:32%!important;
-  }
-  .content button{
-    padding:.03rem .26rem;
-    border:0;
-    background:rgba(185,54,71,1);
-    border-radius: 2px ;
-    font-size:.16rem;
-    font-family:PingFangSC-Medium;
-    color:#fff;
-    margin:.2rem auto;
-  }
-  .content p{
-  	width: 9999px;
-    height: .01rem;
+}
+.vux-flexbox-item.dateLable {
+    flex: 0 0 auto;
+    width: auto;
+}
+button.weui-btn,
+input.weui-btn {
+    width: 32% !important;
+}
+.content button {
+    padding: 0.03rem 0.26rem;
+    border: 0;
+    background: rgba(185, 54, 71, 1);
+    border-radius: 2px;
+    font-size: 0.16rem;
+    font-family: PingFangSC-Medium;
+    color: #fff;
+    margin: 0.2rem auto;
+}
+.content p {
+    width: 108%;
+    height: 0.01rem;
     background-color: #efefef;
     margin-left: -4%;
-  }
+}
 </style>

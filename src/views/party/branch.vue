@@ -20,7 +20,7 @@
                         <flexbox-item>年龄</flexbox-item>
                         <flexbox-item>积分</flexbox-item>
                     </flexbox>
-                    <flexbox :gutter="0"  v-for="(listinfo,index) in contents" :key="index"   @click.native="submit(listinfo)" class="diffrent">
+                    <flexbox :gutter="0"  v-for="(listinfo,index) in contents" :key="index"   @click.native="sub(listinfo)" class="diffrent">
                         <flexbox-item>{{listinfo.name}}</flexbox-item>
                         <flexbox-item>{{judge(listinfo.sex)}}</flexbox-item>
                         <flexbox-item>{{listinfo.age}}</flexbox-item>
@@ -55,22 +55,23 @@ export default {
         };
     },
     methods: {
-        submit(item){
+        sub(item){
 
             this.$router.push({
-                path: '/party/partypointdetail/:userid/:partyBranch',
-                name: 'partypointdetail',
-
+                path: '/party/partyPointDetail',
+                name: 'partyPointDetail',
                 params: {
-                    userid:item.id,
-                    partyBranch:encodeURI(this.partyBranch)
-                }/*query: {
                     userid:item.id
-                }*/
-
+                }
             })
-
-
+            /*this.$router.push({
+                path: '/active/detailPack3',
+                name: 'detailPack3',
+                params:{
+                    userId:item.id,
+                    departmentid:item.departmentid
+                }
+            });*/
         },
         infor() {
             axios.get('ppartymember/queryByDepartmentId', {
@@ -108,19 +109,7 @@ export default {
         this.infor();
         this.nav();
         this.judge();
-    },
-
-    watch:{
-        // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
-      /*  '$route': function(to, from) {
-            console.log(this.$route.path)
-        }*/
-        '$route': 'getParams'
-       /* $route(){
-            alert("改变");
-        }*/
     }
-
 
 };
 </script>

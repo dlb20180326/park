@@ -62,11 +62,14 @@ w<template>
 	                            </router-link>
 
                                 <div class="content"  v-else-if="projectList[progres.id]">
-                                    <router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id ">
-                                    <x-button mini type="warn" v-if="projectList[progres.id]">
+                                    <router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id "  v-show="progres.totalScore != progres.score">
+                                    <x-button mini type="warn">
                                         点击+积分
                                     </x-button>
                                     </router-link>
+                                    <x-button mini type="disable" v-show="progres.totalScore == progres.score">
+                                        点击+积分
+                                    </x-button>
                                 </div>
 
                         </div>
@@ -196,9 +199,8 @@ export default {
     filters: {
         formatDuring: function (value) {
             if(value == "" || value == null || value == undefined){
-                var value="无"
+                var value="无";
                 return value
-
             }else {
                 Date.prototype.toLocaleString = function(){
                     let months = this.getMonth()+1;
@@ -218,8 +220,10 @@ export default {
                         minutes = '0' + minutes;
                     }
                     return this.getFullYear() +'.'+months+'.'+dates+' '+hours+':'+minutes
-                }
-                return new Date(value).toLocaleString();}}
+                };
+                return new Date(value).toLocaleString();
+            }
+        }
     },
     methods:{
     	progress(){

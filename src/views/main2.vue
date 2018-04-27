@@ -66,6 +66,7 @@
                         活动二维码
                     </button>
                 </div>
+                <p></p>
              <!-- <x-button type="warn" :link="item.type=='SCORE'?'points/review':'/active'">
                 {{item.beginYn=='Y'?'去处理':'活动二维码'}}
               </button>-->
@@ -76,10 +77,15 @@
     </div>
 
 
-      <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{width: '80%',height:'300px'}" >
-              <h1 style="text-align: center;margin-top:20px;margin-bottom:20px;">{{activeTitle}}</h1>
-              <img id="fei" alt="">
+     <div v-transfer-dom class="qrcode-dialog">
+          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'300px'}" >
+               <div class="title">
+                    <label for="">活动名称:</label>
+                    <div class="activeTitle">{{activeTitle}}</div>
+                </div>
+                <div class="qrcode">
+                  <img id="fei" alt="">
+                </div>
           </x-dialog>
       </div>
 
@@ -220,7 +226,31 @@
     }
   };
 </script>
-
+<style lang="less">
+.qrcode-dialog {
+    .weui-dialog {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        .title {
+            text-align: left;
+            word-break: break-all;
+            label{
+              color: #999;
+            }
+            .activeTitle {
+                color: #000;
+            }
+        }
+        .qrcode {
+            flex: 1;
+            img {
+                height: 100%;
+            }
+        }
+    }
+}
+</style>
 <style lang="less" scoped>
   .page-body {
     display: flex;
@@ -259,6 +289,9 @@
     .title {
       color: #666;
     }
+    .title a{
+        color: #666!important;
+    }
     .content {
       text-align: center;
     }
@@ -284,5 +317,12 @@
     font-family:PingFangSC-Medium;
     color:#fff;
     margin:.2rem auto;
+  }
+
+  .content p{
+      width: 108%;
+      height: .01rem;
+      background-color: #efefef;
+      margin-left: -4%;
   }
 </style>
