@@ -64,7 +64,7 @@
                                     驳回
                                 </x-button>
                             </flexbox-item>
-                            <flexbox-item>+
+                            <flexbox-item>
                                 <x-button @click.native="auditResolve(item)" :mini="true" type="warn">
                                     通过审核
                                 </x-button>

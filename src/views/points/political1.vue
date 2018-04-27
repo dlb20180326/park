@@ -244,7 +244,13 @@ body {
     -webkit-box-flex: 0.5;
 }
 .points-table {
-    padding-top: 0.46rem;
+    position: absolute;
+    top: 0.96rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 0;
 }
 .btnSub {
     width: 0.6rem;
@@ -378,12 +384,13 @@ body {
     padding: 0 0.2rem 0.2rem 0.21rem;
     z-index: 521;
     background-color: #ffffff;
-    top: 96px;
+    top:0.96rem;
     border: 1px solid #e4e4e4;
     position: fixed;
     left: 0;
     right: 0;
 }
+
 </style>
 <style scoped>
 .vux-header {
