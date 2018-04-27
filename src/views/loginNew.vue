@@ -86,17 +86,19 @@
         flex-direction: column;
         }
     .logo-top{
+        position: absolute;
         width:100%;
         height: 1.79rem;
-        background: url(../assets/images/new-logo.png) no-repeat;
-        background-size:100% 100%;
+        background: url(../assets/images/new-logo1.png) no-repeat;
+         background-size:100% 100%;
         z-index:500;
     }
     .logo-pic{
         position: absolute;
+        /* margin:1.35rem auto 0; */
         top:1.35rem;
         left:50%;
-        z-index:999;
+        z-index:666;
         width:1.1rem;
         height:1.1rem;
         margin-left:-.55rem;
@@ -108,7 +110,8 @@
     .last-content{
         width:80%;
         height: auto;
-        margin:.81rem auto;
+        /* margin: .2rem auto; */
+        margin: 2.66rem auto 0;
     }
     .tiles{
         width:100%;
@@ -136,8 +139,9 @@
     }
     .inputs{
         width:100%;
-        margin:0.72rem auto;
+        /* margin:0.72rem auto; */
         height:auto;
+        margin: 0.72rem auto 0;
     }
 
     .input-all {
