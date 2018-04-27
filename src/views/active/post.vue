@@ -3,6 +3,7 @@
         <view-box ref="viewBox" body-padding-top=".46rem">
             <r-header :rfs="contents"></r-header>
             <p class="titles">{{activeData.activeName}}</p>
+            <p class="time">{{activeNames}}活动发起人：<span class="dark">{{activeData.activeCreatePeopleName}}</span></p>
             <p class="time">活动时间：<span class="dark">{{activeData.startTime|formatDuring}}-{{activeData.endTime|formatDuring}}</span></p>
             <p class="time">地点：<span class="dark">{{activeData.activePace}}</span></p>
             <div class="artical">
@@ -89,6 +90,9 @@
                 this.$http.post('active/queryById?activeId='+this.$route.params.activeId
                 ).then(res =>{
                     this.activeData = res.data;
+                    this.contents.title = res.data.activeTypeName+'详情';
+                    this.activeNames = this.activeData.activeTypeName;
+                    console.log(this.activeData);
                     this.peopleNum = this.activeData.notParticipate.length + this.activeData.participate.length;
                     this.participants = this.activeData.participate.length;
                     this.Noparticipants = this.activeData.notParticipate.length;
@@ -159,7 +163,6 @@
         },
         data(){
             return {
-                contents:{rights:'',title:'驿站活动详情'},
                 num:0,
                 activeData:{},
                 picInfo:[],
@@ -173,6 +176,8 @@
                 peopleNum:null,
                 participants:null,
                 Noparticipants:null,
+                activeNames:'',
+                contents:{rights:'',title:'bbb'},
                 roleId:this.$store.getters.user.roleid,
                 options: {
                     getThumbBoundsFn (index) {

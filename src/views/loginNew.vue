@@ -91,14 +91,14 @@
         height: 1.79rem;
         background: url(../assets/images/new-logo1.png) no-repeat;
          background-size:100% 100%;
-        z-index:500;
+        /* z-index:1; */
     }
     .logo-pic{
         position: absolute;
         /* margin:1.35rem auto 0; */
         top:1.35rem;
         left:50%;
-        z-index:666;
+        /* z-index:1; */
         width:1.1rem;
         height:1.1rem;
         margin-left:-.55rem;
