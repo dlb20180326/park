@@ -166,7 +166,7 @@ export default {
                         for(var i=0;i<item.memo.length;i++){
                             var obj = {};
                             obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+ item.memo[i];
-                            obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.memo[i];
+                            obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+item.memo[i];
                             item.memos.push(obj);
                         }
 
