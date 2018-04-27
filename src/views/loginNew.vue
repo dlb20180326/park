@@ -30,7 +30,7 @@
         data(){
             return {
                 account: '',
-                pass: ''
+                pass: '12345678'
             }
         },
         methods:{
