@@ -32,7 +32,7 @@
 			<span class="numberz">{{ imgpics.length}}张</span>
 			</p>
 			<div class="img-show">
-				<img class="previewer-demo-img" v-for="(item,index) in imgpics" :src="item.src"  @click="show(index)">
+				<img class="previewer-demo-img" v-for="(item,index) in imgpics" :src="item.msrc"  @click="show(index)">
 				<div v-transfer-dom>
 	      		<previewer :list="imgpics" ref="previewer" :options="options" @on-index-change="logIndexChange">
 	      		</previewer>
@@ -79,10 +79,10 @@ export default {
             for (var i = 0; i < imgs.length; i++) {
               var obj = {};
               obj.msrc =
-                "http://www.dlbdata.cn/dangjian/picture/show?pictureId=" +
+                "http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=" +
                 imgs[i];
               obj.src =
-                "http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=" +
+                "http://www.dlbdata.cn/dangjian/picture/show?pictureId=" +
                 imgs[i];
               this.imgpics.push(obj);
             }

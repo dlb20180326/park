@@ -366,6 +366,9 @@ export default {
 }
 </style>
 <style lang="less" scoped>
+    .page-body{
+        -webkit-overflow-scrolling: touch;
+    }
     ul,li{list-style: none}
     .group-item {
         margin-left: 0.2rem;

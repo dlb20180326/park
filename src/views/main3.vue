@@ -73,10 +73,10 @@
         </div>
       </div>
     </div>
-      <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur>
+      <div v-transfer-dom  class="qrcode-dialog">
+          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{minHeight:'350px'}">
                <div class="title">
-                    <label for="">活动名称:</label>
+                    <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
                 </div>
                 <div class="qrcode">
@@ -241,6 +241,7 @@ export default {
 <style lang="less" scoped>
 .page-body {
     background-color: #efefef;
+    -webkit-overflow-scrolling: touch;
 }
 
 .head,
@@ -251,8 +252,6 @@ export default {
 }
 
 .list {
-
-    -webkit-overflow-scrolling: touch;
     margin-top: 0.1rem;
     h3 {
         line-height: 1;
