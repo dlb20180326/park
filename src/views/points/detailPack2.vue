@@ -24,7 +24,7 @@
                         <i class="iconfont dlb-icon-rili"></i>
                     </x-button>
                     <group class="date-no-box">
-                        <datetime v-model="hourListValue" format="YYYY-MM-DD HH:mm" @on-change="changeStart" year-row="{value}年" month-row="{value}月" day-row="{value}日" hour-row="{value}点" minute-row="{value}分"></datetime>
+                        <datetime v-model="hourListValue" format="YYYY-MM-DD HH:mm" readonly @on-change="changeStart" year-row="{value}年" month-row="{value}月" day-row="{value}日" hour-row="{value}点" minute-row="{value}分"></datetime>
                     </group>
                 </flexbox-item>
             </flexbox>
@@ -218,7 +218,7 @@ export default {
                 url: 'pscoreparty/scoreCustom',
                 method: 'post',
                 params: {
-                    detailId: 12,
+                    detailId: this.list1Selected.moduleId,
                     userId: this.$route.params.userId,
                     adderId: this.$store.getters.user.userid,
                     score: 5,
@@ -229,7 +229,6 @@ export default {
             })
                 .then(res => {
                     console.log(res);
-                    //this.users[1].integral = res.data;
                     if (res.success) {
                         this.$vux.alert.show({ title: '增加成功',onHide(){
                             setTimeout(() => history.back(), 1000);

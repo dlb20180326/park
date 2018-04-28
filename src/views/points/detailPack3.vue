@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <x-header>遵纪守法评分</x-header>
+        <x-header>思想汇报评分</x-header>
         <view-box ref="viewBox" body-padding-top=".2rem">
             <p class="allPic">
                 <span class="bg-line"></span>
@@ -92,7 +92,7 @@ export default {
                 .get('pscoreparty/showDakDetialByUserId', {
                     params: {
                         userId: this.$route.params.userId,
-                        moudleId: 12
+                        moudleId: this.$route.params.moduleid
                     }
                 })
                 .then(res => {

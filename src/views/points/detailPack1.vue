@@ -25,7 +25,7 @@
 			<span class="numberz">{{ num}}张</span>
 			</p>
 			<div class="img-show">
-				<img class="previewer-demo-img" v-for="(item,index) in content.picture" :src="item.src"  @click="show(index)">
+				<img class="previewer-demo-img" v-for="(item,index) in content.picture" :src="item.msrc"  @click="show(index)">
 				<div v-transfer-dom>
 	      		<previewer :list="content.picture" ref="previewer" :options="options" @on-index-change="logIndexChange">
 	      		</previewer>
@@ -145,8 +145,8 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
                     this.content.pictures.forEach(it=>{
                         console.log(it);
                         var obj = {};
-                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
-                        obj.src = 'http://www.dlbdata.cn/dangjian/showThumbnail/show?pictureId='+it.pictureId;
+                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+it.pictureId;
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
                         this.content.picture.push(obj);
                     });
 

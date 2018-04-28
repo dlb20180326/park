@@ -32,8 +32,7 @@
                     <flexbox :gutter="0" v-for="(con,index) in list3" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.name}}</flexbox-item>
-                        <flexbox-item>上半年</flexbox-item>
-                        <flexbox-item>
+                        <flexbox-item>上半年</flexbox-item><flexbox-item>
 
                             <!--<input type="button" class="btnSub" value="去处理"  @click="clickLink(con)" />-->
                             <input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="clickLink(con)" />

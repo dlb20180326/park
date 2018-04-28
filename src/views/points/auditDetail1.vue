@@ -217,7 +217,10 @@ export default {
                 }
             }).then(res => {
                 if(res.success){
-                    this.$vux.alert.show({title: '拒绝成功'});
+                    this.$vux.alert.show({title: '拒绝成功',onHide(){
+                        this.rejectReason = "";
+                        window.location.reload();
+                    }});
                 }else{
                     this.$vux.alert.show({title: '提交失败'});
                 }

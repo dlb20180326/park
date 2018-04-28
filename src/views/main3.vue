@@ -241,7 +241,6 @@ export default {
 <style lang="less" scoped>
 .page-body {
     background-color: #efefef;
-    -webkit-overflow-scrolling: touch;
 }
 
 .head,
@@ -253,6 +252,7 @@ export default {
 
 .list {
 
+    -webkit-overflow-scrolling: touch;
     margin-top: 0.1rem;
     h3 {
         line-height: 1;

@@ -41,7 +41,7 @@
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
                             <!-- 缩略图显示 -->
-                            <div><img :class="item.previewerClassName" v-clipping="img.src" @click="preview(index,idx)"></div>
+                            <div><img :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)"></div>
                         </flexbox-item>
                         <flexbox-item :span="1/3" v-if="roleid!==4 && item.pictures.length<9" v-show="item.startTime > new Date().getTime()">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
@@ -187,6 +187,7 @@ export default {
                         item.pictures = item.pictures || [];
                         item.startTime = item.startTime;
                         item.pictures.forEach(item => {
+                            item.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + item.pictureId;
                             item.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + item.pictureId;
                         });
                     });
@@ -241,7 +242,8 @@ export default {
             Promise.all(promiseList).then(results =>
                 results.map(result => {
                     item.pictures.push({
-                        src: 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + result.data
+                        msrc: 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + result.data,
+                        src: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + result.data
                     });
                     axios({
                         url: "active/savePicture",
@@ -252,9 +254,15 @@ export default {
                             pictureId: result.data
                         }
                     }).then(res => {
-                        this.$vux.alert.show({title:  res.msg});
+                        this.$vux.toast.show({
+                            text: 'res.msg',
+                            type: 'text'
+                        });
                     }).catch(err => {
-                        this.$vux.alert.show({title: '提交失败'});
+                        this.$vux.toast.show({
+                            text: '提交失败',
+                            type: 'text'
+                        });
                     });
                 })
             );

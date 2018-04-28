@@ -300,7 +300,11 @@
                             departmentid:this.departmentidId.join()
                         }
                     }) .then((res)=> {
-                        this.$vux.alert.show({title:res.msg});
+                        this.$vux.toast.show({
+                            text: '增加成功',
+                            type: 'text'
+                        });
+
                         this.showQR(res.data);
                     }).catch(function (error) {
                         console.log(error);

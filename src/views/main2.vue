@@ -260,7 +260,6 @@
     display: flex;
     flex-direction: column;
     background-color: #efefef;
-  -webkit-overflow-scrolling: touch;
   }
 
   .box {
@@ -276,6 +275,7 @@
   }
 
   .list {
+      -webkit-overflow-scrolling: touch;
     margin-top: 0.07rem;
     h3 {
       line-height: 1;
