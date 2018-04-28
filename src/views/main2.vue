@@ -81,7 +81,7 @@
 
 
      <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'350px'}" >
+          <x-dialog v-model="showQrcodeDialog" hide-on-blur>
                <div class="title">
                     <label for="">活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
@@ -260,6 +260,7 @@
     display: flex;
     flex-direction: column;
     background-color: #efefef;
+  -webkit-overflow-scrolling: touch;
   }
 
   .box {

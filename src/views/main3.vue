@@ -69,15 +69,12 @@
                     </button>
                     <p></p>
                 </div>
-                <!-- <button :link="item.type=='SCORE'?'points/review':'/active'">
-                   {{item.beginYn=='Y'?'去处理':'活动二维码'}}
-                 </button>-->
           </div>
         </div>
       </div>
     </div>
       <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'300px'}" >
+          <x-dialog v-model="showQrcodeDialog" hide-on-blur>
                <div class="title">
                     <label for="">活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
@@ -233,7 +230,8 @@ export default {
         .qrcode {
             flex: 1;
             img {
-                height: 100%;
+                margin-top: 10px;
+                width: 100%;
             }
         }
     }
@@ -243,6 +241,7 @@ export default {
 <style lang="less" scoped>
 .page-body {
     background-color: #efefef;
+    -webkit-overflow-scrolling: touch;
 }
 
 .head,
@@ -253,6 +252,7 @@ export default {
 }
 
 .list {
+
     margin-top: 0.1rem;
     h3 {
         line-height: 1;

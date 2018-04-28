@@ -222,9 +222,14 @@ export default {
             })
                 .then(res => {
                     if (res.success) {
-                        this.$vux.alert.show({ title: '提交成功' });
+                        this.$vux.alert.show({
+                            title: '提交成功',
+                            onHide(){
+                                setTimeout(() => history.back(), 500);
+                            }
+                        });
                     } else {
-                        this.$vux.alert.show({ title: '提交失败' });
+                        this.$vux.alert.show({ title: res.msg });
                     }
                 })
                 .catch(err => {

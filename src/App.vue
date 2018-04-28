@@ -61,4 +61,5 @@ input[type=button], input[type=submit], input[type=file], button { cursor: point
     border:1px solid #fff!important;
         border-width: 1px 0 0 1px!important;
 }
+
 </style>

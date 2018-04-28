@@ -1,6 +1,6 @@
 <template>
 
-	<div style="height:100%;">
+	<div style="height:100%;" class="disabled-tabbar">
    		<view-box ref="viewBox" body-padding-top=".46rem">
             <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
                 {{contents.title}}<a slot="right" @click="showMenu">评分说明</a></x-header>
