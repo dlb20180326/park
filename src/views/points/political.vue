@@ -231,6 +231,7 @@ font-size: .14rem;
     bottom: 0;
     overflow-y: auto;
     z-index: 0;
+    -webkit-overflow-scrolling: touch;
 }
 .btnSub{width:.6rem;height:.24rem;font-size:.14rem;line-height:.24rem;border-radius: 4px;font-family:PingFangSC-Medium;border:0px;color:#FFFFFF;background-color:rgba(185, 54, 71, 1);}
 .yellowA{background-color:#BABABA;}

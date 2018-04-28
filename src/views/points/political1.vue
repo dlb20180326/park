@@ -6,7 +6,7 @@
                 思想汇报
                 <a slot="right" @click="showMenu">评分说明</a>
             </x-header>
-            <div class="header-list">
+            <div class="header-list cl">
                 <div class="list-left">
                     <span class="left-now">汇报状态：</span>
                     <span class="left-active">{{list1Selected.text}}</span>
@@ -20,7 +20,7 @@
                     {{item.text}}
                 </div>
             </div>
-            <div class="points-table">
+            <div class="points-table cl">
                 <flexbox :gutter="0">
                     <flexbox-item>序号</flexbox-item>
                     <flexbox-item>党员姓名</flexbox-item>
@@ -126,8 +126,6 @@ export default {
         select(it) {
             this.list1Selected = it;
             this.showDet();
-            /*   this.slide1();
-                this.slide();*/
         },
         showDet() {
             this.topShow = !this.topShow;
@@ -190,13 +188,12 @@ export default {
                     moudleId: 11
                 }
             })
-                .then(res => {
-                    this.list3 = res.data;
-                    console.log('222222222222', res.data);
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
+            .then(res => {
+                this.list3 = res.data;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
         },
         know() {
             this.showPop = false;
@@ -215,8 +212,6 @@ export default {
         this.list1Selected = this.list1[0];
         this.getlist1();
         this.getlist2();
-        /* this.getModule();
-            this.getmoduleid()*/
     }
 };
 </script>
@@ -227,6 +222,18 @@ body {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
+}
+
+.cl {
+    *zoom: 1
+}
+
+.cl:after {
+    clear: both;
+    content: '\20';
+    display: block;
+    height: 0;
+    visibility: hidden
 }
 .vux-flexbox {
     width: 88%;
@@ -256,7 +263,6 @@ body {
     font-size: 0.14rem;
     line-height: 0.24rem;
     border-radius: 4px;
-    font-family: PingFangSC-Medium;
     border: 0px;
     color: #ffffff;
     background-color: rgba(185, 54, 71, 1);
@@ -269,6 +275,16 @@ body {
 }
 .yellowC {
     background-color: rgba(244, 151, 74, 1);
+}
+.points-table {
+    position: absolute;
+    top: 0.96rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 0;
+    -webkit-overflow-scrolling: touch;
 }
 .middle {
     width: 2.8rem;
