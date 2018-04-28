@@ -32,9 +32,9 @@
                                 <p>{{datePick(item.createTime)}}</p>
                             </flexbox-item>
                             <!-- 删除 -->
-                            <flexbox-item class="list-close"  v-show="roleid == 2 || roleid == 3">
+                            <!-- <flexbox-item class="list-close"  v-show="roleid == 2 || roleid == 3">
                                 <a><img src="@/assets/images/x.png"></a>
-                            </flexbox-item>
+                            </flexbox-item> -->
                         </flexbox>
                         <div class="list-content" v-html="item.active_Context"></div>
                     </router-link>
