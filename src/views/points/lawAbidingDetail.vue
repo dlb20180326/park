@@ -129,6 +129,25 @@ export default {
         });
     },
     submit() {
+      if(!this.Content1){
+          return this.$vux.toast.show({
+              text: '填写扣分原因',
+              type: 'text'
+          });
+      }
+      if(!this.Content2){
+          return this.$vux.toast.show({
+              text: '填写原因描述',
+              type: 'text'
+          });
+      }
+      if(this.picList.arr.length==0){
+          return this.$vux.toast.show({
+              text: '请上传图片',
+              type: 'text'
+          });
+      }
+
       axios
         .get("pscoreparty/scoreClean", {
           params: {
@@ -143,10 +162,15 @@ export default {
           }
         })
         .then(res => {
-          this.$vux.alert.show({ title: res.msg });
+            this.$vux.alert.show({
+                title: res.msg,
+                onHide () {
+                    setTimeout(() => history.back(),500);
+                }
+            });
         })
         .catch(err => {
-          console.log(err);
+            console.log(err);
         });
     },
     showDeleteButton(it) {

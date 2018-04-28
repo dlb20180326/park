@@ -231,19 +231,11 @@ export default {
                     console.log(res);
                     //this.users[1].integral = res.data;
                     if (res.success) {
-                        this.$vux.alert.show({ title: '增加成功' });
-                        setTimeout(() => {
-                            this.$vux.alert.hide();
-                            // this.$router.push({
-                            //     path: '/points'
-                            // });
+                        this.$vux.alert.show({ title: '增加成功',onHide(){
                             setTimeout(() => history.back(), 1000);
-                        }, 3000);
+                        }});
                     } else {
                         this.$vux.alert.show({ title: res.msg });
-                        setTimeout(() => {
-                            this.$vux.alert.hide();
-                        }, 1000);
                     }
                 })
                 .catch(err => {
