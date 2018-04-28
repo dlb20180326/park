@@ -54,9 +54,12 @@
             </flexbox>
         </div>
 
-        <ul class="active-type-list" v-show="PickerVisible2">
-            <li v-for="(item,index) in list" :key="index" @click="submit1(item)">{{item.title}}</li>
-        </ul>
+        <div style="position:relative" v-show="PickerVisible2">
+            <div class="srcw"></div>
+            <ul class="active-type-list" v-show="PickerVisible2">
+                <li v-for="(item,index) in list" :key="index" @click="submit1(item)">{{item.title}}</li>
+            </ul>
+        </div>
 
         <div class="group-item">
             <group-title slot="title">
@@ -89,7 +92,7 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" hide-on-blur="true">
+          <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
                <div class="title">
                     <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
@@ -432,7 +435,17 @@ export default {
         font-size: .15rem;
     }
 }
-
+    .srcw{
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 8px solid #FFF5E6;
+        position: absolute;
+        right:.3rem;
+        top:-.07rem;
+        z-index:999;
+    }
 </style>
 <style>
     .date-no-box{position: absolute;top:0px;left: 0;right: 0;bottom: 0;height: 0.32rem;overflow: hidden;opacity: 0}

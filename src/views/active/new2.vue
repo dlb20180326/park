@@ -88,11 +88,11 @@
         </div>
         <div></div>
         <div style="position:relative" v-show="PickerVisible5">
-        <div class="srcw"></div>
-        <ul class="active-type-list" >
-            <li v-for="(item,index) in list1" :key="index" @click="submit2(item)">{{item.departmentname}}</li>
-            <li  @click="resetDepartment()" style="color:#999;">清空所选部门</li>
-        </ul>
+            <div class="srcw"></div>
+            <ul class="active-type-list" >
+                <li v-for="(item,index) in list1" :key="index" @click="submit2(item)">{{item.departmentname}}</li>
+                <li  @click="resetDepartment()" style="color:#999;">清空所选部门</li>
+            </ul>
         </div>
         <div class="group-item">
             <group-title slot="title">
@@ -113,7 +113,7 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-            <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" hide-on-blur="true">
+            <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
                <div class="title">
                     <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>

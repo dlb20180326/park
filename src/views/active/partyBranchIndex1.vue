@@ -188,7 +188,7 @@ export default {
                         item.startTime = item.startTime;
                         item.pictures.forEach(item => {
                             item.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + item.pictureId;
-                            item.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + item.pictureId;
+                            item.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + item.pictureId;
                         });
                     });
                 });
