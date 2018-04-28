@@ -1,7 +1,7 @@
 <template>
 
     <div style="height:100%;" class="disabled-tabbar">
-        <view-box ref="viewBox" body-padding-top=".46rem">
+        <view-box ref="viewBox" body-padding-top=".96rem">
             <x-header slot="header" style="position: fixed !important;left:0;right:0;z-index:100">
                 思想汇报
                 <a slot="right" @click="showMenu">评分说明</a>
@@ -9,7 +9,6 @@
             <div class="header-list">
                 <div class="list-left">
                     <span class="left-now">汇报状态：</span>
-                    <span class="left-active">{{text}}</span>
                     <span class="left-active">{{list1Selected.text}}</span>
                 </div>
                 <div class="right-btn" @click="showDet">切换
@@ -17,7 +16,7 @@
                 </div>
             </div>
             <div class="animate-down" v-show="topShow">
-                <div  v-for="(item,index) in list1" :key="index" :class="['bg-flag', {active: item.text === text}]" @click="change(item)">
+                <div  v-for="(item,index) in list1" :key="index" :class="['bg-flag', {active: item.text === list1Selected.text}]" @click="change(item)">
                     {{item.text}}
                 </div>
             </div>
@@ -89,6 +88,7 @@ export default {
             isYellow: false,
             showPop: false,
             topShow: false,
+
             showTrans: false
         };
     },
@@ -110,6 +110,7 @@ export default {
             } catch (err) {
                 return (value = err);
             }
+        }
     },
     components: {
         XHeader,
@@ -155,6 +156,12 @@ export default {
                 });
             }
         },
+        change(it){
+                this.moduleId=it.moduleId;
+                this.topShow = !this.topShow;
+                this.showTrans = !this.showTrans;
+                this.list1Selected = it;
+            },
         //书面汇报
         getlist1() {
             axios({
@@ -242,15 +249,7 @@ body {
 .vux-flexbox .vux-flexbox-item:nth-child(1) {
     -webkit-box-flex: 0.5;
 }
-.points-table {
-    position: absolute;
-    top: 0.96rem;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow-y: auto;
-    z-index: 0;
-}
+
 .btnSub {
     width: 0.6rem;
     height: 0.24rem;
@@ -326,12 +325,13 @@ body {
 }
 .header-list {
     width: 100%;
-    height: 50px;
+    height: .5rem;
     border-bottom: 1px solid #e4e4e4;
     position: fixed;
     top: 0.46rem;
     left: 0;
     right: 0;
+    z-index:30;
     background: #fff;
     line-height: 50px;
 }
