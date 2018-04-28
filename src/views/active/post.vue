@@ -112,8 +112,8 @@
                     this.picInfo= res.data;
                     for(var d=0 ;d<this.picInfo.length;d++){
                         var obj = {};
-                        obj.msrc = 'http://www.dlbdata.cnpicture/showThumbnail?pictureId='+this.picInfo[d].pictureId;
-                        obj.src = 'http://www.dlbdata.cnpicture/show?pictureId='+this.picInfo[d].pictureId;
+                        obj.msrc = 'http://www.dlbdata.cn/picture/showThumbnail?pictureId='+this.picInfo[d].pictureId;
+                        obj.src = 'http://www.dlbdata.cn/picture/show?pictureId='+this.picInfo[d].pictureId;
                         this.list.push(obj);
                     }
                 }).catch(err =>{
