@@ -81,8 +81,8 @@ export default {
     data() {
         return {
             contents: { rights: '评分说明', title: '' },
-            list: '',
-            list3: '',
+            list: [],
+            list3: [],
             list1: [{ text: '口头汇报', moduleId: 11 }, { text: '书面汇报', moduleId: 12 }],
             list1Selected: {},
             isYellow: false,
