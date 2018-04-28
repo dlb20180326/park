@@ -255,7 +255,7 @@ export default {
                         }
                     }).then(res => {
                         this.$vux.toast.show({
-                            text: 'res.msg',
+                            text: res.msg,
                             type: 'text'
                         });
                     }).catch(err => {

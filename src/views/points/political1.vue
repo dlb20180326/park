@@ -349,6 +349,7 @@ body {
     z-index:30;
     background: #fff;
     line-height: 50px;
+    box-sizing: border-box;
 }
 .list-left {
     width: 54%;
@@ -389,11 +390,19 @@ body {
     margin: 7px 8px 0 3px;
     background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
 .bg-flag{height:.2rem;margin-top:.2rem;}
-.animate-down{padding:0 .2rem .2rem .21rem;z-index:521;background-color:#FFFFFF;top:96px;border: 1px solid #E4E4E4;
-position:fixed;left:0;right:0;
-.active{
-	color: #F84D2B;
-}
+.animate-down {
+    padding: 0 .2rem .2rem .21rem;
+    z-index: 521;
+    background-color: #FFFFFF;
+    top: .96rem;
+    border-bottom: 1px solid #E4E4E4;
+    position: fixed;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    .active{
+        color: #F84D2B;
+    }
 }
 
 </style>
