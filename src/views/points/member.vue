@@ -1,5 +1,5 @@
 <template>
-	<div class="page-body">
+	<div class="page-body disabled-tabbar">
    		<view-box ref="viewBox">
             <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" class="bgColors">
             {{contents.title}}<a slot="right" @click="showPops">评分说明</a></x-header>
@@ -206,7 +206,7 @@ font-size: .14rem;
 .vux-flexbox .vux-flexbox-item:nth-child(1){
     flex:0 0 auto;
     width: 22%;
-    
+
 }
 
 
