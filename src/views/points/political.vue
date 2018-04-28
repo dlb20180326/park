@@ -15,7 +15,12 @@
                         <flexbox-item>时间</flexbox-item>
                         <flexbox-item>评分状态</flexbox-item>
                     </flexbox>
-                    <flexbox  style="text-align: center" v-if="list.length === 0">暂无支部人员提交信息</flexbox>
+                    <flexbox  style="text-align: center" v-if="list.length === 0">
+                		<div>
+                			
+                		</div>
+                    	<p style="color: #CCCCCC;margin: auto;">暂无支部人员提交信息</p>
+                    </flexbox>
                     <flexbox  :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.partyname}}</flexbox-item>
