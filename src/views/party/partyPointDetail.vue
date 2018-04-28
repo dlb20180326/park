@@ -107,6 +107,7 @@ export default {
                     return this.getFullYear() +'.'+months+'.'+dates+' '+hours+':'+minutes
                 }
                 return new Date(value).toLocaleString();}
+            
         },
         Upper: function (value) {
              return value> 0 ? '+' + value : value;
