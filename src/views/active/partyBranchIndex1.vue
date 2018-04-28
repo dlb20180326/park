@@ -187,7 +187,7 @@ export default {
                         item.pictures = item.pictures || [];
                         item.startTime = item.startTime;
                         item.pictures.forEach(item => {
-                            item.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + item.pictureId;
+                            item.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + item.pictureId;
                         });
                     });
                 });
@@ -241,7 +241,7 @@ export default {
             Promise.all(promiseList).then(results =>
                 results.map(result => {
                     item.pictures.push({
-                        src: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + result.data
+                        src: 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + result.data
                     });
                     axios({
                         url: "active/savePicture",

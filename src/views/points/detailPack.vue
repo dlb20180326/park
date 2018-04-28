@@ -140,7 +140,7 @@ export default {
                         console.log(it);
                         var obj = {};
                         obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + it.pictureId;
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + it.pictureId;
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + it.pictureId;
                         this.content.picture.push(obj);
                     });
                 })
@@ -171,7 +171,7 @@ export default {
                         console.log(it);
                         var obj = {};
                         obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + it.pictureId;
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + it.pictureId;
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + it.pictureId;
                         this.content.picture.push(obj);
                     });
                 })

@@ -15,7 +15,7 @@
             <p class="allPic">
                 <span class="bg-line"></span>
                 <span class="picture">汇报类型:</span>
-                <span class="numberz1">口头汇报</span>
+                <span class="numberz1">{{list1Selected.text}}</span>
             </p>
 
             <p class="allPic">
@@ -31,7 +31,7 @@
                 <span class="numberz">{{ imgpics.length}}张</span>
             </p>
             <div class="img-show">
-                <img class="previewer-demo-img" v-for="(item,index) in imgpics" :src="item.src"  @click="show(index)">
+                <img class="previewer-demo-img" v-for="(item,index) in imgpics" :key="index" :src="item.src" @click="show(index)">
                 <div v-transfer-dom>
                     <previewer :list="imgpics" ref="previewer" :options="options" @on-index-change="logIndexChange">
                     </previewer>
@@ -44,84 +44,85 @@
 </template>
 
 <script>
-    import axios from 'axios';
+import axios from 'axios';
 
-    import {Previewer, TransferDom,ViewBox,XHeader,XButton} from 'vux'
-    export default {
-        directives: {
-            TransferDom
-        },
-        components:{
-            XHeader,
-            Previewer,
-            ViewBox,
-            XButton
-        },
-        filters: {
-            formatDuring: function (value) {
-                if(value == "" || value == null || value == undefined){
-                    var value="无";
-                    return value
-
-                }else {
-                    Date.prototype.toLocaleString = function(){
-                        let months = this.getMonth()+1;
-                        if(months < 10){
-                            months = '0' + months;
-                        }
-                        let dates = this.getDate();
-                        if(dates < 10){
-                            dates = '0' + dates;
-                        }
-                        let hours = this.getHours();
-                        if(hours < 10){
-                            hours = '0' + hours;
-                        }
-                        let minutes = this.getMinutes();
-                        if(minutes < 10){
-                            minutes = '0' + minutes;
-                        }
-                        return this.getFullYear() +'.'+months+'.'+dates+' '+hours+':'+minutes
+import { Previewer, TransferDom, ViewBox, XHeader, XButton } from 'vux';
+export default {
+    directives: {
+        TransferDom
+    },
+    components: {
+        XHeader,
+        Previewer,
+        ViewBox,
+        XButton
+    },
+    filters: {
+        formatDuring: function(value) {
+            if (value == '' || value == null || value == undefined) {
+                var value = '无';
+                return value;
+            } else {
+                Date.prototype.toLocaleString = function() {
+                    let months = this.getMonth() + 1;
+                    if (months < 10) {
+                        months = '0' + months;
                     }
-                    return new Date(value).toLocaleString();
-
-
-            }}
-        },
-        methods: {
-            getList1(){
-                axios.get('pscoreparty/showDakDetialByUserId', {
+                    let dates = this.getDate();
+                    if (dates < 10) {
+                        dates = '0' + dates;
+                    }
+                    let hours = this.getHours();
+                    if (hours < 10) {
+                        hours = '0' + hours;
+                    }
+                    let minutes = this.getMinutes();
+                    if (minutes < 10) {
+                        minutes = '0' + minutes;
+                    }
+                    return this.getFullYear() + '.' + months + '.' + dates + ' ' + hours + ':' + minutes;
+                };
+                return new Date(value).toLocaleString();
+            }
+        }
+    },
+    methods: {
+        getList1() {
+            axios
+                .get('pscoreparty/showDakDetialByUserId', {
                     params: {
                         userId: this.$route.params.userId,
-                        moudleId:12     }
-                }).then(res => {
-                    console.log("12313123",res);
-                this.scoreTime=res.data.scoreTime
+                        moudleId: 12
+                    }
+                })
+                .then(res => {
+                    console.log('12313123', res);
+                    this.scoreTime = res.data.scoreTime;
 
                     let jsonObj = JSON.parse(res.data.remark);
-                this.content1 = jsonObj.title;
-                this.content2 = jsonObj.remark;
-                this.adderName = res.data.adderName;
+                    this.content1 = jsonObj.title;
+                    this.content2 = jsonObj.remark;
+                    this.adderName = res.data.adderName;
 
-                if (res.data.imgs) {
-                    var imgs = res.data.imgs.split(",");
-                    this.imgpics = [];
-                    for (var i = 0; i < imgs.length; i++) {
-                        var obj = {};
-                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
-                        this.imgpics.push(obj);
+                    if (res.data.imgs) {
+                        var imgs = res.data.imgs.split(',');
+                        this.imgpics = [];
+                        for (var i = 0; i < imgs.length; i++) {
+                            var obj = {};
+                            obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
+                            obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + imgs[i];
+                            this.imgpics.push(obj);
+                        }
+                    } else {
+                        this.imgpics = [];
                     }
-                } else {
-                    this.imgpics = [];
-                }
-            }) .
-                catch(err => {
+                })
+                .catch(err => {
                     console.log(err);
-            })
-            },
+                });
+        },
 
-           /* getList1(){
+        /* getList1(){
                 axios.get('pscoreparty/showDakDetialByUserId', {
                     params: {
                         userId: this.$route.params.userId
@@ -138,7 +139,7 @@
                     for (var i = 0; i < imgs.length; i++) {
                         var obj = {};
                         obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + imgs[i];
                         this.imgpics.push(obj);
                     }
                 } else {
@@ -149,162 +150,289 @@
                     console.log(err);
             })
             },*/
-            getUser1() {
-                axios.get('ppartymember/queryByUserId', {
+        getUser1() {
+            axios
+                .get('ppartymember/queryByUserId', {
                     params: {
                         userid: this.$route.params.userId
                     }
-                }).then(res => {
+                })
+                .then(res => {
                     this.userId = res.data.userid;
-                this.departmentid = res.data.departmentid;
-                this.name = res.data.name;
-                this.departmentname = res.data.departmentname
-
-
-            })
-            .
-                catch(err => {
+                    this.departmentid = res.data.departmentid;
+                    this.name = res.data.name;
+                    this.departmentname = res.data.departmentname;
+                })
+                .catch(err => {
                     console.log(err);
-            })
-                ;
-            },
-            show (index) {
-                this.$refs.previewer.show(index)
-            },
-
-            spread(){
-                this.spr = true;
-                this.btnAn = !this.btnAn;
-                this.btnPack = !this.btnPack;
-            },
-            folding(){
-                this.spr = !this.spr;
-                this.btnAn = !this.btnAn;
-                this.btnPack = !this.btnPack;
-            },
-            noSpread(){
-                this.noSpr = true;
-                this.nobtnAn = !this.nobtnAn;
-                this.nobtnPack = !this.nobtnPack;
-            },
-            noFolding(){
-                this.noSpr = !this.noSpr;
-                this.nobtnAn = !this.nobtnAn;
-                this.nobtnPack = !this.nobtnPack;
-            },
-            logIndexChange (arg) {
-                console.log(arg)
-            }
-
-
+                });
         },
-        mounted(){
-
-            this.getUser1();
-            this.getList1();
+        show(index) {
+            this.$refs.previewer.show(index);
         },
-        data(){
-            return {
-                scoreTime:'',
-                num:0,
-                userId:'',
-                adderName:'',
-                name:'',
-                departmentid:'',
-                content1:'',
-                content2:'',
-                departmentname:'',
-                activeData:{},
-                picInfo:[],
-                list: [],
-                content:{},
-                imgpics:[],
-                imgs:"",
-                spr:false,
-                noSpr:false,
-                nobtnPack:false,
-                nobtnAn:false,
-                btnPack:false,
-                btnAn:false,
-                peopleNum:null,
-                participants:null,
-                Noparticipants:null,
-                options: {
-                    getThumbBoundsFn (index) {
-                        // find thumbnail element
-                        let thumbnail = document.querySelectorAll('.previewer-demo-img')[index];
-                        // get window scroll Y
-                        let pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
-                        // optionally get horizontal scroll
-                        // get position of element relative to viewport
-                        let rect = thumbnail.getBoundingClientRect();
-                        // w = width
-                        return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
-                        // Good guide on how to get element coordinates:
-                        // http://javascript.info/tutorial/coordinates
-                    }
-                }
 
-            }
+        spread() {
+            this.spr = true;
+            this.btnAn = !this.btnAn;
+            this.btnPack = !this.btnPack;
+        },
+        folding() {
+            this.spr = !this.spr;
+            this.btnAn = !this.btnAn;
+            this.btnPack = !this.btnPack;
+        },
+        noSpread() {
+            this.noSpr = true;
+            this.nobtnAn = !this.nobtnAn;
+            this.nobtnPack = !this.nobtnPack;
+        },
+        noFolding() {
+            this.noSpr = !this.noSpr;
+            this.nobtnAn = !this.nobtnAn;
+            this.nobtnPack = !this.nobtnPack;
+        },
+        logIndexChange(arg) {
+            console.log(arg);
         }
+    },
+    mounted() {
+        this.list1Selected = this.list1.find(item => item.moduleId == this.$route.params.moduleid);
+        this.getUser1();
+        this.getList1();
+    },
+    data() {
+        return {
+            scoreTime: '',
+            num: 0,
+            userId: '',
+            adderName: '',
+            name: '',
+            departmentid: '',
+            content1: '',
+            content2: '',
+            departmentname: '',
+            activeData: {},
+            picInfo: [],
+            list: [],
+            list1: [{ text: '口头汇报', moduleId: 11 }, { text: '书面汇报', moduleId: 12 }],
+            list1Selected: {},
+            content: {},
+            imgpics: [],
+            imgs: '',
+            spr: false,
+            noSpr: false,
+            nobtnPack: false,
+            nobtnAn: false,
+            btnPack: false,
+            btnAn: false,
+            peopleNum: null,
+            participants: null,
+            Noparticipants: null,
+            options: {
+                getThumbBoundsFn(index) {
+                    // find thumbnail element
+                    let thumbnail = document.querySelectorAll('.previewer-demo-img')[index];
+                    // get window scroll Y
+                    let pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
+                    // optionally get horizontal scroll
+                    // get position of element relative to viewport
+                    let rect = thumbnail.getBoundingClientRect();
+                    // w = width
+                    return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
+                    // Good guide on how to get element coordinates:
+                    // http://javascript.info/tutorial/coordinates
+                }
+            }
+        };
     }
+};
 </script>
 <style scoped>
-    html,body{
-        width:100%;
-        height:100%;
-        overflow-x:hidden;
-    }
-    .page-body{
-        display:flex;
-        flex-direction: column;
-    }
-    .artical{width:84%;height:auto; font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(102,102,102,1);line-height:.24rem;margin:.2rem 8% 0 8%;text-indent:2em;}
-    .artical p{margin-bottom:.1rem;}
-    .allPic .bg-line{width:.04rem;height:.18rem;margin-left:8%;background: url(../../assets/images/icon-rectangle.png) no-repeat;background-size:100% 100%;display:block;float: left;margin-top:.07rem;}
-    .picture{font-size:.14rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);margin-left:.1rem;display:block;float: left;}
-    .numberz{font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);display:block;float: left;margin-left:.1rem;}
-    .numberz1{font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);margin-left:.1rem;}
-    .allPic{height:.3rem;line-height:.3rem;overflow:hidden;margin-top:.2rem;}
-    .img-show{width:84%;height:auto;margin-left:8%;}
-    .img-show img{width:49%;height:1.5rem;margin-top:.1rem;}
-    .img-show img:not(:first-child){margin-left:2%;}
-    .img-left{width:.37rem;height:.37rem;position:absolute;left:.1rem;top:3.15rem;;z-index:900;}
-    .img-right{width:.37rem;height:.37rem;position:absolute;right:.1rem;top:3.15rem;z-index:900;}
-    .color-num{color:rgba(185, 54, 71, 1);}
-    .line-pic{width:87.2%;margin:.1rem 4.8% .2rem 8%;height:.36rem;overflow:hidden;}
-    .line-pic img{width:.36rem;height:.36rem;margin-left:.07rem;display:block;float:left;}
-    .wz-fonts{
-        font-family: PingFangSC-Medium;
-        color:rgba(153,153,153,1);
-        line-height: .24rem;
-        width: 87.2%;
-        margin: 10px auto;
-        word-spacing: .24rem;
-        height: 44px;
-        overflow: hidden;
-        padding: 0;
-        text-overflow:ellipsis;
-        white-space: pre-wrap;
-    }
-    .wz-fonts.auto{
-        height:auto;
-        overflow:auto;
-    }
-    .wz-fonts span{
-        display: inline-block;
-        margin-right: 10px;
-        font-size: 14px;
-        line-height: 22px;
-        vertical-align: top;
-    }
-    .no-picture{width:1.1rem;font-size:.2rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);display:block;float: left;margin-left:.1rem;}
-    .btnMore{width:1.6rem;height:.3rem;border-radius:15px;margin:.2rem auto;font-size:.1rem;
-        font-family:PingFangSC-Medium;
-        color:rgba(204,204,204,1);border:1px solid #E4E4E4;line-height:.3rem;text-align:center;
-    }
-    .down{width:0.1rem;height:0.1rem;display:inline-block;background: url(../../assets/images/icon-down.png) no-repeat;background-size:100% 100%;margin-left:.05rem;}
-    .up{width:0.1rem;height:0.1rem;display:inline-block;background: url(../../assets/images/icon-up.png) no-repeat;background-size:100% 100%;float:right;margin-right:.2rem;margin-top:.1rem;}
-    .btnRed{width:89.4%;height:.4rem;background:rgba(185,54,71,1);border-radius: 4px;font-size:.16rem;font-family:PingFangSC-Medium;color:rgba(255,255,255,1);line-height:.4rem;text-align:center;position:relative;left:5.3%;border:0;top:.24rem;}
-    .grayBtn{background:rgba(216,216,216,1);}
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+.page-body {
+    display: flex;
+    flex-direction: column;
+}
+.artical {
+    width: 84%;
+    height: auto;
+    font-size: 0.14rem;
+    font-family: PingFangSC-Regular;
+    color: rgba(102, 102, 102, 1);
+    line-height: 0.24rem;
+    margin: 0.2rem 8% 0 8%;
+    text-indent: 2em;
+}
+.artical p {
+    margin-bottom: 0.1rem;
+}
+.allPic .bg-line {
+    width: 0.04rem;
+    height: 0.18rem;
+    margin-left: 8%;
+    background: url(../../assets/images/icon-rectangle.png) no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    float: left;
+    margin-top: 0.07rem;
+}
+.picture {
+    font-size: 0.14rem;
+    font-family: PingFangSC-Semibold;
+    color: rgba(51, 51, 51, 1);
+    margin-left: 0.1rem;
+    display: block;
+    float: left;
+}
+.numberz {
+    font-size: 0.14rem;
+    font-family: PingFangSC-Medium;
+    color: rgba(153, 153, 153, 1);
+    display: block;
+    float: left;
+    margin-left: 0.1rem;
+}
+.numberz1 {
+    font-size: 0.14rem;
+    font-family: PingFangSC-Medium;
+    color: rgba(153, 153, 153, 1);
+    margin-left: 0.1rem;
+}
+.allPic {
+    height: 0.3rem;
+    line-height: 0.3rem;
+    overflow: hidden;
+    margin-top: 0.2rem;
+}
+.img-show {
+    width: 84%;
+    height: auto;
+    margin-left: 8%;
+}
+.img-show img {
+    width: 49%;
+    height: 1.5rem;
+    margin-top: 0.1rem;
+}
+.img-show img:not(:first-child) {
+    margin-left: 2%;
+}
+.img-left {
+    width: 0.37rem;
+    height: 0.37rem;
+    position: absolute;
+    left: 0.1rem;
+    top: 3.15rem;
+    z-index: 900;
+}
+.img-right {
+    width: 0.37rem;
+    height: 0.37rem;
+    position: absolute;
+    right: 0.1rem;
+    top: 3.15rem;
+    z-index: 900;
+}
+.color-num {
+    color: rgba(185, 54, 71, 1);
+}
+.line-pic {
+    width: 87.2%;
+    margin: 0.1rem 4.8% 0.2rem 8%;
+    height: 0.36rem;
+    overflow: hidden;
+}
+.line-pic img {
+    width: 0.36rem;
+    height: 0.36rem;
+    margin-left: 0.07rem;
+    display: block;
+    float: left;
+}
+.wz-fonts {
+    font-family: PingFangSC-Medium;
+    color: rgba(153, 153, 153, 1);
+    line-height: 0.24rem;
+    width: 87.2%;
+    margin: 10px auto;
+    word-spacing: 0.24rem;
+    height: 44px;
+    overflow: hidden;
+    padding: 0;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+}
+.wz-fonts.auto {
+    height: auto;
+    overflow: auto;
+}
+.wz-fonts span {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+    line-height: 22px;
+    vertical-align: top;
+}
+.no-picture {
+    width: 1.1rem;
+    font-size: 0.2rem;
+    font-family: PingFangSC-Semibold;
+    color: rgba(51, 51, 51, 1);
+    display: block;
+    float: left;
+    margin-left: 0.1rem;
+}
+.btnMore {
+    width: 1.6rem;
+    height: 0.3rem;
+    border-radius: 15px;
+    margin: 0.2rem auto;
+    font-size: 0.1rem;
+    font-family: PingFangSC-Medium;
+    color: rgba(204, 204, 204, 1);
+    border: 1px solid #e4e4e4;
+    line-height: 0.3rem;
+    text-align: center;
+}
+.down {
+    width: 0.1rem;
+    height: 0.1rem;
+    display: inline-block;
+    background: url(../../assets/images/icon-down.png) no-repeat;
+    background-size: 100% 100%;
+    margin-left: 0.05rem;
+}
+.up {
+    width: 0.1rem;
+    height: 0.1rem;
+    display: inline-block;
+    background: url(../../assets/images/icon-up.png) no-repeat;
+    background-size: 100% 100%;
+    float: right;
+    margin-right: 0.2rem;
+    margin-top: 0.1rem;
+}
+.btnRed {
+    width: 89.4%;
+    height: 0.4rem;
+    background: rgba(185, 54, 71, 1);
+    border-radius: 4px;
+    font-size: 0.16rem;
+    font-family: PingFangSC-Medium;
+    color: rgba(255, 255, 255, 1);
+    line-height: 0.4rem;
+    text-align: center;
+    position: relative;
+    left: 5.3%;
+    border: 0;
+    top: 0.24rem;
+}
+.grayBtn {
+    background: rgba(216, 216, 216, 1);
+}
 </style>

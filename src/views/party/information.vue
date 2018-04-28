@@ -60,12 +60,8 @@ export default {
                 name: 'partyPointDetail',
 
                 params: {
-                    userid:item.id,
-                    partyBranch:encodeURI(this.partyBranch)
-                }/*query: {
                     userid:item.id
-                }*/
-
+                }
             })
 
 
@@ -114,17 +110,6 @@ export default {
     },mounted() {
         this.getParams();
         this.getParams1()
-    },
-
-    watch:{
-        // 监测路由变化,只要变化了就调用获取路由参数方法将数据存储本组件即可
-      /*  '$route': function(to, from) {
-            console.log(this.$route.path)
-        }*/
-        '$route': 'getParams'
-       /* $route(){
-            alert("改变");
-        }*/
     }
 
 

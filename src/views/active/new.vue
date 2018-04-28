@@ -179,10 +179,24 @@ export default {
             this.PickerVisible1=false
         },
         submit(){
+
+            if(starttime){
+                return this.$vux.toast.show({
+                    text: '请设置时间',
+                    type: 'text'
+                });
+            }
+
+            if(endtime){
+
+
+            }
+
             var starttime = this.startTime.replace(new RegExp("-","gm"),"/");
             var starttimeHaoMiao = (new Date(starttime)).getTime();
             var endtime = this.endTime.replace(new RegExp("-","gm"),"/");
             var endtimeHaoMiao = (new Date(endtime)).getTime();
+
 
             if(starttimeHaoMiao<endtimeHaoMiao){
                 axios({

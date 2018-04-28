@@ -45,19 +45,22 @@
           <div class="item">
            <div class="title">{{index+1}}.
                <span v-if="item.type=='SCORE'">{{item.title}}积分加分确认</span>
+               <span v-if="item.type=='GRAND'">{{item.title}}积分加分确认</span>
                <span v-else-if="item.type=='ACTIVE'">
                    <router-link :to="{  name:'activePost', params:{ activeId:item.masId}}">{{item.title}}</router-link>
                </span>
               </div>
             <div class="content">
                 <div v-if="item.type=='SCORE'">
-                <button  v-if="item.beginYn=='Y'" @click="refer(item)">
-                    去处理
-                </button>
-                <button  v-else-if="item.beginYn=='N'" @click="refer(item)">
-                    去处理
-                </button>
-                    </div>
+                    <button  @click="refer(item)">
+                        去处理
+                    </button>
+                </div>
+                <div v-if="item.type=='GRAND'">
+                    <button  @click="refer(item)">
+                        去评分
+                    </button>
+                </div>
                 <div v-if="item.type=='ACTIVE'">
                     <button  v-if="item.beginYn=='Y'" @click="refer(item)">
                         上传图片
@@ -78,7 +81,7 @@
 
 
      <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'300px'}" >
+          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'350px'}" >
                <div class="title">
                     <label for="">活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
@@ -154,7 +157,7 @@
       refer(item){
         console.log("11111");
         console.log(item);
-          if(item.type == 'SCORE'){
+          if(item.type == 'GRAND'){
               this.$router.push({
                   path:'points/review'
               })
@@ -245,7 +248,8 @@
         .qrcode {
             flex: 1;
             img {
-                height: 100%;
+                width: 100%;
+                margin-top: 10px;
             }
         }
     }

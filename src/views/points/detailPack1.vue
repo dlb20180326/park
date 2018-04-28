@@ -118,7 +118,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     				    console.log(it);
                         var obj = {};
                         obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+it.pictureId;
                         this.content.picture.push(obj);
                     });
 
@@ -146,7 +146,7 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
                         console.log(it);
                         var obj = {};
                         obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
+                        obj.src = 'http://www.dlbdata.cn/dangjian/showThumbnail/show?pictureId='+it.pictureId;
                         this.content.picture.push(obj);
                     });
 

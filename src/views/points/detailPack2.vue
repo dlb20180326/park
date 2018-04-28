@@ -33,7 +33,7 @@
             <span class="bg-line"></span>
             <group-title slot="title" style="margin-left: 0.15rem">
                 <b>汇报类型：
-                    <span style="color: #999999">书面汇报</span>
+                    <span style="color: #999999">{{list1Selected.text}}</span>
                 </b>
             </group-title>
 
@@ -50,7 +50,7 @@
             <span class="bg-line"></span>
             <group-title slot="title" style="margin-left: 0.15rem">
                 <b>思想汇报图片：
-                    <span style="color: #999999">最多可传10张</span>
+                    <span style="color: #999999">最多可传3张</span>
                 </b>
             </group-title>
             <div class="photo-list cl">
@@ -123,6 +123,8 @@ export default {
             hourListValue: '',
             hot: '',
             ListValue: '',
+            list1: [{ text: '口头汇报', moduleId: 11 }, { text: '书面汇报', moduleId: 12 }],
+            list1Selected: {},
             activeContent: '',
             listSingle: {},
             userName: '',
@@ -164,7 +166,7 @@ export default {
             axios
                 .get('pscoredetail/queryById', {
                     params: {
-                        id: this.$route.params.moduleId
+                        id: this.$route.params.moduleid
                     }
                 })
                 .then(res => {
@@ -341,7 +343,9 @@ export default {
                         Promise.all(promiseList).then(result => {
                             let pictureIds = [];
                             result.map(item => pictureIds.push(item.data));
-                            it.list.push('http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + pictureIds.join());
+                            it.list.push(
+                                'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + pictureIds.join()
+                            );
                             it.arr.push(pictureIds.join());
                         });
                     });
@@ -351,6 +355,7 @@ export default {
     },
     mounted() {
         weixin.init(['chooseImage', 'uploadImage']);
+        this.list1Selected = this.list1.find(item => item.moduleId == this.$route.params.moduleid);
         /* this.getActivity();
             this.getList();
             this.getUser();*/

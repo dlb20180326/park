@@ -150,7 +150,7 @@ w<template>
                                 <dl>
                                     <dd v-for="(it,index) in item.pictures" :key="index">
                                         <div class="preview">
-                                             <img class="previewer-demo-img"  :src="'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId" >
+                                             <img class="previewer-demo-img"  :src="'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+it.pictureId" >
                                         </div>
                                     </dd>
                                 </dl>
@@ -162,7 +162,7 @@ w<template>
             <div style="width:316.8px;">
                 <div class="bg-cross" @click =closeBg()></div>
             </div>
-            
+
         </div>
 
         <div class="bg-dark" v-if="darkbgShow"></div>
@@ -312,7 +312,7 @@ export default {
                 for (var i = 0; i < imgs.length; i++) {
                     var obj = {};
                     obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
-                    obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
+                    obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + imgs[i];
                     this.imgpics.push(obj);
                 }*/
             } else {

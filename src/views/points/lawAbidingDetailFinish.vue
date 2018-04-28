@@ -78,7 +78,7 @@ import {Previewer, TransferDom,ViewBox,XHeader,XButton} from 'vux'
                     for (var i = 0; i < imgs.length; i++) {
                         var obj = {};
                         obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + imgs[i];
                         this.imgpics.push(obj);
                     }
                 } else {
