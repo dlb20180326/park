@@ -321,13 +321,12 @@ td {
             .item {
                 margin: 10px;
                 border-bottom: 1px solid #d9d9d9;
-                width:97%;
+                width:95%;
                 .header,
                 .body,
                 .footer {
                     margin: 10px 0;
                 }
-
                 /*.desc{
                 	font-weight: 550;
     				font-size: .16rem;
@@ -337,7 +336,7 @@ td {
                     padding: .1rem 0;
                 }
                 .passN{
-                	width:.65rem;
+                	width:.68rem;
                 	display:inline-block;
                 	padding: 0;
                 	line-height: 2.3;
@@ -347,7 +346,7 @@ td {
                 	float: right;
                 }
                 .passY{
-                	width:.65rem;
+                	width:.68rem;
                 	display:inline-block;
                 	padding: 0;
                 	line-height: 2.3;
