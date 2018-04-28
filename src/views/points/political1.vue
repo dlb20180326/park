@@ -9,6 +9,7 @@
             <div class="header-list">
                 <div class="list-left">
                     <span class="left-now">汇报状态：</span>
+                    <span class="left-active">{{text}}</span>
                     <span class="left-active">{{list1Selected.text}}</span>
                 </div>
                 <div class="right-btn" @click="showDet">切换
@@ -16,7 +17,7 @@
                 </div>
             </div>
             <div class="animate-down" v-show="topShow">
-                <div v-for="(item,index) in list1" :key="index" class="bg-flag" @click="select(item)">
+                <div  v-for="(item,index) in list1" :key="index" :class="['bg-flag', {active: item.text === text}]" @click="change(item)">
                     {{item.text}}
                 </div>
             </div>
@@ -77,39 +78,48 @@ import axios from 'axios';
 import Vue from 'vue';
 import { ViewBox, TransferDom, Popup, Flexbox, FlexboxItem, XHeader } from 'vux';
 Vue.component(Popup.name, Popup);
-export default {
-    data() {
-        return {
-            contents: { rights: '评分说明', title: '' },
-            list: '',
-            list3: '',
-            list1: [{ text: '口头汇报', moduleId: 11 }, { text: '书面汇报', moduleId: 12 }],
-            list1Selected: {},
-            isYellow: false,
-            showPop: false,
-            topShow: false,
-            showTrans: false
-        };
-    },
-    filters: {
-        Upper: function(value) {
-            try {
-                if (value === 1) throw '未评分';
-                if (value === 2) throw '已评分';
-                if (value === 3) throw '已过期';
-            } catch (err) {
-                return (value = err);
+
+	export default {
+		data(){
+
+			return {
+				contents:{rights:'评分说明',title:''},
+				list:"",
+                list3:"",
+                list1:[
+                    {text:"口头汇报",moduleId:11},
+                    {text:"书面汇报",moduleId:12}
+                ],
+				isYellow:false,
+				showPop:false,
+
+                topShow:false,
+                showTrans:false,
+                text:'书面汇报',
+                moduleId:''
+			}
+		},
+		filters: {
+            Upper: function (value) {
+                try {
+                    if(value=== 1)  throw "未评分";
+                    if(value=== 2)  throw "已评分";
+                    if(value=== 3)  throw "已过期";
+                }
+                catch(err) {
+                    return value=err;
+                }
+            },
+            Upper1: function (value) {
+                try {
+                    if(value===1) throw "";
+                    if(value=== 2)  throw "yellowB";
+                    if(value=== 3)  throw "yellowC";
+                }
+                catch(err) {
+                    return value=err;
+                }
             }
-        },
-        Upper1: function(value) {
-            try {
-                if (value === 1) throw '';
-                if (value === 2) throw 'yellowB';
-                if (value === 3) throw 'yellowC';
-            } catch (err) {
-                return (value = err);
-            }
-        }
     },
     components: {
         XHeader,
@@ -372,22 +382,13 @@ body {
     display: block;
     float: right;
     margin: 7px 8px 0 3px;
-    background-image: url(../../assets/images/icon-downs.png);
-    background-size: 100% 100%;
+    background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
+.bg-flag{height:.2rem;margin-top:.2rem;}
+.animate-down{padding:0 .2rem .2rem .21rem;z-index:521;background-color:#FFFFFF;top:96px;border: 1px solid #E4E4E4;
+position:fixed;left:0;right:0;
+.active{
+	color: #F84D2B;
 }
-.bg-flag {
-    height: 0.2rem;
-    margin-top: 0.2rem;
-}
-.animate-down {
-    padding: 0 0.2rem 0.2rem 0.21rem;
-    z-index: 521;
-    background-color: #ffffff;
-    top:0.96rem;
-    border: 1px solid #e4e4e4;
-    position: fixed;
-    left: 0;
-    right: 0;
 }
 
 </style>
