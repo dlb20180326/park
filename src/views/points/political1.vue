@@ -110,6 +110,7 @@ export default {
             } catch (err) {
                 return (value = err);
             }
+    	}
     },
     components: {
         XHeader,
