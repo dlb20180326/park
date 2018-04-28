@@ -78,47 +78,37 @@ import axios from 'axios';
 import Vue from 'vue';
 import { ViewBox, TransferDom, Popup, Flexbox, FlexboxItem, XHeader } from 'vux';
 Vue.component(Popup.name, Popup);
-
-	export default {
-		data(){
-
-			return {
-				contents:{rights:'评分说明',title:''},
-				list:"",
-                list3:"",
-                list1:[
-                    {text:"口头汇报",moduleId:11},
-                    {text:"书面汇报",moduleId:12}
-                ],
-				isYellow:false,
-				showPop:false,
-
-                topShow:false,
-                showTrans:false,
-                text:'书面汇报',
-                moduleId:''
-			}
-		},
-		filters: {
-            Upper: function (value) {
-                try {
-                    if(value=== 1)  throw "未评分";
-                    if(value=== 2)  throw "已评分";
-                    if(value=== 3)  throw "已过期";
-                }
-                catch(err) {
-                    return value=err;
-                }
-            },
-            Upper1: function (value) {
-                try {
-                    if(value===1) throw "";
-                    if(value=== 2)  throw "yellowB";
-                    if(value=== 3)  throw "yellowC";
-                }
-                catch(err) {
-                    return value=err;
-                }
+export default {
+    data() {
+        return {
+            contents: { rights: '评分说明', title: '' },
+            list: [],
+            list3: [],
+            list1: [{ text: '口头汇报', moduleId: 11 }, { text: '书面汇报', moduleId: 12 }],
+            list1Selected: {},
+            isYellow: false,
+            showPop: false,
+            topShow: false,
+            showTrans: false
+        };
+    },
+    filters: {
+        Upper: function(value) {
+            try {
+                if (value === 1) throw '未评分';
+                if (value === 2) throw '已评分';
+                if (value === 3) throw '已过期';
+            } catch (err) {
+                return (value = err);
+            }
+        },
+        Upper1: function(value) {
+            try {
+                if (value === 1) throw '';
+                if (value === 2) throw 'yellowB';
+                if (value === 3) throw 'yellowC';
+            } catch (err) {
+                return (value = err);
             }
     },
     components: {
