@@ -89,7 +89,7 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur="false" :dialog-style="{height:'350px'}" on-click-mask="haha()">
+          <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" hide-on-blur="true">
                <div class="title">
                     <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
@@ -152,15 +152,13 @@ export default {
         };
     },
     methods: {
-        haha(){
-            alert(1);
+        backRoute(){
             setTimeout(() => history.back(), 500);
         },
         openPicker() {
             this.$refs.picker.open();
         },
-        handleConfirm(value) {
-            var d = value;
+        handleConfirm(d) {
             this.startTime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + '';
         },
         handlePicker(){

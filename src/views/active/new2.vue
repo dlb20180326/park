@@ -113,9 +113,9 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'300px'}" >
+            <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" hide-on-blur="true">
                <div class="title">
-                    <label for="">活动名称:</label>
+                    <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
                 </div>
                 <div class="qrcode">
@@ -185,11 +185,13 @@
             };
         },
         methods: {
+            backRoute(){
+                setTimeout(() => history.back(), 500);
+            },
             openPicker() {
                 this.$refs.picker.open();
             },
-            handleConfirm(value) {
-                var d = value;
+            handleConfirm(d) {
                 this.startTime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + '';
             },
             handlePicker(){
@@ -223,6 +225,58 @@
                 this.PickerVisible1=false
             },
             submit(){
+
+                if(!this.startTime){
+
+                    return this.$vux.toast.show({
+                        text: '填写开始时间',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.endTime){
+                    return this.$vux.toast.show({
+                        text: '填写结束时间',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activityName){
+                    return this.$vux.toast.show({
+                        text: '选择活动类型',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activeTitle){
+                    return this.$vux.toast.show({
+                        text: '选择活动类型',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activePace){
+                    return this.$vux.toast.show({
+                        text: '填写活动地点',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activePrincipalPeople){
+                    return this.$vux.toast.show({
+                        text: '填写负责人',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activeContext){
+                    return this.$vux.toast.show({
+                        text: '填写活动内容',
+                        type: 'text'
+                    });
+                }
+
+
                 var starttime = this.startTime.replace(new RegExp("-","gm"),"/");
                 var starttimeHaoMiao = (new Date(starttime)).getTime();
                 var endtime = this.endTime.replace(new RegExp("-","gm"),"/");
@@ -252,7 +306,10 @@
                         console.log(error);
                     });
                 }else {
-                    this.$vux.alert.show({title:'开始日期不能大于结束日期'});
+                    this.$vux.toast.show({
+                        text: '开始日期不能大于结束日期',
+                        type: 'text'
+                    });
                 }
             },
             showQR(data){

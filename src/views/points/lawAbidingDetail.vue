@@ -149,18 +149,7 @@
             },
             atBig (item) {
             },
-          /*  getList(){
-                axios.get('pscoredetail/queryById',{
-                    params: {
-                        id:this.$route.params.moduleId
-                    }
-                }).then(res =>{
-                    this.listSingle=res.data
-            }).catch(err =>{
-                    console.log('fail'+err.data)
 
-            })
-            },*/
 
             openPicker() {
                 this.$refs.picker.open();
@@ -273,9 +262,6 @@
         },
         mounted() {
             weixin.init(['chooseImage', 'uploadImage']);
-           /* this.getActivity();
-            this.getList();*/
-
             this.getUser1();
         }
     };

@@ -26,7 +26,8 @@
 				<div class="middle">
 					<div class="middle-top" @click="show()">评分说明</div>
 					<div class="middle-content">
-						<p>                            1、党员在支部民主评议党员活动中，被评定为“不合格党员”或受限期改正等组织处置的扣20分；<br>
+						<p>
+                            1、党员在支部民主评议党员活动中，被评定为“不合格党员”或受限期改正等组织处置的扣20分；<br>
                             2、党员受到党内纪律处分或行政处罚以上的，实行“一票否决”。
 						</p>
 					</div>
@@ -95,9 +96,7 @@ Vue.component(Popup.name, Popup);
                     method: 'get',
                     url: 'pscoreparty/getDakDetialByDepartmentId',
                     params: {
-                      /*  departmentId:1*/
                        departmentId:this.$store.getters.user.departmentid
-
                     }
                 }) .then((res)=> {
                     this.list=res.data;
