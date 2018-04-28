@@ -276,6 +276,16 @@ body {
 .yellowC {
     background-color: rgba(244, 151, 74, 1);
 }
+.points-table {
+    position: absolute;
+    top: 0.96rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 0;
+    -webkit-overflow-scrolling: touch;
+}
 .middle {
     width: 2.8rem;
     height: 2.02rem;
