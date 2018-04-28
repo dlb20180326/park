@@ -89,9 +89,9 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'300px'}" >
+          <x-dialog v-model="showQrcodeDialog" hide-on-blur="false" :dialog-style="{height:'350px'}" on-click-mask="haha()">
                <div class="title">
-                    <label for="">活动名称:</label>
+                    <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
                 </div>
                 <div class="qrcode">
@@ -152,6 +152,10 @@ export default {
         };
     },
     methods: {
+        haha(){
+            alert(1);
+            setTimeout(() => history.back(), 500);
+        },
         openPicker() {
             this.$refs.picker.open();
         },
@@ -179,18 +183,56 @@ export default {
             this.PickerVisible1=false
         },
         submit(){
+            if(!this.startTime){
 
-            if(starttime){
                 return this.$vux.toast.show({
-                    text: '请设置时间',
+                    text: '填写开始时间',
                     type: 'text'
                 });
             }
 
-            if(endtime){
-
-
+            if(!this.endTime){
+                return this.$vux.toast.show({
+                    text: '填写结束时间',
+                    type: 'text'
+                });
             }
+
+            if(!this.activityName){
+                return this.$vux.toast.show({
+                    text: '选择活动类型',
+                    type: 'text'
+                });
+            }
+
+            if(!this.activeTitle){
+                return this.$vux.toast.show({
+                    text: '选择活动类型',
+                    type: 'text'
+                });
+            }
+
+            if(!this.activePace){
+                return this.$vux.toast.show({
+                    text: '填写活动地点',
+                    type: 'text'
+                });
+            }
+
+            if(!this.activePrincipalPeople){
+                return this.$vux.toast.show({
+                    text: '填写负责人',
+                    type: 'text'
+                });
+            }
+
+            if(!this.activeContext){
+                return this.$vux.toast.show({
+                    text: '填写活动内容',
+                    type: 'text'
+                });
+            }
+
 
             var starttime = this.startTime.replace(new RegExp("-","gm"),"/");
             var starttimeHaoMiao = (new Date(starttime)).getTime();
@@ -216,7 +258,11 @@ export default {
                         departmentid:this.departmentid
                     }
                 }) .then((res)=> {
-                    this.$vux.alert.show({title:res.msg});
+
+                    this.$vux.toast.show({
+                        text: '增加成功',
+                        type: 'text'
+                    });
 
                     this.showQR(res.data);
 
@@ -224,7 +270,11 @@ export default {
                     console.log(error);
                 });
             }else {
-                this.$vux.alert.show({title:'开始日期不能大于结束日期'});
+
+                this.$vux.toast.show({
+                    text: '开始日期不能大于结束日期',
+                    type: 'text'
+                });
 
             }
         },
@@ -310,7 +360,8 @@ export default {
         .qrcode {
             flex: 1;
             img {
-                height: 100%;
+                margin-top: 10px;
+                width: 100%;
             }
         }
     }
@@ -396,5 +447,14 @@ export default {
         align-items: center;
         height: 0.32rem;
         padding: 0;
+    }
+    .weui-toast_text .weui-toast__content {
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+    .weui-toast.weui-toast_text{
+        width: 8em !important;
+        min-width: 7.6em;
     }
 </style>

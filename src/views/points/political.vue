@@ -1,9 +1,13 @@
 <template>
 
-	<div style="height:100%;">
+	<div style="height:100%;"  class="disabled-tabbar">
    		<view-box ref="viewBox" body-padding-top=".46rem">
-			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" class="bgColors">
-                {{contents.title}}<a slot="right" @click="showMenu">评分说明</a></x-header>
+
+            <x-header slot="header" style="position: fixed !important;left:0;right:0;z-index:100"  class="bgColors">
+                {{contents.title}}
+                <a slot="right" @click="showMenu">评分说明</a>
+            </x-header>
+
 			    <div class="points-table">
                     <flexbox :gutter="0">
                         <flexbox-item>序号</flexbox-item>
@@ -213,6 +217,15 @@ font-size: .14rem;
     flex:0 0 auto;
     width: 14%;
 
+}
+.points-table {
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 0;
 }
 .btnSub{width:.6rem;height:.24rem;font-size:.14rem;line-height:.24rem;border-radius: 4px;font-family:PingFangSC-Medium;border:0px;color:#FFFFFF;background-color:rgba(185, 54, 71, 1);}
 .yellowA{background-color:#BABABA;}
