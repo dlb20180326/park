@@ -21,7 +21,7 @@
                     </previewer>
                 </div>
             </div>
-            <div v-show="roleId != 4">
+            <div v-show="roleId != 4 ">
                 <p class="allPic">
                     <span class="bg-line"></span>
                     <span class="picture">参与人员</span>
@@ -112,8 +112,8 @@
                     this.picInfo= res.data;
                     for(var d=0 ;d<this.picInfo.length;d++){
                         var obj = {};
-                        obj.msrc = 'http://www.dlbdata.cn/picture/showThumbnail?pictureId='+this.picInfo[d].pictureId;
-                        obj.src = 'http://www.dlbdata.cn/picture/show?pictureId='+this.picInfo[d].pictureId;
+                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+this.picInfo[d].pictureId;
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
                         this.list.push(obj);
                     }
                 }).catch(err =>{
