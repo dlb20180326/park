@@ -268,14 +268,16 @@ body {
     display: block;
     float: left;
 }
-.numberz {
-    font-size: 0.14rem;
-    font-family: PingFangSC-Medium;
-    color: rgba(153, 153, 153, 1);
-    display: block;
-    float: left;
-    margin-left: 0.1rem;
+
+.numberz{
+	font-size:.14rem;
+	font-family:PingFangSC-Medium;
+	color:rgba(153,153,153,1);
+	display:block;
+	float: left;
+	margin-left:.1rem;
 }
+
 .numberz1 {
     font-size: 0.12rem;
     font-family: PingFangSC-Medium;
