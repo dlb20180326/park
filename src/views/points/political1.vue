@@ -2,8 +2,7 @@
 
     <div style="height:100%;" class="disabled-tabbar">
         <view-box ref="viewBox" body-padding-top=".46rem">
-            <!--<r-header :rfs="contents"></r-header>-->
-            <x-header slot="header" style="position: fixed !important;left:0;right:0;">
+            <x-header slot="header" style="position: fixed !important;left:0;right:0;z-index:100">
                 思想汇报
                 <a slot="right" @click="showMenu">评分说明</a>
             </x-header>
