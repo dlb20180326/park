@@ -211,7 +211,7 @@
                 }
 
 
-                if(!this.this.picList.arr.length){
+                if(!this.picList.arr.length){
                     return this.$vux.toast.show({
                         text: '请上传图片',
                         type: 'text'
