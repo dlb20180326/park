@@ -28,10 +28,10 @@ body {
 }
 .vux-header {
         height: .46rem;
-        background: linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1)); 
-		background: -webkit-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));  
-        background: -o-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));  
-        background: -moz-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));  
+        background: linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));
+		background: -webkit-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));
+        background: -o-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));
+        background: -moz-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));
         background: -mos-linear-gradient(to right,rgba(185,54,71,1),rgba(155,10,26,1));}
 input[type=button], input[type=submit], input[type=file], button { cursor: pointer; -webkit-appearance: none;
     .vux-header-left a,
@@ -43,6 +43,12 @@ input[type=button], input[type=submit], input[type=file], button { cursor: point
 }
 .disabled-tabbar + .weui-tabbar {
     display: none !important;
+}
+.fixed-tabbar + .weui-tabbar {
+    position: fixed !important;
+    left:0;
+    right:0;
+    bottom:0;
 }
 .vux-header .vux-header-left a,
 .vux-header .vux-header-left button,

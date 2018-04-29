@@ -1,8 +1,10 @@
 <template>
-    <div  style="height:100%;overflow-x:hidden;">
-        <view-box ref="viewBox" body-padding-top=".46rem" body-padding-bottom=".55rem">
-            <r-header :rfs='itegal'></r-header>
-            <div class="header-list">
+    <div class="fixed-tabbar">
+        <x-header :left-options="{showBack: false}">
+            积分审核
+        </x-header>
+        <view-box ref="viewBox" body-padding-top="1.36rem" body-padding-bottom=".52rem">
+            <div class="header-list cl">
                 <div class="list-left">
                     <span class="left-now">当前支部：</span>
                     <span class="left-active">{{partyBranch1}}</span>
@@ -13,7 +15,7 @@
                 <tab-item selected @on-item-click="slide">待审核（{{length1  || 0}}）</tab-item>
                 <tab-item @on-item-click="slide1">已审核（{{length2 || 0}}）</tab-item>
             </tab>
-            <div class="trans-black" v-show="showTrans"></div>
+            <!--<div class="trans-black" v-show="showTrans"></div>-->
             <div class="animate-down" v-show="topShow">
                 <div  v-for="(park,index) in department" :key="index" class="bg-flag" :class="[park.departmentid === activesId?'activeColor':'']" @click="change(park)">
                     {{park.departmentname}}
@@ -65,15 +67,14 @@
     </div>
 </template>
 <script>
-    import rHeader from '@/components/comother/rheader';
     import axios from 'axios'
-    import {ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem} from 'vux';
+    import {XHeader,ViewBox,  Sticky, Panel, TransferDom, Flexbox, FlexboxItem,Tab, TabItem} from 'vux';
     export default{
         data(){
             return {
                 itegal:{rights:'',title:'积分审核'},
                 topShow:false,
-                showTrans:false,
+                //showTrans:false,
                 slides:-1,
                 parks:'',
                 partyBranch1:'',
@@ -90,7 +91,7 @@
             }
         },
         components:{
-            'r-header':rHeader,
+            XHeader,
             ViewBox,
             Panel,
             Sticky,
@@ -141,7 +142,7 @@
             },
             showDet(){
                 this.topShow = !this.topShow;
-                this.showTrans = !this.showTrans;
+                //this.showTrans = !this.showTrans;
             },
             slide(){
                 this.table1 = true;
@@ -225,9 +226,37 @@
 </style>
 <style scoped  lang="less">
     .activeColor{color:#CB2F00;}
-    .header-list{width:calc(100% - 2px);height:.5rem;border-bottom:1px solid #E4E4E4;}
-    .list-left{    width: 54%;
-    margin: .08rem 0 .15rem 5.3%;
+    .header-list{width:calc(100% - 2px);height:.46rem;border-bottom:1px solid #E4E4E4;
+    }
+
+    .vux-header{
+        height: .46rem;
+        position: fixed;
+        left:0;right:0;
+        z-index: 30;
+    }
+    .header-list{
+        position: fixed;
+        left: 0;
+        right: 0;
+        z-index: 30;
+        top: .46rem;
+        background: #fff;
+        height: .5rem;
+        box-sizing: border-box;
+        border-bottom: 1px solid #e4e4e4;
+    }
+    .vux-tab-warp{
+        position: fixed !important;
+        left: 0;
+        right: 0;
+        z-index: 30;
+        top: .96rem;
+    }
+    .list-left{
+
+        width: 54%;
+    margin: .08rem 0 0 5.3%;
     height: .3rem;
     line-height: .3rem;
     font-size: .14rem;
@@ -237,16 +266,34 @@
     white-space: nowrap;}
     .left-now{color:#666666;}
     .left-active{color:#333;}
-    .right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.13rem 5.3% .13rem 0;padding-left:.07rem;}
+    .right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.1rem 5.3% 0 0;padding-left:.07rem;}
     .right-btn span{width:.1rem;height:.1rem;display:block;float:right;margin:0.07rem ;background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
     .pop-content{width:100%;height:1.8rem;background-color:rosybrown;}
     .vux-popup-dialog{background-color: transparent;}
     .vux-popup-dialog.vux-popup-top{top:.96rem;}
     .bg-flag{height:.2rem;margin-top:.2rem;}
-    .animate-down{padding:0 .2rem .2rem .21rem;position: absolute;z-index:521;width: calc(100% - 0.41rem);background-color:#FFFFFF;top:0.96rem;border: 1px solid #E4E4E4;}
+    .animate-down{
+        padding: 0 .2rem .2rem .21rem;
+        position: absolute;
+        z-index: 521;
+        width: calc(100% - 0.41rem);
+        background-color: #FFFFFF;
+        top: 0.95rem;
+        border: 1px solid #E4E4E4;
+    }
     .trans-black{position:absolute;z-index:520;background-color:rgba(0,0,0,0.3);top:.96rem;bottom:0px;left:0px;right:0px;}
     ul,li{list-style: none}
-    .tabClick{ background: #FFFFFF; overflow: hidden;font-family: simsun;border-bottom:1px solid #e4e4e4;
+    .cl {
+        *zoom: 1
+    }
+
+    .cl:after {
+        clear: both;
+        content: '\20';
+        display: block;
+        height: 0;
+    }
+        .tabClick{ background: #FFFFFF; overflow: hidden;font-family: simsun;border-bottom:1px solid #e4e4e4;
         clear:both}
     .tabClick li{
         height: 0.48rem;
