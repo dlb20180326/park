@@ -104,10 +104,6 @@ export const routes = [
                 component: () => import('@/views/points/auditDetail')
             },
             {
-                path: 'points/pointDetail',
-                component: () => import('@/views/points/pointDetail')
-            },
-            {
                 path: 'points/addPoint/:projectId/:moduleId',
                 name: 'addPoint',
                 component: () => import('@/views/points/addPoint')

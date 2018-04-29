@@ -45,7 +45,7 @@
       <div v-for="(item,index) in todoList" :key="index">
         <div class="item">
             <div class="title">{{index+1}}.
-                <span v-if="item.type=='SCORE'">{{item.title}}积分加分确认</span>
+                <span v-if="item.type=='SCORE'">{{item.name}}积分加分确认</span>
                 <span v-else-if="item.type=='ACTIVE'">
                    <router-link :to="{  name:'activePost', params:{ activeId:item.masId}}">{{item.title}}</router-link>
                </span>
@@ -139,9 +139,17 @@ export default {
     methods: {
         refer(item) {
             if (item.type == "SCORE") {
-                this.$router.push({
-                    path: "points/evaluation"
-                });
+
+                if(item.id===2 || item.id===4 || item.id===8){
+                    this.$router.push({
+                        path: "points/political/"+item.id
+                    });
+                }else{
+                    this.$router.push({
+                        path: "points/evaluation"
+                    });
+                }
+
             } else if (item.type == "ACTIVE") {
                 if (item.beginYn == "Y") {
                     this.$router.push({
@@ -155,13 +163,13 @@ export default {
         },
         getDate() {
             let datime = new Date().getHours();
-            if ((datime >= 5) & (datime < 8)) {
+            if ((datime >= 5) && (datime < 8)) {
                 this.dateTimes = "早上好";
-            } else if ((datime >= 8) & (datime < 11)) {
+            } else if ((datime >= 8) && (datime < 11)) {
                 this.dateTimes = "上午好";
-            } else if ((datime >= 11) & (datime < 13)) {
+            } else if ((datime >= 11) && (datime < 13)) {
                 this.dateTimes = "中午好";
-            } else if ((datime >= 13) & (datime < 19)) {
+            } else if ((datime >= 13) && (datime < 19)) {
                 this.dateTimes = "下午好";
             } else {
                 this.dateTimes = "晚上好";

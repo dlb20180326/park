@@ -5,7 +5,7 @@
                 <div class="header-top">
                     <div class="top-head">
                         <div class="top-left">{{dateTime}}，{{userAbout.name}}</div>
-                        <div class="top-right" :style="{background: 'url('+userAbout.avatar+')'}"></div>
+                        <div class="top-right" :style="{backgroundImage: 'url('+userAbout.avatar+')'}"></div>
                     </div>
                     <div class="top-second">
                         <div class="second-left">

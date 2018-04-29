@@ -70,9 +70,6 @@
                     </button>
                 </div>
                 <p></p>
-             <!-- <x-button type="warn" :link="item.type=='SCORE'?'points/review':'/active'">
-                {{item.beginYn=='Y'?'去处理':'活动二维码'}}
-              </button>-->
             </div>
           </div>
         </div>
@@ -155,8 +152,7 @@
     },
     methods: {
       refer(item){
-        console.log("11111");
-        console.log(item);
+
           if(item.type == 'GRAND'){
               this.$router.push({
                   path:'points/review'

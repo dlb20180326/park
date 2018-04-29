@@ -134,7 +134,7 @@ w<template>
                             <div class="states" v-if="item.status==2">
                                 已通过
                             </div>
-                            <div class="btn-return" v-if="item.status==2">重新提交</div>
+                            <div class="btn-return" v-if="item.status==3">重新提交</div>
                             <div class="states" v-if="item.status==3">
                                 已拒绝
                             </div>
@@ -457,13 +457,13 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     position: relative;
 }
 .sinfo-title{
-    height: .14rem;
-    line-height: .14rem;
+    height: .16rem;
+    line-height: .16rem;
     font-size: 0;
     margin-bottom: .16rem;
-    vertical-align: top;
+    vertical-align: middle;
     overflow: hidden;
-    text-overflow:ellipsis ;
+    text-overflow: ellipsis;
 }
 .sinfo-title.pr4{
     padding-right:1rem;
@@ -476,9 +476,9 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     font-weight: normal;
     display: inline-block;
 }
-// .sinfo-title span.vb{
-//     vertical-align:top;
-// }
+.sinfo-title span.vb{
+ vertical-align:top;
+}
 .sinfo-title .text-gray{
     color:#999;
     vertical-align: text-bottom;

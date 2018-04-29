@@ -320,7 +320,7 @@ export default {
 }
 .fRight{
 	float:right;
-    margin-top: 0.1rem;
+    line-height: 0.45rem;
     font-size:.12rem;
 }
 .content{width:89%;
