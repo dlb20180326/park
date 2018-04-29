@@ -205,11 +205,18 @@
 
                 if(!this.activeContent){
                     return this.$vux.toast.show({
-                        text: '填写活动内容',
+                        text: '填写内容',
                         type: 'text'
                     });
                 }
 
+
+                if(!this.this.picList.arr.length){
+                    return this.$vux.toast.show({
+                        text: '请上传图片',
+                        type: 'text'
+                    });
+                }
 
                 var starttime = this.startTime.replace(new RegExp("-","gm"),"/");
                 var starttimeHaoMiao = (new Date(starttime)).getTime();
@@ -258,7 +265,7 @@
                     }
 
                 });}else {
-                    alert("开始日期不能大于结束日期");
+                    this.$vux.alert.show({title:'开始日期不能大于结束日期'});
                 }
             },
 
