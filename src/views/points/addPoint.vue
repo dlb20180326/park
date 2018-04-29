@@ -244,16 +244,14 @@
                 }).then(res => {
 
                     if(res.success){
+                        let $this = this;
                     	this.$vux.alert.show({title:'增加成功',onHide(){
-                            this.$router.push({
+                            $this.$router.push({
                                 path: '/points'
                             })
                         }});
                     }else{
                     	this.$vux.alert.show({title:res.msg});
-                        setTimeout(() => {
-        					this.$vux.alert.hide();
-      					}, 1000)
                     }
                 }).catch(err => {
 

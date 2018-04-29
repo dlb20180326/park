@@ -408,7 +408,7 @@ export default {
     top: .2rem;
     font-size: .14rem;
     color: #B93647;
-    width:.74rem;
+    padding:5px .2rem;
 }
 .btn-return{
     text-align: center;
