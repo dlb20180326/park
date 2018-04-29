@@ -8,9 +8,14 @@
                 <x-header :left-options="{showBack: false}">
                     驳回原因
                 </x-header>
-                <group>
-                    <x-textarea v-model="rejectReason"></x-textarea>
-                </group>
+
+                <div style="padding: 2px 15px;background: #fff;">
+                    <group>
+                        <x-textarea v-model="rejectReason"></x-textarea>
+                    </group>
+                </div>
+
+
                 <flexbox>
                     <flexbox-item>
                         <x-button @click.native="dialogConfirm" :mini="true" type="warn">
@@ -283,8 +288,12 @@ export default {
                     border: 0;
                 }
             }
+
             textarea {
                 background: #f4f4f4;
+                height: 1.26rem;
+                font-family: microsoft yahei;
+                font-size: 0.16rem;
             }
             .vux-flexbox {
                 margin: 10px;
@@ -302,6 +311,7 @@ export default {
             .weui-cells,
             .weui-cell {
                 margin-top: 0;
+                background: transparent;
                 &:before {
                     border-top: 0;
                 }
@@ -335,6 +345,13 @@ export default {
             }
 
         }
+    }
+
+    .vux-x-textarea .weui-cell__bd:last-child{
+        padding: 5px;
+        background: #f4f4f4;
+        border: 1px solid #e4e4e4;
+
     }
     .vux-label,.vux-cell-align-left{font-size:.16rem;}
     .vux-cell-align-left{color:#333 !important;}
