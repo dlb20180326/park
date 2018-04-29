@@ -69,7 +69,7 @@
                         活动二维码
                     </button>
                 </div>
-                <p></p>
+                <p v-show="index!==todoList.length-1"></p>
             </div>
           </div>
         </div>
@@ -309,16 +309,13 @@
     color: #8b8b8b;
   }
   .content button{
-    padding: 0 .2rem;
-    height: .3rem;
-    line-height:.3rem;
-    border:0;
-    background:rgba(185,54,71,1);
-    border-radius: 2px ;
-    font-size:.16rem;
-    font-family:PingFangSC-Medium;
-    color:#fff;
-    margin:.2rem auto;
+      padding: 4px 0.26rem;
+      border: 0;
+      background: #b93647;
+      font-size: 0.16rem;
+      color: #fff;
+      margin: 0.2rem auto;
+      border-radius: 4px;
   }
 
   .content p{
@@ -327,4 +324,5 @@
       background-color: #efefef;
       margin-left: -4%;
   }
+
 </style>

@@ -274,7 +274,17 @@ export default {
 .box{
     padding-top:51px;
 }
-    .header-list{width:calc(100% - 2px);height:.5rem;border-bottom:1px solid #E4E4E4;background-color:#FFFFFF}
+    .header-list{
+        width: 100%;
+        height: .5rem;
+        border-bottom: 1px solid #E4E4E4;
+        position: fixed;
+        top: .46rem;
+        left: 0;
+        right: 0;
+        background: #fff;
+        z-index: 1005;
+    }
     .list-left{
     width: 62%;
     margin: .15rem 0 .15rem 5.3%;
@@ -504,7 +514,7 @@ export default {
 
 }
 
-.header-list{width:100%;height:50px;border-bottom:1px solid #E4E4E4;position: fixed;top:46px;left:0;right:0;background:#fff;line-height:50px;z-index:1005}
+
 .list-left{width:54%;margin:.08rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;margin-top:0.15rem }
 .left-now{color:#666;font-size: 14px;}
 .left-active{

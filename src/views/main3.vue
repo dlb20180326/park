@@ -67,7 +67,7 @@
                     <button  v-else-if="item.beginYn=='N'" @click="refer(item)">
                         活动二维码
                     </button>
-                    <p></p>
+                    <p v-show="index!==todoList.length-1"></p>
                 </div>
           </div>
         </div>
@@ -304,14 +304,13 @@ input.weui-btn {
     width: 32% !important;
 }
 .content button {
-    padding: 0.03rem 0.26rem;
+    padding: 4px 0.26rem;
     border: 0;
-    background: rgba(185, 54, 71, 1);
-    border-radius: 2px;
+    background: #b93647;
     font-size: 0.16rem;
-    font-family: PingFangSC-Medium;
     color: #fff;
     margin: 0.2rem auto;
+    border-radius: 4px;
 }
 .content p {
     width: 108%;

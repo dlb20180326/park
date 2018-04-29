@@ -265,7 +265,9 @@
     text-overflow: ellipsis;
     white-space: nowrap;}
     .left-now{color:#666666;}
-    .left-active{color:#333;}
+    .left-active{color:#333;
+        font-size: 14px;
+        font-weight: 600;}
     .right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.1rem 5.5% 0 0;padding-left:.07rem;
         font-size: .14rem;
     }

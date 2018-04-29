@@ -379,7 +379,7 @@ body {
     border-radius: 4px;
     text-align: center;
     float: right;
-    margin: 0.13rem 5.3% 0.13rem 0;
+    margin: 0.13rem 0.4rem 0.13rem 0;
     padding-left: 0.07rem;
 }
 .right-btn span {
