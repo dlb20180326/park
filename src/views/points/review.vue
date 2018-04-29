@@ -266,7 +266,9 @@
     white-space: nowrap;}
     .left-now{color:#666666;}
     .left-active{color:#333;}
-    .right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.1rem 5.3% 0 0;padding-left:.07rem;}
+    .right-btn{width:.6rem;height:.24rem;line-height:.24rem;color:#fff; background:rgba(244,151,74,1);border-radius: 4px;text-align: center;float:right;margin:.1rem 5.5% 0 0;padding-left:.07rem;
+        font-size: .14rem;
+    }
     .right-btn span{width:.1rem;height:.1rem;display:block;float:right;margin:0.07rem ;background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
     .pop-content{width:100%;height:1.8rem;background-color:rosybrown;}
     .vux-popup-dialog{background-color: transparent;}
