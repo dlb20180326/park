@@ -105,7 +105,7 @@ w<template>
                                     加分人：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    {{knoew.adderName}}
+                                    {{knoew.adderName  || '系统自动'}}
                                 </flexbox-item>
                             </flexbox>
                             <flexbox>
