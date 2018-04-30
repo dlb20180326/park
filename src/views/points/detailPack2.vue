@@ -17,7 +17,7 @@
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
-                    <input type="text" v-model='startTime'>
+                    <input type="text" v-model='startTime' readonly>
                 </flexbox-item>
                 <flexbox-item class="input-addon" style="position: relative">
                     <x-button mini type="warn">
@@ -140,10 +140,7 @@ export default {
                     }
                 })
                 .then(res => {
-                    /*  this.totalscore=res.data.totalscore;*/
                     this.name1 = res.data.name;
-                    /*   this.departmentname=res.data.departmentname
-                 this.departmentid=res.data.departmentid*/
                 })
                 .catch(err => {
                     console.log(err);

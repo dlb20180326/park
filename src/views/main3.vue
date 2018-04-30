@@ -58,7 +58,6 @@
                     <button  v-else-if="item.beginYn=='N'" @click="refer(item)">
                         去处理
                     </button>
-                    <p></p>
                 </div>
                 <div v-if="item.type=='ACTIVE'">
                     <button  v-if="item.beginYn=='Y'" @click="refer(item)">
@@ -67,8 +66,8 @@
                     <button  v-else-if="item.beginYn=='N'" @click="refer(item)">
                         活动二维码
                     </button>
-                    <p v-show="index!==todoList.length-1"></p>
                 </div>
+                <p v-show="index!==todoList.length-1"></p>
           </div>
         </div>
       </div>
