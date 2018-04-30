@@ -43,7 +43,7 @@
                             <!-- 缩略图显示 -->
                             <div><img :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)"></div>
                         </flexbox-item>
-                        <flexbox-item :span="1/3" v-if="roleid!==4 && item.pictures.length<9" v-show="item.startTime > new Date().getTime()">
+                        <flexbox-item :span="1/3" v-if="roleid!==4 && item.pictures.length<9" v-show="item.startTime < new Date().getTime()">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>

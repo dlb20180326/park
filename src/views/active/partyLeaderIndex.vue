@@ -27,7 +27,7 @@
 				      		<previewer :list="item.pictureList" ref="previewer" :options="options" @on-index-change="logIndexChange">
 				      		</previewer>
 			    		</div>
-                        <flexbox-item :span="1/3" v-show="roleid != 4 &&  item.pictureList.length<=9">
+                        <flexbox-item :span="1/3" v-show="roleid != 4 &&  item.pictureList.length<=9"  v-show="item.startTime < new Date().getTime()">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>
