@@ -94,9 +94,9 @@ export default {
                 })
                 .then(res => {
                     if (res.success) {
-                        this.$vux.alert.show({ title: res.msg });
-                        userName();
-                        window.location.reload();
+                        this.$vux.alert.show({ title: res.msg,onHide(){
+                            history.back(-1);
+                        }});
                     } else {
                         this.$vux.alert.show({ title: res.msg });
                     }
