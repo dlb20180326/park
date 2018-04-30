@@ -1,6 +1,10 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <r-header :rfs="contents" body-padding-top=".46rem"></r-header>
+        <r-header :rfs="contents"></r-header>
+
+        <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" class="bgColors"  body-padding-top=".46rem">
+            先锋作用评定<a slot="right" @click="showPops">评分说明</a></x-header>
+
         <div class="group-item">
             <group-title slot="title">
                 <b>党员姓名：
@@ -90,6 +94,22 @@
                 确认并提交
             </x-button>
         </div>
+
+
+        <div v-transfer-dom>
+            <popup v-model="showPop" position="left" width="100%">
+                <div class="middle">
+                    <div class="middle-top">评分说明</div>
+                    <div class="middle-content">
+                        <p><span class="dark">1.获得荣誉:</span>年度获得综合党委以上荣誉的加5分</p>
+                        <p><span class="dark">2.先锋表彰：</span>工作突出，年内受到公司、行业表彰奖励的，加5分；</p>
+                        <p><span class="dark">3.先锋模范：</span>在其他发挥先锋模范作用方面需要加分的，由党支部研究后视情况予以加分。</p>
+                    </div>
+                    <div class="knowBtn" @click="know">我知道了</div>
+                </div>
+            </popup>
+        </div>
+
     </div>
 </template>
 
@@ -101,6 +121,7 @@ import Xheaders from '@/components/comother/rheader';
 
 import {
     XHeader,
+    Popup,
     GroupTitle,
     Flexbox,
     Alert,
@@ -109,13 +130,18 @@ import {
     DatetimePlugin,
     Datetime,
     Group,
+    TransferDom,
     Picker,
     InlineXNumber
 } from 'vux';
 
 export default {
+    directives:{
+        TransferDom
+    },
     components: {
         XHeader,
+        Popup,
         GroupTitle,
         Flexbox,
         FlexboxItem,
@@ -134,6 +160,7 @@ export default {
             Messge14: '',
             Messge15: '',
             itemscore: 0,
+            showPop:false,
             contents: { rights: '评分说明', title: '先锋作用评定' },
             picList15: { list: [], arr: [] },
             picList14: { list: [], arr: [] },
@@ -283,6 +310,12 @@ export default {
                     });
                 }
             });
+        },
+        know(){
+            this.showPop = false
+        },
+        showPops(){
+            this.showPop = !this.showPop;
         }
     },
     mounted() {
@@ -533,6 +566,16 @@ input[type='file'] {
 .group-item:nth-child(2) {
     margin-top: 0.52rem;
 }
+.middle{width:2.8rem;height:3rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:15%;}
+.mint-popup-left{left:15%;}
+.middle .middle-top{width:100%;height:.4rem; background:linear-gradient(90deg,rgba(185,54,71,1),rgba(155,10,26,1));box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#FFFFFF;text-align:center;line-height:.4rem;border-radius:10px 10px 0 0;}
+.middle-content{width:2.4rem;height:1.7rem;margin:.21rem .19rem .21rem .21rem;}
+.middle-content p{font-size:.14rem;color:#828282;line-height:.24rem;}
+.dark{color:#333333;}
+.knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
+    border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
+.vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
+
 </style>
 <style lang="less">
 .group-item {

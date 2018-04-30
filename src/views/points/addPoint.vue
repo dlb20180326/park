@@ -71,6 +71,7 @@
             <x-button type="warn" @click.native="submit()">
                 提交支部书记审核
             </x-button>
+
         </div>
 
         <div v-transfer-dom>

@@ -1,5 +1,5 @@
 <template>
-    <div class="page-body">
+    <div class="page-body disabled-tabbar">
         <view-box ref="viewBox" body-padding-top=".46rem">
             <r-header :rfs="contents"></r-header>
             <p class="allPic">
@@ -32,7 +32,17 @@
                 </div>
             </div>
 
-            <button class="btnRed" v-if="content.status==0" @click="pass()">点击通过并加分</button>
+            <table width="90%" style="margin:0.1rem auto;">
+                <tr>
+                    <td width="50%">
+                        <button class="btnRed" v-if="content.status==0" @click="reject()">驳回</button>
+                    </td>
+                    <td width="50%">
+                        <button class="btnRed" v-if="content.status==0" @click="pass()">通过</button>
+                    </td>
+                </tr>
+            </table>
+
             <button class="btnRed" v-if="content.status==2">已评分 (评分人：{{content.branch}})</button>
             <button class="btnRed" v-if="content.status==3">审核失败 (审核人：{{content.branch}})</button>
         </view-box>
@@ -83,6 +93,26 @@ export default {
     methods: {
         show(index) {
             this.$refs.previewer.show(index);
+        },
+        reject(){
+            axios.get('pstudy/reject', {
+                    params: {
+                        userid: this.$store.getters.user.userid,
+                        studyid: this.$route.params.studyid
+                    }
+                })
+                .then(res => {
+                    if (res.success) {
+                        this.$vux.alert.show({ title: res.msg,onHide(){
+                                history.back(-1);
+                            }});
+                    } else {
+                        this.$vux.alert.show({ title: res.msg });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         },
         pass() {
             axios

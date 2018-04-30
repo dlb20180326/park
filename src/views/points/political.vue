@@ -17,7 +17,7 @@
                     </flexbox>
                     <flexbox  style="text-align: center" v-if="list.length === 0">
                 		<div>
-                			
+
                 		</div>
                     	<p style="color: #CCCCCC;margin: auto;">暂无支部人员提交信息</p>
                     </flexbox>
@@ -77,7 +77,7 @@ Vue.component(Popup.name, Popup);
             Upper: function (value) {
                 try {
                     if(value=== 0)  throw "去处理";
-                    if(value=== 1)  throw "已拒绝";
+                    if(value=== 3)  throw "已驳回";
                     if(value=== 2)  throw "已通过";
                 }
                 catch(err) {
@@ -89,6 +89,7 @@ Vue.component(Popup.name, Popup);
                    /* if(value===null) throw "";*/
                     if(value=== 1)  throw "yellowB";
                     if(value=== 0)  throw "yellowC";
+                    if(value=== 3)  throw "yellowA";
                 }
                 catch(err) {
                     return value=err;
@@ -176,15 +177,15 @@ Vue.component(Popup.name, Popup);
 			know(){
 				this.showPop = false
 			},
+            showMenu(){
+                this.showPop = true;
+            },
 			datePick(s){
-            Date.prototype.toLocaleString = function(){
-                return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()
-            };
-            return new Date(s).toLocaleString();
-        },
-        showMenu(){
-        	this.showPop = true;
-        }
+                Date.prototype.toLocaleString = function(){
+                    return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()
+                };
+                return new Date(s).toLocaleString();
+            }
 		},
 		mounted(){
             this.getlist();

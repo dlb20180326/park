@@ -18,7 +18,7 @@ module.exports = {
             }
             /*'/': {
                 changeOrigin: true,
-                target:'http://192.168.1.145:8080/'
+                target:'http://127.0.0.1:8080/'
             }*/
         },
 
