@@ -401,27 +401,26 @@ export default {
 .states{
     text-align: center;
     border-radius: 4px;
-    border: 0.5px solid #B93647;
+    border: 1px solid #B93647;
     position: absolute;
     right: .2rem;
     z-index: 999;
     top: .2rem;
-    font-size: .14rem;
+    font-size:14px;
     color: #B93647;
-    padding:5px .2rem;
+    padding: 2px 16px;
 }
 .btn-return{
     text-align: center;
     border-radius: 4px;
-    border: 0.5px solid #B93647;
+    background-color: #B93647;
+    color: #fff;
     position: absolute;
     right: .2rem;
     z-index: 999;
-    background-color:#B93647;
-    top: .6rem;
-    font-size: .14rem;
-    color: #fff;
-     width:.74rem;
+    top: .55rem;
+    font-size:14px;
+    padding:2px 10px;
 }
 ol,ul,li{
     list-style:none;
@@ -455,6 +454,7 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
 .swiper-one-inner{
     padding:.3rem .2rem .15rem;
     position: relative;
+
 }
 .sinfo-title{
     height: .16rem;
