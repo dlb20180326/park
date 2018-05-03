@@ -8,7 +8,9 @@ import router from './router';
 import rem from './assets/js/dpr.js';
 import store from './store';
 import * as utils from './utils';
-
+import {formatDuring,formatDurings} from './assets/util'
+Vue.filter('formatDuring',formatDuring);
+Vue.filter('formatDurings',formatDurings);
 //引入vux
 import { AjaxPlugin, LoadingPlugin, ToastPlugin, ConfirmPlugin,AlertPlugin } from 'vux';
 Vue.use(AjaxPlugin);
