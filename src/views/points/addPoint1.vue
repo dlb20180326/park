@@ -230,7 +230,8 @@
 
 
                  axios({
-                    url:'pstudy/save',
+                    // url:'pstudy/save',
+                    url:'pstudy/reSubmit',
                     method:'post',
                     headers: {'contentType':'application/json'},
                     params:{
@@ -242,7 +243,8 @@
                         projectid:this.$route.params.projectId,
                         moduleid:this.$route.params.moduleId,
                         content:this.activeContent,
-                        picids:this.picList.arr.join()
+                        picids:this.picList.arr.join(),
+                        studyid:this.info.studyid
                     }
                 }).then(res => {
 
