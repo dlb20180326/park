@@ -54,11 +54,6 @@
             <div class="photo-list cl">
                 <ul>
                     <li v-if="picList.list.length">
-                        <!-- <div v-if="picList.list.length===0">
-                            <div class="preview">
-                                <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
-                            </div>
-                        </div> -->
                         <div :key="index" v-for="(item, index) in picList.list">
                             <div class="preview">
                                 <img class="previewer-demo-img" :src="item">
@@ -80,6 +75,7 @@
             </x-button>
 
         </div>
+        <span class="test-text">{{picList}}</span>
 
         <div v-transfer-dom>
             <popup v-model="showPop" position="left" width="100%">
@@ -104,7 +100,6 @@
                 </div>
             </popup>
         </div>
-        <span class="test-text">{{testText}}</span>
     </div>
 </template>
 
@@ -146,8 +141,7 @@
 				userName:'',
                 showPop:false,
                 picList:{list:[],arr:[]},
-                moduleid:this.$route.params.moduleId,
-                testText: {}
+                moduleid:this.$route.params.moduleId
             };
         },
         methods: {
@@ -395,11 +389,9 @@
                                 )
                             );
                             Promise.all(promiseList).then(result => {
-                                let pictureIds = [];
-                                result.forEach(item => pictureIds.push(item.data));
+                                let pictureIds = result.map(item => item.data);
                                 it.list.push(imgBaseUrl + pictureIds.join());
                                 it.arr.push(pictureIds.join());
-                                this.testText = result;
                             });
                         });
                     }
