@@ -422,7 +422,7 @@ export default {
     top: .2rem;
     font-size: .14rem;
     color: #B93647;
-    width:.54rem;
+    width:.48rem;
 }
 .btn-return{
     text-align: center;
@@ -435,7 +435,7 @@ export default {
     top: .6rem;
     font-size: .14rem;
     color: #fff;
-     width:.74rem;
+    width:.74rem;
 }
 ol,ul,li{
     list-style:none;
@@ -471,8 +471,8 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     position: relative;
 }
 .sinfo-title{
-    height: .14rem;
-    line-height: .14rem;
+    height: .16rem;
+    line-height: .16rem;
     font-size: 0;
     margin-bottom: .1rem;
     vertical-align: top;
