@@ -53,11 +53,9 @@
         	<span class="addPic">添加照片</span>
             <div class="photo-list cl">
                 <ul>
-                    <li v-if="picList.list.length">
-                        <div :key="index" v-for="(item, index) in picList.list">
-                            <div class="preview">
-                                <img class="previewer-demo-img" :src="item">
-                            </div>
+                    <li :key="index" v-for="(item, index) in picList.list">
+                        <div class="preview">
+                            <img class="previewer-demo-img" :src="item">
                         </div>
                     </li>
                     <li>
@@ -75,7 +73,6 @@
             </x-button>
 
         </div>
-        <span class="test-text">{{picList}}</span>
 
         <div v-transfer-dom>
             <popup v-model="showPop" position="left" width="100%">
@@ -438,7 +435,7 @@
                     this.picList.list = pics.map(item => `${imgBaseUrl}${item.pictureId}`);
                     this.picList.arr = pics.map(item => item.pictureId);
                 }
-                console.log(this.info.pictures[0].pictureId);
+                // console.log(this.info.pictures[0].pictureId);
             }
         },
         beforeDestroy () {
