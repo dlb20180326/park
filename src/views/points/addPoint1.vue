@@ -13,14 +13,14 @@
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
-                    <input type="text" v-model='startTime' readonly >
+                    <input type="text" v-model='startTime' readonly>
                 </flexbox-item>
                 <flexbox-item class="input-addon" style="position: relative">
                     <x-button mini type="warn">
                         <i class="iconfont dlb-icon-rili" ></i>
                     </x-button>
                     <group class="date-no-box">
-                        <datetime v-model="hourListValue"  format="YYYY-MM-DD HH:mm" @on-change="changeStart" year-row="{value}年" month-row="{value}月" day-row="{value}日" hour-row="{value}点" minute-row="{value}分" ></datetime>
+                        <datetime v-model="hourListValue" format="YYYY-MM-DD HH:mm" @on-change="changeStart" year-row="{value}年" month-row="{value}月" day-row="{value}日" hour-row="{value}点" minute-row="{value}分" ></datetime>
                     </group>
                 </flexbox-item>
             </flexbox>
@@ -53,9 +53,16 @@
         	<span class="addPic">添加照片</span>
             <div class="photo-list cl">
                 <ul>
-                    <li v-for="(item,index) in picList.list">
-                        <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
+                    <li v-if="picList.list.length">
+                        <!-- <div v-if="picList.list.length===0">
+                            <div class="preview">
+                                <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
+                            </div>
+                        </div> -->
+                        <div :key="index" v-for="(item, index) in picList.list">
+                            <div class="preview">
+                                <img class="previewer-demo-img" :src="item">
+                            </div>
                         </div>
                     </li>
                     <li>
@@ -101,6 +108,8 @@
 </template>
 
 <script>
+    const imgBaseUrl = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=';
+	import { mapActions, mapGetters } from 'vuex';
     import axios from 'axios'
     import { Popup,XHeader, GroupTitle, Flexbox, TransferDomDirective as TransferDom,Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker,Previewer} from 'vux';
     import wx from 'weixin-js-sdk';
@@ -190,6 +199,7 @@
             },
             submit(){
                 if(!this.startTime){
+
                     return this.$vux.toast.show({
                         text: '填写开始时间',
                         type: 'text'
@@ -266,6 +276,36 @@
                     this.$vux.alert.show({title:'开始日期不能大于结束日期'});
                 }
             },
+	        moreInfo(itemList){
+	            console.log(itemList);
+	
+	            this.darkbgShow = true;
+	            this.infoList = itemList;
+	            console.log(this.infoList);
+	            if (itemList) {
+	                var imgs=itemList;
+	            } else {
+	                this.imgpics = [];
+	            }
+	
+	            /*样式渲染*/
+	            setTimeout(function () {
+	                var xscroll = new XScroll({
+	                    renderTo: "#showBox",
+	                    preventDefault:false,
+	                    preventTouchMove:false,
+	                    touchAction:'pan-y'
+	                });
+	
+	                xscroll.on('panstart',function(e){
+	                    console.log(e);
+	                });
+	                xscroll.on('panend',function(e){
+	                    xscroll._resetLockConfig();
+	                });
+	                xscroll.render();
+	            },1000)
+	        },
 
             getActivity(){
             },
@@ -316,66 +356,98 @@
 
             chooseImage(it) {
                 wx.chooseImage({
-                        count: 1, // 默认9
-                        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-                        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-                        success: res => {
+                    count: 1, // 默认9
+                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                    success: res => {
                         let localIds = res.localIds || [];
-                new Promise(resolve => {
-                    let serverIds = [];
-                let toUpload = localId =>
-                wx.uploadImage({
-                        localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                        isShowProgressTips: 1, // 默认为1，显示进度提示
-                        success: res => {
-                        serverIds.push(res.serverId);
-                if (localIds.length) {
-                    toUpload(localIds.shift());
-                } else {
-                    resolve(serverIds);
-                }
-            }
-            })
-                ;
-                if (localIds.length) {
-                    toUpload(localIds.shift());
-                } else {
-                    resolve(serverIds);
-                }
-            }).
-                then(serverIds => {
-                    let promiseList = [];
-                serverIds.map(serverId =>
-                promiseList.push(
-                    this.$http.get('picture/upload', {
-                        params: {
-                            mediaId: serverId
-                        }
-                    })
-                )
-            )
-                ;
-                Promise.all(promiseList).then(result => {
-                    let pictureIds = [];
-                result.map(item => pictureIds.push(item.data)
-            )
-                ;
-                it.list.push("http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=" + pictureIds.join());
-                it.arr.push(pictureIds.join());
-            })
-                ;
-            })
-                ;
-            }
-            })
-                ;
-            }
+                        new Promise(resolve => {
+                            let serverIds = [];
+                            let toUpload = localId =>
+                                wx.uploadImage({
+                                    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                                    success: res => {
+                                        serverIds.push(res.serverId);
+                                        if (localIds.length) {
+                                            toUpload(localIds.shift());
+                                        } else {
+                                            resolve(serverIds);
+                                        }
+                                    }
+                                });
+                            if (localIds.length) {
+                                toUpload(localIds.shift());
+                            } else {
+                                resolve(serverIds);
+                            }
+                        }).then(serverIds => {
+                            let promiseList = [];
+                            serverIds.forEach(serverId =>
+                                promiseList.push(
+                                    this.$http.get('picture/upload', {
+                                        params: {
+                                            mediaId: serverId
+                                        }
+                                    })
+                                )
+                            );
+                            Promise.all(promiseList).then(result => {
+                                let pictureIds = [];
+                                result.forEach(item => pictureIds.push(item.data));
+                                it.list.push(imgBaseUrl + pictureIds.join());
+                                it.arr.push(pictureIds.join());
+                            });
+                        });
+                    }
+                });
+            },
+            ...mapActions(['setInfo'])
+        },
+        computed: {
+        	...mapGetters(['info'])
         },
         mounted() {
             weixin.init(['chooseImage', 'uploadImage']);
             this.getActivity();
             this.getList();
             this.getUser();
+            function userDate(uData){
+                let myDate = new Date(uData);
+                let year = myDate.getFullYear();
+                let months = myDate.getMonth() + 1;
+                if(months < 10){
+                    months = '0' + months;
+                }
+                let day = myDate.getDate();
+                if(day < 10){
+                    day = '0' + day;
+                }
+                let hours=myDate.getHours(); 
+                if(hours < 10){
+                    hours = '0' + hours;
+                }
+                let minutes=myDate.getMinutes(); 
+                if(minutes < 10){
+                    minutes = '0' + minutes;
+                }
+                let second=myDate.getSeconds(); 
+                return year + '-' + months + '-' + day+'  '+hours +':'+ minutes;
+            }
+            if (this.info.studyid) {
+                this.startTime = userDate(this.info.createtime);
+	            this.endTime = userDate(this.info.endtime);
+                this.activeContent = this.info.content;
+                const pics = this.info.pictures;
+                if (pics.length) {
+                    this.picList.list = pics.map(item => `${imgBaseUrl}${item.id}`);
+                    this.picList.arr = pics.map(item => item.id);
+                }
+                console.log(this.info.pictures[0].pictureId);
+            }
+        },
+        beforeDestroy () {
+        	this.setInfo({});
         }
     };
 </script>

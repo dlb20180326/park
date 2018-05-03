@@ -109,6 +109,15 @@ export const routes = [
                 component: () => import('@/views/points/addPoint')
             },
             {
+                path: 'points/addPoint1/:projectId/:moduleId',
+                name: 'addPoint1',
+                component: () => import('@/views/points/addPoint1')
+            },
+            {
+                path: 'points/addPoint1/:projectId/:moduleId/:studyId',
+                component: () => import('@/views/points/addPoint1')
+            },
+            {
                 path: 'points/pointEvaluate/:partmentId/:name/:departmentId/:userId',
                 name: 'pointEvaluate',
                 component: () => import('@/views/points/pointEvaluate')

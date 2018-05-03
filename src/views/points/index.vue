@@ -1,8 +1,9 @@
-w<template>
+<template>
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
-            党员积分
-            <a slot="right">评分说明</a>
+            	党员积分
+            <!--<a slot="right">评分说明</a>-->
+            <router-link slot="right" to="">评分说明</router-link>
         </x-header>
         <div class="box">
             <div class="head">
@@ -62,7 +63,7 @@ w<template>
 	                            </router-link>
 
                                 <div class="content"  v-else-if="projectList[progres.id]">
-                                    <router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id "  v-show="progres.totalScore != progres.score">
+                                    <router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id " v-show="progres.totalScore != progres.score">
                                     <x-button mini type="warn">
                                         点击+积分
                                     </x-button>
@@ -105,7 +106,7 @@ w<template>
                                     加分人：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    {{knoew.adderName  || '系统自动'}}
+                                    {{knoew.adderName}}
                                 </flexbox-item>
                             </flexbox>
                             <flexbox>
@@ -134,7 +135,12 @@ w<template>
                             <div class="states" v-if="item.status==2">
                                 已通过
                             </div>
-                            <div class="btn-return" v-if="item.status==3">重新提交</div>
+                            
+                         	<span class="btn-return" v-if="item.status==3" @click="reSubmit(item)">
+                            	重新提交
+                            </span>
+                            <!--<span class="btn-return" v-if="item.status==3" :click="reaaaa(item)">重新提交</span>-->
+                            
                             <div class="states" v-if="item.status==3">
                                 已拒绝
                             </div>
@@ -171,7 +177,7 @@ w<template>
 
 
 <script>
-
+import { mapActions } from 'vuex';
 import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton} from 'vux';
 import XScroll from 'vux-xscroll/build/cmd/xscroll.js';
 import Snap from 'vux-xscroll/build/cmd/plugins/snap.js';
@@ -226,6 +232,15 @@ export default {
         }
     },
     methods:{
+    	link(){
+	    	this.$router.push({
+	            path: '/points/addPoint1/:id',
+	            name: 'addPoint1',
+	            params: {
+	                id:2,
+	            }
+	        })
+    	},
     	progress(){
     		axios.get('pscoreparty/getProjectScoreByUserId',{
     			params:{
@@ -280,11 +295,11 @@ export default {
             this.results ='暂无';
     	},
         moreInfo(itemList){
-            console.log(itemList);
+            // console.log(itemList);
 
             this.darkbgShow = true;
             this.infoList = itemList;
-            console.log(this.infoList);
+            // console.log(this.infoList);
             if (itemList) {
                 var imgs=itemList;
 
@@ -363,9 +378,12 @@ export default {
     		};
     		return times;
 
-    	}
-
-
+    	},
+    	reSubmit(item){
+    		this.setInfo(item);
+    		this.$router.push(`points/addPoint1/${item.projectid}/${item.moduleid}/${item.studyid}`);
+    	},
+    	...mapActions(['setInfo'])
     },
    	mounted(){
    		this.progress();
@@ -373,8 +391,6 @@ export default {
    		this.getDetail();
    		this.rating();
         this.score();
-
-
     }
 };
 </script>
@@ -401,26 +417,27 @@ export default {
 .states{
     text-align: center;
     border-radius: 4px;
-    border: 1px solid #B93647;
+    border: 0.5px solid #B93647;
     position: absolute;
     right: .2rem;
     z-index: 999;
     top: .2rem;
-    font-size:14px;
+    font-size: .14rem;
     color: #B93647;
-    padding: 2px 16px;
+    width:.74rem;
 }
 .btn-return{
     text-align: center;
     border-radius: 4px;
-    background-color: #B93647;
-    color: #fff;
+    border: 0.5px solid #B93647;
     position: absolute;
     right: .2rem;
     z-index: 999;
-    top: .55rem;
-    font-size:14px;
-    padding:2px 10px;
+    background-color:#B93647;
+    top: .6rem;
+    font-size: .14rem;
+    color: #fff;
+     width:.74rem;
 }
 ol,ul,li{
     list-style:none;
@@ -454,16 +471,15 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
 .swiper-one-inner{
     padding:.3rem .2rem .15rem;
     position: relative;
-
 }
 .sinfo-title{
-    height: .16rem;
-    line-height: .16rem;
+    height: .14rem;
+    line-height: .14rem;
     font-size: 0;
     margin-bottom: .16rem;
-    vertical-align: middle;
+    vertical-align: top;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow:ellipsis ;
 }
 .sinfo-title.pr4{
     padding-right:1rem;
@@ -476,9 +492,9 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     font-weight: normal;
     display: inline-block;
 }
-.sinfo-title span.vb{
- vertical-align:top;
-}
+// .sinfo-title span.vb{
+//     vertical-align:top;
+// }
 .sinfo-title .text-gray{
     color:#999;
     vertical-align: text-bottom;
