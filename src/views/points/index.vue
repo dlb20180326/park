@@ -136,11 +136,9 @@
                                 已通过
                             </div>
                             
-                         	<span class="btn-return" v-if="item.status==3" @click="reSubmit(item)">
+                         	<div class="btn-return" v-if="item.status==3" @click="reSubmit(item)">
                             	重新提交
-                            </span>
-                            <!--<span class="btn-return" v-if="item.status==3" :click="reaaaa(item)">重新提交</span>-->
-                            
+                            </div>
                             <div class="states" v-if="item.status==3">
                                 已拒绝
                             </div>
