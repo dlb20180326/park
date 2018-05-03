@@ -474,7 +474,7 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     height: .14rem;
     line-height: .14rem;
     font-size: 0;
-    margin-bottom: .16rem;
+    margin-bottom: .1rem;
     vertical-align: top;
     overflow: hidden;
     text-overflow:ellipsis ;
