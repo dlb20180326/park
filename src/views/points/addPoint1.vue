@@ -147,7 +147,7 @@
                 showPop:false,
                 picList:{list:[],arr:[]},
                 moduleid:this.$route.params.moduleId,
-                testText
+                testText: {}
             };
         },
         methods: {
