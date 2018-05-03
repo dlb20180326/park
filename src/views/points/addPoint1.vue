@@ -104,6 +104,7 @@
                 </div>
             </popup>
         </div>
+        <span class="test-text">{{testText}}</span>
     </div>
 </template>
 
@@ -145,7 +146,8 @@
 				userName:'',
                 showPop:false,
                 picList:{list:[],arr:[]},
-                moduleid:this.$route.params.moduleId
+                moduleid:this.$route.params.moduleId,
+                testText
             };
         },
         methods: {
@@ -397,6 +399,7 @@
                                 result.forEach(item => pictureIds.push(item.data));
                                 it.list.push(imgBaseUrl + pictureIds.join());
                                 it.arr.push(pictureIds.join());
+                                this.testText = result;
                             });
                         });
                     }
