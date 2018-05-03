@@ -443,8 +443,8 @@
                 this.activeContent = this.info.content;
                 const pics = this.info.pictures;
                 if (pics.length) {
-                    this.picList.list = pics.map(item => `${imgBaseUrl}${item.id}`);
-                    this.picList.arr = pics.map(item => item.id);
+                    this.picList.list = pics.map(item => `${imgBaseUrl}${item.pictureId}`);
+                    this.picList.arr = pics.map(item => item.pictureId);
                 }
                 console.log(this.info.pictures[0].pictureId);
             }
