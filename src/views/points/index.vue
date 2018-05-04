@@ -2,7 +2,7 @@
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
             	党员积分
-            <router-link slot="right" to="points/detial">评分说明</router-link>
+            <router-link slot="right" to="points/detail">评分说明</router-link>
         </x-header>
         <div class="box">
             <div class="head">

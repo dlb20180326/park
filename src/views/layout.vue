@@ -1,7 +1,7 @@
 <template>
     <div class="app-layout">
-        <router-view></router-view>
-        <tabbar slot="bottom" v-model="tabsSelected">
+        <router-view @updateFooterState="showFooter = arguments[0]"></router-view>
+        <tabbar slot="bottom" v-model="tabsSelected" v-show="showFooter">
             <tabbar-item v-for="item in tabs" :key="item.index" :link="item.link">
                 <img slot="icon" :src="item.icon">
                 <img slot="icon-active" :src="item.iconActive">
@@ -100,7 +100,8 @@ export default {
     data() {
         return {
             tabsSelected: -1,
-            tabs: tabs[this.$store.getters.user.roleid] || []
+            tabs: tabs[this.$store.getters.user.roleid] || [],
+            showFooter: true
         };
     },
     mounted() {
