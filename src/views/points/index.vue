@@ -421,20 +421,21 @@ export default {
     top: .2rem;
     font-size: .14rem;
     color: #B93647;
-    width:.47rem;
+    width:.46rem;
 }
 .btn-return{
-    text-align: center;
-    border-radius: 4px;
-    border: 0.5px solid #B93647;
     position: absolute;
     right: .2rem;
-    z-index: 999;
-    background-color:#B93647;
     top: .6rem;
-    font-size: .14rem;
-    color: #fff;
+    z-index: 999;
     width:.74rem;
+    border-radius: 4px;
+    border: 0.5px solid #B93647;
+    font-size: .14rem;
+    line-height:.23rem;
+    text-align: center;
+    background-color:#B93647;
+    color: #fff;
 }
 ol,ul,li{
     list-style:none;

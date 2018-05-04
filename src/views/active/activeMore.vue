@@ -108,10 +108,10 @@ export default {
                     departmentid:this.departmentid,
                     userId:this.$store.getters.user.userid
                 }
-            }) .then((res)=> {
+            }).then((res)=> {
                 console.log(res.data.list);
                 this.active=res.data.list;
-            }) .catch(function (error) {
+            }).catch(function (error) {
                     console.log(error);
                 });
 
