@@ -429,9 +429,6 @@
                 return year + '-' + months + '-' + day+'  '+hours +':'+ minutes;
             }
             if (this.info.studyid) {
-                console.log(this.info);
-                console.log(this.info.starttime);
-                // console.log(new Date(this.info.createtime));
                 this.startTime = userDate(this.info.starttime);
 	            this.endTime = userDate(this.info.endtime);
                 this.activeContent = this.info.content;
@@ -440,7 +437,6 @@
                     this.picList.list = pics.map(item => `${imgBaseUrl}${item.pictureId}`);
                     this.picList.arr = pics.map(item => item.pictureId);
                 }
-                // console.log(this.info.pictures[0].pictureId);
             }
         },
         beforeDestroy () {
