@@ -429,7 +429,10 @@
                 return year + '-' + months + '-' + day+'  '+hours +':'+ minutes;
             }
             if (this.info.studyid) {
-                this.startTime = userDate(this.info.createtime);
+                console.log(this.info);
+                console.log(this.info.starttime);
+                // console.log(new Date(this.info.createtime));
+                this.startTime = userDate(this.info.starttime);
 	            this.endTime = userDate(this.info.endtime);
                 this.activeContent = this.info.content;
                 const pics = this.info.pictures;
