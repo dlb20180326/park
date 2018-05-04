@@ -213,7 +213,7 @@
 	}
 	.xheader{
 		margin-bottom:0.1rem;
-		margin-top:-0.49rem;
+		margin-top:-0.52rem;
 	}
 	
 	
