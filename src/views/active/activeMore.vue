@@ -6,7 +6,9 @@
                         <div style="position:relative">
                             <span class="colorL">活动名称：</span>
                             <span class="colorW">{{item.activeName}}</span>
-                            <img style="position:absolute;right:20px;top:5px;" src="@/assets/images/activeDetail.png" alt="">
+                            <div v-if="item.activeType === 5">
+                                <img style="position:absolute;right:20px;top:3px;" src="@/assets/images/activeDetail.png" alt="">
+                            </div>
                         </div>
                         <div>
                             <span class="colorL">活动时间：</span>
@@ -409,7 +411,7 @@ input {
         color:#666;
         line-height: .3rem;
         margin-left: .1rem;
-        padding-right:0.2rem;
+        padding-right:0.32rem;
     }
 
 

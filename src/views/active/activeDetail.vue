@@ -30,7 +30,9 @@
                         <tr>
                             <td width="100">标题：</td>
                             <td class="f_b">{{activeTitle}}</td>
-                            <img src="@/assets/images/activeDetail.png" alt="">
+                            <div v-if="activeType">
+                                <img src="@/assets/images/activeDetail.png" alt="">
+                            </div>
                         </tr>
                         <tr>
                             <td width="100">活动时间：</td>
@@ -92,7 +94,7 @@
 
 <script>
     import axios from 'axios'
-import { XHeader, Flexbox, FlexboxItem,Alert ,cookie,Cell,Group,XButton,XTable,TransferDomDirective as TransferDom, } from 'vux';
+    import { XHeader, Flexbox, FlexboxItem,Alert ,cookie,Cell,Group,XButton,XTable,TransferDomDirective as TransferDom, } from 'vux';
 
 export default {
     directives: {
@@ -113,6 +115,7 @@ export default {
             activePace:'',
             activeCreatePeopleName:'',
             activeId:'',
+            activeType:false,
             active_Context:'',
             show:false,
             activeComplete:'',
@@ -184,7 +187,8 @@ export default {
                 this.activeCreatePeopleName=res.data.list[0].activeCreatePeopleName;
                 this.active_Context=res.data.list[0].active_Context;
                 this.activeId=res.data.list[0].id;
-               this.signupstatus=res.data.list[0].signupstatus;
+                this.signupstatus=res.data.list[0].signupstatus;
+                this.activeType = res.data.list[0].activeType === 5 ? true : false;
             }).catch(function (error) {
                     console.log(error);
                 });
