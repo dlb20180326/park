@@ -8,7 +8,7 @@
             <flexbox-item>
                 <section class="mainbox">
                     <div class="barbg" >
-                        年度共参与组织活动：
+                        年度共参与党员活动：
                         <span style="display: inline">{{number1}}</span>
                          次
                     </div>
@@ -30,6 +30,7 @@
                         <tr>
                             <td width="100">标题：</td>
                             <td class="f_b">{{activeTitle}}</td>
+                            <img src="@/assets/images/activeDetail.png" alt="">
                         </tr>
                         <tr>
                             <td width="100">活动时间：</td>
@@ -64,7 +65,7 @@
                 <section class="mainbox ">
                     <div class="p15">
                         <div class=" clearfix  display">
-                            <span class="fl weui-cell__bd1">已参与组织生活</span>
+                            <span class="fl weui-cell__bd1">已参与党员生活</span>
                             <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
                         </div>
                         <ul class="news">

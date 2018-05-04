@@ -3,9 +3,10 @@
         <x-header>全部活动</x-header>
         <div class="group-item">
                     <div class="allLine" v-for="(item,index) in active" :key="index">
-                        <div>
+                        <div style="position:relative">
                             <span class="colorL">活动名称：</span>
                             <span class="colorW">{{item.activeName}}</span>
+                            <img style="position:absolute;right:20px;top:5px;" src="@/assets/images/activeDetail.png" alt="">
                         </div>
                         <div>
                             <span class="colorL">活动时间：</span>
