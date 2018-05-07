@@ -240,7 +240,7 @@ export default {
                     this.message = res.msg
                     setTimeout(() => {
                         this.showPop1 = false;
-                    }, 1000)
+                    }, 3000)
                 }
             });  
             this.showPop = false;
@@ -470,7 +470,7 @@ export default {
 }
 .middle{width:2.8rem;height:1.22rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
 .middle1{
-    width: 120px;
+    width: 90%;
     height: 38px;
     line-height: 38px;
     margin: .8rem auto;
@@ -479,7 +479,7 @@ export default {
     background-color: #FFFFFF;
     position: absolute;
     z-index: 300;
-    left: calc(50% - 0.6rem);
+    left: 5%;
     top: 27%;
     overflow: hidden;
 }
