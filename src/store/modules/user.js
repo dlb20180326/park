@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import router from '@/router';
 import { cookie } from 'vux';
 
 const KEYS = ['roleId', 'userId', 'ptoken'];
@@ -46,6 +47,7 @@ const user = {
             // );
         },
         clearUser(state) {
+        		state.user = {};
             Object.keys(state).map(key => delete state[key]);
             KEYS.forEach(key =>
                 cookie.remove(key, {
@@ -53,6 +55,7 @@ const user = {
                     path: '/'
                 })
             );
+            router.push('/login');
         }
     }
 };

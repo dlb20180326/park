@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { Tabbar, TabbarItem, cookie } from 'vux';
 
 const tabs = {
@@ -111,14 +112,6 @@ export default {
         $route: 'selectTab'
     },
     methods: {
-        logout() {
-            cookie.remove('ptoken');
-            cookie.remove('roleId');
-            cookie.remove('userId');
-            this.$router.push({
-                path: '/login'
-            });
-        },
         selectTab() {
             this.tabsSelected = this.tabs.findIndex(item => {
                 if (item.link === '/') {
@@ -127,7 +120,8 @@ export default {
                     return new RegExp('^' + /^\/\w+/.exec(item.link)[0]).test(this.$route.path);
                 }
             });
-        }
+        },
+        ...mapActions(['logout'])
     }
 };
 </script>

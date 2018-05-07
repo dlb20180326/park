@@ -109,8 +109,9 @@
         charts: '',
         partAbout: {},
         todoList: [],
+        total : 0,
         headName:{},
-          activeTitle:"",
+        activeTitle:"",
         showQrcodeDialog: false
       };
     },
