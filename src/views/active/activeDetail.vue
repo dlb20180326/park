@@ -1,7 +1,7 @@
 <template>
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
-            党员活动
+            党员生活
         </x-header>
         <div class="box">
         <flexbox orient="vertical">

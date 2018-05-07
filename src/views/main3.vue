@@ -15,6 +15,15 @@
       </flexbox>
       <flexbox>
         <flexbox-item class="label">
+          所属党委：
+        </flexbox-item>
+        <flexbox-item>
+          {{info.departmentname}}
+
+        </flexbox-item>
+      </flexbox>
+      <flexbox>
+        <flexbox-item class="label">
           所属片区：
         </flexbox-item>
         <flexbox-item>
@@ -132,6 +141,7 @@ export default {
             activeTitle: "",
             info: [],
             dateTimes: "",
+            departmentname:"",
             showQrcodeDialog: false
         };
     },

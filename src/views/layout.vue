@@ -87,7 +87,7 @@ const tabs = {
         {
             icon: require('@/assets/images/gray-active.png'),
             iconActive: require('@/assets/images/iconw-activity.png'),
-            label: '党员活动',
+            label: '党员生活',
             link: '/active/activeDetail'
         }
     ]
@@ -132,7 +132,7 @@ export default {
     flex-direction: column;
     align-items: stretch;
     justify-content: space-between;
-    position: absolute;
+    position:absolute;
     left: 0;
     top: 0;
     right: 0;
