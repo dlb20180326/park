@@ -67,8 +67,9 @@
                                         点击+积分
                                     </x-button>
                                     </router-link>
-                                    <x-button mini type="disable" v-show="progres.totalScore == progres.score">
-                                        点击+积分
+                                    <!-- <x-button mini type="disable" v-show="progres.totalScore == progres.score"> -->
+                                    <x-button mini type="warn" v-show="progres.totalScore == progres.score">
+                                        点击记录
                                     </x-button>
                                 </div>
 

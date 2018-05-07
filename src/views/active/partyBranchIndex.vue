@@ -10,19 +10,18 @@
                     <img src="@/assets/images/icon-head.png">
                 </flexbox-item>
                 <flexbox-item class="list-body">
-                    <router-link :to="{name:'activePost',params:{activeId:item.id}}">
+                    <!-- <router-link :to="{name:'activePost',params:{activeId:item.id}}"> -->
                         <flexbox align="start">
                             <flexbox-item class="list-head">
                                 <b>{{item.activeName}}</b>
                                 <p>{{datePick(item.createTime)}}</p>
                             </flexbox-item>
-                            <!-- 删除 -->
-                            <!-- <flexbox-item class="list-close" v-show="roleid == 2 || roleid == 3">
-                                <img src="@/assets/images/x.png" alt="" title="">
-                            </flexbox-item> -->
+                            <flexbox-item v-if="item.activeCreatePeople == user.userid">
+                                <input type="button" class="cancle" value="取消活动" @click="deleteActive">
+                            </flexbox-item>
                         </flexbox>
                         <div class="list-content" v-html="item.active_Context"></div>
-                    </router-link>
+                    <!-- </router-link> -->
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
                             <!-- 缩略图显示 -->
@@ -32,6 +31,22 @@
                             <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>
+                    
+                   
+                    <div v-transfer-dom>
+                        <popup v-model="showPop" position="left" width="100%">
+                        <div class="middle">
+                            <div class="middle-top">是否取消活动</div>
+                            <input type="button" class="btn" value="确定" @click="confirm">
+                            <input type="button" class="btn" value="取消" @click="cancle">
+                        </div>
+                        </popup>
+                    </div>
+                    <div v-transfer-dom>
+                        <popup v-model="showPop1" position="right" width="100%" height="20px">
+                            <div class="middle1">{{message}}</div>
+                        </popup>
+                    </div>
                     <div v-transfer-dom>
                         <!-- 大图显示 -->
                         <previewer :list="item.pictures" :options="item.previewerOptions" ref="previewer"></previewer>
@@ -43,7 +58,8 @@
 </template>
 
 <script>
-import { XHeader, Flexbox, FlexboxItem, TransferDom, Previewer } from 'vux';
+import { mapGetters } from 'vuex';
+import { XHeader, Flexbox, FlexboxItem, TransferDom, Popup, Alert,AlertPlugin, Previewer } from 'vux';
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
 import axios from "axios";
@@ -51,7 +67,9 @@ import axios from "axios";
 export default {
     components: {
         XHeader,
+        Popup,
         Flexbox,
+        Alert,
         FlexboxItem,
         Previewer
     },
@@ -76,6 +94,9 @@ export default {
         return {
             list: [],
             imgs: [],
+            showPop:false,
+            showPop1:false,
+            message:'',
             roleid: this.$store.getters.user.roleid
         };
     },
@@ -99,8 +120,8 @@ export default {
                     params: {
                         pageNum: 1,
                         pageSize: 200,
-                        departmentid: this.$store.getters.user.departmentid,
-                        userId: this.$store.getters.user.userid
+                        departmentid: this.user.departmentid,
+                        userId: this.user.userid
                     }
                 })
                 .then(res => {
@@ -204,7 +225,30 @@ export default {
                     });
                 })
             );
+        },
+        deleteActive(){
+            this.showPop = true;
+        },
+        confirm(){
+            this.$http.delete('active/deleteById?activeid='+this.user.userid
+            ).then(res =>{
+                let data = res.success;
+                if(res.success == false){
+                    this.showPop1 = true;   
+                    this.message = res.msg
+                    setTimeout(() => {
+                        this.showPop1 = false;
+                    }, 1000)
+                }
+            });  
+            this.showPop = false;
+        },
+        cancle(){
+            this.showPop = false;
         }
+    },
+    computed: {
+        ...mapGetters(['user'])
     }
 };
 </script>
@@ -247,6 +291,18 @@ export default {
 }
 .vux-flexbox-item.list-body {
     padding: 0.1rem;
+    .cancle{
+        float: right;
+        width: 0.6rem;
+        height: 0.24rem;
+        font-size: 0.14rem;
+        line-height: 0.24rem;
+        border-radius: 4px;
+        border: 0px;
+        color: #ffffff;
+        background-color: #b93647;
+        // color: black;
+    }
 }
 .vux-flexbox-item.list-head {
     b {
@@ -409,5 +465,34 @@ export default {
     left: 0;
     width: 0.6rem;
     bottom: 0;
+}
+.middle{width:2.8rem;height:2.02rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
+.middle1{
+    width: 120px;
+    height: 38px;
+    line-height: 38px;
+    margin: .8rem auto;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    position: absolute;
+    z-index: 300;
+    left: calc(50% - 0.6rem);
+    top: 27%;
+    overflow: hidden;
+}
+.mint-popup-left{left:15%;}
+.middle .middle-top{width:100%;height:.4rem; background:linear-gradient(90deg,rgba(185,54,71,1),rgba(155,10,26,1));box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#FFFFFF;text-align:center;line-height:.4rem;border-radius:10px 10px 0 0;}
+.knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
+border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
+.vux-popup-dialog{background-color: rgba(0,0,0,0);}
+.btn{
+    width: 60px;
+    height: 30px;
+    border-radius: 10px;
+    margin-top: 55px;
+    margin-left: 59px;
+    background-color:rgba(185,54,71,1);
+    color:#FFFFFF;
 }
 </style>

@@ -201,7 +201,7 @@ export default {
                 url: 'active/getParticipateCount',
                 params: {
                     userId:this.userId,
-                    activeType:3,
+                    // activeType:3,
                     year: new Date().getFullYear()
                 }
             }) .then((res)=> {

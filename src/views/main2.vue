@@ -40,7 +40,7 @@
                 </flexbox>
             </div>
       <div class="list">
-        <h3>书记待办事宜</h3>
+        <h3>书记待办事宜({{total}})</h3>
         <div v-for="(item,index) in todoList" :key="index">
           <div class="item">
            <div class="title">{{index+1}}.
@@ -141,6 +141,7 @@
         this.dateTime = '晚上好';
       }
       this.getHead();
+      this.getHeader();
       this.$nextTick(function () {
         //this.drawAxis('echartShow');
       });
@@ -217,6 +218,20 @@
         }).then(res => {
             this.headName = JSON.parse(res.data);
             console.log(this.headName);
+        }).
+        catch(err =>{
+            console.log('fail'+err);
+        })
+      },
+      getHeader(){
+        this.$http.get('pscoredetail/todoListCount',{
+            params:{
+                userId: this.$store.getters.user.userid
+            }
+        }).then(res => {
+            // this.headName = JSON.parse(res.data);
+            console.log(res);
+            this.total = res.data;
         }).
         catch(err =>{
             console.log('fail'+err);
