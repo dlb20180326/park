@@ -163,7 +163,7 @@
 	}
 	
 	table {
-		width: 100%;
+		width: 90%;
 		max-width: 750px;
 		font-size: 0.14rem;
 		margin: 0 auto;
@@ -176,6 +176,7 @@
 		text-align: center;
 		color: #B93647;
 		height: 0.4rem;
+		vertical-align: middle;
 	}
 	
 	.table-content {
@@ -190,6 +191,7 @@
 		font-weight: bold;
 		border-radius: 0.1rem 0 0 0.1rem;
 		text-align: center;
+		vertical-align: middle;
 	}
 	
 	.table-content-text {

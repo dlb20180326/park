@@ -17,7 +17,7 @@
                                 <p>{{datePick(item.createTime)}}</p>
                             </flexbox-item>
                             <flexbox-item v-if="item.activeCreatePeople == user.userid">
-                                <input type="button" class="cancle" value="取消活动" @click="deleteActive">
+                                <input type="button" class="cancle" value="取消活动" @click="deleteActive(item.id)">
                             </flexbox-item>
                         </flexbox>
                         <div class="list-content" v-html="item.active_Context"></div>
@@ -94,6 +94,7 @@ export default {
         return {
             list: [],
             imgs: [],
+            activeId : 0,
             showPop:false,
             showPop1:false,
             message:'',
@@ -226,11 +227,12 @@ export default {
                 })
             );
         },
-        deleteActive(){
+        deleteActive(itemId){
             this.showPop = true;
+            this.activeId = itemId;
         },
         confirm(){
-            this.$http.delete('active/deleteById?activeid='+this.user.userid
+            this.$http.delete('active/deleteById?activeid='+this.activeId
             ).then(res =>{
                 let data = res.success;
                 if(res.success == false){
@@ -293,8 +295,8 @@ export default {
     padding: 0.1rem;
     .cancle{
         float: right;
-        width: 0.6rem;
-        height: 0.24rem;
+        width: 0.75rem;
+        height: 0.3rem;
         font-size: 0.14rem;
         line-height: 0.24rem;
         border-radius: 4px;
@@ -466,7 +468,7 @@ export default {
     width: 0.6rem;
     bottom: 0;
 }
-.middle{width:2.8rem;height:2.02rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
+.middle{width:2.8rem;height:1.22rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
 .middle1{
     width: 120px;
     height: 38px;
@@ -487,11 +489,11 @@ export default {
 border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0);}
 .btn{
-    width: 60px;
-    height: 30px;
+    width: 82px;
+    height: 36px;
     border-radius: 10px;
-    margin-top: 55px;
-    margin-left: 59px;
+    margin-top: 28px;
+    margin-left: 40px;
     background-color:rgba(185,54,71,1);
     color:#FFFFFF;
 }
