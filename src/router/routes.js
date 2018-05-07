@@ -6,6 +6,10 @@ export const routes = [
         component: () => import('@/views/loginNew')
     },
     {
+        path: '/loginManage',
+        component: () => import('@/views/loginManage')
+    },
+    {
         path: '/',
         // meta: { requiresAuth: true },
         component: () => import('@/views/layout'),

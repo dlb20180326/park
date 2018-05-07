@@ -182,10 +182,10 @@
                     // })
                     // this.list = t;
                     this.list = res.data.map(item => Object.assign({}, item, { title: item.title.substring(0,4) }));
-                    console.log(res.data);
+                    // console.log(res.data);
                     this.PickerVisible2 = true;
                 }).catch(function (error) {
-                    console.log(error);
+                    // console.log(error);
                 });
             },
             onValuesChange(picker, values){
