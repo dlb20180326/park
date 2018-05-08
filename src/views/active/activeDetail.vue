@@ -69,7 +69,7 @@
                     <div class="p15">
                         <div class=" clearfix  display">
                             <span class="fl weui-cell__bd1">已参与党员生活</span>
-                            <span>({{number2}})</span>
+                            <span class="total">({{number1}})</span>
                             <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
                         </div>
                         <ul class="news">
@@ -461,7 +461,7 @@ export default {
     }
     .fl {
         float:left;
-        width:50.6%;
+        width:44.6%;
         overflow:hidden;
         height:.45rem;
         line-height:.45rem;
@@ -573,6 +573,15 @@ export default {
         padding:2vw 0 3vw;
     }
 .p15 span{background-color:#FFFFFF!important;}
+
+
+
+.total {color:red;
+        font-size:0.15rem;
+        font-weight:bold;
+        display:inline-block;
+        margin-top:10px;
+}
 
 
 
