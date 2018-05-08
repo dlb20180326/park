@@ -1,7 +1,7 @@
 <template>
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
-            	党员积分
+            党员积分信息
             <router-link slot="right" to="points/detail">评分说明</router-link>
         </x-header>
         <div class="box">
