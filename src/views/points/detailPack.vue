@@ -27,7 +27,7 @@
             <div class="img-show">
                 <img class="previewer-demo-img" v-for="(item,index) in content.picture" :key="index" :src="item.msrc" @click="show(index)">
                 <div v-transfer-dom>
-                    <previewer :list="content.picture" ref="previewer" :options="options" @on-index-change="logIndexChange">
+                    <previewer :list="content.picture || []" ref="previewer" :options="options" @on-index-change="logIndexChange">
                     </previewer>
                 </div>
             </div>

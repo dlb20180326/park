@@ -19,8 +19,8 @@
                     </div>
                     <div class="top-second2">
                         <div class="left-second">
-                            <span class="color-light">党支部:</span>
-                            <span class="color-dark">{{partAbout.departmentname}}</span>
+                            <span class="color-light" style="position:relative;">党支部:</span>
+                            <span class="color-dark" style="position:absolute;">{{partAbout.departmentname}}</span>
                         </div>
                     </div>
                 </div>
@@ -30,10 +30,8 @@
                 <flexbox>
                     <flexbox-item v-for="(user,index) in users" :key='index'>
                         <div class="flex-demo" @click="ItemClick(index)">
-                            <!-- <div v-if="users.index == 0"> -->
-                                <div class="fonts-au">{{user.fonts}}</div>
-                                <div class="integral">{{user.integral}}</div>
-                            <!-- </div> -->
+                            <div class="fonts-au">{{user.fonts}}</div>
+                            <div class="integral">{{user.integral}}</div>
                         </div>
                     </flexbox-item>
                 </flexbox>

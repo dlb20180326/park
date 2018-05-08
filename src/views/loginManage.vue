@@ -60,7 +60,7 @@
                     name: '片区负责人',
                     value: "2"
                 }],
-                pickerValue: "3",
+                pickerValue: ["3"],
                 roleName : "党支部书记",
                 PickerVisible:false
             }
