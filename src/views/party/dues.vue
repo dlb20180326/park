@@ -1,6 +1,6 @@
 <template>
 	<div style="height:100%">
-        <x-header title="党员缴费" :left-options="{preventGoBack:true}" @on-click-back="backhome()"></x-header>
+        <x-header title="党员缴费" :left-options="{preventGoBack:true,showBack: false}" @on-click-back="backhome()"></x-header>
 		<view-box ref="viewBox">
 		<div class="card-top">
 		<div class="card-img"></div>

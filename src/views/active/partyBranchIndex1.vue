@@ -29,7 +29,7 @@
                         <flexbox align="start">
                             <flexbox-item class="list-head">
                                 <b>{{item.activeName}}</b>
-                                <p>{{datePick(item.createTime)}}</p>
+                                <p>{{datePick(item.startTime)}}</p>
                             </flexbox-item>
                             <!-- 删除 -->
                             <!-- <flexbox-item class="list-close"  v-show="roleid == 2 || roleid == 3">
