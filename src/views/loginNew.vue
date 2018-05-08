@@ -92,6 +92,7 @@
         }
     .logo-top{
         position: absolute;
+        top:-.2rem;
         width:100%;
         height: 1.79rem;
         background: url(../assets/images/new-logo1.png) no-repeat;
@@ -101,7 +102,7 @@
     .logo-pic{
         position: absolute;
         /* margin:1.35rem auto 0; */
-        top:1.35rem;
+        top:1.15rem;
         left:50%;
         /* z-index:1; */
         width:1.1rem;
@@ -116,7 +117,7 @@
         width:80%;
         height: auto;
         /* margin: .2rem auto; */
-        margin: 2.66rem auto 0;
+        margin: 2.46rem auto 0;
     }
     .tiles{
         width:100%;
@@ -136,11 +137,11 @@
         display: inline-block;
         height: .1rem;
         width: .11rem;
-        margin-top:.05rem;
+        /* margin-top:.05rem; */
         background:#fff url(../assets/images/icon-star.png) no-repeat 100% 100%;
         background-size:cover;
         color:rgba(227,192,140,1);
-        /* vertical-align: bottom; */
+        vertical-align: center;
     }
     .inputs{
         width:100%;
