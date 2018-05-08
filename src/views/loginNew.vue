@@ -12,13 +12,13 @@
             <div class="inputs">
                 <div class="input-all clearfix">
                 <span class="icon-phone"></span>
-                <input type="text" v-model="account" @keyup.13="keyUpReturn" placeholder="输入登陆用户" />
+                <input type="text" v-model="account" @keyup.13="keyUpReturn" placeholder="输入登录用户" />
             </div>
             <div class="input-all clearfix">
                 <span class="icon-key"></span>
-                <input type="password" v-model="pass" @keyup.13="keyUpReturn" placeholder="输入登陆密码" />
+                <input type="password" v-model="pass" @keyup.13="keyUpReturn" placeholder="输入登录密码" />
             </div>
-            <button class="btnSub" @click="login">登陆</button>
+            <button class="btnSub" @click="login">登录</button>
             </div>
             
         </div>

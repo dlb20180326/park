@@ -72,24 +72,24 @@ const tabs = {
         }
     ],
     4: [
-        // {
-        //     icon: require('@/assets/images/gray-home.png'),
-        //     iconActive: require('@/assets/images/iconw-home.png'),
-        //     label: '首页',
-        //     link: '/'
-        // },
-        // {
-        //     icon: require('@/assets/images/gray-item.png'),
-        //     iconActive: require('@/assets/images/iconw-integral.png'),
-        //     label: '党员积分',
-        //     link: '/points'
-        // },
-        // {
-        //     icon: require('@/assets/images/gray-active.png'),
-        //     iconActive: require('@/assets/images/iconw-activity.png'),
-        //     label: '党员生活',
-        //     link: '/active/activeDetail'
-        // }
+        {
+            icon: require('@/assets/images/gray-home.png'),
+            iconActive: require('@/assets/images/iconw-home.png'),
+            label: '首页',
+            link: '/'
+        },
+        {
+            icon: require('@/assets/images/gray-item.png'),
+            iconActive: require('@/assets/images/iconw-integral.png'),
+            label: '党员积分',
+            link: '/points'
+        },
+        {
+            icon: require('@/assets/images/gray-active.png'),
+            iconActive: require('@/assets/images/iconw-activity.png'),
+            label: '党员生活',
+            link: '/active/activeDetail'
+        }
     ]
 };
 

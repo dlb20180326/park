@@ -11,19 +11,19 @@
             </div>
             <div class="inputs">
                 <div class="input-all clearfix">
-                    <span class="icon-phone"></span>
+                    <span class="icon-phone1 "></span>
                     <input type="text" v-model="roleName" placeholder="请选择管理角色" @click="PickerVisible=true" readonly/>
-                    <span class="icon-phone" style="float:right" ></span>
+                    <span class="icon-phone2" style="float:right" ></span>
                 </div>
                 <div class="input-all clearfix">
                     <span class="icon-phone"></span>
-                    <input type="text" v-model="account" @keyup.13="keyUpReturn" placeholder="请输入登陆用户" />
+                    <input type="text" v-model="account" @keyup.13="keyUpReturn" placeholder="请输入登录用户" />
                 </div>
                 <div class="input-all clearfix">
                     <span class="icon-key"></span>
-                    <input type="password" v-model="pass" @keyup.13="keyUpReturn" placeholder="请输入登陆密码" />
+                    <input type="password" v-model="pass" @keyup.13="keyUpReturn" placeholder="请输入登录密码" />
                 </div>
-                <button class="btnSub" @click="login">登陆</button>
+                <button class="btnSub" @click="login">登录</button>
             </div>
             <transition name="fade">
                 <div class="picker-box" v-show="PickerVisible" @click="PickerVisible=false">
@@ -213,7 +213,7 @@
         width:100%;
         /* margin:0.72rem auto; */
         height:auto;
-        margin: 0.72rem auto 0;
+        margin: 0.3rem auto 0;
     }
 
     .input-all {
@@ -253,6 +253,28 @@
         background-size:100% 100%;
         margin:.1rem .11rem .1rem -.2rem;
     }
+    .icon-phone1{
+        display:block;
+        float: left;
+        width:.1rem;
+        height: .16rem;
+        background:url(../assets/images/new-phone1.png) no-repeat;
+        background-size: 110% 85%;
+        margin: .1rem .11rem .1rem -.2rem;
+        vertical-align: middle;
+        margin-top: 12px;
+    }
+    .icon-phone2{
+        display:block;
+        float: left;
+        width:.1rem;
+        height: .16rem;
+        background:url(../assets/images/Triangle.png) no-repeat;
+        background-size: 100% 40%;
+        margin: .1rem .11rem .1rem -.2rem;
+        vertical-align: middle;
+        margin-top: 16px;
+    }
     .icon-key{
         display:block;
         float: left;
@@ -267,7 +289,7 @@
         height:.36rem;
         line-height:.36rem;
         background:linear-gradient(180deg,rgba(194,81,72,1),rgba(180,56,44,1));
-        box-shadow: 0px 4px 4px 0px rgba(228,149,158,1);
+        box-shadow: 0px 1px 5px 0px rgba(150,150,150,0.5);
         border-radius:21px;
         border:0;
         font-size: .14rem;

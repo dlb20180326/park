@@ -37,8 +37,8 @@
                         <popup v-model="showPop" position="left" width="100%">
                         <div class="middle">
                             <div class="middle-top">是否取消活动</div>
-                            <input type="button" class="btn" value="确定" @click="confirm">
-                            <input type="button" class="btn" value="取消" @click="cancle">
+                            <input type="button" class="btn" value="否" @click="cancle">
+                            <input type="button" class="btn" value="是" @click="confirm">
                         </div>
                         </popup>
                     </div>
@@ -468,7 +468,7 @@ export default {
     width: 0.6rem;
     bottom: 0;
 }
-.middle{width:2.8rem;height:1.22rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
+.middle{width:2.8rem;height:1.48rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
 .middle1{
     width: 90%;
     height: 38px;
@@ -484,16 +484,16 @@ export default {
     overflow: hidden;
 }
 .mint-popup-left{left:15%;}
-.middle .middle-top{width:100%;height:.8rem;line-height:.8rem;box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#333333;text-align:center;border-radius:10px 10px 0 0;}
+.middle .middle-top{width:100%;height:1rem;line-height:1rem;box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#333333;text-align:center;border-radius:10px 10px 0 0;}
 .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
 border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0);}
 .btn{
     float: left;
     width: 50%;
-    height: 42px;
-    border: 1px solid #cccccc;
+    height: 48px;
+    border: 1px solid #E4E4E4;
     background-color: #ffffff;
-    color: #33333333;
+    color: #666;
 }
 </style>
