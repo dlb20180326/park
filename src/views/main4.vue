@@ -29,9 +29,11 @@
                 <div class="annual">年度参与</div>
                 <flexbox>
                     <flexbox-item v-for="(user,index) in users" :key='index'>
-                        <div class="flex-demo">
-                            <div class="fonts-au">{{user.fonts}}</div>
-                            <div class="integral">{{user.integral}}</div>
+                        <div class="flex-demo" @click="ItemClick(index)">
+                            <!-- <div v-if="users.index == 0"> -->
+                                <div class="fonts-au">{{user.fonts}}</div>
+                                <div class="integral">{{user.integral}}</div>
+                            <!-- </div> -->
                         </div>
                     </flexbox-item>
                 </flexbox>
@@ -225,6 +227,14 @@ export default {
             }).catch(err => {
                 console.log(err);
             });
+        },
+        ItemClick(index){
+            if(index == 0){
+                this.$router.push("points/");
+            }
+            else{
+                this.$router.push("active/activeDetail");
+            }
         }
     }
 };

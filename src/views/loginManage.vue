@@ -43,21 +43,22 @@
     </div>
 </template>
 <script>
-    import {  Picker } from 'vux';
+    import {  Picker,PopupPicker  } from 'vux';
     export default {
         components: {
-            Picker
+            Picker,
+            PopupPicker 
         },
         data(){
             return {
                 account: '',
                 pass: '12345678',
                 pickerList:[{
-                name: '党支部书记',
-                value: "3"
-                }, {
-                name: '片区负责人',
-                value: "2"
+                    name: '党支部书记',
+                    value: "3"
+                    }, {
+                    name: '片区负责人',
+                    value: "2"
                 }],
                 pickerValue: "3",
                 roleName : "党支部书记",
