@@ -37,7 +37,7 @@
                         <popup v-model="showPop" position="left" width="100%">
                         <div class="middle">
                             <div class="middle-top">是否取消活动</div>
-                            <input type="button" class="btn" value="否" @click="cancle">
+                            <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="cancle">
                             <input type="button" class="btn" value="是" @click="confirm">
                         </div>
                         </popup>
@@ -484,7 +484,17 @@ export default {
     overflow: hidden;
 }
 .mint-popup-left{left:15%;}
-.middle .middle-top{width:100%;height:1rem;line-height:1rem;box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#333333;text-align:center;border-radius:10px 10px 0 0;}
+.middle .middle-top{
+    width:100%;
+    height:1rem;
+    line-height:1rem;
+    text-align:center;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);
+    font-size:.16rem;
+    color:#333333;
+    border-radius:10px 10px 0 0;
+    border-bottom: 1px solid #E4E4E4;
+    }
 .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
 border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0);}
@@ -492,7 +502,8 @@ border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
     float: left;
     width: 50%;
     height: 48px;
-    border: 1px solid #E4E4E4;
+    font-size: .16rem;
+    border: 0;
     background-color: #ffffff;
     color: #666;
 }

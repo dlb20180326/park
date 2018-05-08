@@ -44,7 +44,7 @@
             </table>
 
             <button class="btnRed" v-if="content.status==2">已评分 (评分人：{{content.branch}})</button>
-            <button class="btnRed" v-if="content.status==3">审核失败 (审核人：{{content.branch}})</button>
+            <button class="btnRed" v-if="content.status==3">审核已驳回 (审核人：{{content.branch}})</button>            
         </view-box>
     </div>
 </template>

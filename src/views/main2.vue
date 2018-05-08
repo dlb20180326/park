@@ -1,7 +1,7 @@
 <template>
   <div class="page-body">
     <x-header :left-options="{showBack: false}">
-      花旗银行第二党支部
+      上海中心片区
     </x-header>
         <div class="box">
             <div class="head">

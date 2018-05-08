@@ -1,7 +1,8 @@
 <template>
   <div class="page-body">
     <x-header :left-options="{showBack: false}">
-      {{info.departmentname}}
+      <!-- {{info.departmentname}} -->
+      上海中心片区
     </x-header>
     <div class="head">
       <flexbox>

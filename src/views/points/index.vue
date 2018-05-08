@@ -67,12 +67,9 @@
                                         点击+积分
                                     </x-button>
                                     </router-link>
-                                    <!-- <x-button mini type="disable" v-show="progres.totalScore == progres.score"> -->
-                                    <!-- <router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id "> -->
                                     <x-button mini type="warn" v-show="progres.totalScore == progres.score" @click.native="changeTable">
                                         点击记录
                                     </x-button>
-                                    <!-- </router-link> -->
                                 </div>
 
                         </div>

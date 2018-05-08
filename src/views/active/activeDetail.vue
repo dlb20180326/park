@@ -23,6 +23,7 @@
             <section class="mainbox1">
                 <div class=" clearfix p15 display">
                     <span class="fl weui-cell__bd1">党员生活通知</span>
+                    <!-- <span class="title"></span> -->
                     <a  class="fRight"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
                 </div>
                 <div class="content">
@@ -176,7 +177,7 @@ export default {
                 params: {
                     pageNum:1,
                     pageSize:1,
-
+                    departmentid:this.$store.getters.user.departmentid,
                     userId:this.$store.getters.user.userid
                 }
             }) .then((res)=> {
