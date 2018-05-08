@@ -88,15 +88,32 @@
             this.$store.dispatch('login', {
                     name: this.account,
                     password: this.pass,
-                    openId: this.$route.query.openId || undefined
+                    openId: this.$route.query.openId || undefined,
+                    userType : this.pickerValue
                 })
                 .then(
                     result =>{
                         if(result.status){
                             var roleId = result.entry.roleId;
-                            this.$router.push({
-                                path: '/main' + roleId
-                            })
+                            if(roleId == 2)
+                            {
+                                this.$router.push({
+                                    path: 'points/review'
+                                })
+                            }
+                            else if(roleId == 3)
+                            {
+                                this.$router.push({
+                                    path: 'points/evaluation'
+                                })
+                            }
+                            else
+                            {
+                                this.$router.push({
+                                    path: '/main' + roleId
+                                })
+                            }
+                            
                         }else{
                             this.$vux.toast.show({
                                 text: result.message,
@@ -200,15 +217,15 @@
     }
 
     .input-all {
-    height: 0.36rem;
-    line-height: 0.36rem;
-    padding-left: 0.36rem;
-    padding-right: 0.11rem;
-    position: relative;
-    background:rgba(255,255,255,1);
-    box-shadow: 0px 1px 5px 0px rgba(150,150,150,0.5);
-    border-radius:18px;
-    margin-bottom:.26rem;
+        height: 0.36rem;
+        line-height: 0.36rem;
+        padding-left: 0.36rem;
+        padding-right: 0.11rem;
+        position: relative;
+        background:rgba(255,255,255,1);
+        box-shadow: 0px 1px 5px 0px rgba(150,150,150,0.5);
+        border-radius:18px;
+        margin-bottom:.26rem;
     }
     .input-all input{
         width: 79%;

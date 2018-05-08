@@ -47,7 +47,8 @@ const user = {
             // );
         },
         clearUser(state) {
-        		state.user = {};
+            state.user = {};
+            var roleId = cookie.get('roleId');
             Object.keys(state).map(key => delete state[key]);
             KEYS.forEach(key =>
                 cookie.remove(key, {
@@ -55,7 +56,15 @@ const user = {
                     path: '/'
                 })
             );
-            router.push('/login');
+            if(roleId == 4)
+            {
+                router.push('/login');
+            }
+            else
+            {
+                router.push('/loginManage');
+            }
+            
         }
     }
 };

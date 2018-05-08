@@ -102,7 +102,7 @@ export default {
         return {
             tabsSelected: -1,
             tabs: tabs[this.$store.getters.user.roleid] || [],
-            showFooter: this.$store.getters.user.roleid != 4 ? true : false
+            showFooter: true
         };
     },
     mounted() {
