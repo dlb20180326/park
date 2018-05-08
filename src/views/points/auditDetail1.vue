@@ -36,7 +36,7 @@
                         <div class="header mb-reject1">{{item.title}} <span class="mb-score">(得分<b class="text-red">{{item.itemscore}}</b>分)</span>  </div>
 
                         <div class="text-red mb-reject" v-if="item.status == 3">
-                            拒绝原因:　{{item.rejectReson}}
+                            驳回原因:　{{item.rejectReson}}
                         </div>
 
                         <div class="states" v-if="item.status==0">
@@ -46,7 +46,7 @@
                             已通过
                         </div>
                         <div class="states" v-if="item.status==3">
-                            已拒绝
+                            已驳回
                         </div>
 
 
@@ -214,7 +214,7 @@ export default {
                 }
             }).then(res => {
                 if(res.success){
-                    this.$vux.alert.show({title: '拒绝成功',onHide(){
+                    this.$vux.alert.show({title: '驳回成功',onHide(){
                         this.rejectReason = "";
                         window.location.reload();
                     }});
