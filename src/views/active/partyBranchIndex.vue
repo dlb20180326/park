@@ -14,7 +14,8 @@
                         <flexbox align="start">
                             <flexbox-item class="list-head">
                                 <b>{{item.activeName}}</b>
-                                <p>{{datePick(item.startTime)}}</p>
+                                <span>{{item.activePrincipalPeople}}</span>
+                                &nbsp; &nbsp;<span>{{datePick(item.startTime)}}</span>
                             </flexbox-item>
                             <flexbox-item v-if="item.activeCreatePeople == user.userid">
                                 <input type="button" class="cancle" value="取消活动" @click="deleteActive(item.id)">
@@ -308,9 +309,10 @@ export default {
 }
 .vux-flexbox-item.list-head {
     b {
+        display: block;
         color: #444;
     }
-    p {
+    span {
         font-size: 0.12rem;
         color: #999;
     }
