@@ -57,7 +57,7 @@
                     <a  style="background-color:#B93647" @click="submit()">报名</a>
                 </div>
                 <div class="book"  v-if="signupstatus == 1">
-                    <a  style="background-color: #8b8b8b" @click="submit1()">已报名</a>
+                    <a  style="background-color: #8b8b8b">已报名</a>
                 </div>
                 <div class="grayLine margin-top"></div>
             </section>

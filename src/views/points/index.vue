@@ -45,7 +45,7 @@
 	                            <div class="title cl">
 	                                <b>{{index+1}}. {{progres.projectName}}</b>
 	                                <div class="space"></div>
-	                                <span class="number">{{progres.totalScore}}</span>/{{progres.score}}
+	                                <span class="number">{{progres.totalScore}}</span> /{{progres.score}}
                                     <span class="fr" v-if="progres.info&&progres.info.length!=0" @click="moreInfo(progres.info)">
                                         审批进度 <span class="icon-arrows"></span>
                                     </span>
@@ -56,7 +56,7 @@
 	                            <router-link :to="{name:'Dues'}" v-if="progres.id === 7">
 	                            <div class="content">
 	                                <x-button mini type="warn" v-if="projectList[progres.id]">
-	                                    点击+积分
+	                                   获取积分
 	                                </x-button>
 	                            </div>
 	                            </router-link>
@@ -64,7 +64,7 @@
                                 <div class="content"  v-else-if="projectList[progres.id]">
                                     <router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id " v-show="progres.totalScore != progres.score">
                                     <x-button mini type="warn">
-                                        点击+积分
+                                       获取积分
                                     </x-button>
                                     </router-link>
                                     <x-button mini type="warn" v-show="progres.totalScore == progres.score" @click.native="changeTable">
@@ -81,7 +81,7 @@
                                     获取时间：
                                 </flexbox-item>
                                 <flexbox-item>
-                                   {{dataPickers(knoew.scoreTime)}}
+                                   {{knoew.scoreTime | date}}
                                 </flexbox-item>
                             </flexbox>
                             <flexbox>
@@ -226,6 +226,10 @@ export default {
                 };
                 return new Date(value).toLocaleString();
             }
+        },
+        date (val) {
+    		let times = new Date(val);
+    		return `${times.getFullYear()}年${times.getMonth()+1}月${times.getDate()}日`;
         }
     },
     methods:{
@@ -374,7 +378,6 @@ export default {
           		return this.getFullYear() + "年" + (this.getMonth()+1) + "月" + this.getDate() + "日 "
     		};
     		return times;
-
     	},
     	reSubmit(item){
     		this.setInfo(item);
