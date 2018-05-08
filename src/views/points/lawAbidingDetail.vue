@@ -1,6 +1,6 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <!-- <x-header>遵纪守法评分</x-header> -->
+        <!-- <x-header>遵章守纪评分</x-header> -->
         <r-header :rfs="contents" body-padding-top=".46rem"></r-header>
         <div class="group-item">
             <group-title slot="title">
@@ -107,7 +107,7 @@ export default {
       departmentname: "",
       Content1: "",
       Content2: "",
-      contents: { rights: "评分说明", title: "遵纪守法评分" }
+      contents: { rights: "评分说明", title: "遵章守纪评分" }
     };
   },
   methods: {
