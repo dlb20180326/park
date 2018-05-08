@@ -188,7 +188,7 @@
     .tiles{
         width:100%;
         text-align:center;
-        text-shadow:0 1px 1px #F2CE8F;
+        /* text-shadow:0 1px 1px #F2CE8F; */
         font-size:0;
     }
     .tiles div{
@@ -202,9 +202,9 @@
     .tiles span{
         display: inline-block;
         height: .1rem;
-        width: .15rem;
+        width: .11rem;
         margin-top:.05rem;
-        background:#fff url(../assets/images/icon-star.png) no-repeat 50% 50%;
+        background:#fff url(../assets/images/icon-star.png) no-repeat 100% 100%;
         background-size:cover;
         color:rgba(227,192,140,1);
         /* vertical-align: bottom; */
