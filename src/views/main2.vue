@@ -40,7 +40,7 @@
                 </flexbox>
             </div>
       <div class="list">
-        <h3>书记待办事宜<span style="color:#b93647;font-size:.16rem;">({{total}})</span></h3>
+        <h3>书记待办事宜 <span style="color:#b93647;font-size:.16rem;"> ({{total}})</span></h3>
         <div v-for="(item,index) in todoList" :key="index">
           <div class="item">
            <div class="title">{{index+1}}.

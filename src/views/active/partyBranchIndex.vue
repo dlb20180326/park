@@ -14,7 +14,7 @@
                         <flexbox align="start">
                             <flexbox-item class="list-head">
                                 <b>{{item.activeName}}</b>
-                                <p>{{datePick(item.createTime)}}</p>
+                                <p>{{datePick(item.startTime)}}</p>
                             </flexbox-item>
                             <flexbox-item v-if="item.activeCreatePeople == user.userid">
                                 <input type="button" class="cancle" value="取消活动" @click="deleteActive(item.id)">

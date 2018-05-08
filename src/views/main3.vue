@@ -1,8 +1,7 @@
 <template>
   <div class="page-body">
     <x-header :left-options="{showBack: false}">
-      <!-- {{info.departmentname}} -->
-      上海中心片区
+      {{info.departmentname}}
     </x-header>
     <div class="head">
       <flexbox>
@@ -10,7 +9,7 @@
           {{dateTimes}},
         </flexbox-item>
         <flexbox-item>
-          {{info.partyBranch}}
+          {{info.partyBranch}}书记。
 
         </flexbox-item>
       </flexbox>

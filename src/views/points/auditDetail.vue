@@ -48,12 +48,12 @@
                             已通过
                         </div>
                         <div class="states" v-if="item.status==3">
-                            已拒绝
+                            已驳回
                         </div>
 
 
                         <div class="text-red mb-reject" v-if="item.status == 3">
-                            拒绝原因：{{item.rejectReson}}
+                            驳回原因：{{item.rejectReson}}
                         </div>
 
 
