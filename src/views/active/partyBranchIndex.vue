@@ -10,7 +10,7 @@
                     <img src="@/assets/images/icon-head.png">
                 </flexbox-item>
                 <flexbox-item class="list-body">
-                    <!-- <router-link :to="{name:'activePost',params:{activeId:item.id}}"> -->
+                    <router-link :to="{name:'activePost',params:{activeId:item.id}}">
                         <flexbox align="start">
                             <flexbox-item class="list-head">
                                 <b>{{item.activeName}}</b>
@@ -22,7 +22,7 @@
                             </flexbox-item>
                         </flexbox>
                         <div class="list-content" v-html="item.active_Context"></div>
-                    <!-- </router-link> -->
+                    </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
                             <!-- 缩略图显示 -->
