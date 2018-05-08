@@ -1,7 +1,7 @@
 <template>
     <div class="page-body">
         <x-header :left-options="{showBack: false}" class="bgColors">
-            党员活动
+            支部活动
             <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>
         </x-header>
         <div class="box">

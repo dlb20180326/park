@@ -5,9 +5,9 @@
 			<div>
 				<table class="table-title">
 					<tr>
-						<td style="width: 20%;">项目指标</td>
-						<td style="width: 30%;">具体内容</td>
-						<td style="width: 20%;">分值</td>
+						<td style="width: 20%;vertical-align:middle;">项目指标</td>
+						<td style="width: 30%;vertical-align:middle;">具体内容</td>
+						<td style="width: 20%;vertical-align:middle;">分值</td>
 					</tr>
 				</table>
 			</div>
@@ -176,7 +176,7 @@
 		text-align: center;
 		color: #B93647;
 		height: 0.4rem;
-		vertical-align: middle;
+		/* vertical-align: middle; */
 	}
 	
 	.table-content {

@@ -1,7 +1,7 @@
 <template>
     <div class="page-body">
         <x-header :left-options="{showBack: true}">
-            党务积分信息
+            党员积分信息
         </x-header>
         <section class="mainbox">
             <div style="padding:0 .2rem;">
@@ -48,7 +48,7 @@
                             <td class="f_b">{{item.approvedName}}</td>
                         </tr>
                         <tr v-show="!item.approvedName">
-                            <td class="grayColors">加分人：</td>
+                            <td class="grayColors">审核人：</td>
                             <td class="f_b">{{item.adderName||'系统自动'}}</td>
                         </tr>
                         <tr>

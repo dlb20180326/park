@@ -5,7 +5,7 @@
 
             <x-header slot="header" style="position: fixed !important;left:0;right:0;z-index:100"  class="bgColors">
                 {{contents.title}}
-                <a slot="right" @click="showMenu">评分说明</a>
+                <a slot="right" @click="showMenu" style="cursor:pointer;" >评分说明</a>
             </x-header>
 
 			    <div class="points-table">
