@@ -121,7 +121,7 @@
     .tiles{
         width:100%;
         text-align:center;
-        text-shadow:0 1px 1px #F2CE8F;
+        /* text-shadow:0 1px 1px #F2CE8F; */
         font-size:0;
     }
     .tiles div{
@@ -134,19 +134,19 @@
     }
     .tiles span{
         display: inline-block;
-        height: .16rem;
+        height: .1rem;
         width: .15rem;
         margin-top:.05rem;
         background:#fff url(../assets/images/icon-star.png) no-repeat 50% 50%;
         background-size:cover;
         color:rgba(227,192,140,1);
-        vertical-align: bottom;
+        /* vertical-align: bottom; */
     }
     .inputs{
         width:100%;
         /* margin:0.72rem auto; */
         height:auto;
-        margin: 0.72rem auto 0;
+        margin: 0.5rem auto 0;
     }
 
     .input-all {
@@ -200,7 +200,7 @@
         height:.36rem;
         line-height:.36rem;
         background:linear-gradient(180deg,rgba(194,81,72,1),rgba(180,56,44,1));
-        box-shadow: 0px 4px 4px 0px rgba(228,149,158,1);
+        box-shadow: 0px 1px 5px 0px rgba(150,150,150,0.5);
         border-radius:21px;
         border:0;
         font-size: .14rem;

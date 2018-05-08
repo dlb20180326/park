@@ -201,13 +201,13 @@
     }
     .tiles span{
         display: inline-block;
-        height: .16rem;
+        height: .1rem;
         width: .15rem;
         margin-top:.05rem;
         background:#fff url(../assets/images/icon-star.png) no-repeat 50% 50%;
         background-size:cover;
         color:rgba(227,192,140,1);
-        vertical-align: bottom;
+        /* vertical-align: bottom; */
     }
     .inputs{
         width:100%;
