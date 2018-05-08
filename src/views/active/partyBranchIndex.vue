@@ -484,7 +484,7 @@ export default {
     overflow: hidden;
 }
 .mint-popup-left{left:15%;}
-.middle .middle-top{width:100%;height:.8rem;line-height:.8rem;box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#999999;text-align:center;border-radius:10px 10px 0 0;}
+.middle .middle-top{width:100%;height:.8rem;line-height:.8rem;box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#333333;text-align:center;border-radius:10px 10px 0 0;}
 .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
 border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0);}
@@ -494,6 +494,6 @@ border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
     height: 42px;
     border: 1px solid #cccccc;
     background-color: #ffffff;
-    color: #999999;
+    color: #33333333;
 }
 </style>
