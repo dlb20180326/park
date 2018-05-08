@@ -23,7 +23,7 @@
             <section class="mainbox1">
                 <div class=" clearfix p15 display">
                     <span class="fl weui-cell__bd1">党员生活通知</span>
-                    <!-- <span class="title"></span> -->
+                    <span class="total" style="margin-left:-0.3rem">（{{count}}）</span>
                     <a  class="fRight"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
                 </div>
                 <div class="content">
@@ -61,7 +61,6 @@
                 </div>
                 <div class="grayLine margin-top"></div>
             </section>
-
         </flexbox>
         <flexbox orient="vertical">
             <flexbox-item>
@@ -79,9 +78,7 @@
                                     <div class=" fr">{{item.endTime|formatDuring}}<span class="rightBtn"></span></div>
                                 </a>
                             </li>
-
                         </ul>
-
                     </div>
                 </section>
             </flexbox-item>
@@ -90,14 +87,11 @@
         <div v-transfer-dom>
             <alert v-model="show" :title="msg" @on-show="onShow" @on-hide="onHide"></alert>
         </div>
-
     </div>
 </template>
-
 <script>
     import axios from 'axios'
     import { XHeader, Flexbox, FlexboxItem,Alert ,cookie,Cell,Group,XButton,XTable,TransferDomDirective as TransferDom, } from 'vux';
-
 export default {
     directives: {
         TransferDom
@@ -124,7 +118,8 @@ export default {
             isActive:true,
             signupstatus:'',
             msg:'',
-            endTime1:''
+            endTime1:'',
+            count:''
         };
     },
     filters: {
@@ -231,8 +226,6 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                 });
-
-
         },submit(){
             axios({
                 method: 'post',
@@ -260,18 +253,30 @@ export default {
                     userId:this.userId,
                     pageNum:1,
                     pageSize:4
-
                 }
             }) .then((res)=>{
-
-
                  this.activeComplete=res.data;
 
             }).catch(function (error) {
                 console.log(error);
             });
         },
+        getActiveCount(){
+             axios({
+                method: 'get',
+                url: 'active/getParticipateActiveCount',
+                params: {
+                    departmentid:this.$store.getters.user.departmentid,
+                    userId:this.$store.getters.user.userid 
+                }
+            }) .then((res)=>{
+                console.log(res);
+                 this.count=res.data;
 
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },  
     onHide () {
         window.location.reload()
     },
@@ -288,11 +293,11 @@ export default {
         this.getActivity();
         this.gettimes1();
         this.gettimes2();
-        this.getAlreadyActive()
+        this.getAlreadyActive();
+        this.getActiveCount()
     }
 };
 </script>
-
 <style lang="less" scoped>
 .vux-header-title-area, .vux-header .vux-header-title{height: .46rem;}
 .grayLine{width:100%;height:.1rem;background:rgba(244,244,244,1);}
@@ -303,7 +308,6 @@ export default {
     .table td {
         padding:3px;
     }
-
     .custom-primary-red {
         border-radius: 99px!important;
         border-color: #CE3C39!important;
@@ -409,9 +413,6 @@ export default {
         }
     }
 }
-
-
-
     *{
         margin:0; padding:0;
     }
@@ -440,7 +441,6 @@ export default {
         font-size:.14rem;
         overflow-x:hidden;
     }
-
     table {
         border-collapse:collapse;
     }
@@ -573,14 +573,11 @@ export default {
         padding:2vw 0 3vw;
     }
 .p15 span{background-color:#FFFFFF!important;}
-
-
-
-.total {color:red;
+.total {color:#fa7e07;
         font-size:0.15rem;
         font-weight:bold;
         display:inline-block;
-        margin-top:10px;
+        margin-top:11px;
 }
 
 
