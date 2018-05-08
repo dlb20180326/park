@@ -27,13 +27,15 @@
         </div>
         <flexbox orient="vertical" align="initial">
             <view-box class="view-box">
-<group label-width="80px" label-margin-right=".08rem">
-    <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="userName" value-align="left"></cell>
-    <cell :border-intent="false" disabled title="获得总分" :value="totalscore||0.0" value-align="left"></cell>
-</group>
+            <group label-width="80px" label-margin-right=".08rem">
+                <span class="bg-line"></span>
+                <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="userName" value-align="left"></cell>
+                <span class="bg-line"></span>
+                <cell :border-intent="false" disabled title="获得总分" :value="totalscore||0.0" value-align="left"></cell>
+            </group>
                 <div class="item-list" v-if="item.message!=''" v-for="(item,i) of list" :key="i">
                     <div class="item">
-                        <div class="header mb-reject1">{{item.title}} <span class="mb-score">(得分<b class="text-red">{{item.itemscore}}</b>分)</span>  </div>
+                         <span class="bg-line1"></span><div class="header mb-reject1">{{item.title}} <span class="mb-score">(得分<b>{{item.itemscore}}</b>分)</span>  </div>
 
                         <div class="text-red mb-reject" v-if="item.status == 3">
                             驳回原因:　{{item.rejectReson}}
@@ -50,7 +52,7 @@
                         </div>
 
 
-                        <span class="desc">{{item.message}}</span>
+                        <span class="desc" style="color: #b2b2b2;">{{item.message}}</span>
                         <div class="img-show">
                             <img class="previewer-demo-img" v-for="(it,idx) in item.memos" :src="it.msrc" width="100"  @click="atBig(idx,i)">
                             <div v-transfer-dom>
@@ -335,6 +337,27 @@ td {
     font-weight: 600;
     color: #B93647;
     padding: 0.02rem .15rem;
+}
+
+.bg-line {
+    width: 0.04rem;
+    height: 0.18rem;
+    background: url(../../assets/images/icon-rectangle.png) no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    float: left;
+    margin-top: 0.12rem;
+    margin-right: 4%;
+}
+.bg-line1{
+    width: 0.04rem;
+    height: 0.18rem;
+    background: url(../../assets/images/icon-rectangle.png) no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    float: left;
+    margin-top: 0.24rem;
+    margin-right: 4%;
 }
 .states.scuess{
     color: #6BD46B;
