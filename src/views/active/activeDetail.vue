@@ -267,12 +267,9 @@ export default {
 
                  this.activeComplete=res.data;
 
-            })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
 
     onHide () {
