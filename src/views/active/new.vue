@@ -1,6 +1,6 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <x-header>发起活动</x-header>
+        <x-header title="发起活动" @on-click-back="backhome()"></x-header>
         <div class="group-item">
             <group-title slot="title">
                 <b>活动开始时间</b>
@@ -50,7 +50,7 @@
                     <x-button mini type="warn" @click.native="handlePicker()">
                         <i class="iconfont dlb-icon-category" ></i>
                     </x-button>
-                    <group class="date-no-box"></group>
+                    <!-- <group class="date-no-box"></group> -->
                 </flexbox-item>
             </flexbox>
         </div>
@@ -150,6 +150,7 @@
                 activeStatus:0,
                 activeProjectActive:'',
                 PickerVisible1:false,
+                // contents:{rights:'',title:'bbb'},
                 pickerValue1:'请选择活动类型',
                 years:'',
                 year1: [''],
@@ -345,6 +346,12 @@
                 if (day < 10) day = '0' + day;
                 this.value7 = now.getFullYear() + '-' + cmonth + '-' + day;
                 console.log('set today ok')
+            },
+            backhome(){
+                console.log("---")
+                this.$router.push({
+                    path:'/'
+                })
             }
         },
         computed: {
