@@ -53,7 +53,7 @@ Vue.component(Popup.name, Popup);
 export default {
   data() {
     return {
-      contents: { rights: "评分说明", title: "遵纪守法评分" },
+      contents: { rights: "评分说明", title: "遵章守纪评分" },
       list: [],
       isYellow: false,
       showPop: false,

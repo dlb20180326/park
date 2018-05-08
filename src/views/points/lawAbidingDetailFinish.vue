@@ -1,6 +1,6 @@
 <template>
 	<div class="page-body">
-        <x-header>遵纪守法评分</x-header>
+        <x-header>遵章守纪评分</x-header>
 		<view-box ref="viewBox" body-padding-top=".2rem">
 			<p class="allPic">
 				<span class="bg-line"></span>
@@ -28,7 +28,7 @@
             </div>
 			<p class="allPic">
 			<span class="bg-line"></span>
-			<span class="picture">遵纪守法图片</span>
+			<span class="picture">遵章守纪图片</span>
 			<span class="numberz">{{ imgpics.length}}张</span>
 			</p>
 			<div class="img-show">
