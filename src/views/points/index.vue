@@ -228,8 +228,24 @@ export default {
             }
         },
         date (val) {
-    		let times = new Date(val);
-    		return `${times.getFullYear()}年${times.getMonth()+1}月${times.getDate()}日`;
+            let times = new Date(val);
+            let month = times.getMonth()+1;
+            if(month <10){
+                month = '0' + month; 
+            }
+            let datas = times.getDate();
+            if(datas <10){
+                datas = '0' + datas;
+            }
+            let hours = times.getHours();
+            if(hours <10){
+                hours = '0' + hours;
+            }
+            let minutes = times.getMinutes();
+            if(minutes < 10){
+                minutes = '0' + minutes;
+            }
+    		return `${times.getFullYear()}.${month}.${datas}  ${hours}.${minutes}`;
         }
     },
     methods:{

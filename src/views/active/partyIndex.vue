@@ -14,7 +14,7 @@
                         <flexbox align="start">
                             <flexbox-item class="list-head">
                                 <b>{{item.activeName}}</b>
-                                <p>{{datePick(item.createTime)}}</p>
+                                <p>{{datePick(item.startTime)}}</p>
                             </flexbox-item>
                         </flexbox>
                         <div class="list-content" v-html="item.activeContext"></div>
