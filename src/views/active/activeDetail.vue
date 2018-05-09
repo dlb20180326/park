@@ -119,7 +119,7 @@ export default {
             signupstatus:'',
             msg:'',
             endTime1:'',
-            count:''
+            count:'0'
         };
     },
     filters: {

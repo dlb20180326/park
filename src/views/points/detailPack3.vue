@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <x-header>思想汇报评分</x-header>
+        <x-header>思想汇报评分<a slot="right" @click="showMenu">评分说明</a></x-header>
         <view-box ref="viewBox" body-padding-top=".2rem">
             <p class="allPic">
                 <span class="bg-line"></span>
@@ -38,7 +38,22 @@
                 </div>
             </div>
             <x-button type="primary" style="background-color: #D8D8D8;width: 80%;margin-top: 1.5rem">已评分（评分人:{{adderName}}）</x-button>
+                <div v-transfer-dom>
+                    <popup v-model="showPop" position="left" width="100%">
+                        <div class="middle">
+                            <div class="middle-top">评分说明</div>
+                            <div class="middle-content">
+                                <p>
+                                    1、党员每上半年口头向支部书记汇报一次，经支部书记审核通过后加5分； 2、党员每下半年书面向支部汇报一次，经支部书记审核通过后加5分。
+                                </p>
 
+                            </div>
+                            <div class="knowBtn" @click="know">我知道了</div>
+                        </div>
+                    </popup>
+                </div>
+        
+        
         </view-box>
     </div>
 </template>
@@ -163,7 +178,13 @@ export default {
         },
         logIndexChange(arg) {
             console.log(arg);
-        }
+        },
+       showMenu(){
+               this.showPop = true;
+            },
+        know(){
+             this.showPop = false;
+        },
     },
     mounted() {
         this.list1Selected = this.list1.find(item => item.moduleId == this.$route.params.moduleid);
@@ -198,6 +219,7 @@ export default {
             peopleNum: null,
             participants: null,
             Noparticipants: null,
+            showPop:false,
             options: {
                 getThumbBoundsFn(index) {
                     // find thumbnail element
@@ -380,7 +402,7 @@ body {
 .up {
     width: 0.1rem;
     height: 0.1rem;
-    display: inline-block;
+    display:block;
     background: url(../../assets/images/icon-up.png) no-repeat;
     background-size: 100% 100%;
     float: right;
@@ -405,4 +427,13 @@ body {
 .grayBtn {
     background: rgba(216, 216, 216, 1);
 }
+.middle{width:2.8rem;height:2.4rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:15%;}
+.mint-popup-left{left:15%;}
+.middle .middle-top{width:100%;height:.4rem; background:linear-gradient(90deg,rgba(185,54,71,1),rgba(155,10,26,1));box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#FFFFFF;text-align:center;line-height:.4rem;border-radius:10px 10px 0 0;}
+.middle-content{width:2.4rem;height:1.2rem;margin:.21rem .19rem .05rem .21rem;}
+.middle-content p{font-size:.14rem;color:#828282;line-height:.24rem;}
+.dark{color:#333333;}
+.knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
+    border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
+.vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
 </style>

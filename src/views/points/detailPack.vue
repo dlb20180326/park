@@ -1,8 +1,10 @@
 <template>
     <div class="page-body disabled-tabbar">
         <view-box ref="viewBox" body-padding-top=".46rem">
-            <r-header :rfs="contents" @subs="cos()">
-            </r-header>
+            <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" class="bgColors"  body-padding-top=".46rem">
+             {{contents.title}}
+              <a slot="right" @click="showMenu">评分说明</a>
+             </x-header>
             <p class="allPic">
                 <span class="bg-line"></span>
                 <span class="picture">党员姓名:</span>
@@ -45,27 +47,45 @@
             </table>
             <button class="btnRed" v-if="content.status==2">已评分 (评分人：{{content.branch}})</button>
             <button class="btnRed" v-if="content.status==3">审核已驳回 (审核人：{{content.branch}})</button>            
+       <div v-transfer-dom>
+				<popup v-model="showPop" position="left" width="100%">
+				<div class="middle">
+					<div class="middle-top">评分说明</div>
+					<div class="middle-content">
+
+						<p v-if="moduleid === '2'">
+							党员自学或参加其他党组织组织的学习教育活动，经所属党支部书记确认后，每参加一次加2.5分（共5分）。
+						</p>
+                        <p v-else-if="moduleid === '4'">
+                            党员在金领驿站参加政治活动，或“双报到”参加居民区党组织组织的党日活动，经所属党支部书记确认后，每次加2分（共10分）。
+                        </p>
+                        <p v-else-if="moduleid === '11'">
+                            党员积极参加公益活动，每次加3分(最高不超过20分)。
+                        </p>
+                        <p v-else-if="moduleid === '8'">
+                            党员积极参加公益活动，每次加3分(最高不超过10分)。
+                        </p>
+					</div>
+					<div class="knowBtn" @click="know()">我知道了</div>
+				</div>
+				</popup>
+			</div>
         </view-box>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
-import Xheader from '@/components/comother/rheader';
-import { Previewer, TransferDom, ViewBox } from 'vux';
+import {ViewBox,TransferDom,Popup,Flexbox, FlexboxItem,XHeader,Previewer} from 'vux';
 export default {
-    data(){
-        return {
-            contents: { rights: '评分说明', title: '' }
-        }
-    },
     directives: {
         TransferDom
     },
     components: {
-        'r-header': Xheader,
+        XHeader,
         Previewer,
-        ViewBox
+        ViewBox,
+        Popup,
     },
     filters: {
         formatDuring: function(value) {
@@ -190,8 +210,7 @@ export default {
             this.$http
                 .get('pscoredetail/queryById?id=' + this.$route.params.moduleid)
                 .then(res => {
-                    this.contents.title = res.data.projectName + '评分';
-                     this.contents.rights = '说明';
+                    this.contents.title = res.data.projectName+'评分';
                 })
                 .catch(err => {
                     console.log(err);
@@ -220,15 +239,28 @@ export default {
                 return this.getFullYear() + '年' + (this.getMonth() + 1) + '月' + this.getDate() + '日';
             };
             return new Date(s).toLocaleString();
-        }
-    },
-    mounted() {
+        },
+        showMenu(){
+               this.showPop = true;
+            },
+         know(){
+             this.showPop = false;
+        },
+         getmoduleid(){
+                this.moduleid=this.$route.params.moduleid
+
+            },
+        },
+       
+         mounted() {
         this.getDetail();
         this.getModule();
+        this.getmoduleid();
     },
     data() {
         return {
-            contents: { title: '' },
+            moduleid:'',
+            contents:{title:''},
             num: 0,
             activeData: {},
             picInfo: [],
@@ -243,6 +275,7 @@ export default {
             peopleNum: null,
             participants: null,
             Noparticipants: null,
+            showPop:false,
             options: {
                 getThumbBoundsFn(index) {
                     // find thumbnail element
@@ -259,7 +292,7 @@ export default {
                 }
             }
         };
-    }
+    },
 };
 </script>
 <style scoped>
@@ -427,7 +460,7 @@ body {
 .up {
     width: 0.1rem;
     height: 0.1rem;
-    display: inline-block;
+    display:block;
     background: url(../../assets/images/icon-up.png) no-repeat;
     background-size: 100% 100%;
     float: right;
@@ -452,4 +485,11 @@ body {
 .grayBtn {
     background: rgba(216, 216, 216, 1);
 }
+.middle .middle-top{width:100%;height:.4rem; background:linear-gradient(90deg,rgba(185,54,71,1),rgba(155,10,26,1));box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#FFFFFF;text-align:center;line-height:.4rem;border-radius:10px 10px 0 0;}
+.middle{width:2.8rem;height:2.02rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
+.knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
+border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
+.vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
+.middle-content p{font-size:.14rem;color:#828282;line-height:.24rem;}
+.middle-content{width:2.4rem;height:0.8rem;margin:.21rem .19rem .21rem .21rem;}
 </style>
