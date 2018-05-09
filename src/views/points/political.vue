@@ -94,7 +94,6 @@ Vue.component(Popup.name, Popup);
                 catch(err) {
                     return value=err;
                 }
-
             },
             formatDuring: function (value) {
                 if(value == "" || value == null || value == undefined){
@@ -148,7 +147,6 @@ Vue.component(Popup.name, Popup);
                     name: 'detailPack',
                     params:{studyid:item.studyid,createUserid:item.createUserid,moduleid:this.$route.params.moduleid}
                 })
-
             },
             getModule(){
                 this.$http.get('pscoredetail/queryById?id='+this.$route.params.moduleid

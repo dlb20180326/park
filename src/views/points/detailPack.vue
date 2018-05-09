@@ -1,7 +1,8 @@
 <template>
     <div class="page-body disabled-tabbar">
         <view-box ref="viewBox" body-padding-top=".46rem">
-            <r-header :rfs="contents"></r-header>
+            <r-header :rfs="contents" @subs="cos()">
+            </r-header>
             <p class="allPic">
                 <span class="bg-line"></span>
                 <span class="picture">党员姓名:</span>
@@ -42,7 +43,6 @@
                     </td>
                 </tr>
             </table>
-
             <button class="btnRed" v-if="content.status==2">已评分 (评分人：{{content.branch}})</button>
             <button class="btnRed" v-if="content.status==3">审核已驳回 (审核人：{{content.branch}})</button>            
         </view-box>
@@ -54,6 +54,11 @@ import axios from 'axios';
 import Xheader from '@/components/comother/rheader';
 import { Previewer, TransferDom, ViewBox } from 'vux';
 export default {
+    data(){
+        return {
+            contents: { rights: '评分说明', title: '' }
+        }
+    },
     directives: {
         TransferDom
     },
@@ -91,6 +96,9 @@ export default {
         }
     },
     methods: {
+        cos(){
+        console.log('1111');
+        },
         show(index) {
             this.$refs.previewer.show(index);
         },
@@ -183,6 +191,7 @@ export default {
                 .get('pscoredetail/queryById?id=' + this.$route.params.moduleid)
                 .then(res => {
                     this.contents.title = res.data.projectName + '评分';
+                     this.contents.rights = '说明';
                 })
                 .catch(err => {
                     console.log(err);
