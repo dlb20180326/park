@@ -5,12 +5,12 @@
                 <div class="header-top">
                     <div class="top-head">
                         <div class="top-left">{{dateTime}}，{{userAbout.name}}</div>
-                        <div class="top-right" :style="{background: 'url('+userAbout.avatar+')'}"></div>
+                        <div class="top-right" :style="{backgroundImage: 'url('+userAbout.avatar+')'}"></div>
                     </div>
                     <div class="top-second">
                         <div class="second-left">
                             <span class="color-light">片区:</span>
-                            <span class="color-dark">{{partAbout.address}}</span>
+                            <span class="color-dark">{{partAbout.address }}</span>
                         </div>
                         <div class="second-right">
                             <span class="color-light">党支部书记:</span>
@@ -19,8 +19,8 @@
                     </div>
                     <div class="top-second2">
                         <div class="left-second">
-                            <span class="color-light">党支部:</span>
-                            <span class="color-dark">{{partAbout.departmentname}}</span>
+                            <span class="color-light" style="position:relative;">党支部:</span>
+                            <span class="color-dark" style="position:absolute;">{{partAbout.departmentname}}</span>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                 <div class="annual">年度参与</div>
                 <flexbox>
                     <flexbox-item v-for="(user,index) in users" :key='index'>
-                        <div class="flex-demo">
+                        <div class="flex-demo" @click="ItemClick(index)">
                             <div class="fonts-au">{{user.fonts}}</div>
                             <div class="integral">{{user.integral}}</div>
                         </div>
@@ -225,6 +225,14 @@ export default {
             }).catch(err => {
                 console.log(err);
             });
+        },
+        ItemClick(index){
+            if(index == 0){
+                this.$router.push("points/");
+            }
+            else{
+                this.$router.push("active/activeDetail");
+            }
         }
     }
 };

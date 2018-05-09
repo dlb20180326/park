@@ -1,8 +1,8 @@
-w<template>
+<template>
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
-            党员积分
-            <a slot="right">评分说明</a>
+            党员积分信息
+            <router-link slot="right" to="points/detail">评分说明</router-link>
         </x-header>
         <div class="box">
             <div class="head">
@@ -45,7 +45,7 @@ w<template>
 	                            <div class="title cl">
 	                                <b>{{index+1}}. {{progres.projectName}}</b>
 	                                <div class="space"></div>
-	                                <span class="number">{{progres.totalScore}}</span>/{{progres.score}}
+	                                <span class="number">{{progres.totalScore}}</span> /{{progres.score}}
                                     <span class="fr" v-if="progres.info&&progres.info.length!=0" @click="moreInfo(progres.info)">
                                         审批进度 <span class="icon-arrows"></span>
                                     </span>
@@ -56,19 +56,19 @@ w<template>
 	                            <router-link :to="{name:'Dues'}" v-if="progres.id === 7">
 	                            <div class="content">
 	                                <x-button mini type="warn" v-if="projectList[progres.id]">
-	                                    点击+积分
+	                                   获取积分
 	                                </x-button>
 	                            </div>
 	                            </router-link>
 
                                 <div class="content"  v-else-if="projectList[progres.id]">
-                                    <router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id "  v-show="progres.totalScore != progres.score">
+                                    <router-link :to="'points/addPoint/'+progres.id+'/'+ projectList[progres.id].id " v-show="progres.totalScore != progres.score">
                                     <x-button mini type="warn">
-                                        点击+积分
+                                       获取积分
                                     </x-button>
                                     </router-link>
-                                    <x-button mini type="disable" v-show="progres.totalScore == progres.score">
-                                        点击+积分
+                                    <x-button mini type="warn" v-show="progres.totalScore == progres.score" @click.native="changeTable">
+                                        点击记录
                                     </x-button>
                                 </div>
 
@@ -81,7 +81,7 @@ w<template>
                                     获取时间：
                                 </flexbox-item>
                                 <flexbox-item>
-                                   {{dataPickers(knoew.scoreTime)}}
+                                   {{knoew.scoreTime | date}}
                                 </flexbox-item>
                             </flexbox>
                             <flexbox>
@@ -134,7 +134,10 @@ w<template>
                             <div class="states" v-if="item.status==2">
                                 已通过
                             </div>
-                            <div class="btn-return" v-if="item.status==2">重新提交</div>
+                            
+                         	<div class="btn-return" v-if="item.status==3" @click="reSubmit(item)">
+                            	重新提交
+                            </div>
                             <div class="states" v-if="item.status==3">
                                 已拒绝
                             </div>
@@ -171,7 +174,7 @@ w<template>
 
 
 <script>
-
+import { mapActions } from 'vuex';
 import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton} from 'vux';
 import XScroll from 'vux-xscroll/build/cmd/xscroll.js';
 import Snap from 'vux-xscroll/build/cmd/plugins/snap.js';
@@ -223,9 +226,38 @@ export default {
                 };
                 return new Date(value).toLocaleString();
             }
+        },
+        date (val) {
+            let times = new Date(val);
+            let month = times.getMonth()+1;
+            if(month <10){
+                month = '0' + month; 
+            }
+            let datas = times.getDate();
+            if(datas <10){
+                datas = '0' + datas;
+            }
+            let hours = times.getHours();
+            if(hours <10){
+                hours = '0' + hours;
+            }
+            let minutes = times.getMinutes();
+            if(minutes < 10){
+                minutes = '0' + minutes;
+            }
+    		return `${times.getFullYear()}.${month}.${datas}  ${hours}.${minutes}`;
         }
     },
     methods:{
+    	link(){
+	    	this.$router.push({
+	            path: '/points/addPoint1/:id',
+	            name: 'addPoint1',
+	            params: {
+	                id:2,
+	            }
+	        })
+    	},
     	progress(){
     		axios.get('pscoreparty/getProjectScoreByUserId',{
     			params:{
@@ -280,11 +312,11 @@ export default {
             this.results ='暂无';
     	},
         moreInfo(itemList){
-            console.log(itemList);
+            // console.log(itemList);
 
             this.darkbgShow = true;
             this.infoList = itemList;
-            console.log(this.infoList);
+            // console.log(this.infoList);
             if (itemList) {
                 var imgs=itemList;
 
@@ -362,10 +394,16 @@ export default {
           		return this.getFullYear() + "年" + (this.getMonth()+1) + "月" + this.getDate() + "日 "
     		};
     		return times;
-
-    	}
-
-
+    	},
+    	reSubmit(item){
+    		this.setInfo(item);
+    		this.$router.push(`points/addPoint1/${item.projectid}/${item.moduleid}/${item.studyid}`);
+        },
+        changeTable()
+        {
+            this.tabIndex = 1;
+        },
+    	...mapActions(['setInfo'])
     },
    	mounted(){
    		this.progress();
@@ -373,8 +411,6 @@ export default {
    		this.getDetail();
    		this.rating();
         this.score();
-
-
     }
 };
 </script>
@@ -408,20 +444,21 @@ export default {
     top: .2rem;
     font-size: .14rem;
     color: #B93647;
-    width:.74rem;
+    width:.46rem;
 }
 .btn-return{
-    text-align: center;
-    border-radius: 4px;
-    border: 0.5px solid #B93647;
     position: absolute;
     right: .2rem;
-    z-index: 999;
-    background-color:#B93647;
     top: .6rem;
+    z-index: 999;
+    width:.74rem;
+    border-radius: 4px;
+    border: 0.5px solid #B93647;
     font-size: .14rem;
+    line-height:.23rem;
+    text-align: center;
+    background-color:#B93647;
     color: #fff;
-     width:.74rem;
 }
 ol,ul,li{
     list-style:none;
@@ -457,10 +494,10 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     position: relative;
 }
 .sinfo-title{
-    height: .14rem;
-    line-height: .14rem;
+    height: .16rem;
+    line-height: .16rem;
     font-size: 0;
-    margin-bottom: .16rem;
+    margin-bottom: .1rem;
     vertical-align: top;
     overflow: hidden;
     text-overflow:ellipsis ;

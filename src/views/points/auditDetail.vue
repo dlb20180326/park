@@ -8,9 +8,14 @@
                 <x-header :left-options="{showBack: false}">
                     驳回原因
                 </x-header>
-                <group>
-                    <x-textarea v-model="rejectReason"></x-textarea>
-                </group>
+
+                <div style="padding: 2px 15px;background: #fff;">
+                    <group>
+                        <x-textarea v-model="rejectReason"></x-textarea>
+                    </group>
+                </div>
+
+
                 <flexbox>
                     <flexbox-item>
                         <x-button @click.native="dialogConfirm" :mini="true" type="warn">
@@ -27,31 +32,42 @@
         </div>
         <flexbox orient="vertical" align="initial">
             <view-box class="view-box">
-                <group label-width="80px" label-margin-right="20px">
-                    <cell class="no-border" :border-intent="false" disabled title="党员姓名 :" value-align="left"><span class="nav">{{userName}}</span></cell>
-                    <cell :border-intent="false" disabled title="获得总分 :" value-align="left"><span class="nav">{{totalscore}}</span></cell>
+                <group label-width="80px" label-margin-right=".08rem">
+                    <span class="bg-line"></span>
+                    <cell class="no-border" :border-intent="false" disabled title="党员姓名 :" value-align="left">
+                        <span class="nav">{{userName}}</span>
+                    </cell>
+                    <span class="bg-line"></span>
+                    <cell :border-intent="false" disabled title="获得总分 :" value-align="left">
+                        <span class="nav">{{totalscore}}</span>
+                    </cell>
                 </group>
+
                 <div class="item-list" v-if="item.message!=''" v-for="(item,i) of list" :key="i">
                     <div class="item">
-                        <!--<div class="header">{{item.title}}：（ 得分：5 分 ）<span v-if="i==2">支部书记评分{{item.itemscore}}分</span>  </div>-->
-                        <div class="header">{{item.title}}：（ 得分：<span v-show="item.status == 3">0</span>
+
+                       <span class="bg-line1"></span> <div class="header mb-reject1">{{item.title}}：（ 得分：<span v-show="item.status == 3">0</span>
                         											<span v-show="item.status != 3">5</span> 分 ）
-                        	<x-button v-if="item.status == 3" class="passN" :mini="true">已拒绝</x-button>
-                        	<x-button v-if="item.status == 2" class="passY">审核通过</x-button>
                         </div>
-                        <flexbox class="footer" justify= "left" v-if="item.status == 3" style="text-align:left;">
-                            <table>
-                                <tr>
-                                <td style="width:5em;color: #a0333b;">拒绝原因:</td>
-                                <td style="color: #a0333b;">{{item.rejectReson}}</td>
-                                </tr>
-                            </table>
-                        </flexbox>
+
+                        <div class="states scuess" v-if="item.status==2">
+                            已通过
+                        </div>
+                        <div class="states" v-if="item.status==3">
+                            已驳回
+                        </div>
+
+
+                        <div class="text-red mb-reject" v-if="item.status == 3">
+                            驳回原因：{{item.rejectReson}}
+                        </div>
+
+
                         <div class="body" style="margin-bottom: .1rem;">
                             <span v-show="item.status == 3" style="color: #b2b2b2;">{{item.message}}</span>
                             <span v-show="item.status != 3" style="color: #b2b2b2;" class="desc">{{item.message}}</span>
                             <div class="img-show">
-                                <img class="previewer-demo-img" v-for="(it,idx) in item.memos" :src="it.src" width="100"  @click="atBig(idx,i)">
+                                <img class="previewer-demo-img" v-for="(it,idx) in item.memos" :src="it.msrc" width="100"  @click="atBig(idx,i)">
                                 <div v-transfer-dom>
                                 <previewer :list="item.memos" ref="previewer"  slot="names"  :options="options" @on-index-change="logIndexChange">
                                 </previewer>
@@ -64,7 +80,7 @@
                                     驳回
                                 </x-button>
                             </flexbox-item>
-                            <flexbox-item>+
+                            <flexbox-item>
                                 <x-button @click.native="auditResolve(item)" :mini="true" type="warn">
                                     通过审核
                                 </x-button>
@@ -185,8 +201,8 @@ export default {
 
                         for(var i=0;i<item.memo.length;i++){
                             var obj = {};
-                            obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+ item.memo[i];
-                            obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+item.memo[i];
+                            obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+ item.memo[i];
+                            obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.memo[i];
                             item.memos.push(obj);
                         }
 
@@ -262,125 +278,135 @@ export default {
 </script>
 <style lang="less">
 
-td {
-    word-wrap: break-word;
-    word-break: break-all;
-    vertical-align:top;
-}
-.points-auditDetail-dialog {
-    .weui-dialog {
-        .vux-header {
-        }
-        .weui-cells {
-            margin-top: 0;
-            &:before,
-            &:after {
-                border: 0;
-            }
-        }
-        textarea {
-            background: #f4f4f4;
-        }
-        .vux-flexbox {
-            margin: 10px;
-            text-align: center;
-            .weui-btn {
-                width: 100px;
-            }
-        }
+    td {
+        word-wrap: break-word;
+        word-break: break-all;
+        vertical-align:top;
     }
-}
-.page-body.points-auditDetail {
-    background: #fff;
-    .vux-header .vux-header-left .left-arrow:before{
-    	border-color: #fff;
-    	height: 9px;
-    	width: 9px;
-    	top:11px;
-    }
-    .vux-header-back{
-    	color: #fff;
-    }
-    .view-box {
-        padding: 10px 20px;
-        .weui-cells,
-        .weui-cell {
-            margin-top: 0;
-            padding-bottom: .1rem;
-            &:before {
-                border-top: 0;
+    .points-auditDetail-dialog {
+        .weui-dialog {
+            .vux-header {
             }
-        }
-		.nav{
-		    font-weight: Medium;
-		    font-family: PingFangSC;
-		    font-size: .16rem;
-		    color: #333333;
-		}
-        .item-list {
-            .item {
-                margin: 10px;
-                border-bottom: 1px solid #d9d9d9;
-                width:97%;
-                .header,
-                .body,
-                .footer {
-                    margin: 10px 0;
+            .weui-cells {
+                margin-top: 0;
+                &:before,
+                &:after {
+                    border: 0;
                 }
+            }
 
-                /*.desc{
-                	font-weight: 550;
-    				font-size: .16rem;
-                }*/
-                .header {
-                    color: #b2b2b2;
-                    padding: .1rem 0;
+            textarea {
+                background: #f4f4f4;
+                height: 1.26rem;
+                font-family: microsoft yahei;
+                font-size: 0.16rem;
+            }
+            .vux-flexbox {
+                margin: 10px;
+                text-align: center;
+                .weui-btn {
+                    width: 100px;
                 }
-                .passN{
-                	width:.65rem;
-                	display:inline-block;
-                	padding: 0;
-                	line-height: 2.3;
-                	color:#a0333b;
-                	background-color:#FFFFFF;
-                	border:.005rem solid #a0333b;
-                	float: right;
+            }
+        }
+    }
+    .page-body.points-auditDetail {
+        background: #fff;
+        .view-box {
+            padding: 10px 20px;
+            .weui-cells,
+            .weui-cell {
+                margin-top: 0;
+                background: transparent;
+                &:before {
+                    border-top: 0;
                 }
-                .passY{
-                	width:.65rem;
-                	display:inline-block;
-                	padding: 0;
-                	line-height: 2.3;
-					color:#6BD46B;
-					background-color:#FFFFFF;
-					font-size:13px;
-					border:.005rem solid #6BD46B;
-					float: right;
-                }
-                .number{
-                	color: #a0333b;
-                }
-                .body {
-                    .img-list {
-                        margin-top: 10px;
-                        img {
-                            width: 90%;
-                            border-radius: 5px;
+            }
+
+            .item-list {
+                .item {
+                    padding-bottom: 0.2rem;
+                    border-bottom: 1px solid #d9d9d9;
+                    position: relative;
+                    .header,
+                    .footer {
+                        padding-top:.2rem;
+                    }
+                    .header {
+                        color: #b2b2b2;
+                    }
+                    .body {
+                        .img-list {
+                            margin-top: 10px;
+                            img {
+                                width: 90%;
+                                border-radius: 5px;
+                            }
                         }
                     }
-                }
-                .footer {
-                    text-align: center;
+                    .footer {
+                        text-align: center;
+                    }
                 }
             }
+
         }
+    }
+
+    .vux-x-textarea .weui-cell__bd:last-child{
+        padding: 5px;
+        background: #f4f4f4;
+        border: 1px solid #e4e4e4;
 
     }
-}
-.page-body.points-auditDetail .view-box .item-list:last-child .item{border-bottom:0}
-.img-show{width:100%;height:auto;}
-.img-show img{width:31%;height:1rem;margin-top:.1rem;margin-right:10px}
-.img-show img:nth-child(3n+3){margin-right:0}
-.img-left{width:.37rem;height:.37rem;position:absolute;left:.1rem;top:3.15rem;;z-index:900;}
-.img-right{width:.37rem;height:.37rem;position:absolute;right:.1rem;top:3.15rem;z-index:900;}
+    .vux-label,.vux-cell-align-left{font-size:.16rem;}
+    .vux-cell-align-left{color:#333 !important;}
+    .weui-cell{padding: 10px 0px!important;}
+    .page-body.points-auditDetail .view-box .item-list:last-child .item{border-bottom:0}
+    .img-show{width:100%;height:auto;}
+    .img-show img{width:31%;height:1rem;margin-top:.1rem;margin-right:10px}
+    .img-show img:nth-child(3n+3){margin-right:0}
+    .img-left{width:.37rem;height:.37rem;position:absolute;left:.1rem;top:3.15rem;;z-index:900;}
+    .img-right{width:.37rem;height:.37rem;position:absolute;right:.1rem;top:3.15rem;z-index:900;}
+    .text-red{color: #B93647;}
+    .mb-reject{margin-bottom:.2rem}
+    .mb-reject1{margin-bottom: .25rem}
+    .mb-score{margin-left:.2rem;letter-spacing: 2px;}
+    .states{
+        text-align: center;
+        border-radius: 4px;
+        border: 2px solid #B93647;
+        position: absolute;
+        right:0rem;
+        z-index: 999;
+        top: .2rem;
+        font-size: .16rem;
+        font-weight: 600;
+        color: #B93647;
+        padding: 0.02rem .15rem;
+    }
+    .bg-line {
+        width: 0.04rem;
+        height: 0.18rem;
+        background: url(../../assets/images/icon-rectangle.png) no-repeat;
+        background-size: 100% 100%;
+        display: block;
+        float: left;
+        margin-top: 0.12rem;
+        margin-right: 4%;
+    }
+    .bg-line1{
+        width: 0.04rem;
+        height: 0.18rem;
+        background: url(../../assets/images/icon-rectangle.png) no-repeat;
+        background-size: 100% 100%;
+        display: block;
+        float: left;
+        margin-top: 0.24rem;
+        margin-right: 4%;
+    }
+    .states.scuess{
+        color: #6BD46B;
+        border: 2px solid #6BD46B;
+    }
 </style>

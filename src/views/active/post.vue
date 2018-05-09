@@ -4,7 +4,7 @@
             <r-header :rfs="contents"></r-header>
             <p class="titles">{{activeData.activeName}}</p>
             <p class="time">{{activeNames}}活动发起人：<span class="dark">{{activeData.activeCreatePeopleName}}</span></p>
-            <p class="time">活动时间：<span class="dark">{{activeData.startTime|formatDuring}}-{{activeData.endTime|formatDuring}}</span></p>
+            <p class="time">活动时间：<span class="dark">{{activeData.startTime|formatDuring}}~{{activeData.endTime|formatDuring}}</span></p>
             <p class="time">地点：<span class="dark">{{activeData.activePace}}</span></p>
             <div class="artical">
                 {{activeData.activeContext}}
@@ -15,13 +15,13 @@
                 <span class="numberz"><span style="color:#ff0000">{{list&& list.length || num}}</span>张</span>
             </p>
             <div class="img-show">
-                <img class="previewer-demo-img" v-for="(item,index) in list" :src="item.src" :key="index"  @click="show(index)">
+                <img class="previewer-demo-img" v-for="(item,index) in list" :src="item.msrc" :key="index"  @click="show(index)">
                 <div v-transfer-dom>
                     <previewer :list="list" ref="previewer" :options="options" @on-index-change="logIndexChange">
                     </previewer>
                 </div>
             </div>
-            <div v-show="roleId != 4">
+            <div v-show="roleId != 4 ">
                 <p class="allPic">
                     <span class="bg-line"></span>
                     <span class="picture">参与人员</span>
@@ -109,11 +109,11 @@
             getPic(){
                 this.$http.post('active/getActivePictures?activeId='+this.$route.params.activeId
                 ).then(res =>{
-                    this.picInfo= res.data
-                    for(let d in this.picInfo){
+                    this.picInfo= res.data;
+                    for(var d=0 ;d<this.picInfo.length;d++){
                         var obj = {};
-                        obj.msrc = 'http://www.dlbdata.cnpicture/show?pictureId='+this.picInfo[d].pictureId;
-                        obj.src = 'http://www.dlbdata.cnpicture/show?pictureId='+this.picInfo[d].pictureId;
+                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+this.picInfo[d].pictureId;
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
                         this.list.push(obj);
                     }
                 }).catch(err =>{

@@ -21,13 +21,13 @@
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(it,second) in item.pictureList" :key="second">
-                            <div><img :src="it.src" class="previewer-demo-img widthSet" @click="atShow(second,index)"></div>
+                            <div><img :src="it.msrc" class="previewer-demo-img widthSet" @click="atShow(second,index)"></div>
                         </flexbox-item>
                         <div v-transfer-dom>
 				      		<previewer :list="item.pictureList" ref="previewer" :options="options" @on-index-change="logIndexChange">
 				      		</previewer>
 			    		</div>
-                        <flexbox-item :span="1/3" v-show="roleid != 4 &&  item.pictureList.length<=9">
+                        <flexbox-item :span="1/3" v-show="roleid != 4 &&  item.pictureList.length<=9"  v-show="item.startTime < new Date().getTime()">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>

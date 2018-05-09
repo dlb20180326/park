@@ -9,7 +9,16 @@
           {{dateTimes}},
         </flexbox-item>
         <flexbox-item>
-          {{info.partyBranch}}
+          {{info.partyBranch}}书记。
+
+        </flexbox-item>
+      </flexbox>
+      <flexbox>
+        <flexbox-item class="label">
+          所属党委：
+        </flexbox-item>
+        <flexbox-item>
+          {{info.departmentname}}
 
         </flexbox-item>
       </flexbox>
@@ -45,7 +54,7 @@
       <div v-for="(item,index) in todoList" :key="index">
         <div class="item">
             <div class="title">{{index+1}}.
-                <span v-if="item.type=='SCORE'">{{item.title}}积分加分确认</span>
+                <span v-if="item.type=='SCORE'">{{item.name}}积分加分确认</span>
                 <span v-else-if="item.type=='ACTIVE'">
                    <router-link :to="{  name:'activePost', params:{ activeId:item.masId}}">{{item.title}}</router-link>
                </span>
@@ -58,7 +67,6 @@
                     <button  v-else-if="item.beginYn=='N'" @click="refer(item)">
                         去处理
                     </button>
-                    <p></p>
                 </div>
                 <div v-if="item.type=='ACTIVE'">
                     <button  v-if="item.beginYn=='Y'" @click="refer(item)">
@@ -67,19 +75,16 @@
                     <button  v-else-if="item.beginYn=='N'" @click="refer(item)">
                         活动二维码
                     </button>
-                    <p></p>
                 </div>
-                <!-- <button :link="item.type=='SCORE'?'points/review':'/active'">
-                   {{item.beginYn=='Y'?'去处理':'活动二维码'}}
-                 </button>-->
+                <p v-show="index!==todoList.length-1"></p>
           </div>
         </div>
       </div>
     </div>
-      <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'300px'}" >
+      <div v-transfer-dom  class="qrcode-dialog">
+          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{minHeight:'350px'}">
                <div class="title">
-                    <label for="">活动名称:</label>
+                    <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
                 </div>
                 <div class="qrcode">
@@ -136,15 +141,24 @@ export default {
             activeTitle: "",
             info: [],
             dateTimes: "",
+            departmentname:"",
             showQrcodeDialog: false
         };
     },
     methods: {
         refer(item) {
             if (item.type == "SCORE") {
-                this.$router.push({
-                    path: "points/evaluation"
-                });
+
+                if(item.id===2 || item.id===4 || item.id===8){
+                    this.$router.push({
+                        path: "points/political/"+item.id
+                    });
+                }else{
+                    this.$router.push({
+                        path: "points/evaluation"
+                    });
+                }
+
             } else if (item.type == "ACTIVE") {
                 if (item.beginYn == "Y") {
                     this.$router.push({
@@ -158,13 +172,13 @@ export default {
         },
         getDate() {
             let datime = new Date().getHours();
-            if ((datime >= 5) & (datime < 8)) {
+            if ((datime >= 5) && (datime < 8)) {
                 this.dateTimes = "早上好";
-            } else if ((datime >= 8) & (datime < 11)) {
+            } else if ((datime >= 8) && (datime < 11)) {
                 this.dateTimes = "上午好";
-            } else if ((datime >= 11) & (datime < 13)) {
+            } else if ((datime >= 11) && (datime < 13)) {
                 this.dateTimes = "中午好";
-            } else if ((datime >= 13) & (datime < 19)) {
+            } else if ((datime >= 13) && (datime < 19)) {
                 this.dateTimes = "下午好";
             } else {
                 this.dateTimes = "晚上好";
@@ -233,7 +247,8 @@ export default {
         .qrcode {
             flex: 1;
             img {
-                height: 100%;
+                margin-top: 10px;
+                width: 100%;
             }
         }
     }
@@ -243,6 +258,7 @@ export default {
 <style lang="less" scoped>
 .page-body {
     background-color: #efefef;
+    -webkit-overflow-scrolling: touch;
 }
 
 .head,
@@ -297,14 +313,13 @@ input.weui-btn {
     width: 32% !important;
 }
 .content button {
-    padding: 0.03rem 0.26rem;
+    padding: 4px 0.26rem;
     border: 0;
-    background: rgba(185, 54, 71, 1);
-    border-radius: 2px;
+    background: #b93647;
     font-size: 0.16rem;
-    font-family: PingFangSC-Medium;
     color: #fff;
     margin: 0.2rem auto;
+    border-radius: 4px;
 }
 .content p {
     width: 108%;

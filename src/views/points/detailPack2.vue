@@ -17,7 +17,7 @@
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
-                    <input type="text" v-model='startTime'>
+                    <input type="text" v-model='startTime' readonly>
                 </flexbox-item>
                 <flexbox-item class="input-addon" style="position: relative">
                     <x-button mini type="warn">
@@ -140,10 +140,7 @@ export default {
                     }
                 })
                 .then(res => {
-                    /*  this.totalscore=res.data.totalscore;*/
                     this.name1 = res.data.name;
-                    /*   this.departmentname=res.data.departmentname
-                 this.departmentid=res.data.departmentid*/
                 })
                 .catch(err => {
                     console.log(err);
@@ -218,7 +215,7 @@ export default {
                 url: 'pscoreparty/scoreCustom',
                 method: 'post',
                 params: {
-                    detailId: 12,
+                    detailId: this.list1Selected.moduleId,
                     userId: this.$route.params.userId,
                     adderId: this.$store.getters.user.userid,
                     score: 5,
@@ -229,21 +226,12 @@ export default {
             })
                 .then(res => {
                     console.log(res);
-                    //this.users[1].integral = res.data;
                     if (res.success) {
-                        this.$vux.alert.show({ title: '增加成功' });
-                        setTimeout(() => {
-                            this.$vux.alert.hide();
-                            // this.$router.push({
-                            //     path: '/points'
-                            // });
+                        this.$vux.alert.show({ title: '增加成功',onHide(){
                             setTimeout(() => history.back(), 1000);
-                        }, 3000);
+                        }});
                     } else {
                         this.$vux.alert.show({ title: res.msg });
-                        setTimeout(() => {
-                            this.$vux.alert.hide();
-                        }, 1000);
                     }
                 })
                 .catch(err => {

@@ -1,7 +1,7 @@
 <template>
   <div class="page-body">
     <x-header :left-options="{showBack: false}">
-      花旗银行第二党支部
+      上海中心片区
     </x-header>
         <div class="box">
             <div class="head">
@@ -40,24 +40,27 @@
                 </flexbox>
             </div>
       <div class="list">
-        <h3>书记待办事宜</h3>
+        <h3>书记待办事宜 <span style="color:#b93647;font-size:.16rem;"> ({{total}})</span></h3>
         <div v-for="(item,index) in todoList" :key="index">
           <div class="item">
            <div class="title">{{index+1}}.
                <span v-if="item.type=='SCORE'">{{item.title}}积分加分确认</span>
+               <span v-if="item.type=='GRAND'">{{item.title}}积分加分确认</span>
                <span v-else-if="item.type=='ACTIVE'">
                    <router-link :to="{  name:'activePost', params:{ activeId:item.masId}}">{{item.title}}</router-link>
                </span>
               </div>
             <div class="content">
                 <div v-if="item.type=='SCORE'">
-                <button  v-if="item.beginYn=='Y'" @click="refer(item)">
-                    去处理
-                </button>
-                <button  v-else-if="item.beginYn=='N'" @click="refer(item)">
-                    去处理
-                </button>
-                    </div>
+                    <button  @click="refer(item)">
+                        去处理
+                    </button>
+                </div>
+                <div v-if="item.type=='GRAND'">
+                    <button  @click="refer(item)">
+                        去评分
+                    </button>
+                </div>
                 <div v-if="item.type=='ACTIVE'">
                     <button  v-if="item.beginYn=='Y'" @click="refer(item)">
                         上传图片
@@ -66,10 +69,7 @@
                         活动二维码
                     </button>
                 </div>
-                <p></p>
-             <!-- <x-button type="warn" :link="item.type=='SCORE'?'points/review':'/active'">
-                {{item.beginYn=='Y'?'去处理':'活动二维码'}}
-              </button>-->
+                <p v-show="index!==todoList.length-1"></p>
             </div>
           </div>
         </div>
@@ -78,9 +78,9 @@
 
 
      <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'300px'}" >
+         <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{minHeight:'350px'}">
                <div class="title">
-                    <label for="">活动名称:</label>
+                    <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
                 </div>
                 <div class="qrcode">
@@ -109,8 +109,9 @@
         charts: '',
         partAbout: {},
         todoList: [],
+        total : 0,
         headName:{},
-          activeTitle:"",
+        activeTitle:"",
         showQrcodeDialog: false
       };
     },
@@ -141,6 +142,7 @@
         this.dateTime = '晚上好';
       }
       this.getHead();
+      this.getHeader();
       this.$nextTick(function () {
         //this.drawAxis('echartShow');
       });
@@ -152,15 +154,14 @@
     },
     methods: {
       refer(item){
-        console.log("11111");
-        console.log(item);
-          if(item.type == 'SCORE'){
+
+          if(item.type == 'GRAND'){
               this.$router.push({
                   path:'points/review'
               })
           }else if(item.type == 'ACTIVE'){if(item.beginYn=='Y'){
               this.$router.push({
-                  path:'active/partyBranch'
+                  path:'active/partyBranch1'
               })}else{ this.activeTitle = item.name;
                   this.showQR(item.masId);}
           }
@@ -222,6 +223,20 @@
         catch(err =>{
             console.log('fail'+err);
         })
+      },
+      getHeader(){
+        this.$http.get('pscoredetail/todoListCount',{
+            params:{
+                userId: this.$store.getters.user.userid
+            }
+        }).then(res => {
+            // this.headName = JSON.parse(res.data);
+            console.log(res);
+            this.total = res.data;
+        }).
+        catch(err =>{
+            console.log('fail'+err);
+        })
       }
     }
   };
@@ -245,7 +260,8 @@
         .qrcode {
             flex: 1;
             img {
-                height: 100%;
+                width: 100%;
+                margin-top: 10px;
             }
         }
     }
@@ -256,6 +272,7 @@
     display: flex;
     flex-direction: column;
     background-color: #efefef;
+    -webkit-overflow-scrolling: touch;
   }
 
   .box {
@@ -271,6 +288,7 @@
   }
 
   .list {
+      -webkit-overflow-scrolling: touch;
     margin-top: 0.07rem;
     h3 {
       line-height: 1;
@@ -307,16 +325,13 @@
     color: #8b8b8b;
   }
   .content button{
-    padding: 0 .2rem;
-    height: .3rem;
-    line-height:.3rem;
-    border:0;
-    background:rgba(185,54,71,1);
-    border-radius: 2px ;
-    font-size:.16rem;
-    font-family:PingFangSC-Medium;
-    color:#fff;
-    margin:.2rem auto;
+      padding: 4px 0.26rem;
+      border: 0;
+      background: #b93647;
+      font-size: 0.16rem;
+      color: #fff;
+      margin: 0.2rem auto;
+      border-radius: 4px;
   }
 
   .content p{
@@ -325,4 +340,5 @@
       background-color: #efefef;
       margin-left: -4%;
   }
+
 </style>

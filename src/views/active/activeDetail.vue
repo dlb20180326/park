@@ -1,14 +1,14 @@
 <template>
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
-            党员活动
+            党员生活
         </x-header>
         <div class="box">
         <flexbox orient="vertical">
             <flexbox-item>
                 <section class="mainbox">
                     <div class="barbg" >
-                        年度共参与组织活动：
+                        年度共参与党员活动：
                         <span style="display: inline">{{number1}}</span>
                          次
                     </div>
@@ -23,16 +23,20 @@
             <section class="mainbox1">
                 <div class=" clearfix p15 display">
                     <span class="fl weui-cell__bd1">党员生活通知</span>
+                    <span class="total" style="margin-left:-0.3rem">（{{count}}）</span>
                     <a  class="fRight"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
                 </div>
                 <div class="content">
                     <table width="100%" class="table">
                         <tr>
-                            <td width="100">标题：</td>
+                            <td width="80">标题：</td>
                             <td class="f_b">{{activeTitle}}</td>
+                            <div v-if="activeType">
+                                <img src="@/assets/images/activeDetail.png" alt="">
+                            </div>
                         </tr>
                         <tr>
-                            <td width="100">活动时间：</td>
+                            <td width="80">活动时间：</td>
                             <td class="f_b">{{startTime1|formatDuring}}~{{endTime1|formatDuring}}</td>
                         </tr>
                         <tr>
@@ -53,30 +57,28 @@
                     <a  style="background-color:#B93647" @click="submit()">报名</a>
                 </div>
                 <div class="book"  v-if="signupstatus == 1">
-                    <a  style="background-color: #8b8b8b" @click="submit1()">已报名</a>
+                    <a  style="background-color: #8b8b8b">已报名</a>
                 </div>
                 <div class="grayLine margin-top"></div>
             </section>
-
         </flexbox>
         <flexbox orient="vertical">
             <flexbox-item>
                 <section class="mainbox ">
                     <div class="p15">
                         <div class=" clearfix  display">
-                            <span class="fl weui-cell__bd1">已参与组织生活</span>
+                            <span class="fl weui-cell__bd1">已参与党员生活</span>
+                            <span class="total">({{number1}})</span>
                             <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
                         </div>
                         <ul class="news">
                             <li v-for="(item,index) in activeComplete" :key="index">
                                 <a class=" display clearfix " >
                                     <div class=" fl">{{item.activeName}}</div>
-                                    <div class=" fr">{{item.endTime|formatDuring}}<span class="rightBtn"></span></div>
+                                    <div class=" fr">{{item.startTime|formatDuring}}<span class="rightBtn"></span></div>
                                 </a>
                             </li>
-
                         </ul>
-
                     </div>
                 </section>
             </flexbox-item>
@@ -85,14 +87,11 @@
         <div v-transfer-dom>
             <alert v-model="show" :title="msg" @on-show="onShow" @on-hide="onHide"></alert>
         </div>
-
     </div>
 </template>
-
 <script>
     import axios from 'axios'
-import { XHeader, Flexbox, FlexboxItem,Alert ,cookie,Cell,Group,XButton,XTable,TransferDomDirective as TransferDom, } from 'vux';
-
+    import { XHeader, Flexbox, FlexboxItem,Alert ,cookie,Cell,Group,XButton,XTable,TransferDomDirective as TransferDom, } from 'vux';
 export default {
     directives: {
         TransferDom
@@ -112,13 +111,15 @@ export default {
             activePace:'',
             activeCreatePeopleName:'',
             activeId:'',
+            activeType:false,
             active_Context:'',
             show:false,
             activeComplete:'',
             isActive:true,
             signupstatus:'',
             msg:'',
-            endTime1:''
+            endTime1:'',
+            count:''
         };
     },
     filters: {
@@ -172,7 +173,7 @@ export default {
                 params: {
                     pageNum:1,
                     pageSize:1,
-
+                    departmentid:this.$store.getters.user.departmentid,
                     userId:this.$store.getters.user.userid
                 }
             }) .then((res)=> {
@@ -183,7 +184,8 @@ export default {
                 this.activeCreatePeopleName=res.data.list[0].activeCreatePeopleName;
                 this.active_Context=res.data.list[0].active_Context;
                 this.activeId=res.data.list[0].id;
-               this.signupstatus=res.data.list[0].signupstatus;
+                this.signupstatus=res.data.list[0].signupstatus;
+                this.activeType = res.data.list[0].activeType === 5 ? true : false;
             }).catch(function (error) {
                     console.log(error);
                 });
@@ -196,7 +198,7 @@ export default {
                 url: 'active/getParticipateCount',
                 params: {
                     userId:this.userId,
-                    activeType:3,
+                    // activeType:3,
                     year: new Date().getFullYear()
                 }
             }) .then((res)=> {
@@ -224,8 +226,6 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                 });
-
-
         },submit(){
             axios({
                 method: 'post',
@@ -253,21 +253,30 @@ export default {
                     userId:this.userId,
                     pageNum:1,
                     pageSize:4
-
                 }
             }) .then((res)=>{
-
-
                  this.activeComplete=res.data;
 
-            })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-
+            }).catch(function (error) {
+                console.log(error);
+            });
         },
+        getActiveCount(){
+             axios({
+                method: 'get',
+                url: 'active/getParticipateActiveCount',
+                params: {
+                    departmentid:this.$store.getters.user.departmentid,
+                    userId:this.$store.getters.user.userid 
+                }
+            }) .then((res)=>{
+                console.log(res);
+                 this.count=res.data;
 
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },  
     onHide () {
         window.location.reload()
     },
@@ -284,11 +293,11 @@ export default {
         this.getActivity();
         this.gettimes1();
         this.gettimes2();
-        this.getAlreadyActive()
+        this.getAlreadyActive();
+        this.getActiveCount()
     }
 };
 </script>
-
 <style lang="less" scoped>
 .vux-header-title-area, .vux-header .vux-header-title{height: .46rem;}
 .grayLine{width:100%;height:.1rem;background:rgba(244,244,244,1);}
@@ -299,7 +308,6 @@ export default {
     .table td {
         padding:3px;
     }
-
     .custom-primary-red {
         border-radius: 99px!important;
         border-color: #CE3C39!important;
@@ -320,7 +328,7 @@ export default {
 }
 .fRight{
 	float:right;
-    margin-top: 0.1rem;
+    line-height: 0.45rem;
     font-size:.12rem;
 }
 .content{width:89%;
@@ -405,9 +413,6 @@ export default {
         }
     }
 }
-
-
-
     *{
         margin:0; padding:0;
     }
@@ -436,7 +441,6 @@ export default {
         font-size:.14rem;
         overflow-x:hidden;
     }
-
     table {
         border-collapse:collapse;
     }
@@ -457,7 +461,7 @@ export default {
     }
     .fl {
         float:left;
-        width:50.6%;
+        width:44.6%;
         overflow:hidden;
         height:.45rem;
         line-height:.45rem;
@@ -569,6 +573,12 @@ export default {
         padding:2vw 0 3vw;
     }
 .p15 span{background-color:#FFFFFF!important;}
+.total {color:#fa7e07;
+        font-size:0.15rem;
+        font-weight:bold;
+        display:inline-block;
+        margin-top:11px;
+}
 
 
 

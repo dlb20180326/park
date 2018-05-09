@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <x-header>遵纪守法评分</x-header>
+        <x-header>思想汇报评分</x-header>
         <view-box ref="viewBox" body-padding-top=".2rem">
             <p class="allPic">
                 <span class="bg-line"></span>
@@ -23,7 +23,7 @@
                 <span class="picture">思想汇报主要内容:</span>
             </p>
             <div class="artical">
-                {{content2}}
+                {{content1}}
             </div>
             <p class="allPic">
                 <span class="bg-line"></span>
@@ -31,7 +31,7 @@
                 <span class="numberz">{{ imgpics.length}}张</span>
             </p>
             <div class="img-show">
-                <img class="previewer-demo-img" v-for="(item,index) in imgpics" :key="index" :src="item.src" @click="show(index)">
+                <img class="previewer-demo-img" v-for="(item,index) in imgpics" :key="index" :src="item.msrc" @click="show(index)">
                 <div v-transfer-dom>
                     <previewer :list="imgpics" ref="previewer" :options="options" @on-index-change="logIndexChange">
                     </previewer>
@@ -92,16 +92,14 @@ export default {
                 .get('pscoreparty/showDakDetialByUserId', {
                     params: {
                         userId: this.$route.params.userId,
-                        moudleId: 12
+                        detailId: this.$route.params.moduleid
                     }
                 })
                 .then(res => {
                     console.log('12313123', res);
                     this.scoreTime = res.data.scoreTime;
 
-                    let jsonObj = JSON.parse(res.data.remark);
-                    this.content1 = jsonObj.title;
-                    this.content2 = jsonObj.remark;
+                    this.content1 = res.data.remark;
                     this.adderName = res.data.adderName;
 
                     if (res.data.imgs) {
@@ -109,8 +107,8 @@ export default {
                         this.imgpics = [];
                         for (var i = 0; i < imgs.length; i++) {
                             var obj = {};
-                            obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
-                            obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + imgs[i];
+                            obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + imgs[i];
+                            obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
                             this.imgpics.push(obj);
                         }
                     } else {
@@ -122,34 +120,6 @@ export default {
                 });
         },
 
-        /* getList1(){
-                axios.get('pscoreparty/showDakDetialByUserId', {
-                    params: {
-                        userId: this.$route.params.userId
-                    }
-                }).then(res => {
-                    let jsonObj = JSON.parse(res.data.remark);
-                this.content1 = jsonObj.title;
-                this.content2 = jsonObj.remark;
-                this.adderName = res.data.adderName;
-
-                if (res.data.imgs) {
-                    var imgs = res.data.imgs.split(",");
-                    this.imgpics = [];
-                    for (var i = 0; i < imgs.length; i++) {
-                        var obj = {};
-                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + imgs[i];
-                        this.imgpics.push(obj);
-                    }
-                } else {
-                    this.imgpics = [];
-                }
-            }) .
-                catch(err => {
-                    console.log(err);
-            })
-            },*/
         getUser1() {
             axios
                 .get('ppartymember/queryByUserId', {

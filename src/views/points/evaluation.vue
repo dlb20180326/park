@@ -47,14 +47,14 @@ export default {
                 this.$router.push({
                     path: '/party/dues1',
                     name: 'Dues'
-                });
+                });removes
             }
             if (it.label == '思想汇报') {
                 this.$router.push({
                     path: '/points/political1/'
                 });
             }
-            if (it.label == '遵纪守法一票否决') {
+            if (it.label == '遵章守纪一票否决') {
                 this.$router.push({
                     path: '/points/lawAbiding'
                 });
@@ -72,7 +72,7 @@ export default {
                     },
                     { moduleid: 11, bgImg: require('@/assets/images/icon-idea.png'), label: '思想汇报', score: '15分' },
                     { bgImg: require('@/assets/images/icon-before.png'), label: '先锋作用', score: '10分' },
-                    { bgImg: require('@/assets/images/icon-law.png'), label: '遵纪守法一票否决', score: '20分' },
+                    { bgImg: require('@/assets/images/icon-law.png'), label: '遵章守纪一票否决', score: '20分' },
                     { moduleid: 8, bgImg: require('@/assets/images/icon-server.png'), label: '公益服务', score: '10分' }
                 ];
             } else {
@@ -87,7 +87,7 @@ export default {
                     { bgImg: require('@/assets/images/icon-much.png'), label: '党费缴纳', score: '10分' },
                     { moduleid: 11, bgImg: require('@/assets/images/icon-idea.png'), label: '思想汇报', score: '15分' },
                     { bgImg: require('@/assets/images/icon-before.png'), label: '先锋作用', score: '10分' },
-                    { bgImg: require('@/assets/images/icon-law.png'), label: '遵纪守法一票否决', score: '20分' },
+                    { bgImg: require('@/assets/images/icon-law.png'), label: '遵章守纪一票否决', score: '20分' },
                     { moduleid: 8, bgImg: require('@/assets/images/icon-server.png'), label: '公益服务', score: '10分' }
                 ];
             }

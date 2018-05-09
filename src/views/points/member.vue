@@ -46,7 +46,7 @@ Vue.component(Popup.name, Popup);
 		data(){
 
 			return {
-				contents:{rights:'评分说明',title:'支部党员'},
+				contents:{rights:'评分说明',title:'先锋评定'},
 				list:"",
 				isYellow:false,
 				showPop:false
@@ -206,7 +206,7 @@ font-size: .14rem;
 .vux-flexbox .vux-flexbox-item:nth-child(1){
     flex:0 0 auto;
     width: 22%;
-    
+
 }
 
 

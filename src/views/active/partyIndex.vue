@@ -14,14 +14,14 @@
                         <flexbox align="start">
                             <flexbox-item class="list-head">
                                 <b>{{item.activeName}}</b>
-                                <p>{{datePick(item.createTime)}}</p>
+                                <p>{{datePick(item.startTime)}}</p>
                             </flexbox-item>
                         </flexbox>
                         <div class="list-content" v-html="item.activeContext"></div>
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(it,second) in item.pictureList" :key="second">
-                            <div><img :src="it.src" class="previewer-demo-img widthSet" @click="atShow(second,index)"></div>
+                            <div><img :src="it.msrc" class="previewer-demo-img widthSet" @click="atShow(second,index)"></div>
                         </flexbox-item>
                         <div v-transfer-dom>
 				      		<previewer :list="item.pictureList" ref="previewer" :options="options" @on-index-change="logIndexChange">
@@ -125,8 +125,8 @@ export default {
     					item.pictureList=[];
     				    for(let i=0;i<item.pictures.length;i++){
 	    					var obj = {};
-	    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
-	    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+item.pictures[i].pictureId;
+	    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+item.pictures[i].pictureId;
+	    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
 	    					item.pictureList.push(obj);
     					}
     			})

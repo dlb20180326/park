@@ -29,21 +29,22 @@
                         <flexbox align="start">
                             <flexbox-item class="list-head">
                                 <b>{{item.activeName}}</b>
-                                <p>{{datePick(item.createTime)}}</p>
+                                <span>{{item.activePrincipalPeople}}</span>
+                                &nbsp; &nbsp;<span>{{datePick(item.startTime)}}</span>
                             </flexbox-item>
                             <!-- 删除 -->
-                            <flexbox-item class="list-close"  v-show="roleid == 2 || roleid == 3">
+                            <!-- <flexbox-item class="list-close"  v-show="roleid == 2 || roleid == 3">
                                 <a><img src="@/assets/images/x.png"></a>
-                            </flexbox-item>
+                            </flexbox-item> -->
                         </flexbox>
                         <div class="list-content" v-html="item.active_Context"></div>
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
                             <!-- 缩略图显示 -->
-                            <div><img :class="item.previewerClassName" v-clipping="img.src" @click="preview(index,idx)"></div>
+                            <div><img :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)"></div>
                         </flexbox-item>
-                        <flexbox-item :span="1/3" v-if="roleid!==4 && item.pictures.length<9" v-show="item.startTime > new Date().getTime()">
+                        <flexbox-item :span="1/3" v-if="roleid!==4 && item.pictures.length<9" v-show="item.startTime < new Date().getTime()">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>
@@ -187,7 +188,8 @@ export default {
                         item.pictures = item.pictures || [];
                         item.startTime = item.startTime;
                         item.pictures.forEach(item => {
-                            item.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + item.pictureId;
+                            item.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + item.pictureId;
+                            item.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + item.pictureId;
                         });
                     });
                 });
@@ -241,7 +243,8 @@ export default {
             Promise.all(promiseList).then(results =>
                 results.map(result => {
                     item.pictures.push({
-                        src: 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + result.data
+                        msrc: 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + result.data,
+                        src: 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + result.data
                     });
                     axios({
                         url: "active/savePicture",
@@ -252,9 +255,15 @@ export default {
                             pictureId: result.data
                         }
                     }).then(res => {
-                        this.$vux.alert.show({title:  res.msg});
+                        this.$vux.toast.show({
+                            text: res.msg,
+                            type: 'text'
+                        });
                     }).catch(err => {
-                        this.$vux.alert.show({title: '提交失败'});
+                        this.$vux.toast.show({
+                            text: '提交失败',
+                            type: 'text'
+                        });
                     });
                 })
             );
@@ -266,7 +275,17 @@ export default {
 .box{
     padding-top:51px;
 }
-    .header-list{width:calc(100% - 2px);height:.5rem;border-bottom:1px solid #E4E4E4;background-color:#FFFFFF}
+    .header-list{
+        width: 100%;
+        height: .5rem;
+        border-bottom: 1px solid #E4E4E4;
+        position: fixed;
+        top: .46rem;
+        left: 0;
+        right: 0;
+        background: #fff;
+        z-index: 1005;
+    }
     .list-left{
     width: 62%;
     margin: .15rem 0 .15rem 5.3%;
@@ -330,9 +349,10 @@ export default {
 }
 .vux-flexbox-item.list-head {
     b {
+        display: block;
         color: #444;
     }
-    p {
+    span {
         font-size: 0.12rem;
         color: #999;
     }
@@ -496,7 +516,7 @@ export default {
 
 }
 
-.header-list{width:100%;height:50px;border-bottom:1px solid #E4E4E4;position: fixed;top:46px;left:0;right:0;background:#fff;line-height:50px;z-index:1005}
+
 .list-left{width:54%;margin:.08rem 0 .15rem 5.3%;height:.2rem;line-height:.2rem;font-size:.14rem;float:left;margin-top:0.15rem }
 .left-now{color:#666;font-size: 14px;}
 .left-active{

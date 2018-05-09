@@ -1,7 +1,8 @@
 <template>
-    <div class="page-body">
+    <div class="page-body disabled-tabbar">
         <view-box ref="viewBox" body-padding-top=".46rem">
-            <r-header :rfs="contents"></r-header>
+            <r-header :rfs="contents" @subs="cos()">
+            </r-header>
             <p class="allPic">
                 <span class="bg-line"></span>
                 <span class="picture">党员姓名:</span>
@@ -25,16 +26,25 @@
                 <span class="numberz">{{ num}}张</span>
             </p>
             <div class="img-show">
-                <img class="previewer-demo-img" v-for="(item,index) in content.picture" :key="index" :src="item.src" @click="show(index)">
+                <img class="previewer-demo-img" v-for="(item,index) in content.picture" :key="index" :src="item.msrc" @click="show(index)">
                 <div v-transfer-dom>
-                    <previewer :list="content.picture" ref="previewer" :options="options" @on-index-change="logIndexChange">
+                    <previewer :list="content.picture || []" ref="previewer" :options="options" @on-index-change="logIndexChange">
                     </previewer>
                 </div>
             </div>
 
-            <button class="btnRed" v-if="content.status==0" @click="pass()">点击通过并加分</button>
+            <table width="90%" style="margin:0.1rem auto;">
+                <tr>
+                    <td width="50%">
+                        <button class="btnRed" v-if="content.status==0" @click="reject()">驳回</button>
+                    </td>
+                    <td width="50%">
+                        <button class="btnRed" v-if="content.status==0" @click="pass()">通过</button>
+                    </td>
+                </tr>
+            </table>
             <button class="btnRed" v-if="content.status==2">已评分 (评分人：{{content.branch}})</button>
-            <button class="btnRed" v-if="content.status==3">审核失败 (审核人：{{content.branch}})</button>
+            <button class="btnRed" v-if="content.status==3">审核已驳回 (审核人：{{content.branch}})</button>            
         </view-box>
     </div>
 </template>
@@ -44,6 +54,11 @@ import axios from 'axios';
 import Xheader from '@/components/comother/rheader';
 import { Previewer, TransferDom, ViewBox } from 'vux';
 export default {
+    data(){
+        return {
+            contents: { rights: '评分说明', title: '' }
+        }
+    },
     directives: {
         TransferDom
     },
@@ -81,8 +96,31 @@ export default {
         }
     },
     methods: {
+        cos(){
+        console.log('1111');
+        },
         show(index) {
             this.$refs.previewer.show(index);
+        },
+        reject(){
+            axios.get('pstudy/reject', {
+                    params: {
+                        userid: this.$store.getters.user.userid,
+                        studyid: this.$route.params.studyid
+                    }
+                })
+                .then(res => {
+                    if (res.success) {
+                        this.$vux.alert.show({ title: res.msg,onHide(){
+                                history.back(-1);
+                            }});
+                    } else {
+                        this.$vux.alert.show({ title: res.msg });
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         },
         pass() {
             axios
@@ -94,9 +132,9 @@ export default {
                 })
                 .then(res => {
                     if (res.success) {
-                        this.$vux.alert.show({ title: res.msg });
-                        userName();
-                        window.location.reload();
+                        this.$vux.alert.show({ title: res.msg,onHide(){
+                            history.back(-1);
+                        }});
                     } else {
                         this.$vux.alert.show({ title: res.msg });
                     }
@@ -153,6 +191,7 @@ export default {
                 .get('pscoredetail/queryById?id=' + this.$route.params.moduleid)
                 .then(res => {
                     this.contents.title = res.data.projectName + '评分';
+                     this.contents.rights = '说明';
                 })
                 .catch(err => {
                     console.log(err);
@@ -162,16 +201,13 @@ export default {
             this.$http
                 .get('pstudy/queryById?studyid=' + this.$route.params.studyid)
                 .then(res => {
-                    console.log('1111', res.data);
                     this.content = res.data;
                     this.content.picture = [];
-
                     this.num = res.data.pictures.length;
                     this.content.pictures.forEach(it => {
-                        console.log(it);
                         var obj = {};
-                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + it.pictureId;
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + it.pictureId;
+                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + it.pictureId;
+                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + it.pictureId;
                         this.content.picture.push(obj);
                     });
                 })
@@ -268,14 +304,16 @@ body {
     display: block;
     float: left;
 }
-.numberz {
-    font-size: 0.14rem;
-    font-family: PingFangSC-Medium;
-    color: rgba(153, 153, 153, 1);
-    display: block;
-    float: left;
-    margin-left: 0.1rem;
+
+.numberz{
+	font-size:.14rem;
+	font-family:PingFangSC-Medium;
+	color:rgba(153,153,153,1);
+	display:block;
+	float: left;
+	margin-left:.1rem;
 }
+
 .numberz1 {
     font-size: 0.12rem;
     font-family: PingFangSC-Medium;

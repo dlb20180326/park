@@ -88,11 +88,11 @@
         </div>
         <div></div>
         <div style="position:relative" v-show="PickerVisible5">
-        <div class="srcw"></div>
-        <ul class="active-type-list" >
-            <li v-for="(item,index) in list1" :key="index" @click="submit2(item)">{{item.departmentname}}</li>
-            <li  @click="resetDepartment()" style="color:#999;">清空所选部门</li>
-        </ul>
+            <div class="srcw"></div>
+            <ul class="active-type-list" >
+                <li v-for="(item,index) in list1" :key="index" @click="submit2(item)">{{item.departmentname}}</li>
+                <li  @click="resetDepartment()" style="color:#999;">清空所选部门</li>
+            </ul>
         </div>
         <div class="group-item">
             <group-title slot="title">
@@ -113,9 +113,9 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'300px'}" >
+            <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
                <div class="title">
-                    <label for="">活动名称:</label>
+                    <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
                 </div>
                 <div class="qrcode">
@@ -185,11 +185,13 @@
             };
         },
         methods: {
+            backRoute(){
+                setTimeout(() => history.back(), 500);
+            },
             openPicker() {
                 this.$refs.picker.open();
             },
-            handleConfirm(value) {
-                var d = value;
+            handleConfirm(d) {
                 this.startTime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + '';
             },
             handlePicker(){
@@ -223,6 +225,58 @@
                 this.PickerVisible1=false
             },
             submit(){
+
+                if(!this.startTime){
+
+                    return this.$vux.toast.show({
+                        text: '填写开始时间',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.endTime){
+                    return this.$vux.toast.show({
+                        text: '填写结束时间',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activityName){
+                    return this.$vux.toast.show({
+                        text: '选择活动类型',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activeTitle){
+                    return this.$vux.toast.show({
+                        text: '选择活动类型',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activePace){
+                    return this.$vux.toast.show({
+                        text: '填写活动地点',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activePrincipalPeople){
+                    return this.$vux.toast.show({
+                        text: '填写负责人',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activeContext){
+                    return this.$vux.toast.show({
+                        text: '填写活动内容',
+                        type: 'text'
+                    });
+                }
+
+
                 var starttime = this.startTime.replace(new RegExp("-","gm"),"/");
                 var starttimeHaoMiao = (new Date(starttime)).getTime();
                 var endtime = this.endTime.replace(new RegExp("-","gm"),"/");
@@ -246,13 +300,20 @@
                             departmentid:this.departmentidId.join()
                         }
                     }) .then((res)=> {
-                        this.$vux.alert.show({title:res.msg});
+                        this.$vux.toast.show({
+                            text: '增加成功',
+                            type: 'text'
+                        });
+
                         this.showQR(res.data);
                     }).catch(function (error) {
                         console.log(error);
                     });
                 }else {
-                    this.$vux.alert.show({title:'开始日期不能大于结束日期'});
+                    this.$vux.toast.show({
+                        text: '开始日期不能大于结束日期',
+                        type: 'text'
+                    });
                 }
             },
             showQR(data){
@@ -371,6 +432,9 @@
 }
 </style>
 <style lang="less" scoped>
+    .page-body{
+        -webkit-overflow-scrolling: touch;
+    }
     ul,li{list-style: none}
     .group-item {
         margin-left: 0.2rem;

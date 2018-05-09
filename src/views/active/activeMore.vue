@@ -3,9 +3,12 @@
         <x-header>全部活动</x-header>
         <div class="group-item">
                     <div class="allLine" v-for="(item,index) in active" :key="index">
-                        <div>
+                        <div style="position:relative">
                             <span class="colorL">活动名称：</span>
                             <span class="colorW">{{item.activeName}}</span>
+                            <div v-if="item.activeType === 5">
+                                <img style="position:absolute;right:20px;top:3px;" src="@/assets/images/activeDetail.png" alt="">
+                            </div>
                         </div>
                         <div>
                             <span class="colorL">活动时间：</span>
@@ -29,7 +32,8 @@
                     		<a @click="submit(item.id)">报名</a>
                 		</div>
                         <div class="book"  v-if="item.signupstatus == 1">
-                            <a  style="background-color: #8b8b8b" @click="submit1(item.id)">已报名</a>
+                            <!-- <a  style="background-color: #8b8b8b" @click="submit1(item.id)">已报名</a> -->
+                            <a  style="background-color: #8b8b8b">已报名</a>
                         </div>
                 		<div class="grayLine"></div>
                 	</div>
@@ -105,10 +109,10 @@ export default {
                     departmentid:this.departmentid,
                     userId:this.$store.getters.user.userid
                 }
-            }) .then((res)=> {
+            }).then((res)=> {
                 console.log(res.data.list);
                 this.active=res.data.list;
-            }) .catch(function (error) {
+            }).catch(function (error) {
                     console.log(error);
                 });
 
@@ -408,7 +412,7 @@ input {
         color:#666;
         line-height: .3rem;
         margin-left: .1rem;
-        padding-right:0.2rem;
+        padding-right:0.32rem;
     }
 
 

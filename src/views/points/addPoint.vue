@@ -1,6 +1,6 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <x-header>{{listSingle.projectName}}<a slot="right">评分说明</a></x-header>
+        <x-header>{{listSingle.projectName}}<a slot="right"  @click="showMenu">评分说明</a></x-header>
         <div class="group-item">
             <group-title slot="title">
                 <b>党员姓名：<span style="color: #999999">{{userName}}</span></b>
@@ -13,14 +13,14 @@
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
-                    <input type="text" v-model='startTime'>
+                    <input type="text" v-model='startTime' readonly >
                 </flexbox-item>
                 <flexbox-item class="input-addon" style="position: relative">
                     <x-button mini type="warn">
                         <i class="iconfont dlb-icon-rili" ></i>
                     </x-button>
                     <group class="date-no-box">
-                        <datetime v-model="hourListValue" format="YYYY-MM-DD HH:mm" @on-change="changeStart" year-row="{value}年" month-row="{value}月" day-row="{value}日" hour-row="{value}点" minute-row="{value}分" ></datetime>
+                        <datetime v-model="hourListValue"  format="YYYY-MM-DD HH:mm" @on-change="changeStart" year-row="{value}年" month-row="{value}月" day-row="{value}日" hour-row="{value}点" minute-row="{value}分" ></datetime>
                     </group>
                 </flexbox-item>
             </flexbox>
@@ -31,14 +31,14 @@
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
-                    <input type="text" v-model='endTime'>
+                    <input type="text" v-model='endTime' readonly>
                 </flexbox-item>
-                <flexbox-item class="input-addon" style="position: relative">
+                <flexbox-item class="input-addon" style="position: relative" >
                     <x-button mini type="warn">
                         <i class="iconfont dlb-icon-rili" ></i>
                     </x-button>
                     <group class="date-no-box">
-                        <datetime v-model="ListValue" format="YYYY-MM-DD HH:mm" @on-change="changeEnd" year-row="{value}年" month-row="{value}月" day-row="{value}日" hour-row="{value}点" minute-row="{value}分" ></datetime>
+                        <datetime v-model="ListValue"  format="YYYY-MM-DD HH:mm" @on-change="changeEnd" year-row="{value}年" month-row="{value}月" day-row="{value}日" hour-row="{value}点" minute-row="{value}分" ></datetime>
                     </group>
                 </flexbox-item>
             </flexbox>
@@ -71,14 +71,38 @@
             <x-button type="warn" @click.native="submit()">
                 提交支部书记审核
             </x-button>
+
         </div>
 
+        <div v-transfer-dom>
+            <popup v-model="showPop" position="left" width="100%">
+                <div class="middle">
+                    <div class="middle-top">评分说明</div>
+                    <div class="middle-content">
+
+                        <p v-if="moduleid === '2'">
+                            党员自学或参加其他党组织组织的学习教育活动，经所属党支部书记确认后，每参加一次加2.5分（共5分）。
+                        </p>
+                        <p v-else-if="moduleid === '4'">
+                            党员在金领驿站参加政治活动，或“双报到”参加居民区党组织组织的党日活动，经所属党支部书记确认后，每次加2分（共10分）。
+                        </p>
+                        <p v-else-if="moduleid === '11'">
+                            党员积极参加公益活动，每次加3分(最高不超过20分)。
+                        </p>
+                        <p v-else-if="moduleid === '8'">
+                            党员积极参加公益活动，每次加3分(最高不超过20分)。
+                        </p>
+                    </div>
+                    <div class="knowBtn" @click="know">我知道了</div>
+                </div>
+            </popup>
+        </div>
     </div>
 </template>
 
 <script>
     import axios from 'axios'
-    import { XHeader, GroupTitle, Flexbox, TransferDomDirective as TransferDom,Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker,Previewer} from 'vux';
+    import { Popup,XHeader, GroupTitle, Flexbox, TransferDomDirective as TransferDom,Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker,Previewer} from 'vux';
     import wx from 'weixin-js-sdk';
     import weixin from '@/services/weixin';
     export default {
@@ -96,7 +120,8 @@
             Group,
             Picker,
             Alert,
-            Previewer
+            Previewer,
+            Popup
         },
         data() {
             return {
@@ -109,10 +134,18 @@
                 activeContent:'',
 				listSingle:{},
 				userName:'',
+                showPop:false,
                 picList:{list:[],arr:[]},
+                moduleid:this.$route.params.moduleId
             };
         },
         methods: {
+            know(){
+                this.showPop = false
+            },
+            showMenu(){
+                this.showPop = true;
+            },
             showDeleteButton(it) {
                 clearInterval(this.Loop);//再次清空定时器，防止重复注册定时器
                 var This = this;
@@ -156,6 +189,35 @@
                 this.$refs.picker.open();
             },
             submit(){
+                if(!this.startTime){
+                    return this.$vux.toast.show({
+                        text: '填写开始时间',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.endTime){
+                    return this.$vux.toast.show({
+                        text: '填写结束时间',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activeContent){
+                    return this.$vux.toast.show({
+                        text: '填写内容',
+                        type: 'text'
+                    });
+                }
+
+
+                if(!this.picList.arr.length){
+                    return this.$vux.toast.show({
+                        text: '请上传图片',
+                        type: 'text'
+                    });
+                }
+
                 var starttime = this.startTime.replace(new RegExp("-","gm"),"/");
                 var starttimeHaoMiao = (new Date(starttime)).getTime();
                 var endtime = this.endTime.replace(new RegExp("-","gm"),"/");
@@ -180,22 +242,16 @@
                         picids:this.picList.arr.join()
                     }
                 }).then(res => {
-                    console.log(res);
-                    //this.users[1].integral = res.data;
-                    if(res.success){
-                    	this.$vux.alert.show({title:'增加成功'});
-                        setTimeout(() => {
-                            this.$vux.alert.hide();
-                            this.$router.push({
-                            path: '/points'
-                        })
 
-      					}, 1000)
+                    if(res.success){
+                        let $this = this;
+                    	this.$vux.alert.show({title:'增加成功',onHide(){
+                            $this.$router.push({
+                                path: '/points'
+                            })
+                        }});
                     }else{
                     	this.$vux.alert.show({title:res.msg});
-                        setTimeout(() => {
-        					this.$vux.alert.hide();
-      					}, 1000)
                     }
                 }).catch(err => {
 
@@ -207,7 +263,7 @@
                     }
 
                 });}else {
-                    alert("开始日期不能大于结束日期");
+                    this.$vux.alert.show({title:'开始日期不能大于结束日期'});
                 }
             },
 
@@ -422,7 +478,15 @@
     .photo-list ul .operate a{color:#fff;cursor:pointer;text-decoration:none}
     .photo-list ul li.no-operate:hover .operate{display:none;}
     .photo-list .upload-file-input{opacity: 0;position: absolute;z-index: 99;top: 0;right: 0;left: 0;width: .6rem;bottom: 0;}
-
+    .middle{width:2.8rem;height:2.02rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
+    .mint-popup-left{left:15%;}
+    .middle .middle-top{width:100%;height:.4rem; background:linear-gradient(90deg,rgba(185,54,71,1),rgba(155,10,26,1));box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#FFFFFF;text-align:center;line-height:.4rem;border-radius:10px 10px 0 0;}
+    .middle-content{width:2.4rem;height:0.8rem;margin:.21rem .19rem .21rem .21rem;}
+    .middle-content p{font-size:.14rem;color:#828282;line-height:.24rem;}
+    .dark{color:#333333;}
+    .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
+        border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
+    .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
 
 </style>
 <style scoped>

@@ -1,13 +1,14 @@
 <template>
     <div class="app-layout">
-        <router-view></router-view>
-        <tabbar slot="bottom" v-model="tabsSelected">
+        <router-view @updateFooterState="showFooter = arguments[0]"></router-view>
+        <tabbar slot="bottom" v-model="tabsSelected" v-show="showFooter">
             <tabbar-item v-for="item in tabs" :key="item.index" :link="item.link">
                 <img slot="icon" :src="item.icon">
                 <img slot="icon-active" :src="item.iconActive">
                 <span slot="label">{{item.label}}</span>
             </tabbar-item>
             <tabbar-item>
+                <img slot="icon" src="@/assets/images/icon_logout.png" style="width:80%;height:80%;margin-top:3px;" @click="logout">
                 <span slot="label" @click="logout">注销</span>
             </tabbar-item>
         </tabbar>
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { Tabbar, TabbarItem, cookie } from 'vux';
 
 const tabs = {
@@ -86,7 +88,7 @@ const tabs = {
         {
             icon: require('@/assets/images/gray-active.png'),
             iconActive: require('@/assets/images/iconw-activity.png'),
-            label: '党员活动',
+            label: '党员生活',
             link: '/active/activeDetail'
         }
     ]
@@ -100,7 +102,8 @@ export default {
     data() {
         return {
             tabsSelected: -1,
-            tabs: tabs[this.$store.getters.user.roleid] || []
+            tabs: tabs[this.$store.getters.user.roleid] || [],
+            showFooter: true
         };
     },
     mounted() {
@@ -110,14 +113,6 @@ export default {
         $route: 'selectTab'
     },
     methods: {
-        logout() {
-            cookie.remove('ptoken');
-            cookie.remove('roleId');
-            cookie.remove('userId');
-            this.$router.push({
-                path: '/login'
-            });
-        },
         selectTab() {
             this.tabsSelected = this.tabs.findIndex(item => {
                 if (item.link === '/') {
@@ -126,7 +121,8 @@ export default {
                     return new RegExp('^' + /^\/\w+/.exec(item.link)[0]).test(this.$route.path);
                 }
             });
-        }
+        },
+        ...mapActions(['logout'])
     }
 };
 </script>
@@ -137,7 +133,7 @@ export default {
     flex-direction: column;
     align-items: stretch;
     justify-content: space-between;
-    position: absolute;
+    position:absolute;
     left: 0;
     top: 0;
     right: 0;

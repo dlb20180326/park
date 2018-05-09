@@ -12,13 +12,13 @@
             <div class="inputs">
                 <div class="input-all clearfix">
                 <span class="icon-phone"></span>
-                <input type="text" v-model="account" placeholder="输入登陆用户" />
+                <input type="text" v-model="account" @keyup.13="keyUpReturn" placeholder="输入登录用户" />
             </div>
             <div class="input-all clearfix">
                 <span class="icon-key"></span>
-                <input type="password" v-model="pass" placeholder="输入登陆密码" />
+                <input type="password" v-model="pass" @keyup.13="keyUpReturn" placeholder="输入登录密码" />
             </div>
-            <button class="btnSub" @click="login">登陆</button>
+            <button class="btnSub" @click="login">登录</button>
             </div>
             
         </div>
@@ -55,8 +55,9 @@
                 .then(
                     result =>{
                         if(result.status){
+                            var roleId = result.entry.roleId;
                             this.$router.push({
-                                path: '/'
+                                path: '/main' + roleId
                             })
                         }else{
                             this.$vux.toast.show({
@@ -68,6 +69,10 @@
                         }
                     }
                 )
+            },
+            keyUpReturn()
+            {
+                this.login();
             }
         },
         mounted(){
@@ -87,6 +92,7 @@
         }
     .logo-top{
         position: absolute;
+        top:-.2rem;
         width:100%;
         height: 1.79rem;
         background: url(../assets/images/new-logo1.png) no-repeat;
@@ -96,7 +102,7 @@
     .logo-pic{
         position: absolute;
         /* margin:1.35rem auto 0; */
-        top:1.35rem;
+        top:1.15rem;
         left:50%;
         /* z-index:1; */
         width:1.1rem;
@@ -111,12 +117,12 @@
         width:80%;
         height: auto;
         /* margin: .2rem auto; */
-        margin: 2.66rem auto 0;
+        margin: 2.46rem auto 0;
     }
     .tiles{
         width:100%;
         text-align:center;
-        text-shadow:0 1px 1px #F2CE8F;
+        /* text-shadow:0 1px 1px #F2CE8F; */
         font-size:0;
     }
     .tiles div{
@@ -129,19 +135,19 @@
     }
     .tiles span{
         display: inline-block;
-        height: .16rem;
-        width: .15rem;
-        margin-top:.05rem;
-        background:#fff url(../assets/images/icon-star.png) no-repeat 50% 50%;
+        height: .1rem;
+        width: .11rem;
+        /* margin-top:.05rem; */
+        background:#fff url(../assets/images/icon-star.png) no-repeat 100% 100%;
         background-size:cover;
         color:rgba(227,192,140,1);
-        vertical-align: bottom;
+        vertical-align: center;
     }
     .inputs{
         width:100%;
         /* margin:0.72rem auto; */
         height:auto;
-        margin: 0.72rem auto 0;
+        margin: 0.5rem auto 0;
     }
 
     .input-all {
@@ -195,7 +201,7 @@
         height:.36rem;
         line-height:.36rem;
         background:linear-gradient(180deg,rgba(194,81,72,1),rgba(180,56,44,1));
-        box-shadow: 0px 4px 4px 0px rgba(228,149,158,1);
+        box-shadow: 0px 1px 5px 0px rgba(150,150,150,0.5);
         border-radius:21px;
         border:0;
         font-size: .14rem;

@@ -1,13 +1,13 @@
 <template>
     <div class="page-body">
         <x-header :left-options="{showBack: true}">
-            党务积分信息
+            党员积分信息
         </x-header>
         <section class="mainbox">
             <div style="padding:0 .2rem;">
                 <table width="100%" class="table">
                     <tr>
-                        <td width="100" class="grayColors">姓名：</td>
+                        <td width="100" class="grayColors">党员姓名：</td>
                         <td class="f_b blackColors">{{name1}}</td>
                     </tr>
                     <tr>
@@ -28,33 +28,35 @@
 
         </section>
 
-        <section class="mainboss" >
+        <section class="mainboss2" >
             <div class=" clearfix p15 display">
-                <span class="fl weui-cell__bd1">积分获取明细</span>
+                <span class="fl weui-cell__bd1" style="padding-left:.2rem">积分获取明细</span>
             </div>
-            <div style="padding:0 .2rem;" v-for="(item,index) in pointdetail" :key="index">
-                <table width="100%" class="table">
-                    <tr>
-                        <td width="100" class="grayColors">获取时间：</td>
-                        <td class="f_b">{{item.scoreTime|formatDuring}}</td>
-                    </tr>
-                    <tr>
-                        <td class="grayColors">积分类型：</td>
-                        <td class="f_b">{{item.detailTitle}}</td>
-                    </tr>
-                    <tr v-if="item.approvedName">
-                        <td class="grayColors">审核人：</td>
-                        <td class="f_b">{{item.approvedName}}</td>
-                    </tr>
-                    <tr v-show="!item.approvedName">
-                        <td class="grayColors">加分人：</td>
-                        <td class="f_b">{{item.adderName||'系统自动'}}</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" class="grayColors">积分变动：</td>
-                        <td class="f_b"><span :class="[item.score>0?'darkColors':'lightColors']">{{item.score|Upper}}</span></td>
-                    </tr>
-                </table>
+            <div style="padding:0 .2rem;">
+                <div class="my-table"  v-for="(item,index) in pointdetail" :key="index" id="myTableBox">
+                    <table width="100%" class="table" >
+                        <tr>
+                            <td width="100" class="grayColors">获取时间：</td>
+                            <td class="f_b">{{item.scoreTime|formatDuring}}</td>
+                        </tr>
+                        <tr>
+                            <td class="grayColors">积分类型：</td>
+                            <td class="f_b">{{item.detailTitle}}</td>
+                        </tr>
+                        <tr v-if="item.approvedName">
+                            <td class="grayColors">审核人：</td>
+                            <td class="f_b">{{item.approvedName}}</td>
+                        </tr>
+                        <tr v-show="!item.approvedName">
+                            <td class="grayColors">审核人：</td>
+                            <td class="f_b">{{item.adderName||'系统自动'}}</td>
+                        </tr>
+                        <tr>
+                            <td valign="top" class="grayColors">积分变动：</td>
+                            <td class="f_b"><span :class="[item.score>0?'darkColors':'lightColors']">{{item.score|Upper}}</span></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
         </section>
@@ -194,6 +196,18 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#myTableBox:last-child{
+    border-bottom:0
+}
+.my-table{
+    padding-top:.1rem;
+    padding-bottom:.1rem;
+    border-bottom: 1px solid #e4e4e4
+}
+.mainboss2{
+    background: #fff;
+    padding-top:2vw;
+}
 .mainboss{
     background: #fff;
     padding:2vw 0;
@@ -268,7 +282,7 @@ input {
     float:right;
 }
 .p15 {
-    padding:2vw;
+    padding-top:2vw;
 }
 .display {
     display:block;

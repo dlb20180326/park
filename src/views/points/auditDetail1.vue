@@ -27,40 +27,39 @@
         </div>
         <flexbox orient="vertical" align="initial">
             <view-box class="view-box">
-                <group label-width="80px" label-margin-right="20px">
-                    <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="userName" value-align="left"></cell>
-                    <cell :border-intent="false" disabled title="获得总分" :value="totalscore||0.0" value-align="left"></cell>
-                </group>
+            <group label-width="80px" label-margin-right=".08rem">
+                <span class="bg-line"></span>
+                <cell class="no-border" :border-intent="false" disabled title="党员姓名" :value="userName" value-align="left"></cell>
+                <span class="bg-line"></span>
+                <cell :border-intent="false" disabled title="获得总分" :value="totalscore||0.0" value-align="left"></cell>
+            </group>
                 <div class="item-list" v-if="item.message!=''" v-for="(item,i) of list" :key="i">
                     <div class="item">
-                        <div class="header">{{item.title}} <span v-if="i==2">支部书记评分{{item.itemscore}}分</span>  </div>
-                        <div class="body">
-                            <span class="desc">{{item.message}}</span>
-                            <div class="img-show">
-                                <img class="previewer-demo-img" v-for="(it,idx) in item.memos" :src="it.src" width="100"  @click="atBig(idx,i)">
-                                <div v-transfer-dom>
-                                <previewer :list="item.memos" ref="previewer"  slot="names"  :options="options" @on-index-change="logIndexChange">
-                                </previewer>
-                                </div>
+                         <span class="bg-line1"></span><div class="header mb-reject1">{{item.title}} <span class="mb-score">(得分<b>{{item.itemscore}}</b>分)</span>  </div>
+
+                        <div class="text-red mb-reject" v-if="item.status == 3">
+                            驳回原因:　{{item.rejectReson}}
+                        </div>
+
+                        <div class="states" v-if="item.status==0">
+                            待审核
+                        </div>
+                        <div class="states scuess" v-if="item.status==2">
+                            已通过
+                        </div>
+                        <div class="states" v-if="item.status==3">
+                            已驳回
+                        </div>
+
+
+                        <span class="desc" style="color: #b2b2b2;">{{item.message}}</span>
+                        <div class="img-show">
+                            <img class="previewer-demo-img" v-for="(it,idx) in item.memos" :src="it.msrc" width="100"  @click="atBig(idx,i)">
+                            <div v-transfer-dom>
+                            <previewer :list="item.memos" ref="previewer"  slot="names"  :options="options" @on-index-change="logIndexChange">
+                            </previewer>
                             </div>
                         </div>
-                        <flexbox class="footer" v-if="item.status == 0">
-                            <x-button  :mini="true" type="warn" >等待领导审核中</x-button>
-                        </flexbox>
-                        <flexbox class="footer" justify= "center" v-if="item.status == 2">
-                            <x-button  :mini="true" type="warn" >审核通过</x-button>
-                        </flexbox>
-                        <flexbox class="footer" justify= "center" v-if="item.status == 3">
-                            <x-button  :mini="true" style="color:gray">已拒绝</x-button>
-                        </flexbox>
-                        <flexbox class="footer" justify= "left" v-if="item.status == 3" style="text-align:left;">
-                            <table>
-                                <tr>
-                                <td style="width:5em">拒绝原因:</td>
-                                <td>{{item.rejectReson}}</td>
-                                </tr>
-                            </table>
-                        </flexbox>
                     </div>
                 </div>
             </view-box>
@@ -165,8 +164,8 @@ export default {
 
                         for(var i=0;i<item.memo.length;i++){
                             var obj = {};
-                            obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+ item.memo[i];
-                            obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+item.memo[i];
+                            obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+ item.memo[i];
+                            obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.memo[i];
                             item.memos.push(obj);
                         }
 
@@ -217,7 +216,10 @@ export default {
                 }
             }).then(res => {
                 if(res.success){
-                    this.$vux.alert.show({title: '拒绝成功'});
+                    this.$vux.alert.show({title: '驳回成功',onHide(){
+                        this.rejectReason = "";
+                        window.location.reload();
+                    }});
                 }else{
                     this.$vux.alert.show({title: '提交失败'});
                 }
@@ -282,12 +284,13 @@ td {
 
         .item-list {
             .item {
-                margin: 10px;
+                padding-bottom: 0.2rem;
                 border-bottom: 1px solid #d9d9d9;
+                position: relative;
                 .header,
                 .body,
                 .footer {
-                    margin: 10px 0;
+                    padding-top:.2rem;
                 }
                 .header {
                     color: #b2b2b2;
@@ -309,10 +312,55 @@ td {
 
     }
 }
+.vux-label,.vux-cell-align-left{font-size:.16rem;}
+.vux-cell-align-left{color:#333 !important;}
+.weui-cell{padding: 10px 0px!important;}
 .page-body.points-auditDetail .view-box .item-list:last-child .item{border-bottom:0}
 .img-show{width:100%;height:auto;}
 .img-show img{width:31%;height:1rem;margin-top:.1rem;margin-right:10px}
 .img-show img:nth-child(3n+3){margin-right:0}
 .img-left{width:.37rem;height:.37rem;position:absolute;left:.1rem;top:3.15rem;;z-index:900;}
 .img-right{width:.37rem;height:.37rem;position:absolute;right:.1rem;top:3.15rem;z-index:900;}
+.text-red{color: #B93647;}
+.mb-reject{margin-bottom:.2rem}
+.mb-reject1{margin-bottom: .25rem}
+.mb-score{margin-left:.2rem;letter-spacing: 2px;}
+.states{
+    text-align: center;
+    border-radius: 4px;
+    border: 2px solid #B93647;
+    position: absolute;
+    right:0rem;
+    z-index: 999;
+    top: .2rem;
+    font-size: .16rem;
+    font-weight: 600;
+    color: #B93647;
+    padding: 0.02rem .15rem;
+}
+
+.bg-line {
+    width: 0.04rem;
+    height: 0.18rem;
+    background: url(../../assets/images/icon-rectangle.png) no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    float: left;
+    margin-top: 0.12rem;
+    margin-right: 4%;
+}
+.bg-line1{
+    width: 0.04rem;
+    height: 0.18rem;
+    background: url(../../assets/images/icon-rectangle.png) no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    float: left;
+    margin-top: 0.24rem;
+    margin-right: 4%;
+}
+.states.scuess{
+    color: #6BD46B;
+    border: 2px solid #6BD46B;
+}
 </style>

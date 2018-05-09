@@ -6,6 +6,10 @@ export const routes = [
         component: () => import('@/views/loginNew')
     },
     {
+        path: '/loginManage',
+        component: () => import('@/views/loginManage')
+    },
+    {
         path: '/',
         // meta: { requiresAuth: true },
         component: () => import('@/views/layout'),
@@ -83,6 +87,12 @@ export const routes = [
                 component: () => import('@/views/points/review')
             },
             {
+	            // path:'points/detial',
+	            path:'points/detail',
+	            name:'pointsNews',
+	            component: () => import('@/views/points/detail')
+            },
+            {
                 path: 'points/evaluation',
                 component: () => import('@/views/points/evaluation')
             },
@@ -104,13 +114,18 @@ export const routes = [
                 component: () => import('@/views/points/auditDetail')
             },
             {
-                path: 'points/pointDetail',
-                component: () => import('@/views/points/pointDetail')
-            },
-            {
                 path: 'points/addPoint/:projectId/:moduleId',
                 name: 'addPoint',
                 component: () => import('@/views/points/addPoint')
+            },
+            {
+                path: 'points/addPoint1/:projectId/:moduleId',
+                name: 'addPoint1',
+                component: () => import('@/views/points/addPoint1')
+            },
+            {
+                path: 'points/addPoint1/:projectId/:moduleId/:studyId',
+                component: () => import('@/views/points/addPoint1')
             },
             {
                 path: 'points/pointEvaluate/:partmentId/:name/:departmentId/:userId',

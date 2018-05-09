@@ -1,6 +1,6 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <x-header>发起活动</x-header>
+        <x-header title="发起活动" @on-click-back="backhome()"></x-header>
         <div class="group-item">
             <group-title slot="title">
                 <b>活动开始时间</b>
@@ -44,19 +44,16 @@
             </group-title>
             <flexbox :gutter="0">
                 <flexbox-item>
-                    <input type="text" v-model='activityName' readonly="readonly" >
+                    <input type="text" :value="activityType" readonly="readonly" >
                 </flexbox-item>
                 <flexbox-item class="input-addon">
                     <x-button mini type="warn" @click.native="handlePicker()">
                         <i class="iconfont dlb-icon-category" ></i>
                     </x-button>
+                    <!-- <group class="date-no-box"></group> -->
                 </flexbox-item>
             </flexbox>
         </div>
-
-        <ul class="active-type-list" v-show="PickerVisible2">
-            <li v-for="(item,index) in list" :key="index" @click="submit1(item)">{{item.title}}</li>
-        </ul>
 
         <div class="group-item">
             <group-title slot="title">
@@ -89,9 +86,9 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'300px'}" >
+          <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" :hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
                <div class="title">
-                    <label for="">活动名称:</label>
+                    <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
                 </div>
                 <div class="qrcode">
@@ -99,210 +96,338 @@
                 </div>
           </x-dialog>
         </div>
+        <transition name="fade">
+            <div class="picker-box" v-show="PickerVisible2" @click="PickerVisible2 = false">
+                <picker
+                    :data="pickerList"
+                    :column-width="[]"
+                    :fixed-columns="2"
+                    :columns="1"
+                    v-model="pickerValue"
+                    @on-change="submit1()">
+                </picker>
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
     import axios from 'axios'
-import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker ,XDialog, TransferDomDirective as TransferDom  } from 'vux';
+    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group, Picker ,XDialog, TransferDomDirective as TransferDom  } from 'vux';
 
-export default {
-    directives: {
-        TransferDom
-    },
-    components: {
-        XHeader,
-        GroupTitle,
-        Flexbox,
-        FlexboxItem,
-        XButton,
-        DatetimePlugin,
-        Datetime,
-        Group,
-        Picker,
-        Alert,
-        XDialog
-    },
-    data() {
-        return {
-            value1: '',
-            startTime:"",
-            endTime:"",
-            hourListValue:'',
-            hot:'',
-            activeType:'',
-            activityName:'',
-            activePace:'',
-            activeTitle:'',
-            activeCreatePeople:this.$store.getters.user.userid,
-            activePrincipalPeople:'',
-            activeContext:'',
-            activeContent:'',
-            activeStatus:0,
-            activeProjectActive:'',
-            PickerVisible1:false,
-            pickerValue1:'请选择活动类型',
-            years:'',
-            year1: [''],
-            list:'',
-            PickerVisible2:false,
-            departmentid:this.$store.getters.user.departmentid,
-            showQrcodeDialog: false,
-            Qrcode:''
-        };
-    },
-    methods: {
-        openPicker() {
-            this.$refs.picker.open();
+    export default {
+        directives: {
+            TransferDom
         },
-        handleConfirm(value) {
-            var d = value;
-            this.startTime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + '';
+        components: {
+            XHeader,
+            GroupTitle,
+            Flexbox,
+            FlexboxItem,
+            XButton,
+            DatetimePlugin,
+            Datetime,
+            Group,
+            Picker,
+            Alert,
+            XDialog
         },
-        handlePicker(){
-            this.PickerVisible2=!this.PickerVisible2;
-            axios({
-                method: 'get',
-                url: 'pscoredetail/queryByJoinList'
-            }) .then((res)=> {
-                let t = res.data;
-                t.forEach((value)=>{
-                    value.title = value.title.substring(0,4);
-                })
-                this.list = t;
-            }).catch(function (error) {
-                console.log(error);
-            });
+        data() {
+            return {
+                value1: '',
+                startTime:"",
+                endTime:"",
+                hourListValue:'',
+                hot:'',
+                activeType:'',
+                activityName:'',
+                activePace:'',
+                activeTitle:'',
+                activeCreatePeople:this.$store.getters.user.userid,
+                activePrincipalPeople:'',
+                activeContext:'',
+                activeContent:'',
+                activeStatus:0,
+                activeProjectActive:'',
+                PickerVisible1:false,
+                // contents:{rights:'',title:'bbb'},
+                pickerValue1:'请选择活动类型',
+                years:'',
+                year1: [''],
+                list: [],
+                pickerValue: [],
+                PickerVisible2:false,
+                departmentid:this.$store.getters.user.departmentid,
+                showQrcodeDialog: false,
+                Qrcode:''
+            };
         },
-        onValuesChange(picker, values){
-            this.pickerValue1=values[0];
-            this.PickerVisible1=false
-        },
-        submit(){
-            var starttime = this.startTime.replace(new RegExp("-","gm"),"/");
-            var starttimeHaoMiao = (new Date(starttime)).getTime();
-            var endtime = this.endTime.replace(new RegExp("-","gm"),"/");
-            var endtimeHaoMiao = (new Date(endtime)).getTime();
-
-            if(starttimeHaoMiao<endtimeHaoMiao){
+        methods: {
+            backRoute(){
+                setTimeout(() => history.back(), 500);
+            },
+            openPicker() {
+                this.$refs.picker.open();
+            },
+            handleConfirm(d) {
+                this.startTime = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + '';
+            },
+            handlePicker(){
                 axios({
-                    method: 'post',
-                    url: 'active/create',
-                    params: {
-                        startTime:starttimeHaoMiao,
-                        endTime:endtimeHaoMiao,
-                        activeType:this.activeType,
-                        activityProjectId:this.activeProjectActive,
-                        activePace:this.activePace,
-                        activeCreatePeople:this.$store.getters.user.userid,
-                        activePrincipalPeople:this.activePrincipalPeople,
-                        activeContext:this.activeContext,
-                        activeName:this.activeTitle,
-                        activeStatus:1,
-                        departmentid:this.departmentid
-                    }
-                }) .then((res)=> {
-                    this.$vux.alert.show({title:res.msg});
-
-                    this.showQR(res.data);
-
+                    method: 'get',
+                    url: 'pscoredetail/queryByJoinList'
+                }).then((res)=> {
+                    // let t = res.data;
+                    // t.forEach((value)=>{
+                    //     value.title = value.title.substring(0,4);
+                    // })
+                    // this.list = t;
+                    this.list = res.data.map(item => Object.assign({}, item, { title: item.title.substring(0,4) }));
+                    // console.log(res.data);
+                    this.PickerVisible2 = true;
                 }).catch(function (error) {
-                    console.log(error);
+                    // console.log(error);
                 });
-            }else {
-                this.$vux.alert.show({title:'开始日期不能大于结束日期'});
+            },
+            onValuesChange(picker, values){
+                this.pickerValue1=values[0];
+                this.PickerVisible1=false
+            },
+            submit(){
+                if(!this.startTime){
 
+                    return this.$vux.toast.show({
+                        text: '填写开始时间',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.endTime){
+                    return this.$vux.toast.show({
+                        text: '填写结束时间',
+                        type: 'text'
+                    });
+                }
+
+                // if(!this.activityName){
+                //     return this.$vux.toast.show({
+                //         text: '选择活动类型',
+                //         type: 'text'
+                //     });
+                // }
+
+                if(!this.pickerValue){
+                    return this.$vux.toast.show({
+                        text: '选择活动类型',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activePace){
+                    return this.$vux.toast.show({
+                        text: '填写活动地点',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activePrincipalPeople){
+                    return this.$vux.toast.show({
+                        text: '填写负责人',
+                        type: 'text'
+                    });
+                }
+
+                if(!this.activeContext){
+                    return this.$vux.toast.show({
+                        text: '填写活动内容',
+                        type: 'text'
+                    });
+                }
+
+
+                var starttime = this.startTime.replace(new RegExp("-","gm"),"/");
+                var starttimeHaoMiao = (new Date(starttime)).getTime();
+                var endtime = this.endTime.replace(new RegExp("-","gm"),"/");
+                var endtimeHaoMiao = (new Date(endtime)).getTime();
+
+
+                if(starttimeHaoMiao<endtimeHaoMiao){
+                    axios({
+                        method: 'post',
+                        url: 'active/create',
+                        params: {
+                            startTime:starttimeHaoMiao,
+                            endTime:endtimeHaoMiao,
+                            activeType:this.pickerValue[0],
+                            activityProjectId:this.pickerValue[0],
+                            activePace:this.activePace,
+                            activeCreatePeople:this.$store.getters.user.userid,
+                            activePrincipalPeople:this.activePrincipalPeople,
+                            activeContext:this.activeContext,
+                            activeName:this.activeTitle,
+                            activeStatus:1,
+                            departmentid:this.departmentid
+                        }
+                    }) .then((res)=> {
+
+                        this.$vux.toast.show({
+                            text: '增加成功',
+                            type: 'text'
+                        });
+
+                        this.showQR(res.data);
+
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }else {
+
+                    this.$vux.toast.show({
+                        text: '开始日期不能大于结束日期',
+                        type: 'text'
+                    });
+
+                }
+            },
+            showQR(data){
+                document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
+                this.showQrcodeDialog = true;
+            },
+            submit1(it){
+                // console.log('submit1 it:', it);
+                // this.activeType=it.id;
+                // this.activeProjectActive = it.projectId;
+                // this.activityName = it.title;
+                // this.PickerVisible2=false
+
+            },
+            getActivity(){
+            },
+            log (str1, str2 = '') {
+                console.log(str1, str2)
+            },
+            showPlugin () {
+                this.$vux.datetime.show({
+                    cancelText: '取消',
+                    confirmText: '确定',
+                    format: 'YYYY-MM-DD HH',
+                    value: '2017-05-20 18',
+                    onConfirm (val) {
+                        console.log('plugin confirm', val)
+                    },
+                    onShow () {
+                        console.log('plugin show')
+                    },
+                    onHide () {
+                        console.log('plugin hide')
+                    }
+                })
+            },
+            toggleFormat () {
+                this.format = this.format === 'YYYY-MM-DD HH:mm' ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm'
+            },
+            change (value) {
+                this.startTime = value;
+            },
+            change1 (value) {
+                this.endTime = value;
+            },
+            clearValue (value) {
+                this.value6 = ''
+            },
+            clearValue8 (value) {
+                this.value8 = ''
+            },
+            setToday (value) {
+                let now = new Date();
+                let cmonth = now.getMonth() + 1;
+                let day = now.getDate();
+                if (cmonth < 10) cmonth = '0' + cmonth;
+                if (day < 10) day = '0' + day;
+                this.value7 = now.getFullYear() + '-' + cmonth + '-' + day;
+                console.log('set today ok')
+            },
+            backhome(){
+                console.log("---")
+                this.$router.push({
+                    path:'/'
+                })
             }
         },
-        showQR(data){
-            document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
-            this.showQrcodeDialog = true;
-        },
-        submit1(it){
-            this.activeType=it.id;
-            this.activeProjectActive = it.projectId;
-            this.activityName = it.title;
-            this.PickerVisible2=false
-
-        },
-        getActivity(){
-        },
-        log (str1, str2 = '') {
-            console.log(str1, str2)
-        },
-        showPlugin () {
-            this.$vux.datetime.show({
-                cancelText: '取消',
-                confirmText: '确定',
-                format: 'YYYY-MM-DD HH',
-                value: '2017-05-20 18',
-                onConfirm (val) {
-                    console.log('plugin confirm', val)
-                },
-                onShow () {
-                    console.log('plugin show')
-                },
-                onHide () {
-                    console.log('plugin hide')
+        computed: {
+            pickerList () {
+                return this.list.map(item => ({
+                    name: item.title,
+                    value: `${item.id}`
+                }));
+            },
+            activityType () {
+                const value = this.pickerValue[0];
+                if (value && this.pickerList.length) {
+                    return this.pickerList.find(item => item.value === value).name;
                 }
-            })
+                return '';
+            }
         },
-        toggleFormat () {
-            this.format = this.format === 'YYYY-MM-DD HH:mm' ? 'YYYY-MM-DD' : 'YYYY-MM-DD HH:mm'
-        },
-        change (value) {
-            this.startTime = value;
-        },
-        change1 (value) {
-            this.endTime = value;
-        },
-        clearValue (value) {
-            this.value6 = ''
-        },
-        clearValue8 (value) {
-            this.value8 = ''
-        },
-        setToday (value) {
-            let now = new Date();
-            let cmonth = now.getMonth() + 1;
-            let day = now.getDate();
-            if (cmonth < 10) cmonth = '0' + cmonth;
-            if (day < 10) day = '0' + day;
-            this.value7 = now.getFullYear() + '-' + cmonth + '-' + day;
-            console.log('set today ok')
+        mounted() {
+            this.getActivity()
         }
-    },
-    mounted() {
-        this.getActivity()
-    }
-};
+    };
 </script>
 <style lang="less">
-.qrcode-dialog {
-    .weui-dialog {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        .title {
-            text-align: left;
-            word-break: break-all;
-            label{
-              color: #999;
+    .qrcode-dialog {
+        .weui-dialog {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            .title {
+                text-align: left;
+                word-break: break-all;
+                label{
+                color: #999;
+                }
+                .activeTitle {
+                    color: #000;
+                }
             }
-            .activeTitle {
-                color: #000;
-            }
-        }
-        .qrcode {
-            flex: 1;
-            img {
-                height: 100%;
+            .qrcode {
+                flex: 1;
+                img {
+                    margin-top: 10px;
+                    width: 100%;
+                }
             }
         }
     }
-}
+    .picker-box {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+        .vux-picker {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #333;
+            background: #fff;
+        }
+    }
+    // 淡入淡出
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter,
+    .fade-leave-to {
+        opacity: 0;
+    }
 </style>
 <style lang="less" scoped>
+    .page-body{
+        -webkit-overflow-scrolling: touch;
+    }
     ul,li{list-style: none}
     .group-item {
         margin-left: 0.2rem;
@@ -366,7 +491,17 @@ export default {
         font-size: .15rem;
     }
 }
-
+    .srcw{
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 8px solid #FFF5E6;
+        position: absolute;
+        right:.3rem;
+        top:-.07rem;
+        z-index:999;
+    }
 </style>
 <style>
     .date-no-box{position: absolute;top:0px;left: 0;right: 0;bottom: 0;height: 0.32rem;overflow: hidden;opacity: 0}
@@ -382,5 +517,14 @@ export default {
         align-items: center;
         height: 0.32rem;
         padding: 0;
+    }
+    .weui-toast_text .weui-toast__content {
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+    .weui-toast.weui-toast_text{
+        width: 8em !important;
+        min-width: 7.6em;
     }
 </style>

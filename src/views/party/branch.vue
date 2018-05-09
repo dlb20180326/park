@@ -1,7 +1,7 @@
 <template>
     <div class="page-body party-information">
         <x-header>
-            党务信息
+            党员信息
         </x-header>
         <flexbox orient="vertical" align="initial">
             <view-box>
@@ -22,7 +22,7 @@
                     </flexbox>
                     <flexbox :gutter="0"  v-for="(listinfo,index) in contents" :key="index"   @click.native="sub(listinfo)" class="diffrent">
                         <flexbox-item>{{listinfo.name}}</flexbox-item>
-                        <flexbox-item>{{judge(listinfo.sex)}}</flexbox-item>
+                        <flexbox-item>{{listinfo.sex}}</flexbox-item>
                         <flexbox-item>{{listinfo.age}}</flexbox-item>
                         <flexbox-item>{{listinfo.totalscore || 0.0}}</flexbox-item>
                     </flexbox>

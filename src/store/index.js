@@ -5,9 +5,22 @@ import user from './modules/user';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-    state: {},
-    getters: {},
-    mutations: {},
+    state: {
+    	info: {}
+    },
+    actions: {
+    	setInfo ({ commit }, info) {
+        	commit('setInfo', info);
+        }
+    },
+    getters: {
+    	info: state => state.info
+    },
+    mutations: {
+    	setInfo (state, info) {
+        	state.info = info;
+        }
+    },
     modules: {
         user
     },

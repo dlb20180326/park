@@ -1,13 +1,12 @@
 <template>
 
     <div style="height:100%;" class="disabled-tabbar">
-        <view-box ref="viewBox" body-padding-top=".46rem">
-            <!--<r-header :rfs="contents"></r-header>-->
-            <x-header slot="header" style="position: fixed !important;left:0;right:0;">
+        <view-box ref="viewBox" body-padding-top=".96rem">
+            <x-header slot="header" style="position: fixed !important;left:0;right:0;z-index:100">
                 思想汇报
                 <a slot="right" @click="showMenu">评分说明</a>
             </x-header>
-            <div class="header-list">
+            <div class="header-list cl">
                 <div class="list-left">
                     <span class="left-now">汇报状态：</span>
                     <span class="left-active">{{list1Selected.text}}</span>
@@ -17,11 +16,11 @@
                 </div>
             </div>
             <div class="animate-down" v-show="topShow">
-                <div v-for="(item,index) in list1" :key="index" class="bg-flag" @click="select(item)">
+                <div  v-for="(item,index) in list1" :key="index" :class="['bg-flag', {active: item.text === list1Selected.text}]" @click="change(item)">
                     {{item.text}}
                 </div>
             </div>
-            <div class="points-table">
+            <div class="points-table cl">
                 <flexbox :gutter="0">
                     <flexbox-item>序号</flexbox-item>
                     <flexbox-item>党员姓名</flexbox-item>
@@ -33,8 +32,7 @@
                     <flexbox :gutter="0" v-for="(con,index) in list3" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.name}}</flexbox-item>
-                        <flexbox-item>上半年</flexbox-item>
-                        <flexbox-item>
+                        <flexbox-item>上半年</flexbox-item><flexbox-item>
 
                             <!--<input type="button" class="btnSub" value="去处理"  @click="clickLink(con)" />-->
                             <input type="button" class="btnSub" :value="con.tempint|Upper" :class="con.tempint|Upper1" @click="clickLink(con)" />
@@ -82,13 +80,14 @@ export default {
     data() {
         return {
             contents: { rights: '评分说明', title: '' },
-            list: '',
-            list3: '',
+            list: [],
+            list3: [],
             list1: [{ text: '口头汇报', moduleId: 11 }, { text: '书面汇报', moduleId: 12 }],
             list1Selected: {},
             isYellow: false,
             showPop: false,
             topShow: false,
+
             showTrans: false
         };
     },
@@ -110,7 +109,7 @@ export default {
             } catch (err) {
                 return (value = err);
             }
-        }
+		}
     },
     components: {
         XHeader,
@@ -126,8 +125,6 @@ export default {
         select(it) {
             this.list1Selected = it;
             this.showDet();
-            /*   this.slide1();
-                this.slide();*/
         },
         showDet() {
             this.topShow = !this.topShow;
@@ -156,6 +153,12 @@ export default {
                 });
             }
         },
+        change(it){
+                this.moduleId=it.moduleId;
+                this.topShow = !this.topShow;
+                this.showTrans = !this.showTrans;
+                this.list1Selected = it;
+            },
         //书面汇报
         getlist1() {
             axios({
@@ -184,13 +187,12 @@ export default {
                     moudleId: 11
                 }
             })
-                .then(res => {
-                    this.list3 = res.data;
-                    console.log('222222222222', res.data);
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
+            .then(res => {
+                this.list3 = res.data;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
         },
         know() {
             this.showPop = false;
@@ -209,8 +211,6 @@ export default {
         this.list1Selected = this.list1[0];
         this.getlist1();
         this.getlist2();
-        /* this.getModule();
-            this.getmoduleid()*/
     }
 };
 </script>
@@ -221,6 +221,18 @@ body {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
+}
+
+.cl {
+    *zoom: 1
+}
+
+.cl:after {
+    clear: both;
+    content: '\20';
+    display: block;
+    height: 0;
+    visibility: hidden
 }
 .vux-flexbox {
     width: 88%;
@@ -243,16 +255,13 @@ body {
 .vux-flexbox .vux-flexbox-item:nth-child(1) {
     -webkit-box-flex: 0.5;
 }
-.points-table {
-    padding-top: 0.46rem;
-}
+
 .btnSub {
     width: 0.6rem;
     height: 0.24rem;
     font-size: 0.14rem;
     line-height: 0.24rem;
     border-radius: 4px;
-    font-family: PingFangSC-Medium;
     border: 0px;
     color: #ffffff;
     background-color: rgba(185, 54, 71, 1);
@@ -265,6 +274,16 @@ body {
 }
 .yellowC {
     background-color: rgba(244, 151, 74, 1);
+}
+.points-table {
+    position: absolute;
+    top: 0.96rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 0;
+    -webkit-overflow-scrolling: touch;
 }
 .middle {
     width: 2.8rem;
@@ -321,14 +340,16 @@ body {
 }
 .header-list {
     width: 100%;
-    height: 50px;
+    height: .5rem;
     border-bottom: 1px solid #e4e4e4;
     position: fixed;
     top: 0.46rem;
     left: 0;
     right: 0;
+    z-index:30;
     background: #fff;
     line-height: 50px;
+    box-sizing: border-box;
 }
 .list-left {
     width: 54%;
@@ -358,7 +379,7 @@ body {
     border-radius: 4px;
     text-align: center;
     float: right;
-    margin: 0.13rem 5.3% 0.13rem 0;
+    margin: 0.13rem 0.4rem 0.13rem 0;
     padding-left: 0.07rem;
 }
 .right-btn span {
@@ -367,23 +388,23 @@ body {
     display: block;
     float: right;
     margin: 7px 8px 0 3px;
-    background-image: url(../../assets/images/icon-downs.png);
-    background-size: 100% 100%;
-}
-.bg-flag {
-    height: 0.2rem;
-    margin-top: 0.2rem;
-}
+    background-image:url(../../assets/images/icon-downs.png);background-size: 100% 100%;}
+.bg-flag{height:.2rem;margin-top:.2rem;}
 .animate-down {
-    padding: 0 0.2rem 0.2rem 0.21rem;
+    padding: 0 .2rem .2rem .21rem;
     z-index: 521;
-    background-color: #ffffff;
-    top: 96px;
-    border: 1px solid #e4e4e4;
+    background-color: #FFFFFF;
+    top: .96rem;
+    border-bottom: 1px solid #E4E4E4;
     position: fixed;
     left: 0;
     right: 0;
+    box-sizing: border-box;
+    .active{
+        color: #F84D2B;
+    }
 }
+
 </style>
 <style scoped>
 .vux-header {

@@ -1,9 +1,13 @@
 <template>
 
-	<div style="height:100%;">
+	<div style="height:100%;"  class="disabled-tabbar">
    		<view-box ref="viewBox" body-padding-top=".46rem">
-			<x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" class="bgColors">
-                {{contents.title}}<a slot="right" @click="showMenu">评分说明</a></x-header>
+
+            <x-header slot="header" style="position: fixed !important;left:0;right:0;z-index:100"  class="bgColors">
+                {{contents.title}}
+                <a slot="right" @click="showMenu" style="cursor:pointer;" >评分说明</a>
+            </x-header>
+
 			    <div class="points-table">
                     <flexbox :gutter="0">
                         <flexbox-item>序号</flexbox-item>
@@ -11,7 +15,12 @@
                         <flexbox-item>时间</flexbox-item>
                         <flexbox-item>评分状态</flexbox-item>
                     </flexbox>
-                    <flexbox  style="text-align: center" v-if="list.length===0">暂无支部人员提交信息</flexbox>
+                    <flexbox  style="text-align: center" v-if="list.length === 0">
+                		<div>
+
+                		</div>
+                    	<p style="color: #CCCCCC;margin: auto;">暂无支部人员提交信息</p>
+                    </flexbox>
                     <flexbox  :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.partyname}}</flexbox-item>
@@ -28,7 +37,7 @@
 					<div class="middle-content">
 
 						<p v-if="moduleid === '2'">
-							2党员自学或参加其他党组织组织的学习教育活动，经所属党支部书记确认后，每参加一次加2.5分（共5分）。
+							党员自学或参加其他党组织组织的学习教育活动，经所属党支部书记确认后，每参加一次加2.5分（共5分）。
 						</p>
                         <p v-else-if="moduleid === '4'">
                             党员在金领驿站参加政治活动，或“双报到”参加居民区党组织组织的党日活动，经所属党支部书记确认后，每次加2分（共10分）。
@@ -58,7 +67,7 @@ Vue.component(Popup.name, Popup);
 
 			return {
 				contents:{rights:'评分说明',title:''},
-				list:"",
+				list:[],
 				isYellow:false,
 				showPop:false,
                 moduleid:''
@@ -68,7 +77,7 @@ Vue.component(Popup.name, Popup);
             Upper: function (value) {
                 try {
                     if(value=== 0)  throw "去处理";
-                    if(value=== 1)  throw "已拒绝";
+                    if(value=== 3)  throw "已驳回";
                     if(value=== 2)  throw "已通过";
                 }
                 catch(err) {
@@ -80,11 +89,11 @@ Vue.component(Popup.name, Popup);
                    /* if(value===null) throw "";*/
                     if(value=== 1)  throw "yellowB";
                     if(value=== 0)  throw "yellowC";
+                    if(value=== 3)  throw "yellowA";
                 }
                 catch(err) {
                     return value=err;
                 }
-
             },
             formatDuring: function (value) {
                 if(value == "" || value == null || value == undefined){
@@ -138,7 +147,6 @@ Vue.component(Popup.name, Popup);
                     name: 'detailPack',
                     params:{studyid:item.studyid,createUserid:item.createUserid,moduleid:this.$route.params.moduleid}
                 })
-
             },
             getModule(){
                 this.$http.get('pscoredetail/queryById?id='+this.$route.params.moduleid
@@ -167,15 +175,15 @@ Vue.component(Popup.name, Popup);
 			know(){
 				this.showPop = false
 			},
+            showMenu(){
+                this.showPop = true;
+            },
 			datePick(s){
-            Date.prototype.toLocaleString = function(){
-                return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()
-            };
-            return new Date(s).toLocaleString();
-        },
-        showMenu(){
-        	this.showPop = true;
-        }
+                Date.prototype.toLocaleString = function(){
+                    return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()
+                };
+                return new Date(s).toLocaleString();
+            }
 		},
 		mounted(){
             this.getlist();
@@ -213,6 +221,16 @@ font-size: .14rem;
     flex:0 0 auto;
     width: 14%;
 
+}
+.points-table {
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    z-index: 0;
+    -webkit-overflow-scrolling: touch;
 }
 .btnSub{width:.6rem;height:.24rem;font-size:.14rem;line-height:.24rem;border-radius: 4px;font-family:PingFangSC-Medium;border:0px;color:#FFFFFF;background-color:rgba(185, 54, 71, 1);}
 .yellowA{background-color:#BABABA;}
