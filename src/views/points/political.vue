@@ -66,7 +66,7 @@ Vue.component(Popup.name, Popup);
 		data(){
 
 			return {
-				contents:{rights:'评分说明',title:''},
+				contents:{title:''},
 				list:[],
 				isYellow:false,
 				showPop:false,
@@ -173,7 +173,7 @@ Vue.component(Popup.name, Popup);
                     });
             },
 			know(){
-				this.showPop = false
+				this.showPop = false;
 			},
             showMenu(){
                 this.showPop = true;

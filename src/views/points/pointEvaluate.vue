@@ -1,6 +1,6 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <r-header :rfs="contents"></r-header>
+        <!-- <r-header :rfs="contents"></r-header> -->
 
         <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" class="bgColors"  body-padding-top=".46rem">
             先锋作用评定<a slot="right" @click="showPops">评分说明</a></x-header>
@@ -117,7 +117,7 @@
 import axios from 'axios';
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
-import Xheaders from '@/components/comother/rheader';
+// import Xheaders from '@/components/comother/rheader';
 
 import {
     XHeader,
@@ -152,7 +152,7 @@ export default {
         Picker,
         InlineXNumber,
         Alert,
-        'r-header': Xheaders
+        // 'r-header': Xheaders
     },
     data() {
         return {
