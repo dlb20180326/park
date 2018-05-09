@@ -12,6 +12,7 @@
             <p class="allPic">
                 <span class="bg-line"></span>
                 <span class="picture">活动图集</span>
+
                 <span class="numberz"><span style="color:#ff0000">{{list&& list.length || num}}</span>张</span>
             </p>
             <div class="img-show">
@@ -26,6 +27,20 @@
                     <span class="bg-line"></span>
                     <span class="picture">参与人员</span>
                     <span class="numberz"><span class="color-num">{{participants}}</span>/{{peopleNum}}</span>
+                    <!-- <div class="pictureTotal">
+                        <div class="picture-1">
+                            <span class="picture-1-title">花期银行第一支部：</span> 
+                            <div class="wz-fonts1" :class="[noSpr?'auto':'']">
+                                <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span>
+                            </div>
+                        </div>
+                        <div class="picture-2">
+                            <span class="picture-1-title">花期银行第二支部：</span> 
+                            <div class="wz-fonts1" :class="[noSpr?'auto':'']">
+                                <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span>
+                            </div>
+                        </div>
+                    </div> -->
                 </p>
                 <div class="wz-fonts" :class="[spr?'auto':'']">
                     <span  v-for="(peopleName,index) in activeData.participate" :key="index">{{peopleName.name}}</span>
@@ -35,10 +50,21 @@
                 <p class="allPic">
                     <span class="bg-line"></span>
                     <span class="no-picture">未参与人员</span>
+
                     <span class="numberz"><span class="color-num">{{Noparticipants}}</span>/{{peopleNum}}</span>
                 </p>
                 <div class="wz-fonts" :class="[noSpr?'auto':'']">
-                    <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span>
+                    <!-- <div v-for="(peopleName,index) in activeData.notParticipate">
+                        <span class="noPartici-title" v-if="peopleName.userRoleId == -1">{{peopleName.name}}：</span>
+                        <span v-if="peopleName.userRoleId != -1">{{peopleName.name}}</span>
+                    </div> -->
+                    <span
+                        :key="index"
+                        :class="item.userRoleId === -1 ? 'c1' : 'c2'"
+                        v-for="(item, index) in activeData.notParticipate">
+                        {{item.name}}
+                    </span>
+                    <!-- <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span> -->
                 </div>
                 <div class="btnMore" @click="noSpread" v-show="nobtnAn">查看全部参与人员名单<span class="down"></span></div>
                 <div class="btnMore" v-show="nobtnPack" @click="noFolding">收起<span class="up"></span></div>
@@ -108,12 +134,19 @@
             },
             getPic(){
                 this.$http.post('active/getActivePictures?activeId='+this.$route.params.activeId
+
                 ).then(res =>{
                     this.picInfo= res.data;
                     for(var d=0 ;d<this.picInfo.length;d++){
                         var obj = {};
                         obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+this.picInfo[d].pictureId;
+
+
+
                         obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+this.picInfo[d].pictureId;
+
+
+
                         this.list.push(obj);
                     }
                 }).catch(err =>{
@@ -193,7 +226,6 @@
                         // http://javascript.info/tutorial/coordinates
                     }
                 }
-
             }
         }
     }
@@ -214,6 +246,19 @@
     .artical p{margin-bottom:.1rem;}
     .allPic .bg-line{width:.04rem;height:.18rem;margin-left:8%;background: url(../../assets/images/icon-rectangle.png) no-repeat;background-size:100% 100%;display:block;float: left;margin-top:.07rem;}
     .picture{width:0.9rem;font-size:.2rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);margin-left:.1rem;display:block;float: left;}
+    
+    .pictureTotal{
+        margin-left: 8%;
+    }
+    .picture-1{
+         margin-top:.1rem;
+    }
+    .picture-1-title{
+        font-size: .14rem;
+        font-family:PingFangSC-Semibold;
+        color: #666;
+    }
+    
     .numberz{ font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);display:block;float: left;margin-top: .02rem;}
     .allPic{height:.3rem;line-height:.3rem;overflow:hidden;}
     .img-show{width:84%;height:auto;margin-left:8%;    min-height: 44px;}
@@ -248,7 +293,39 @@
         line-height: 22px;
         vertical-align: top;
     }
+    .wz-fonts1{
+        font-family: PingFangSC-Medium;
+        color:rgba(153,153,153,1);
+        line-height: .24rem;
+        width: 87.2%;
+        margin: 10px auto;
+        overflow: hidden;
+        padding: 0;
+        text-overflow:ellipsis;
+        white-space: pre-line;
+    }
+    .wz-fonts1.auto{
+        height:auto;
+        overflow:auto;
+    }
+    .wz-fonts1 span{
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 14px;
+        line-height: 22px;
+        vertical-align: top;
+    }
+    .noPartici-title{
+        color: #666;
+        font-size: .14rem;
+        font-family: PingFangSC-Medium;
+    }
+    .c1 {
+        display: block !important;
+        color: #666;
+    }
     .no-picture{width:1.1rem;font-size:.2rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);display:block;float: left;margin-left:.1rem;}
+
     .btnMore{width:1.6rem;height:.3rem;border-radius:15px;margin:.2rem auto;font-size:.1rem;
         font-family:PingFangSC-Medium;
         color:rgba(204,204,204,1);border:1px solid #E4E4E4;line-height:.3rem;text-align:center;

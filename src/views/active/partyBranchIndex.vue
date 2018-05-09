@@ -10,23 +10,26 @@
                     <img src="@/assets/images/icon-head.png">
                 </flexbox-item>
                 <flexbox-item class="list-body">
-                    <router-link :to="{name:'activePost',params:{activeId:item.id}}">
                         <flexbox align="start">
                             <flexbox-item class="list-head">
-                                <b>{{item.activeName}}</b>
-                                <span>{{item.activePrincipalPeople}}</span>
-                                &nbsp; &nbsp;<span>{{datePick(item.startTime)}}</span>
+                                <router-link :to="{name:'activePost',params:{activeId:item.id}}">
+                                    <b>{{item.activeName}}</b>
+                                    <span>{{item.activePrincipalPeople}}</span>
+                                    &nbsp; &nbsp;<span>{{datePick(item.startTime)}}</span>
+                                </router-link>
                             </flexbox-item>
-                            <flexbox-item v-if="item.activeCreatePeople == user.userid">
+                            <flexbox-item v-if="item.activeCreatePeople == user.userid && item.endTime  > new Date().getTime()">
                                 <input type="button" class="cancle" value="取消活动" @click="deleteActive(item.id)">
                             </flexbox-item>
                         </flexbox>
+                    <router-link :to="{name:'activePost',params:{activeId:item.id}}">
                         <div class="list-content" v-html="item.active_Context"></div>
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
                             <!-- 缩略图显示 -->
-                            <div><img :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)"></div>
+                            <div><img style="position:relative;" :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)">
+                            <img style="position:absolute;top:0;right:0;" src="@/assets/images/x.png" @click="deletePic(img.id)"></div>
                         </flexbox-item>
                         <flexbox-item :span="1/3" v-if="roleid!==4 && item.pictures.length<9"  v-show="item.startTime < new Date().getTime()">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
@@ -40,6 +43,15 @@
                             <div class="middle-top">是否取消活动？</div>
                             <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="cancle">
                             <input type="button" class="btn" value="是" @click="confirm">
+                        </div>
+                        </popup>
+                    </div>
+                    <div v-transfer-dom>
+                        <popup v-model="showPopPic" position="left" width="100%">
+                        <div class="middle">
+                            <div class="middle-top">是否删除？</div>
+                            <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="showPopPic=false">
+                            <input type="button" class="btn" value="是" @click="confirmPic">
                         </div>
                         </popup>
                     </div>
@@ -96,8 +108,10 @@ export default {
             list: [],
             imgs: [],
             activeId : 0,
+            pictureId : 0,
             showPop:false,
             showPop1:false,
+            showPopPic:false,
             message:'',
             roleid: this.$store.getters.user.roleid
         };
@@ -115,6 +129,10 @@ export default {
         },
         preview(index, idx) {
             this.$refs.previewer[index].show(idx);
+        },
+        deletePic(imgId){
+            this.showPopPic = true;
+            this.pictureId = imgId;
         },
         getList() {
             this.$http
@@ -238,13 +256,26 @@ export default {
                 let data = res.success;
                 if(res.success == false){
                     this.showPop1 = true;   
-                    this.message = res.msg
+                    this.message = res.msg;
+                    this.getList();
                     setTimeout(() => {
                         this.showPop1 = false;
                     }, 3000)
                 }
             });  
             this.showPop = false;
+        },
+        confirmPic(imgId){
+            this.$http.delete('active/deleteActivePicById?id='+this.pictureId
+            ).then(res =>{
+                let data = res.success;
+                if(res.success){
+                    this.message = res.msg
+                    this.pictureId = 0;
+                    this.getList();
+                }
+            });  
+            this.showPopPic = false;
         },
         cancle(){
             this.showPop = false;

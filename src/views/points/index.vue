@@ -92,6 +92,14 @@
                                    {{knoew.detailTitle}}
                                 </flexbox-item>
                             </flexbox>
+                            <flexbox v-if="knoew.recordType == 1">
+                                <flexbox-item class="label">
+                                    活动名称：
+                                </flexbox-item>
+                                <flexbox-item>
+                                    {{knoew.recordDesc}}
+                                </flexbox-item>
+                            </flexbox>
                             <flexbox v-if="knoew.approvedName">
                                 <flexbox-item class="label">
                                     审核人：
@@ -105,7 +113,7 @@
                                     加分人：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    {{knoew.adderName}}
+                                    {{knoew.adderName||'系统自动'}}
                                 </flexbox-item>
                             </flexbox>
                             <flexbox>
