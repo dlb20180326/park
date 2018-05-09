@@ -10,7 +10,7 @@
                     <div class="top-second">
                         <div class="second-left">
                             <span class="color-light">片区:</span>
-                            <span class="color-dark">{{partAbout.address}}</span>
+                            <span class="color-dark">{{partAbout.address }}</span>
                         </div>
                         <div class="second-right">
                             <span class="color-light">党支部书记:</span>

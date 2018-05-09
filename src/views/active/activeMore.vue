@@ -32,7 +32,8 @@
                     		<a @click="submit(item.id)">报名</a>
                 		</div>
                         <div class="book"  v-if="item.signupstatus == 1">
-                            <a  style="background-color: #8b8b8b" @click="submit1(item.id)">已报名</a>
+                            <!-- <a  style="background-color: #8b8b8b" @click="submit1(item.id)">已报名</a> -->
+                            <a  style="background-color: #8b8b8b">已报名</a>
                         </div>
                 		<div class="grayLine"></div>
                 	</div>

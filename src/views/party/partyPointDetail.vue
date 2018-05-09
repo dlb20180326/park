@@ -7,7 +7,7 @@
             <div style="padding:0 .2rem;">
                 <table width="100%" class="table">
                     <tr>
-                        <td width="100" class="grayColors">姓名：</td>
+                        <td width="100" class="grayColors">党员姓名：</td>
                         <td class="f_b blackColors">{{name1}}</td>
                     </tr>
                     <tr>

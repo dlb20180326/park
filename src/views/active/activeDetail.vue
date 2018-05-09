@@ -29,14 +29,14 @@
                 <div class="content">
                     <table width="100%" class="table">
                         <tr>
-                            <td width="100">标题：</td>
+                            <td width="80">标题：</td>
                             <td class="f_b">{{activeTitle}}</td>
                             <div v-if="activeType">
                                 <img src="@/assets/images/activeDetail.png" alt="">
                             </div>
                         </tr>
                         <tr>
-                            <td width="100">活动时间：</td>
+                            <td width="80">活动时间：</td>
                             <td class="f_b">{{startTime1|formatDuring}}~{{endTime1|formatDuring}}</td>
                         </tr>
                         <tr>
@@ -75,7 +75,7 @@
                             <li v-for="(item,index) in activeComplete" :key="index">
                                 <a class=" display clearfix " >
                                     <div class=" fl">{{item.activeName}}</div>
-                                    <div class=" fr">{{item.endTime|formatDuring}}<span class="rightBtn"></span></div>
+                                    <div class=" fr">{{item.startTime|formatDuring}}<span class="rightBtn"></span></div>
                                 </a>
                             </li>
                         </ul>

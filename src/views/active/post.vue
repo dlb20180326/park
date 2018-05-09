@@ -4,7 +4,7 @@
             <r-header :rfs="contents"></r-header>
             <p class="titles">{{activeData.activeName}}</p>
             <p class="time">{{activeNames}}活动发起人：<span class="dark">{{activeData.activeCreatePeopleName}}</span></p>
-            <p class="time">活动时间：<span class="dark">{{activeData.startTime|formatDuring}}-{{activeData.endTime|formatDuring}}</span></p>
+            <p class="time">活动时间：<span class="dark">{{activeData.startTime|formatDuring}}~{{activeData.endTime|formatDuring}}</span></p>
             <p class="time">地点：<span class="dark">{{activeData.activePace}}</span></p>
             <div class="artical">
                 {{activeData.activeContext}}

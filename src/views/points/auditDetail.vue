@@ -33,14 +33,20 @@
         <flexbox orient="vertical" align="initial">
             <view-box class="view-box">
                 <group label-width="80px" label-margin-right=".08rem">
-                    <cell class="no-border" :border-intent="false" disabled title="党员姓名 :" value-align="left"><span class="nav">{{userName}}</span></cell>
-                    <cell :border-intent="false" disabled title="获得总分 :" value-align="left"><span class="nav">{{totalscore}}</span></cell>
+                    <span class="bg-line"></span>
+                    <cell class="no-border" :border-intent="false" disabled title="党员姓名 :" value-align="left">
+                        <span class="nav">{{userName}}</span>
+                    </cell>
+                    <span class="bg-line"></span>
+                    <cell :border-intent="false" disabled title="获得总分 :" value-align="left">
+                        <span class="nav">{{totalscore}}</span>
+                    </cell>
                 </group>
 
                 <div class="item-list" v-if="item.message!=''" v-for="(item,i) of list" :key="i">
                     <div class="item">
 
-                        <div class="header mb-reject1">{{item.title}}：（ 得分：<span v-show="item.status == 3">0</span>
+                       <span class="bg-line1"></span> <div class="header mb-reject1">{{item.title}}：（ 得分：<span v-show="item.status == 3">0</span>
                         											<span v-show="item.status != 3">5</span> 分 ）
                         </div>
 
@@ -378,6 +384,26 @@ export default {
         font-weight: 600;
         color: #B93647;
         padding: 0.02rem .15rem;
+    }
+    .bg-line {
+        width: 0.04rem;
+        height: 0.18rem;
+        background: url(../../assets/images/icon-rectangle.png) no-repeat;
+        background-size: 100% 100%;
+        display: block;
+        float: left;
+        margin-top: 0.12rem;
+        margin-right: 4%;
+    }
+    .bg-line1{
+        width: 0.04rem;
+        height: 0.18rem;
+        background: url(../../assets/images/icon-rectangle.png) no-repeat;
+        background-size: 100% 100%;
+        display: block;
+        float: left;
+        margin-top: 0.24rem;
+        margin-right: 4%;
     }
     .states.scuess{
         color: #6BD46B;
