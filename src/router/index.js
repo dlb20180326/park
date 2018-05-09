@@ -28,7 +28,8 @@ router.beforeEach((to, from, next) => {
             return next({
                 path: '/login',
                 query: {
-                    openId: to.query.openId || undefined
+                    openId: to.query.openId || undefined,
+                    toPath: to.fullPath
                 }
             });
         }

@@ -12,7 +12,7 @@
             <div class="input-all clearfix">
                 <div class="left-content">
                     <i class="img-locks"></i>
-                    <label  class="label-lock">密码</label>
+                    <label class="label-lock">密码</label>
                 </div>
                 <input type="password" v-model="pass" placeholder="输入登陆密码" />
             </div>
@@ -47,27 +47,26 @@ export default {
                     type: 'text',
                     position: 'top'
                 });
-            this.$store.dispatch('login', {
+            this.$store
+                .dispatch('login', {
                     name: this.account,
                     password: this.pass,
                     openId: this.$route.query.openId || undefined
                 })
-                .then(
-                    result =>{
-                        if(result.status){
-                            this.$router.push({
-                                path: '/'
-                            })
-                        }else{
-                            this.$vux.toast.show({
-                                text: result.message,
-                                width: '18em',
-                                type: 'text',
-                                position: 'top'
-                            })
-                        }
+                .then(result => {
+                    if (result.status) {
+                        this.$router.push({
+                            path: this.$route.query.toPath || '/'
+                        });
+                    } else {
+                        this.$vux.toast.show({
+                            text: result.message,
+                            width: '18em',
+                            type: 'text',
+                            position: 'top'
+                        });
                     }
-                )
+                });
         }
     }
 };
