@@ -1,10 +1,12 @@
 <template>
 	<div>
-		<x-header class="bgColors" :title='rfs.title' slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;"><a slot="right" @on-click-more="" v-text="rfs.rights"></a></x-header>
+		<x-header class="bgColors" :title='rfs.title' slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;">
+			<a slot="right" v-text="rfs.rights" @click="eventsName"></a>
+		</x-header>
 	</div>
 </template>
 <script>
-import {XHeader} from 'vux'
+	import {XHeader} from 'vux'
 	export default {
 		data(){
 			return {
@@ -14,9 +16,14 @@ import {XHeader} from 'vux'
 		components:{
 			XHeader
 		},
+		methods:{
+			eventsName(){
+				this.$emit('subs');
+			}
+		},
 		props:['rfs'],
 		mounted(){
-			/*console.log(this.rfs);*/
+			console.log(123213);
 		}
 		
 	}

@@ -402,7 +402,7 @@ body {
 .up {
     width: 0.1rem;
     height: 0.1rem;
-    display: inline-block;
+    display:block;
     background: url(../../assets/images/icon-up.png) no-repeat;
     background-size: 100% 100%;
     float: right;

@@ -116,6 +116,9 @@ export default {
         }
     },
     methods: {
+        cos(){
+        console.log('1111');
+        },
         show(index) {
             this.$refs.previewer.show(index);
         },
@@ -457,7 +460,7 @@ body {
 .up {
     width: 0.1rem;
     height: 0.1rem;
-    display: inline-block;
+    display:block;
     background: url(../../assets/images/icon-up.png) no-repeat;
     background-size: 100% 100%;
     float: right;
