@@ -47,7 +47,7 @@ export default {
                 this.$router.push({
                     path: '/party/dues1',
                     name: 'Dues'
-                });
+                });removes
             }
             if (it.label == '思想汇报') {
                 this.$router.push({
