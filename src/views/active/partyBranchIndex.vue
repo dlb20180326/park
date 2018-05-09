@@ -501,7 +501,7 @@ export default {
     width: 0.6rem;
     bottom: 0;
 }
-.middle{width:2.8rem;height:1.48rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
+.middle{width:2.8rem;height:1.48rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;opacity: 0.2}
 .middle1{
     width: 90%;
     height: 38px;
@@ -522,6 +522,7 @@ export default {
     height:1rem;
     line-height:1rem;
     text-align:center;
+    background-color: #FFFFFF;
     box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);
     font-size:.16rem;
     color:#333333;

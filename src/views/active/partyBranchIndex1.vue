@@ -48,6 +48,31 @@
                             <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>
+                    
+                   
+                    <div v-transfer-dom>
+                        <popup v-model="showPop" position="left" width="100%">
+                        <div class="middle">
+                            <div class="middle-top">是否取消活动？</div>
+                            <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="cancle">
+                            <input type="button" class="btn" value="是" @click="confirm">
+                        </div>
+                        </popup>
+                    </div>
+                    <div v-transfer-dom>
+                        <popup v-model="showPopPic" position="left" width="100%">
+                        <div class="middle">
+                            <div class="middle-top">是否删除？</div>
+                            <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="showPopPic=false">
+                            <input type="button" class="btn" value="是" @click="confirmPic">
+                        </div>
+                        </popup>
+                    </div>
+                    <div v-transfer-dom>
+                        <popup v-model="showPop1" position="right" width="100%" height="20px">
+                            <div class="middle1">{{message}}</div>
+                        </popup>
+                    </div>
                     <div v-transfer-dom>
                         <!-- 大图显示 -->
                         <previewer :list="item.pictures" :options="item.previewerOptions" ref="previewer"></previewer>
@@ -99,7 +124,11 @@ export default {
             department:'',
             departmentids:'',
             activeS:false,
-            activesId:1
+            activesId:1,
+            pictureId : 0,
+            showPop:false,
+            showPop1:false,
+            showPopPic:false
         };
     },
     mounted() {
@@ -267,6 +296,25 @@ export default {
                     });
                 })
             );
+        },
+        deleteActive(itemId){
+            this.showPop = true;
+            this.activeId = itemId;
+        },
+        confirmPic(imgId){
+            this.$http.delete('active/deleteActivePicById?id='+this.pictureId
+            ).then(res =>{
+                let data = res.success;
+                if(res.success){
+                    this.message = res.msg
+                    this.pictureId = 0;
+                    this.getList();
+                }
+            });  
+            this.showPopPic = false;
+        },
+        cancle(){
+            this.showPop = false;
         }
     },
 };
