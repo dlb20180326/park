@@ -161,7 +161,7 @@
               })
           }else if(item.type == 'ACTIVE'){if(item.beginYn=='Y'){
               this.$router.push({
-                  path:'active/partyBranch'
+                  path:'active/partyBranch1'
               })}else{ this.activeTitle = item.name;
                   this.showQR(item.masId);}
           }
