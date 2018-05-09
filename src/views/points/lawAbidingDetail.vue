@@ -1,7 +1,9 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <!-- <x-header>遵章守纪评分</x-header> -->
-        <r-header :rfs="contents" body-padding-top=".46rem"></r-header>
+         <x-header slot="header" style="width:100%;position:absolute;left:0;top:0;z-index:100;" class="bgColors"  body-padding-top=".46rem">
+            遵章守纪评分
+              <a slot="right" @click="showMenu">评分说明</a>
+             </x-header>
         <div class="group-item">
             <group-title slot="title">
                 <b>党员姓名：<span style="color: #999999">{{name}}</span></b>
@@ -48,13 +50,26 @@
                 点击确认扣分
             </x-button>
         </div>
-
+  <div v-transfer-dom>
+				<popup v-model="showPop" position="left" width="100%">
+				<div class="middle">
+					<div class="middle-top">评分说明</div>
+					<div class="middle-content">
+              	<p>
+                            1、党员在支部民主评议党员活动中，被评定为“不合格党员”或受限期改正等组织处置的扣20分；<br>
+                            2、党员受到党内纪律处分或行政处罚以上的，实行“一票否决”。
+						</p>
+					
+					</div>
+					<div class="knowBtn" @click="know()">我知道了</div>
+				</div>
+				</popup>
+			</div>
     </div>
 </template>
 
 <script>
 import axios from "axios";
-import Xheader from "@/components/comother/rheader";
 import {
   XHeader,
   GroupTitle,
@@ -67,7 +82,8 @@ import {
   Datetime,
   Group,
   Picker,
-  Previewer
+  Previewer,
+  Popup,
 } from "vux";
 import wx from "weixin-js-sdk";
 import weixin from "@/services/weixin";
@@ -87,7 +103,7 @@ export default {
     Picker,
     Alert,
     Previewer,
-    "r-header": Xheader
+    Popup,
   },
   data() {
     return {
@@ -107,7 +123,7 @@ export default {
       departmentname: "",
       Content1: "",
       Content2: "",
-      contents: { rights: "评分说明", title: "遵章守纪评分" }
+      showPop:false
     };
   },
   methods: {
@@ -237,7 +253,12 @@ export default {
       this.value7 = now.getFullYear() + "-" + cmonth + "-" + day;
       console.log("set today ok");
     },
-
+    showMenu(){
+               this.showPop = true;
+            },
+    know(){
+             this.showPop = false;
+        },
     chooseImage(it) {
       wx.chooseImage({
         count: 1, // 默认9
@@ -288,7 +309,7 @@ export default {
           });
         }
       });
-    }
+    }, 
   },
   mounted() {
     weixin.init(["chooseImage", "uploadImage"]);
@@ -523,4 +544,11 @@ input[type="file"] {
   height: 0.32rem;
   padding: 0;
 }
+.middle .middle-top{width:100%;height:.4rem; background:linear-gradient(90deg,rgba(185,54,71,1),rgba(155,10,26,1));box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);font-size:.16rem;color:#FFFFFF;text-align:center;line-height:.4rem;border-radius:10px 10px 0 0;}
+.middle{width:2.8rem;height:2.5rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
+.knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
+border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
+.vux-popup-dialog{background-color: rgba(0,0,0,0.2)!important;}
+.middle-content p{font-size:.14rem;color:#828282;line-height:.24rem;}
+.middle-content{width:2.4rem;height:1.2rem;margin:.21rem .19rem .21rem .21rem;}
 </style>

@@ -54,7 +54,7 @@
 
                         <span class="desc" style="color: #b2b2b2;">{{item.message}}</span>
                         <div class="img-show">
-                            <img class="previewer-demo-img" v-for="(it,idx) in item.memos" :src="it.msrc" width="100"  @click="atBig(idx,i)">
+                            <img class="previewer-demo-img" v-for="(it,idx) in item.memos" :src="it.msrc" :key="it" width="100"  @click="atBig(idx,i)">
                             <div v-transfer-dom>
                             <previewer :list="item.memos" ref="previewer"  slot="names"  :options="options" @on-index-change="logIndexChange">
                             </previewer>
@@ -249,8 +249,6 @@ td {
 }
 .points-auditDetail-dialog {
     .weui-dialog {
-        .vux-header {
-        }
         .weui-cells {
             margin-top: 0;
             &:before,
