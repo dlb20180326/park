@@ -50,7 +50,7 @@ export default {
             select: {infos: '党员信息', acin: false},
             userId: cookie.get('userId'),
             departmentname:'',
-            person:null,
+            person:0,
             partyBranch:''
         };
     },
@@ -81,7 +81,6 @@ export default {
                 }).then(res => {
                     this.contents = res.data;
                     this.departmentname = this.contents[0].departmentname;
-                    this.person = this.contents.length;
                 }).catch(err => {
                     console.log('fail' + err);
                 })
@@ -94,6 +93,7 @@ export default {
                     }
                 }).then(res => {
                     this.navName = res.data;
+                    this.person = res.data.people;
                 }).catch(err => {
                     console.log('fail' + err);
                 })
