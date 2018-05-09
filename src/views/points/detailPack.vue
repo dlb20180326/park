@@ -1,7 +1,7 @@
 <template>
     <div class="page-body disabled-tabbar">
         <view-box ref="viewBox" body-padding-top=".46rem">
-            <r-header :rfs="contents">
+            <r-header :rfs="contents" @subs="cos()">
             </r-header>
             <p class="allPic">
                 <span class="bg-line"></span>
@@ -96,6 +96,9 @@ export default {
         }
     },
     methods: {
+        cos(){
+        console.log('1111');
+        },
         show(index) {
             this.$refs.previewer.show(index);
         },
@@ -188,6 +191,7 @@ export default {
                 .get('pscoredetail/queryById?id=' + this.$route.params.moduleid)
                 .then(res => {
                     this.contents.title = res.data.projectName + '评分';
+                     this.contents.rights = '说明';
                 })
                 .catch(err => {
                     console.log(err);
