@@ -639,6 +639,6 @@
     }
     .weui-btn{
         width: 100%!important;
-        bottom: .1rem!important;
+        /* bottom: .1rem!important; */
     }
 </style>
