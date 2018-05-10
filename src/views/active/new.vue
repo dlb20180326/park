@@ -469,7 +469,7 @@
     };
 </script>
 <style lang="less">
-    .addPic{height:.17rem; 	font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.17rem;
+    .addPic{height:.17rem; 	font-size:.14rem;font-family:PingFangSC-Medium;color:#464646;font-weight: 600;line-height:.17rem;
     }
     .photo-list{padding:0.1rem 0 0;}
     .photo-list.border0{border-bottom:0;padding-bottom: 0;}
