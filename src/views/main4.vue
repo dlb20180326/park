@@ -263,6 +263,11 @@ export default {
 </script>
 
 <style scoped>
+/* .top-right{
+    position:absolute;
+    left:0.5rem;
+} */
+
 .header {
     width: 100%;
     height: 1.6rem;
@@ -271,7 +276,7 @@ export default {
 }
 .header-top {
     width: 94%;
-    height: 1.7rem;
+    height: 100%;
     border-radius: 5px;
     background: rgba(255, 255, 255, 1);
     /* box-shadow: 0 3px 8px 0 rgba(174, 174, 174, 0.5); */
@@ -281,27 +286,33 @@ export default {
     left:3%;
 }
 .top-head {
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 0.54rem;
-    margin: 0 auto;
     border-bottom: 1px solid #ededed;
 }
 .top-left {
-    float: left;
+    /* float: left;
     margin: 0.02rem 0 0.15rem .17rem;
     height: 0.54rem;
     line-height: 0.54rem;
     font-size: 0.14rem;
     font-weight: 600;
     font-family: PingFangSC-Semibold;
-    color:#3E3E3E;
+    color:#3E3E3E; */
+    height: 0.54rem;
+    line-height: 0.54rem;
+    font-size: 0.14rem;
 }
 .top-right {
-    float: left;;
-    margin: 0.12rem 0 0.15rem .91rem;
+    /* float: left;
+    margin: 0.12rem 0 0.15rem .91rem; */
     width: 0.31rem;
     height: 0.33rem;
-    font-weight: 600;
+    /* font-weight: 600; */
     background-repeat:no-repeat;
     background-size: 100% 100%;
 }
@@ -310,7 +321,7 @@ export default {
     height: 1.2rem;
     margin: 0 auto;
     font-size: 0.14rem;
-    padding-top: .16rem;
+    /* padding-top: .16rem; */
    /* margin-bottom:20px; */
 }
 .second-top{
