@@ -92,7 +92,7 @@
         }
     .logo-top{
         position: absolute;
-        top:0;
+        top:.58rem;
         width:100%;
         height: 1.67rem;
         background: url(../assets/images/new-logo-new.png) no-repeat;
