@@ -28,8 +28,12 @@
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
                             <!-- 缩略图显示 -->
-                            <div><img style="position:relative;" :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)">
-                            <img style="position:absolute;top:0;right:0;" src="@/assets/images/x.png" @click="deletePic(img.id)"></div>
+                            <div>
+                                <img style="position:relative;" :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)">
+                                <div v-if="item.activeCreatePeople == user.userid">
+                                    <img style="position:absolute;top:0;right:0;" src="@/assets/images/x.png" @click="deletePic(img.id)">
+                                </div>
+                           </div>
                         </flexbox-item>
                         <flexbox-item :span="1/3" v-if="roleid!==4 && item.pictures.length<9"  v-show="item.startTime < new Date().getTime()">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
