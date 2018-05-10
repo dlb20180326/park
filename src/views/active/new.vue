@@ -103,7 +103,7 @@
         <div class="group-item" style="margin-bottom:0.2rem">
             <group-title slot="title"></group-title>
             <x-button type="warn" @click.native="submit()" style="height:0.4rem !important">
-                生成活动二维码
+                生成活动二维码1
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
