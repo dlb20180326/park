@@ -107,7 +107,7 @@
             <textarea cols="30" rows="10"  maxlength="300" v-model='activeContext'></textarea>
         </div>
         <div class="group-item">
-        	<span class="addPic">添加照片</span>
+        	<span class="addPic">添加海报</span>
             <div class="photo-list cl">
                 <ul>
                     <li v-for="(item,index) in picList.list">
@@ -123,9 +123,9 @@
                 </ul>
             </div>
         </div>
-        <div class="group-item">
+        <div class="group-item" style="margin-bottom:0.2rem">
             <group-title slot="title"></group-title>
-            <x-button type="warn" @click.native="submit()">
+            <x-button type="warn" @click.native="submit()" style="height:0.4rem !important">
                 生成活动二维码
             </x-button>
         </div>
