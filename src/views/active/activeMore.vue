@@ -1,6 +1,21 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <x-header><span @click="toggle">已报名</span><span @click="noSign">未报名</span></x-header>
+        <x-header>
+                    <!-- <span @click="toggle" class="toggle">已报名</span><span @click="noSign" class="toggle">未报名</span> -->
+            
+              <tab v-model="tabIndex" :line-width="5" active-color="#666" bar-active-color="#a0333b" custom-bar-width="1rem">
+
+                   
+                    <tab-item class="tabitem">
+                        <b> <span @click="toggle">已报名</span></b>
+                    </tab-item>
+                    <tab-item class="tabitem">
+                        <b><span @click="noSign">未报名</span></b>
+                    </tab-item>
+                </tab>
+        
+         
+        </x-header>
         <div class="group-item">
                     <div class="allLine" v-for="(item,index) in infoM" :key="index">
                         <div style="position:relative">
@@ -46,7 +61,7 @@
 
 <script>
 import axios from 'axios'
-import { XHeader, GroupTitle, cookie,Flexbox, FlexboxItem, XButton ,Alert,TransferDomDirective as TransferDom} from 'vux';
+import { XHeader, GroupTitle, cookie,Flexbox, FlexboxItem, Tab, TabItem,XButton ,Alert,TransferDomDirective as TransferDom} from 'vux';
 export default {
     directives: {
         TransferDom
@@ -57,7 +72,9 @@ export default {
         Flexbox,
         FlexboxItem,
         XButton,
-        Alert
+        Alert,
+        Tab,
+        TabItem,
     },
     filters: {
         formatDuring: function (value) {
@@ -97,7 +114,8 @@ export default {
             msg:'',
             userId:cookie.get('userId'),
             isActive:false,
-            infoM:[]
+            infoM:[],
+            tabIndex:"1",
         }
     },
     methods:{
@@ -167,13 +185,13 @@ export default {
 	return new Date(s).toLocaleString();
     },
     toggle(){
-        alert("111");
+        // alert("111");
         this.infoM = [];
         this.infoM = this.active;
 
     },
     noSign(){
-        alert("3333");
+        // alert("3333");
         this.infoM = [];
         this.infoM = this.unactive;
     },
@@ -187,6 +205,23 @@ export default {
 </script>
 
 <style lang="less" scoped>
+// .span{
+//     display:inline-block;
+//     width:0.5rem;
+// }
+.tabitem{
+    border: 0px!important;
+    box-sizing: border-box!important;
+    // background: linear-gradient(to right, rgb(185, 54, 71), rgb(155, 10, 26))!important;
+     background-color:none!important;
+
+    
+    color:#fff!important;
+}
+.vux-tab .vux-tab-item{
+    background: transparent!important;
+}
+
 .page-body{
 	flex: 1;
 }
