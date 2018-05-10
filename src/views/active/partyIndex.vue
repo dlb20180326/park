@@ -188,6 +188,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.vux-flexbox-item.list-avatar img{
+    width:0.4rem!important;
+    height:0.4rem!important;
+}
 .page-body {
     display: flex;
     flex-direction: column;

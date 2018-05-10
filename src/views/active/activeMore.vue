@@ -470,15 +470,6 @@ input {
     display: inline-block;
     padding: 0 0.2rem;
     }
-
-
-
-
-
-
-
-
-
 </style>
 <style>
 #nameSc .vux-tab{

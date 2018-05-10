@@ -1,6 +1,6 @@
 <template>
     <div class="page-body">
-        <x-header :left-options="{showBack: false}">
+        <x-header :left-options="{showBack: false}" style="position:fixed;width:100%;">
             党员生活
         </x-header>
         <div class="box">
