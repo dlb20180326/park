@@ -16,6 +16,13 @@
                         </previewer>
                     </div>
                 </div> -->
+                <div class="img-show-pic">
+                    <img class="previewer-demo-img" v-for="(item,index) in picList" :src="item.msrc" :key="index"  @click="showPicInfo(index)">
+                    <div v-transfer-dom>
+                        <previewer :list="picList" ref="previewer2" :options="options" @on-index-change="logIndexChange">
+                        </previewer>
+                    </div>
+                </div>
             </div>
             <p class="allPic">
                 <span class="bg-line"></span>
@@ -97,6 +104,9 @@
             show (index) {
                 this.$refs.previewer.show(index)
             },
+            showPicInfo (index) {
+                this.$refs.previewer2.show(index)
+            },
             spread(){
                 this.spr = true;
                 this.btnAn = !this.btnAn;
@@ -135,6 +145,20 @@
                     if(this.Noparticipants >= 4){
                         this.nobtnAn = true
                     }
+                    if(this.activeData.picIds)
+                    {
+                        var picIdArr = this.activeData.picIds.split(",")
+                        picIdArr.forEach(element => {
+                            if(element)
+                            {
+                                var obj = {};
+                                obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+element;
+                                obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+element;
+                                this.picList.push(obj);
+                            }
+                        });
+                    }
+                    
 
                 }).catch(err =>{
                     console.log(err)
@@ -207,6 +231,7 @@
                 activeData:{},
                 picInfo:[],
                 list: [],
+                picList : [],
                 spr:false,
                 noSpr:false,
                 nobtnPack:false,
@@ -266,7 +291,9 @@
         font-family:PingFangSC-Semibold;
         color: #666;
     }
-    
+    .img-show-pic{height:auto;min-height: 44px;}
+    .img-show-pic img{width:90%;margin-left:-5%;margin-top:.1rem;}
+    .img-show-pic img:not(:first-child){margin-left:4%;}
     .numberz{ font-size:.14rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);display:block;float: left;margin-top: .02rem;}
     .allPic{height:.3rem;line-height:.3rem;overflow:hidden;}
     .img-show{width:84%;height:auto;margin-left:8%;    min-height: 44px;}
