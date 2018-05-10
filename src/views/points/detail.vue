@@ -15,7 +15,7 @@
 			<div>
 				<table class="table-content">
 					<tr>
-						<td class="table-content-label" rowspan="2">政治学习（10分）</td>
+						<td class="table-content-label" rowspan="2">政治学习<br>（10分）</td>
 						<td class="table-content-text">党员根据综合党委工作提示和各级党组织的学习要求，参加学习教育活动</td>
 						<td class="table-content-score" style="border-radius: 0 0.1rem 0 0">2.5分/次<br/>（2次）</td>
 					</tr>
@@ -29,7 +29,7 @@
 			<div>
 				<table class="table-content">
 					<tr>
-						<td class="table-content-label" rowspan="2">组织生活（20分）</td>
+						<td class="table-content-label" rowspan="2">组织生活<br>（20分）</td>
 						<td class="table-content-text">党员按时参加本支部的组织生活</td>
 						<td class="table-content-score" style="border-radius: 0 0.1rem 0 0">2分/次<br/>（5次）</td>
 					</tr>
@@ -43,7 +43,7 @@
 			<div>
 				<table class="table-content">
 					<tr>
-						<td class="table-content-label" rowspan="2">党费缴纳（15分）</td>
+						<td class="table-content-label" rowspan="2">党费缴纳<br>（15分）</td>
 						<td class="table-content-text">党员按时足额缴纳党费</td>
 						<td class="table-content-score" style="border-radius: 0 0.1rem 0.1rem 0">1.25分/次<br/>（12次）</td>
 					</tr>
@@ -53,7 +53,7 @@
 			<div>
 				<table class="table-content">
 					<tr>
-						<td class="table-content-label" rowspan="2">思想汇报（10分）</td>
+						<td class="table-content-label" rowspan="2">思想汇报<br>（10分）</td>
 						<td class="table-content-text">党员每上半年口头向支部书记汇报一次</td>
 						<td class="table-content-score" style="border-radius: 0 0.1rem 0 0">5分</td>
 					</tr>
@@ -67,7 +67,7 @@
 			<div>
 				<table class="table-content">
 					<tr>
-						<td class="table-content-label" rowspan="3">先锋作用（15分）</td>
+						<td class="table-content-label" rowspan="3">先锋作用<br>（15分）</td>
 						<td class="table-content-text">党员年内获得综合党委以上荣誉的</td>
 						<td class="table-content-score" style="border-radius: 0 0.1rem 0 0">5分</td>
 					</tr>
@@ -85,7 +85,7 @@
 			<div>
 				<table class="table-content">
 					<tr>
-						<td class="table-content-label" rowspan="2">遵章守纪（20分）</td>
+						<td class="table-content-label" rowspan="2">遵章守纪<br>（20分）</td>
 						<td class="table-content-text">党员在支部民主评议党员活动中，被评定为“不合格党员”或受限期改正等组织处置的扣20分</td>
 						<td class="table-content-score" style="border-radius: 0 0.1rem 0.1rem 0">默认20分</td>
 					</tr>
@@ -95,7 +95,7 @@
 			<div>
 				<table class="table-content">
 					<tr>
-						<td class="table-content-label" rowspan="2">公益服务（10分）</td>
+						<td class="table-content-label" rowspan="2">公益服务<br>（10分）</td>
 						<td class="table-content-text">党员积极参加公益活动</td>
 						<td class="table-content-score" style="border-radius: 0 0.1rem 0.1rem 0">3分/次<br/>（最高不超过20分）</td>
 					</tr>

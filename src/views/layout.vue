@@ -7,12 +7,10 @@
                 <img slot="icon-active" :src="item.iconActive">
                 <span slot="label">{{item.label}}</span>
             </tabbar-item>
-            <!--
-            <tabbar-item>
+            <!-- <tabbar-item>
                 <img slot="icon" src="@/assets/images/icon_logout.png" style="width:80%;height:80%;margin-top:3px;" @click="logout">
                 <span slot="label" @click="logout">注销</span>
-            </tabbar-item>
-            -->
+            </tabbar-item> -->
         </tabbar>
     </div>
 </template>

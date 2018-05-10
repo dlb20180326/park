@@ -473,7 +473,7 @@ ol,ul,li{
 }
 .bg-dark{position:fixed;left:0;top:0;width:100%;height:100%;z-index:998;opacity:0.3;background-color:#000;filter:alpha(opacity=30)}
 .bg-cross{
-    width: .4rem;height: .4rem;right: 0;display: inline-block;margin:.3rem auto 0;
+    width: .4rem;height: .4rem;right: 0;display: inline-block;margin-top:0.3rem;margin-bottom:0;margin-left:0.5rem;
 
 background-image:url(../../assets/images/icon-del.png);background-size:contain;background-repeat:no-repeat;background-position:50% 50%;
 }

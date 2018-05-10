@@ -1,8 +1,8 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <x-header>全部活动</x-header>
+        <x-header><span @click="toggle">已报名</span><span @click="noSign">未报名</span></x-header>
         <div class="group-item">
-                    <div class="allLine" v-for="(item,index) in active" :key="index">
+                    <div class="allLine" v-for="(item,index) in infoM" :key="index">
                         <div style="position:relative">
                             <span class="colorL">活动名称：</span>
                             <span class="colorW">{{item.activeName}}</span>
@@ -91,11 +91,13 @@ export default {
     data() {
         return {
             departmentid:this.$store.getters.user.departmentid,
-            active:[],
+            active : [],
+            unactive : [],
             show:false,
             msg:'',
             userId:cookie.get('userId'),
-            isActive:false
+            isActive:false,
+            infoM:[]
         }
     },
     methods:{
@@ -111,7 +113,18 @@ export default {
                 }
             }).then((res)=> {
                 console.log(res.data.list);
-                this.active=res.data.list;
+                res.data.list.forEach(element => {
+                    if(element.signupstatus == 1)
+                    {
+                        this.active.push(element);
+                    }
+                    else
+                    {
+                        this.unactive.push(element);
+                    }
+                    this.infoM = this.active;
+                });
+                //this.active=res.data.list;
             }).catch(function (error) {
                     console.log(error);
                 });
@@ -152,7 +165,18 @@ export default {
 		return this.getFullYear() +'.'+ (this.getMonth()+1)+'.'+this.getDate()
 	}
 	return new Date(s).toLocaleString();
-	}
+    },
+    toggle(){
+        alert("111");
+        this.infoM = [];
+        this.infoM = this.active;
+
+    },
+    noSign(){
+        alert("3333");
+        this.infoM = [];
+        this.infoM = this.unactive;
+    },
     } ,
     mounted() {
         this.getActivityMore();
@@ -415,7 +439,10 @@ input {
         padding-right:0.32rem;
     }
 
-
+.vux-header .vux-header-title > span{
+    display: inline-block;
+    padding: 0 0.2rem;
+    }
 
 
 
