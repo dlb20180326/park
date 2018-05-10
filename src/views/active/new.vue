@@ -631,4 +631,13 @@
         width: 8em !important;
         min-width: 7.6em;
     }
+    .weui-btn_warn {
+        background-color: #b93647!important;
+        width: .51rem!important;
+        height: .32rem!important;
+        border: 0px!important;
+    }
+    .weui-btn{
+        width: 100%!important;
+    }
 </style>
