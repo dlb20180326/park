@@ -1,8 +1,8 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <x-header><span @click="toggle">已报名</span><span @click="item">未报名</span></x-header>
+        <x-header><span @click="toggle">已报名</span><span @click="noSign">未报名</span></x-header>
         <div class="group-item">
-                    <div class="allLine" v-for="(item,index) in active" :key="index">
+                    <div class="allLine" v-for="(item,index) in infoM" :key="index">
                         <div style="position:relative">
                             <span class="colorL">活动名称：</span>
                             <span class="colorW">{{item.activeName}}</span>
@@ -97,8 +97,7 @@ export default {
             msg:'',
             userId:cookie.get('userId'),
             isActive:false,
-            dataSu:[],
-            signupstatus:null
+            infoM:[]
         }
     },
     methods:{
@@ -115,7 +114,6 @@ export default {
             }).then((res)=> {
                 console.log(res.data.list);
                 res.data.list.forEach(element => {
-                    this.dataSu.push(element.signupstatus);
                     if(element.signupstatus == 1)
                     {
                         this.active.push(element);
@@ -124,6 +122,7 @@ export default {
                     {
                         this.unactive.push(element);
                     }
+                    this.infoM = this.active;
                 });
                 //this.active=res.data.list;
             }).catch(function (error) {
@@ -169,15 +168,18 @@ export default {
     },
     toggle(){
         alert("111");
+        this.infoM = [];
+        this.infoM = this.active;
 
     },
-    item(){
-        alert("3333")
+    noSign(){
+        alert("3333");
+        this.infoM = [];
+        this.infoM = this.unactive;
     },
     } ,
     mounted() {
         this.getActivityMore();
-        console.log(this.dataSu);
 
 
     }
