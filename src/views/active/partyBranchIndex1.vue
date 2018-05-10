@@ -81,7 +81,7 @@
                 </confirm>
             </div> -->
             <div v-transfer-dom>
-                <popup v-model="showPop" position="left" width="100%">
+                <popup v-model="showPop" position="left" width="100%" border="0">
                 <div class="middle">
                     <div class="middle-top">是否取消活动？</div>
                     <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="cancle">
@@ -90,7 +90,7 @@
                 </popup>
             </div>
             <div v-transfer-dom>
-                <popup v-model="showPopPic" position="left" width="100%">
+                <popup v-model="showPopPic" position="left" width="100%" border="0">
                 <div class="middle">
                     <div class="middle-top">是否删除？</div>
                     <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="showPopPic=false">

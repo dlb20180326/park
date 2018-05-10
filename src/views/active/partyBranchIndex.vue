@@ -53,7 +53,7 @@
             </flexbox>
         </div>
         <div v-transfer-dom>
-            <popup v-model="showPop" position="left" width="100%">
+            <popup v-model="showPop" position="left" width="100%" border="0">
             <div class="middle">
                 <div class="middle-top">是否取消活动？</div>
                 <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="cancle">
@@ -63,7 +63,7 @@
         </div>
 
         <div v-transfer-dom>
-            <popup v-model="showPopPic" position="left" width="100%">
+            <popup v-model="showPopPic" position="left" width="100%" border="0">
             <div class="middle">
                 <div class="middle-top">是否删除？</div>
                 <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="showPopPic=false">
@@ -531,8 +531,8 @@ export default {
     height:1rem;
     line-height:1rem;
     text-align:center;
-    background-color: #FFFFFF !important;
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);
+    // background-color: #FFFFFF !important;
+    background: linear-gradient(90deg,#fff,#fff);
     font-size:.16rem;
     color:#333333;
     border-radius:10px 10px 0 0;
@@ -545,6 +545,7 @@ border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
     float: left;
     width: 50%;
     height: 48px;
+    line-height: 48px;
     font-size: .16rem;
     border: 0;
     background-color: #ffffff;
