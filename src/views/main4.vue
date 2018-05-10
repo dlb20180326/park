@@ -1,13 +1,30 @@
 <template>
-    <div class="page-body">
+    <div class="page-body" style="background-color: #F5F5F5;">
         <view-box ref="viewBox">
             <div class="header">
                 <div class="header-top">
                     <div class="top-head">
-                        <div class="top-left">{{dateTime}}，{{userAbout.name}}</div>
                         <div class="top-right" :style="{backgroundImage: 'url('+userAbout.avatar+')'}"></div>
+                        <div class="top-left">{{dateTime}}，{{userAbout.name}}~</div>
                     </div>
-                    <div class="top-second">
+                    <div class="top-bottom">
+                        <div class="second-top" >
+                            <span class="color-light">所属片区:</span>
+                            <span class="color-dark" style="margin-left:.23rem;">{{partAbout.address }}</span>
+                        </div>
+                        <div class="second-content">
+                            <span class="color-light" style="position:relative;">所属党支部:</span>
+                            <span class="color-dark" style="position:absolute;">{{partAbout.departmentname}}</span>
+                        </div>
+                        <div class="left-bottom">
+                            <span class="color-light">党支部书记:</span>
+                            <span class="color-dark" style="margin-left:.08rem;">{{partAbout.partyBranch}}</span>
+                        </div>
+                         <div class="exit">
+                             <span>退出登录</span>
+                         </div>
+                    </div>
+                    <!-- <div class="top-second">
                         <div class="second-left">
                             <span class="color-light">片区:</span>
                             <span class="color-dark">{{partAbout.address }}</span>
@@ -22,11 +39,11 @@
                             <span class="color-light" style="position:relative;">党支部:</span>
                             <span class="color-dark" style="position:absolute;">{{partAbout.departmentname}}</span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="content">
-                <div class="annual">年度参与</div>
+                <div class="annual"><span style="display: inline-block;margin-top: .06rem;">党员年度参与</span></div>
                 <flexbox>
                     <flexbox-item v-for="(user,index) in users" :key='index'>
                         <div class="flex-demo" @click="ItemClick(index)">
@@ -35,6 +52,11 @@
                         </div>
                     </flexbox-item>
                 </flexbox>
+            </div>
+            <div class="bottom">
+                <div class="bottom-top">
+                    <span>年度积分分配</span>
+                </div>
                 <div id="echartShow">
 
                 </div>
@@ -246,7 +268,7 @@ export default {
 }
 .header-top {
     width: 90%;
-    height: 2.05rem;
+    height: 1.75rem;
     border-radius: 5px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0 3px 8px 0 rgba(174, 174, 174, 0.5);
@@ -256,29 +278,58 @@ export default {
     left:5%;
 }
 .top-head {
-    width: 86%;
-    height: 1.14rem;
+    width: 100%;
+    height: 0.54rem;
     margin: 0 auto;
     border-bottom: 1px solid #ededed;
 }
 .top-left {
-    height: 0.32rem;
-    font-size: 0.18rem;
-    font-family: PingFangSC-Semibold;
-    color: rgba(62, 62, 62, 1);
-    line-height: 0.25rem;
-    margin: 0.49rem 0 0.21rem 0.24rem;
-    font-weight: 600;
     float: left;
+    margin: 0.02rem 0 0.15rem .17rem;
+    height: 0.54rem;
+    line-height: 0.54rem;
+    font-size: 0.14rem;
+    font-weight: 600;
+    font-family: PingFangSC-Semibold;
+    color:#3E3E3E;
 }
 .top-right {
-    width: 0.66rem;
-    height: 0.66rem;
+    float: left;;
+    margin: 0.12rem 0 0.15rem .91rem;
+    width: 0.31rem;
+    height: 0.33rem;
     font-weight: 600;
-    float: right;
-    margin: 0.24rem 0.2rem 0.15rem 0;
     background-repeat:no-repeat;
     background-size: 100% 100%;
+}
+.top-bottom{
+    width: 86%;
+    height: 1.2rem;
+    margin: 0 auto;
+    font-size: 0.14rem;
+    padding-top: .16rem;
+}
+.second-top{
+    margin-bottom: .1rem;
+}
+.second-content{
+    margin-bottom: .2rem;
+}
+.exit{
+    display: inline-block;
+    float: right;
+    margin-top: -.2rem;
+}
+.exit span{
+    display: inline-block;
+    width: .6rem;
+    height: .2rem;
+    font-size: .12rem;
+    text-align: center;
+    color: #BBBBBB;
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    background-color: #fcfcfc;
 }
 .top-second2 {
     width: 82%;
@@ -316,54 +367,83 @@ export default {
     color: rgba(153, 153, 153, 1);
 }
 .color-dark {
+    margin-left:.1rem;
+    margin-right:.1rem;
     font-family: PingFang-SC-Medium;
     color: rgba(102, 102, 102, 1);
 }
 .content {
-    width: 100%;
+    width: 90%;
+    height: .9rem;
     background-color: #fff;
+    margin: auto;
+    border-radius: .08rem;
 }
 .annual {
     width: 93.3%;
     height: 0.32rem;
-    font-size: 0.2rem;
+    font-size: 0.14rem;
     font-family: PingFangSC-Semibold;
-    color: rgba(49, 49, 49, 1);
+    color: #333333;
     line-height: 0.28rem;
-    margin: 0.9rem 0rem 0.13rem 6.6%;
+    margin: 0.48rem 0rem 0.13rem 6.6%;
     font-weight: 600;
 }
 .fonts-au {
-    width: 100%;
+    width: 50%;
     height: 0.2rem;
     font-size: 0.14rem;
     font-family: PingFang-SC-Medium;
-    color: rgba(49, 49, 49, 1);
+    color: #A6A6A6;
     line-height: 20px;
     margin: 0 auto;
-    padding-top: 0.13rem;
+    padding-top: 0.06rem;
+    margin-left: .2rem;
     text-align: center;
 }
 .integral {
+    float: right;
     width: 0.55rem;
     height: 0.37rem;
-    font-size: 0.26rem;
+    font-size: 0.16rem;
     font-family: PingFang-SC-Medium;
     color: rgba(250, 122, 0, 1);
     line-height: 0.37rem;
     text-align: center;
-    margin: 0.04rem auto 0.1rem auto;
+    margin-top: -.3rem;
+    /* margin: 0.04rem auto 0.1rem auto; */
 }
 .vux-flexbox {
     width: 89.4%;
-    height: 0.8rem;
+    height: 0.33rem;
+    border-radius: .5rem;
     margin: 0.13rem auto 0.32rem auto;
 }
 .flex-demo {
     width: 98%;
-    height: 0.8rem;
+    height: 0.33rem;
     background: rgba(246, 246, 246, 1);
     border-radius: 2px;
+}
+.bottom{
+    width: 90%;
+    height: 3.31rem;
+    background-color: #fff;
+    margin: auto;
+    border-radius: .08rem;
+    margin-top: .1rem;
+}
+.bottom-top{
+    width: 100%;
+    height: .4rem;
+    border-bottom: 1px solid #F2F2F2;
+}
+.bottom-top span{
+    display: inline-block;
+    margin: .08rem 0 0 6.6%;
+    font-size: .14rem;
+    font-weight: 600;
+    color: #333;
 }
 .vux-flexbox-item:nth-child(2) {
     margin-right: -1%;
@@ -371,7 +451,7 @@ export default {
 #echartShow {
     width: 76%;
     height: 2.1rem;
-    margin: 0 auto;
+    margin: .3rem auto 0;
 }
 .weui-tabbar {
     background-color: #ffffff;

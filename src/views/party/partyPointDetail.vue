@@ -47,6 +47,10 @@
                             <td class="grayColors">审核人：</td>
                             <td class="f_b">{{item.approvedName}}</td>
                         </tr>
+                        <tr v-if="item.recordId == 1">
+                            <td class="grayColors">活动内容：</td>
+                            <td class="f_b">{{item.recordDesc}}</td>
+                        </tr>
                         <tr v-show="!item.approvedName">
                             <td class="grayColors">审核人：</td>
                             <td class="f_b">{{item.adderName||'系统自动'}}</td>

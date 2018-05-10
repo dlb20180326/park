@@ -25,29 +25,63 @@
                     <img src="@/assets/images/icon-head.png">
                 </flexbox-item>
                 <flexbox-item class="list-body">
-                    <router-link :to="{name:'activePost',params:{activeId:item.id}}">
                         <flexbox align="start">
                             <flexbox-item class="list-head">
+                            <router-link :to="{name:'activePost',params:{activeId:item.id}}">
                                 <b>{{item.activeName}}</b>
                                 <span>{{item.activePrincipalPeople}}</span>
                                 &nbsp; &nbsp;<span>{{datePick(item.startTime)}}</span>
+                            </router-link>
                             </flexbox-item>
                             <!-- 删除 -->
                             <!-- <flexbox-item class="list-close"  v-show="roleid == 2 || roleid == 3">
                                 <a><img src="@/assets/images/x.png"></a>
                             </flexbox-item> -->
                         </flexbox>
+                        
+                            <flexbox-item v-if="item.activeCreatePeople == user.userid && item.endTime  > new Date().getTime()">
+                                <input type="button" class="cancle" value="取消活动" @click="deleteActive(item.id)">
+                            </flexbox-item>
+                    <router-link :to="{name:'activePost',params:{activeId:item.id}}">
                         <div class="list-content" v-html="item.active_Context"></div>
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
                         <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
                             <!-- 缩略图显示 -->
-                            <div><img :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)"></div>
+                            <div>
+                                <img style="position:relative;" :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)" />
+                                <img style="position:absolute;top:0;right:0;" src="@/assets/images/x.png" @click="deletePic(img.id)" />
+                            </div>
                         </flexbox-item>
                         <flexbox-item :span="1/3" v-if="roleid!==4 && item.pictures.length<9" v-show="item.startTime < new Date().getTime()">
                             <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>
+                    
+                   
+                    <div v-transfer-dom>
+                        <popup v-model="showPop" position="left" width="100%">
+                        <div class="middle">
+                            <div class="middle-top">是否取消活动？</div>
+                            <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="cancle">
+                            <input type="button" class="btn" value="是" @click="confirm">
+                        </div>
+                        </popup>
+                    </div>
+                    <div v-transfer-dom>
+                        <popup v-model="showPopPic" position="left" width="100%">
+                        <div class="middle">
+                            <div class="middle-top">是否删除？</div>
+                            <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="showPopPic=false">
+                            <input type="button" class="btn" value="是" @click="confirmPic">
+                        </div>
+                        </popup>
+                    </div>
+                    <div v-transfer-dom>
+                        <popup v-model="showPop1" position="right" width="100%" height="20px">
+                            <div class="middle1">{{message}}</div>
+                        </popup>
+                    </div>
                     <div v-transfer-dom>
                         <!-- 大图显示 -->
                         <previewer :list="item.pictures" :options="item.previewerOptions" ref="previewer"></previewer>
@@ -59,7 +93,8 @@
 </template>
 
 <script>
-import { XHeader, Flexbox, FlexboxItem, TransferDom, Previewer } from 'vux';
+import { mapGetters } from 'vuex';
+import { XHeader, Flexbox, FlexboxItem, TransferDom, Popup, Alert,AlertPlugin, Previewer } from 'vux';
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
 import axios from "axios";
@@ -67,7 +102,9 @@ import axios from "axios";
 export default {
     components: {
         XHeader,
+        Popup,
         Flexbox,
+        Alert,
         FlexboxItem,
         Previewer
     },
@@ -99,7 +136,12 @@ export default {
             department:'',
             departmentids:'',
             activeS:false,
-            activesId:1
+            activesId:0,
+            message:'',
+            pictureId : 0,
+            showPop:false,
+            showPop1:false,
+            showPopPic:false
         };
     },
     mounted() {
@@ -267,8 +309,49 @@ export default {
                     });
                 })
             );
+        },
+        deleteActive(itemId){
+            this.showPop = true;
+            this.activeId = itemId;
+        },
+        confirm(){
+            this.$http.delete('active/deleteById?activeid='+this.activeId
+            ).then(res =>{
+                let data = res.success;
+                if(res.success == false){
+                    this.showPop1 = true;   
+                    this.message = res.msg;
+                    this.getList();
+                    setTimeout(() => {
+                        this.showPop1 = false;
+                    }, 3000)
+                }
+            });  
+            this.showPop = false;
+        },        
+        deletePic(imgId){
+            this.showPopPic = true;
+            this.pictureId = imgId;
+        },
+        confirmPic(imgId){
+            this.$http.delete('active/deleteActivePicById?id='+this.pictureId
+            ).then(res =>{
+                let data = res.success;
+                if(res.success){
+                    this.message = res.msg
+                    this.pictureId = 0;
+                    this.getList();
+                }
+            });  
+            this.showPopPic = false;
+        }, 
+        cancle(){
+            this.showPop = false;
         }
     },
+    computed: {
+        ...mapGetters(['user'])
+    }
 };
 </script>
 <style lang="less" scoped>
@@ -284,7 +367,7 @@ export default {
         left: 0;
         right: 0;
         background: #fff;
-        z-index: 1005;
+        // z-index: 1005;
     }
     .list-left{
     width: 62%;
@@ -307,7 +390,21 @@ export default {
     background-color: #efefef;
 }
 .vux-flexbox-item.list-body {
-        padding: 0.1rem !important;
+        padding: 0.1rem;
+        .cancle{
+            float: right;
+            width: 0.75rem;
+            height: 0.3rem;
+            font-size: 0.14rem;
+            line-height: 0.24rem;
+            border-radius: 4px;
+            border: 0px;
+            color: #ffffff;
+            background-color: #b93647;
+            margin-right: -2.45rem !important;
+            margin-top: -0.5rem !important;
+            // color: black;
+        }
     }
 .trans-black{position:absolute;z-index:520;background-color:rgba(0,0,0,0.6);top:1.07rem;bottom:0px;left:0px;right:0px;}
 .widthSet {
@@ -535,5 +632,45 @@ export default {
 .bg-flag{height:.2rem;margin-top:.2rem;}
 .animate-down{padding:0 .2rem .2rem .21rem;z-index:521;background-color:#FFFFFF;top:96px;border: 1px solid #E4E4E4;
 position:fixed;left:0;right:0;
+}
+.middle{width:2.8rem;height:1.48rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF !important;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;opacity: 0.2 !important}
+.middle1{
+    width: 90%;
+    height: 38px;
+    line-height: 38px;
+    margin: .8rem auto;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #FFFFFF !important;
+    position: absolute;
+    z-index: 300;
+    left: 5%;
+    top: 27%;
+    overflow: hidden;
+}
+.mint-popup-left{left:15%;}
+.middle .middle-top{
+    width:100%;
+    height:1rem;
+    line-height:1rem;
+    text-align:center;
+    background-color: #FFFFFF !important;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);
+    font-size:.16rem;
+    color:#333333;
+    border-radius:10px 10px 0 0;
+    border-bottom: 1px solid #E4E4E4;
+    }
+.knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
+border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
+.vux-popup-dialog{background-color: rgba(0,0,0,0);}
+.btn{
+    float: left;
+    width: 50%;
+    height: 48px;
+    font-size: .16rem;
+    border: 0;
+    background-color: #ffffff;
+    color: #666;
 }
 </style>

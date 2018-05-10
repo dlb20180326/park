@@ -89,7 +89,7 @@
                     name: this.account,
                     password: this.pass,
                     openId: this.$route.query.openId || undefined,
-                    userType : this.pickerValue
+                    userType : this.pickerValue[0]
                 })
                 .then(
                     result =>{
