@@ -54,25 +54,28 @@
                 account: '',
                 pass: '12345678',
                 pickerList:[{
+                    name: '请选择管理角色',
+                    value: "0"
+                    },{
                     name: '党支部书记',
                     value: "3"
                     }, {
                     name: '片区负责人',
                     value: "2"
                 }],
-                pickerValue: ["3"],
-                roleName : "党支部书记",
+                pickerValue: ["0"],
+                roleName : "请选择管理角色",
                 PickerVisible:false
             }
         },
         methods:{
             login() {
-            // if (!this.role)
-            //     return this.$vux.toast.show({
-            //         text: '请选择角色',
-            //         type: 'text',
-            //         position: 'top'
-            //     });
+            if (this.pickerValue[0] == "0")
+                return this.$vux.toast.show({
+                    text: '请选择角色',
+                    type: 'text',
+                    position: 'top'
+                });
             if (!this.account)
                 return this.$vux.toast.show({
                     text: '请输入帐号',
@@ -133,11 +136,15 @@
                 this.pickerValue = value;
                 if(value == "3")
                 {
-                    this.roleName = this.pickerList[0].name;
+                    this.roleName = this.pickerList[1].name;
                 }
                 else if(value == "2")
                 {
-                    this.roleName = this.pickerList[1].name;
+                    this.roleName = this.pickerList[2].name;
+                }
+                else
+                {
+                    this.roleName = this.pickerList[0].name;
                 }
             }
 
