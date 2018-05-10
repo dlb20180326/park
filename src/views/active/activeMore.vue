@@ -1,6 +1,6 @@
 <template>
     <div class="page-body disabled-tabbar">
-        <x-header><span @click="toggle">已报名</span><span @click="toggle">未报名</span></x-header>
+        <x-header><span @click="toggle">已报名</span><span @click="item">未报名</span></x-header>
         <div class="group-item">
                     <div class="allLine" v-for="(item,index) in active" :key="index">
                         <div style="position:relative">
@@ -96,7 +96,9 @@ export default {
             show:false,
             msg:'',
             userId:cookie.get('userId'),
-            isActive:false
+            isActive:false,
+            dataSu:[],
+            signupstatus:null
         }
     },
     methods:{
@@ -113,6 +115,7 @@ export default {
             }).then((res)=> {
                 console.log(res.data.list);
                 res.data.list.forEach(element => {
+                    this.dataSu.push(element.signupstatus);
                     if(element.signupstatus == 1)
                     {
                         this.active.push(element);
@@ -166,11 +169,15 @@ export default {
     },
     toggle(){
         alert("111");
+
     },
-    
+    item(){
+        alert("3333")
+    },
     } ,
     mounted() {
         this.getActivityMore();
+        console.log(this.dataSu);
 
 
     }
