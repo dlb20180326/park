@@ -12,7 +12,7 @@
             <div class="inputs">
                 <div class="input-all clearfix">
                     <span class="icon-phone1 "></span>
-                    <input type="text" v-model="roleName" placeholder="请选择管理角色" @click="PickerVisible=true" readonly/>
+                    <input type="text" v-model="roleName" style="color:#ccc;" placeholder="请选择管理角色" @click="PickerVisible=true" readonly/>
                     <span class="icon-phone2" style="float:right" ></span>
                 </div>
                 <div class="input-all clearfix">
