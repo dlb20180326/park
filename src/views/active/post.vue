@@ -56,6 +56,20 @@
                             </div>
                         </div>
                     </div> -->
+                    
+                    <div class="wz-fonts" :class="[noSpr?'auto':'']">
+                        <div v-for="(peopleName,index) in activeData.participate">
+                            <span class="noPartici-title">{{index}}：</span>
+                            <span style="display:inline-block;" v-for="(peopleName1,index) in peopleName">{{peopleName1.name}}</span>
+                        </div>
+                        <!-- <span
+                            :key="index"
+                            :class="item.userRoleId === -1 ? 'titleClass' : 'contentClass'"
+                            v-for="(item, index) in activeData.notParticipate">
+                            {{item.name}}
+                        </span> -->
+                        <!-- <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span> -->
+                    </div>
                 </p>
                 <div class="wz-fonts" :class="[spr?'auto':'']">
                     <span  v-for="(peopleName,index) in activeData.participate" :key="index">{{peopleName.name}}</span>
@@ -69,16 +83,16 @@
                     <span class="numberz"><span class="color-num">{{Noparticipants}}</span>/{{peopleNum}}</span>
                 </p>
                 <div class="wz-fonts" :class="[noSpr?'auto':'']">
-                    <!-- <div v-for="(peopleName,index) in activeData.notParticipate">
-                        <span class="noPartici-title" v-if="peopleName.userRoleId == -1">{{peopleName.name}}：</span>
-                        <span v-if="peopleName.userRoleId != -1">{{peopleName.name}}</span>
-                    </div> -->
-                    <span
+                    <div v-for="(peopleName,index) in activeData.notParticipate">
+                        <span class="noPartici-title">{{index}}：</span>
+                        <span style="display:inline-block;" v-for="(peopleName1,index) in peopleName">{{peopleName1.name}}</span>
+                    </div>
+                    <!-- <span
                         :key="index"
                         :class="item.userRoleId === -1 ? 'titleClass' : 'contentClass'"
                         v-for="(item, index) in activeData.notParticipate">
                         {{item.name}}
-                    </span>
+                    </span> -->
                     <!-- <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span> -->
                 </div>
                 <div class="btnMore" @click="noSpread" v-show="nobtnAn">查看全部参与人员名单<span class="down"></span></div>
@@ -136,9 +150,9 @@
                     this.activeData = res.data;
                     this.contents.title = res.data.activeTypeName+'详情';
                     this.activeNames = this.activeData.activeTypeName;
-                    this.peopleNum = this.activeData.notParticipate.length + this.activeData.participate.length;
-                    this.participants = this.activeData.participate.length;
-                    this.Noparticipants = this.activeData.notParticipate.length;
+                    this.peopleNum = this.activeData.participateCount + this.activeData.notParticipateCount;
+                    this.participants = this.activeData.participateCount;
+                    this.Noparticipants = this.activeData.notParticipateCount;
                     if(this.participants >= 4){
                         this.btnAn = true
                     }
@@ -360,6 +374,8 @@
         vertical-align: top;
     }
     .noPartici-title{
+        display: block !important;
+        margin-bottom: .2rem;
         color: #666;
         font-size: .14rem;
         font-family: PingFangSC-Medium;

@@ -323,7 +323,7 @@ body {
     width: 0.04rem;
     height: 0.18rem;
     margin-left: 8%;
-    background: url(../../assets/images/icon-rectangle.png) no-repeat;
+    background: url(../../assets/images/icon-rectangle1.png) no-repeat;
     background-size: 100% 100%;
     display: block;
     float: left;
@@ -333,7 +333,7 @@ body {
     font-size: 0.14rem;
     font-family: PingFangSC-Semibold;
     color: rgba(51, 51, 51, 1);
-    margin-left: 0.1rem;
+    margin-left: 0.05rem;
     display: block;
     float: left;
 }

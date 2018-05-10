@@ -31,7 +31,7 @@
                             <div>
                                 <img style="position:relative;" :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)">
                                 <div v-if="item.activeCreatePeople == user.userid">
-                                    <img style="position:absolute;top:0;right:0;" src="@/assets/images/x.png" @click="deletePic(img.id)">
+                                    <img style="width:.2rem;position:absolute;top:0;right:0;" src="@/assets/images/x-1.png" @click="deletePic(img.id)">
                                 </div>
                            </div>
                         </flexbox-item>

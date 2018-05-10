@@ -50,7 +50,20 @@
                     <x-button mini type="warn" @click.native="handlePicker()">
                         <i class="iconfont dlb-icon-category" ></i>
                     </x-button>
-                    <!-- <group class="date-no-box"></group> -->
+                    
+                    <transition name="fade">
+                        <div class="picker-box" v-show="PickerVisible2" @click="PickerVisible2 = false">
+                            <picker
+                                :data="pickerList"
+                                :column-width="[]"
+                                :fixed-columns="1"
+                                :columns="1"
+                                v-model="pickerValue"
+                                v-show="PickerVisible2"
+                                @on-change="submit1()">·
+                            </picker>
+                        </div>
+                    </transition>
                 </flexbox-item>
             </flexbox>
         </div>
@@ -117,26 +130,25 @@
                 </div>
           </x-dialog>
         </div>
-        <transition name="fade">
+        <!-- <transition name="fade">
             <div class="picker-box" v-show="PickerVisible2" @click="PickerVisible2 = false">
-                <picker
+                <popup-picker
                     :data="pickerList"
                     :column-width="[]"
                     :fixed-columns="2"
                     :columns="1"
                     v-model="pickerValue"
-                    @on-change="submit1()">
-
-                <GroupTitle>123456789</GroupTitle>  
-                </picker>
+                    v-show="PickerVisible2"
+                    @on-change="submit1()">·
+                </popup-picker>
             </div>
-        </transition>
+        </transition> -->
     </div>
 </template>
 
 <script>
     import axios from 'axios'
-    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group, Picker ,XDialog, TransferDomDirective as TransferDom  } from 'vux';
+    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group, Picker ,PopupPicker,XDialog, TransferDomDirective as TransferDom  } from 'vux';
     import wx from 'weixin-js-sdk';
     import weixin from '@/services/weixin';
     export default {
@@ -154,7 +166,8 @@
             Group,
             Picker,
             Alert,
-            XDialog
+            XDialog,
+            PopupPicker
         },
         data() {
             return {
@@ -207,12 +220,8 @@
                     //     value.title = value.title.substring(0,4);
                     // })
                     // this.list = t;
-                    
-                    // cancelText: '取消',
-                    // confirmText: '确定',
-                    this.list = res.data.map(item => Object.assign({}, item, { title: item.title.substring(0,4) }));
-                    // console.log(res.data);
                     this.PickerVisible2 = true;
+                    this.list = res.data.map(item => Object.assign({}, item, { title: item.title.substring(0,4) }));
                 }).catch(function (error) {
                     // console.log(error);
                 });
@@ -479,8 +488,27 @@
     .photo-list ul li:first-child{margin-left:0;}
     .photo-list .operate{display:none;background:rgba(33,33,33,.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);z-index:5;position:absolute;bottom:0;left:0;right:0;height:12px;padding-bottom:7px;font-size:12px;color:#fff;text-align: center}
     .photo-list .info{line-height:.6rem;text-align:center}
-    .photo-list .preview{width: 0.9rem;height:.9rem;z-index:4;line-height:.6rem;font-family:arial;background-color: #dbdbdb;background-repeat:no-repeat;position:absolute;bottom:0;left:0;text-align:center;right:0;cursor: pointer;border:1px solid #fff;box-sizing: border-box;}
-    .photo-list .preview.addUpload{background-color:#f4f4f4;border: 1px solid #e4e4e4;}
+    .photo-list .preview{
+        width: 0.9rem!important;
+        height:.9rem!important;
+        z-index:4;
+        line-height:.6rem;
+        font-family:arial;
+        background-color: #dbdbdb;
+        background-repeat:no-repeat;
+        position:absolute;
+        bottom:0;
+        left:0;
+        text-align:center;
+        right:0;
+        cursor: pointer;
+        border:1px solid #fff;
+        box-sizing: border-box;
+        }
+    .photo-list .preview.addUpload{
+        background-color:#f4f4f4!important;
+        border: 1px solid #e4e4e4!important;
+        }
     .photo-list .preview img{max-height:.6rem;max-width:.6rem;vertical-align:middle;}
     .photo-list .photo-primary-text{color:#ffA500;font-size:12px;}
     .photo-list .add-bg{
