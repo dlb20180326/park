@@ -325,13 +325,13 @@ export default {
    /* margin-bottom:20px; */
 }
 .second-top{
-    margin-bottom: .1rem;
+    margin-bottom: .15rem;
 }
 .second-content{
-    margin-bottom: .1rem;
+    margin-bottom: .15rem;
 }
 .exit{
-    display: inline-block;
+    display: block;
     float: right;
     margin-top: -.2rem;
 }
@@ -487,3 +487,4 @@ export default {
     }
 }
 </style>
+

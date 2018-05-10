@@ -17,13 +17,13 @@
                 </flexbox>
                 <flexbox :gutter="15">
                     <flexbox-item>
-                        <div class="piece">
+                        <div class="piece left">
                             <div>现党员积分</div>
                             <span>{{itegral || 0.0}}</span>
                         </div>
                     </flexbox-item>
                     <flexbox-item>
-                        <div class="piece">
+                        <div class="piece right">
                             <div>年度党员评级</div>
                             <span>{{results}}</span>
                         </div>
@@ -424,7 +424,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+vux-tab-bar-inner{
+    width:0.6rem!important;
+}
 .box1 {
   height: 100px;
   position: relative;
@@ -604,6 +606,7 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
 .vux-flexbox-item.avatar {
     display: flex;
     align-items: stretch;
+
     justify-content: center;
     flex: 0 0 auto;
     width: 1rem;
@@ -624,13 +627,16 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
 }
 .piece {
     margin-top: 0.1rem;
-    padding: 0.1rem;
+    padding: 0.15rem;
     border-radius: 5px;
     background-color: rgba(246,246,246,1);
     text-align: center;
+    width:85%;
+    height:0.6rem;
     span {
         font-size: 0.24rem;
         color: #ea8031;
+        padding-left:-0.8rem;
     }
 }
 .item-detail {
@@ -644,13 +650,12 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
         color: #666;
     }
     .content {
-       margin: .15rem auto;
+       margin: .15rem 0 ;
         text-align: center;
         width:89.3%;
     }
     .space {
         display: inline-block;
-        width: 0.5rem;
     }
 }
 </style>
