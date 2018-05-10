@@ -311,6 +311,7 @@ export default {
     background-color: #fff;
     &:not(:last-child) {
         margin-bottom: 0.1rem;
+        padding-top: 0.1rem;
     }
 }
 .vux-flexbox-item.list-avatar {
@@ -330,7 +331,7 @@ export default {
     }
 }
 .vux-flexbox-item.list-body {
-    padding: 0.1rem;
+    padding: 0.1rem 0.1rem 0.1rem 0.005rem;
     .cancle{
         float: right;
         width: 0.75rem;
