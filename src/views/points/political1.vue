@@ -412,4 +412,8 @@ body {
 .weui-tabbar[slot='bottom'] {
     display: none !important;
 }
+.vux-flexbox .vux-flexbox-item:first-child {
+    margin-left: -24px!important;
+    margin-top: 0!important;
+}
 </style>

@@ -15,11 +15,15 @@
                 <div class="right-btn" @click="showDet">切换<span></span></div>
             </div>
             </flexbox>
-            <div class="animate-down" style="background-color:#FFFFFF;" v-show="topShow">
-                <div  v-for="(park,index) in department" :key="index" class="bg-flag" :class="[park.departmentid === activesId?'activeColors':'']" @click="change(park)">
-                    {{park.departmentname}}
-                </div>
-            </div>
+            <!-- <div v-transfer-dom>
+                <popup> -->
+                    <div class="animate-down" style="background-color:#FFFFFF;" v-show="topShow">
+                        <div  v-for="(park,index) in department" :key="index" class="bg-flag" :class="[park.departmentid === activesId?'activeColors':'']" @click="change(park)">
+                            {{park.departmentname}}
+                        </div>
+                    </div>
+                <!-- </popup>
+            </div> -->
             <flexbox class="list-item" v-for="(item,index) in list" :key="index" :gutter="0" align="stretch">
                 <flexbox-item class="list-avatar">
                     <img src="@/assets/images/icon-head.png">
@@ -72,14 +76,6 @@
             
         </div>
          
-        <!-- <div v-transfer-dom>
-                <confirm v-model="showPop" position="left" width="100%"
-                title="是否取消活动？"
-                ref="confirm5"
-                @on-cancel="cancle"
-                @on-confirm="confirm">
-                </confirm>
-            </div> -->
             <div v-transfer-dom>
                 <popup v-model="showPop" position="left" width="100%" border="0">
                 <div class="middle">
@@ -669,7 +665,8 @@ position:fixed;left:0;right:0;
     height:1rem;
     line-height:1rem;
     text-align:center;
-    background-color: #FFFFFF !important;
+    // background-color: #FFFFFF !important;
+    background: linear-gradient(90deg, #fff, #fff);
     box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);
     font-size:.16rem;
     color:#333333;
