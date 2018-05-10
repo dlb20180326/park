@@ -60,7 +60,7 @@
                     </div> -->
                     <span
                         :key="index"
-                        :class="item.userRoleId === -1 ? 'c1' : 'c2'"
+                        :class="item.userRoleId === -1 ? 'titleClass' : 'contentClass'"
                         v-for="(item, index) in activeData.notParticipate">
                         {{item.name}}
                     </span>
@@ -276,7 +276,7 @@
         width: 87.2%;
         margin: 10px auto;
         /* word-spacing: .1rem; */
-        height: 44px;
+        height: 52px;
         overflow: hidden;
         padding: 0;
         text-overflow:ellipsis;
@@ -290,7 +290,7 @@
         display: inline-block;
         margin-right: 10px;
         font-size: 14px;
-        line-height: 22px;
+        line-height: 12px;
         vertical-align: top;
     }
     .wz-fonts1{
@@ -320,7 +320,7 @@
         font-size: .14rem;
         font-family: PingFangSC-Medium;
     }
-    .c1 {
+    .titleClass {
         display: block !important;
         color: #666;
     }
