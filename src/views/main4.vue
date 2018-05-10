@@ -1,5 +1,5 @@
 <template>
-    <div class="page-body" style="background-color: #F5F5F5;">
+    <div class="page-body" style="background-color: #F4F4F4;">
         <view-box ref="viewBox">
             <div class="header">
                 <div class="header-top">
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="content">
-                <div class="annual"><span style="display: inline-block;margin-top: .06rem;">党员年度参与</span></div>
+                <div class="annual"><span style="display: inline-block;margin-top: .06rem;margin-left:-0.1rem;">党员年度参与</span></div>
                 <flexbox>
                     <flexbox-item v-for="(user,index) in users" :key='index'>
                         <div class="flex-demo" @click="ItemClick(index)">
@@ -265,17 +265,18 @@ export default {
     width: 100%;
     height: 1.6rem;
     background: linear-gradient(to right, rgba(185, 54, 71, 1), rgba(155, 10, 26, 1));
+   
 }
 .header-top {
-    width: 90%;
-    height: 1.75rem;
+    width: 94%;
+    height: 1.7rem;
     border-radius: 5px;
     background: rgba(255, 255, 255, 1);
-    box-shadow: 0 3px 8px 0 rgba(174, 174, 174, 0.5);
+    /* box-shadow: 0 3px 8px 0 rgba(174, 174, 174, 0.5); */
     /*margin: 0 auto;*/
     position:relative;
     top:.24rem;
-    left:5%;
+    left:3%;
 }
 .top-head {
     width: 100%;
@@ -308,12 +309,13 @@ export default {
     margin: 0 auto;
     font-size: 0.14rem;
     padding-top: .16rem;
+   /* margin-bottom:20px; */
 }
 .second-top{
     margin-bottom: .1rem;
 }
 .second-content{
-    margin-bottom: .2rem;
+    margin-bottom: .1rem;
 }
 .exit{
     display: inline-block;
@@ -373,11 +375,12 @@ export default {
     color: rgba(102, 102, 102, 1);
 }
 .content {
-    width: 90%;
+    width: 92.5%;
     height: .9rem;
     background-color: #fff;
     margin: auto;
     border-radius: .08rem;
+    margin-top:-0.05rem;
 }
 .annual {
     width: 93.3%;
@@ -409,7 +412,7 @@ export default {
     font-family: PingFang-SC-Medium;
     color: rgba(250, 122, 0, 1);
     line-height: 0.37rem;
-    text-align: center;
+    /* text-align: center; */
     margin-top: -.3rem;
     /* margin: 0.04rem auto 0.1rem auto; */
 }
@@ -424,9 +427,10 @@ export default {
     height: 0.33rem;
     background: rgba(246, 246, 246, 1);
     border-radius: 2px;
+    margin-left:-0.08rem;
 }
 .bottom{
-    width: 90%;
+    width: 92.5%;
     height: 3.31rem;
     background-color: #fff;
     margin: auto;
@@ -440,7 +444,7 @@ export default {
 }
 .bottom-top span{
     display: inline-block;
-    margin: .08rem 0 0 6.6%;
+    margin: .08rem 0 0 4%;
     font-size: .14rem;
     font-weight: 600;
     color: #333;
