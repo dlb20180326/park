@@ -4,7 +4,7 @@
                     <!-- <span @click="toggle" class="toggle">已报名</span><span @click="noSign" class="toggle">未报名</span> -->
             
               <tab v-model="tabIndex" :line-width="5" active-color="#666" bar-active-color="#a0333b" custom-bar-width="1rem">
-                   
+
                    
                     <tab-item class="tabitem">
                         <b> <span @click="toggle">已报名</span></b>
