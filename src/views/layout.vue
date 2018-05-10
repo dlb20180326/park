@@ -7,19 +7,10 @@
                 <img slot="icon-active" :src="item.iconActive">
                 <span slot="label">{{item.label}}</span>
             </tabbar-item>
-<<<<<<< HEAD
             <!-- <tabbar-item>
                 <img slot="icon" src="@/assets/images/icon_logout.png" style="width:80%;height:80%;margin-top:3px;" @click="logout">
                 <span slot="label" @click="logout">注销</span>
             </tabbar-item> -->
-=======
-            <!--
-            <tabbar-item>
-                <img slot="icon" src="@/assets/images/icon_logout.png" style="width:80%;height:80%;margin-top:3px;" @click="logout">
-                <span slot="label" @click="logout">注销</span>
-            </tabbar-item>
-            -->
->>>>>>> 4a9fd829f406b8ca79d60708ce9b44724671c2a3
         </tabbar>
     </div>
 </template>
