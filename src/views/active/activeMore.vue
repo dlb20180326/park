@@ -1,5 +1,5 @@
 <template>
-    <div class="page-body disabled-tabbar">
+    <div class="page-body disabled-tabbar" id="nameSc">
         <x-header>
                     <!-- <span @click="toggle" class="toggle">已报名</span><span @click="noSign" class="toggle">未报名</span> -->
             
@@ -218,9 +218,9 @@ export default {
     
     color:#fff!important;
 }
-.vux-tab .vux-tab-item{
-    background: transparent!important;
-}
+// .vux-tab .vux-tab-item{
+//     background: transparent!important;
+// }
 
 .page-body{
 	flex: 1;
@@ -487,4 +487,9 @@ input {
 
 
 
+</style>
+<style>
+#nameSc .vux-tab{
+    background-color:transparent!important;
+}
 </style>
