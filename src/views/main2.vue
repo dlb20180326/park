@@ -10,7 +10,7 @@
                   <!-- {{dateTimes}}, -->
                 <!-- </flexbox-item> -->
                 <flexbox-item>
-                  {{headName.name}}书记
+                  {{dateTime}}，{{headName.name}}书记
                 </flexbox-item>
               </flexbox>
               <!-- <flexbox>

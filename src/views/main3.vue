@@ -9,7 +9,7 @@
           {{dateTimes}},
         </flexbox-item>
         <flexbox-item>
-          {{info.partyBranch}}书记。
+          {{dateTime}}，{{info.partyBranch}}书记。
         </flexbox-item>
       </flexbox>
       <flexbox>
@@ -229,6 +229,19 @@ export default {
         ...mapActions(['logout'])
     },
     mounted() {
+        
+        let datime = new Date().getHours();
+        if ((datime >= 5) && (datime < 8)) {
+            this.dateTime = '早上好';
+        } else if ((datime >= 8) && (datime < 11)) {
+            this.dateTime = '上午好';
+        } else if ((datime >= 11) && (datime < 13)) {
+            this.dateTime = '中午好';
+        } else if ((datime >= 13) && (datime < 19)) {
+            this.dateTime = '下午好';
+        } else {
+            this.dateTime = '晚上好';
+        }
         this.getDepartment();
         this.getDate();
     },
