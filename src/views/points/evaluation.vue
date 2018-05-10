@@ -137,7 +137,7 @@ body {
 .vux-flexbox {
     width: 89.4%;
     height: auto;
-    margin: 0.13rem auto 0.32rem auto;
+    margin: 0.2rem auto 0.32rem auto;
     flex-wrap: wrap;
 }
 .flex-demo {
@@ -156,7 +156,7 @@ body {
 .vux-flexbox .vux-flexbox-item {
     min-width: 49%;
     width: 49%;
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.2rem;
     flex: 0;
     position: relative;
 }

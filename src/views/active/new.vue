@@ -103,7 +103,7 @@
         <div class="group-item" style="margin-bottom:0.2rem">
             <group-title slot="title"></group-title>
             <x-button type="warn" @click.native="submit()" style="height:0.4rem !important">
-                生成活动二维码1
+                生成活动二维码
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
@@ -126,6 +126,8 @@
                     :columns="1"
                     v-model="pickerValue"
                     @on-change="submit1()">
+
+                <GroupTitle>123456789</GroupTitle>  
                 </picker>
             </div>
         </transition>
@@ -205,6 +207,9 @@
                     //     value.title = value.title.substring(0,4);
                     // })
                     // this.list = t;
+                    
+                    // cancelText: '取消',
+                    // confirmText: '确定',
                     this.list = res.data.map(item => Object.assign({}, item, { title: item.title.substring(0,4) }));
                     // console.log(res.data);
                     this.PickerVisible2 = true;
