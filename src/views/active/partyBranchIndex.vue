@@ -35,26 +35,7 @@
                             <a class="btn-plus" @click="chooseImage(item)"></a>
                         </flexbox-item>
                     </flexbox>
-                    
-                   
-                    <div v-transfer-dom>
-                        <popup v-model="showPop" position="left" width="100%">
-                        <div class="middle">
-                            <div class="middle-top">是否取消活动？</div>
-                            <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="cancle">
-                            <input type="button" class="btn" value="是" @click="confirm">
-                        </div>
-                        </popup>
-                    </div>
-                    <div v-transfer-dom>
-                        <popup v-model="showPopPic" position="left" width="100%">
-                        <div class="middle">
-                            <div class="middle-top">是否删除？</div>
-                            <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="showPopPic=false">
-                            <input type="button" class="btn" value="是" @click="confirmPic">
-                        </div>
-                        </popup>
-                    </div>
+
                     <div v-transfer-dom>
                         <popup v-model="showPop1" position="right" width="100%" height="20px">
                             <div class="middle1">{{message}}</div>
@@ -67,12 +48,31 @@
                 </flexbox-item>
             </flexbox>
         </div>
+        <div v-transfer-dom>
+            <popup v-model="showPop" position="left" width="100%">
+            <div class="middle">
+                <div class="middle-top">是否取消活动？</div>
+                <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="cancle">
+                <input type="button" class="btn" value="是" @click="confirm">
+            </div>
+            </popup>
+        </div>
+
+        <div v-transfer-dom>
+            <popup v-model="showPopPic" position="left" width="100%">
+            <div class="middle">
+                <div class="middle-top">是否删除？</div>
+                <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="showPopPic=false">
+                <input type="button" class="btn" value="是" @click="confirmPic">
+            </div>
+            </popup>
+        </div>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import { XHeader, Flexbox, FlexboxItem, TransferDom, Popup, Alert,AlertPlugin, Previewer } from 'vux';
+import { XHeader, Flexbox, FlexboxItem, TransferDom, Popup, Alert,AlertPlugin, Confirm,ConfirmPlugin,Previewer } from 'vux';
 import wx from 'weixin-js-sdk';
 import weixin from '@/services/weixin';
 import axios from "axios";
@@ -84,7 +84,9 @@ export default {
         Flexbox,
         Alert,
         FlexboxItem,
-        Previewer
+        Previewer,
+        Confirm,
+        ConfirmPlugin
     },
     directives: {
         clipping: {
@@ -504,7 +506,7 @@ export default {
 .vux-popup-dialog{
     background-color: transparent!important;
 }
-.middle{width:2.8rem;height:1.48rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF !important;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;opacity: 0.2 !important}
+.middle{width:2.8rem;height:1.48rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF !important;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;}
 .middle1{
     width: 90%;
     height: 38px;

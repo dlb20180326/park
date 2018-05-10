@@ -10,7 +10,6 @@
         </flexbox-item>
         <flexbox-item>
           {{info.partyBranch}}书记。
-
         </flexbox-item>
       </flexbox>
       <flexbox>
@@ -280,10 +279,11 @@ export default {
     h3 {
         line-height: 1;
         margin-bottom: 0.08rem;
+        margin-top: 0.08rem;
     }
     .item {
         /*margin-top: 0.1rem;*/
-        padding: 0.1rem 0;
+        padding: 0.05rem 0;
         border-top: 1px solid #eee;
         &:first-child {
             border-top: 0;

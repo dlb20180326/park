@@ -61,7 +61,7 @@
                     value: "2"
                 }],
                 pickerValue: ["3"],
-                roleName : "党支部书记",
+                roleName : "请选择管理角色",
                 PickerVisible:false
             }
         },
@@ -140,7 +140,6 @@
                     this.roleName = this.pickerList[1].name;
                 }
             }
-
         },
         mounted(){
 

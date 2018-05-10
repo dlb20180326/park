@@ -1,7 +1,7 @@
 <template>
     <div class="page-body party-information">
         <x-header>
-            党务信息
+            党员信息
         </x-header>
         <flexbox orient="vertical" align="initial">
             <view-box>

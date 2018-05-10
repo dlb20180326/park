@@ -256,7 +256,7 @@
     .list-left{
 
         width: 54%;
-    margin: .08rem 0 0 5.3%;
+    margin: .1rem 0 0 5.3%;
     height: .3rem;
     line-height: .3rem;
     font-size: .14rem;
@@ -340,7 +340,7 @@
     .points-table {
         box-sizing: border-box;
         border-radius: 5px;
-        margin: 5px 0 30px;
+        margin:5px 10px 30px 0px;
         padding: 10px;
         color: #000;
         background: #fff;

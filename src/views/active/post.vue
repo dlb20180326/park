@@ -75,7 +75,7 @@
                     <!-- <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span> -->
                 </div>
                 <div class="btnMore" @click="noSpread" v-show="nobtnAn">查看全部参与人员名单<span class="down"></span></div>
-                <div class="btnMore" v-show="nobtnPack" @click="noFolding">收起<span class="up"></span></div>
+                <div class="btnMore" v-show="nobtnPack" @click="noFolding"><span style="margin-left:.2rem;"> 收起</span><span class="up"></span></div>
                 </div>
         </view-box>
     </div>
@@ -252,7 +252,16 @@
     .time .dark{color:#6b6b6b;}
     .artical{width:84%;height:auto; font-size:.14rem;font-family:PingFangSC-Regular;color:rgba(102,102,102,1);line-height:.24rem;margin:.18rem 8% .2rem 8%;text-indent:2em;}
     .artical p{margin-bottom:.1rem;}
-    .allPic .bg-line{width:.04rem;height:.18rem;margin-left:8%;background: url(../../assets/images/icon-rectangle.png) no-repeat;background-size:100% 100%;display:block;float: left;margin-top:.07rem;}
+    .allPic .bg-line{
+        width:3px;
+        height:.14rem;
+        margin-left:.3rem;
+        background: url(../../assets/images/icon-rectangle1.png) no-repeat;
+        background-size:100% 100%;
+        display:block;
+        float: left;
+        margin-top:.09rem;
+        }
     .picture{width:0.9rem;font-size:.2rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);margin-left:.1rem;display:block;float: left;}
     
     .pictureTotal{
@@ -331,6 +340,9 @@
     .titleClass {
         display: block !important;
         color: #666;
+    }
+    .contentClass{
+        color: #999;
     }
     .no-picture{width:1.1rem;font-size:.2rem;font-family:PingFangSC-Semibold;color:rgba(51,51,51,1);display:block;float: left;margin-left:.1rem;}
 

@@ -5,14 +5,22 @@
     </x-header>
         <div class="box">
             <div class="head">
-                <flexbox>
+              <flexbox>
+                <!-- <flexbox-item class="dateLable"> -->
+                  <!-- {{dateTimes}}, -->
+                <!-- </flexbox-item> -->
+                <flexbox-item>
+                  {{headName.name}}书记
+                </flexbox-item>
+              </flexbox>
+              <!-- <flexbox>
                     <flexbox-item class="label">
                         片区负责人：
                     </flexbox-item>
                     <flexbox-item>
                         {{headName.name}}
                     </flexbox-item>
-                </flexbox>
+                </flexbox> -->
                 <flexbox>
                     <flexbox-item class="label">
                         现有党支部：
@@ -113,6 +121,7 @@
         partAbout: {},
         todoList: [],
         total : 0,
+        dateTimes: "",
         headName:{},
         activeTitle:"",
         showQrcodeDialog: false
@@ -246,6 +255,11 @@
   };
 </script>
 <style lang="less">
+
+.vux-flexbox-item.dateLable {
+    flex: 0 0 auto;
+    width: auto;
+}
 .qrcode-dialog {
     .weui-dialog {
         padding: 20px;
@@ -284,16 +298,17 @@
     overflow-y: auto;
   }
 
-  .head,
-  .list {
+  .head {
     background-color: #fff;
     line-height: 2;
-    padding: 0.15rem;
+    padding: 0.1rem 0.2rem;
   }
 
   .list {
+      background-color: #fff;
       -webkit-overflow-scrolling: touch;
     margin-top: 0.07rem;
+     padding: 0.2rem 0.2rem;
     h3 {
       line-height: 1;
     }
@@ -301,8 +316,7 @@
       color:#000;
     }
     .item {
-      margin-top: 0.15rem;
-      padding: 0.1rem 0;
+      margin-top: 0.1rem;
       border-top: 1px solid #eee;
       &:first-child {
         border-top: 0;
@@ -348,7 +362,7 @@
   .exit{
       display: inline-block;
       float: right;
-      margin-top: -.2rem;
+      margin-top: -.3rem;
   }
   .exit span{
       display: inline-block;

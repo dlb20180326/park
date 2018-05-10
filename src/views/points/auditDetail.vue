@@ -47,7 +47,7 @@
                     <div class="item">
 
                        <span class="bg-line1"></span> <div class="header mb-reject1">{{item.title}}：（ 得分：<span v-show="item.status == 3">0</span>
-                        											<span v-show="item.status != 3">5</span> 分 ）
+                        											<span v-show="item.status != 3" style="color:#b93647;">5</span> 分 ）
                         </div>
 
                         <div class="states scuess" v-if="item.status==2">
@@ -65,7 +65,7 @@
 
                         <div class="body" style="margin-bottom: .1rem;">
                             <span v-show="item.status == 3" style="color: #b2b2b2;">{{item.message}}</span>
-                            <span v-show="item.status != 3" style="color: #b2b2b2;" class="desc">{{item.message}}</span>
+                            <span v-show="item.status != 3" style="color: #333;" class="desc">{{item.message}}</span>
                             <div class="img-show">
                                 <img class="previewer-demo-img" v-for="(it,idx) in item.memos" :src="it.msrc" width="100"  @click="atBig(idx,i)">
                                 <div v-transfer-dom>
@@ -325,7 +325,7 @@ export default {
 
             .item-list {
                 .item {
-                    padding-bottom: 0.2rem;
+                    padding-bottom: 0.3rem;
                     border-bottom: 1px solid #d9d9d9;
                     position: relative;
                     .header,
@@ -370,12 +370,12 @@ export default {
     .img-right{width:.37rem;height:.37rem;position:absolute;right:.1rem;top:3.15rem;z-index:900;}
     .text-red{color: #B93647;}
     .mb-reject{margin-bottom:.2rem}
-    .mb-reject1{margin-bottom: .25rem}
+    .mb-reject1{margin-bottom: .1rem}
     .mb-score{margin-left:.2rem;letter-spacing: 2px;}
     .states{
         text-align: center;
         border-radius: 4px;
-        border: 2px solid #B93647;
+        border: 1px solid #B93647;
         position: absolute;
         right:0rem;
         z-index: 999;
@@ -386,27 +386,33 @@ export default {
         padding: 0.02rem .15rem;
     }
     .bg-line {
-        width: 0.04rem;
-        height: 0.18rem;
-        background: url(../../assets/images/icon-rectangle.png) no-repeat;
+        width: 0.03rem;
+        height: 0.14rem;
+        background: url(../../assets/images/icon-rectangle1.png) no-repeat;
         background-size: 100% 100%;
         display: block;
         float: left;
-        margin-top: 0.12rem;
-        margin-right: 4%;
+        margin-top: 0.14rem;
+        margin-right: 1.9%;
     }
     .bg-line1{
-        width: 0.04rem;
-        height: 0.18rem;
-        background: url(../../assets/images/icon-rectangle.png) no-repeat;
+        width: 0.03rem;
+        height: 0.14rem;
+        background: url(../../assets/images/icon-rectangle1.png) no-repeat;
         background-size: 100% 100%;
         display: block;
         float: left;
-        margin-top: 0.24rem;
-        margin-right: 4%;
+        margin-top: 0.26rem;
+        margin-right: 1.9%;
     }
     .states.scuess{
         color: #6BD46B;
-        border: 2px solid #6BD46B;
+        border: 1px solid #6BD46B;
+    }
+    .weui-btn_warn {
+        background-color: #b93647!important;
+        width: 120px!important;
+        height: 30px!important;
+        border: 0!important;
     }
 </style>

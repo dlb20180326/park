@@ -1,7 +1,7 @@
 <template>
     <div class="page-body">
         <x-header :left-options="{showBack: false}">
-            党务信息
+            党员信息
         </x-header>
         <div class="header-top">上海中心片区支部信息一览</div>
         <div class="overFs">
@@ -86,7 +86,7 @@ export default {
     height: .24rem;
     margin-top:-.12rem;
     top:50%;
-    background: url(../../assets/images/icon-ses.png) no-repeat;background-size: 100% 100%;
+    background: url(../../assets/images/icon-ses1.png) no-repeat;background-size: 100% 100%;
 }
 .overFs{
     height:calc(100% - .46rem);
