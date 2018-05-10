@@ -633,6 +633,9 @@ export default {
 .animate-down{padding:0 .2rem .2rem .21rem;z-index:521;background-color:#FFFFFF;top:96px;border: 1px solid #E4E4E4;
 position:fixed;left:0;right:0;
 }
+.vux-popup-dialog{
+    background-color: transparent!important;
+}
 .middle{width:2.8rem;height:1.48rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF !important;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;opacity: 0.2 !important}
 .middle1{
     width: 90%;

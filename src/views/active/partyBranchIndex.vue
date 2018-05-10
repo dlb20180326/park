@@ -10,18 +10,18 @@
                     <img src="@/assets/images/icon-head.png">
                 </flexbox-item>
                 <flexbox-item class="list-body">
-                        <flexbox align="start">
-                            <flexbox-item class="list-head">
-                                <router-link :to="{name:'activePost',params:{activeId:item.id}}">
-                                    <b>{{item.activeName}}</b>
-                                    <span>{{item.activePrincipalPeople}}</span>
-                                    &nbsp; &nbsp;<span>{{datePick(item.startTime)}}</span>
-                                </router-link>
-                            </flexbox-item>
-                            <flexbox-item v-if="item.activeCreatePeople == user.userid && item.endTime  > new Date().getTime()">
-                                <input type="button" class="cancle" value="取消活动" @click="deleteActive(item.id)">
-                            </flexbox-item>
-                        </flexbox>
+                    <flexbox align="start">
+                        <flexbox-item class="list-head">
+                            <router-link :to="{name:'activePost',params:{activeId:item.id}}">
+                                <b>{{item.activeName}}</b>
+                                <span>{{item.activePrincipalPeople}}</span>
+                                &nbsp; &nbsp;<span>{{datePick(item.startTime)}}</span>
+                            </router-link>
+                        </flexbox-item>
+                        <flexbox-item v-if="item.activeCreatePeople == user.userid && item.endTime  > new Date().getTime()">
+                            <input type="button" class="cancle" value="取消活动" @click="deleteActive(item.id)">
+                        </flexbox-item>
+                    </flexbox>
                     <router-link :to="{name:'activePost',params:{activeId:item.id}}">
                         <div class="list-content" v-html="item.active_Context"></div>
                     </router-link>
@@ -500,6 +500,9 @@ export default {
     left: 0;
     width: 0.6rem;
     bottom: 0;
+}
+.vux-popup-dialog{
+    background-color: transparent!important;
 }
 .middle{width:2.8rem;height:1.48rem;margin:.8rem auto;border-radius:10px;background-color: #FFFFFF !important;position:absolute;z-index:300;left:calc(50% - 1.4rem);top:21%;overflow:hidden;opacity: 0.2 !important}
 .middle1{

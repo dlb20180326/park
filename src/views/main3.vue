@@ -48,6 +48,10 @@
           人
         </flexbox-item>
       </flexbox>
+      
+        <div class="exit" @click="logout">
+            <span>退出登录</span>
+        </div>
     </div>
     <div class="list">
       <h3>书记待办事宜</h3>
@@ -96,6 +100,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import axios from "axios";
 import {
     XHeader,
@@ -220,12 +225,14 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
-        }
+        },
+
+        ...mapActions(['logout'])
     },
     mounted() {
         this.getDepartment();
         this.getDate();
-    }
+    },
 };
 </script>
 <style lang="less">
@@ -326,5 +333,20 @@ input.weui-btn {
     height: 0.01rem;
     background-color: #efefef;
     margin-left: -4%;
+}
+.exit{
+    display: inline-block;
+    float: right;
+    margin-top: -.2rem;
+}
+.exit span{
+    display: inline-block;
+    width: .6rem;
+    font-size: .12rem;
+    text-align: center;
+    color: #BBBBBB;
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    background-color: #fcfcfc;
 }
 </style>
