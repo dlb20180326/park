@@ -20,7 +20,7 @@
                             <span class="color-light">党支部书记:</span>
                             <span class="color-dark" style="margin-left:.08rem;">{{partAbout.partyBranch}}</span>
                         </div>
-                         <div class="exit">
+                         <div class="exit" @click="logout">
                              <span>退出登录</span>
                          </div>
                     </div>
@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { Flexbox, FlexboxItem, Tabbar, TabbarItem, ViewBox, cookie } from 'vux';
 import echarts from 'echarts';
 import axios from 'axios';
@@ -255,7 +256,8 @@ export default {
             else{
                 this.$router.push("active/activeDetail");
             }
-        }
+        },
+        ...mapActions(['logout'])
     }
 };
 </script>

@@ -38,6 +38,9 @@
                         人
                     </flexbox-item>
                 </flexbox>
+              <div class="exit" @click="logout">
+                  <span>退出登录</span>
+              </div>
             </div>
       <div class="list">
         <h3>书记待办事宜 <span style="color:#b93647;font-size:.16rem;"> ({{total}})</span></h3>
@@ -93,7 +96,7 @@
 </template>
 
 <script>
-
+  import { mapActions } from 'vuex';
   import axios from 'axios';
   import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker ,XDialog, TransferDomDirective as TransferDom ,cookie } from 'vux';
 
@@ -166,10 +169,10 @@
                   this.showQR(item.masId);}
           }
       },
-        showQR(data){
-            document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
-            this.showQrcodeDialog = true;
-        },
+      showQR(data){
+          document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
+          this.showQrcodeDialog = true;
+      },
       infoDetail() {
         axios
           .get('/dangjian/pdepartment/queryById', {
@@ -237,7 +240,8 @@
         catch(err =>{
             console.log('fail'+err);
         })
-      }
+      },
+      ...mapActions(['logout'])
     }
   };
 </script>
@@ -341,4 +345,19 @@
       margin-left: -4%;
   }
 
+  .exit{
+      display: inline-block;
+      float: right;
+      margin-top: -.2rem;
+  }
+  .exit span{
+      display: inline-block;
+      width: .6rem;
+      font-size: .12rem;
+      text-align: center;
+      color: #BBBBBB;
+      border: 1px solid #efefef;
+      border-radius: 4px;
+      background-color: #fcfcfc;
+  }
 </style>

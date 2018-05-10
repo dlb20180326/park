@@ -8,6 +8,14 @@
             <p class="time">地点：<span class="dark">{{activeData.activePace}}</span></p>
             <div class="artical">
                 {{activeData.activeContext}}
+                
+                <!-- <div class="img-show">
+                    <img class="previewer-demo-img" v-for="(item,index) in content.picture" :key="index" :src="item.msrc" @click="show(index)">
+                    <div v-transfer-dom>
+                        <previewer :list="content.picture || []" ref="previewer" :options="options" @on-index-change="logIndexChange">
+                        </previewer>
+                    </div>
+                </div> -->
             </div>
             <p class="allPic">
                 <span class="bg-line"></span>
@@ -60,7 +68,7 @@
                     </div> -->
                     <span
                         :key="index"
-                        :class="item.userRoleId === -1 ? 'c1' : 'c2'"
+                        :class="item.userRoleId === -1 ? 'titleClass' : 'contentClass'"
                         v-for="(item, index) in activeData.notParticipate">
                         {{item.name}}
                     </span>
@@ -276,7 +284,7 @@
         width: 87.2%;
         margin: 10px auto;
         /* word-spacing: .1rem; */
-        height: 44px;
+        height: 52px;
         overflow: hidden;
         padding: 0;
         text-overflow:ellipsis;
@@ -290,7 +298,7 @@
         display: inline-block;
         margin-right: 10px;
         font-size: 14px;
-        line-height: 22px;
+        line-height: 12px;
         vertical-align: top;
     }
     .wz-fonts1{
@@ -320,7 +328,7 @@
         font-size: .14rem;
         font-family: PingFangSC-Medium;
     }
-    .c1 {
+    .titleClass {
         display: block !important;
         color: #666;
     }
