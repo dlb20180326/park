@@ -99,7 +99,7 @@
         <div class="group-item">
             <group-title slot="title"></group-title>
             <x-button type="warn" @click.native="submit()">
-                生成活动二维码
+                <span>生成活动二维码</span>
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
@@ -639,5 +639,6 @@
     }
     .weui-btn{
         width: 100%!important;
+        bottom: .1rem!important;
     }
 </style>
