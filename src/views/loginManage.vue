@@ -1,14 +1,14 @@
 <template>
     <div class="page-body">
         <div class="logo-top"></div>
-        <div class="logo-pic"></div>
+        <!-- <div class="logo-pic"></div> -->
         <div class="last-content">
             
-            <div class="tiles">
+            <!-- <div class="tiles">
                 <span></span>
                 <div>上海陆家嘴金融贸易区综合党委</div>
                 <span></span>
-            </div>
+            </div> -->
             <div class="inputs">
                 <div class="input-all clearfix">
                     <span class="icon-phone1 "></span>
@@ -147,7 +147,6 @@
                     this.roleName = this.pickerList[0].name;
                 }
             }
-
         },
         mounted(){
 
@@ -166,11 +165,11 @@
         }
     .logo-top{
         position: absolute;
-        top:-.2rem;
+        top:0;
         width:100%;
-        height: 1.79rem;
-        background: url(../assets/images/new-logo1.png) no-repeat;
-         background-size:100% 100%;
+        height: 1.67rem;
+        background: url(../assets/images/new-logo-new.png) no-repeat;
+        background-size:100% 100%;
         /* z-index:1; */
     }
     .logo-pic{
