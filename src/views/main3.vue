@@ -6,10 +6,7 @@
     <div class="head">
       <flexbox>
         <flexbox-item class="dateLable">
-          {{dateTimes}},
-        </flexbox-item>
-        <flexbox-item>
-          {{dateTime}}，{{info.partyBranch}}书记。
+          {{dateTimes}},{{info.partyBranch}}书记。
         </flexbox-item>
       </flexbox>
       <flexbox>
