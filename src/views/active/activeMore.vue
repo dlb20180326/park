@@ -11,10 +11,12 @@
                         <b><span @click="noSign">未报名</span></b>
                     </tab-item>
                 </tab> -->
+    <div>
         <tab>
                 <tab-item selected @on-item-click="toggle">已报名</tab-item>
                 <tab-item @on-item-click="noSign">未报名</tab-item>
             </tab>
+    </div>
         <div class="group-item">
                     <div class="allLine" v-for="(item,index) in infoM" :key="index">
                         <div style="position:relative">
