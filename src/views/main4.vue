@@ -435,13 +435,13 @@ export default {
     color: rgba(250, 122, 0, 1);
     line-height: 0.37rem;
     /* text-align: center; */
-    margin-top: -.3rem;
+    margin-top: -.29rem;
     /* margin: 0.04rem auto 0.1rem auto; */
     position:relative;
-    left:0.1rem;
+    left:0.1rem!important;
 }
 .vux-flexbox {
-    width: 89.4%;
+    width: 93%;
     height: 0.33rem;
     border-radius: .5rem;
     margin: 0.13rem auto 0.32rem auto;
@@ -451,7 +451,7 @@ export default {
     height: 0.33rem;
     background: rgba(246, 246, 246, 1);
     border-radius: 2px;
-    margin-left:-0.08rem;
+    margin-left:0rem;
 }
 .bottom{
     width: 92.5%;
