@@ -313,7 +313,7 @@
                             type: 'text'
                         });
 
-                        this.showQR(res.data);
+                        //this.showQR(res.data);
 
                     }).catch(function (error) {
                         console.log(error);
