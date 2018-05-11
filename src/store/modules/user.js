@@ -34,7 +34,7 @@ const user = {
             })
     },
     mutations: {
-        setUser(state, data) {  
+        setUser(state, data) {
             Object.keys(data).map(key => {
                 state[key] = data[key];
             });
@@ -56,15 +56,15 @@ const user = {
                     path: '/'
                 })
             );
-            if(roleId == 4)
-            {
-                router.push('/login');
-            }
-            else
-            {
-                router.push('/loginManage');
-            }
-            
+            //if(roleId == 4)
+            //{
+            router.push('/login');
+            //}
+            //else
+            //{
+            //    router.push('/loginManage');
+            //}
+
         }
     }
 };

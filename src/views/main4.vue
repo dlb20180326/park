@@ -116,6 +116,8 @@ export default {
     },
     methods: {
         drawAxis(id,arr1,arr2) {
+            console.log(arr1);
+            console.log(arr2);
             let myCharts = echarts.init(document.getElementById(id));
             let option = {
                 tooltip: {
@@ -421,7 +423,7 @@ export default {
     line-height: 20px;
     margin: 0 auto;
     padding-top: 0.06rem;
-    margin-left: .2rem;
+    margin-left: .3rem;
     text-align: center;
 }
 .integral {
@@ -435,6 +437,8 @@ export default {
     /* text-align: center; */
     margin-top: -.3rem;
     /* margin: 0.04rem auto 0.1rem auto; */
+    position:relative;
+    left:0.1rem;
 }
 .vux-flexbox {
     width: 89.4%;
