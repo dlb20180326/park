@@ -140,6 +140,9 @@
         Alert,
         XDialog
     },
+    beforeMount () {
+      sessionStorage.userRoleId = 2;
+    },
     mounted() {
       let datime = new Date().getHours();
       if (datime >= 5 && datime < 8) {

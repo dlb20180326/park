@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { Flexbox, FlexboxItem, Tabbar, TabbarItem, ViewBox, cookie } from 'vux';
 import echarts from 'echarts';
 import axios from 'axios';
@@ -91,6 +91,9 @@ export default {
         Tabbar,
         TabbarItem,
         ViewBox
+    },
+    beforeMount () {
+        sessionStorage.userRoleId = 4;
     },
     mounted() {
         let datime = new Date().getHours();
@@ -185,16 +188,17 @@ export default {
                 }
             })
             .then(res => {
-                this.partAbout = res.data;
+                this.partAbout = res.data || {};
             })
             .catch(err => {
                 console.log(err);
             });
         },
         userName() {
+            console.log('userName', this.user);
             axios.get('ppartymember/queryByUserId', {
                 params: {
-                    userid: this.$store.getters.user.userid
+                    userid: this.user.userid
                 }
             })
             .then(res => {
@@ -261,6 +265,9 @@ export default {
             }
         },
         ...mapActions(['logout'])
+    },
+    computed: {
+        ...mapGetters(['user'])
     }
 };
 </script>

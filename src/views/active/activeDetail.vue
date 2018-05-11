@@ -277,17 +277,18 @@ export default {
                 console.log(error);
             });
         },  
-    onHide () {
-        window.location.reload()
-    },
-    onShow () {
-        console.log('on show')
-    },submit1(){
-            this.$vux.alert.show({title:'请勿重复报名'});
-
-
+        onHide () {
+            window.location.reload()
         },
-
+        onShow () {
+            console.log('on show')
+        },
+        submit1(){
+                this.$vux.alert.show({title:'请勿重复报名'});
+        },
+    },
+    beforeMount () {
+        sessionStorage.userRoleId = 4;
     },
     mounted() {
         this.getActivity();

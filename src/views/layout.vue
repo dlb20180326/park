@@ -2,7 +2,7 @@
     <div class="app-layout">
         <router-view @updateFooterState="showFooter = arguments[0]"></router-view>
         <tabbar slot="bottom" v-model="tabsSelected" v-show="showFooter">
-            <tabbar-item v-for="item in tabs" :key="item.index" :link="item.link">
+            <tabbar-item v-for="item in tabs" :key="item.index" :link="item.link" v-if="loaded">
                 <img slot="icon" :src="item.icon">
                 <img slot="icon-active" :src="item.iconActive">
                 <span slot="label">{{item.label}}</span>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { Tabbar, TabbarItem, cookie } from 'vux';
 
 const tabs = {
@@ -25,7 +25,7 @@ const tabs = {
             icon: require('@/assets/images/gray-home.png'),
             iconActive: require('@/assets/images/iconw-home.png'),
             label: '首页',
-            link: '/'
+            link: '/main2'
         },
         {
             icon: require('@/assets/images/gray-info.png'),
@@ -51,7 +51,7 @@ const tabs = {
             icon: require('@/assets/images/gray-home.png'),
             iconActive: require('@/assets/images/iconw-home.png'),
             label: '首页',
-            link: '/'
+            link: '/main3'
         },
         {
             icon: require('@/assets/images/gray-info.png'),
@@ -77,7 +77,7 @@ const tabs = {
             icon: require('@/assets/images/gray-home.png'),
             iconActive: require('@/assets/images/iconw-home.png'),
             label: '首页',
-            link: '/'
+            link: '/main4'
         },
         {
             icon: require('@/assets/images/gray-item.png'),
@@ -102,12 +102,13 @@ export default {
     data() {
         return {
             tabsSelected: -1,
-            tabs: tabs[this.$store.getters.user.roleid] || [],
-            showFooter: true
+            showFooter: true,
+            loaded: false
         };
     },
     mounted() {
         this.selectTab();
+        this.loaded = true;
     },
     watch: {
         $route: 'selectTab'
@@ -123,6 +124,12 @@ export default {
             });
         },
         ...mapActions(['logout'])
+    },
+    computed: {
+        tabs () {
+            return tabs[sessionStorage.userRoleId || 4];
+        },
+        ...mapGetters(['userRoleId'])
     }
 };
 </script>

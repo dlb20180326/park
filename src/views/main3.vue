@@ -225,6 +225,9 @@ export default {
 
         ...mapActions(['logout'])
     },
+    beforeMount () {
+        sessionStorage.userRoleId = 3;
+    },
     mounted() {
         
         let datime = new Date().getHours();
