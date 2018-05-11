@@ -57,7 +57,8 @@
             this.$store.dispatch('login', {
                     name: this.account,
                     password: this.pass,
-                    openId: this.$route.query.openId || undefined
+                    openId: this.$route.query.openId || undefined,
+                    userType : 4
                 })
                 .then(
                     result =>{
