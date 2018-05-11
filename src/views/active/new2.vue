@@ -509,7 +509,7 @@
         box-sizing: border-box;
         }
     .photo-list .preview.addUpload{background-color:#fff;border: 1px solid #b53141;}
-    .photo-list .preview img{max-height:.6rem;max-width:.6rem;vertical-align:middle;}
+    .photo-list .preview img{max-height:.9rem!important;max-width:.9rem!important;vertical-align:middle;}
     .photo-list .photo-primary-text{color:#ffA500;font-size:12px;}
     .photo-list .add-bg{
         width: 0.2rem;
