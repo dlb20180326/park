@@ -120,7 +120,7 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-          <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" :hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
+          <x-dialog v-if="showQrcodeDialog" @on-hide="backRoute()" :hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
                <div class="title">
                     <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
@@ -313,7 +313,7 @@
                             type: 'text'
                         });
 
-                        //this.showQR(res.data);
+                        this.showQR(res.data);
 
                     }).catch(function (error) {
                         console.log(error);
@@ -328,8 +328,7 @@
                 }
             },
             showQR(data){
-                if(data)
-                {
+                if (data) {
                     document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
                     this.showQrcodeDialog = true;
                 }
@@ -467,6 +466,7 @@
             }
         },
         mounted() {
+            weixin.init(['chooseImage', 'uploadImage']);
             this.getActivity()
         }
     };
