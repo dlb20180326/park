@@ -92,12 +92,10 @@
             </group-title>
             <textarea cols="30" rows="10"  maxlength="300" v-model='activeContext'></textarea>
         </div>
-        <div class="group-item">
-            
+        <!-- <div class="group-item">
             <group-title slot="title">
                 <b>添加海报</b>
             </group-title>
-        	<!-- <span class="addPic">添加海报</span> -->
             <div class="photo-list cl">
                 <ul style="margin-top:-.1rem;">
                     <li v-for="(item,index) in picList.list">
@@ -112,7 +110,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <div class="group-item" style="margin-bottom:0.2rem">
             <group-title slot="title"></group-title>
             <x-button type="warn" @click.native="submit()" style="height:0.4rem !important">
