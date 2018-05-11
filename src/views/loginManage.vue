@@ -70,34 +70,33 @@
         },
         methods:{
             login() {
-            if (this.pickerValue[0] == "0")
-                return this.$vux.toast.show({
-                    text: '请选择角色',
-                    type: 'text',
-                    position: 'top'
-                });
-            if (!this.account)
-                return this.$vux.toast.show({
-                    text: '请输入帐号',
-                    type: 'text',
-                    position: 'top'
-                });
-            if (!this.pass)
-                return this.$vux.toast.show({
-                    text: '请输入密码',
-                    type: 'text',
-                    position: 'top'
-                });
-            this.$store.dispatch('login', {
+                if (this.pickerValue[0] == "0")
+                    return this.$vux.toast.show({
+                        text: '请选择角色',
+                        type: 'text',
+                        position: 'top'
+                    });
+                if (!this.account)
+                    return this.$vux.toast.show({
+                        text: '请输入帐号',
+                        type: 'text',
+                        position: 'top'
+                    });
+                if (!this.pass)
+                    return this.$vux.toast.show({
+                        text: '请输入密码',
+                        type: 'text',
+                        position: 'top'
+                    });
+                this.$store.dispatch('login', {
                     name: this.account,
                     password: this.pass,
                     openId: this.$route.query.openId || undefined,
                     userType : this.pickerValue[0]
-                })
-                .then(
-                    result =>{
+                }).then(result => {
                         if(result.status){
                             var roleId = result.entry.roleId;
+                            sessionStorage.userRoleId = roleId;
                             if(roleId == 2)
                             {
                                 this.$router.push({

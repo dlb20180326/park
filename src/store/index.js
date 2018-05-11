@@ -6,19 +6,27 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-    	info: {}
+        info: {},
+        userRoleId: 4
     },
     actions: {
-    	setInfo ({ commit }, info) {
-        	commit('setInfo', info);
+        setInfo({ commit }, info) {
+            commit('setInfo', info);
+        },
+        setUserRoleId({ commit }, id) {
+            commit('setUserRoleId', id);
         }
     },
     getters: {
-    	info: state => state.info
+        info: state => state.info,
+        userRoleId: state => state.userRoleId
     },
     mutations: {
-    	setInfo (state, info) {
-        	state.info = info;
+        setInfo(state, info) {
+            state.info = info;
+        },
+        setUserRoleId(state, id) {
+            state.userRoleId = id;
         }
     },
     modules: {

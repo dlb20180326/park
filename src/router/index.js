@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '../store';
 import { routes } from './routes';
+import { cookie } from 'vux';
 
 Vue.use(Router);
 
@@ -14,10 +15,15 @@ router.beforeEach((to, from, next) => {
     if (/^\/$/.test(to.path) && /^\/main/.test(from.path)) return next(false);
 
     Vue.$vux.loading.show({ text: '加载中' });
-
+    const userEntry = ['/active/activeDetail', '/main4', '/points'];
+    const manageEntry = ['/loginManage', '/main3', '/main2'];
+    if (userEntry.includes(to.path)) {
+        sessionStorage.userRoleId = 4;
+    } else if (manageEntry.includes(to.path)) {
+        sessionStorage.userRoleId = 3;
+    }
     // if (to.matched.some(record => record.meta.requiresAuth)) {
     if (/^\/login/.test(to.path) || store.getters.user.userid) return next();
-
     store.dispatch('userinfo').then(
         result => next(),
         error => {

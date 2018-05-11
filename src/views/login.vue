@@ -54,6 +54,7 @@ export default {
                     openId: this.$route.query.openId || undefined
                 })
                 .then(result => {
+                    sessionStorage.userRoleId = 4;
                     if (result.status) {
                         this.$router.push({
                             path: this.$route.query.toPath || '/'
