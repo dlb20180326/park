@@ -1,10 +1,6 @@
 <template>
-      <!-- <x-header :left-options="{showBack: false}">
-            党员活动
-            <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>
-        </x-header> -->
-    <!-- <x-header>联系工作人员</x-header> -->
-    <div>
+    <div class="page-body"> 
+        <x-header>联系工作人员</x-header>
         <div class="contect">
             <div class="contectMain">
                 <div class="top-content">
@@ -45,12 +41,12 @@
     </div>
 </template>
 <script>
-//  import { XHeader} from 'vux';
-//  export default {
-//     components: {
-//         XHeader
-//     }
-//  }
+ import { XHeader} from 'vux';
+ export default {
+    components: {
+        XHeader
+    }
+ }
 </script>
 <style lang="less" scoped>
 .contect{

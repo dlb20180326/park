@@ -1,48 +1,51 @@
 <template>
-    <div id="changPwd">
-        <div id="myForm">
-            <div class="input-all clearfix">
-                <div class="left-content">
-                    <i class="img-phone"></i>
-                    <label class="label-name">请输入账户名</label>
+    <div class="page-body"> 
+        <x-header>更改初始密码</x-header>
+        <div id="changPwd">
+            <div id="myForm">
+                <div class="input-all clearfix">
+                    <div class="left-content">
+                        <i class="img-phone"></i>
+                        <label class="label-name">请输入账户名</label>
+                    </div>
+                    <input type="text" v-model="account" placeholder="" />
                 </div>
-                <input type="text" v-model="account" placeholder="" />
-            </div>
-            <div class="input-all clearfix">
-                <div class="left-content">
-                    <i class="img-locks"></i>
-                    <label class="label-lock">请输入原密码</label>
+                <div class="input-all clearfix">
+                    <div class="left-content">
+                        <i class="img-locks"></i>
+                        <label class="label-lock">请输入原密码</label>
+                    </div>
+                    <input type="password" v-model="pass" placeholder="" />
                 </div>
-                <input type="password" v-model="pass" placeholder="" />
-            </div>
-            <div class="input-all clearfix">
-                <div class="left-content">
-                    <i class="img-locks"></i>
-                    <label class="label-lock">请输入新密码</label>
+                <div class="input-all clearfix">
+                    <div class="left-content">
+                        <i class="img-locks"></i>
+                        <label class="label-lock">请输入新密码</label>
+                    </div>
+                    <input type="password" v-model="newPass" placeholder="" />
                 </div>
-                <input type="password" v-model="newPass" placeholder="" />
-            </div>
-            <div class="input-all clearfix">
-                <div class="left-content">
-                    <i class="img-locks"></i>
-                    <label class="label-lock">请确认新密码</label>
+                <div class="input-all clearfix">
+                    <div class="left-content">
+                        <i class="img-locks"></i>
+                        <label class="label-lock">请确认新密码</label>
+                    </div>
+                    <input type="password" v-model="confrimNewPass" placeholder="" />
                 </div>
-                <input type="password" v-model="confrimNewPass" placeholder="" />
-            </div>
-            
-            <div class="input-all clearfix">
-                <div class="attention">
-                    <span>注意：</span>
-                    <p>密码必须是8-20个英文字母、数字或符号（除空格）。</p>
+                
+                <div class="input-all clearfix">
+                    <div class="attention">
+                        <span>注意：</span>
+                        <p>密码必须是8-20个英文字母、数字或符号（除空格）。</p>
+                    </div>
                 </div>
+                <button type="button" class="changPwd" @click="change">更改密码</button>
             </div>
-            <button type="button" class="changPwd" @click="change">更改密码</button>
         </div>
     </div>
 </template>
 <script>
 import Vue from 'vue';
-import { XImg, Icon } from 'vux';
+import { XImg, Icon,XHeader } from 'vux';
 export default {
     data() {
         return {
@@ -54,7 +57,8 @@ export default {
     },
     components: {
         XImg,
-        Icon
+        Icon,
+        XHeader
     },
     methods: {
         change() {
