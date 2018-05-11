@@ -6,7 +6,7 @@
         <div class="box">
         <flexbox orient="vertical">
             <flexbox-item>
-                <section class="mainbox">
+                <section class="mainbox-top">
                     <div class="barbg" >
                         年度共参与党员活动：
                         <span style="display: inline">{{number1}}</span>
@@ -489,7 +489,7 @@ export default {
         padding:3vw 0;
         position:relative;
     }
-    .mainbox {
+    .mainbox-top {
         background:#fff;
         width:100%;
         padding:.6rem 0 .06rem 0;
@@ -498,6 +498,10 @@ export default {
         background:#fff;
         width:100%;
         padding-top:.1rem;
+    }
+    .mainbox{
+        background:#fff;
+        width:100%;
     }
     .weui-cell1 {
         padding-bottom:0;

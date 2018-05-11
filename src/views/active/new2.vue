@@ -110,7 +110,7 @@
         	<span class="addPic">添加海报</span>
             <div class="photo-list cl">
                 <ul>
-                    <li :key="index" v-for="(item,index) in picList.list">
+                    <li v-for="(item,index) in picList.list" :key="index">
                         <div class="preview">
                             <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
                         </div>
@@ -318,15 +318,20 @@
                             departmentid:this.departmentidId.join(),
                             picids:this.picList.arr.join()
                         }
-                    }) .then((res)=> {
+                    }).then((res)=> {
                         this.$vux.toast.show({
                             text: '增加成功' + this.picList.arr.join(),
                             type: 'text'
                         });
 
                         this.showQR(res.data);
+                        console.log(res.data);
                     }).catch(function (error) {
                         console.log(error);
+                           this.$vux.toast.show({
+                            text:进入失败,
+                            type: 'text'
+                        });
                     });
                 }else {
                     this.$vux.toast.show({
@@ -336,11 +341,10 @@
                 }
             },
             showQR(data){
-                if(data)
-                {
+                setTimeout(() => {
                     document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
                     this.showQrcodeDialog = true;
-                }
+                }, 5000);
             },
             submit1(it){
                 this.activeType=it.id;
