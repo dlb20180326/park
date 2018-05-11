@@ -130,13 +130,13 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-            <x-dialog v-if="showQrcodeDialog" :hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
+            <x-dialog v-model="showQrcodeDialog" :hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
                <div class="title">
                     <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
                 </div>
                 <div class="qrcode">
-                  <img id="fei" alt="">
+                  <img id="fei" alt="" onerror="alert('error')">
                 </div>
           </x-dialog>
       </div>
@@ -318,13 +318,14 @@
                             picids:this.picList.arr.join() || '780'
                         }
                     }).then((res)=> {
+                        alert(11);
                         this.$vux.toast.show({
                             text: '增加成功',
                             type: 'text'
                         });
-
+                        alert(0);
                         this.showQR(res.data);
-                        console.log(res.data);
+                        alert(res.data);
                     }).catch(function (error) {
                         console.log(error);
                            this.$vux.toast.show({
@@ -340,8 +341,11 @@
                 }
             },
             showQR(data){
+                alert(1);
                 document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
+                alert(2);
                 this.showQrcodeDialog = true;
+                alert(3);
             },
             submit1(it){
                 this.activeType=it.id;
