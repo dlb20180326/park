@@ -10,15 +10,16 @@
                     <div class="top-bottom">
                         <div class="second-top" >
                             <span class="color-light">所属片区:</span>
-                            <span class="color-dark" style="margin-left:.23rem;">{{partAbout.address }}</span>
+                            <span class="color-dark" style="margin-left:.35rem;">{{partAbout.address }}</span>
                         </div>
                         <div class="second-content">
-                            <span class="color-light" style="position:relative;">所属党支部:</span>
-                            <span class="color-dark" style="position:absolute;">{{partAbout.departmentname}}</span>
+                            <span class="color-light">所属党支部:</span>
+                            <!-- <span class="color-dark" style="position:absolute;" :class="partAbout.departmentname.length>16?margin">{{partAbout.departmentname}}</span> -->
+                            <span class="color-dark">{{partAbout.departmentname}}</span>
                         </div>
                         <div class="left-bottom">
                             <span class="color-light">党支部书记:</span>
-                            <span class="color-dark" style="margin-left:.08rem;">{{partAbout.partyBranch}}</span>
+                            <span class="color-dark" style="margin-left:.2rem;">{{partAbout.partyBranch}}</span>
                         </div>
                          <div class="exit" @click="logout">
                              <span>退出登录</span>
@@ -270,7 +271,6 @@ export default {
 
 .header {
     width: 100%;
-    height: 1.6rem;
     background: linear-gradient(to right, rgba(185, 54, 71, 1), rgba(155, 10, 26, 1));
    
 }
@@ -308,27 +308,34 @@ export default {
     font-size: 0.14rem;
 }
 .top-right {
-    /* float: left;
-    margin: 0.12rem 0 0.15rem .91rem; */
     width: 0.31rem;
     height: 0.33rem;
-    /* font-weight: 600; */
     background-repeat:no-repeat;
     background-size: 100% 100%;
 }
 .top-bottom{
     width: 86%;
-    height: 1.2rem;
     margin: 0 auto;
     font-size: 0.14rem;
-    /* padding-top: .16rem; */
-   /* margin-bottom:20px; */
+    overflow: hidden;
+    padding-top:.1rem;
+    padding-bottom:.1rem;
 }
 .second-top{
-    margin-bottom: .15rem;
+    margin-bottom: .1rem;
 }
 .second-content{
-    margin-bottom: .15rem;
+    margin-bottom: .1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.second-content .color-light {
+    flex-basis: 6em;
+}
+.second-content .color-dark {
+    flex: 1;
+    line-height: 1.2;
 }
 .exit{
     display: block;

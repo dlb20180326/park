@@ -432,7 +432,7 @@ input {
  .allLine {
         width: 100%;
         overflow: hidden;
-        margin: 0.1rem auto;
+        margin: 0.1rem auto .1rem;
     }
 
     .allLine {
