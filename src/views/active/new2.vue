@@ -318,7 +318,7 @@
                             departmentid:this.departmentidId.join(),
                             picids:this.picList.arr.join()
                         }
-                    }) .then((res)=> {
+                    }).then((res)=> {
                         this.$vux.toast.show({
                             text: '增加成功' + this.picList.arr.join(),
                             type: 'text'
@@ -336,11 +336,10 @@
                 }
             },
             showQR(data){
-                if(data)
-                {
+                setTimeout(() => {
                     document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
                     this.showQrcodeDialog = true;
-                }
+                }, 5000);
             },
             submit1(it){
                 this.activeType=it.id;
