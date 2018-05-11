@@ -376,14 +376,14 @@ export default {
 
 <style lang="less" scoped>
 .bg-line {
-    width: 0.04rem;
-    height: 0.18rem;
+    width: 0.03rem;
+    height: 0.14rem;
     margin-left: 1%;
     background: url(../../assets/images/icon-rectangle.png) no-repeat;
     background-size: 100% 100%;
     display: block;
     float: left;
-    margin-top: 0.02rem;
+    margin-top: 0.05rem;
 }
 ul,
 li {
@@ -401,8 +401,8 @@ li {
         width: 100%;
         padding: 0.06rem 0.08rem;
         border-radius: 3px;
-        border: 1px solid #ccc;
-        background-color: rgba(0, 0, 0, 0.05);
+        border: 1px solid #e4e4e4;
+        background-color: #f4f4f4;
         box-sizing: border-box;
         color: #333;
         font-size: 0.14rem;

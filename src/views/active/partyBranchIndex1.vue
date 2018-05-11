@@ -54,7 +54,7 @@
                         <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
                             <!-- 缩略图显示 -->
                             <div>
-                                <img style="position:relative;" :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)" />
+                                <img style="position:relative;" :class="item.previewerClassName" :title="img.msrc" v-clipping="img.msrc" @click="preview(index,idx)" />
                                 <img style="position:absolute;top:0;right:0;" src="@/assets/images/x.png" @click="deletePic(img.id)" />
                             </div>
                         </flexbox-item>

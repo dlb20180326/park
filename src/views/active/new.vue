@@ -102,7 +102,7 @@
                 <ul style="margin-top:-.1rem;">
                     <li v-for="(item,index) in picList.list">
                         <div class="preview">
-                            <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
+                            <img style="float:left;width:100%;height:100%;" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
                         </div>
                     </li>
                     <li>
@@ -509,7 +509,7 @@
         background-color:#f4f4f4!important;
         border: 1px solid #e4e4e4!important;
         }
-    .photo-list .preview img{max-height:.6rem;max-width:.6rem;vertical-align:middle;}
+    .photo-list .preview img{max-height:.9rem!important;max-width:.9rem!important;vertical-align:middle;}
     .photo-list .photo-primary-text{color:#ffA500;font-size:12px;}
     .photo-list .add-bg{
         width: 0.2rem;

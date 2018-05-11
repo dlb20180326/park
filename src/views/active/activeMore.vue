@@ -424,21 +424,14 @@ input {
     word-wrap: break-word;
     word-break: break-all;
 }
-
-
-
-
-
-
-
  .allLine {
         width: 100%;
-        overflow: hidden;
-        margin: 0.1rem auto;
+        overflow: hidden!important;
+        margin: 0.1rem auto .1rem!important;
     }
 
     .allLine {
-        padding-top: .1rem;
+        padding-top: .5rem!important;
         /*padding-bottom: .08rem*/
     }
 

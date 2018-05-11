@@ -6,6 +6,7 @@
             先锋作用评定<a slot="right" @click="showPops">评分说明</a></x-header>
 
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>党员姓名：
                     <span class="grayColor">{{userName}}</span>
@@ -13,12 +14,14 @@
             </group-title>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>获得荣誉（本项评定即获 5 分）：</b>
             </group-title>
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge13'></textarea>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <span class="addPic">添加凭证</span>
             <div class="photo-list cl">
                 <ul>
@@ -37,12 +40,14 @@
 
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>先锋表彰（本项评定即获 5 分）：</b>
             </group-title>
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge14'></textarea>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <span class="addPic">添加凭证</span>
             <div class="photo-list cl">
                 <ul>
@@ -60,6 +65,7 @@
             </div>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>先锋模范（本项总分 5 分，请打分）：</b>
             </group-title>
@@ -67,6 +73,7 @@
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge15'></textarea>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <span class="addPic">添加凭证</span>
 
             <div class="photo-list cl">
@@ -346,6 +353,16 @@ li {
         .vux-number-selector {
             background-color: #b93647 !important;
         }
+    }
+    .bg-line{
+        width: 0.03rem;
+        height: 0.14rem;
+        margin-left: 1%;
+        background: url(../../assets/images/icon-rectangle.png) no-repeat;
+        background-size: 100% 100%;
+        display: block;
+        float: left;
+        margin-top: 0.05rem;
     }
     input,
     textarea {
