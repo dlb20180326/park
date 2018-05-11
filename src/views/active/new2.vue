@@ -107,7 +107,7 @@
             <textarea cols="30" rows="10"  maxlength="300" v-model='activeContext'></textarea>
         </div>
         <div class="group-item">
-        	<span class="addPic">添加照片</span>
+        	<span class="addPic">添加海报</span>
             <div class="photo-list cl">
                 <ul>
                     <li v-for="(item,index) in picList.list" :key="index">
@@ -123,14 +123,14 @@
                 </ul>
             </div>
         </div>
-        <div class="group-item">
+        <div class="group-item" style="margin-bottom:0.2rem">
             <group-title slot="title"></group-title>
-            <x-button type="warn" @click.native="submit()">
+            <x-button type="warn" @click.native="submit()" style="height:0.4rem !important">
                 生成活动二维码
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-            <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
+            <x-dialog v-model="showQrcodeDialog" :hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
                <div class="title">
                     <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
@@ -318,10 +318,9 @@
                             departmentid:this.departmentidId.join(),
                             picids:this.picList.arr.join()
                         }
-                    }) .then((res)=> {
-
+                    }).then((res)=> {
                         this.$vux.toast.show({
-                            text: res.data,
+                            text: '增加成功' + this.picList.arr.join(),
                             type: 'text'
                         });
 
@@ -342,8 +341,10 @@
                 }
             },
             showQR(data){
-                document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
-                this.showQrcodeDialog = true;
+                setTimeout(() => {
+                    document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
+                    this.showQrcodeDialog = true;
+                }, 5000);
             },
             submit1(it){
                 this.activeType=it.id;
@@ -436,18 +437,17 @@
                     let serverIds = [];
                 let toUpload = localId =>
                 wx.uploadImage({
-                        localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                        isShowProgressTips: 1, // 默认为1，显示进度提示
-                        success: res => {
+                    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                    success: res => {
                         serverIds.push(res.serverId);
-                if (localIds.length) {
-                    toUpload(localIds.shift());
-                } else {
-                    resolve(serverIds);
-                }
-            }
-            })
-                ;
+                        if (localIds.length) {
+                            toUpload(localIds.shift());
+                        } else {
+                            resolve(serverIds);
+                        }
+                    }
+                });
                 if (localIds.length) {
                     toUpload(localIds.shift());
                 } else {
@@ -488,26 +488,42 @@
     };
 </script>
 <style lang="less">
-.addPic{height:.17rem; 	font-size:.12rem;font-family:PingFangSC-Medium;color:rgba(153,153,153,1);line-height:.17rem;
+.addPic{height:.17rem; 	font-size:.14rem;font-family:PingFangSC-Medium;color:#464646;font-weight: 600;line-height:.17rem;
     }
     .photo-list{padding:0.1rem 0 0;}
     .photo-list.border0{border-bottom:0;padding-bottom: 0;}
     .photo-list ul{font-size:0;list-style:none;}
-    .photo-list ul li{font-size:0;display:inline-block;margin-right:.2rem;position:relative;vertical-align:top;width:.6rem;height:.6rem;overflow:hidden;margin-bottom:.2rem;}
+    .photo-list ul li{font-size:0;display:inline-block;margin-right:.2rem;position:relative;vertical-align:top;width:.9rem!important;height:.9rem!important;overflow:hidden;margin-bottom:.2rem;}
     .photo-list ul li:first-child{margin-left:0;}
     .photo-list .operate{display:none;background:rgba(33,33,33,.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);z-index:5;position:absolute;bottom:0;left:0;right:0;height:12px;padding-bottom:7px;font-size:12px;color:#fff;text-align: center}
     .photo-list .info{line-height:.6rem;text-align:center}
-    .photo-list .preview{width: 0.6rem;height:.6rem;z-index:4;line-height:.6rem;font-family:arial;background-color: #dbdbdb;background-repeat:no-repeat;position:absolute;bottom:0;left:0;text-align:center;right:0;cursor: pointer;border:1px solid #fff;box-sizing: border-box;}
+    .photo-list .preview{
+        width: 0.9rem!important;
+        height:.9rem!important;
+        z-index:4;
+        line-height:.6rem;
+        font-family:arial;
+        background-color: #dbdbdb;
+        background-repeat:no-repeat;
+        position:absolute;
+        bottom:0;
+        left:0;
+        text-align:center;
+        right:0;
+        cursor: pointer;
+        border:1px solid #fff;
+        box-sizing: border-box;
+        }
     .photo-list .preview.addUpload{background-color:#fff;border: 1px solid #b53141;}
-    .photo-list .preview img{max-height:.6rem;max-width:.6rem;vertical-align:middle;}
+    .photo-list .preview img{max-height:.9rem!important;max-width:.9rem!important;vertical-align:middle;}
     .photo-list .photo-primary-text{color:#ffA500;font-size:12px;}
     .photo-list .add-bg{
         width: 0.2rem;
         height: 0.2rem;
-        margin-left: .2rem;
-        margin-top: .2rem;
+        margin-left: .34rem;
+        margin-top: .32rem;
         display: block;
-        background: url(../../assets/images/add_icon_bg.png) no-repeat;
+        background: url(../../assets/images/add_icon_bg1.png) no-repeat;
         background-size: contain;
         background-position: center;
     }
@@ -609,7 +625,10 @@
         font-size: .13rem;
     }
     }
-
+    .photo-list .preview.addUpload{
+        background-color:#f4f4f4!important;
+        border: 1px solid #e4e4e4!important;
+        }
 </style>
 <style>
     .srcw{

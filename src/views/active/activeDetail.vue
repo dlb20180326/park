@@ -1,12 +1,12 @@
 <template>
     <div class="page-body">
-        <x-header :left-options="{showBack: false}">
+        <x-header :left-options="{showBack: false}" style="position:fixed;width:100%;">
             党员生活
         </x-header>
         <div class="box">
         <flexbox orient="vertical">
             <flexbox-item>
-                <section class="mainbox">
+                <section class="mainbox-top">
                     <div class="barbg" >
                         年度共参与党员活动：
                         <span style="display: inline">{{number1}}</span>
@@ -489,15 +489,19 @@ export default {
         padding:3vw 0;
         position:relative;
     }
-    .mainbox {
+    .mainbox-top {
         background:#fff;
         width:100%;
-        padding:.1rem 0 .06rem 0;
+        padding:.6rem 0 .06rem 0;
     }
     .mainbox1 {
         background:#fff;
         width:100%;
         padding-top:.1rem;
+    }
+    .mainbox{
+        background:#fff;
+        width:100%;
     }
     .weui-cell1 {
         padding-bottom:0;

@@ -1,21 +1,22 @@
 <template>
-    <div class="page-body disabled-tabbar">
+    <div class="page-body disabled-tabbar" id="nameSc">
         <x-header>
-                    <!-- <span @click="toggle" class="toggle">已报名</span><span @click="noSign" class="toggle">未报名</span> -->
-            
-              <tab v-model="tabIndex" :line-width="5" active-color="#666" bar-active-color="#a0333b" custom-bar-width="1rem">
-
-                   
+            全部活动
+        </x-header>
+          <!-- <tab v-model="tabIndex" :line-width="5" active-color="#666" bar-active-color="#a0333b" custom-bar-width="1rem">
                     <tab-item class="tabitem">
                         <b> <span @click="toggle">已报名</span></b>
                     </tab-item>
                     <tab-item class="tabitem">
                         <b><span @click="noSign">未报名</span></b>
                     </tab-item>
-                </tab>
-        
-         
-        </x-header>
+                </tab> -->
+    <div>
+        <tab>
+                <tab-item selected @on-item-click="toggle">已报名</tab-item>
+                <tab-item @on-item-click="noSign">未报名</tab-item>
+            </tab>
+    </div>
         <div class="group-item">
                     <div class="allLine" v-for="(item,index) in infoM" :key="index">
                         <div style="position:relative">
@@ -58,7 +59,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import axios from 'axios'
 import { XHeader, GroupTitle, cookie,Flexbox, FlexboxItem, Tab, TabItem,XButton ,Alert,TransferDomDirective as TransferDom} from 'vux';
@@ -130,7 +130,6 @@ export default {
                     userId:this.$store.getters.user.userid
                 }
             }).then((res)=> {
-                console.log(res.data.list);
                 res.data.list.forEach(element => {
                     if(element.signupstatus == 1)
                     {
@@ -146,8 +145,6 @@ export default {
             }).catch(function (error) {
                     console.log(error);
                 });
-
-
         },
     submit(id){
        axios({
@@ -161,16 +158,13 @@ export default {
         }) .then((res)=> {
             this.msg=res.msg,
             this.show=true
-
         })
             .catch(function (error) {
                 console.log(error);
             });
-
     },
         submit1(id){
             this.$vux.alert.show({title:'请勿重复报名'});
-
         },
     onHide () {
         window.location.reload()
@@ -198,7 +192,7 @@ export default {
     } ,
     mounted() {
         this.getActivityMore();
-
+        console.log(this.unactive);
 
     }
 }
@@ -218,9 +212,9 @@ export default {
     
     color:#fff!important;
 }
-.vux-tab .vux-tab-item{
-    background: transparent!important;
-}
+// .vux-tab .vux-tab-item{
+//     background: transparent!important;
+// }
 
 .page-body{
 	flex: 1;
@@ -430,25 +424,15 @@ input {
     word-wrap: break-word;
     word-break: break-all;
 }
-
-
-
-
-
-
-
+.group-item{
+    margin-top: .5rem!important;
+}
  .allLine {
         width: 100%;
-        overflow: hidden;
-        margin: 0.1rem auto;
+        overflow: hidden!important;
+        margin: 0.1rem auto .1rem!important;
     }
-
-    .allLine {
-        padding-top: .1rem;
-        /*padding-bottom: .08rem*/
-    }
-
-    .allLine span {
+    span {
         display: table-cell;
         line-height: 1.44
     }
@@ -478,13 +462,9 @@ input {
     display: inline-block;
     padding: 0 0.2rem;
     }
-
-
-
-
-
-
-
-
-
+</style>
+<style>
+#nameSc .vux-tab{
+    background-color:transparent!important;
+}
 </style>

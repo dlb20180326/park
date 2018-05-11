@@ -5,9 +5,9 @@
 			<div>
 				<table class="table-title">
 					<tr>
-						<td style="width: 20%;vertical-align:middle;">项目指标</td>
-						<td style="width: 30%;vertical-align:middle;">具体内容</td>
-						<td style="width: 20%;vertical-align:middle;">分值</td>
+						<td style="width: 20%;vertical-align:middle!important;">项目指标</td>
+						<td style="width: 30%;vertical-align:middle!important;">具体内容</td>
+						<td style="width: 20%;vertical-align:middle!important;padding-left:0.35rem!important">分值</td>
 					</tr>
 				</table>
 			</div>
@@ -97,7 +97,7 @@
 					<tr>
 						<td class="table-content-label" rowspan="2">公益服务<br>（10分）</td>
 						<td class="table-content-text">党员积极参加公益活动</td>
-						<td class="table-content-score" style="border-radius: 0 0.1rem 0.1rem 0">3分/次<br/>（最高不超过20分）</td>
+						<td class="table-content-score" style="border-radius: 0 0.1rem 0.1rem 0">3分/次<br/>（最高不超过10分）</td>
 					</tr>
 				</table>
 			</div>
@@ -106,8 +106,8 @@
 			<div>
 				<table class="table-title">
 					<tr>
-						<td>分值</td>
-						<td>评级</td>
+						<td style="vertical-align:middle!important;">分值</td>
+						<td style="vertical-align:middle!important;">评级</td>
 					</tr>
 				</table>
 			</div>

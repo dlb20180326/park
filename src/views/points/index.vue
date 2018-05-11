@@ -8,7 +8,7 @@
             <div class="head">
                 <flexbox>
                     <flexbox-item class="avatar">
-                        <img src="@/assets/images/icon-head.png">
+                        <img :src="picAccept">
                     </flexbox-item>
                     <flexbox-item>
                         <div class="label">积分周期：</div>
@@ -17,13 +17,13 @@
                 </flexbox>
                 <flexbox :gutter="15">
                     <flexbox-item>
-                        <div class="piece">
+                        <div class="piece left">
                             <div>现党员积分</div>
                             <span>{{itegral || 0.0}}</span>
                         </div>
                     </flexbox-item>
                     <flexbox-item>
-                        <div class="piece">
+                        <div class="piece right">
                             <div>年度党员评级</div>
                             <span>{{results}}</span>
                         </div>
@@ -50,7 +50,7 @@
                                         审批进度 <span class="icon-arrows"></span>
                                     </span>
 	                            </div>
-	                            <div class="content">
+	                            <div class="content progress">
 	                                <x-progress :percent="progres.totalScore/progres.score*100" :show-cancel="false"></x-progress>
 	                            </div>
 	                            <router-link :to="{name:'Dues'}" v-if="progres.id === 7">
@@ -191,6 +191,7 @@ export default {
     components: { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton, XScroll,Snap},
     data() {
         return {
+            userAbout: {},
             tabIndex: 0,
             percent:0,
             collect:[],
@@ -411,7 +412,25 @@ export default {
         {
             this.tabIndex = 1;
         },
+        userName() {
+            axios.get('ppartymember/queryByUserId', {
+                params: {
+                    userid: this.$store.getters.user.userid
+                }
+            })
+            .then(res => {
+                this.userAbout = res.data;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        },
     	...mapActions(['setInfo'])
+    },
+    computed: {
+        picAccept () {
+            return `http://www.dlbdata.cn/icon-${this.userAbout.sex === '女' ? 'girl' : 'boy'}.png`;
+        }
     },
    	mounted(){
    		this.progress();
@@ -419,12 +438,15 @@ export default {
    		this.getDetail();
    		this.rating();
         this.score();
+        this.userName();
     }
 };
 </script>
 
 <style lang="less" scoped>
-
+vux-tab-bar-inner{
+    width:0.6rem!important;
+}
 .box1 {
   height: 100px;
   position: relative;
@@ -604,6 +626,7 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
 .vux-flexbox-item.avatar {
     display: flex;
     align-items: stretch;
+
     justify-content: center;
     flex: 0 0 auto;
     width: 1rem;
@@ -624,13 +647,19 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
 }
 .piece {
     margin-top: 0.1rem;
-    padding: 0.1rem;
+    padding: 0.15rem;
     border-radius: 5px;
     background-color: rgba(246,246,246,1);
     text-align: center;
+    width:85%;
+    height:0.6rem;
     span {
         font-size: 0.24rem;
         color: #ea8031;
+        padding-left:-0.8rem;
+        position: relative!important;
+    right: 0!important;
+    bottom: 0.1rem!important;
     }
 }
 .item-detail {
@@ -644,13 +673,12 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
         color: #666;
     }
     .content {
-       margin: .15rem auto;
+       margin: .15rem 0 ;
         text-align: center;
         width:89.3%;
     }
     .space {
         display: inline-block;
-        width: 0.5rem;
     }
 }
 </style>
@@ -694,5 +722,13 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     display: block;
     height: 0;
     visibility: hidden
+}
+button.weui-btn_inline, input.weui-btn_inline, button.weui-btn_mini, input.weui-btn_mini{
+    width:auto!important;
+    margin-left:0.4rem;
+    margin-top:0.1rem;
+}
+.progress{
+    margin-left:0.2rem!important;
 }
 </style>

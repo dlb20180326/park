@@ -6,6 +6,7 @@
             先锋作用评定<a slot="right" @click="showPops">评分说明</a></x-header>
 
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>党员姓名：
                     <span class="grayColor">{{userName}}</span>
@@ -13,12 +14,14 @@
             </group-title>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>获得荣誉（本项评定即获 5 分）：</b>
             </group-title>
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge13'></textarea>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <span class="addPic">添加凭证</span>
             <div class="photo-list cl">
                 <ul>
@@ -37,12 +40,14 @@
 
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>先锋表彰（本项评定即获 5 分）：</b>
             </group-title>
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge14'></textarea>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <span class="addPic">添加凭证</span>
             <div class="photo-list cl">
                 <ul>
@@ -60,6 +65,7 @@
             </div>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>先锋模范（本项总分 5 分，请打分）：</b>
             </group-title>
@@ -67,6 +73,7 @@
             <textarea placeholder="请在此处填写评价" cols="30" rows="10" maxlength="300" v-model='Messge15'></textarea>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <span class="addPic">添加凭证</span>
 
             <div class="photo-list cl">
@@ -347,14 +354,23 @@ li {
             background-color: #b93647 !important;
         }
     }
+    .bg-line{
+        width: 0.03rem;
+        height: 0.14rem;
+        margin-left: 1%;
+        background: url(../../assets/images/icon-rectangle.png) no-repeat;
+        background-size: 100% 100%;
+        display: block;
+        float: left;
+        margin-top: 0.05rem;
+    }
     input,
     textarea {
         display: block;
         width: 100%;
         padding: 0.06rem 0.08rem;
-        border-radius: 3px;
-        border: 1px solid #ccc;
-        background-color: rgba(0, 0, 0, 0.05);
+        border: 1px solid #e4e4e4;
+        background-color: #f4f4f4;
         box-sizing: border-box;
         color: #333;
         font-size: 0.14rem;
@@ -411,9 +427,10 @@ li {
 }
 .addPic {
     height: 0.17rem;
-    font-size: 0.12rem;
+    font-size: 0.14rem;
     font-family: PingFangSC-Medium;
-    color: rgba(153, 153, 153, 1);
+    font-weight: 600;
+    color: #464646;
     line-height: 0.17rem;
 }
 input[type='file'] {
@@ -471,8 +488,8 @@ input[type='file'] {
     margin-right: 0.1rem;
     position: relative;
     vertical-align: top;
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.9rem!important;
+    height: 0.9rem!important;
     overflow-y: hidden;
     margin-bottom: 0.2rem;
     box-sizing: border-box;
@@ -500,8 +517,8 @@ input[type='file'] {
     text-align: center;
 }
 .photo-list .preview {
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.9rem!important;
+    height: 0.9rem!important;
     z-index: 4;
     line-height: 0.6rem;
     font-family: arial;
@@ -517,8 +534,8 @@ input[type='file'] {
     box-sizing: border-box;
 }
 .photo-list .preview.addUpload {
-    background-color: #fff;
-    border: 1px solid #b53141;
+    background-color: #f4f4f4!important;
+    border: 1px solid #e4e4e4!important;
 }
 .photo-list .preview img {
     max-height: 0.6rem;
@@ -532,10 +549,10 @@ input[type='file'] {
 .photo-list .add-bg {
     width: 0.2rem;
     height: 0.2rem;
-    margin-left: 0.2rem;
-    margin-top: 0.2rem;
+    margin-left: 0.34rem;
+    margin-top: 0.32rem;
     display: block;
-    background: url(../../assets/images/add_icon_bg.png) no-repeat;
+    background: url(../../assets/images/add_icon_bg1.png) no-repeat;
     background-size: contain;
     background-position: center;
 }
@@ -575,7 +592,9 @@ input[type='file'] {
 .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
     border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
-
+.weui-btn_warn{
+    height: .4rem!important;
+}
 </style>
 <style lang="less">
 .group-item {

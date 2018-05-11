@@ -15,11 +15,15 @@
                 <div class="right-btn" @click="showDet">切换<span></span></div>
             </div>
             </flexbox>
-            <div class="animate-down" style="background-color:#FFFFFF;" v-show="topShow">
-                <div  v-for="(park,index) in department" :key="index" class="bg-flag" :class="[park.departmentid === activesId?'activeColors':'']" @click="change(park)">
-                    {{park.departmentname}}
-                </div>
-            </div>
+            <!-- <div v-transfer-dom>
+                <popup> -->
+                    <div class="animate-down" style="background-color:#FFFFFF;" v-show="topShow">
+                        <div  v-for="(park,index) in department" :key="index" class="bg-flag" :class="[park.departmentid === activesId?'activeColors':'']" @click="change(park)">
+                            {{park.departmentname}}
+                        </div>
+                    </div>
+                <!-- </popup>
+            </div> -->
             <flexbox class="list-item" v-for="(item,index) in list" :key="index" :gutter="0" align="stretch">
                 <flexbox-item class="list-avatar">
                     <img src="@/assets/images/icon-head.png">
@@ -39,7 +43,7 @@
                             </flexbox-item> -->
                         </flexbox>
                         
-                        <flexbox-item v-if="item.activeCreatePeople == user.userid && item.endTime  > new Date().getTime()">
+                        <flexbox-item v-if="item.activeCreatePeople == user.userid && item.startTime  > new Date().getTime()">
                             <input type="button" class="cancle" value="取消活动" @click="deleteActive(item.id)">
                             <!-- <input type="button" class="cancle" value="取消活动"> -->
                         </flexbox-item>
@@ -50,7 +54,7 @@
                         <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
                             <!-- 缩略图显示 -->
                             <div>
-                                <img style="position:relative;" :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)" />
+                                <img style="position:relative;" :class="item.previewerClassName" :title="img.msrc" v-clipping="img.msrc" @click="preview(index,idx)" />
                                 <img style="position:absolute;top:0;right:0;" src="@/assets/images/x.png" @click="deletePic(img.id)" />
                             </div>
                         </flexbox-item>
@@ -72,16 +76,8 @@
             
         </div>
          
-        <!-- <div v-transfer-dom>
-                <confirm v-model="showPop" position="left" width="100%"
-                title="是否取消活动？"
-                ref="confirm5"
-                @on-cancel="cancle"
-                @on-confirm="confirm">
-                </confirm>
-            </div> -->
             <div v-transfer-dom>
-                <popup v-model="showPop" position="left" width="100%">
+                <popup v-model="showPop" position="left" width="100%" border="0">
                 <div class="middle">
                     <div class="middle-top">是否取消活动？</div>
                     <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="cancle">
@@ -90,7 +86,7 @@
                 </popup>
             </div>
             <div v-transfer-dom>
-                <popup v-model="showPopPic" position="left" width="100%">
+                <popup v-model="showPopPic" position="left" width="100%" border="0">
                 <div class="middle">
                     <div class="middle-top">是否删除？</div>
                     <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="showPopPic=false">
@@ -669,7 +665,8 @@ position:fixed;left:0;right:0;
     height:1rem;
     line-height:1rem;
     text-align:center;
-    background-color: #FFFFFF !important;
+    // background-color: #FFFFFF !important;
+    background: linear-gradient(90deg, #fff, #fff);
     box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);
     font-size:.16rem;
     color:#333333;

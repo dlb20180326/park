@@ -18,7 +18,7 @@
                                 &nbsp; &nbsp;<span>{{datePick(item.startTime)}}</span>
                             </router-link>
                         </flexbox-item>
-                        <flexbox-item v-if="item.activeCreatePeople == user.userid && item.endTime  > new Date().getTime()">
+                        <flexbox-item v-if="item.activeCreatePeople == user.userid && item.startTime  > new Date().getTime()">
                             <input type="button" class="cancle" value="取消活动" @click="deleteActive(item.id)">
                         </flexbox-item>
                     </flexbox>
@@ -26,12 +26,12 @@
                         <div class="list-content" v-html="item.active_Context"></div>
                     </router-link>
                     <flexbox class="images-preview" :gutter="0" wrap="wrap">
-                        <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="idx">
+                        <flexbox-item :span="1/3" v-for="(img, idx) in item.pictures" :key="img.pictureId">
                             <!-- 缩略图显示 -->
                             <div>
-                                <img style="position:relative;" :class="item.previewerClassName" v-clipping="img.msrc" @click="preview(index,idx)">
+                                <img style="position:relative;" :class="item.previewerClassName" :title="img.msrc" :src="img.msrc" @click="preview(index,idx)">
                                 <div v-if="item.activeCreatePeople == user.userid">
-                                    <img style="position:absolute;top:0;right:0;" src="@/assets/images/x.png" @click="deletePic(img.id)">
+                                    <img style="width:.2rem;position:absolute;top:0;right:0;" src="@/assets/images/x-1.png" @click="deletePic(img.id)">
                                 </div>
                            </div>
                         </flexbox-item>
@@ -53,7 +53,7 @@
             </flexbox>
         </div>
         <div v-transfer-dom>
-            <popup v-model="showPop" position="left" width="100%">
+            <popup v-model="showPop" position="left" width="100%" border="0">
             <div class="middle">
                 <div class="middle-top">是否取消活动？</div>
                 <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="cancle">
@@ -63,7 +63,7 @@
         </div>
 
         <div v-transfer-dom>
-            <popup v-model="showPopPic" position="left" width="100%">
+            <popup v-model="showPopPic" position="left" width="100%" border="0">
             <div class="middle">
                 <div class="middle-top">是否删除？</div>
                 <input type="button" class="btn" value="否" style="border-right:1px solid #E4E4E4;" @click="showPopPic=false">
@@ -311,6 +311,7 @@ export default {
     background-color: #fff;
     &:not(:last-child) {
         margin-bottom: 0.1rem;
+        padding-top: 0.1rem;
     }
 }
 .vux-flexbox-item.list-avatar {
@@ -330,7 +331,7 @@ export default {
     }
 }
 .vux-flexbox-item.list-body {
-    padding: 0.1rem;
+    padding: 0.1rem 0.1rem 0.1rem 0.005rem;
     .cancle{
         float: right;
         width: 0.75rem;
@@ -531,8 +532,8 @@ export default {
     height:1rem;
     line-height:1rem;
     text-align:center;
-    background-color: #FFFFFF !important;
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);
+    // background-color: #FFFFFF !important;
+    background: linear-gradient(90deg,#fff,#fff);
     font-size:.16rem;
     color:#333333;
     border-radius:10px 10px 0 0;
@@ -545,6 +546,7 @@ border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
     float: left;
     width: 50%;
     height: 48px;
+    line-height: 48px;
     font-size: .16rem;
     border: 0;
     background-color: #ffffff;

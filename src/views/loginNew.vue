@@ -94,7 +94,7 @@
         position: absolute;
         top:0;
         width:100%;
-        height: 1.67rem;
+        height: 1.77rem;
         background: url(../assets/images/new-logo-new.png) no-repeat;
          background-size:100% 100%;
         /* z-index:1; */

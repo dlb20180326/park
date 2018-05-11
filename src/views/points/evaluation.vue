@@ -135,9 +135,9 @@ body {
     font-size: 0.17rem !important;
 }
 .vux-flexbox {
-    width: 89.4%;
+    width: 95%;
     height: auto;
-    margin: 0.13rem auto 0.32rem auto;
+    margin: .15rem;
     flex-wrap: wrap;
 }
 .flex-demo {
@@ -154,9 +154,10 @@ body {
     margin-right: -1%;
 }
 .vux-flexbox .vux-flexbox-item {
-    min-width: 49%;
-    width: 49%;
-    margin-bottom: 0.1rem;
+    min-width: 46%;
+    width: 46%;
+    margin-bottom: 0.2rem;
+    margin-right: 0.095rem;
     flex: 0;
     position: relative;
 }

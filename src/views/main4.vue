@@ -10,15 +10,16 @@
                     <div class="top-bottom">
                         <div class="second-top" >
                             <span class="color-light">所属片区:</span>
-                            <span class="color-dark" style="margin-left:.23rem;">{{partAbout.address }}</span>
+                            <span class="color-dark" style="margin-left:.35rem;">{{partAbout.address }}</span>
                         </div>
                         <div class="second-content">
-                            <span class="color-light" style="position:relative;">所属党支部:</span>
-                            <span class="color-dark" style="position:absolute;">{{partAbout.departmentname}}</span>
+                            <span class="color-light">所属党支部:</span>
+                            <!-- <span class="color-dark" style="position:absolute;" :class="partAbout.departmentname.length>16?margin">{{partAbout.departmentname}}</span> -->
+                            <span class="color-dark">{{partAbout.departmentname}}</span>
                         </div>
                         <div class="left-bottom">
                             <span class="color-light">党支部书记:</span>
-                            <span class="color-dark" style="margin-left:.08rem;">{{partAbout.partyBranch}}</span>
+                            <span class="color-dark" style="margin-left:.2rem;">{{partAbout.partyBranch}}</span>
                         </div>
                          <div class="exit" @click="logout">
                              <span>退出登录</span>
@@ -80,7 +81,8 @@ export default {
             dateTime: '',
             charts: '',
             partAbout: {},
-            years:new Date().getFullYear()
+            years:new Date().getFullYear(),
+            pictureSex:''
         };
     },
     components: {
@@ -197,6 +199,7 @@ export default {
             })
             .then(res => {
                 this.userAbout = res.data;
+                this.pictureSex = res.data.avatar;
             })
             .catch(err => {
                 console.log(err);
@@ -251,7 +254,7 @@ export default {
         },
         ItemClick(index){
             if(index == 0){
-                this.$router.push("points/");
+                this.$router.push({name:'pointsName',params:{pictureSex:this.pictureSex}});
             }
             else{
                 this.$router.push("active/activeDetail");
@@ -263,15 +266,19 @@ export default {
 </script>
 
 <style scoped>
+/* .top-right{
+    position:absolute;
+    left:0.5rem;
+} */
+
 .header {
     width: 100%;
-    height: 1.6rem;
     background: linear-gradient(to right, rgba(185, 54, 71, 1), rgba(155, 10, 26, 1));
    
 }
 .header-top {
     width: 94%;
-    height: 1.7rem;
+    height: 100%;
     border-radius: 5px;
     background: rgba(255, 255, 255, 1);
     /* box-shadow: 0 3px 8px 0 rgba(174, 174, 174, 0.5); */
@@ -281,46 +288,59 @@ export default {
     left:3%;
 }
 .top-head {
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 0.54rem;
-    margin: 0 auto;
     border-bottom: 1px solid #ededed;
 }
 .top-left {
-    float: left;
+    /* float: left;
     margin: 0.02rem 0 0.15rem .17rem;
     height: 0.54rem;
     line-height: 0.54rem;
     font-size: 0.14rem;
     font-weight: 600;
     font-family: PingFangSC-Semibold;
-    color:#3E3E3E;
+    color:#3E3E3E; */
+    height: 0.54rem;
+    line-height: 0.54rem;
+    font-size: 0.14rem;
 }
 .top-right {
-    float: left;;
-    margin: 0.12rem 0 0.15rem .91rem;
     width: 0.31rem;
     height: 0.33rem;
-    font-weight: 600;
     background-repeat:no-repeat;
     background-size: 100% 100%;
 }
 .top-bottom{
     width: 86%;
-    height: 1.2rem;
     margin: 0 auto;
     font-size: 0.14rem;
-    padding-top: .16rem;
-   /* margin-bottom:20px; */
+    overflow: hidden;
+    padding-top:.1rem;
+    padding-bottom:.1rem;
 }
 .second-top{
     margin-bottom: .1rem;
 }
 .second-content{
     margin-bottom: .1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.second-content .color-light {
+    flex-basis: 6em;
+}
+.second-content .color-dark {
+    flex: 1;
+    line-height: 1.2;
 }
 .exit{
-    display: inline-block;
+    display: block;
     float: right;
     margin-top: -.2rem;
 }
@@ -382,7 +402,7 @@ export default {
     background-color: #fff;
     margin: auto;
     border-radius: .08rem;
-    margin-top:-0.05rem;
+    margin-top:-0.15rem;
 }
 .annual {
     width: 93.3%;
@@ -403,7 +423,7 @@ export default {
     line-height: 20px;
     margin: 0 auto;
     padding-top: 0.06rem;
-    margin-left: .2rem;
+    margin-left: .3rem;
     text-align: center;
 }
 .integral {
@@ -417,6 +437,8 @@ export default {
     /* text-align: center; */
     margin-top: -.3rem;
     /* margin: 0.04rem auto 0.1rem auto; */
+    position:relative;
+    left:0.1rem;
 }
 .vux-flexbox {
     width: 89.4%;
@@ -476,3 +498,4 @@ export default {
     }
 }
 </style>
+
