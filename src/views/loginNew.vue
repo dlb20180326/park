@@ -26,8 +26,7 @@
         <div class="bottom">
             <div class="bottomLink">
                 <a href="#" class="changPwd"><router-link slot="right" :to="{name:'changPwd'}">更改密码&nbsp;&nbsp;&nbsp;&nbsp;|</router-link></a>
-                <!-- <a href="./changPwd.vue" class="changPwd">更改密码&nbsp;&nbsp;&nbsp;&nbsp;|</a> -->
-                <a href="#" class="contact"><router-link slot="right" :to="{name:'activeMore'}">&nbsp;&nbsp;&nbsp;联系工作人员</router-link></a>
+                <a href="#" class="contact"><router-link slot="right" :to="{name:'contect'}">&nbsp;&nbsp;&nbsp;联系工作人员</router-link></a>
             </div>
         </div>
         
