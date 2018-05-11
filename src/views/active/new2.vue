@@ -130,7 +130,7 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-            <x-dialog v-model="showQrcodeDialog" :hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
+            <x-dialog v-if="showQrcodeDialog" :hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
                <div class="title">
                     <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
