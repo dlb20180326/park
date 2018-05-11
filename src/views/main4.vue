@@ -402,7 +402,7 @@ export default {
     background-color: #fff;
     margin: auto;
     border-radius: .08rem;
-    margin-top:-0.05rem;
+    margin-top:-0.15rem;
 }
 .annual {
     width: 93.3%;
