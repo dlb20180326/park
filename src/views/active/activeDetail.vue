@@ -492,7 +492,7 @@ export default {
     .mainbox {
         background:#fff;
         width:100%;
-        padding:.1rem 0 .06rem 0;
+        padding:.6rem 0 .06rem 0;
     }
     .mainbox1 {
         background:#fff;

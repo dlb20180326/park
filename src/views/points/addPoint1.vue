@@ -552,7 +552,9 @@
     .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
         border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
     .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
-
+    .weui-btn_warn{
+        height: .4rem!important;
+    }
 </style>
 <style scoped>
 .colorSet{
