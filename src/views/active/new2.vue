@@ -110,7 +110,7 @@
         	<span class="addPic">添加海报</span>
             <div class="photo-list cl">
                 <ul>
-                    <li v-for="(item,index) in picList.list">
+                    <li :key="index" v-for="(item,index) in picList.list">
                         <div class="preview">
                             <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
                         </div>
@@ -130,7 +130,7 @@
             </x-button>
         </div>
         <div v-transfer-dom class="qrcode-dialog">
-            <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
+            <x-dialog v-model="showQrcodeDialog" :hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
                <div class="title">
                     <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
@@ -316,11 +316,11 @@
                             activeName:this.activeTitle,
                             activeStatus:1,
                             departmentid:this.departmentidId.join(),
-                            picids:this.picList.arr.join()
+                            picids:this.picList.arr.join() || '101'
                         }
                     }) .then((res)=> {
                         this.$vux.toast.show({
-                            text: '增加成功',
+                            text: '增加成功' + this.picList.arr.join(),
                             type: 'text'
                         });
 
