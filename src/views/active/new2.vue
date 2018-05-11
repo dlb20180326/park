@@ -110,7 +110,7 @@
         	<span class="addPic">添加海报</span>
             <div class="photo-list cl">
                 <ul>
-                    <li :key="index" v-for="(item,index) in picList.list">
+                    <li v-for="(item,index) in picList.list" :key="index">
                         <div class="preview">
                             <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
                         </div>
@@ -324,8 +324,13 @@
                         });
 
                         this.showQR(res.data);
+                        console.log(res.data);
                     }).catch(function (error) {
                         console.log(error);
+                           this.$vux.toast.show({
+                            text:进入失败,
+                            type: 'text'
+                        });
                     });
                 }else {
                     this.$vux.toast.show({

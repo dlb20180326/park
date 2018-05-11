@@ -479,7 +479,6 @@
     }
     .weui-btn_mini {
         height: 0.32rem;
-        line-height: 1;
         padding: 0 0.16rem;
         font-size: 0.14rem;
         border-top-left-radius: 0;
