@@ -3,107 +3,25 @@
         <div id="myForm">
             <div class="input-all clearfix">
                 <div class="left-content">
-                    <i class="img-phone"></i>
-                    <label class="label-name">请输入账户名</label>
+                    <span>管理者</span>
+                    <h2>陆家嘴金领驿站超级管理员</h2>
+                    <div class="bottom">
+                        <span>联系方式：</span>
+                        <span>QQ：123456789</span>
+                        <span>电话：021-6677 5566</span>
+                    </div>
                 </div>
-                <input type="text" v-model="account" placeholder="" />
             </div>
-            <div class="input-all clearfix">
-                <div class="left-content">
-                    <i class="img-locks"></i>
-                    <label class="label-lock">请输入原密码</label>
-                </div>
-                <input type="password" v-model="pass" placeholder="" />
-            </div>
-            <div class="input-all clearfix">
-                <div class="left-content">
-                    <i class="img-locks"></i>
-                    <label class="label-lock">请输入新密码</label>
-                </div>
-                <input type="password" v-model="newPass" placeholder="" />
-            </div>
-            <div class="input-all clearfix">
-                <div class="left-content">
-                    <i class="img-locks"></i>
-                    <label class="label-lock">请确认新密码</label>
-                </div>
-                <input type="password" v-model="confrimNewPass" placeholder="" />
-            </div>
-            
             <div class="input-all clearfix">
                 <div class="attention">
                     <span>注意：</span>
                     <p>密码必须是8-20个英文字母、数字或符号（除空格）。</p>
                 </div>
             </div>
-            <button type="button" class="changPwd" @click="change">更改密码</button>
         </div>
     </div>
 </template>
 <script>
-import Vue from 'vue';
-import { XImg, Icon } from 'vux';
-export default {
-    data() {
-        return {
-            account: '',
-            pass: '',
-            newPass: '',
-            confrimNewPass:''
-        };
-    },
-    components: {
-        XImg,
-        Icon
-    },
-    methods: {
-        change() {
-            if (!this.account)
-                return this.$vux.toast.show({
-                    text: '请输入帐号',
-                    type: 'text',
-                    position: 'top'
-                });
-            if (!this.pass)
-                return this.$vux.toast.show({
-                    text: '请输入原密码',
-                    type: 'text',
-                    position: 'top'
-                });
-            if (!this.newPass)
-                return this.$vux.toast.show({
-                    text: '请输入新密码',
-                    type: 'text',
-                    position: 'top'
-                });
-            if (!this.confrimNewPass)
-                return this.$vux.toast.show({
-                    text: '请输入新密码',
-                    type: 'text',
-                    position: 'top'
-                });
-            Vue.http.post('puser/updatePwd', {
-                    name: this.account,
-                    password: this.pass,
-                    rePassWord: this.newPass
-                })
-                .then(result => {
-                    if (result.status) {
-                        this.$router.push({
-                            path: this.$route.query.toPath || '/'
-                        });
-                    } else {
-                        this.$vux.toast.show({
-                            text: result.message,
-                            width: '18em',
-                            type: 'text',
-                            position: 'top'
-                        });
-                    }
-                });
-        }
-    }
-};
 </script>
 <style lang="less" scoped>
 #changPwd{

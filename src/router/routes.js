@@ -15,6 +15,11 @@ export const routes = [
         component: () => import('@/views/changPwd')
     },
     {
+        path: '/loginContect',
+        name: 'contect',
+        component: () => import('@/views/contect')
+    },
+    {
         path: '/',
         // meta: { requiresAuth: true },
         component: () => import('@/views/layout'),
