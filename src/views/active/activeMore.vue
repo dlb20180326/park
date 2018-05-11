@@ -424,25 +424,15 @@ input {
     word-wrap: break-word;
     word-break: break-all;
 }
-
-
-
-
-
-
-
+.group-item{
+    margin-top: .5rem!important;
+}
  .allLine {
         width: 100%;
-        overflow: hidden;
-        margin: 0.1rem auto .1rem;
+        overflow: hidden!important;
+        margin: 0.1rem auto .1rem!important;
     }
-
-    .allLine {
-        padding-top: .1rem;
-        /*padding-bottom: .08rem*/
-    }
-
-    .allLine span {
+    span {
         display: table-cell;
         line-height: 1.44
     }

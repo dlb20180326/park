@@ -5,29 +5,34 @@
               <a slot="right" @click="showMenu">评分说明</a>
              </x-header>
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>党员姓名：<span style="color: #999999">{{name}}</span></b>
             </group-title>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>所属支部：<span style="color: #999999">{{departmentname}}</span></b>
             </group-title>
         </div>
 
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>扣分原因</b>
             </group-title>
             <textarea cols="30" rows="10"  maxlength="300" v-model='Content1' placeholder="请简单总结扣分原因"></textarea>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <group-title slot="title">
                 <b>原因描述</b>
             </group-title>
             <textarea cols="30" rows="10"  maxlength="300" v-model='Content2' placeholder="请详细描述扣分原因"></textarea>
         </div>
         <div class="group-item">
+            <span class="bg-line"></span>
             <span class="addPic">添加凭证</span>
             <div class="photo-list cl">
                 <ul>
@@ -332,6 +337,16 @@ li {
   &:nth-child(2) {
     margin-top: 0.6rem;
   }
+  .bg-line{
+    width: 0.03rem;
+    height: 0.14rem;
+    margin-left: 1%;
+    background: url(../../assets/images/icon-rectangle.png) no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    float: left;
+    margin-top: 0.05rem;
+  }
   input,
   textarea {
     display: block;
@@ -390,11 +405,12 @@ li {
 }
 
 .addPic {
-  height: 0.17rem;
-  font-size: 0.12rem;
-  font-family: PingFangSC-Medium;
-  color: rgba(153, 153, 153, 1);
-  line-height: 0.17rem;
+    height: 0.17rem;
+    font-size: 0.14rem;
+    font-family: PingFangSC-Medium;
+    color: #464646;
+    font-weight: 600;
+    line-height: 0.17rem;
 }
 input[type="file"] {
   color: transparent;
@@ -426,8 +442,8 @@ input[type="file"] {
   margin-right: 0.2rem;
   position: relative;
   vertical-align: top;
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 0.9rem!important;
+  height: 0.9rem!important;
   overflow: hidden;
   margin-bottom: 0.2rem;
 }
@@ -457,8 +473,8 @@ input[type="file"] {
   text-align: center;
 }
 .photo-list .preview {
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 0.9rem!important;
+  height: 0.9rem!important;
   z-index: 4;
   line-height: 0.6rem;
   font-family: arial;
@@ -474,12 +490,12 @@ input[type="file"] {
   box-sizing: border-box;
 }
 .photo-list .preview.addUpload {
-  background-color: #fff;
-  border: 1px solid #b53141;
+  background-color: #f4f4f4;
+  border: 1px solid #e4e4e4;
 }
 .photo-list .preview img {
-  max-height: 0.6rem;
-  max-width: 0.6rem;
+  max-height: 0.9rem!important;
+  max-width: 0.9rem!important;
   vertical-align: middle;
 }
 .photo-list .photo-primary-text {
@@ -489,10 +505,10 @@ input[type="file"] {
 .photo-list .add-bg {
   width: 0.2rem;
   height: 0.2rem;
-  margin-left: 0.2rem;
-  margin-top: 0.2rem;
+  margin-left: 0.34rem;
+  margin-top: 0.32rem;
   display: block;
-  background: url(../../assets/images/add_icon_bg.png) no-repeat;
+  background: url(../../assets/images/add_icon_bg1.png) no-repeat;
   background-size: contain;
   background-position: center;
 }
@@ -551,4 +567,7 @@ border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2)!important;}
 .middle-content p{font-size:.14rem;color:#828282;line-height:.24rem;}
 .middle-content{width:2.4rem;height:1.2rem;margin:.21rem .19rem .21rem .21rem;}
+.weui-btn_warn{
+  height: .4rem!important;
+}
 </style>

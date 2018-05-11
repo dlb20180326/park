@@ -532,10 +532,10 @@
     .photo-list .add-bg{
         width: 0.2rem;
         height: 0.2rem;
-        margin-left: .2rem;
-        margin-top: .2rem;
+        margin-left: .34rem;
+        margin-top: .32rem;
         display: block;
-        background: url(../../assets/images/add_icon_bg.png) no-repeat;
+        background: url(../../assets/images/add_icon_bg1.png) no-repeat;
         background-size: contain;
         background-position: center;
     }
@@ -552,7 +552,9 @@
     .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
         border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
     .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
-
+    .weui-btn_warn{
+        height: .4rem!important;
+    }
 </style>
 <style scoped>
 .colorSet{

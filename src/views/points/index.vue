@@ -8,7 +8,7 @@
             <div class="head">
                 <flexbox>
                     <flexbox-item class="avatar">
-                        <img src="@/assets/images/icon-head.png">
+                        <img :src="picAccept">
                     </flexbox-item>
                     <flexbox-item>
                         <div class="label">积分周期：</div>
@@ -204,6 +204,7 @@ export default {
             results:'',
             infoList:[{}],
             darkbgShow:false,
+            picAccept:'',
             myWidth: 0.88*document.documentElement.clientWidth
         };
     },
@@ -419,6 +420,7 @@ export default {
    		this.getDetail();
    		this.rating();
         this.score();
+        this.picAccept = this.$route.params.pictureSex;
     }
 };
 </script>
