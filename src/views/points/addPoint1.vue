@@ -532,10 +532,10 @@
     .photo-list .add-bg{
         width: 0.2rem;
         height: 0.2rem;
-        margin-left: .2rem;
-        margin-top: .2rem;
+        margin-left: .34rem;
+        margin-top: .32rem;
         display: block;
-        background: url(../../assets/images/add_icon_bg.png) no-repeat;
+        background: url(../../assets/images/add_icon_bg1.png) no-repeat;
         background-size: contain;
         background-position: center;
     }

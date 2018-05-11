@@ -429,6 +429,7 @@ input {
         overflow: hidden!important;
         margin: 0.1rem auto .1rem!important;
     }
+    
 
     .allLine {
         padding-top: .5rem!important;
