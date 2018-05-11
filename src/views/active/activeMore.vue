@@ -431,7 +431,7 @@ input {
     }
 
     .allLine {
-        padding-top: .1rem!important;
+        padding-top: .5rem!important;
         /*padding-bottom: .08rem*/
     }
 
