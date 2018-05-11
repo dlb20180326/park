@@ -43,7 +43,7 @@
                             </flexbox-item> -->
                         </flexbox>
                         
-                        <flexbox-item v-if="item.activeCreatePeople == user.userid && item.endTime  > new Date().getTime()">
+                        <flexbox-item v-if="item.activeCreatePeople == user.userid && item.startTime  > new Date().getTime()">
                             <input type="button" class="cancle" value="取消活动" @click="deleteActive(item.id)">
                             <!-- <input type="button" class="cancle" value="取消活动"> -->
                         </flexbox-item>
