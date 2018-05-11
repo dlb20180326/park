@@ -1,10 +1,15 @@
 <template>
-    <div id="changPwd">
-        <div id="myForm">
-            <div class="input-all clearfix">
-                <div class="left-content">
+      <!-- <x-header :left-options="{showBack: false}">
+            党员活动
+            <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>
+        </x-header> -->
+    <!-- <x-header>联系工作人员</x-header> -->
+    <div>
+        <div class="contect">
+            <div class="contectMain">
+                <div class="top-content">
                     <span>管理者</span>
-                    <h2>陆家嘴金领驿站超级管理员</h2>
+                    <p>陆家嘴金领驿站超级管理员</p>
                     <div class="bottom">
                         <span>联系方式：</span>
                         <span>QQ：123456789</span>
@@ -12,32 +17,52 @@
                     </div>
                 </div>
             </div>
-            <div class="input-all clearfix">
+            <div class="title">
                 <div class="attention">
-                    <span>注意：</span>
-                    <p>密码必须是8-20个英文字母、数字或符号（除空格）。</p>
+                    <p>金领驿站工作时间：9:00-16:00</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contect" style="padding-top: 0rem;">
+            <div class="contectMain">
+                <div class="top-content">
+                    <span>开发者</span>
+                    <p>上海市东链博数据科技有限公司</p>
+                    <div class="bottom">
+                        <span>联系方式：</span>
+                        <span>QQ：123456789</span>
+                        <span>电话：021-6677 5566</span>
+                    </div>
+                </div>
+            </div>
+            <div class="title">
+                <div class="attention">
+                    <p>东链博工作时间：10:00-18:00</p>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+//  import { XHeader} from 'vux';
+//  export default {
+//     components: {
+//         XHeader
+//     }
+//  }
 </script>
 <style lang="less" scoped>
-#changPwd{
+.contect{
     padding:.2rem;
-    .label-name{
-        font-size: .14rem;
-        color: #666;
-    }
-    .label-lock{
-        font-size: .14rem;
-        color: #666;
-    }
-    input{
+    .contectMain{
         display: block;
         width: 100%;
-        height: .36rem;
+        // height: ;
+        font-size: .14rem;
+        padding: .2rem;
+        margin-top: .1rem;
+        margin-bottom: .1rem;
         outline: 0;
         background-color: transparent;
         box-sizing: border-box;
@@ -45,28 +70,26 @@
         color: #999;
         border:0;
         border-radius: .04rem;
-        font-size: .14rem;
-        margin-top: .1rem;
-        margin-bottom: .1rem;
+        span{
+            display: block;
+            font-size:.14rem;
+            font-family:PingFangSC-Medium;
+            color:rgba(153,153,153,1);
+        }
+        p{
+            margin-top: .2rem;
+            font-size:.2rem;
+            font-family:PingFangSC-Medium;
+            color:rgba(102,102,102,1);
+        }
+        .bottom{
+            margin-top: .35rem;
+        }
     }
-    .changPwd{
-        position: fixed;
-        bottom: .2rem;
-        width: 90%;
-        height: .4rem;
-        font-size: .16rem;
-        font-family:PingFangSC-Medium;
-        background:rgba(216,216,216,1);
-        color: #fff;
-        border-radius: 4px;
-        border: 0;
-    }
-    .attention{
-        width:3.35rem;
-        height:.4rem; 
-        font-size:.14rem;
-        font-family:PingFangSC-Medium;
-        color:rgba(185,54,71,1);
+    .title{
+        font-size: .12rem;
+        color: #ccc;
     }
 }
+
 </style>

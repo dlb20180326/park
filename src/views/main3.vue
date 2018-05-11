@@ -251,7 +251,7 @@ export default {
 .qrcode-dialog {
     .weui-dialog {
         padding: 20px;
-        display: table;
+        display: table!important;
         flex-direction: column;
         .title {
             text-align: left;
