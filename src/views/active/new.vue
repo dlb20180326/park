@@ -328,8 +328,11 @@
                 }
             },
             showQR(data){
-                document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
-                this.showQrcodeDialog = true;
+                if(data)
+                {
+                    document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
+                    this.showQrcodeDialog = true;
+                }
             },
             submit1(it){
                 // console.log('submit1 it:', it);

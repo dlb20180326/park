@@ -316,7 +316,7 @@
                             activeName:this.activeTitle,
                             activeStatus:1,
                             departmentid:this.departmentidId.join(),
-                            picids:this.picList.arr.join() || '101'
+                            picids:this.picList.arr.join()
                         }
                     }) .then((res)=> {
                         this.$vux.toast.show({
@@ -336,8 +336,11 @@
                 }
             },
             showQR(data){
-                document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
-                this.showQrcodeDialog = true;
+                if(data)
+                {
+                    document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
+                    this.showQrcodeDialog = true;
+                }
             },
             submit1(it){
                 this.activeType=it.id;
@@ -430,18 +433,17 @@
                     let serverIds = [];
                 let toUpload = localId =>
                 wx.uploadImage({
-                        localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
-                        isShowProgressTips: 1, // 默认为1，显示进度提示
-                        success: res => {
+                    localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                    isShowProgressTips: 1, // 默认为1，显示进度提示
+                    success: res => {
                         serverIds.push(res.serverId);
-                if (localIds.length) {
-                    toUpload(localIds.shift());
-                } else {
-                    resolve(serverIds);
-                }
-            }
-            })
-                ;
+                        if (localIds.length) {
+                            toUpload(localIds.shift());
+                        } else {
+                            resolve(serverIds);
+                        }
+                    }
+                });
                 if (localIds.length) {
                     toUpload(localIds.shift());
                 } else {
