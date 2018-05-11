@@ -110,7 +110,7 @@
         	<span class="addPic">添加照片</span>
             <div class="photo-list cl">
                 <ul>
-                    <li v-for="(item,index) in picList.list">
+                    <li v-for="(item,index) in picList.list" :key="index">
                         <div class="preview">
                             <img style="float:left;width:100%" :key="index" width="100" :src="item"  @touchend="clearLoop" @touchstart="showDeleteButton(index)">
                         </div>
@@ -319,14 +319,20 @@
                             picids:this.picList.arr.join()
                         }
                     }) .then((res)=> {
+
                         this.$vux.toast.show({
-                            text: '增加成功',
+                            text: res.data,
                             type: 'text'
                         });
 
                         this.showQR(res.data);
+                        console.log(res.data);
                     }).catch(function (error) {
                         console.log(error);
+                           this.$vux.toast.show({
+                            text:进入失败,
+                            type: 'text'
+                        });
                     });
                 }else {
                     this.$vux.toast.show({
