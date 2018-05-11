@@ -106,7 +106,7 @@
             </group-title>
             <textarea cols="30" rows="10"  maxlength="300" v-model='activeContext'></textarea>
         </div>
-        <div class="group-item">
+        <!-- <div class="group-item">
         	<span class="addPic">添加海报</span>
             <div class="photo-list cl">
                 <ul>
@@ -122,7 +122,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <div class="group-item" style="margin-bottom:0.2rem">
             <group-title slot="title"></group-title>
             <x-button type="warn" @click.native="submit()" style="height:0.4rem !important">
@@ -139,13 +139,6 @@
                   <img id="fei" alt="" onerror="alert('error')">
                 </div>
           </x-dialog>
-      </div>
-      <div class="qrbox" v-show="qrBoxShow" @click.self="qrBoxShow = false">
-          <div class="title">
-              活动名称
-              <span class="activetitle">{{activeTitle}}</span>
-          </div>
-          <img :src="qrsrc" alt="二维码" onload="alert('success')" onerror="alert('error')" v-if="qrsrc">
       </div>
     </div>
 </template>
@@ -206,9 +199,7 @@
                 departmentidId:'',
                 departmentidNames:'',
                 str:[],String:'',
-                picList:{list:[],arr:[]},
-                qrsrc: '',
-                qrBoxShow: false
+                picList:{list:[],arr:[]}
             };
         },
         methods: {
@@ -327,14 +318,11 @@
                             picids:this.picList.arr.join() || '780'
                         }
                     }).then((res)=> {
-                        // alert(11);
-                        // this.$vux.toast.show({
-                        //     text: '增加成功',
-                        //     type: 'text'
-                        // });
-                        // alert(0);
+                        this.$vux.toast.show({
+                            text: '增加成功',
+                            type: 'text'
+                        });
                         this.showQR(res.data);
-                        alert(res.data);
                     }).catch(function (error) {
                         console.log(error);
                         this.$vux.toast.show({
@@ -350,13 +338,8 @@
                 }
             },
             showQR(data){
-                alert(1);
-                // document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
-                // alert(2);
-                // this.showQrcodeDialog = true;
-                this.qrBoxShow = true;
-                this.qrsrc = `http://www.dlbdata.cn/dangjian/active/showQrCode?activeId=${data}`;
-                alert(3);
+                document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
+                this.showQrcodeDialog = true;
             },
             submit1(it){
                 this.activeType=it.id;
@@ -556,26 +539,6 @@
                 height: 100%;
             }
         }
-    }
-}
-.qrbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 9;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, .5);
-    .title {
-        color: #fff;
-    }
-    img {
-        width: 80%;
-        margin-top: .2rem;
     }
 }
 </style>
