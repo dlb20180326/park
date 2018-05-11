@@ -478,7 +478,7 @@
         width: auto;
     }
     .weui-btn_mini {
-        height: 0.32rem;
+        height: 0.325rem!important;
         padding: 0 0.16rem;
         font-size: 0.14rem;
         border-top-left-radius: 0;
@@ -531,8 +531,8 @@
     .photo-list .add-bg{
         width: 0.2rem;
         height: 0.2rem;
-        margin-left: .34rem;
-        margin-top: .32rem;
+        margin-left: .2rem;
+        margin-top: .2rem;
         display: block;
         background: url(../../assets/images/add_icon_bg1.png) no-repeat;
         background-size: contain;
