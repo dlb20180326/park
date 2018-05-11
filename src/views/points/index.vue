@@ -146,7 +146,7 @@
                          	<div class="btn-return" v-if="item.status==3" @click="reSubmit(item)">
                             	重新提交
                             </div>
-                            <div class="states" v-if="item.status==3">
+                            <div class="states reject" v-if="item.status==3">
                                 已拒绝
                             </div>
                             <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">{{item.branch}}</span></h4>
@@ -476,12 +476,15 @@ vux-tab-bar-inner{
     color: #B93647;
     width:.46rem;
 }
+.reject{
+    width:0.74rem!important;
+}
 .btn-return{
     position: absolute;
     right: .2rem;
     top: .6rem;
     z-index: 999;
-    width:.74rem;
+    width:.74rem!important;
     border-radius: 4px;
     border: 0.5px solid #B93647;
     font-size: .14rem;
