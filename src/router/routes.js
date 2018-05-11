@@ -10,6 +10,11 @@ export const routes = [
         component: () => import('@/views/loginManage')
     },
     {
+        path: '/loginChangPwd',
+        name: 'changPwd',
+        component: () => import('@/views/changPwd')
+    },
+    {
         path: '/',
         // meta: { requiresAuth: true },
         component: () => import('@/views/layout'),

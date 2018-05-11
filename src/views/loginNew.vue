@@ -22,6 +22,14 @@
             </div>
             
         </div>
+
+        <div class="bottom">
+            <div class="bottomLink">
+                <a href="#" class="changPwd"><router-link slot="right" :to="{name:'changPwd'}">更改密码&nbsp;&nbsp;&nbsp;&nbsp;|</router-link></a>
+                <!-- <a href="./changPwd.vue" class="changPwd">更改密码&nbsp;&nbsp;&nbsp;&nbsp;|</a> -->
+                <a href="#" class="contact"><router-link slot="right" :to="{name:'activeMore'}">&nbsp;&nbsp;&nbsp;联系工作人员</router-link></a>
+            </div>
+        </div>
         
     </div>
 </template>
@@ -151,15 +159,15 @@
     }
 
     .input-all {
-    height: 0.36rem;
-    line-height: 0.36rem;
-    padding-left: 0.36rem;
-    padding-right: 0.11rem;
-    position: relative;
-    background:rgba(255,255,255,1);
-    box-shadow: 0px 1px 5px 0px rgba(150,150,150,0.5);
-    border-radius:18px;
-    margin-bottom:.26rem;
+        height: 0.36rem;
+        line-height: 0.36rem;
+        padding-left: 0.36rem;
+        padding-right: 0.11rem;
+        position: relative;
+        background:rgba(255,255,255,1);
+        box-shadow: 0px 1px 5px 0px rgba(150,150,150,0.5);
+        border-radius:18px;
+        margin-bottom:.26rem;
     }
     .input-all input{
         width: 79%;
@@ -207,5 +215,19 @@
         font-size: .14rem;
         color:#fff;
     }
+    .bottom{
+        width:80%;
+        height: auto;
+        margin: 1.6rem auto .1rem;
+    }
+    .bottomLink{
+        margin-left: 24%;
+    }
+    .bottomLink a{
+        color: #B93647;
+        font-size: .12rem;
+        margin-bottom: .1rem
+    }
+    
 </style>
 
