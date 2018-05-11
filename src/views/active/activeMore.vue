@@ -424,8 +424,8 @@ input {
     word-wrap: break-word;
     word-break: break-all;
 }
-.group-item:first-child{
-    padding-top: .5rem!important;
+.group-item{
+    margin-top: .5rem!important;
 }
  .allLine {
         width: 100%;
