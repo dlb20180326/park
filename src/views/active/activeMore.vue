@@ -13,8 +13,8 @@
                 </tab> -->
     <div>
         <tab>
-                <tab-item selected @on-item-click="toggle">已报名</tab-item>
-                <tab-item @on-item-click="noSign">未报名</tab-item>
+                <tab-item selected @on-item-click="toggle">已报名 ({{activeCount}})</tab-item>
+                <tab-item @on-item-click="noSign">未报名 ({{unactiveCount}})</tab-item>
             </tab>
     </div>
         <div class="group-item">
@@ -116,6 +116,8 @@ export default {
             isActive:false,
             infoM:[],
             tabIndex:"1",
+            activeCount : 0,
+            unactiveCount : 0
         }
     },
     methods:{
@@ -140,6 +142,8 @@ export default {
                         this.unactive.push(element);
                     }
                     this.infoM = this.active;
+                    this.activeCount = this.active.length;
+                    this.unactiveCount = this.unactive.length;
                 });
                 //this.active=res.data.list;
             }).catch(function (error) {
