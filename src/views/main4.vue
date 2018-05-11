@@ -81,7 +81,8 @@ export default {
             dateTime: '',
             charts: '',
             partAbout: {},
-            years:new Date().getFullYear()
+            years:new Date().getFullYear(),
+            pictureSex:''
         };
     },
     components: {
@@ -116,8 +117,6 @@ export default {
     },
     methods: {
         drawAxis(id,arr1,arr2) {
-            console.log(arr1);
-            console.log(arr2);
             let myCharts = echarts.init(document.getElementById(id));
             let option = {
                 tooltip: {
@@ -200,6 +199,7 @@ export default {
             })
             .then(res => {
                 this.userAbout = res.data;
+                this.pictureSex = res.data.avatar;
             })
             .catch(err => {
                 console.log(err);
@@ -254,7 +254,7 @@ export default {
         },
         ItemClick(index){
             if(index == 0){
-                this.$router.push("points/");
+                this.$router.push({name:'pointsName',params:{pictureSex:this.pictureSex}});
             }
             else{
                 this.$router.push("active/activeDetail");

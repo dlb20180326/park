@@ -5,7 +5,7 @@
         </x-header>
         <div class="box">
         <flexbox orient="vertical">
-            <flexbox-item style="padding-top:0.47rem;">
+            <flexbox-item>
                 <section class="mainbox">
                     <div class="barbg" >
                         年度共参与党员活动：

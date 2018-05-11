@@ -70,7 +70,8 @@ export const routes = [
                 component: () => import('@/views/party/partyPointDetail')
             },
             {
-                path: 'points',
+                path: 'points/',
+                name:'pointsName',
                 component: () => import('@/views/points')
             },
             {
