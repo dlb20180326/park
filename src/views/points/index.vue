@@ -191,6 +191,7 @@ export default {
     components: { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton, XScroll,Snap},
     data() {
         return {
+            userAbout: {},
             tabIndex: 0,
             percent:0,
             collect:[],
@@ -204,7 +205,6 @@ export default {
             results:'',
             infoList:[{}],
             darkbgShow:false,
-            picAccept:'',
             myWidth: 0.88*document.documentElement.clientWidth
         };
     },
@@ -412,7 +412,25 @@ export default {
         {
             this.tabIndex = 1;
         },
+        userName() {
+            axios.get('ppartymember/queryByUserId', {
+                params: {
+                    userid: this.$store.getters.user.userid
+                }
+            })
+            .then(res => {
+                this.userAbout = res.data;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        },
     	...mapActions(['setInfo'])
+    },
+    computed: {
+        picAccept () {
+            return `http://www.dlbdata.cn/icon-${this.userAbout.sex === '女' ? 'girl' : 'boy'}.png`;
+        }
     },
    	mounted(){
    		this.progress();
@@ -420,7 +438,7 @@ export default {
    		this.getDetail();
    		this.rating();
         this.score();
-        this.picAccept = this.$route.params.pictureSex;
+        this.userName();
     }
 };
 </script>
