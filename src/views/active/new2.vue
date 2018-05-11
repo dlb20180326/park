@@ -485,6 +485,7 @@
             }
         },
         mounted() {
+            weixin.init(['chooseImage', 'uploadImage']);
             this.getActivity()
         }
     };
