@@ -50,7 +50,7 @@
                                         审批进度 <span class="icon-arrows"></span>
                                     </span>
 	                            </div>
-	                            <div class="content">
+	                            <div class="content progress">
 	                                <x-progress :percent="progres.totalScore/progres.score*100" :show-cancel="false"></x-progress>
 	                            </div>
 	                            <router-link :to="{name:'Dues'}" v-if="progres.id === 7">
@@ -637,6 +637,9 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
         font-size: 0.24rem;
         color: #ea8031;
         padding-left:-0.8rem;
+        position: relative!important;
+    right: 0!important;
+    bottom: 0.1rem!important;
     }
 }
 .item-detail {
@@ -699,5 +702,13 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
     display: block;
     height: 0;
     visibility: hidden
+}
+button.weui-btn_inline, input.weui-btn_inline, button.weui-btn_mini, input.weui-btn_mini{
+    width:auto!important;
+    margin-left:0.4rem;
+    margin-top:0.1rem;
+}
+.progress{
+    margin-left:0.2rem!important;
 }
 </style>
