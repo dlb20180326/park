@@ -115,6 +115,8 @@ export default {
     },
     methods: {
         drawAxis(id,arr1,arr2) {
+            console.log(arr1);
+            console.log(arr2);
             let myCharts = echarts.init(document.getElementById(id));
             let option = {
                 tooltip: {
