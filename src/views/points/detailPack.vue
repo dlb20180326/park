@@ -320,20 +320,20 @@ body {
     margin-bottom: 0.1rem;
 }
 .allPic .bg-line {
-    width: 0.04rem;
-    height: 0.18rem;
-    margin-left: 8%;
+    width: 0.03rem;
+    height: 0.14rem;
+    margin-left: 5%;
     background: url(../../assets/images/icon-rectangle1.png) no-repeat;
     background-size: 100% 100%;
     display: block;
     float: left;
-    margin-top: 0.07rem;
+    margin-top: 0.08rem;
 }
 .picture {
     font-size: 0.14rem;
     font-family: PingFangSC-Semibold;
     color: rgba(51, 51, 51, 1);
-    margin-left: 0.05rem;
+    /* margin-left: 0.05rem; */
     display: block;
     float: left;
 }
@@ -365,8 +365,8 @@ body {
     margin-left: 8%;
 }
 .img-show img {
-    width: 49%;
-    height: 1.5rem;
+    width: .9rem;
+    height: .9rem;
     margin-top: 0.1rem;
 }
 .img-show img:not(:first-child) {
