@@ -145,7 +145,7 @@
               活动名称
               <span class="activetitle">{{activeTitle}}</span>
           </div>
-          <img :src="qrsrc" alt="二维码" v-if="qrsrc">
+          <img :src="qrsrc" alt="二维码" onload="alert('success')" onerror="alert('error')" v-if="qrsrc">
       </div>
     </div>
 </template>
@@ -334,10 +334,10 @@
                         // });
                         // alert(0);
                         this.showQR(res.data);
-                        // alert(res.data);
+                        alert(res.data);
                     }).catch(function (error) {
                         console.log(error);
-                           this.$vux.toast.show({
+                        this.$vux.toast.show({
                             text:进入失败,
                             type: 'text'
                         });
@@ -350,13 +350,13 @@
                 }
             },
             showQR(data){
-                // alert(1);
+                alert(1);
                 // document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
                 // alert(2);
                 // this.showQrcodeDialog = true;
-                // alert(3);
                 this.qrBoxShow = true;
                 this.qrsrc = `http://www.dlbdata.cn/dangjian/active/showQrCode?activeId=${data}`;
+                alert(3);
             },
             submit1(it){
                 this.activeType=it.id;
