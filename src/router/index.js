@@ -16,7 +16,7 @@ router.beforeEach((to, from, next) => {
 
     Vue.$vux.loading.show({ text: '加载中' });
     const userEntry = ['/active/activeDetail', '/main4', '/points', '/active/activeSign'];
-    const manageEntry = ['/loginManage', '/main3', '/main2'];
+    const manageEntry = ['/loginManage', '/main3', '/party/branch', '/active/partyBranch', '/points/evaluation', '/main2', 'party/partyDetail', '/active/partyBranch1', '/points/review'];
     if (to.path.indexOf("active/activeSign") > 0) {
         sessionStorage.userRoleId = 4;
     } else if (userEntry.includes(to.path)) {
@@ -26,7 +26,7 @@ router.beforeEach((to, from, next) => {
     }
 
     // if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (/^\/login/.test(to.path)) return next();
+    if (/^\/login/.test(to.path) || (store.getters.user && store.getters.user.userid)) return next();
     store.dispatch('userinfo').then(
         result => next(),
         error => {
