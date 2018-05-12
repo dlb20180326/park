@@ -129,8 +129,8 @@
                 生成活动二维码
             </x-button>
         </div>
-        <div v-transfer-dom class="qrcode-dialog">
-            <x-dialog v-model="showQrcodeDialog" :hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
+        <div v-transfer-dom class="qrcode-dialog3">
+            <x-dialog v-model="showQrcodeDialog" @on-hide="backRoute()" :hide-on-blur="true"  :dialog-style="{minHeight:'350px'}">
                <div class="title">
                     <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
@@ -518,7 +518,7 @@
     .photo-list ul li.no-operate:hover .operate{display:none;}
     .photo-list .upload-file-input{opacity: 0;position: absolute;z-index: 99;top: 0;right: 0;left: 0;width: .6rem;bottom: 0;}
     
-.qrcode-dialog {
+.qrcode-dialog3 {
     .weui-dialog {
         padding: 20px;
         display: flex;
