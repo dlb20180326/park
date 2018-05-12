@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
         sessionStorage.userRoleId = 3;
     }
     // if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (/^\/login/.test(to.path) || store.getters.user.userid) return next();
+    if (/^\/login/.test(to.path)) return next();
     store.dispatch('userinfo').then(
         result => next(),
         error => {
