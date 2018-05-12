@@ -82,7 +82,7 @@
       </div>
     </div>
       <div v-transfer-dom  class="qrcode-dialog1">
-          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{minHeight:'350px'}">
+          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'350px',minHeight:'350px'}">
                <div class="title">
                     <label>活动名称:</label>
                     <div class="activeTitle">{{activeTitle}}</div>
