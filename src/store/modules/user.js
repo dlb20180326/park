@@ -65,14 +65,11 @@ const user = {
                     path: '/'
                 })
             );
-            //if(roleId == 4)
-            //{
-            router.push('/login');
-            //}
-            //else
-            //{
-            //    router.push('/loginManage');
-            //}
+            if (roleId == 4) {
+                router.push('/login');
+            } else {
+                router.push('/loginManage');
+            }
 
         }
     }
