@@ -115,6 +115,9 @@ export default {
         this.getSign();
         this.getActiveName();
     },
+    beforeMount(){
+        sessionStorage.userRoleId = 4;
+    }
 };
 </script>
 

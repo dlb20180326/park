@@ -21,6 +21,8 @@ router.beforeEach((to, from, next) => {
         sessionStorage.userRoleId = 4;
     } else if (manageEntry.includes(to.path)) {
         sessionStorage.userRoleId = 3;
+    } else {
+        sessionStorage.userRoleId = 4;
     }
     // if (to.matched.some(record => record.meta.requiresAuth)) {
     if (/^\/login/.test(to.path)) return next();
