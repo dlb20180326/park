@@ -15,7 +15,7 @@ router.beforeEach((to, from, next) => {
     if (/^\/$/.test(to.path) && /^\/main/.test(from.path)) return next(false);
 
     Vue.$vux.loading.show({ text: '加载中' });
-    const userEntry = ['/active/activeDetail', '/main4', '/points'];
+    const userEntry = ['/active/activeDetail', '/main4', '/points', '/active/activeSign'];
     const manageEntry = ['/loginManage', '/main3', '/main2'];
     if (userEntry.includes(to.path)) {
         sessionStorage.userRoleId = 4;
