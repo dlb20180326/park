@@ -17,13 +17,14 @@ router.beforeEach((to, from, next) => {
     Vue.$vux.loading.show({ text: '加载中' });
     const userEntry = ['/active/activeDetail', '/main4', '/points', '/active/activeSign'];
     const manageEntry = ['/loginManage', '/main3', '/main2'];
-    if (userEntry.includes(to.path)) {
+    if (to.path.indexOf("active/activeSign") > 0) {
+        sessionStorage.userRoleId = 4;
+    } else if (userEntry.includes(to.path)) {
         sessionStorage.userRoleId = 4;
     } else if (manageEntry.includes(to.path)) {
         sessionStorage.userRoleId = 3;
-    } else {
-        sessionStorage.userRoleId = 4;
     }
+
     // if (to.matched.some(record => record.meta.requiresAuth)) {
     if (/^\/login/.test(to.path)) return next();
     store.dispatch('userinfo').then(
