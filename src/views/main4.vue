@@ -83,7 +83,8 @@ export default {
             charts: '',
             partAbout: {},
             years:new Date().getFullYear(),
-            pictureSex:''
+            pictureSex:'',
+            userId : cookie.get('userId')
         };
     },
     components: {
@@ -199,7 +200,7 @@ export default {
             console.log('userName', this.user);
             axios.get('ppartymember/queryByUserId', {
                 params: {
-                    userid: cookie.get('userId')
+                    userid: this.userId
                 }
             })
             .then(res => {
@@ -215,7 +216,7 @@ export default {
         getScoreByType(){
             axios.get('pscoreparty/getProjectScoreByUserId', {
                 params: {
-                    userId: cookie.get('userId'),
+                    userId: this.userId,
                     year:new Date().getFullYear()
                 }
             }).then(res => {
@@ -238,7 +239,7 @@ export default {
                 method:'post',
                 headers: {'contentType':'application/x-www-form-urlencode'},
                 params:{
-                  userId: cookie.get('userId'),
+                  userId: this.userId,
                   year: new Date().getFullYear()
                 }
             }).then(res => {
@@ -250,7 +251,7 @@ export default {
         getUserByScoreInfo(){
             axios.get('pscoreparty/getSumScoreByUserId', {
                 params: {
-                    userId: cookie.get('userId'),
+                    userId: this.userId,
                     year:new Date().getFullYear()
                 }
             }).then(res => {
