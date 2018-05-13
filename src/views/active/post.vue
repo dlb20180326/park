@@ -210,9 +210,6 @@
             this.getData();
             this.getPic();
         },
-        computed: {
-                ...mapGetters(['user'])
-            },
         filters: {
             formatDuring: function (value) {
                 if(value == "" || value == null || value == undefined){
