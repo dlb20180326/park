@@ -71,7 +71,7 @@
         <flexbox orient="vertical">
             <flexbox-item>
                 <section class="mainbox ">
-                    <div class="p15">
+                    <div class="p15" style="padding-top:0.1rem;">
                         <div class=" clearfix  display">
                             <span class="fl weui-cell__bd1">已参与党员生活</span>
                             <span class="total">({{number1}})</span>
