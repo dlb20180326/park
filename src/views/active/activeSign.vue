@@ -41,13 +41,14 @@ import axios from 'axios';
 export default {
     data(){
         return{
-        userName:'',
-        dateTime:'',
-        activeId:'',
-        activeName:'',
-        activeMsg:'',
-        sucStates:''
-        }
+            userName:'',
+            dateTime:'',
+            activeId:'',
+            activeName:'',
+            activeMsg:'',
+            sucStates:'',
+            userId : cookie.get('userId')
+            }
         },
     methods:{
      getId(){
@@ -57,7 +58,7 @@ export default {
     getSign(){
        this.$http.get('active/approved', {
            params: {
-               userId: this.$store.getters.user.userid,
+               userId: this.userId,
                activeId:this.$route.params.activeId
            }
        })
@@ -91,7 +92,7 @@ export default {
     getUser() {
         this.$http.get('ppartymember/queryByUserId', {
             params: {
-                userid: this.$store.getters.user.userid
+                userid: this.userId
             }
         })
         .then(res => {
