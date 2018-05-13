@@ -75,6 +75,8 @@
 
 <script>
 import axios from "axios";
+import { mapGetters } from 'vuex';
+
 import {
   XHeader,
   GroupTitle,
@@ -173,7 +175,7 @@ export default {
         .get("pscoreparty/scoreClean", {
           params: {
             detailId: 6,
-            adderId: this.$store.getters.user.userid,
+            adderId: this.user.userid,
             userId: this.userid,
             imgs: this.picList.arr.join(),
             remark: JSON.stringify({
@@ -319,7 +321,11 @@ export default {
   mounted() {
     weixin.init(["chooseImage", "uploadImage"]);
     this.getUser1();
-  }
+  },
+  computed: {
+        ...mapGetters(['user'])
+    }
+
 };
 </script>
 

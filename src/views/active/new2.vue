@@ -144,7 +144,8 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from 'axios';
+    import { mapGetters } from 'vuex';
     import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker ,XDialog, TransferDomDirective as TransferDom  } from 'vux';
     import wx from 'weixin-js-sdk';
     import weixin from '@/services/weixin';
@@ -167,6 +168,7 @@
         },
         data() {
             return {
+                userId : cookie.get("manageId"),
                 value1: '',
                 startTime:"",
                 endTime:"",
@@ -192,7 +194,7 @@
                 PickerVisible2:false,
                 PickerVisible3:false,
                 PickerVisible5:false,
-                departmentid:this.$store.getters.user.departmentid,
+                departmentid:this.user.departmentid,
                 showQrcodeDialog: false,
                 Qrcode:'',
                 departmentname1:'',
@@ -309,7 +311,7 @@
                             activeType:this.activeType,
                             activityProjectId:this.activeProjectActive,
                             activePace:this.activePace,
-                            activeCreatePeople:this.$store.getters.user.userid,
+                            activeCreatePeople:this.userId,
                             activePrincipalPeople:this.activePrincipalPeople,
                             activeContext:this.activeContext,
                             activeName:this.activeTitle,
@@ -470,7 +472,10 @@
         mounted() {
             weixin.init(['chooseImage', 'uploadImage']);
             this.getActivity()
-        }
+        },
+        computed: {
+                ...mapGetters(['user'])
+            }
     };
 </script>
 <style lang="less">

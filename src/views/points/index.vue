@@ -22,7 +22,7 @@
                             <span>{{itegral || 0.0}}</span>
                         </div>
                     </flexbox-item>
-                    <flexbox-item>
+                    <flexbox-item style="margin-right:5px;">
                         <div class="piece right">
                             <div>年度党员评级</div>
                             <span>{{results}}</span>

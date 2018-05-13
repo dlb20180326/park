@@ -38,6 +38,7 @@
 
 <script>
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 export default {
     data(){
         return{
@@ -115,6 +116,9 @@ export default {
         this.getUser();
         this.getSign();
         this.getActiveName();
+    },
+  computed: {
+        ...mapGetters(['user'])
     },
     beforeMount(){
         sessionStorage.userRoleId = 4;

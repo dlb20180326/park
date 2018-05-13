@@ -60,7 +60,7 @@
 
 <script>
 import axios from 'axios';
-
+import { mapGetters } from 'vuex';
 import { Previewer, TransferDom, ViewBox, XHeader, XButton } from 'vux';
 export default {
     directives: {
@@ -236,6 +236,9 @@ export default {
                 }
             }
         };
+    },
+  computed: {
+        ...mapGetters(['user'])
     }
 };
 </script>

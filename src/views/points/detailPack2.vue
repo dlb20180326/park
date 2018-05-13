@@ -93,6 +93,7 @@
 
 <script>
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 import {
     XHeader,
     GroupTitle,
@@ -199,7 +200,7 @@ export default {
             axios
                 .get('ppartymember/queryByUserId', {
                     params: {
-                        userid: this.$store.getters.user.userid
+                        userid: this.user.userid
                     }
                 })
                 .then(res => {
@@ -239,7 +240,7 @@ export default {
                 params: {
                     detailId: this.list1Selected.moduleId,
                     userId: this.$route.params.userId,
-                    adderId: this.$store.getters.user.userid,
+                    adderId: this.user.userid,
                     score: 5,
                     imgs: this.picList.arr.join(),
                     remark: this.activeContent,
@@ -370,6 +371,9 @@ export default {
             this.getList();
             this.getUser();*/
         this.getUser1();
+    },
+  computed: {
+        ...mapGetters(['user'])
     }
 };
 </script>
