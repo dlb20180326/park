@@ -12,8 +12,22 @@
             <div class="inputs">
                 <div class="input-all clearfix">
                     <span class="icon-phone1 "></span>
-                    <input type="text" v-model="roleName" style="color:#ccc;" placeholder="请选择管理角色" @click="PickerVisible=true" readonly/>
-                    <span class="icon-phone2" style="float:right" ></span>
+                    <!-- <popup-picker
+                        :data="pickerList"
+                        :columns="1"
+                        :show-name="true"
+                        :value-text-align="'left'"
+                        v-model="pickerValue"
+                        >
+                    </popup-picker> -->
+                    
+                    <x-button @click.native="PickerVisible = true">
+                        <input type="text" style="color:#ccc;margin-top:-14px;margin-left:-11px;" placeholder="请选择管理角色" @click:native="PickerVisible=true" v-model="roleName" readonly/>  
+                        {{ }}
+                    </x-button>
+                    <popup-picker :show.sync="PickerVisible" :columns="1" :show-cell="false" title="TEST" :data="pickerList" v-model="pickerValue" confirm-text="确认" @on-change="roleChange"></popup-picker>
+                    <!-- <input type="text" v-model="roleName" style="color:#ccc;" placeholder="请选择管理角色" @click="PickerVisible=true" readonly/> -->
+                    <!-- <span class="icon-phone2" style="float:right" ></span> -->
                 </div>
                 <div class="input-all clearfix">
                     <span class="icon-phone"></span>
@@ -25,9 +39,9 @@
                 </div>
                 <button class="btnSub" @click="login">登录</button>
             </div>
-            <transition name="fade">
-                <div class="picker-box" v-show="PickerVisible" @click="PickerVisible=false">
-                    <picker id="picker"
+            <!-- <transition name="fade"> -->
+                <!-- <div class="picker-box" v-show="PickerVisible" @click="PickerVisible=false"> -->
+                    <!-- <popup-picker id="picker"
                         :data="pickerList"
                         :column-width="[]"
                         :fixed-columns="1"
@@ -35,36 +49,44 @@
                         v-model="pickerValue"
                         @on-change="roleChange"
                         >
-                    </picker>
-                </div>
-            </transition>
+                    </popup-picker> -->
+                     <!-- <picker id="picker"
+                        :data="pickerList"
+                        :column-width="[]"
+                        :fixed-columns="1"
+                        :columns="1"
+                        v-model="pickerValue"
+                        @on-change="roleChange"
+                        >
+                    </picker> -->
+                <!-- </div> -->
+            <!-- </transition> -->
         </div>
         
     </div>
 </template>
 <script>
-    import {  Picker,PopupPicker  } from 'vux';
+    import {  Picker,PopupPicker, XButton  } from 'vux';
     export default {
         components: {
             Picker,
-            PopupPicker 
+            PopupPicker,
+            XButton
         },
         data(){
             return {
                 account: '',
                 pass: '12345678',
                 pickerList:[{
-                    name: '请选择管理角色',
-                    value: "0"
-                    },{
                     name: '党支部书记',
                     value: "3"
                     }, {
                     name: '片区负责人',
                     value: "2"
                 }],
-                pickerValue: ["0"],
-                roleName : "请选择管理角色",
+                pickerValue: [""],
+                pickerName : "",
+                roleName : "请选择角色",
                 PickerVisible:false
             }
         },
@@ -131,19 +153,21 @@
             {
                 this.login();
             },
+            pickerChange(closeType){
+                if(closeType)
+                {
+                    console.log("",closeType)
+                }
+            },
             roleChange(value){
                 this.pickerValue = value;
                 if(value == "3")
                 {
-                    this.roleName = this.pickerList[1].name;
+                    this.roleName = this.pickerList[0].name;
                 }
                 else if(value == "2")
                 {
-                    this.roleName = this.pickerList[2].name;
-                }
-                else
-                {
-                    this.roleName = this.pickerList[0].name;
+                    this.roleName = this.pickerList[1].name;
                 }
             }
         },
@@ -317,6 +341,22 @@
         width: 100%;
         border-top: 1px solid #333;
         background: #fff;
+    }
+    vux-popup-picker-container>.vux-1px-b{
+        background-color: #fefefe!important;
+    }
+    .vux-popup-picker-container>.vux-popup-header{
+        background-color: #fefefe!important;
+    }
+    .weui-btn{
+        position: absolute;
+        background-color: transparent;
+        width: 83%;
+        height: 30px;
+    }
+    .weui-btn:after{
+        width: 0!important;
+        height: 0!important;
     }
     /* 淡入淡出 */
     .fade-enter-active,
