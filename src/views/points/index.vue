@@ -146,7 +146,7 @@
                          	<div class="btn-return" v-if="item.status==3" @click="reSubmit(item)">
                             	重新提交
                             </div>
-                            <div class="states reject" v-if="item.status==3">
+                            <div class="states" v-if="item.status==3">
                                 已拒绝
                             </div>
                             <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">{{item.branch}}</span></h4>
