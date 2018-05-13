@@ -25,7 +25,7 @@
                         <input type="text" style="color:#ccc;margin-top:-15px;margin-left:-11px;" placeholder="请选择管理角色" @click:native="PickerVisible=true" v-model="roleName" readonly/>  
                         {{ }}
                     </x-button>
-                    <popup-picker :show.sync="PickerVisible" :columns="1" :show-cell="false" title="TEST" :data="pickerList" v-model="pickerValue" confirm-text="确认" @on-change="roleChange"></popup-picker>
+                    <popup-picker :show.sync="PickerVisible" :columns="1" :show-cell="false" :data="pickerList" v-model="pickerValue" confirm-text="确认" @on-change="roleChange"></popup-picker>
                     <!-- <input type="text" v-model="roleName" style="color:#ccc;" placeholder="请选择管理角色" @click="PickerVisible=true" readonly/> -->
                     <!-- <span class="icon-phone2" style="float:right" ></span> -->
                 </div>
@@ -371,4 +371,24 @@
         opacity: 0;
     }
 </style>
+<style scoped=“loginManage”>
+    .vux-popup-dialog {
+        background-color: rgba(0,0,0,1) !important;
+        background: #fefefe !important;
+    }
+    .vux-popup-picker-container
+    {
+        background: #fefefe !important;
+    }
+    .scroller-item {
+        background-color: #fff !important;
+    }
+
+    .scroller-mask
+    {
+        -webkit-transform: translateZ(0px);
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.95)), to(rgba(255,255,255,0.6))), -webkit-gradient(linear, left bottom, left top, from(rgba(255,255,255,0.95)), to(rgba(255,255,255,0.6)));
+        background-image: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0.6)), linear-gradient(to top, rgba(255,255,255,0.95), rgba(255,255,255,0.6));
+    }
+    </style>
 
