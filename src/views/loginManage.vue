@@ -172,10 +172,19 @@
             }
         },
         mounted(){
-
+            document.body.classList.add('login-manage');
+        },
+        beforeDestroy () {
+            document.body.classList.remove('login-manage');
         }
     }
 </script>
+<style>
+    .login-manage .vux-popup-dialog {
+        background-color: #eee !important;
+    }
+</style>
+
 <style scoped>
     .page-body{
         position: absolute;
@@ -371,7 +380,7 @@
         opacity: 0;
     }
 </style>
-<style scoped=“loginManage”>
+<style scoped>
     .vux-popup-dialog {
         background-color: rgba(0,0,0,1) !important;
         background: #fefefe !important;
