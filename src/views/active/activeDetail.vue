@@ -26,7 +26,7 @@
                     <span class="total" style="margin-left:-0.3rem">（{{count}}）</span>
                     <a  class="fRight"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
                 </div>
-                <flexbox  style="text-align: center" v-if="!activeTitle">
+                <flexbox  style="text-align: center" v-if="!activeTitle|!startTime1|!endTime1|!activePace|!activeCreatePeopleName|!active_Context">
                     <div style="margin:auto;">
                         <img style="width:.9rem;height:1.2rem;" src="@/assets/images/icon-noRecord.png" alt="">
                         <p style="color: #CCC;">暂无信息</p>
