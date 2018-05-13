@@ -334,6 +334,7 @@ export default {
                         this.showPop1 = false;
                     }, 3000)
                 }
+                this.getList();
             });  
             this.showPop = false;
         },        
