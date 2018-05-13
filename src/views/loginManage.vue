@@ -177,13 +177,6 @@
     }
 </script>
 <style scoped>
-    .vux-popup-dialog {
-        background-color: rgba(0,0,0,1) !important;
-    }
-    .scroller-item {
-        color: #fff !important;
-        background-color: #fefefe !important;
-    }
     .page-body{
         position: absolute;
         top: 0px;
@@ -378,4 +371,24 @@
         opacity: 0;
     }
 </style>
+<style>
+    .vux-popup-dialog {
+        background-color: rgba(0,0,0,1) !important;
+        background: #fefefe;
+    }
+    .vux-popup-picker-container
+    {
+        background: #fefefe;
+    }
+    .scroller-item {
+        background-color: #fff !important;
+    }
+
+    .scroller-mask
+    {
+        -webkit-transform: translateZ(0px);
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.95)), to(rgba(255,255,255,0.6))), -webkit-gradient(linear, left bottom, left top, from(rgba(255,255,255,0.95)), to(rgba(255,255,255,0.6)));
+        background-image: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0.6)), linear-gradient(to top, rgba(255,255,255,0.95), rgba(255,255,255,0.6));
+    }
+    </style>
 
