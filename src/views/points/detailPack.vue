@@ -76,6 +76,7 @@
 
 <script>
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 import {ViewBox,TransferDom,Popup,Flexbox, FlexboxItem,XHeader,Previewer} from 'vux';
 export default {
     directives: {
@@ -125,7 +126,7 @@ export default {
         reject(){
             axios.get('pstudy/reject', {
                     params: {
-                        userid: this.$store.getters.user.userid,
+                        userid: this.user.userid,
                         studyid: this.$route.params.studyid
                     }
                 })
@@ -146,7 +147,7 @@ export default {
             axios
                 .get('pstudy/pass', {
                     params: {
-                        userid: this.$store.getters.user.userid,
+                        userid: this.user.userid,
                         studyid: this.$route.params.studyid
                     }
                 })
@@ -256,6 +257,9 @@ export default {
         this.getDetail();
         this.getModule();
         this.getmoduleid();
+    },
+        computed: {
+        ...mapGetters(['user'])
     },
     data() {
         return {

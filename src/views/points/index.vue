@@ -22,7 +22,7 @@
                             <span>{{itegral || 0.0}}</span>
                         </div>
                     </flexbox-item>
-                    <flexbox-item>
+                    <flexbox-item style="margin-right:5px;">
                         <div class="piece right">
                             <div>年度党员评级</div>
                             <span>{{results}}</span>
@@ -478,7 +478,7 @@ vux-tab-bar-inner{
     width:.46rem;
 }
 .reject{
-    width:0.5 rem !important;
+    width:0.52rem!important;
 }
 .btn-return{
     position: absolute;

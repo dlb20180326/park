@@ -520,19 +520,36 @@
 	.photo-list{padding:0.1rem 0 0;}
     .photo-list.border0{border-bottom:0;padding-bottom: 0;}
     .photo-list ul{font-size:0;list-style:none;}
-    .photo-list ul li{font-size:0;display:inline-block;margin-right:.2rem;position:relative;vertical-align:top;width:.6rem;height:.6rem;overflow:hidden;margin-bottom:.2rem;}
+    .photo-list ul li{
+        font-size:0;
+        display:inline-block;
+        margin-right:.2rem;
+        position:relative;
+        vertical-align:top;
+        width:.9rem!important;
+        height:.9rem!important;
+        overflow:hidden;
+        margin-bottom:.2rem;
+        }
     .photo-list ul li:first-child{margin-left:0;}
     .photo-list .operate{display:none;background:rgba(33,33,33,.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2404040, endColorstr=#b2404040);z-index:5;position:absolute;bottom:0;left:0;right:0;height:12px;padding-bottom:7px;font-size:12px;color:#fff;text-align: center}
     .photo-list .info{line-height:.6rem;text-align:center}
-    .photo-list .preview{width: 0.6rem;height:.6rem;z-index:4;line-height:.6rem;font-family:arial;background-color: #dbdbdb;background-repeat:no-repeat;position:absolute;bottom:0;left:0;text-align:center;right:0;cursor: pointer;border:1px solid #fff;box-sizing: border-box;}
-    .photo-list .preview.addUpload{background-color:#fff;border: 1px solid #b53141;}
+    .photo-list .preview{
+        width: 0.9rem!important;
+        height:.9rem!important;
+        z-index:4;
+        line-height:.6rem;font-family:arial;background-color: #dbdbdb;background-repeat:no-repeat;position:absolute;bottom:0;left:0;text-align:center;right:0;cursor: pointer;border:1px solid #fff;box-sizing: border-box;}
+    .photo-list .preview.addUpload{
+        background-color: #f4f4f4!important;
+        border: 1px solid #e4e4e4!important;
+        }
     .photo-list .preview img{max-height:.6rem;max-width:.6rem;vertical-align:middle;}
     .photo-list .photo-primary-text{color:#ffA500;font-size:12px;}
     .photo-list .add-bg{
         width: 0.2rem;
         height: 0.2rem;
-        margin-left: .2rem;
-        margin-top: .2rem;
+        margin-left: .34rem;
+        margin-top: .32rem;
         display: block;
         background: url(../../assets/images/add_icon_bg1.png) no-repeat;
         background-size: contain;

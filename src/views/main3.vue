@@ -20,7 +20,7 @@
       </flexbox>
       <flexbox>
         <flexbox-item class="label">
-          所属片区：rem
+          所属片区：
         </flexbox-item>
         <flexbox-item>
           {{info.address}}
