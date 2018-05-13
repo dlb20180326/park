@@ -22,7 +22,7 @@
                     </popup-picker> -->
                     
                     <x-button @click.native="PickerVisible = true">
-                        <input type="text" style="color:#ccc;margin-top:-14px;margin-left:-11px;" placeholder="请选择管理角色" @click:native="PickerVisible=true" v-model="roleName" readonly/>  
+                        <input type="text" style="color:#ccc;margin-top:-15px;margin-left:-11px;" placeholder="请选择管理角色" @click:native="PickerVisible=true" v-model="roleName" readonly/>  
                         {{ }}
                     </x-button>
                     <popup-picker :show.sync="PickerVisible" :columns="1" :show-cell="false" title="TEST" :data="pickerList" v-model="pickerValue" confirm-text="确认" @on-change="roleChange"></popup-picker>
@@ -347,6 +347,9 @@
     }
     .vux-popup-picker-container>.vux-popup-header{
         background-color: #fefefe!important;
+    }
+    .vux-cell-box:not(:first-child):before{
+        border:0!important;
     }
     .weui-btn{
         position: absolute;
