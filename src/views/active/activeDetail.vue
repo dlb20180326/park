@@ -26,7 +26,13 @@
                     <span class="total" style="margin-left:-0.3rem">（{{count}}）</span>
                     <a  class="fRight"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
                 </div>
-                <div class="content">
+                <flexbox  style="text-align: center" v-if="!activeTitle">
+                    <div style="margin:auto;">
+                        <img style="width:.9rem;height:1.2rem;" src="@/assets/images/icon-noRecord.png" alt="">
+                        <p style="color: #CCC;">暂无信息</p>
+                    </div>
+                </flexbox>
+                <div class="content" v-else>
                     <table width="100%" class="table">
                         <tr>
                             <td width="80">标题：</td>
