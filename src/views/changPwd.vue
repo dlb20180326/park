@@ -38,7 +38,8 @@
                         <p>密码必须是8-20个英文字母、数字或符号（除空格）。</p>
                     </div>
                 </div>
-                <button type="button" class="changPwd" @click="change">更改密码</button>
+                <!-- <button type="button" class="colorChange" @click="change">更改密码</button> -->
+                <button type="button" class="changPwdAfter" @click="change">更改密码</button>
             </div>
         </div>
     </div>
@@ -59,6 +60,19 @@ export default {
         XImg,
         Icon,
         XHeader
+    },
+    filters:{
+        colorChange: function (value) {
+            try {
+                /* if(value===null) throw "";*/
+                if(!this.account)  throw "changPwdBefore";
+                if(this.account)  throw "changPwdAfter";
+            }
+            catch(err) {
+                return value=err;
+            }
+
+        }
     },
     methods: {
         change() {
@@ -135,14 +149,26 @@ export default {
         margin-top: .1rem;
         margin-bottom: .1rem;
     }
-    .changPwd{
+    .changPwdBefore{
         position: fixed;
         bottom: .2rem;
         width: 90%;
         height: .4rem;
         font-size: .16rem;
         font-family:PingFangSC-Medium;
-        background:rgba(216,216,216,1);
+        background:#D8D8D8;
+        color: #fff;
+        border-radius: 4px;
+        border: 0;
+    }
+    .changPwdAfter{
+        position: fixed;
+        bottom: .2rem;
+        width: 90%;
+        height: .4rem;
+        font-size: .16rem;
+        font-family:PingFangSC-Medium;
+        background:#B93647;
         color: #fff;
         border-radius: 4px;
         border: 0;
