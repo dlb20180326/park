@@ -104,8 +104,8 @@ export default {
     },
     data() {
         return {
-            number1:1,
-            number2:1,
+            number1:0,
+            number2:0,
             userId:cookie.get('userId'),
             startTime1:'',
             activeTitle:'',
