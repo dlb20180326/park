@@ -147,7 +147,7 @@
 <script>
     import axios from 'axios';
     import { mapGetters } from 'vuex';
-    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group, Picker ,PopupPicker,XDialog, TransferDomDirective as TransferDom  } from 'vux';
+    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group, Picker ,PopupPicker,XDialog, TransferDomDirective as TransferDom ,cookie } from 'vux';
     import wx from 'weixin-js-sdk';
     import weixin from '@/services/weixin';
     export default {
