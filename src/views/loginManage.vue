@@ -22,7 +22,7 @@
                     </popup-picker> -->
                     
                     <x-button @click.native="PickerVisible = true">
-                        <input type="text" style="color:#ccc;margin-top:-15px;margin-left:-11px;" placeholder="请选择管理角色" @click:native="PickerVisible=true" v-model="roleName" readonly/>  
+                        <input type="text" style="color:#ccc;margin-top:-19px;margin-left:-11px;" placeholder="请选择管理角色" @click:native="PickerVisible=true" v-model="roleName" readonly/>  
                         {{ }}
                     </x-button>
                     <popup-picker :show.sync="PickerVisible" :columns="1" :show-cell="false" :data="pickerList" v-model="pickerValue" confirm-text="确认" @on-change="roleChange"></popup-picker>
