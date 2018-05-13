@@ -71,7 +71,7 @@
         <flexbox orient="vertical">
             <flexbox-item>
                 <section class="mainbox ">
-                    <div class="p15">
+                    <div class="p15" style="padding-top:0.1rem;">
                         <div class=" clearfix  display">
                             <span class="fl weui-cell__bd1">已参与党员生活</span>
                             <span class="total">({{number1}})</span>
@@ -480,6 +480,7 @@ export default {
         height:.45rem;
         line-height:.45rem;
         width:27%;
+        margin-right:-0.15rem;
     }
     .p15 {
         padding:0 .2rem .2rem;
@@ -524,12 +525,13 @@ export default {
     .barbg {
         background:#f5f5f5;
         border-radius:4px;
-        width:89%;
+        width:85%;
         height:.38rem;
         line-height:.38rem;
         margin:0 auto;
         margin-bottom:.14rem;
         padding-left:.2rem;
+        margin-left:0.2rem;
     }
     .barbg span {
         color:#fa7e07;
