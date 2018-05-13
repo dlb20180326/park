@@ -317,7 +317,7 @@
                             activeName:this.activeTitle,
                             activeStatus:1,
                             departmentid:this.departmentidId.join(),
-                            picids:this.picList.arr.join() || '780'
+                            picids:this.picList.arr.join() || ''
                         }
                     }).then((res)=> {
                         this.$vux.toast.show({

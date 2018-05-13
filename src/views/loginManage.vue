@@ -25,7 +25,7 @@
                         <input type="text" style="color:#ccc;margin-top:-15px;margin-left:-11px;" placeholder="请选择管理角色" @click:native="PickerVisible=true" v-model="roleName" readonly/>  
                         {{ }}
                     </x-button>
-                    <popup-picker :show.sync="PickerVisible" :columns="1" :show-cell="false" title="TEST" :data="pickerList" v-model="pickerValue" confirm-text="确认" @on-change="roleChange"></popup-picker>
+                    <popup-picker :show.sync="PickerVisible" :columns="1" :show-cell="false" :data="pickerList" v-model="pickerValue" confirm-text="确认" @on-change="roleChange"></popup-picker>
                     <!-- <input type="text" v-model="roleName" style="color:#ccc;" placeholder="请选择管理角色" @click="PickerVisible=true" readonly/> -->
                     <!-- <span class="icon-phone2" style="float:right" ></span> -->
                 </div>
