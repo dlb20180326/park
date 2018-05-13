@@ -61,7 +61,7 @@ export default {
     getSign(){
        this.$http.get('active/approved', {
            params: {
-               userId: this.userId,
+               userId: this.$store.getters.user.userid,
                activeId:this.$route.params.activeId
            }
        })
@@ -95,7 +95,7 @@ export default {
     getUser() {
         this.$http.get('ppartymember/queryByUserId', {
             params: {
-                userid: this.userId
+                userid: this.$store.getters.user.userid
             }
         })
         .then(res => {

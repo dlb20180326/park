@@ -17,7 +17,7 @@ router.beforeEach((to, from, next) => {
     Vue.$vux.loading.show({ text: '加载中' });
     const userEntry = ['/active/activeDetail', '/main4', '/points', '/active/activeSign'];
     const manageEntry = ['/loginManage', '/main3', '/party/branch', '/active/partyBranch', '/points/evaluation', '/main2', 'party/partyDetail', '/active/partyBranch1', '/points/review'];
-    if (to.path.indexOf("/active/activeSign") > 0 || to.path.indexOf("/active/activeDetail") > 0 || to.path.indexOf("/points") > 0 || to.path.indexOf("/main4") > 0) {
+    if (to.path.indexOf("/active/activeSign") > 0 || to.path.indexOf("/active/activeDetail") > 0) {
         sessionStorage.userRoleId = 4;
     } else if (userEntry.includes(to.path)) {
         sessionStorage.userRoleId = 4;
