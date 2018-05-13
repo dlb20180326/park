@@ -125,7 +125,7 @@ export default {
     filters: {
         formatDuring: function (value) {
             if(value == "" || value == null || value == undefined){
-                var value="无"
+                var value=""
                 return value
 
             }else {

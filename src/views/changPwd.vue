@@ -38,8 +38,7 @@
                         <p>密码必须是8-20个英文字母、数字或符号（除空格）。</p>
                     </div>
                 </div>
-                <!-- <button type="button" class="colorChange" @click="change">更改密码</button> -->
-                <button type="button" class="changPwdAfter" @click="change">更改密码</button>
+                <button type="button" :class="!this.account?'changPwdBefore':'changPwdAfter'" @click="change">更改密码</button>
             </div>
         </div>
     </div>
@@ -61,19 +60,19 @@ export default {
         Icon,
         XHeader
     },
-    filters:{
-        colorChange: function (value) {
-            try {
-                /* if(value===null) throw "";*/
-                if(!this.account)  throw "changPwdBefore";
-                if(this.account)  throw "changPwdAfter";
-            }
-            catch(err) {
-                return value=err;
-            }
+    // filters:{
+    //     colorChange: function (value) {
+    //         try {
+    //             /* if(value===null) throw "";*/
+    //             if(!this.account)  throw "changPwdBefore";
+    //             if(this.account)  throw "changPwdAfter";
+    //         }
+    //         catch(err) {
+    //             return value=err;
+    //         }
 
-        }
-    },
+    //     }
+    // },
     methods: {
         change() {
             if (!this.account)

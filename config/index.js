@@ -10,17 +10,17 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            // '/dangjian/': {
-            //     changeOrigin: true,
-            //     target: 'http://www.dlbdata.cn/',
-            //     // target:'192.168.1.173:8080/',
-            //     pathRewrite: { '^/dangjian/': '/dangjian/' }
-            // }
-            '/dangjian': {
+            '/dangjian/': {
                 changeOrigin: true,
-                target: 'http://192.168.1.187:9000/',
+                target: 'http://www.dlbdata.cn/',
+                // target:'192.168.1.173:8080/',
                 pathRewrite: { '^/dangjian/': '/dangjian/' }
             }
+            // '/dangjian': {
+            //     changeOrigin: true,
+            //     target: 'http://192.168.1.187:9000/',
+            //     pathRewrite: { '^/dangjian/': '/dangjian/' }
+            // }
             /*'/': {
                 changeOrigin: true,
                 target:'http://127.0.0.1:8080/'
