@@ -7,7 +7,7 @@
         <div class="box">
             
             <flexbox  style="text-align: center" v-if="list.length === 0">
-                <div style="margin:auto;margin-top:50%">
+                <div style="margin:50% auto auto;">
                     <img style="width:.9rem;height:1.2rem;" src="@/assets/images/icon-noRecord.png" alt="">
                     <p style="color: #CCC;">暂无信息</p>
                 </div>
