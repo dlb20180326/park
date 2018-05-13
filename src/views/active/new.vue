@@ -145,8 +145,9 @@
 </template>
 
 <script>
-    import axios from 'axios'
-    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group, Picker ,PopupPicker,XDialog, TransferDomDirective as TransferDom  } from 'vux';
+    import axios from 'axios';
+    import { mapGetters } from 'vuex';
+    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group, Picker ,PopupPicker,XDialog,cookie, TransferDomDirective as TransferDom  } from 'vux';
     import wx from 'weixin-js-sdk';
     import weixin from '@/services/weixin';
     export default {
@@ -169,6 +170,7 @@
         },
         data() {
             return {
+                userId : cookie.get("manageId"),
                 value1: '',
                 startTime:"",
                 endTime:"",
@@ -178,7 +180,7 @@
                 activityName:'',
                 activePace:'',
                 activeTitle:'',
-                activeCreatePeople:this.$store.getters.user.userid,
+                activeCreatePeople:this.userId,
                 activePrincipalPeople:'',
                 activeContext:'',
                 activeContent:'',
@@ -190,7 +192,7 @@
                 years:'',
                 year1: [''],
                 list: [],
-                pickerValue: [],
+                pickerValue: [""],
                 PickerVisible2:false,
                 departmentid:this.$store.getters.user.departmentid,
                 showQrcodeDialog: false,
@@ -296,7 +298,7 @@
                             activeType:this.pickerValue[0],
                             activityProjectId:this.pickerValue[0],
                             activePace:this.activePace,
-                            activeCreatePeople:this.$store.getters.user.userid,
+                            activeCreatePeople:this.userId,
                             activePrincipalPeople:this.activePrincipalPeople,
                             activeContext:this.activeContext,
                             activeName:this.activeTitle,
@@ -461,11 +463,13 @@
                     return this.pickerList.find(item => item.value === value).name;
                 }
                 return '';
-            }
+            },
+            ...mapGetters(['user'])
         },
         mounted() {
             weixin.init(['chooseImage', 'uploadImage']);
-            this.getActivity()
+            this.getActivity();
+            this.departmentid = this.user.departmentid;
         }
     };
 </script>

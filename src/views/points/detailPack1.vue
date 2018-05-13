@@ -40,7 +40,8 @@
 </template>
 
 <script>
-    import axios from 'axios';
+	import axios from 'axios';
+	import { mapGetters } from 'vuex';
 import Xheader from '@/components/comother/rheader';
 import {Previewer, TransferDom,ViewBox} from 'vux'
 	export default {

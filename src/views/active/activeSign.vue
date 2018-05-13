@@ -29,7 +29,7 @@
                 <h1>
                 {{userName}}
                 </h1>
-                <button class="btn-return"><router-link to="/" style="color:#fff">点击返回</router-link></button>
+                <button class="btn-return"><router-link to="/main4" style="color:#fff">点击返回</router-link></button>
             </div>
         </div>
 
@@ -38,6 +38,9 @@
 
 <script>
 import axios from 'axios';
+import { mapGetters } from 'vuex';
+import { cookie } from 'vux';
+    
 export default {
     data(){
         return{
@@ -115,6 +118,9 @@ export default {
         this.getUser();
         this.getSign();
         this.getActiveName();
+    },
+  computed: {
+        ...mapGetters(['user'])
     },
     beforeMount(){
         sessionStorage.userRoleId = 4;
