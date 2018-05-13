@@ -5,6 +5,12 @@
        <!--     <router-link slot="right" :to="{name:'activeNews'}">发起活动</router-link>-->
         </x-header>
         <div class="box">
+            <flexbox  style="text-align: center" v-if="list.length === 0">
+                <div style="margin:auto;margin-top:50%;">
+                    <img style="width:.9rem;height:1.2rem;" src="@/assets/images/icon-noRecord.png" alt="">
+                    <p style="color: #CCC;">暂无信息</p>
+                </div>
+            </flexbox>
             <flexbox class="list-item" v-for="(item,index) in list" :key="index" :gutter="0" align="stretch">
                 <flexbox-item class="list-avatar">
                     <img src="@/assets/images/icon-head.png">

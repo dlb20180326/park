@@ -13,46 +13,52 @@
                 </tab> -->
     <div>
         <tab>
-                <tab-item selected @on-item-click="toggle">已报名 ({{activeCount}})</tab-item>
-                <tab-item @on-item-click="noSign">未报名 ({{unactiveCount}})</tab-item>
-            </tab>
+            <tab-item selected @on-item-click="toggle">已报名 ({{activeCount}})</tab-item>
+            <tab-item @on-item-click="noSign">未报名 ({{unactiveCount}})</tab-item>
+        </tab>
     </div>
         <div class="group-item">
-                    <div class="allLine" v-for="(item,index) in infoM" :key="index">
-                        <div style="position:relative">
-                            <span class="colorL">活动名称：</span>
-                            <span class="colorW">{{item.activeName}}</span>
-                            <div v-if="item.activeType === 5">
-                                <img style="position:absolute;right:20px;top:3px;" src="@/assets/images/activeDetail.png" alt="">
-                            </div>
-                        </div>
-                        <div>
-                            <span class="colorL">活动时间：</span>
-                            <span class="colorW">{{item.startTime|formatDuring}}~{{item.endTime|formatDuring}}</span>
-                        </div>
-                        <div>
-                            <span class="colorL">地点：</span>
-                            <span class="colorW">{{item.activePace}}</span>
-                        </div>
-                        <div>
-                            <span class="colorL">发起人：</span>
-                            <span class="colorW">{{item.activeCreatePeopleName}}</span>
+            <flexbox  style="text-align: center" v-if="activeCount === 0|unactiveCount === 0 &&infoM.length==0">
+                <div style="margin:auto;margin-top:50%">
+                    <img style="width:.9rem;height:1.2rem;" src="@/assets/images/icon-noRecord.png" alt="">
+                    <p style="color: #CCC;">暂无信息</p>
+                </div>
+            </flexbox>
+            <div class="allLine" v-for="(item,index) in infoM" :key="index">
+                <div style="position:relative">
+                    <span class="colorL">活动名称：</span>
+                    <span class="colorW">{{item.activeName}}</span>
+                    <div v-if="item.activeType === 5">
+                        <img style="position:absolute;right:20px;top:3px;" src="@/assets/images/activeDetail.png" alt="">
+                    </div>
+                </div>
+                <div>
+                    <span class="colorL">活动时间：</span>
+                    <span class="colorW">{{item.startTime|formatDuring}}~{{item.endTime|formatDuring}}</span>
+                </div>
+                <div>
+                    <span class="colorL">地点：</span>
+                    <span class="colorW">{{item.activePace}}</span>
+                </div>
+                <div>
+                    <span class="colorL">发起人：</span>
+                    <span class="colorW">{{item.activeCreatePeopleName}}</span>
 
-                        </div>
-                        <div>
-                            <span class="colorL">活动内容：</span>
-                            <span class="colorW">{{item.active_Context}}</span>
+                </div>
+                <div>
+                    <span class="colorL">活动内容：</span>
+                    <span class="colorW">{{item.active_Context}}</span>
 
-                        </div>
-                    	<div class="book" v-if="item.signupstatus == 2">
-                    		<a @click="submit(item.id)">报名</a>
-                		</div>
-                        <div class="book"  v-if="item.signupstatus == 1">
-                            <!-- <a  style="background-color: #8b8b8b" @click="submit1(item.id)">已报名</a> -->
-                            <a  style="background-color: #8b8b8b">已报名</a>
-                        </div>
-                		<div class="grayLine"></div>
-                	</div>
+                </div>
+                <div class="book" v-if="item.signupstatus == 2">
+                    <a @click="submit(item.id)">报名</a>
+                </div>
+                <div class="book"  v-if="item.signupstatus == 1">
+                    <!-- <a  style="background-color: #8b8b8b" @click="submit1(item.id)">已报名</a> -->
+                    <a  style="background-color: #8b8b8b">已报名</a>
+                </div>
+                <div class="grayLine"></div>
+            </div>
         </div>
         <div v-transfer-dom>
             <alert v-model="show" :title="msg" @on-show="onShow" @on-hide="onHide">谢谢</alert>
