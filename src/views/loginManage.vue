@@ -177,6 +177,13 @@
     }
 </script>
 <style scoped>
+    .vux-popup-dialog {
+        background-color: rgba(0,0,0,1) !important;
+    }
+    .scroller-item {
+        color: #fff !important;
+        background-color: #fefefe !important;
+    }
     .page-body{
         position: absolute;
         top: 0px;
