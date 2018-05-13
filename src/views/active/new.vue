@@ -147,7 +147,7 @@
 <script>
     import axios from 'axios';
     import { mapGetters } from 'vuex';
-    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group, Picker ,PopupPicker,XDialog, TransferDomDirective as TransferDom ,cookie } from 'vux';
+    import { XHeader, GroupTitle, Flexbox, Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group, Picker ,PopupPicker,XDialog,cookie, TransferDomDirective as TransferDom  } from 'vux';
     import wx from 'weixin-js-sdk';
     import weixin from '@/services/weixin';
     export default {
@@ -192,9 +192,9 @@
                 years:'',
                 year1: [''],
                 list: [],
-                pickerValue: [],
+                pickerValue: [""],
                 PickerVisible2:false,
-                departmentid:this.user.departmentid,
+                departmentid:this.$store.getters.user.departmentid,
                 showQrcodeDialog: false,
                 Qrcode:'',
                 picList:{list:[],arr:[]}
@@ -468,7 +468,8 @@
         },
         mounted() {
             weixin.init(['chooseImage', 'uploadImage']);
-            this.getActivity()
+            this.getActivity();
+            this.departmentid = this.user.departmentid;
         }
     };
 </script>

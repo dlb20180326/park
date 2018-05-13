@@ -39,6 +39,8 @@
 <script>
 import axios from 'axios';
 import { mapGetters } from 'vuex';
+import { cookie } from 'vux';
+    
 export default {
     data(){
         return{

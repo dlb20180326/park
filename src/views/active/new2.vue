@@ -194,7 +194,7 @@
                 PickerVisible2:false,
                 PickerVisible3:false,
                 PickerVisible5:false,
-                departmentid:this.user.departmentid,
+                departmentid:this.$store.getters.user.departmentid,
                 showQrcodeDialog: false,
                 Qrcode:'',
                 departmentname1:'',
@@ -471,7 +471,8 @@
         },
         mounted() {
             weixin.init(['chooseImage', 'uploadImage']);
-            this.getActivity()
+            this.getActivity();
+            this.departmentid = this.user.departmentid;
         },
         computed: {
                 ...mapGetters(['user'])
