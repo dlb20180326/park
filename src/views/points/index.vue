@@ -477,7 +477,7 @@ vux-tab-bar-inner{
     width:.46rem;
 }
 .reject{
-    width:0.74rem!important;
+    width:0.52rem!important;
 }
 .btn-return{
     position: absolute;
