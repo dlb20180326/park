@@ -330,6 +330,7 @@ export default {
 	float:right;
     margin-top: 0.1rem;
     font-size: .12rem;
+    line-height:0.27rem;
 }
 .fRight{
 	float:right;
