@@ -11,7 +11,11 @@ const user = {
     },
     getters: {
         user: state => {
-            return sessionStorage.userRoleId === '4' ? state.user : state.manage;
+            console.log("user: manage", state.user, state.manage);
+            if (Object.keys(state.user).length || Object.keys(state.manage).length) {
+                return sessionStorage.userRoleId === '4' ? state.user : state.manage;
+            }
+            return {};
         }
     },
     actions: {
@@ -40,10 +44,8 @@ const user = {
     },
     mutations: {
         setUser(state, data) {
-            Object.keys(data).map(key => {
-                state[key] = data[key];
-            });
-            state.user = data;
+            console.log('user');
+            state.user = data || {};
             // KEYS.forEach(key =>
             //     cookie.set(key, data[key], {
             //         // domain: 'example.com',
@@ -53,12 +55,12 @@ const user = {
             // );
         },
         setManage(state, data) {
-            state.manage = data;
+            console.log('manage');
+            state.manage = data || {};
         },
         clearUser(state) {
             state.user = {};
             var roleId = cookie.get('roleId');
-            Object.keys(state).map(key => delete state[key]);
             KEYS.forEach(key =>
                 cookie.remove(key, {
                     // domain: 'example.com',
@@ -66,8 +68,10 @@ const user = {
                 })
             );
             if (roleId == 4) {
+                state.user = {};
                 router.push('/login');
             } else {
+                state.manage = {};
                 router.push('/loginManage');
             }
 

@@ -78,11 +78,13 @@ export default {
         return {
             users: [{ fonts: '年度积分',integral:0}, {fonts: '活动次数',integral:0}],
             userAbout: {},
+            departmentid : 0,
             dateTime: '',
             charts: '',
             partAbout: {},
             years:new Date().getFullYear(),
-            pictureSex:''
+            pictureSex:'',
+            userId : cookie.get('userId')
         };
     },
     components: {
@@ -112,8 +114,8 @@ export default {
         this.$nextTick(function() {
 //            this.drawAxis('echartShow');
         });
+
         this.userName();
-        this.infoDetail();
         this.getUserByScoreInfo();
         this.getUserByActiveInfo();
         this.getScoreByType();
@@ -184,7 +186,7 @@ export default {
         infoDetail() {
             axios.get('pdepartment/queryById', {
                 params: {
-                    departmentid: this.$store.getters.user.departmentid
+                    departmentid: this.departmentid
                 }
             })
             .then(res => {
@@ -198,12 +200,14 @@ export default {
             console.log('userName', this.user);
             axios.get('ppartymember/queryByUserId', {
                 params: {
-                    userid: this.user.userid
+                    userid: this.userId
                 }
             })
             .then(res => {
                 this.userAbout = res.data;
                 this.pictureSex = res.data.avatar;
+                this.departmentid = this.userAbout.departmentid;
+        this.infoDetail();
             })
             .catch(err => {
                 console.log(err);
@@ -212,7 +216,7 @@ export default {
         getScoreByType(){
             axios.get('pscoreparty/getProjectScoreByUserId', {
                 params: {
-                    userId: this.$store.getters.user.userid,
+                    userId: this.userId,
                     year:new Date().getFullYear()
                 }
             }).then(res => {
@@ -235,7 +239,7 @@ export default {
                 method:'post',
                 headers: {'contentType':'application/x-www-form-urlencode'},
                 params:{
-                  userId: this.$store.getters.user.userid,
+                  userId: this.userId,
                   year: new Date().getFullYear()
                 }
             }).then(res => {
@@ -247,7 +251,7 @@ export default {
         getUserByScoreInfo(){
             axios.get('pscoreparty/getSumScoreByUserId', {
                 params: {
-                    userId: this.$store.getters.user.userid,
+                    userId: this.userId,
                     year:new Date().getFullYear()
                 }
             }).then(res => {

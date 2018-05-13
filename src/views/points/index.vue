@@ -146,7 +146,7 @@
                          	<div class="btn-return" v-if="item.status==3" @click="reSubmit(item)">
                             	重新提交
                             </div>
-                            <div class="states reject" v-if="item.status==3">
+                            <div class="states" v-if="item.status==3">
                                 已拒绝
                             </div>
                             <h4 class="sinfo-title pr4"><b class="sinfo-border"></b><span>审批人：</span><span class="text-gray">{{item.branch}}</span></h4>
@@ -183,7 +183,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton} from 'vux';
+import { XHeader, Flexbox, FlexboxItem, Tab, TabItem, XProgress, XButton,cookie} from 'vux';
 import XScroll from 'vux-xscroll/build/cmd/xscroll.js';
 import Snap from 'vux-xscroll/build/cmd/plugins/snap.js';
 import axios from 'axios';
@@ -205,7 +205,8 @@ export default {
             results:'',
             infoList:[{}],
             darkbgShow:false,
-            myWidth: 0.88*document.documentElement.clientWidth
+            myWidth: 0.88*document.documentElement.clientWidth,
+            userId : cookie.get('userId')
         };
     },
     filters: {
@@ -270,7 +271,7 @@ export default {
     	progress(){
     		axios.get('pscoreparty/getProjectScoreByUserId',{
     			params:{
-    				userId:this.$store.getters.user.userid,
+    				userId:this.userId,
     				year:this.years
     			}
     		}).then( res => {
@@ -307,7 +308,7 @@ export default {
     	getDetail(){
     		axios.get('pscoreparty/queryByUserId',{
     			params:{
-    				userid:this.$store.getters.user.userid,
+    				userid:this.userId,
     				year:this.years
     			}
     		}).then( res => {
@@ -386,7 +387,7 @@ export default {
     	score(){
     		axios.get('pscoreparty/getSumScoreByUserId',{
     			params:{
-    				userId:this.$store.getters.user.userid,
+    				userId:this.userId,
 					year:new Date().getFullYear()
     			}
     		})
@@ -415,7 +416,7 @@ export default {
         userName() {
             axios.get('ppartymember/queryByUserId', {
                 params: {
-                    userid: this.$store.getters.user.userid
+                    userid: this.userId
                 }
             })
             .then(res => {

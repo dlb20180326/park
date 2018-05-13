@@ -90,7 +90,8 @@
     </div>
 </template>
 <script>
-    import axios from 'axios'
+    import { mapGetters } from 'vuex';
+    import axios from 'axios';
     import { XHeader, Flexbox, FlexboxItem,Alert ,cookie,Cell,Group,XButton,XTable,TransferDomDirective as TransferDom, } from 'vux';
 export default {
     directives: {
@@ -103,8 +104,8 @@ export default {
     },
     data() {
         return {
-            number1:1,
-            number2:1,
+            number1:0,
+            number2:0,
             userId:cookie.get('userId'),
             startTime1:'',
             activeTitle:'',
@@ -125,7 +126,7 @@ export default {
     filters: {
         formatDuring: function (value) {
             if(value == "" || value == null || value == undefined){
-                var value="无"
+                var value=""
                 return value
 
             }else {
@@ -173,8 +174,8 @@ export default {
                 params: {
                     pageNum:1,
                     pageSize:1,
-                    departmentid:this.$store.getters.user.departmentid,
-                    userId:this.$store.getters.user.userid
+                    departmentid:this.user.departmentid,
+                    userId:this.userId
                 }
             }) .then((res)=> {
                 this.activeTitle=res.data.list[0].activeName;
@@ -218,10 +219,7 @@ export default {
                     year: new Date().getFullYear()
                 }
             }) .then((res)=> {
-
                 this.number2=res.data
-
-
             })
                 .catch(function (error) {
                     console.log(error);
@@ -235,10 +233,8 @@ export default {
                     activeId:this.activeId
                 }
             }) .then((res)=> {
-
                 this.msg=res.msg;
                 this.show=true
-
             })
                 .catch(function (error) {
                     console.log(error);
@@ -267,12 +263,11 @@ export default {
                 url: 'active/getParticipateActiveCount',
                 params: {
                     departmentid:this.$store.getters.user.departmentid,
-                    userId:this.$store.getters.user.userid 
+                    userId:this.userId 
                 }
             }) .then((res)=>{
                 console.log(res);
                  this.count=res.data;
-
             }).catch(function (error) {
                 console.log(error);
             });
@@ -286,6 +281,9 @@ export default {
         submit1(){
                 this.$vux.alert.show({title:'请勿重复报名'});
         },
+    },
+    computed: {
+        ...mapGetters(['user'])
     },
     beforeMount () {
         sessionStorage.userRoleId = 4;

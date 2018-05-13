@@ -11,6 +11,13 @@
                         <flexbox-item>分数</flexbox-item>
                         <flexbox-item>一票否决</flexbox-item>
                     </flexbox>
+                    
+                    <flexbox  style="text-align: center" v-if="list.length === 0">
+                        <div style="margin-left:30%;">
+                            <img style="width:.9rem;height:1.2rem;" src="@/assets/images/icon-noRecord.png" alt="">
+                            <p style="color: #CCC;">暂无信息</p>
+                        </div>
+                    </flexbox>
                     <flexbox :gutter="0"  v-for="(con,index) in list" :key="index">
                         <flexbox-item>{{index+1}}</flexbox-item>
                         <flexbox-item>{{con.approvedName}}</flexbox-item>

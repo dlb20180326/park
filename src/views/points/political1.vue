@@ -27,6 +27,12 @@
                     <flexbox-item>时间</flexbox-item>
                     <flexbox-item>评分状态</flexbox-item>
                 </flexbox>
+                <flexbox  style="text-align: center" v-if="list3.length === 0">
+                    <div style="margin-left:30%;">
+                        <img style="width:.9rem;height:1.2rem;" src="@/assets/images/icon-noRecord.png" alt="">
+                        <p style="color: #CCC;">暂无信息</p>
+                    </div>
+                </flexbox>
                 <template v-if="list1Selected.moduleId==11">
 
                     <flexbox :gutter="0" v-for="(con,index) in list3" :key="index">
