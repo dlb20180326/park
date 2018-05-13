@@ -42,44 +42,21 @@
                     <span class="bg-line"></span>
                     <span class="picture">参与人员</span>
                     <span class="numberz"><span class="color-num">{{participants}}</span>/{{peopleNum}}</span>
-                    <!-- <div class="pictureTotal">
-                        <div class="picture-1">
-                            <span class="picture-1-title">花期银行第一支部：</span> 
-                            <div class="wz-fonts1" :class="[noSpr?'auto':'']">
-                                <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span>
-                            </div>
-                        </div>
-                        <div class="picture-2">
-                            <span class="picture-1-title">花期银行第二支部：</span> 
-                            <div class="wz-fonts1" :class="[noSpr?'auto':'']">
-                                <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span>
-                            </div>
-                        </div>
-                    </div> -->
-                    
-                    <div class="wz-fonts" :class="[noSpr?'auto':'']">
-                        <div v-for="(peopleName,index) in activeData.participate">
-                            <span class="noPartici-title">{{index}}：</span>
-                            <span style="display:inline-block;" v-for="(peopleName1,index) in peopleName">{{peopleName1.name}}</span>
-                        </div>
-                        <!-- <span
-                            :key="index"
-                            :class="item.userRoleId === -1 ? 'titleClass' : 'contentClass'"
-                            v-for="(item, index) in activeData.notParticipate">
-                            {{item.name}}
-                        </span> -->
-                        <!-- <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span> -->
+                </p>    
+                <div class="wz-fonts" :class="[noSpr?'auto':'']">
+                    <div v-for="(peopleName,index) in activeData.participate">
+                        <span class="noPartici-title">{{index}}：</span>
+                        <span style="display:inline-block;" v-for="(peopleName1,index) in peopleName">{{peopleName1.name}}</span>
                     </div>
-                </p>
-                <div class="wz-fonts" :class="[spr?'auto':'']">
-                    <span  v-for="(peopleName,index) in activeData.participate" :key="index">{{peopleName.name}}</span>
                 </div>
+<!--                 
                 <div class="btnMore" @click="spread" v-show="btnAn">查看全部参与人员名单<span class="down"></span></div>
-                <div class="btnMore" v-show="btnPack" @click="folding">收起<span class="up"></span></div>
+                <div class="btnMore" v-show="btnPack" @click="folding"><span style="margin-left:.2rem;">收起</span><span class="up"></span></div> -->
+
+
                 <p class="allPic">
                     <span class="bg-line"></span>
                     <span class="no-picture">未参与人员</span>
-
                     <span class="numberz"><span class="color-num">{{Noparticipants}}</span>/{{peopleNum}}</span>
                 </p>
                 <div class="wz-fonts" :class="[noSpr?'auto':'']">
@@ -87,13 +64,6 @@
                         <span class="noPartici-title">{{index}}：</span>
                         <span style="display:inline-block;" v-for="(peopleName1,index) in peopleName">{{peopleName1.name}}</span>
                     </div>
-                    <!-- <span
-                        :key="index"
-                        :class="item.userRoleId === -1 ? 'titleClass' : 'contentClass'"
-                        v-for="(item, index) in activeData.notParticipate">
-                        {{item.name}}
-                    </span> -->
-                    <!-- <span v-for="(peopleName,index) in activeData.notParticipate" :key="index">{{peopleName.name}}</span> -->
                 </div>
                 <div class="btnMore" @click="noSpread" v-show="nobtnAn">查看全部参与人员名单<span class="down"></span></div>
                 <div class="btnMore" v-show="nobtnPack" @click="noFolding"><span style="margin-left:.2rem;"> 收起</span><span class="up"></span></div>
@@ -108,6 +78,42 @@
     export default {
         directives: {
             TransferDom
+        },
+        data(){
+            return {
+                num:0,
+                activeData:{},
+                picInfo:[],
+                list: [],
+                picList : [],
+                spr:false,
+                noSpr:false,
+                nobtnPack:false,
+                nobtnAn:false,
+                btnPack:false,
+                btnAn:false,
+                peopleNum:null,
+                participants:null,
+                Noparticipants:null,
+                activeNames:'',
+                contents:{rights:'',title:'bbb'},
+                roleId:this.$store.getters.user.roleid,
+                options: {
+                    getThumbBoundsFn (index) {
+                        // find thumbnail element
+                        let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
+                        // get window scroll Y
+                        let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
+                        // optionally get horizontal scroll
+                        // get position of element relative to viewport
+                        let rect = thumbnail.getBoundingClientRect()
+                        // w = width
+                        return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
+                        // Good guide on how to get element coordinates:
+                        // http://javascript.info/tutorial/coordinates
+                    }
+                }
+            }
         },
         components:{
             'r-header':Xheader,
@@ -238,42 +244,6 @@
                     }
                     return new Date(value).toLocaleString();
             }}
-        },
-        data(){
-            return {
-                num:0,
-                activeData:{},
-                picInfo:[],
-                list: [],
-                picList : [],
-                spr:false,
-                noSpr:false,
-                nobtnPack:false,
-                nobtnAn:false,
-                btnPack:false,
-                btnAn:false,
-                peopleNum:null,
-                participants:null,
-                Noparticipants:null,
-                activeNames:'',
-                contents:{rights:'',title:'bbb'},
-                roleId:this.$store.getters.user.roleid,
-                options: {
-                    getThumbBoundsFn (index) {
-                        // find thumbnail element
-                        let thumbnail = document.querySelectorAll('.previewer-demo-img')[index]
-                        // get window scroll Y
-                        let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
-                        // optionally get horizontal scroll
-                        // get position of element relative to viewport
-                        let rect = thumbnail.getBoundingClientRect()
-                        // w = width
-                        return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
-                        // Good guide on how to get element coordinates:
-                        // http://javascript.info/tutorial/coordinates
-                    }
-                }
-            }
         }
     }
 </script>
@@ -334,7 +304,7 @@
         width: 87.2%;
         margin: 10px auto;
         /* word-spacing: .1rem; */
-        height: 52px;
+        /* height: 52px; */
         overflow: hidden;
         padding: 0;
         text-overflow:ellipsis;
@@ -357,6 +327,7 @@
         line-height: .24rem;
         width: 87.2%;
         margin: 10px auto;
+        height: 52px;
         overflow: hidden;
         padding: 0;
         text-overflow:ellipsis;
