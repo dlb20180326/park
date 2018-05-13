@@ -371,14 +371,14 @@
         opacity: 0;
     }
 </style>
-<style>
+<style scoped=“loginManage”>
     .vux-popup-dialog {
         background-color: rgba(0,0,0,1) !important;
-        background: #fefefe;
+        background: #fefefe !important;
     }
     .vux-popup-picker-container
     {
-        background: #fefefe;
+        background: #fefefe !important;
     }
     .scroller-item {
         background-color: #fff !important;
