@@ -20,7 +20,7 @@
       </flexbox>
       <flexbox>
         <flexbox-item class="label">
-          所属片区：
+          所属片区：rem
         </flexbox-item>
         <flexbox-item>
           {{info.address}}
@@ -51,6 +51,10 @@
     </div>
     <div class="list">
       <h3>书记待办事宜</h3>
+      <div v-if="todoList.length == 0">
+        <img style="width:.9rem;height:1.2rem;margin-left:30%" src="@/assets/images/icon-noRecord.png" alt="">
+        <p style="color:#ccc;margin-left:35%">暂无信息</p>
+      </div>
       <div v-for="(item,index) in todoList" :key="index">
         <div class="item">
             <div class="title">{{index+1}}.
