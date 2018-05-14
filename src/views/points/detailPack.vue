@@ -352,7 +352,7 @@ body {
 }
 
 .numberz1 {
-    font-size: 0.14rem;
+    font-size: 0.16rem;
     font-family: PingFangSC-Medium;
     color: rgba(153, 153, 153, 1);
     margin-left: 0.1rem;
