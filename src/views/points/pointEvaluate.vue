@@ -593,7 +593,7 @@ input[type='file'] {
     border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
 .weui-btn_warn{
-    height: .4rem!important;
+    height: .5rem!important;
 }
 </style>
 <style lang="less">

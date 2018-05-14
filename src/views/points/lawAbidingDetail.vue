@@ -575,5 +575,6 @@ border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .middle-content{width:2.4rem;height:1.2rem;margin:.21rem .19rem .21rem .21rem;}
 .weui-btn_warn{
   height: .4rem!important;
+  line-height: .3rem!important;
 }
 </style>

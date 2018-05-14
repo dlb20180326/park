@@ -3,7 +3,7 @@
         <x-header :left-options="{showBack: false}">
             积分审核
         </x-header>
-        <view-box ref="viewBox" body-padding-top="1.36rem" body-padding-bottom=".52rem">
+        <view-box ref="viewBox" body-padding-top="1.0rem" body-padding-bottom=".52rem">
             <div class="header-list cl">
                 <div class="list-left">
                     <span class="left-now">当前支部：</span>

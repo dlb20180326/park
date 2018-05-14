@@ -63,13 +63,13 @@
             <group-title slot="title">
                 <b>活动名称</b>
             </group-title>
-            <input type="text" v-model="activeTitle">
+            <input type="text" v-model="activeTitle" maxlength="80">
         </div>
         <div class="group-item">
             <group-title slot="title">
                 <b>活动地点</b>
             </group-title>
-            <input type="text"  v-model='activePace'>
+            <input type="text"  v-model='activePace' maxlength="150">
         </div>
         <div class="group-item">
             <group-title slot="title">
@@ -98,7 +98,7 @@
             <group-title slot="title">
                 <b>活动负责人</b>
             </group-title>
-            <input type="text"  v-model='activePrincipalPeople'>
+            <input type="text"  v-model='activePrincipalPeople' maxlength="20">
         </div>
         <div class="group-item">
             <group-title slot="title">
@@ -317,7 +317,7 @@
                             activeName:this.activeTitle,
                             activeStatus:1,
                             departmentid:this.departmentidId.join(),
-                            picids:this.picList.arr.join() || '780'
+                            picids:this.picList.arr.join() || ''
                         }
                     }).then((res)=> {
                         this.$vux.toast.show({

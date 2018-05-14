@@ -26,7 +26,7 @@
                     <span class="total" style="margin-left:-0.3rem">（{{count}}）</span>
                     <a  class="fRight"> <router-link slot="right" :to="{name:'activeMore'}">查看全部 ></router-link></a>
                 </div>
-                <flexbox  style="text-align: center" v-if="!activeTitle|!startTime1|!endTime1|!activePace|!activeCreatePeopleName|!active_Context">
+                <flexbox  style="text-align: center" v-if="count == 0">
                     <div style="margin:auto;">
                         <img style="width:.9rem;height:1.2rem;" src="@/assets/images/icon-noRecord.png" alt="">
                         <p style="color: #CCC;">暂无信息</p>
@@ -77,7 +77,14 @@
                             <span class="total">({{number1}})</span>
                             <a href="#" class=" fAll"><router-link slot="right" :to="{name:'Active'}">查看全部 ></router-link></a>
                         </div>
-                        <ul class="news">
+                        
+                        <flexbox  style="text-align: center" v-if="number1 == 0">
+                            <div style="margin:.1rem auto auto;">
+                                <img style="width:.9rem;height:1.2rem;" src="@/assets/images/icon-noRecord.png" alt="">
+                                <p style="color: #CCC;">暂无信息</p>
+                            </div>
+                        </flexbox>
+                        <ul class="news" v-else>
                             <li v-for="(item,index) in activeComplete" :key="index">
                                 <a class=" display clearfix " >
                                     <div class=" fl">{{item.activeName}}</div>
@@ -114,6 +121,7 @@ export default {
             number2:0,
             userId:cookie.get('userId'),
             startTime1:'',
+            activeId : 0,
             activeTitle:'',
             activePace:'',
             activeCreatePeopleName:'',
@@ -184,6 +192,7 @@ export default {
                     userId:this.userId
                 }
             }) .then((res)=> {
+                this.activeId = res.data.list[0].id;
                 this.activeTitle=res.data.list[0].activeName;
                 this.startTime1=res.data.list[0].startTime;
                 this.endTime1=res.data.list[0].endTime;
@@ -311,7 +320,7 @@ export default {
         border-collapse:collapse;
     }
     .table td {
-        padding:3px;
+        padding-top:8px;
     }
     .custom-primary-red {
         border-radius: 99px!important;
@@ -484,7 +493,7 @@ export default {
         margin-right:-0.15rem;
     }
     .p15 {
-        padding:0 .2rem .2rem;
+        padding:0 .2rem;
     }
     .display {
         display:block;
@@ -557,9 +566,9 @@ export default {
     .active2 {
            background:#d8d8d8;
      }
-    .table td {
-        padding:3px;
-    }
+    // .table td {
+    //     padding:3px;
+    // }
     .news {
         margin-top:0;
     }

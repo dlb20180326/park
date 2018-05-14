@@ -72,19 +72,19 @@
             <group-title slot="title">
                 <b>活动名称</b>
             </group-title>
-            <input type="text" v-model="activeTitle">
+            <input type="text" v-model="activeTitle" maxlength="80">
         </div>
         <div class="group-item">
             <group-title slot="title">
                 <b>活动地点</b>
             </group-title>
-            <input type="text"  v-model='activePace'>
+            <input type="text"  v-model='activePace' maxlength="150">
         </div>
         <div class="group-item">
             <group-title slot="title">
                 <b>活动负责人</b>
             </group-title>
-            <input type="text"  v-model='activePrincipalPeople'>
+            <input type="text"  v-model='activePrincipalPeople' maxlength="20">
         </div>
         <div class="group-item">
             <group-title slot="title">
@@ -234,14 +234,14 @@
                 if(!this.startTime){
 
                     return this.$vux.toast.show({
-                        text: '填写开始时间',
+                        text: '请填写开始时间',
                         type: 'text'
                     });
                 }
 
                 if(!this.endTime){
                     return this.$vux.toast.show({
-                        text: '填写结束时间',
+                        text: '请填写结束时间',
                         type: 'text'
                     });
                 }
@@ -252,31 +252,37 @@
                 //         type: 'text'
                 //     });
                 // }
-
+                
+                
                 if(!this.pickerValue){
                     return this.$vux.toast.show({
-                        text: '选择活动类型',
+                        text: '请选择活动类型',
                         type: 'text'
                     });
                 }
-
+                if(!this.activeTitle){
+                    return this.$vux.toast.show({
+                        text: '请选择活动名称',
+                        type: 'text'
+                    });
+                }
                 if(!this.activePace){
                     return this.$vux.toast.show({
-                        text: '填写活动地点',
+                        text: '请填写活动地点',
                         type: 'text'
                     });
                 }
 
                 if(!this.activePrincipalPeople){
                     return this.$vux.toast.show({
-                        text: '填写负责人',
+                        text: '请填写负责人',
                         type: 'text'
                     });
                 }
 
                 if(!this.activeContext){
                     return this.$vux.toast.show({
-                        text: '填写活动内容',
+                        text: '请填写活动内容',
                         type: 'text'
                     });
                 }

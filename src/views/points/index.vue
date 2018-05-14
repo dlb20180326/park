@@ -46,7 +46,7 @@
 	                                <b>{{index+1}}. {{progres.projectName}}</b>
 	                                <div class="space"></div>
 	                                <span class="number">{{progres.totalScore}}</span> /{{progres.score}}
-                                    <span class="fr" v-if="progres.info&&progres.info.length!=0" @click="moreInfo(progres.info)">
+                                    <span class="fr" v-if="progres.info&&progres.info.length!=0" @click="moreInfo(progres)">
                                         审批进度 <span class="icon-arrows"></span>
                                     </span>
 	                            </div>
@@ -156,7 +156,10 @@
                             <div class="text-gray-box">
                                 {{item.content}}
                             </div>
-                            <h4 class="sinfo-title"><b class="sinfo-border"></b><span>政治学习图片：</span><span class="text-gray">{{item.pictures.length}}</span></h4>
+                            <h4 class="sinfo-title" >
+                                <b class="sinfo-border"></b><span>{{name}}：</span>
+                                <span class="text-gray">{{item.pictures.length}}</span>
+                            </h4>
                             <div class="show-list cl">
                                 <dl>
                                     <dd v-for="(it,index) in item.pictures" :key="index">
@@ -325,7 +328,8 @@ export default {
             // console.log(itemList);
 
             this.darkbgShow = true;
-            this.infoList = itemList;
+            this.infoList = itemList.info;
+            this.name = itemList.projectName;
             // console.log(this.infoList);
             if (itemList) {
                 var imgs=itemList;

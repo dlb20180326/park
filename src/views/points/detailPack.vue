@@ -331,7 +331,7 @@ body {
     background-size: 100% 100%;
     display: block;
     float: left;
-    margin-top: 0.08rem;
+    margin-top: 0.06rem;
 }
 .picture {
     font-size: 0.14rem;
@@ -352,7 +352,7 @@ body {
 }
 
 .numberz1 {
-    font-size: 0.12rem;
+    font-size: 0.14rem;
     font-family: PingFangSC-Medium;
     color: rgba(153, 153, 153, 1);
     margin-left: 0.1rem;

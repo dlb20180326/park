@@ -68,26 +68,26 @@
                 </ul>
             </div>
         </div>
-        <div class="group-item" style="margin-top: 0.8rem">
+        <div class="group-item">
             <group-title slot="title"></group-title>
-            <x-button type="warn" @click.native="submit()">
+            <x-button type="warn" style="height：.5rem!important;" @click.native="submit()">
                 提交支部书记审核
             </x-button>
         </div>
- <div v-transfer-dom>
-                    <popup v-model="showPop" position="left" width="100%">
-                        <div class="middle">
-                            <div class="middle-top">评分说明</div>
-                            <div class="middle-content">
-                                <p>
-                                    1、党员每上半年口头向支部书记汇报一次，经支部书记审核通过后加5分； 2、党员每下半年书面向支部汇报一次，经支部书记审核通过后加5分。
-                                </p>
+        <div v-transfer-dom>
+            <popup v-model="showPop" position="left" width="100%">
+                <div class="middle">
+                    <div class="middle-top">评分说明</div>
+                    <div class="middle-content">
+                        <p>
+                            1、党员每上半年口头向支部书记汇报一次，经支部书记审核通过后加5分； 2、党员每下半年书面向支部汇报一次，经支部书记审核通过后加5分。
+                        </p>
 
-                            </div>
-                            <div class="knowBtn" @click="know">我知道了</div>
-                        </div>
-                    </popup>
+                    </div>
+                    <div class="knowBtn" @click="know">我知道了</div>
                 </div>
+            </popup>
+        </div>
     </div>
 </template>
 
@@ -620,7 +620,8 @@ input[type='file'] {
 .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
     border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
-.weui-btn{
-    height: .4rem!important;
+.weui-btn_warn{
+    height: .5rem!important;
+    line-height: .3rem!important;
 }
 </style>
