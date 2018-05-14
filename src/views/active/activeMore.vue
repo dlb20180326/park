@@ -11,7 +11,7 @@
                         <b><span @click="noSign">未报名</span></b>
                     </tab-item>
                 </tab> -->
-    <div style="padding-top:0.44rem">
+    <div>
         <tab>
             <tab-item selected @on-item-click="toggle">已报名 ({{activeCount}})</tab-item>
             <tab-item @on-item-click="noSign">未报名 ({{unactiveCount}})</tab-item>
@@ -435,7 +435,7 @@ input {
     word-break: break-all;
 }
 .group-item{
-    // margin-top: .5rem!important;
+    margin-top: .5rem!important;
 }
  .allLine {
         width: 100%;
@@ -477,13 +477,5 @@ input {
 #nameSc .vux-tab{
     background-color:transparent!important;
 }
-.vux-header {
-    position: absolute!important;
-    padding: 3px 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    background-color: #35495e;
-    /* display: flex!important; */
-    width: 100%;}
-    
+
 </style>
