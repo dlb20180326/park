@@ -539,6 +539,10 @@ input[type="file"] {
   width: 0.6rem;
   bottom: 0;
 }
+.weui-btn_warn{
+  height: .5rem!important;
+  line-height: .3rem!important;
+}
 </style>
 <style>
 .date-no-box {
@@ -573,8 +577,5 @@ border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2)!important;}
 .middle-content p{font-size:.14rem;color:#828282;line-height:.24rem;}
 .middle-content{width:2.4rem;height:1.2rem;margin:.21rem .19rem .21rem .21rem;}
-.weui-btn_warn{
-  height: .4rem!important;
-  line-height: .3rem!important;
-}
+
 </style>
