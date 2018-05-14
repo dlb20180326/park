@@ -433,7 +433,7 @@ export default {
     color: #A6A6A6;
     line-height: 20px;
     margin: 0 auto;
-    padding-top: 0.06rem;
+    padding-top: 0.07rem;
     margin-left: .3rem;
     text-align: center;
 }
