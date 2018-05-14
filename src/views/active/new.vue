@@ -252,14 +252,20 @@
                 //         type: 'text'
                 //     });
                 // }
-
+                
+                
                 if(!this.pickerValue){
                     return this.$vux.toast.show({
                         text: '请选择活动类型',
                         type: 'text'
                     });
                 }
-
+                if(!this.activeTitle){
+                    return this.$vux.toast.show({
+                        text: '请选择活动名称',
+                        type: 'text'
+                    });
+                }
                 if(!this.activePace){
                     return this.$vux.toast.show({
                         text: '请填写活动地点',
