@@ -16,7 +16,7 @@
                         <flexbox-item>评分状态</flexbox-item>
                     </flexbox>
                     <flexbox  style="text-align: center" v-if="list.length === 0">
-                        <div style="margin-left:30%;">
+                        <div style="margin-left:34%;">
                             <img style="width:.9rem;height:1.2rem;" src="@/assets/images/icon-noRecord.png" alt="">
                             <p style="color: #CCC;">暂无信息</p>
                         </div>

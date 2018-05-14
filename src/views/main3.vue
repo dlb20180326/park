@@ -354,7 +354,7 @@ input.weui-btn {
 .exit{
     display: inline-block;
     float: right;
-    margin-top: -.2rem;
+    margin-top: -.3rem;
 }
 .exit span{
     display: inline-block;
