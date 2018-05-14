@@ -38,9 +38,14 @@ const user = {
         loginManage: ({ commit }, data) => Vue.http.post('puser/tologin', data),
         logout: ({ commit }) =>
             new Promise((resolve, reject) => {
-                commit('clearUser');
+                commit('clearUser', 4);
                 resolve();
-            })
+            }),
+        logoutManage: ({ commit }) =>
+            new Promise((resolve, reject) => {
+                commit('clearUser', 3);
+                resolve();
+            }),
     },
     mutations: {
         setUser(state, data) {
@@ -58,9 +63,7 @@ const user = {
             console.log('manage');
             state.manage = data || {};
         },
-        clearUser(state) {
-            state.user = {};
-            var roleId = cookie.get('roleId');
+        clearUser(state, roleId) {
             KEYS.forEach(key =>
                 cookie.remove(key, {
                     // domain: 'example.com',

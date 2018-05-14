@@ -46,7 +46,7 @@
                         人
                     </flexbox-item>
                 </flexbox>
-              <div class="exit" @click="logout">
+              <div class="exit" @click="logoutManage">
                   <span>退出登录</span>
               </div>
             </div>
@@ -253,7 +253,7 @@
             console.log('fail'+err);
         })
       },
-      ...mapActions(['logout'])
+      ...mapActions(['logoutManage'])
     }
   };
 </script>

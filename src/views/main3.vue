@@ -45,7 +45,7 @@
         </flexbox-item>
       </flexbox>
       
-        <div class="exit" @click="logout">
+        <div class="exit" @click="logoutManage">
             <span>退出登录</span>
         </div>
     </div>
@@ -227,7 +227,7 @@ export default {
                 });
         },
 
-        ...mapActions(['logout'])
+        ...mapActions(['logoutManage'])
     },
     beforeMount () {
         sessionStorage.userRoleId = 3;
