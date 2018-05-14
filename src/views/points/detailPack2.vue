@@ -371,10 +371,6 @@ export default {
             this.getList();
             this.getUser();*/
         this.getUser1();
-        document.body.classList.add('weui-btn_warn');
-    },
-    beforeDestroy () {
-        document.body.classList.remove('weui-btn_warn');
     },
     computed: {
         ...mapGetters(['user'])
@@ -585,6 +581,10 @@ input[type='file'] {
     width: 0.6rem;
     bottom: 0;
 }
+.weui-btn_warn{
+    height: .5rem!important;
+    line-height: .3rem!important;
+}
 </style>
 <style>
 .colorSet {
@@ -624,8 +624,5 @@ input[type='file'] {
 .knowBtn{width:1.2rem;height:.3rem;margin:0 auto;color:#FFFFFF;background:rgba(185,54,71,1);
     border-radius: 4px;line-height:.3rem;text-align:center;font-size:.16rem;}
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
-.weui-btn_warn{
-    height: .5rem!important;
-    line-height: .5rem!important;
-}
+
 </style>
