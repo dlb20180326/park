@@ -542,6 +542,7 @@ background-image:url(../../assets/images/icon-del.png);background-size:contain;b
 }
 .sinfo-title.pr4{
     padding-right:1rem;
+    padding-top:0.1rem;
 }
 .sinfo-title span{
     vertical-align: text-bottom;
