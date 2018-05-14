@@ -51,7 +51,7 @@
         </div>
         <div class="group-item">
             <group-title slot="title"></group-title>
-            <x-button type="warn" @click.native="submit()">
+            <x-button type="warn" style="height：.5rem!important;" @click.native="submit()">
                 点击确认扣分
             </x-button>
         </div>
