@@ -371,8 +371,12 @@ export default {
             this.getList();
             this.getUser();*/
         this.getUser1();
+        document.body.classList.add('weui-btn_warn');
     },
-  computed: {
+    beforeDestroy () {
+        document.body.classList.remove('weui-btn_warn');
+    },
+    computed: {
         ...mapGetters(['user'])
     }
 };
@@ -622,6 +626,6 @@ input[type='file'] {
 .vux-popup-dialog{background-color: rgba(0,0,0,0.2);}
 .weui-btn_warn{
     height: .5rem!important;
-    line-height: .3rem!important;
+    line-height: .5rem!important;
 }
 </style>
