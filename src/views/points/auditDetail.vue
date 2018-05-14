@@ -46,8 +46,8 @@
                 <div class="item-list" v-if="item.message!=''" v-for="(item,i) of list" :key="i">
                     <div class="item">
 
-                       <span class="bg-line1"></span> <div class="header mb-reject1">{{item.title}}：（ 得分：<span v-show="item.status == 3">0</span>
-                        											<span v-show="item.status != 3" style="color:#b93647;">5</span> 分 ）
+                       <span class="bg-line1"></span> <div class="header mb-reject1">{{item.title}}：（ 得分：<span v-show="item.status == 3">{{item.itemscore}}</span>
+                        											<span v-show="item.status != 3" style="color:#b93647;">{{item.itemscore}}</span> 分 ）
                         </div>
 
                         <div class="states scuess" v-if="item.status==2">
