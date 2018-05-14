@@ -234,14 +234,14 @@
                 if(!this.startTime){
 
                     return this.$vux.toast.show({
-                        text: '填写开始时间',
+                        text: '请填写开始时间',
                         type: 'text'
                     });
                 }
 
                 if(!this.endTime){
                     return this.$vux.toast.show({
-                        text: '填写结束时间',
+                        text: '请填写结束时间',
                         type: 'text'
                     });
                 }
@@ -255,28 +255,28 @@
 
                 if(!this.pickerValue){
                     return this.$vux.toast.show({
-                        text: '选择活动类型',
+                        text: '请选择活动类型',
                         type: 'text'
                     });
                 }
 
                 if(!this.activePace){
                     return this.$vux.toast.show({
-                        text: '填写活动地点',
+                        text: '请填写活动地点',
                         type: 'text'
                     });
                 }
 
                 if(!this.activePrincipalPeople){
                     return this.$vux.toast.show({
-                        text: '填写负责人',
+                        text: '请填写负责人',
                         type: 'text'
                     });
                 }
 
                 if(!this.activeContext){
                     return this.$vux.toast.show({
-                        text: '填写活动内容',
+                        text: '请填写活动内容',
                         type: 'text'
                     });
                 }
