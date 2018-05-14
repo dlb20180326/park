@@ -65,8 +65,8 @@
                         <span style="display:inline-block;" v-for="(peopleName1,index) in peopleName">{{peopleName1.name}}</span>
                     </div>
                 </div>
-                <div class="btnMore" @click="noSpread" v-show="nobtnAn">查看全部参与人员名单<span class="down"></span></div>
-                <div class="btnMore" v-show="nobtnPack" @click="noFolding"><span style="margin-left:.2rem;"> 收起</span><span class="up"></span></div>
+                <!-- <div class="btnMore" @click="noSpread" v-show="nobtnAn">查看全部参与人员名单<span class="down"></span></div> -->
+                <!-- <div class="btnMore" v-show="nobtnPack" @click="noFolding"><span style="margin-left:.2rem;"> 收起</span><span class="up"></span></div> -->
                 </div>
         </view-box>
     </div>
