@@ -37,7 +37,7 @@
                     </previewer>
                 </div>
             </div>
-            <x-button type="primary" style="background-color: #D8D8D8;width: 80%;margin-top: 1.5rem">已评分（评分人:{{adderName}}）</x-button>
+            <x-button type="primary" style="background-color: #D8D8D8;width: 80%!important;margin-top: 1.5rem">已评分（评分人:{{adderName}}）</x-button>
                 <div v-transfer-dom>
                     <popup v-model="showPop" position="left" width="100%">
                         <div class="middle">
