@@ -376,7 +376,7 @@ export default {
         left: 0;
         right: 0;
         background: #fff;
-        // z-index: 1005;
+        z-index: 999;
     }
     .list-left{
     width: 62%;
