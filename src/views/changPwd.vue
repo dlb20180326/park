@@ -95,10 +95,18 @@ export default {
                 });
             if (!this.confrimNewPass)
                 return this.$vux.toast.show({
-                    text: '请输入新密码',
+                    text: '请再次输入新密码',
                     type: 'text',
                     position: 'top'
                 });
+            if(this.newPass != this.confrimNewPass)
+            {
+                return this.$vux.toast.show({
+                    text: '两次输入的密码不一致',
+                    type: 'text',
+                    position: 'top'
+                });
+            }    
             Vue.http.post('puser/updatePwd', {
                     name: this.account,
                     password: this.pass,
