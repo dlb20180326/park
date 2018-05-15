@@ -259,9 +259,8 @@ export default {
                 minutes = '0' + minutes;
             }
     		return `${times.getFullYear()}.${month}.${datas}  ${hours}.${minutes}`;
-        }
-    },
-     filters: {
+        },
+
         Upper: function (value) {
              return value> 0 ? '+' + value : value;
         }
