@@ -88,7 +88,7 @@
     </div>
 
 
-     <div v-transfer-dom class="qrcode-dialog">
+     <div v-transfer-dom class="qrcode-dialog2">
          <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{minHeight:'350px'}">
                <div class="title">
                     <label>活动名称:</label>
@@ -263,10 +263,10 @@
     flex: 0 0 auto;
     width: auto;
 }
-.qrcode-dialog {
+.qrcode-dialog2 {
     .weui-dialog {
         padding: 20px;
-        display: flex;
+        display: table;
         flex-direction: column;
         .title {
             text-align: left;

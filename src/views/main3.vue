@@ -85,7 +85,7 @@
         </div>
       </div>
     </div>
-      <div v-transfer-dom  class="qrcode-dialog1">
+      <div v-transfer-dom  class="qrcode-dialog3">
           <x-dialog v-model="showQrcodeDialog" hide-on-blur :dialog-style="{height:'350px',minHeight:'350px'}">
                <div class="title">
                     <label>活动名称:</label>
@@ -252,7 +252,7 @@ export default {
 };
 </script>
 <style lang="less">
-.qrcode-dialog1 {
+.qrcode-dialog3 {
     .weui-dialog {
         padding: 20px;
         display: table;
