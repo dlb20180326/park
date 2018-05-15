@@ -553,8 +553,8 @@ input[type='file'] {
 .photo-list .add-bg {
     width: 0.2rem;
     height: 0.2rem;
-    margin-left: 0.3rem!important;
-    margin-top: 0.3rem!important;
+    margin-left: 0.34rem!important;
+    margin-top: 0.32rem!important;
     display: block;
     background: url(../../assets/images/add_icon_bg1.png) no-repeat;
     background-size: contain;
