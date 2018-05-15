@@ -582,7 +582,7 @@ input[type='file'] {
     bottom: 0;
 }
 .weui-btn_warn{
-    height: .5rem!important;
+    height: .32rem!important;
     line-height: .3rem!important;
 }
 </style>
