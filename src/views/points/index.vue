@@ -121,7 +121,7 @@
                                     积分变动：
                                 </flexbox-item>
                                 <flexbox-item>
-                                    <span class="number" :class="[knoew.score >= 0?'colored':'colorGreen']">{{knoew.score}}</span>
+                                    <span class="number" :class="[knoew.score >= 0?'colored':'colorGreen']">{{knoew.score|Upper}}</span>
                                 </flexbox-item>
                             </flexbox>
                         </div>
@@ -259,6 +259,11 @@ export default {
                 minutes = '0' + minutes;
             }
     		return `${times.getFullYear()}.${month}.${datas}  ${hours}.${minutes}`;
+        }
+    },
+     filters: {
+        Upper: function (value) {
+             return value> 0 ? '+' + value : value;
         }
     },
     methods:{
