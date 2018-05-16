@@ -155,6 +155,7 @@ export default {
         font-size: .14rem;
         margin-top: .1rem;
         margin-bottom: .1rem;
+        padding:.1rem;
     }
     .changPwdBefore{
         position: fixed;
@@ -182,7 +183,7 @@ export default {
     }
     .attention{
         width:3.35rem;
-        height:.4rem; 
+        height:.5rem; 
         font-size:.14rem;
         font-family:PingFangSC-Medium;
         color:rgba(185,54,71,1);

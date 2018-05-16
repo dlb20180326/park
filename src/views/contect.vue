@@ -7,9 +7,9 @@
                     <span>管理者</span>
                     <p>陆家嘴金领驿站超级管理员</p>
                     <div class="bottom">
-                        <span>联系方式：</span>
-                        <span>QQ：123456789</span>
-                        <span>电话：021-6677 5566</span>
+                        <span>联系方式</span>
+                        <!-- <span>QQ：123456789</span> -->
+                        <span>电话：021-58562559</span>
                     </div>
                 </div>
             </div>
@@ -26,9 +26,9 @@
                     <span>开发者</span>
                     <p>上海市东链博数据科技有限公司</p>
                     <div class="bottom">
-                        <span>联系方式：</span>
-                        <span>QQ：123456789</span>
-                        <span>电话：021-6677 5566</span>
+                        <span>联系方式</span>
+                        <!-- <span>QQ：123456789</span> -->
+                        <span>电话：021-58562559</span>
                     </div>
                 </div>
             </div>
@@ -71,6 +71,7 @@
             font-size:.14rem;
             font-family:PingFangSC-Medium;
             color:rgba(153,153,153,1);
+            margin-top:.1rem;
         }
         p{
             margin-top: .2rem;
