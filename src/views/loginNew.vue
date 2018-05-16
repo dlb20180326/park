@@ -125,7 +125,7 @@
         width:80%;
         height: auto;
         /* margin: .2rem auto; */
-        margin: 2.46rem auto 0;
+        margin: 2.26rem auto 0;
     }
     .tiles{
         width:100%;
@@ -218,10 +218,10 @@
     .bottom{
         width:80%;
         height: auto;
-        margin: 1.6rem auto .1rem;
+        margin: 1.0rem auto .1rem;
     }
     .bottomLink{
-        margin-left: 24%;
+        margin-left: 26%;
     }
     .bottomLink a{
         color: #B93647;
