@@ -586,7 +586,7 @@
         opacity: 0;
     }
     .picker-box .vux-picker{
-        z-index: 100;
+        z-index: 1000;
     }
 </style>
 <style lang="less" scoped>
