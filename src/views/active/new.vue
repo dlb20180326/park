@@ -585,7 +585,7 @@
     .fade-leave-to {
         opacity: 0;
     }
-    .picker-box .vux-picker{
+    .picker-box {
         z-index: 1000;
     }
 </style>
