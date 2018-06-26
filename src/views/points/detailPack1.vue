@@ -118,8 +118,8 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
     				this.content.pictures.forEach(it=>{
     				    console.log(it);
                         var obj = {};
-                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+it.pictureId;
+                        obj.msrc = 'http://dj.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
+                        obj.src = 'http://dj.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+it.pictureId;
                         this.content.picture.push(obj);
                     });
 
@@ -146,8 +146,8 @@ import {Previewer, TransferDom,ViewBox} from 'vux'
                     this.content.pictures.forEach(it=>{
                         console.log(it);
                         var obj = {};
-                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+it.pictureId;
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
+                        obj.msrc = 'http://dj.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+it.pictureId;
+                        obj.src = 'http://dj.dlbdata.cn/dangjian/picture/show?pictureId='+it.pictureId;
                         this.content.picture.push(obj);
                     });
 

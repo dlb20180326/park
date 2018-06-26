@@ -164,7 +164,7 @@
                                 <dl>
                                     <dd v-for="(it,index) in item.pictures" :key="index">
                                         <div class="preview">
-                                             <img class="previewer-demo-img"  :src="'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+it.pictureId" >
+                                             <img class="previewer-demo-img"  :src="'http://dj.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+it.pictureId" >
                                         </div>
                                     </dd>
                                 </dl>
@@ -343,8 +343,8 @@ export default {
                     for (var j in imgs[i]) {
                         var obj = {};
 
-                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i][j];
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i][j];
+                        obj.msrc = 'http://dj.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i][j];
+                        obj.src = 'http://dj.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i][j];
                         this.imgpics.push(obj);
                     }
                 }*/
@@ -361,8 +361,8 @@ export default {
                 this.imgpics = [];
                 for (var i = 0; i < imgs.length; i++) {
                     var obj = {};
-                    obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
-                    obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + imgs[i];
+                    obj.msrc = 'http://dj.dlbdata.cn/dangjian/picture/show?pictureId=' + imgs[i];
+                    obj.src = 'http://dj.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + imgs[i];
                     this.imgpics.push(obj);
                 }*/
             } else {
@@ -438,7 +438,7 @@ export default {
     },
     computed: {
         picAccept () {
-            return `http://www.dlbdata.cn/icon-${this.userAbout.sex === '女' ? 'girl' : 'boy'}.png`;
+            return `http://dj.dlbdata.cn/icon-${this.userAbout.sex === '女' ? 'girl' : 'boy'}.png`;
         }
     },
    	mounted(){

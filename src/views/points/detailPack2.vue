@@ -355,7 +355,7 @@ export default {
                             let pictureIds = [];
                             result.map(item => pictureIds.push(item.data));
                             it.list.push(
-                                'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + pictureIds.join()
+                                'http://dj.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=' + pictureIds.join()
                             );
                             it.arr.push(pictureIds.join());
                         });

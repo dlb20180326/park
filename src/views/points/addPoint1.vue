@@ -101,7 +101,7 @@
 </template>
 
 <script>
-    const imgBaseUrl = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=';
+    const imgBaseUrl = 'http://dj.dlbdata.cn/dangjian/picture/showThumbnail?pictureId=';
 	import { mapActions, mapGetters } from 'vuex';
     import axios from 'axios'
     import { Popup,XHeader, GroupTitle, Flexbox, TransferDomDirective as TransferDom,Alert, FlexboxItem, XButton,DatetimePlugin,Datetime ,Group,Picker,Previewer} from 'vux';

@@ -125,8 +125,8 @@ export default {
                     item.pictureList=[];
                     for(let i=0;i<item.pictures.length;i++){
                         var obj = {};
-                        obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
-                        obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+item.pictures[i].pictureId;
+                        obj.msrc = 'http://dj.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
+                        obj.src = 'http://dj.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+item.pictures[i].pictureId;
                         item.pictureList.push(obj);
                     }
     			})
@@ -182,10 +182,10 @@ export default {
                             //this.imgIds.push('pictureIds:' + pictureIds.join());
                             alert(pictureIds.join());
                             for(var i=0;i<pictureIds.length;i++){
-                                its.pictures.push('http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+pictureIds[i]);
+                                its.pictures.push('http://dj.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+pictureIds[i]);
                                 var obj = {};
-                                obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
-                                obj.src = 'http://www.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+pictureIds[i];
+                                obj.msrc = 'http://dj.dlbdata.cn/dangjian/picture/show?pictureId='+pictureIds[i];
+                                obj.src = 'http://dj.dlbdata.cn/dangjian/picture/showThumbnail?pictureId='+pictureIds[i];
                                 its.pictureList.push(obj);
                             }
 

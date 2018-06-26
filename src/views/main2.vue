@@ -182,7 +182,7 @@
           }
       },
       showQR(data){
-          document.getElementById('fei').src = 'http://www.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
+          document.getElementById('fei').src = 'http://dj.dlbdata.cn/dangjian/active/showQrCode?activeId='+data;
           this.showQrcodeDialog = true;
       },
       infoDetail() {

@@ -191,7 +191,7 @@ export default {
         },
         showQR(data) {
             document.getElementById("fei").src =
-                "http://www.dlbdata.cn/dangjian/active/showQrCode?activeId=" +
+                "http://dj.dlbdata.cn/dangjian/active/showQrCode?activeId=" +
                 data;
             this.showQrcodeDialog = true;
         },

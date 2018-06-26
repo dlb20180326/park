@@ -125,8 +125,8 @@ export default {
     					item.pictureList=[];
     				    for(let i=0;i<item.pictures.length;i++){
 	    					var obj = {};
-	    					obj.msrc = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
-	    					obj.src = 'http://www.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
+	    					obj.msrc = 'http://dj.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
+	    					obj.src = 'http://dj.dlbdata.cn/dangjian/picture/show?pictureId='+item.pictures[i].pictureId;
 	    					item.pictureList.push(obj);
     					}
     			})
