@@ -12,7 +12,7 @@ module.exports = {
         proxyTable: {
             '/dangjian/': {
                 changeOrigin: true,
-                target: 'http://www.dlbdata.cn/',
+                target: 'http://pp.dlbdata.cn/',
                 // target:'192.168.1.173:8080/',
                 pathRewrite: { '^/dangjian/': '/dangjian/' }
             }
@@ -29,7 +29,7 @@ module.exports = {
 
         // Various Dev Server settings
         host: '0.0.0.0', // can be overwritten by process.env.HOST
-        port: 3000, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+        port: 3002, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
         autoOpenBrowser: false,
         errorOverlay: true,
         notifyOnErrors: true,
