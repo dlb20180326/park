@@ -438,7 +438,7 @@ export default {
     },
     computed: {
         picAccept () {
-            return `http://dj.dlbdata.cn/icon-${this.userAbout.sex === '女' ? 'girl' : 'boy'}.png`;
+            return this.userAbout.avatar;
         }
     },
    	mounted(){
